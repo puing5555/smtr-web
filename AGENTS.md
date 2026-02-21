@@ -235,6 +235,11 @@ The goal: Be helpful without being annoying. Check in a few times a day, do usef
 - **"완료!"라고 하기 전에 실제로 작동하는지 확인**하라
 - 파일을 2번 이상 수정해서 보내는 상황이면 **근본 원인부터 파악**하라
 
+## 🔍 리뷰 페이지 규칙
+
+- 검토대기 옆에 **영상 날짜** 항상 표시
+- **최신순 정렬** (최신 영상이 위에)
+
 ## 🔬 파이프라인 규칙 (절대 변경 금지)
 
 - **시그널 8가지:** `STRONG_BUY` / `BUY` / `POSITIVE` / `HOLD` / `NEUTRAL` / `CONCERN` / `SELL` / `STRONG_SELL`

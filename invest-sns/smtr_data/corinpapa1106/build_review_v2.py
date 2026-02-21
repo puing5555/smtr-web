@@ -42,6 +42,9 @@ for sig in signals:
     ts = sig.get('timestamp', '')
     sig['timestamp_seconds'] = parse_timestamp(ts)
 
+# Sort by date (newest first)
+signals.sort(key=lambda s: s.get('date', ''), reverse=True)
+
 from collections import Counter
 types = Counter(s['signal_type'] for s in signals)
 print(f'Building HTML with {len(signals)} signals')
@@ -52,7 +55,7 @@ html = '''<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>유튜버 시그널 검증 리뷰 v2</title>
+    <title>유튜버 시그널 검증 리뷰 v3</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f4f8; color: #1a1a2e; }
@@ -111,7 +114,7 @@ html = '''<!DOCTYPE html>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🔍 유튜버 시그널 검증 리뷰 v2</h1>
+            <h1>🔍 유튜버 시그널 검증 리뷰 v3</h1>
             <p>파이프라인: Claude Sonnet(추출) → 사람(최종 검토)</p>
         </div>
         
@@ -198,7 +201,8 @@ html = '''<!DOCTYPE html>
                         '<span class="signal-asset">' + sig.asset + '</span> ' +
                         '<span class="signal-type ' + sig.signal_type + '">' + (SIGNAL_LABELS[sig.signal_type] || sig.signal_type) + '</span> ' +
                         '<span class="confidence ' + (sig.confidence || '') + '">' + (sig.confidence || '') + '</span> ' +
-                        '<span class="review-badge ' + review.status + '">' + ({pending:'검토대기',approved:'승인',rejected:'거부'}[review.status] || review.status) + '</span>' +
+                        '<span class="review-badge ' + review.status + '">' + ({pending:'검토대기',approved:'승인',rejected:'거부'}[review.status] || review.status) + '</span> ' +
+                        '<span style="font-size:13px;color:#888;">📅 ' + (sig.date || 'N/A') + '</span>' +
                     '</div>' +
                     '<div class="signal-actions">' +
                         '<button class="btn" onclick="setReview(\\\'' + id.replace(/'/g,"\\\\'") + '\\\', \\\'approved\\\')">✅</button>' +
