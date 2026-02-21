@@ -44,7 +44,10 @@ class ReviewHandler(SimpleHTTPRequestHandler):
             self.send_header('Content-Type', 'application/json')
             self.end_headers()
             with open(SIGNALS_FILE, 'r', encoding='utf-8') as f:
-                self.wfile.write(f.read().encode('utf-8'))
+                signals = json.load(f)
+            # Sort by date descending (newest first)
+            signals.sort(key=lambda s: s.get('date', ''), reverse=True)
+            self.wfile.write(json.dumps(signals, ensure_ascii=False).encode('utf-8'))
         else:
             self.send_response(404)
             self.end_headers()
@@ -192,6 +195,10 @@ def build_review_html(signals, reviews):
                         <option value="approved">승인됨</option>
                         <option value="rejected">거부됨</option>
                     </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">유튜버</label>
+                    <select class="filter-select" id="youtuber-filter"><option value="">전체 유튜버</option></select>
                 </div>
                 <div class="filter-group">
                     <label class="filter-label">검색</label>
@@ -347,6 +354,7 @@ def build_review_html(signals, reviews):
             const assetF = document.getElementById('asset-filter').value;
             const signalF = document.getElementById('signal-filter').value;
             const reviewF = document.getElementById('review-filter').value;
+            const youtuberF = document.getElementById('youtuber-filter').value;
             const searchF = document.getElementById('search-input').value.toLowerCase();
             
             container.innerHTML = '';
@@ -362,6 +370,7 @@ def build_review_html(signals, reviews):
                 if (assetF && sig.asset !== assetF) return;
                 if (signalF && sig.signal_type !== signalF) return;
                 if (reviewF && review.status !== reviewF) return;
+                if (youtuberF && (sig.channel || '코린이 아빠') !== youtuberF) return;
                 if (searchF && !(sig.content || '').toLowerCase().includes(searchF) && 
                     !(sig.asset || '').toLowerCase().includes(searchF)) return;
                 
@@ -388,7 +397,11 @@ def build_review_html(signals, reviews):
             const af = document.getElementById('asset-filter');
             assets.forEach(a => { const o = document.createElement('option'); o.value = a; o.textContent = a; af.appendChild(o); });
             
-            ['asset-filter','signal-filter','review-filter'].forEach(id => 
+            const youtubers = [...new Set(SIGNALS_DATA.map(s => s.channel || '코린이 아빠'))].sort();
+            const yf = document.getElementById('youtuber-filter');
+            youtubers.forEach(y => { const o = document.createElement('option'); o.value = y; o.textContent = y; yf.appendChild(o); });
+            
+            ['asset-filter','signal-filter','review-filter','youtuber-filter'].forEach(id => 
                 document.getElementById(id).addEventListener('change', render));
             document.getElementById('search-input').addEventListener('input', render);
         }
