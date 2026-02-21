@@ -1,0 +1,1103 @@
+{
+  "metadata": {
+    "channel": "corinpapa1106",
+    "extracted_at": "2026-02-21T12:22:15.781072",
+    "total_signals": 30
+  },
+  "signals": [
+    {
+      "video_id": "-brWAKvRaqI",
+      "title": "Bitmine (BMNR) and the Triangle of Desire",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "비트마인과 이더리움에 대한 집단적 공포와 투자 심리 분석",
+          "confidence": "high",
+          "timestamp": "4:01"
+        },
+        {
+          "type": "coin_mention",
+          "content": "비트마인 주식이 80% 폭락한 사례 언급",
+          "confidence": "medium",
+          "timestamp": "5:50"
+        },
+        {
+          "type": "price_prediction",
+          "content": "XRP가 만 달러 간다는 비밀 공유에 대한 경고",
+          "confidence": "low",
+          "timestamp": "5:13"
+        }
+      ],
+      "summary": "영상에서는 르네 지라르의 욕망의 삼각형 이론을 바탕으로 비트마인과 이더리움에 대한 투자 심리를 분석하고, 집단적 모방과 공포가 투자 결정에 미치는 영향을 설명합니다. 또한, 피터 틸의 투자 방식과 그에 따른 시장의 반응을 비판적으로 다룹니다.",
+      "coins_mentioned": [
+        "비트마인",
+        "이더리움",
+        "XRP"
+      ],
+      "sentiment": "bearish"
+    },
+    {
+      "video_id": "151ejJicjy4",
+      "title": "Why I Climb Canton (CC) Alone and Why I Published a Book on Amazon (Feat. Tymune)",
+      "date": "",
+      "signals": [
+        {
+          "type": "price_prediction",
+          "content": "가격 예측 능력이 전혀 없는 사람이라고 언급",
+          "confidence": "low",
+          "timestamp": "0:54"
+        },
+        {
+          "type": "market_analysis",
+          "content": "캔톤이 다른 자산들과 달리 상승세를 보이고 있음",
+          "confidence": "high",
+          "timestamp": "4:05"
+        },
+        {
+          "type": "coin_mention",
+          "content": "캔톤과 타임윤에 대한 언급",
+          "confidence": "high",
+          "timestamp": "4:20"
+        },
+        {
+          "type": "market_analysis",
+          "content": "알트코인이 2026년에 대부분 멸망할 것이라는 예측",
+          "confidence": "medium",
+          "timestamp": "6:31"
+        }
+      ],
+      "summary": "영상에서는 캔톤 코인에 대한 투자 의견과 가격 예측의 어려움, 그리고 암호화폐 시장의 현재 상황을 분석하며, 개인적인 투자 경험과 아마존에서의 책 출판 소식을 공유합니다.",
+      "coins_mentioned": [
+        "캔톤",
+        "이더리움",
+        "비트코인",
+        "타임윤"
+      ],
+      "sentiment": "bullish"
+    },
+    {
+      "video_id": "5nfe_ZdUSoA",
+      "title": "\"미국도 희토류 없으면 개털\" (미국의 국방, 로봇, 우주 산업 올스톱)",
+      "date": "",
+      "signals": [],
+      "summary": "영상에서는 미국의 국방, 로봇, 우주 산업이 희토류 자원 부족으로 인해 심각한 위기에 처할 수 있다는 내용을 다루고 있습니다. 희토류의 중요성과 미국이 중국에 의존하고 있는 상황을 설명하며, 미국 내 희토류 광산의 중요성과 관련 기업들의 주가 상승에 대해서도 언급합니다.",
+      "coins_mentioned": [],
+      "sentiment": "bearish"
+    },
+    {
+      "video_id": "6IYiaHn6Jls",
+      "title": "Etherzilla Sells Ethereum and Implements RWA? Peter Thiel's Proof of a Fraudulent Transaction",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "이더질라가 24,291개의 이더리움을 매각하여 부채 상환을 위한 조치를 취함.",
+          "confidence": "high",
+          "timestamp": "0:25"
+        },
+        {
+          "type": "market_analysis",
+          "content": "이더질라가 RW 사업에 집중하겠다고 발표함.",
+          "confidence": "medium",
+          "timestamp": "1:09"
+        },
+        {
+          "type": "price_prediction",
+          "content": "이더질라의 주가가 10달러에서 최대 100달러까지 일시적으로 상승했음.",
+          "confidence": "medium",
+          "timestamp": "2:54"
+        },
+        {
+          "type": "market_analysis",
+          "content": "MSTR이 비트코인 매입을 일시적으로 중단함.",
+          "confidence": "high",
+          "timestamp": "4:30"
+        },
+        {
+          "type": "market_analysis",
+          "content": "트럼프가 우주 개발에 대한 행정 명령을 사인하여 자본 이동이 예상됨.",
+          "confidence": "medium",
+          "timestamp": "6:49"
+        }
+      ],
+      "summary": "영상에서는 이더질라가 이더리움을 매각하고 RW 사업에 집중하겠다는 발표를 하였으며, 시장의 여러 변화와 투자 전략에 대한 의견을 공유함.",
+      "coins_mentioned": [
+        "이더리움",
+        "비트코인"
+      ],
+      "sentiment": "bearish"
+    },
+    {
+      "video_id": "6r5ZHidwBGs",
+      "title": "\"Hey buddy, throw your Bitcoins away now\" (M2 has already been diverted elsewhere)",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "글로벌 M2가 증가하고 있지만 비트코인 가격은 제자리이다.",
+          "confidence": "high",
+          "timestamp": "0:34"
+        },
+        {
+          "type": "market_analysis",
+          "content": "고금리로 인해 유동성이 비트코인을 향하지 않고 AI 및 빅테크로 흘러가고 있다.",
+          "confidence": "high",
+          "timestamp": "4:07"
+        },
+        {
+          "type": "price_prediction",
+          "content": "비트코인의 가격은 유동성의 방향과 속도에 따라 영향을 받는다.",
+          "confidence": "medium",
+          "timestamp": "5:30"
+        },
+        {
+          "type": "market_analysis",
+          "content": "미국의 전략적 목표는 디지털 달러 패권으로의 이전이다.",
+          "confidence": "high",
+          "timestamp": "9:05"
+        }
+      ],
+      "summary": "영상에서는 글로벌 M2의 증가에도 불구하고 비트코인 가격이 제자리인 이유와 고금리 환경에서 유동성이 비트코인을 향하지 않고 AI 및 빅테크로 흘러가고 있음을 설명한다. 또한, 미국의 디지털 달러 패권 전략에 대한 논의도 포함되어 있다.",
+      "coins_mentioned": [
+        "비트코인",
+        "스테이블코인",
+        "테더"
+      ],
+      "sentiment": "bearish"
+    },
+    {
+      "video_id": "7AaksU-R3dg",
+      "title": "Decision to Part with XRP (WLFI Mar-a-Lago Forum Impact)",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "월드 리버티 파이낸셜의 USD1 스테이블 코인이 국경 간 송금 및 환전에서 주요 결제 자산으로 활용될 예정이며, XRP와의 경쟁이 예상됨.",
+          "confidence": "high",
+          "timestamp": "3:00"
+        },
+        {
+          "type": "price_prediction",
+          "content": "USD1이 빠른 속도로 상승하고 있으며, 조만간 서클을 잡을 수 있을 것이라는 예측.",
+          "confidence": "medium",
+          "timestamp": "4:40"
+        },
+        {
+          "type": "coin_mention",
+          "content": "XRP의 기술적 브릿지 통화 역할에 대한 언급.",
+          "confidence": "high",
+          "timestamp": "3:44"
+        }
+      ],
+      "summary": "영상에서는 월드 리버티 파이낸셜의 포럼과 그에 따른 XRP와의 경쟁 구도, USD1 스테이블 코인의 부상, 그리고 암호화폐 시장의 전반적인 상황에 대해 다루고 있습니다. 또한, 투자자들에게 데이터와 본인의 판단에 의존할 것을 강조합니다.",
+      "coins_mentioned": [
+        "XRP",
+        "USD1",
+        "비트코인"
+      ],
+      "sentiment": "bearish"
+    },
+    {
+      "video_id": "82TEaq8GIfc",
+      "title": "\"Canton, Countdown to Upbit Listing\" (Samsung's Choice: Canton, Not Bitcoin)",
+      "date": "",
+      "signals": [
+        {
+          "type": "coin_mention",
+          "content": "CC코인이 업비트에 상장될 예정이다.",
+          "confidence": "high",
+          "timestamp": "0:28"
+        },
+        {
+          "type": "market_analysis",
+          "content": "바이낸스에서 CC코인의 현물 상장이 멀지 않았다고 예측.",
+          "confidence": "medium",
+          "timestamp": "1:36"
+        },
+        {
+          "type": "market_analysis",
+          "content": "가격이 떨어지고 있지만 거래량이 거의 없다.",
+          "confidence": "high",
+          "timestamp": "3:00"
+        },
+        {
+          "type": "coin_mention",
+          "content": "삼성이 켄톤 네트워크를 선택했다.",
+          "confidence": "high",
+          "timestamp": "5:20"
+        },
+        {
+          "type": "market_analysis",
+          "content": "켄톤의 슈퍼 밸리 데이터가 증가하고 있다.",
+          "confidence": "medium",
+          "timestamp": "6:35"
+        }
+      ],
+      "summary": "영상에서는 CC코인의 업비트 상장 가능성과 삼성의 켄톤 네트워크 선택에 대해 논의하며, 시장의 가격 변동과 거래량에 대한 분석을 제공합니다.",
+      "coins_mentioned": [
+        "CC코인",
+        "켄톤"
+      ],
+      "sentiment": "bullish"
+    },
+    {
+      "video_id": "8VIfrqxW4wc",
+      "title": "Causes of SVB's Bankruptcy and the Need for Canton",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "SVB의 파산 원인 분석 및 유동성 위기 설명",
+          "confidence": "high",
+          "timestamp": "3:01"
+        },
+        {
+          "type": "market_analysis",
+          "content": "디지털 뱅크런의 위험성과 대응책 필요성",
+          "confidence": "high",
+          "timestamp": "5:51"
+        },
+        {
+          "type": "coin_mention",
+          "content": "켄톤 네트워크의 필요성 및 기능 설명",
+          "confidence": "medium",
+          "timestamp": "6:34"
+        }
+      ],
+      "summary": "영상에서는 실리콘 밸리 은행(SVB)의 파산 원인과 그로 인해 드러난 유동성 위기를 분석하고, 디지털 뱅크런의 위험성을 강조하며, 켄톤 네트워크와 같은 프라이빗 블록체인의 필요성을 설명합니다.",
+      "coins_mentioned": [
+        "켄톤"
+      ],
+      "sentiment": "bearish"
+    },
+    {
+      "video_id": "A7qHwvcGh9A",
+      "title": "\"It's performance that matters, fool\" (The Reason for the Coin Market Crash)",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "코인 시장이 실적 부족으로 인해 하락하고 있으며, AI와 로봇 기술이 기존 소프트웨어를 대체하고 있다는 분석.",
+          "confidence": "high",
+          "timestamp": "0:55"
+        },
+        {
+          "type": "coin_mention",
+          "content": "XRP 가격이 1.5달러 수준으로 하락.",
+          "confidence": "medium",
+          "timestamp": "7:04"
+        },
+        {
+          "type": "coin_mention",
+          "content": "이더리움 가격이 2,000달러 위협받는 수준.",
+          "confidence": "medium",
+          "timestamp": "7:08"
+        },
+        {
+          "type": "coin_mention",
+          "content": "켄톤이 실적을 기반으로 한 유일한 암호화폐로 언급됨.",
+          "confidence": "high",
+          "timestamp": "10:04"
+        }
+      ],
+      "summary": "영상에서는 최근 코인 시장의 붕괴 원인으로 실적 부족을 지적하며, AI와 로봇 기술의 발전이 기존 소프트웨어 시장에 미치는 영향을 분석하였다. 또한, 특정 암호화폐인 켄톤이 실적을 기반으로 한 유일한 코인으로 강조되었다.",
+      "coins_mentioned": [
+        "XRP",
+        "이더리움",
+        "켄톤"
+      ],
+      "sentiment": "bearish"
+    },
+    {
+      "video_id": "arOUCh4C9kM",
+      "title": "The altcoin extinction of 2026 begins. (Here's the inconvenient truth!)",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "2026년 알트코인의 대멸종이 시작될 것이라는 예측",
+          "confidence": "high",
+          "timestamp": "3:30"
+        },
+        {
+          "type": "price_prediction",
+          "content": "캔톤 코인이 10달러에 도달할 것이라는 예측",
+          "confidence": "medium",
+          "timestamp": "1:22"
+        },
+        {
+          "type": "market_analysis",
+          "content": "2026년에는 난세가 예상되며, 인플레이션과 부채 문제로 어려움이 있을 것",
+          "confidence": "high",
+          "timestamp": "1:55"
+        },
+        {
+          "type": "market_analysis",
+          "content": "알트코인들이 실적을 묻는 시장에서 살아남기 어려울 것이라는 분석",
+          "confidence": "high",
+          "timestamp": "5:55"
+        }
+      ],
+      "summary": "영상에서는 2026년 알트코인의 대멸종이 시작될 것이라는 예측과 함께, 현재 암호화폐 시장의 문제점과 향후 시장에서 살아남기 위한 조건에 대해 논의하고 있습니다. 또한, 캔톤 코인의 가격 상승 가능성에 대한 언급도 있습니다.",
+      "coins_mentioned": [
+        "비트코인",
+        "XRP",
+        "이더리움",
+        "캔톤",
+        "솔라나",
+        "도지코인",
+        "카르다노",
+        "체인링크"
+      ],
+      "sentiment": "bearish"
+    },
+    {
+      "video_id": "awXkJ9hK-a0",
+      "title": "\"Canton is Darkcoin? Not at all!\" (Why the US chose a 'permissioned' blockchain)",
+      "date": "",
+      "signals": [
+        {
+          "type": "coin_mention",
+          "content": "Canton is not a darkcoin and is a permissioned blockchain chosen by the US for regulatory reasons.",
+          "confidence": "high",
+          "timestamp": "0:01"
+        },
+        {
+          "type": "market_analysis",
+          "content": "Monero and Zcash are preferred by criminals due to their privacy features.",
+          "confidence": "high",
+          "timestamp": "1:30"
+        },
+        {
+          "type": "market_analysis",
+          "content": "Canton's permissioned blockchain provides privacy for financial transactions while allowing regulatory oversight.",
+          "confidence": "high",
+          "timestamp": "5:01"
+        },
+        {
+          "type": "market_analysis",
+          "content": "Canton is seen as a tool to strengthen the dollar's dominance rather than challenge it.",
+          "confidence": "high",
+          "timestamp": "7:49"
+        }
+      ],
+      "summary": "영상에서는 켄톤이 다크코인이 아니라는 점과 미국이 허가형 블록체인을 선택한 이유를 설명합니다. 켄톤은 규제 당국의 감시를 허용하면서도 금융 거래의 프라이버시를 보호하는 시스템으로, 범죄와 불법 자금의 접근을 차단하는 기능을 가지고 있습니다. 또한, 켄톤은 달러 패권을 강화하는 도구로 여겨집니다.",
+      "coins_mentioned": [
+        "Canton",
+        "Monero",
+        "Zcash",
+        "Bitcoin"
+      ],
+      "sentiment": "neutral"
+    },
+    {
+      "video_id": "axurZUkC5Dc",
+      "title": "Is CC Coin and THAR Worth Investing for Individuals?",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "CC코인과 TAR 타임윤은 전통 금융의 시스템 효율화일 뿐 암호화폐 투자자에게 직접적인 수익을 안겨 줄 호재라고 보기 어렵다.",
+          "confidence": "medium",
+          "timestamp": "2:29"
+        },
+        {
+          "type": "market_analysis",
+          "content": "2026년부터 RW가 본격적으로 시작될 것이라는 전망.",
+          "confidence": "high",
+          "timestamp": "6:35"
+        },
+        {
+          "type": "coin_mention",
+          "content": "CC코인은 기관들의 거래 수수료와 관련이 있으며, 가격이 올라가도 기관들의 거래 비용에는 영향을 미치지 않는다.",
+          "confidence": "high",
+          "timestamp": "8:47"
+        }
+      ],
+      "summary": "영상에서는 CC코인과 TAR 타임윤의 투자 가치에 대해 논의하며, 전통 금융의 효율화와 암호화폐 시장의 변화에 대한 전망을 제시한다. CC코인의 가격 변동이 기관 거래 수수료에 미치는 영향에 대한 오해를 해소하고, 2026년부터 RW의 본격적인 시작을 예고한다.",
+      "coins_mentioned": [
+        "CC코인",
+        "TAR 타임윤"
+      ],
+      "sentiment": "neutral"
+    },
+    {
+      "video_id": "azTr1P5of4E",
+      "title": "The World's Easiest RWA Explained (With Real Estate Transactions as an Example)",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "부동산 거래에서 발생하는 사기와 그 해결 방안으로서 켄톤 네트워크의 역할 설명",
+          "confidence": "high",
+          "timestamp": "3:20"
+        },
+        {
+          "type": "coin_mention",
+          "content": "켄톤 네트워크의 토큰화 및 스마트 계약서 생성",
+          "confidence": "high",
+          "timestamp": "4:30"
+        }
+      ],
+      "summary": "영상에서는 부동산 거래에서 발생할 수 있는 사기 사례와 이를 해결하기 위한 켄톤 네트워크의 기능을 설명하고, 디지털 자산의 토큰화 및 스마트 계약의 중요성을 강조합니다.",
+      "coins_mentioned": [
+        "켄톤"
+      ],
+      "sentiment": "bullish"
+    },
+    {
+      "video_id": "bm_O5iqGiFg",
+      "title": "US Treasury bonds rise above Canton (a clear signal of full-scale operation in 2026)",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "미국 국채가 캔톤 네트워크에서 거래될 수 있도록 승인받음.",
+          "confidence": "high",
+          "timestamp": "9:40"
+        },
+        {
+          "type": "coin_mention",
+          "content": "캔톤 코인이 시장과 무관하게 횡보 중.",
+          "confidence": "medium",
+          "timestamp": "0:43"
+        },
+        {
+          "type": "price_prediction",
+          "content": "디지털 자산의 토큰화가 진행됨에 따라 전통 자산의 디지털화가 필요.",
+          "confidence": "medium",
+          "timestamp": "6:34"
+        }
+      ],
+      "summary": "영상에서는 미국 국채가 캔톤 네트워크에서 거래될 수 있도록 승인받았다는 소식과 함께, 캔톤 코인의 시장에서의 움직임, 그리고 디지털 자산의 중요성에 대해 설명하고 있습니다. 또한, 디지털 트윈과 디파이의 개념을 통해 전통 자산의 디지털화 필요성을 강조합니다.",
+      "coins_mentioned": [
+        "비트코인",
+        "캔톤",
+        "이더리움"
+      ],
+      "sentiment": "bullish"
+    },
+    {
+      "video_id": "haqNGCpQKDg",
+      "title": "The Collapse of Investment Patterns and Beliefs (CC Coin's Quiet Santa Rally)",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "비트코인 4년 사이클 설은 더 이상 유효하지 않다.",
+          "confidence": "high",
+          "timestamp": "0:45"
+        },
+        {
+          "type": "price_prediction",
+          "content": "2026년도에 대부분의 알트코인은 다 멸망할 것이다.",
+          "confidence": "high",
+          "timestamp": "2:51"
+        },
+        {
+          "type": "market_analysis",
+          "content": "비트코인과 이더리움은 나스닥 종목 중 하나에 불과하다.",
+          "confidence": "medium",
+          "timestamp": "4:12"
+        },
+        {
+          "type": "market_analysis",
+          "content": "달러 스테이블 코인의 활성화가 이더리움의 소각량이나 활용 가치를 높이지 않는다.",
+          "confidence": "medium",
+          "timestamp": "5:05"
+        },
+        {
+          "type": "market_analysis",
+          "content": "2026년부터 전통 금융과 비트코인 기업들의 크립토 진출이 본격화될 것이다.",
+          "confidence": "high",
+          "timestamp": "5:59"
+        },
+        {
+          "type": "market_analysis",
+          "content": "워렌 버핏이 구글에 투자한 것은 기존의 가치 투자 신념이 바뀌었음을 나타낸다.",
+          "confidence": "medium",
+          "timestamp": "9:02"
+        }
+      ],
+      "summary": "영상에서는 비트코인과 알트코인의 투자 패턴과 신념의 붕괴에 대해 논의하며, 비트코인의 4년 사이클 설이 더 이상 유효하지 않다는 점과 2026년까지 대부분의 알트코인이 멸망할 것이라는 예측을 제시합니다. 또한, 비트코인과 이더리움이 나스닥 종목 중 하나로 간주되고 있으며, 달러 스테이블 코인의 활성화가 이더리움의 가치를 높이지 않는다는 점도 강조합니다.",
+      "coins_mentioned": [
+        "비트코인",
+        "이더리움",
+        "CC 코인"
+      ],
+      "sentiment": "bearish"
+    },
+    {
+      "video_id": "hr5v-QUws9c",
+      "title": "\"What happens to my coins if the government blocks overseas coin exchanges?\" (feat. Corin's Dad's...",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "정부가 해외 거래소를 차단할 경우 개인 지갑 준비 필요성 언급",
+          "confidence": "high",
+          "timestamp": "3:40"
+        },
+        {
+          "type": "coin_mention",
+          "content": "CC코인을 장기 투자 자산으로 고려",
+          "confidence": "medium",
+          "timestamp": "5:21"
+        },
+        {
+          "type": "price_prediction",
+          "content": "현재 CC코인 매도 타이밍이 좋다고 언급",
+          "confidence": "medium",
+          "timestamp": "5:49"
+        }
+      ],
+      "summary": "영상에서는 정부가 해외 거래소를 차단할 경우 개인 자산 관리 방법과 CC코인에 대한 투자 전략을 논의하며, 개인 지갑의 필요성과 해외 자산의 안전한 관리 방법을 제안합니다.",
+      "coins_mentioned": [
+        "CC코인"
+      ],
+      "sentiment": "neutral"
+    },
+    {
+      "video_id": "jRE3eC8gx8o",
+      "title": "\"JP Morgan's choice is ultimately Canton\" (Feat. JPMorgan's token also launched in Canton)",
+      "date": "",
+      "signals": [
+        {
+          "type": "coin_mention",
+          "content": "JP Morgan's JPM token is being launched on the Canton network.",
+          "confidence": "high",
+          "timestamp": "0:27"
+        },
+        {
+          "type": "market_analysis",
+          "content": "The potential for instant international remittance and reduced transaction fees with the tokenization of deposits.",
+          "confidence": "high",
+          "timestamp": "2:49"
+        },
+        {
+          "type": "market_analysis",
+          "content": "The growth potential of JPM token and its liquidity supply to the Canton network.",
+          "confidence": "high",
+          "timestamp": "6:23"
+        }
+      ],
+      "summary": "The video discusses JP Morgan's decision to launch its JPM token on the Canton network, highlighting the benefits of tokenizing deposits for instant international transactions, reduced fees, and the potential for significant liquidity growth in the market.",
+      "coins_mentioned": [
+        "JPM token",
+        "USDC"
+      ],
+      "sentiment": "bullish"
+    },
+    {
+      "video_id": "mMCVfDBaFKA",
+      "title": "Canton Coin (CC): Why is it crashing when everyone else is rising? (The reason for the lonely d...",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "Canton Coin (CC)는 비트코인, 이더리움과 반대로 움직이며 가격이 하락하고 있다.",
+          "confidence": "medium",
+          "timestamp": "0:01"
+        },
+        {
+          "type": "price_prediction",
+          "content": "Canton Coin의 가격 조정은 과거의 급등에 따른 자연스러운 현상일 수 있다.",
+          "confidence": "medium",
+          "timestamp": "2:27"
+        },
+        {
+          "type": "market_analysis",
+          "content": "Canton Coin은 비트코인 및 이더리움과 상관없이 독립적으로 움직이고 있다.",
+          "confidence": "high",
+          "timestamp": "3:01"
+        },
+        {
+          "type": "coin_mention",
+          "content": "Canton Coin의 소각량이 가격 상승에 따라 감소하고 있다.",
+          "confidence": "medium",
+          "timestamp": "4:15"
+        },
+        {
+          "type": "market_analysis",
+          "content": "Canton Coin의 민팅과 소각 시스템이 가격에 영향을 미친다.",
+          "confidence": "high",
+          "timestamp": "5:09"
+        },
+        {
+          "type": "market_analysis",
+          "content": "Canton Coin의 소각 금액이 증가하고 있으며, 이는 긍정적인 신호로 해석될 수 있다.",
+          "confidence": "high",
+          "timestamp": "7:12"
+        }
+      ],
+      "summary": "영상에서는 Canton Coin(CC)의 가격 하락 원인과 시장에서의 독립적인 움직임을 분석하며, 소각 및 민팅 시스템이 가격에 미치는 영향을 설명한다.",
+      "coins_mentioned": [
+        "Canton Coin",
+        "Bitcoin",
+        "Ethereum",
+        "XRP"
+      ],
+      "sentiment": "neutral"
+    },
+    {
+      "video_id": "NeL2M9UvF24",
+      "title": "Are Bitcoin and Ethereum the ultimate collateral assets? (I don't know much about RWA.)",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "비트코인과 이더리움이 최종 담보 자산으로서의 가능성에 대한 논의",
+          "confidence": "medium",
+          "timestamp": "0:15"
+        },
+        {
+          "type": "coin_mention",
+          "content": "비트코인과 이더리움의 가격 변동성에 대한 우려",
+          "confidence": "high",
+          "timestamp": "2:43"
+        },
+        {
+          "type": "market_analysis",
+          "content": "스테이블코인의 확산과 비트코인, 이더리움의 담보 자산으로서의 역할",
+          "confidence": "medium",
+          "timestamp": "7:39"
+        }
+      ],
+      "summary": "영상에서는 비트코인과 이더리움이 최종 담보 자산으로서의 가능성을 논의하며, 이들의 가격 변동성과 스테이블코인의 역할에 대해 설명합니다. 또한, 전통 금융과 디지털 자산의 연결에 대한 관점을 제시합니다.",
+      "coins_mentioned": [
+        "비트코인",
+        "이더리움",
+        "XRP"
+      ],
+      "sentiment": "neutral"
+    },
+    {
+      "video_id": "oC-mHWKj8m8",
+      "title": "\"Why Coin YouTubers Become Heroes Even When Your Coin Crashes\" (The Psychology of John Burr)",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "비트코인이 64,000달러에서 6만 달러가 무너지면 마이크로스트라티지 위험",
+          "confidence": "high",
+          "timestamp": "0:39"
+        },
+        {
+          "type": "market_analysis",
+          "content": "비트코인이 5만 달러 밑으로 떨어지면 채굴장 도산 가능성",
+          "confidence": "high",
+          "timestamp": "1:02"
+        },
+        {
+          "type": "market_analysis",
+          "content": "이더륨이 2,000달러 밑으로 하락",
+          "confidence": "medium",
+          "timestamp": "1:11"
+        },
+        {
+          "type": "market_analysis",
+          "content": "리플이 1.2달러 밑으로 떨어짐",
+          "confidence": "medium",
+          "timestamp": "1:18"
+        },
+        {
+          "type": "market_analysis",
+          "content": "스테이블 코인들이 시장에서 상대적으로 안정적",
+          "confidence": "medium",
+          "timestamp": "1:38"
+        }
+      ],
+      "summary": "영상에서는 코인 유튜버들이 코인 가격 폭락에도 불구하고 어떻게 영웅으로 여겨지는지를 심리학적으로 분석하고, 투자자들이 겪는 심리적 고통과 그에 대한 대처 방식을 설명합니다. 또한, 가격 하락 시 유튜버들이 제공하는 서사가 투자자들에게 심리적 위로가 되는 과정을 다룹니다.",
+      "coins_mentioned": [
+        "비트코인",
+        "이더륨",
+        "리플",
+        "XRP",
+        "도지코인",
+        "솔라나",
+        "테더"
+      ],
+      "sentiment": "bearish"
+    },
+    {
+      "video_id": "OOL77dtnR3g",
+      "title": "THAR, Tymune's secretive strategy. Why is the stock price stagnant?",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "노동의 시대에서 자본소득의 시대로 옮겨가고 있으며, 노동만으로는 계층에서 벗어날 수 없다는 분석.",
+          "confidence": "high",
+          "timestamp": "2:15"
+        },
+        {
+          "type": "coin_mention",
+          "content": "CC코인과 TH의 비교, TH가 더 나은 선택일 수 있다는 언급.",
+          "confidence": "medium",
+          "timestamp": "2:49"
+        },
+        {
+          "type": "market_analysis",
+          "content": "삼성 넥스트의 투자로 인해 CC코인이 안드로이드 지갑에 들어갈 가능성이 있다는 분석.",
+          "confidence": "high",
+          "timestamp": "5:11"
+        },
+        {
+          "type": "company_analysis",
+          "content": "디지털 에셋 회사가 자금 부족이 아닌 전략적 파트너십을 통해 투자를 유치하고 있다는 설명.",
+          "confidence": "high",
+          "timestamp": "8:09"
+        },
+        {
+          "type": "company_analysis",
+          "content": "DRW가 THAR의 지배자로서 임원들을 교체하고 비밀주의 전략을 실행하고 있다는 분석.",
+          "confidence": "high",
+          "timestamp": "10:00"
+        }
+      ],
+      "summary": "영상에서는 THAR의 비밀주의 전략과 주가 정체의 원인, CC코인과 TH의 비교, 삼성의 투자 의미, 디지털 에셋 회사의 전략적 파트너십 등을 다루고 있습니다.",
+      "coins_mentioned": [
+        "CC코인",
+        "TH"
+      ],
+      "sentiment": "neutral"
+    },
+    {
+      "video_id": "Pb_RkyKhOcM",
+      "title": "After reading \"Insider Insights\" (The Essence of Finance and Canton)",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "금융 시장의 비효율성에 대한 분석과 트레이딩 기회",
+          "confidence": "high",
+          "timestamp": "0:58"
+        },
+        {
+          "type": "market_analysis",
+          "content": "월가의 트레이더들이 비효율성을 이용하여 수익을 창출하는 방법",
+          "confidence": "high",
+          "timestamp": "1:36"
+        },
+        {
+          "type": "coin_mention",
+          "content": "비트코인과 이더리움의 과거 성과에 대한 언급",
+          "confidence": "medium",
+          "timestamp": "9:48"
+        }
+      ],
+      "summary": "영상에서는 'Insider Insights'라는 책을 바탕으로 금융 시장의 비효율성과 이를 해결하기 위한 캔톤 네트워크의 목적에 대해 설명합니다. 월가의 트레이더들이 자금을 필요로 하는 기관과 여유 자금을 가진 기관을 연결하는 방법과 알고리즘 자동화 거래의 중요성도 다룹니다. 또한, 과거의 성과에 대한 경계와 시장의 방향성을 예측하는 것의 어려움에 대해서도 언급합니다.",
+      "coins_mentioned": [
+        "비트코인",
+        "이더리움"
+      ],
+      "sentiment": "neutral"
+    },
+    {
+      "video_id": "PGQW7nyoRRI",
+      "title": "Canton is an institution-only coin? That's your opinion~",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "기관 거래가 활성화되면 리테일 상품이 나올 것이라는 전망",
+          "confidence": "high",
+          "timestamp": "0:35"
+        },
+        {
+          "type": "coin_mention",
+          "content": "Canton과 관련된 거래소 및 지갑의 연결성에 대한 설명",
+          "confidence": "high",
+          "timestamp": "1:23"
+        },
+        {
+          "type": "market_analysis",
+          "content": "리테일 시장 확장을 위한 준비가 진행 중이라는 주장",
+          "confidence": "high",
+          "timestamp": "3:55"
+        },
+        {
+          "type": "market_analysis",
+          "content": "대형 기관 간의 도매 거래가 확대되고 있다는 정보",
+          "confidence": "high",
+          "timestamp": "6:51"
+        }
+      ],
+      "summary": "영상에서는 캔톤이 기관 전용 코인이라는 의견에 대해 반박하며, 기관 거래가 활성화되면 리테일 시장으로의 확장이 가능하다는 점을 강조하고 있습니다. 또한, 크리서스와의 협력을 통해 개인 투자자들도 캔톤의 거래에 참여할 수 있는 가능성을 제시하고 있습니다.",
+      "coins_mentioned": [
+        "Canton",
+        "비트코인"
+      ],
+      "sentiment": "bullish"
+    },
+    {
+      "video_id": "pN4qDs7Zfh8",
+      "title": "\"Brother XRP, get out quick!\" (Narrative and Numbers Collapse)",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "XRP의 송금 및 환전 네러티브가 붕괴되었다.",
+          "confidence": "high",
+          "timestamp": "1:22"
+        },
+        {
+          "type": "market_analysis",
+          "content": "XRP의 가격 변동성이 은행들에게 리스크로 작용하고 있다.",
+          "confidence": "high",
+          "timestamp": "2:42"
+        },
+        {
+          "type": "market_analysis",
+          "content": "XRP는 대체제가 아닌 보완재로서의 가능성이 낮아졌다.",
+          "confidence": "medium",
+          "timestamp": "3:44"
+        },
+        {
+          "type": "market_analysis",
+          "content": "XRP의 국제 표준 준수는 기축 통화로서의 지위를 보장하지 않는다.",
+          "confidence": "high",
+          "timestamp": "4:28"
+        },
+        {
+          "type": "market_analysis",
+          "content": "XRP의 소각량이 다른 알트코인에 비해 현저히 낮다.",
+          "confidence": "high",
+          "timestamp": "6:34"
+        }
+      ],
+      "summary": "영상에서는 XRP의 현재 상황과 미래 전망에 대해 논의하며, 송금 및 환전 네러티브의 붕괴, 가격 변동성, 그리고 XRP의 기능적 한계에 대해 설명한다. XRP가 대체제가 아닌 보완재로서의 가능성이 낮아지고 있으며, 소각량이 다른 알트코인에 비해 현저히 낮아 과대 평가되고 있다는 점을 강조한다.",
+      "coins_mentioned": [
+        "XRP",
+        "USDT",
+        "RLUSD",
+        "비트코인",
+        "솔라나",
+        "이더리움"
+      ],
+      "sentiment": "bearish"
+    },
+    {
+      "video_id": "qKzql5TOQkg",
+      "title": "월가가 RWA에 진심인 이유 (이제 연준과 SEC까지 나섰다고?)",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "월가의 주요 금융 기관들이 블록체인 기술과 디지털 자산에 대한 긍정적인 입장을 보이고 있으며, 향후 5년 내에 금융 산업의 큰 변화가 예상됨.",
+          "confidence": "high",
+          "timestamp": "1:28"
+        },
+        {
+          "type": "coin_mention",
+          "content": "비트코인과 이더리움이 담보로 사용될 예정임.",
+          "confidence": "high",
+          "timestamp": "1:56"
+        },
+        {
+          "type": "market_analysis",
+          "content": "미국이 크립토 수도가 되겠다고 선언한 이유는 국채와 관련이 깊음.",
+          "confidence": "high",
+          "timestamp": "3:39"
+        },
+        {
+          "type": "market_analysis",
+          "content": "디지털 토큰과 미국 국채의 실시간 확인 가능성이 강조됨.",
+          "confidence": "high",
+          "timestamp": "4:40"
+        },
+        {
+          "type": "market_analysis",
+          "content": "퍼미션드 체인의 필요성이 강조되며, 규제 환경에서의 운영이 필수적임.",
+          "confidence": "high",
+          "timestamp": "10:00"
+        }
+      ],
+      "summary": "영상에서는 월가의 주요 금융 기관들이 블록체인 기술과 디지털 자산에 대한 긍정적인 입장을 보이고 있으며, 향후 금융 산업의 큰 변화가 예상된다는 내용을 다루고 있습니다. 특히, 미국 국채와 스테이블 코인의 관계, 그리고 퍼미션드 체인의 필요성이 강조됩니다.",
+      "coins_mentioned": [
+        "비트코인",
+        "이더리움",
+        "USDC",
+        "USDT"
+      ],
+      "sentiment": "bullish"
+    },
+    {
+      "video_id": "Quyl_Xss93E",
+      "title": "CC Coin Exclusive Strategy - feat. Zero to One",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "이더리움의 독점적 지위와 경쟁 네트워크들에 대한 분석",
+          "confidence": "medium",
+          "timestamp": "1:15"
+        },
+        {
+          "type": "market_analysis",
+          "content": "디파이 시장의 성장 가능성과 현재의 거래량 비교",
+          "confidence": "medium",
+          "timestamp": "4:03"
+        },
+        {
+          "type": "coin_mention",
+          "content": "CC코인에 대한 독점 전략 설명",
+          "confidence": "high",
+          "timestamp": "0:05"
+        },
+        {
+          "type": "coin_mention",
+          "content": "이더리움과 솔라나의 비교",
+          "confidence": "medium",
+          "timestamp": "3:30"
+        },
+        {
+          "type": "market_analysis",
+          "content": "켄톤 네트워크의 독자 기술성과 네트워크 효과 설명",
+          "confidence": "high",
+          "timestamp": "6:28"
+        }
+      ],
+      "summary": "영상에서는 CC코인에 대한 독점 전략과 이더리움의 시장 지위, 디파이의 현실, 그리고 켄톤 네트워크의 기술적 우위에 대해 논의합니다. 이더리움의 경쟁 네트워크와 디파이의 성장 가능성에 대한 비판적인 시각도 포함되어 있습니다.",
+      "coins_mentioned": [
+        "CC코인",
+        "이더리움",
+        "솔라나"
+      ],
+      "sentiment": "neutral"
+    },
+    {
+      "video_id": "RIhGc56eSHo",
+      "title": "Romantic Bitcoin vs. Realistic Cantoncoin",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "비트코인은 더 이상 달러에 위협적이지 않고, 오히려 달러에 봉사하는 자산으로 보고됨.",
+          "confidence": "high",
+          "timestamp": "6:10"
+        },
+        {
+          "type": "price_prediction",
+          "content": "비트코인 가격이 1년 전과 비슷하며, 더 이상 오르지도 떨어지지도 않을 것.",
+          "confidence": "medium",
+          "timestamp": "7:20"
+        },
+        {
+          "type": "coin_mention",
+          "content": "캔톤코인의 하루 매출이 150만 달러로, 연간 5억 달러의 매출이 예상됨.",
+          "confidence": "high",
+          "timestamp": "8:50"
+        },
+        {
+          "type": "market_analysis",
+          "content": "솔라나가 앞으로 괜찮은 코인으로 주목받을 것.",
+          "confidence": "medium",
+          "timestamp": "9:26"
+        },
+        {
+          "type": "coin_mention",
+          "content": "리플은 사라질 코인으로 판단됨.",
+          "confidence": "high",
+          "timestamp": "9:41"
+        }
+      ],
+      "summary": "영상에서는 비트코인과 캔톤코인을 비교하며, 비트코인이 더 이상 달러에 위협적이지 않다는 점과 캔톤코인의 매출 성장 가능성을 강조하고 있습니다. 또한, 솔라나와 리플에 대한 의견도 제시됩니다.",
+      "coins_mentioned": [
+        "비트코인",
+        "캔톤코인",
+        "이더리움",
+        "솔라나",
+        "리플"
+      ],
+      "sentiment": "bearish"
+    },
+    {
+      "video_id": "TjKVuAGhC1M",
+      "title": "\"The Clarity Act's Indefinite Delay Reverberates\" (Coinbase's Rice Bowl Struggle and Canton)",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "클레르티 법안의 무기한 연기가 코인베이스와 스테이블 코인에 미치는 영향 분석",
+          "confidence": "medium",
+          "timestamp": "0:21"
+        },
+        {
+          "type": "coin_mention",
+          "content": "USDC와 USDT의 이자 지급 및 스테이블 코인의 가치 변동에 대한 언급",
+          "confidence": "high",
+          "timestamp": "0:46"
+        },
+        {
+          "type": "market_analysis",
+          "content": "JP모건의 디지털 예금 시대와 스테이블 코인의 토큰화에 대한 논의",
+          "confidence": "medium",
+          "timestamp": "4:29"
+        }
+      ],
+      "summary": "영상에서는 클레르티 법안의 무기한 연기가 암호화폐 시장에 미치는 영향과 코인베이스의 대응, 스테이블 코인의 이자 지급 문제, JP모건의 디지털 예금 시스템에 대한 논의가 이루어졌다. 또한, 향후 은행과 암호화폐 거래의 통합 가능성에 대해 설명하였다.",
+      "coins_mentioned": [
+        "USDC",
+        "USDT"
+      ],
+      "sentiment": "neutral"
+    },
+    {
+      "video_id": "ULXCspCxaSg",
+      "title": "\"Don't call me CNTN, from now on it's [Canton]!\"",
+      "date": "",
+      "signals": [
+        {
+          "type": "coin_mention",
+          "content": "CNTN은 캔톤으로 발음해야 한다고 설명함.",
+          "confidence": "high",
+          "timestamp": "3:14"
+        },
+        {
+          "type": "market_analysis",
+          "content": "캔톤이 전략적 매집 회사로 유일하다고 강조함.",
+          "confidence": "high",
+          "timestamp": "2:20"
+        }
+      ],
+      "summary": "영상에서는 CNTN의 새로운 티커명이 캔톤으로 바뀌었음을 알리고, 올바른 발음과 회사의 정체성에 대해 설명합니다. 또한, 캔톤이 전략적 매집 회사로서의 유일성을 강조합니다.",
+      "coins_mentioned": [
+        "CC코인",
+        "캔톤"
+      ],
+      "sentiment": "bullish"
+    },
+    {
+      "video_id": "Vy2jrX-uCbY",
+      "title": "Why Canton Will Survive the AI ​​Bubble Burst",
+      "date": "",
+      "signals": [
+        {
+          "type": "market_analysis",
+          "content": "AI 거품이 붕괴하면 비트코인과 부동산은 중간 위험 자산으로 분류됨.",
+          "confidence": "medium",
+          "timestamp": "4:02"
+        },
+        {
+          "type": "market_analysis",
+          "content": "버블 붕괴 시 자산 리밸런싱이 빨라지고, 우량 은행들이 기회를 잡을 것임.",
+          "confidence": "high",
+          "timestamp": "10:06"
+        },
+        {
+          "type": "price_prediction",
+          "content": "AI 버블이 계속되든 붕괴하든 캔톤 네트워크의 크립토 금융과 RW는 가속화될 것임.",
+          "confidence": "high",
+          "timestamp": "10:56"
+        }
+      ],
+      "summary": "영상에서는 AI 버블 붕괴에 대한 우려와 켄톤 네트워크가 어떻게 생존할 수 있는지를 설명하며, 자산 리밸런싱과 우량 자산의 기회에 대해 논의합니다.",
+      "coins_mentioned": [
+        "비트코인"
+      ],
+      "sentiment": "bullish"
+    }
+  ]
+}

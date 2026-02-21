@@ -1,0 +1,26 @@
+{
+  "total_videos": 2,
+  "total_signals": 3,
+  "correct_signals": 3,
+  "error_count": 0,
+  "error_types": {},
+  "errors": [],
+  "missed_signals": [],
+  "accuracy_rate": 100.0,
+  "video_results": {
+    "-brWAKvRaqI": {
+      "video_id": "-brWAKvRaqI",
+      "total_signals": 2,
+      "correct_signals": 2,
+      "errors": [],
+      "missed_signals": []
+    },
+    "151ejJicjy4": {
+      "video_id": "151ejJicjy4",
+      "total_signals": 1,
+      "correct_signals": 1,
+      "errors": [],
+      "missed_signals": []
+    }
+  }
+}

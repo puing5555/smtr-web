@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>투자 SNS - 프로필 & 뱃지 시스템 데모</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0f0f0f;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        /* Profile Card */
+        .profile-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 28px;
+            color: white;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .profile-bio {
+            color: #888;
+            margin-bottom: 12px;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .investment-style {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            margin: 12px 0;
+        }
+
+        /* Badges */
+        .badges-section {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+        }
+
+        .badges-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .badges-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+            cursor: help;
+        }
+
+        .badge.common {
+            background: #374151;
+            color: #d1d5db;
+            border-color: #4b5563;
+        }
+
+        .badge.rare {
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .badge.epic {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            border-color: #a855f7;
+            animation: subtle-glow 3s ease-in-out infinite alternate;
+        }
+
+        .badge.legendary {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border-color: #f59e0b;
+            animation: legendary-glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes subtle-glow {
+            from { box-shadow: 0 0 5px rgba(168, 85, 247, 0.3); }
+            to { box-shadow: 0 0 15px rgba(168, 85, 247, 0.6); }
+        }
+
+        @keyframes legendary-glow {
+            from { box-shadow: 0 0 8px rgba(245, 158, 11, 0.4); }
+            to { box-shadow: 0 0 20px rgba(245, 158, 11, 0.8); }
+        }
+
+        .badge-icon {
+            font-size: 16px;
+        }
+
+        .no-badges {
+            color: #888;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #374151;
+            color: #d1d5db;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+
+        /* Demo Controls */
+        .demo-controls {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        /* Investment Style Selector */
+        .style-selector {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .style-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .style-option {
+            padding: 12px 16px;
+            background: #0f0f0f;
+            border: 2px solid #333;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .style-option:hover {
+            border-color: #667eea;
+        }
+
+        .style-option.selected {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            transform: translateX(100%);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏆 프로필 & 뱃지 시스템</h1>
+            <p>투자성향과 뱃지 컬렉션 데모</p>
+        </div>
+
+        <!-- Investment Style Selector -->
+        <div class="style-selector">
+            <div class="section-title">💼 투자성향 선택</div>
+            <div class="style-options" id="styleOptions">
+                <div class="style-option" data-style="가치투자자">
+                    🎯 가치투자자<br>
+                    <small style="color: #888;">기업의 내재가치 중심 투자</small>
+                </div>
+                <div class="style-option" data-style="모멘텀투자자">
+                    🚀 모멘텀투자자<br>
+                    <small style="color: #888;">상승 추세 따라가는 투자</small>
+                </div>
+                <div class="style-option" data-style="단타">
+                    ⚡ 단타<br>
+                    <small style="color: #888;">단기 매매 중심</small>
+                </div>
+                <div class="style-option" data-style="스윙">
+                    🔄 스윙<br>
+                    <small style="color: #888;">중기 추세 투자</small>
+                </div>
+                <div class="style-option" data-style="배당투자자">
+                    💰 배당투자자<br>
+                    <small style="color: #888;">안정적인 배당 중심</small>
+                </div>
+                <div class="style-option" data-style="인덱스투자자">
+                    📊 인덱스투자자<br>
+                    <small style="color: #888;">지수 추종 투자</small>
+                </div>
+                <div class="style-option" data-style="비트코이너">
+                    ₿ 비트코이너<br>
+                    <small style="color: #888;">암호화폐 중심 투자</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Profile -->
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-avatar" id="userAvatar">김</div>
+                <div class="profile-info">
+                    <div class="profile-name" id="userName">김투자</div>
+                    <div class="profile-bio" id="userBio">10년차 개미투자자, 장기투자 선호</div>
+                    <div class="profile-stats">
+                        <span>팔로워 156명</span>
+                        <span>팔로잉 23명</span>
+                        <span>글 47개</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Investment Style Display -->
+            <div class="investment-style" id="investmentStyleDisplay">
+                🎯 가치투자자
+            </div>
+
+            <!-- User Badges -->
+            <div class="badges-section">
+                <div class="badges-header">
+                    <div class="section-title">🏆 보유 뱃지</div>
+                    <div style="font-size: 14px; color: #888;" id="badgeCount">0개</div>
+                </div>
+                <div class="badges-container" id="userBadges">
+                    <div class="no-badges" id="noBadges">
+                        아직 획득한 뱃지가 없습니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Demo Controls -->
+        <div class="demo-controls">
+            <div class="section-title">🎮 데모 컨트롤</div>
+            <div class="demo-grid">
+                <button class="btn btn-primary" onclick="grantRandomBadge()">
+                    🎁 랜덤 뱃지 부여
+                </button>
+                <button class="btn btn-primary" onclick="grantStyleBadge()">
+                    🎯 성향별 뱃지 부여
+                </button>
+                <button class="btn btn-primary" onclick="grantRareBadge()">
+                    ⭐ 희귀 뱃지 부여
+                </button>
+                <button class="btn btn-secondary" onclick="clearAllBadges()">
+                    🗑️ 모든 뱃지 제거
+                </button>
+            </div>
+        </div>
+
+        <!-- Available Badges Info -->
+        <div class="demo-controls">
+            <div class="section-title">📋 사용 가능한 뱃지들</div>
+            <div class="badges-container" style="margin-top: 16px;" id="availableBadges">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast for notifications -->
+    <div id="toast" class="toast"></div>
+
+    <script>
+        // Demo data
+        const AVAILABLE_BADGES = [
+            {
+                name: "신규 회원",
+                description: "투자 SNS에 오신 것을 환영합니다!",
+                icon: "🎉",
+                category: "general",
+                rarity: "common"
+            },
+            {
+                name: "활동적인 투자자",
+                description: "활발한 투자 소통을 하고 있습니다",
+                icon: "🚀",
+                category: "achievement",
+                rarity: "rare"
+            },
+            {
+                name: "등록 인플루언서",
+                description: "인증된 투자 인플루언서입니다",
+                icon: "⭐",
+                category: "achievement",
+                rarity: "rare"
+            },
+            {
+                name: "비트코이너",
+                description: "암호화폐 투자 전문가입니다",
+                icon: "₿",
+                category: "special",
+                rarity: "epic"
+            },
+            {
+                name: "가치투자 마스터",
+                description: "가치투자에 정통한 투자자입니다",
+                icon: "💎",
+                category: "achievement",
+                rarity: "epic"
+            },
+            {
+                name: "전설의 투자자",
+                description: "투자 역사에 이름을 남긴 투자자입니다",
+                icon: "👑",
+                category: "special",
+                rarity: "legendary"
+            }
+        ];
+
+        const INVESTMENT_STYLES = {
+            '가치투자자': '🎯',
+            '모멘텀투자자': '🚀',
+            '단타': '⚡',
+            '스윙': '🔄',
+            '배당투자자': '💰',
+            '인덱스투자자': '📊',
+            '비트코이너': '₿'
+        };
+
+        let currentInvestmentStyle = '가치투자자';
+        let userBadges = [];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeStyleSelector();
+            loadAvailableBadges();
+            updateBadgesDisplay();
+        });
+
+        function initializeStyleSelector() {
+            const options = document.querySelectorAll('.style-option');
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    const style = this.dataset.style;
+                    selectInvestmentStyle(style);
+                });
+            });
+
+            // Set initial selection
+            selectInvestmentStyle(currentInvestmentStyle);
+        }
+
+        function selectInvestmentStyle(style) {
+            currentInvestmentStyle = style;
+            
+            // Update UI
+            document.querySelectorAll('.style-option').forEach(option => {
+                option.classList.toggle('selected', option.dataset.style === style);
+            });
+
+            const emoji = INVESTMENT_STYLES[style] || '🎯';
+            document.getElementById('investmentStyleDisplay').textContent = `${emoji} ${style}`;
+            
+            showToast(`투자성향이 "${style}"로 변경되었습니다`);
+        }
+
+        function loadAvailableBadges() {
+            const container = document.getElementById('availableBadges');
+            const html = AVAILABLE_BADGES.map(badge => `
+                <div class="badge ${badge.rarity}" title="${badge.description}">
+                    <span class="badge-icon">${badge.icon}</span>
+                    <span class="badge-name">${badge.name}</span>
+                </div>
+            `).join('');
+            container.innerHTML = html;
+        }
+
+        function updateBadgesDisplay() {
+            const container = document.getElementById('userBadges');
+            const noBadges = document.getElementById('noBadges');
+            const badgeCount = document.getElementById('badgeCount');
+            
+            if (userBadges.length === 0) {
+                noBadges.style.display = 'block';
+                container.innerHTML = '<div class="no-badges">아직 획득한 뱃지가 없습니다.</div>';
+                badgeCount.textContent = '0개';
+            } else {
+                noBadges.style.display = 'none';
+                const html = userBadges.map(badge => `
+                    <div class="badge ${badge.rarity}" title="${badge.description}">
+                        <span class="badge-icon">${badge.icon}</span>
+                        <span class="badge-name">${badge.name}</span>
+                    </div>
+                `).join('');
+                container.innerHTML = html;
+                badgeCount.textContent = `${userBadges.length}개`;
+            }
+        }
+
+        function grantRandomBadge() {
+            const availableBadges = AVAILABLE_BADGES.filter(badge => 
+                !userBadges.some(userBadge => userBadge.name === badge.name)
+            );
+            
+            if (availableBadges.length === 0) {
+                showToast('모든 뱃지를 이미 획득했습니다!');
+                return;
+            }
+            
+            const randomBadge = availableBadges[Math.floor(Math.random() * availableBadges.length)];
+            grantBadge(randomBadge);
+        }
+
+        function grantStyleBadge() {
+            let styleBadge;
+            
+            if (currentInvestmentStyle === '비트코이너') {
+                styleBadge = AVAILABLE_BADGES.find(badge => badge.name === '비트코이너');
+            } else if (currentInvestmentStyle === '가치투자자') {
+                styleBadge = AVAILABLE_BADGES.find(badge => badge.name === '가치투자 마스터');
+            } else {
+                // 다른 성향의 경우 활동적인 투자자 뱃지
+                styleBadge = AVAILABLE_BADGES.find(badge => badge.name === '활동적인 투자자');
+            }
+            
+            if (styleBadge && !userBadges.some(badge => badge.name === styleBadge.name)) {
+                grantBadge(styleBadge);
+            } else {
+                showToast('해당 뱃지를 이미 보유하고 있거나 사용할 수 없습니다.');
+            }
+        }
+
+        function grantRareBadge() {
+            const rareBadges = AVAILABLE_BADGES.filter(badge => 
+                (badge.rarity === 'epic' || badge.rarity === 'legendary') &&
+                !userBadges.some(userBadge => userBadge.name === badge.name)
+            );
+            
+            if (rareBadges.length === 0) {
+                showToast('사용 가능한 희귀 뱃지가 없습니다.');
+                return;
+            }
+            
+            const randomRareBadge = rareBadges[Math.floor(Math.random() * rareBadges.length)];
+            grantBadge(randomRareBadge);
+        }
+
+        function grantBadge(badge) {
+            userBadges.push({...badge});
+            updateBadgesDisplay();
+            showToast(`🎉 "${badge.name}" 뱃지를 획득했습니다!`);
+        }
+
+        function clearAllBadges() {
+            userBadges = [];
+            updateBadgesDisplay();
+            showToast('모든 뱃지가 제거되었습니다.');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

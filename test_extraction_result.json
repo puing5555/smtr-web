@@ -1,0 +1,17 @@
+[
+  {
+    "video_id": "-brWAKvRaqI",
+    "result": "```json\n{\"signals\": []}\n```",
+    "tokens": 1263
+  },
+  {
+    "video_id": "-fmfJn1psbA",
+    "result": "```json\n{\"signals\": []}\n```",
+    "tokens": 1229
+  },
+  {
+    "video_id": "08FEwaGddCk",
+    "result": "```json\n{\n  \"signals\": [\n    {\n      \"type\": \"investment_advice\",\n      \"content\": \"절대 한 방에 들어가지 마세요. 정말로 이거는 분할해 조금씩 조금씩만 하세요.\"\n    },\n    {\n      \"type\": \"price_information\",\n      \"content\": \"지금 주식도 2.6달러밖에 안 하잖아요.\"\n    },\n    {\n      \"type\": \"caution\",\n      \"content\": \"절대 무리해 가지고 막 내일 당장 떡상하고 이런 코인이 아니에요.\"\n    },\n    {\n      \"type\": \"caution\",\n      \"content\": \"함부로 막 이렇게 한꺼번에 막 몰빵하시고 하지 마십시오.\"\n    }\n  ]\n}\n```",
+    "tokens": 1416
+  }
+]

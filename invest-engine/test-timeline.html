@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Engine - News Timeline</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+        }
+
+        .btn.secondary {
+            background: #95a5a6;
+        }
+
+        .btn.secondary:hover {
+            background: #7f8c8d;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+        }
+
+        .timeline {
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e0e6ed;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 80px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .timeline-icon {
+            position: absolute;
+            left: -50px;
+            top: 20px;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border: 3px solid #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            padding: 20px;
+        }
+
+        .timeline-time {
+            color: #7f8c8d;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .timeline-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .timeline-subtitle {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .original-title {
+            color: #95a5a6;
+            font-size: 12px;
+            font-style: italic;
+            margin-top: 5px;
+            padding: 5px 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            border-left: 3px solid #e0e6ed;
+        }
+
+        .timeline-meta {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #7f8c8d;
+        }
+
+        .grade-a { border-left: 5px solid #e74c3c; }
+        .grade-b { border-left: 5px solid #f39c12; }
+        .grade-c { border-left: 5px solid #95a5a6; }
+
+        .market-us .timeline-icon { border-color: #3498db; background: #ebf3fd; }
+        .market-crypto .timeline-icon { border-color: #f39c12; background: #fdf6e3; }
+        .market-kr .timeline-icon { border-color: #27ae60; background: #e8f8f0; }
+
+        .importance-high { box-shadow: 0 4px 20px rgba(231, 76, 60, 0.2); }
+        .importance-medium { box-shadow: 0 2px 10px rgba(52, 152, 219, 0.2); }
+
+        .no-data {
+            text-align: center;
+            padding: 50px 20px;
+            color: #7f8c8d;
+            background: white;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-item {
+                padding-left: 40px;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-icon {
+                left: -10px;
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Investment Engine News Timeline</h1>
+            <p>실시간 투자 뉴스 및 공시 정보 (한국어 번역 지원)</p>
+        </div>
+
+        <div class="controls">
+            <button class="btn" onclick="loadTimeline()">🔄 새로고침</button>
+            <button class="btn secondary" onclick="triggerTranslation()">🌐 번역 실행</button>
+            <button class="btn secondary" onclick="triggerTranslation('us')">🇺🇸 미국뉴스 번역</button>
+            <button class="btn secondary" onclick="triggerTranslation('crypto')">₿ 암호화폐 번역</button>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            뉴스를 불러오는 중...
+        </div>
+
+        <div id="timeline" class="timeline">
+            <!-- Timeline items will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        let currentData = [];
+
+        // 페이지 로드 시 자동으로 타임라인 로드
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTimeline();
+        });
+
+        async function loadTimeline() {
+            const loading = document.getElementById('loading');
+            const timeline = document.getElementById('timeline');
+
+            loading.style.display = 'block';
+            timeline.innerHTML = '';
+
+            try {
+                const response = await fetch('/api/feed?limit=50');
+                const data = await response.json();
+
+                if (data.success && data.feed && data.feed.length > 0) {
+                    currentData = data.feed;
+                    renderTimeline(currentData);
+                } else {
+                    timeline.innerHTML = '<div class="no-data">표시할 뉴스가 없습니다.</div>';
+                }
+            } catch (error) {
+                console.error('Failed to load timeline:', error);
+                timeline.innerHTML = '<div class="no-data">뉴스 로드 중 오류가 발생했습니다.</div>';
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
+        function renderTimeline(items) {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '';
+
+            items.forEach(item => {
+                const timelineItem = createTimelineItem(item);
+                timeline.appendChild(timelineItem);
+            });
+        }
+
+        function createTimelineItem(item) {
+            const div = document.createElement('div');
+            div.className = `timeline-item ${getMarketClass(item)} ${getGradeClass(item)} ${getImportanceClass(item)}`;
+
+            // 제목 결정: ai_summary가 있으면 번역본, 없으면 원문
+            const displayTitle = item.ai_summary || item.title;
+            const showOriginal = item.ai_summary && item.ai_summary !== item.title;
+
+            div.innerHTML = `
+                <div class="timeline-icon">
+                    ${item.icon || '📰'}
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-time">${item.time}</div>
+                    <div class="timeline-title">
+                        ${displayTitle}
+                    </div>
+                    ${showOriginal ? `<div class="original-title">원문: ${item.title}</div>` : ''}
+                    <div class="timeline-subtitle">${item.subtitle || ''}</div>
+                    <div class="timeline-meta">
+                        <div class="meta-item">
+                            📊 ${item.type || 'news'}
+                        </div>
+                        ${item.grade ? `<div class="meta-item">🏆 ${item.grade}급</div>` : ''}
+                        ${item.importance_score ? `<div class="meta-item">⭐ 중요도: ${Math.round(item.importance_score * 100)}%</div>` : ''}
+                        ${item.stock_code ? `<div class="meta-item">📈 ${item.stock_code}</div>` : ''}
+                    </div>
+                </div>
+            `;
+
+            // 클릭 이벤트 추가
+            if (item.url) {
+                div.style.cursor = 'pointer';
+                div.addEventListener('click', () => {
+                    window.open(item.url, '_blank');
+                });
+            }
+
+            return div;
+        }
+
+        function getMarketClass(item) {
+            // API 응답에서 market 정보를 추정
+            const source = item.subtitle || item.source || '';
+            if (source.includes('Yahoo') || source.includes('Google') || item.type === 'us_news') {
+                return 'market-us';
+            }
+            if (source.includes('Coin') || source.includes('crypto') || item.type === 'crypto_news') {
+                return 'market-crypto';
+            }
+            return 'market-kr';
+        }
+
+        function getGradeClass(item) {
+            if (item.grade === 'A') return 'grade-a';
+            if (item.grade === 'B') return 'grade-b';
+            return 'grade-c';
+        }
+
+        function getImportanceClass(item) {
+            const score = item.importance_score || 0;
+            if (score >= 0.8) return 'importance-high';
+            if (score >= 0.6) return 'importance-medium';
+            return '';
+        }
+
+        async function triggerTranslation(market = null) {
+            const loading = document.getElementById('loading');
+            loading.style.display = 'block';
+            loading.textContent = '번역을 실행하는 중...';
+
+            try {
+                const url = '/trigger/translate-news' + (market ? `?market=${market}` : '');
+                const response = await fetch(url, { method: 'POST' });
+                const data = await response.json();
+
+                if (data.success) {
+                    alert(`번역 완료: ${data.translated_count}개 뉴스가 번역되었습니다.`);
+                    // 번역 후 자동으로 새로고침
+                    await loadTimeline();
+                } else {
+                    alert('번역 실패: ' + (data.detail || '알 수 없는 오류'));
+                }
+            } catch (error) {
+                console.error('Translation failed:', error);
+                alert('번역 실행 중 오류가 발생했습니다.');
+            } finally {
+                loading.style.display = 'none';
+                loading.textContent = '뉴스를 불러오는 중...';
+            }
+        }
+
+        // 자동 새로고침 (30초마다)
+        setInterval(() => {
+            if (!document.hidden) {
+                loadTimeline();
+            }
+        }, 30000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "batch_id": "batch_6997bf300f248190b196f07370662463",
+  "input_file_id": "file-HAbMy4ibBDM9t1ViPDVnem",
+  "status": "completed",
+  "created_at": 1771552560,
+  "request_counts": {
+    "completed": 36,
+    "failed": 0,
+    "total": 36
+  },
+  "metadata": {
+    "description": "SMTR corinpapa v7 analysis - _batch_v7_01.jsonl"
+  },
+  "completed_at": 1771557467,
+  "output_file_id": "file-SCv7A3gYfQ9qj2FR71V2rM"
+}
