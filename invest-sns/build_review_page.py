@@ -642,8 +642,8 @@ def main():
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(html_content)
     
-    print(f"✅ Review page built successfully: {output_path}")
-    print(f"📊 Statistics:")
+    print(f"Review page built successfully: {output_path}")
+    print(f"Statistics:")
     
     # 통계 출력
     stats = {'confirmed': 0, 'modified': 0, 'rejected': 0}

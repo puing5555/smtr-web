@@ -326,7 +326,7 @@ def create_html_template():
     <div class="container">
         <div class="header">
             <h1 class="title">🔍 코린이 아빠 시그널 검증 리뷰</h1>
-            <p class="subtitle">4단계 검증 파이프라인: GPT-4o-mini 추출 → GPT-4o 검증 → Claude Opus 검증 → 인간 최종 리뷰</p>
+            <p class="subtitle">3단계 검증 파이프라인: GPT-4o-mini 추출 → Claude 검증 → 인간 최종 리뷰</p>
             
             <div class="stats" id="stats">
                 <div class="stat-card">
@@ -466,14 +466,7 @@ def create_html_template():
                         </div>
                         
                         <div class="stage">
-                            <div class="stage-title">🤖 2차: GPT-4o 검증</div>
-                            <div class="stage-content">
-                                ${formatGpt4oVerification(gpt4oVerifications, signal)}
-                            </div>
-                        </div>
-                        
-                        <div class="stage">
-                            <div class="stage-title">🔍 3차: Claude 검증</div>
+                            <div class="stage-title">🔍 2차: Claude 검증</div>
                             <div class="stage-content">
                                 <strong>판정:</strong> ${claude.judgment || 'N/A'}<br>
                                 <strong>사유:</strong> ${claude.reason || 'N/A'}<br>
@@ -486,7 +479,7 @@ def create_html_template():
                         </div>
                         
                         <div class="stage">
-                            <div class="stage-title">👤 4차: 인간 검토</div>
+                            <div class="stage-title">👤 3차: 인간 검토</div>
                             <div class="stage-content">
                                 <strong>상태:</strong> ${getStatusLabel(reviewStatus)}<br>
                                 <small>마지막 수정: ${reviews[signalId + '_timestamp'] || '없음'}</small>
