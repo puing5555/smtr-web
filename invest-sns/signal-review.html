@@ -3126,7 +3126,7 @@
 
         // 시그널 ID 생성
         function getSignalId(signal) {
-            return `${signal.video_id}-${signal.asset} <span style="color:#94a3b8;font-size:14px;font-weight:400">· ${signal.influencer || "알 수 없음"}</span>-${signal.signal_type}-${signal.content.substring(0, 50)}`.replace(/[^a-zA-Z0-9-_]/g, '');
+            return `${signal.video_id || 'unknown'}-${signal.asset || 'unknown'}-${signal.signal_type || 'unknown'}-${(signal.content || '').substring(0, 50)}`.replace(/[^a-zA-Z0-9-_]/g, '');
         }
 
         // 인간 검토 제출

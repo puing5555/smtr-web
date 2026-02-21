@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Claude Sonnet을 사용해 코린이 아빠 시그널을 검증하는 스크립트
+Claude Sonnet을 사용해 코린이 아빠 시그널을 검증하는 스크립트 (수정된 버전)
 """
 import json
 import os
@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 class ClaudeSignalVerifier:
     def __init__(self, api_key: str):
         self.client = anthropic.Anthropic(api_key=api_key)
-        self.model = "claude-3-5-sonnet-20241022"  # Claude 3.5 Sonnet 모델
+        self.model = "claude-3-haiku-20240307"  # Claude Haiku 모델
         
     def load_signals(self, signals_path: str) -> List[Dict]:
         """시그널 파일 로드"""
@@ -58,14 +58,17 @@ class ClaudeSignalVerifier:
     
     def verify_signal(self, signal: Dict, subtitle: str) -> Dict:
         """Claude Sonnet으로 개별 시그널 검증"""
+        # 자막이 너무 길면 자르기
+        truncated_subtitle = subtitle[:2000] + "..." if len(subtitle) > 2000 else subtitle
+        
         prompt = f"""다음은 유튜브 영상에서 GPT-4o-mini가 추출한 투자 시그널입니다. 원본 자막과 비교해서 검증해주세요.
 
 **원본 자막:**
-{subtitle[:3000]}...  # 길면 자름
+{truncated_subtitle}
 
 **GPT-4o-mini 추출 결과:**
 - 종목: {signal.get('asset', 'N/A')}
-- 시그널 타입: {signal.get('signal_type', 'N/A')}
+- 시그널 타입: {signal.get('signal_type', 'N/A')}  
 - 내용: {signal.get('content', 'N/A')}
 - 신뢰도: {signal.get('confidence', 'N/A')}
 - 맥락: {signal.get('context', 'N/A')}
@@ -75,15 +78,13 @@ class ClaudeSignalVerifier:
 2. 수정됨: 틀렸지만 유사한 내용이 있음 (수정 의견 제시)
 3. 거부됨: 자막에 해당 내용이 없음
 
-**응답 형식 (JSON):**
+JSON 형식으로 응답해주세요:
 {{
     "verdict": "확인됨|수정됨|거부됨",
     "confidence": 0.85,
     "reason": "간결한 이유 (한국어, 50자 이내)",
     "correction": "수정됨인 경우 올바른 내용 (선택사항)"
-}}
-
-JSON만 응답해주세요."""
+}}"""
 
         try:
             response = self.client.messages.create(

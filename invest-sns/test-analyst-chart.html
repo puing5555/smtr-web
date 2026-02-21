@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>애널리스트 차트 - 삼성전자</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>애널리스트 탭</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.1.0/dist/lightweight-charts.standalone.production.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.js"></script>
     <style>
         :root {
             --bg: #0a0e17;
@@ -44,58 +41,40 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 16px;
         }
 
-        /* Header & Search */
-        .header {
+        /* 검색바 */
+        .search-header {
+            position: sticky;
+            top: 0;
             background: var(--bg2);
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 24px;
-            border: 1px solid var(--border);
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
         }
 
-        .search-section {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .search-container {
+        .search-wrapper {
             position: relative;
-            flex: 1;
-            min-width: 280px;
         }
 
         .search-input {
             width: 100%;
-            padding: 12px 48px 12px 16px;
+            padding: 12px 20px;
             background: var(--bg3);
-            border: 2px solid var(--border);
+            border: 1px solid var(--border);
             border-radius: 12px;
             color: var(--text);
             font-size: 16px;
-            font-family: inherit;
-            transition: all 0.3s ease;
+            outline: none;
+            transition: all 0.2s;
         }
 
         .search-input:focus {
-            outline: none;
             border-color: var(--accent);
             background: var(--bg4);
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text3);
-            font-size: 18px;
         }
 
         .search-dropdown {
@@ -104,358 +83,380 @@
             left: 0;
             right: 0;
             background: var(--bg3);
-            border: 1px solid var(--border2);
-            border-radius: 12px;
-            margin-top: 4px;
-            z-index: 1000;
-            max-height: 200px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            max-height: 300px;
             overflow-y: auto;
+            z-index: 101;
             display: none;
         }
 
-        .search-dropdown.active {
-            display: block;
-        }
-
-        .dropdown-item {
+        .search-item {
             padding: 12px 16px;
             cursor: pointer;
-            transition: background 0.2s ease;
             border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .dropdown-item:last-child {
+        .search-item:hover {
+            background: var(--bg4);
+        }
+
+        .search-item:last-child {
             border-bottom: none;
         }
 
-        .dropdown-item:hover {
-            background: var(--bg4);
-        }
-
-        .dropdown-item.selected {
-            background: var(--accent);
-            color: white;
-        }
-
-        .stock-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-left: auto;
-        }
-
-        .stock-price {
-            font-size: 24px;
-            font-weight: 600;
-        }
-
-        .stock-change {
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-weight: 500;
-            font-size: 14px;
-        }
-
-        .stock-change.positive {
-            background: rgba(16, 185, 129, 0.2);
-            color: var(--green);
-        }
-
-        .stock-change.negative {
-            background: rgba(239, 68, 68, 0.2);
-            color: var(--red);
-        }
-
-        /* Chart Section */
-        .chart-section {
-            background: var(--bg2);
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 24px;
-            border: 1px solid var(--border);
-        }
-
-        .chart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .chart-title {
-            font-size: 20px;
-            font-weight: 600;
-        }
-
-        .chart-controls {
-            display: flex;
-            gap: 8px;
-        }
-
-        .time-btn {
-            padding: 8px 16px;
+        /* 뒤로가기 버튼 */
+        .back-btn {
             background: var(--bg3);
             border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px 16px;
             border-radius: 8px;
-            color: var(--text2);
             cursor: pointer;
-            transition: all 0.2s ease;
             font-size: 14px;
+            margin-bottom: 16px;
+            display: none;
+            transition: all 0.2s;
         }
 
-        .time-btn:hover, .time-btn.active {
-            background: var(--accent);
-            color: white;
+        .back-btn:hover {
+            background: var(--bg4);
             border-color: var(--accent);
         }
 
-        #chartContainer {
-            height: 400px;
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        /* Tooltip */
-        .custom-tooltip {
-            position: absolute;
-            background: var(--bg4);
-            border: 1px solid var(--border2);
-            border-radius: 12px;
-            padding: 16px;
-            z-index: 1000;
-            pointer-events: none;
-            min-width: 280px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-        }
-
-        .custom-tooltip.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .tooltip-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .tooltip-analyst {
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .tooltip-firm {
-            font-size: 12px;
-            color: var(--text2);
-        }
-
-        .tooltip-recommendation {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
-        }
-
-        .recommendation-badge {
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .recommendation-badge.buy {
-            background: rgba(16, 185, 129, 0.2);
-            color: var(--green);
-        }
-
-        .recommendation-badge.sell {
-            background: rgba(239, 68, 68, 0.2);
-            color: var(--red);
-        }
-
-        .recommendation-badge.hold {
-            background: rgba(245, 158, 11, 0.2);
-            color: var(--yellow);
-        }
-
-        .tooltip-target {
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        .tooltip-summary {
-            font-size: 13px;
-            color: var(--text2);
-            line-height: 1.4;
-        }
-
-        /* Analysts Section */
-        .analysts-section {
-            background: var(--bg2);
-            border-radius: 16px;
-            padding: 24px;
-            border: 1px solid var(--border);
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+        /* 섹션 공통 */
+        .section {
+            margin: 24px 0;
         }
 
         .section-title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .analysts-grid {
+        /* 랭킹 카드 */
+        .rank-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
         }
 
         .rank-card {
-            background: var(--bg3);
+            background: var(--bg2);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 20px;
+            padding: 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
             position: relative;
-            overflow: hidden;
         }
 
         .rank-card:hover {
             border-color: var(--accent);
             transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.2);
         }
 
         .rank-header {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 16px;
+            margin-bottom: 8px;
         }
 
-        .rank-position {
-            font-size: 24px;
-            min-width: 40px;
+        .rank-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent);
+            min-width: 24px;
         }
 
-        .analyst-info {
-            flex: 1;
-        }
-
-        .analyst-name {
+        .analyst-info h3 {
             font-size: 16px;
             font-weight: 600;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
-        .analyst-firm {
-            font-size: 14px;
+        .analyst-company {
+            font-size: 12px;
             color: var(--text2);
         }
 
-        .accuracy-badge {
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            color: white;
-            padding: 6px 12px;
+        .accuracy-rate {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--green);
+            text-align: right;
+        }
+
+        /* 리포트 카드 */
+        .report-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .report-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            transition: all 0.2s;
+        }
+
+        .report-card:hover {
+            border-color: var(--accent2);
+        }
+
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .stock-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .report-date {
+            font-size: 12px;
+            color: var(--text3);
+        }
+
+        .analyst-name {
+            font-size: 14px;
+            color: var(--accent);
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+
+        .analyst-name:hover {
+            color: var(--accent2);
+        }
+
+        .recommendation {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .rec-buy { background: var(--green); color: white; }
+        .rec-hold { background: var(--yellow); color: white; }
+        .rec-sell { background: var(--red); color: white; }
+
+        .target-price {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .ai-summary {
+            font-size: 14px;
+            color: var(--text2);
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .report-link {
+            font-size: 12px;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .report-link:hover {
+            color: var(--accent2);
+        }
+
+        /* 컨센서스 리스트 */
+        .consensus-list {
+            display: grid;
+            gap: 8px;
+        }
+
+        .consensus-item {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .consensus-item:hover {
+            background: var(--bg3);
+        }
+
+        .consensus-change {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .change-icon {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .change-up { color: var(--green); }
+        .change-down { color: var(--red); }
+
+        /* 핫 종목 태그 */
+        .hot-stocks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .hot-tag {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
             border-radius: 20px;
             font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hot-tag:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .report-count {
+            background: var(--accent);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 12px;
             font-weight: 600;
         }
 
-        .rank-details {
+        /* 의견 변경 */
+        .opinion-changes {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid var(--border);
+            gap: 8px;
         }
 
-        .detail-item {
-            text-align: center;
+        .opinion-item {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .detail-label {
+        .opinion-change {
             font-size: 12px;
-            color: var(--text3);
+            color: var(--text2);
+        }
+
+        /* 종목 상세 화면 */
+        .stock-detail {
+            display: none;
+        }
+
+        .stock-header {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stock-info h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .stock-price {
+            font-size: 32px;
+            font-weight: 700;
             margin-bottom: 4px;
         }
 
-        .detail-value {
+        .stock-change {
             font-size: 14px;
             font-weight: 500;
         }
 
-        .target-price {
-            color: var(--accent2);
+        .price-up { color: var(--green); }
+        .price-down { color: var(--red); }
+
+        /* 차트 컨테이너 */
+        .chart-container {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            height: 400px;
+            position: relative;
         }
 
-        .status-icon {
-            font-size: 18px;
+        #trading-chart {
+            width: 100%;
+            height: 100%;
         }
 
-        /* Modal */
+        /* 애널 프로필 모달 */
         .modal {
-            display: none;
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            right: 0;
+            bottom: 0;
             background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal.active {
-            display: flex;
-            align-items: center;
+            display: none;
             justify-content: center;
-            opacity: 1;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
         }
 
         .modal-content {
             background: var(--bg2);
+            border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 32px;
             max-width: 600px;
-            width: 90%;
+            width: 100%;
             max-height: 80vh;
             overflow-y: auto;
             position: relative;
-            border: 1px solid var(--border2);
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-        }
-
-        .modal.active .modal-content {
-            transform: scale(1);
         }
 
         .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 24px;
+            align-items: center;
         }
 
         .modal-title {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 600;
         }
 
@@ -465,1259 +466,907 @@
             color: var(--text2);
             font-size: 24px;
             cursor: pointer;
-            padding: 4px;
-            transition: color 0.2s ease;
-        }
-
-        .close-btn:hover {
-            color: var(--text);
-        }
-
-        .profile-section {
-            margin-bottom: 24px;
-        }
-
-        .profile-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-
-        .profile-avatar {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--accent), var(--purple));
-            border-radius: 50%;
+            padding: 0;
+            width: 32px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            font-weight: 600;
-            color: white;
-        }
-
-        .profile-details h3 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .profile-details p {
-            color: var(--text2);
-            font-size: 14px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .stat-card {
-            background: var(--bg3);
-            padding: 16px;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid var(--border);
-        }
-
-        .stat-value {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .stat-label {
-            font-size: 12px;
-            color: var(--text3);
-        }
-
-        .history-chart {
-            margin-bottom: 24px;
-        }
-
-        .history-title {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        #historyChart {
-            height: 200px;
-        }
-
-        .coverage-list {
-            margin-top: 24px;
-        }
-
-        .coverage-title {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .coverage-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px;
-            background: var(--bg3);
             border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .close-btn:hover {
+            background: var(--bg3);
+            color: var(--text);
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .analyst-profile {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .analyst-profile h2 {
+            font-size: 24px;
+            font-weight: 700;
             margin-bottom: 8px;
         }
 
-        .coverage-stock {
-            font-weight: 500;
+        .analyst-profile .company {
+            font-size: 16px;
+            color: var(--text2);
+            margin-bottom: 4px;
         }
 
-        .coverage-accuracy {
-            color: var(--accent2);
-            font-weight: 500;
+        .analyst-profile .sector {
+            font-size: 14px;
+            color: var(--text3);
         }
 
+        .accuracy-section {
+            margin-bottom: 24px;
+        }
+
+        .accuracy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .accuracy-item {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .accuracy-item .stock {
+            font-size: 12px;
+            color: var(--text2);
+            margin-bottom: 4px;
+        }
+
+        .accuracy-item .rate {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--green);
+        }
+
+        .chart-section {
+            margin-bottom: 24px;
+        }
+
+        .history-chart {
+            height: 200px;
+            margin-top: 12px;
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 12px;
+            }
+
+            .rank-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stock-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .chart-container {
+                height: 300px;
+                padding: 12px;
+            }
+
+            .modal {
+                padding: 12px;
+            }
+
+            .modal-content {
+                max-height: 90vh;
+            }
+        }
+
+        /* 애니메이션 */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .slide-in {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 리포트 모달 */
         .report-modal .modal-content {
             max-width: 500px;
         }
 
+        .report-modal-body {
+            padding: 24px;
+        }
+
+        .report-meta {
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
         .report-summary {
-            background: var(--bg3);
-            border-radius: 12px;
-            padding: 20px;
             margin-bottom: 20px;
-            border: 1px solid var(--border);
         }
 
-        .summary-title {
+        .report-summary h3 {
             font-size: 16px;
-            font-weight: 600;
             margin-bottom: 12px;
-            color: var(--accent2);
+            color: var(--accent);
         }
 
-        .summary-text {
+        .report-summary p {
+            font-size: 14px;
             line-height: 1.6;
             margin-bottom: 8px;
-        }
-
-        .report-details {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .detail-card {
-            background: var(--bg3);
-            padding: 16px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .detail-card h4 {
-            font-size: 14px;
-            color: var(--text3);
-            margin-bottom: 8px;
-        }
-
-        .detail-card .value {
-            font-size: 20px;
-            font-weight: 600;
-        }
-
-        .pdf-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--accent);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-
-        .pdf-link:hover {
-            background: var(--accent2);
-            transform: translateY(-1px);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 12px;
-            }
-            
-            .search-section {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .stock-info {
-                margin-left: 0;
-                justify-content: space-between;
-            }
-            
-            #chartContainer {
-                height: 300px;
-            }
-            
-            .analysts-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .modal-content {
-                padding: 20px;
-                width: 95%;
-            }
-        }
-
-        /* Marker styles */
-        .chart-marker {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            z-index: 100;
-            transition: all 0.2s ease;
-        }
-
-        .chart-marker:hover {
-            transform: scale(1.2);
-        }
-
-        .chart-marker.buy {
-            background: var(--green);
-            color: white;
-        }
-
-        .chart-marker.sell {
-            background: var(--red);
-            color: white;
-        }
-
-        .chart-marker.hold {
-            background: var(--yellow);
-            color: white;
-        }
-
-        .marker-badge {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: var(--accent);
-            color: white;
-            border-radius: 50%;
-            width: 16px;
-            height: 16px;
-            font-size: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header & Search -->
-        <div class="header">
-            <div class="search-section">
-                <div class="search-container">
-                    <input type="text" class="search-input" placeholder="종목을 검색하세요..." value="삼성전자">
-                    <span class="search-icon">🔍</span>
-                    <div class="search-dropdown" id="searchDropdown">
-                        <div class="dropdown-item selected" data-symbol="005930">삼성전자 (005930)</div>
-                        <div class="dropdown-item" data-symbol="000660">SK하이닉스 (000660)</div>
-                        <div class="dropdown-item" data-symbol="035420">NAVER (035420)</div>
-                        <div class="dropdown-item" data-symbol="005380">현대차 (005380)</div>
-                        <div class="dropdown-item" data-symbol="051910">LG화학 (051910)</div>
-                    </div>
-                </div>
-                <div class="stock-info">
-                    <span class="stock-price">71,200원</span>
-                    <span class="stock-change positive">+1,200 (+1.71%)</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Chart Section -->
-        <div class="chart-section">
-            <div class="chart-header">
-                <h2 class="chart-title">주가 차트 & 애널리스트 리포트</h2>
-                <div class="chart-controls">
-                    <button class="time-btn" data-period="1M">1M</button>
-                    <button class="time-btn" data-period="3M">3M</button>
-                    <button class="time-btn active" data-period="6M">6M</button>
-                    <button class="time-btn" data-period="1Y">1Y</button>
-                </div>
-            </div>
-            <div id="chartContainer"></div>
-        </div>
-
-        <!-- Analysts Section -->
-        <div class="analysts-section">
-            <div class="section-header">
-                <h2 class="section-title">애널리스트 랭킹</h2>
-            </div>
-            <div class="analysts-grid" id="analystsGrid">
-                <!-- Analysts will be populated by JavaScript -->
+    <!-- 검색 헤더 -->
+    <div class="search-header">
+        <div class="container">
+            <button class="back-btn" onclick="showMainScreen()">← 뒤로가기</button>
+            <div class="search-wrapper">
+                <input type="text" class="search-input" placeholder="종목명을 입력하세요..." onkeyup="handleSearch(event)">
+                <div class="search-dropdown" id="searchDropdown"></div>
             </div>
         </div>
     </div>
 
-    <!-- Tooltip -->
-    <div class="custom-tooltip" id="chartTooltip"></div>
+    <!-- 메인 화면 -->
+    <div class="main-screen">
+        <div class="container">
+            <!-- 애널리스트 TOP 10 -->
+            <div class="section">
+                <h2 class="section-title">🏆 애널리스트 TOP 10</h2>
+                <div class="rank-grid" id="analystRanking"></div>
+            </div>
 
-    <!-- Analyst Profile Modal -->
-    <div class="modal" id="profileModal">
+            <!-- 최신 리포트 -->
+            <div class="section">
+                <h2 class="section-title">📄 최신 리포트</h2>
+                <div class="report-grid" id="latestReports"></div>
+            </div>
+
+            <!-- 오늘의 컨센서스 -->
+            <div class="section">
+                <h2 class="section-title">📊 오늘의 컨센서스</h2>
+                <div class="consensus-list" id="todayConsensus"></div>
+            </div>
+
+            <!-- 핫 종목 -->
+            <div class="section">
+                <h2 class="section-title">🔥 핫 종목</h2>
+                <div class="hot-stocks" id="hotStocks"></div>
+            </div>
+
+            <!-- 의견 변경 -->
+            <div class="section">
+                <h2 class="section-title">⚡ 의견 변경</h2>
+                <div class="opinion-changes" id="opinionChanges"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 종목 상세 화면 -->
+    <div class="stock-detail" id="stockDetail">
+        <div class="container">
+            <!-- 종목 헤더 -->
+            <div class="stock-header" id="stockHeader"></div>
+
+            <!-- 차트 -->
+            <div class="chart-container">
+                <div id="trading-chart"></div>
+            </div>
+
+            <!-- 해당 종목 애널 랭킹 -->
+            <div class="section">
+                <h2 class="section-title">📊 해당 종목 애널 랭킹</h2>
+                <div class="rank-grid" id="stockAnalystRanking"></div>
+            </div>
+
+            <!-- 리포트 리스트 -->
+            <div class="section">
+                <h2 class="section-title">📄 리포트 리스트</h2>
+                <div class="report-grid" id="stockReports"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 애널 프로필 모달 -->
+    <div class="modal" id="analystModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">애널리스트 프로필</h2>
-                <button class="close-btn">&times;</button>
+                <h3 class="modal-title">애널리스트 프로필</h3>
+                <button class="close-btn" onclick="closeModal('analystModal')">&times;</button>
             </div>
-            <div id="profileContent">
-                <!-- Content will be populated by JavaScript -->
-            </div>
+            <div class="modal-body" id="analystModalBody"></div>
         </div>
     </div>
 
-    <!-- Report Detail Modal -->
+    <!-- 리포트 상세 모달 -->
     <div class="modal report-modal" id="reportModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">리포트 상세</h2>
-                <button class="close-btn">&times;</button>
+                <h3 class="modal-title">리포트 상세</h3>
+                <button class="close-btn" onclick="closeModal('reportModal')">&times;</button>
             </div>
-            <div id="reportContent">
-                <!-- Content will be populated by JavaScript -->
-            </div>
+            <div class="report-modal-body" id="reportModalBody"></div>
         </div>
     </div>
 
     <script>
-        // Sample Data
-        const sampleData = {
-            candlestick: [
-                { time: '2024-08-21', open: 72500, high: 74200, low: 71800, close: 73100 },
-                { time: '2024-08-22', open: 73100, high: 73800, low: 72200, close: 72900 },
-                { time: '2024-08-23', open: 72900, high: 73500, low: 71500, close: 72200 },
-                { time: '2024-08-26', open: 72200, high: 72800, low: 70900, close: 71400 },
-                { time: '2024-08-27', open: 71400, high: 72100, low: 70500, close: 71800 },
-                { time: '2024-08-28', open: 71800, high: 72600, low: 71200, close: 72000 },
-                { time: '2024-08-29', open: 72000, high: 73200, low: 71600, close: 72800 },
-                { time: '2024-08-30', open: 72800, high: 73100, low: 72200, close: 72600 },
-                { time: '2024-09-02', open: 72600, high: 73800, low: 72100, close: 73300 },
-                { time: '2024-09-03', open: 73300, high: 74000, low: 72800, close: 73500 },
-                { time: '2024-09-04', open: 73500, high: 74200, low: 73000, close: 73800 },
-                { time: '2024-09-05', open: 73800, high: 74500, low: 73200, close: 74100 },
-                { time: '2024-09-06', open: 74100, high: 74800, low: 73600, close: 74300 },
-                { time: '2024-09-09', open: 74300, high: 75000, low: 73900, close: 74600 },
-                { time: '2024-09-10', open: 74600, high: 75200, low: 74000, close: 74800 },
-                { time: '2024-09-11', open: 74800, high: 75100, low: 74200, close: 74500 },
-                { time: '2024-09-12', open: 74500, high: 74900, low: 73800, close: 74200 },
-                { time: '2024-09-13', open: 74200, high: 74600, low: 73500, close: 74000 },
-                { time: '2024-09-16', open: 74000, high: 74400, low: 73200, close: 73600 },
-                { time: '2024-09-17', open: 73600, high: 74100, low: 72900, close: 73300 },
-                { time: '2024-09-18', open: 73300, high: 73800, low: 72600, close: 73000 },
-                { time: '2024-09-19', open: 73000, high: 73500, low: 72200, close: 72800 },
-                { time: '2024-09-20', open: 72800, high: 73200, low: 72000, close: 72400 },
-                { time: '2024-09-23', open: 72400, high: 72900, low: 71600, close: 72100 },
-                { time: '2024-09-24', open: 72100, high: 72600, low: 71300, close: 71800 },
-                { time: '2024-09-25', open: 71800, high: 72300, low: 71000, close: 71500 },
-                { time: '2024-09-26', open: 71500, high: 72000, low: 70800, close: 71200 },
-                { time: '2024-09-27', open: 71200, high: 71700, low: 70500, close: 70900 },
-                { time: '2024-09-30', open: 70900, high: 71400, low: 70200, close: 70600 },
-                { time: '2024-10-01', open: 70600, high: 71100, low: 69900, close: 70300 },
-                { time: '2024-10-02', open: 70300, high: 70800, low: 69600, close: 70000 },
-                { time: '2024-10-04', open: 70000, high: 70500, low: 69300, close: 69800 },
-                { time: '2024-10-07', open: 69800, high: 70300, low: 69000, close: 69500 },
-                { time: '2024-10-08', open: 69500, high: 70000, low: 68800, close: 69200 },
-                { time: '2024-10-10', open: 69200, high: 69700, low: 68500, close: 69000 },
-                { time: '2024-10-11', open: 69000, high: 69500, low: 68200, close: 68800 },
-                { time: '2024-10-14', open: 68800, high: 69300, low: 68000, close: 68500 },
-                { time: '2024-10-15', open: 68500, high: 69000, low: 67800, close: 68200 },
-                { time: '2024-10-16', open: 68200, high: 68700, low: 67500, close: 68000 },
-                { time: '2024-10-17', open: 68000, high: 68500, low: 67200, close: 67800 },
-                { time: '2024-10-18', open: 67800, high: 68300, low: 67000, close: 67500 },
-                { time: '2024-10-21', open: 67500, high: 68000, low: 66800, close: 67200 },
-                { time: '2024-10-22', open: 67200, high: 67700, low: 66500, close: 67000 },
-                { time: '2024-10-23', open: 67000, high: 67500, low: 66200, close: 66800 },
-                { time: '2024-10-24', open: 66800, high: 67300, low: 66000, close: 66500 },
-                { time: '2024-10-25', open: 66500, high: 67000, low: 65800, close: 66200 },
-                { time: '2024-10-28', open: 66200, high: 66700, low: 65500, close: 66000 },
-                { time: '2024-10-29', open: 66000, high: 66500, low: 65200, close: 65800 },
-                { time: '2024-10-30', open: 65800, high: 66300, low: 65000, close: 65500 },
-                { time: '2024-10-31', open: 65500, high: 66000, low: 64800, close: 65200 },
-                { time: '2024-11-01', open: 65200, high: 65700, low: 64500, close: 65000 },
-                { time: '2024-11-04', open: 65000, high: 65500, low: 64200, close: 64800 },
-                { time: '2024-11-05', open: 64800, high: 65300, low: 64000, close: 64500 },
-                { time: '2024-11-06', open: 64500, high: 65000, low: 63800, close: 64200 },
-                { time: '2024-11-07', open: 64200, high: 64700, low: 63500, close: 64000 },
-                { time: '2024-11-08', open: 64000, high: 64500, low: 63200, close: 63800 },
-                { time: '2024-11-11', open: 63800, high: 64300, low: 63000, close: 63500 },
-                { time: '2024-11-12', open: 63500, high: 64000, low: 62800, close: 63200 },
-                { time: '2024-11-13', open: 63200, high: 63700, low: 62500, close: 63000 },
-                { time: '2024-11-14', open: 63000, high: 63500, low: 62200, close: 62800 },
-                { time: '2024-11-15', open: 62800, high: 63300, low: 62000, close: 62500 },
-                { time: '2024-11-18', open: 62500, high: 63000, low: 61800, close: 62200 },
-                { time: '2024-11-19', open: 62200, high: 62700, low: 61500, close: 62000 },
-                { time: '2024-11-20', open: 62000, high: 62500, low: 61200, close: 61800 },
-                { time: '2024-11-21', open: 61800, high: 62300, low: 61000, close: 61500 },
-                { time: '2024-11-22', open: 61500, high: 62000, low: 60800, close: 61200 },
-                { time: '2024-11-25', open: 61200, high: 61700, low: 60500, close: 61000 },
-                { time: '2024-11-26', open: 61000, high: 61500, low: 60200, close: 60800 },
-                { time: '2024-11-27', open: 60800, high: 61300, low: 60000, close: 60500 },
-                { time: '2024-11-28', open: 60500, high: 61000, low: 59800, close: 60200 },
-                { time: '2024-11-29', open: 60200, high: 60700, low: 59500, close: 60000 },
-                { time: '2024-12-02', open: 60000, high: 60800, low: 59700, close: 60500 },
-                { time: '2024-12-03', open: 60500, high: 61200, low: 60200, close: 60900 },
-                { time: '2024-12-04', open: 60900, high: 61600, low: 60600, close: 61300 },
-                { time: '2024-12-05', open: 61300, high: 62000, low: 61000, close: 61700 },
-                { time: '2024-12-06', open: 61700, high: 62400, low: 61400, close: 62100 },
-                { time: '2024-12-09', open: 62100, high: 62800, low: 61800, close: 62500 },
-                { time: '2024-12-10', open: 62500, high: 63200, low: 62200, close: 62900 },
-                { time: '2024-12-11', open: 62900, high: 63600, low: 62600, close: 63300 },
-                { time: '2024-12-12', open: 63300, high: 64000, low: 63000, close: 63700 },
-                { time: '2024-12-13', open: 63700, high: 64400, low: 63400, close: 64100 },
-                { time: '2024-12-16', open: 64100, high: 64800, low: 63800, close: 64500 },
-                { time: '2024-12-17', open: 64500, high: 65200, low: 64200, close: 64900 },
-                { time: '2024-12-18', open: 64900, high: 65600, low: 64600, close: 65300 },
-                { time: '2024-12-19', open: 65300, high: 66000, low: 65000, close: 65700 },
-                { time: '2024-12-20', open: 65700, high: 66400, low: 65400, close: 66100 },
-                { time: '2024-12-23', open: 66100, high: 66800, low: 65800, close: 66500 },
-                { time: '2024-12-24', open: 66500, high: 67200, low: 66200, close: 66900 },
-                { time: '2024-12-26', open: 66900, high: 67600, low: 66600, close: 67300 },
-                { time: '2024-12-27', open: 67300, high: 68000, low: 67000, close: 67700 },
-                { time: '2024-12-30', open: 67700, high: 68400, low: 67400, close: 68100 },
-                { time: '2024-12-31', open: 68100, high: 68800, low: 67800, close: 68500 },
-                { time: '2025-01-02', open: 68500, high: 69200, low: 68200, close: 68900 },
-                { time: '2025-01-03', open: 68900, high: 69600, low: 68600, close: 69300 },
-                { time: '2025-01-06', open: 69300, high: 70000, low: 69000, close: 69700 },
-                { time: '2025-01-07', open: 69700, high: 70400, low: 69400, close: 70100 },
-                { time: '2025-01-08', open: 70100, high: 70800, low: 69800, close: 70500 },
-                { time: '2025-01-09', open: 70500, high: 71200, low: 70200, close: 70900 },
-                { time: '2025-01-10', open: 70900, high: 71600, low: 70600, close: 71300 },
-                { time: '2025-01-13', open: 71300, high: 72000, low: 71000, close: 71700 },
-                { time: '2025-01-14', open: 71700, high: 72400, low: 71400, close: 72100 },
-                { time: '2025-01-15', open: 72100, high: 72800, low: 71800, close: 72500 },
-                { time: '2025-01-16', open: 72500, high: 73200, low: 72200, close: 72900 },
-                { time: '2025-01-17', open: 72900, high: 73600, low: 72600, close: 73300 },
-                { time: '2025-01-20', open: 73300, high: 74000, low: 73000, close: 73700 },
-                { time: '2025-01-21', open: 73700, high: 74400, low: 73400, close: 74100 },
-                { time: '2025-01-22', open: 74100, high: 74800, low: 73800, close: 74500 },
-                { time: '2025-01-23', open: 74500, high: 75200, low: 74200, close: 74900 },
-                { time: '2025-01-24', open: 74900, high: 75600, low: 74600, close: 75300 },
-                { time: '2025-01-27', open: 75300, high: 76000, low: 75000, close: 75700 },
-                { time: '2025-01-28', open: 75700, high: 76400, low: 75400, close: 76100 },
-                { time: '2025-01-29', open: 76100, high: 76800, low: 75800, close: 76500 },
-                { time: '2025-01-30', open: 76500, high: 77200, low: 76200, close: 76900 },
-                { time: '2025-01-31', open: 76900, high: 77600, low: 76600, close: 77300 },
-                { time: '2025-02-03', open: 77300, high: 78000, low: 77000, close: 77700 },
-                { time: '2025-02-04', open: 77700, high: 78400, low: 77400, close: 78100 },
-                { time: '2025-02-05', open: 78100, high: 78800, low: 77800, close: 78500 },
-                { time: '2025-02-06', open: 78500, high: 79200, low: 78200, close: 78900 },
-                { time: '2025-02-07', open: 78900, high: 79600, low: 78600, close: 79300 },
-                { time: '2025-02-10', open: 79300, high: 80000, low: 79000, close: 79700 },
-                { time: '2025-02-11', open: 79700, high: 80400, low: 79400, close: 80100 },
-                { time: '2025-02-12', open: 80100, high: 80800, low: 79800, close: 80500 },
-                { time: '2025-02-13', open: 80500, high: 81200, low: 80200, close: 80900 },
-                { time: '2025-02-14', open: 80900, high: 81600, low: 80600, close: 81300 },
-                { time: '2025-02-17', open: 81300, high: 82000, low: 81000, close: 81700 },
-                { time: '2025-02-18', open: 81700, high: 82400, low: 81400, close: 82100 },
-                { time: '2025-02-19', open: 82100, high: 82800, low: 81800, close: 82500 },
-                { time: '2025-02-20', open: 82500, high: 83200, low: 82200, close: 82900 },
-                { time: '2025-02-21', open: 82900, high: 71500, low: 70800, close: 71200 }
-            ],
-            
-            analysts: [
-                {
-                    id: 1,
-                    name: '김현우',
-                    firm: '삼성증권',
-                    accuracy: 85,
-                    rank: 1,
-                    latestTarget: 78000,
-                    status: 'up',
-                    sector: 'IT하드웨어',
-                    reports: [
-                        {
-                            date: '2025-02-15',
-                            target: 78000,
-                            recommendation: 'buy',
-                            summary: [
-                                '반도체 업황 회복으로 메모리 가격 상승세 지속',
-                                'HBM 시장에서의 경쟁우위 확대로 수익성 개선',
-                                '2025년 실적 턴어라운드 기대감 반영한 목표가 상향'
-                            ]
-                        },
-                        {
-                            date: '2024-12-20',
-                            target: 75000,
-                            recommendation: 'buy',
-                            summary: [
-                                'AI 반도체 수요 증가로 HBM3E 출하량 확대',
-                                '중국 스마트폰 시장 회복세로 메모리 수요 증가',
-                                '4분기 실적 개선 전망에 따른 투자의견 유지'
-                            ]
-                        }
-                    ],
-                    coverage: [
-                        { stock: 'SK하이닉스', accuracy: 88 },
-                        { stock: 'LG디스플레이', accuracy: 79 },
-                        { stock: 'LG전자', accuracy: 82 }
-                    ]
-                },
-                {
-                    id: 2,
-                    name: '박지민',
-                    firm: '미래에셋',
-                    accuracy: 82,
-                    rank: 2,
-                    latestTarget: 76000,
-                    status: 'up',
-                    sector: '반도체',
-                    reports: [
-                        {
-                            date: '2025-02-10',
-                            target: 76000,
-                            recommendation: 'buy',
-                            summary: [
-                                '글로벌 메모리 시장 회복으로 ASP 상승 지속',
-                                'HBM과 DDR5 등 고부가 제품 비중 확대',
-                                '파운드리 사업 개선으로 전체 수익성 향상'
-                            ]
-                        },
-                        {
-                            date: '2025-01-05',
-                            target: 73000,
-                            recommendation: 'hold',
-                            summary: [
-                                '4분기 실적은 예상 하회했으나 1분기부터 개선',
-                                'DRAM 가격 상승세 본격화로 마진 개선 기대',
-                                '투자의견 HOLD 유지, 목표가는 상향 조정'
-                            ]
-                        }
-                    ],
-                    coverage: [
-                        { stock: 'SK하이닉스', accuracy: 85 },
-                        { stock: '삼성SDI', accuracy: 77 },
-                        { stock: 'TSMC', accuracy: 84 }
-                    ]
-                },
-                {
-                    id: 3,
-                    name: '이성훈',
-                    firm: 'NH투자',
-                    accuracy: 79,
-                    rank: 3,
-                    latestTarget: 75000,
-                    status: 'up',
-                    sector: 'IT하드웨어',
-                    reports: [
-                        {
-                            date: '2025-02-05',
-                            target: 75000,
-                            recommendation: 'buy',
-                            summary: [
-                                'AI 서버향 HBM 수요 급증으로 공급 부족 심화',
-                                '메모리 업황 개선으로 가격 상승세 가속화',
-                                '중장기 성장동력 확보로 프리미엄 밸류에이션 정당화'
-                            ]
-                        },
-                        {
-                            date: '2024-11-15',
-                            target: 70000,
-                            recommendation: 'hold',
-                            summary: [
-                                '3분기 실적 부진으로 단기 조정 불가피',
-                                '하지만 HBM 시장 선점으로 중장기 전망 긍정적',
-                                '주가 조정시 매수 기회로 판단'
-                            ]
-                        }
-                    ],
-                    coverage: [
-                        { stock: 'SK하이닉스', accuracy: 81 },
-                        { stock: 'NAVER', accuracy: 76 },
-                        { stock: 'LG전자', accuracy: 80 }
-                    ]
-                },
-                {
-                    id: 4,
-                    name: '최유진',
-                    firm: 'KB증권',
-                    accuracy: 76,
-                    rank: 4,
-                    latestTarget: 72000,
-                    status: 'down',
-                    sector: '반도체',
-                    reports: [
-                        {
-                            date: '2025-01-25',
-                            target: 72000,
-                            recommendation: 'hold',
-                            summary: [
-                                'HBM 수요는 강하나 경쟁 심화로 마진 압박',
-                                'PC DRAM 회복 지연으로 전체적인 개선 속도 제한',
-                                '신중한 접근 필요, 목표가 하향 조정'
-                            ]
-                        },
-                        {
-                            date: '2024-12-10',
-                            target: 74000,
-                            recommendation: 'buy',
-                            summary: [
-                                '4분기 HBM 출하량 증가로 실적 개선 기대',
-                                '중국 정부의 반도체 지원 정책으로 수요 확대',
-                                '밸류에이션 매력도 높아 매수 의견 유지'
-                            ]
-                        }
-                    ],
-                    coverage: [
-                        { stock: 'SK하이닉스', accuracy: 78 },
-                        { stock: 'LG화학', accuracy: 74 },
-                        { stock: '현대차', accuracy: 77 }
-                    ]
-                },
-                {
-                    id: 5,
-                    name: '정민석',
-                    firm: '한국투자',
-                    accuracy: 74,
-                    rank: 5,
-                    latestTarget: 74000,
-                    status: 'up',
-                    sector: 'IT하드웨어',
-                    reports: [
-                        {
-                            date: '2025-01-30',
-                            target: 74000,
-                            recommendation: 'buy',
-                            summary: [
-                                '글로벌 IT 기업들의 AI 투자 확대로 HBM 수요 급증',
-                                '메모리 재고 조정 완료로 가격 상승 압력 강화',
-                                '1분기부터 본격적인 실적 개선 사이클 진입'
-                            ]
-                        },
-                        {
-                            date: '2024-10-20',
-                            target: 68000,
-                            recommendation: 'hold',
-                            summary: [
-                                '단기 실적 부진 지속되나 구조적 경쟁력은 유지',
-                                'HBM 시장에서의 기술적 우위로 중장기 성장 확신',
-                                '주가 하락시 점진적 매수 전략 권고'
-                            ]
-                        }
-                    ],
-                    coverage: [
-                        { stock: 'SK하이닉스', accuracy: 76 },
-                        { stock: 'NAVER', accuracy: 72 },
-                        { stock: '카카오', accuracy: 75 }
-                    ]
-                },
-                {
-                    id: 6,
-                    name: '강수진',
-                    firm: '신한투자',
-                    accuracy: 71,
-                    rank: 6,
-                    latestTarget: 70000,
-                    status: 'down',
-                    sector: '반도체',
-                    reports: [
-                        {
-                            date: '2025-02-01',
-                            target: 70000,
-                            recommendation: 'hold',
-                            summary: [
-                                '메모리 업황 회복세는 확인되나 속도가 예상보다 완만',
-                                '대만 지진 리스크와 지정학적 리스크 상존',
-                                '밸류에이션 부담으로 신중한 접근 필요'
-                            ]
-                        },
-                        {
-                            date: '2024-12-05',
-                            target: 72000,
-                            recommendation: 'buy',
-                            summary: [
-                                'HBM 시장 확대로 고마진 제품 비중 증가',
-                                '중국 스마트폰 시장 회복으로 모바일 DRAM 수요 개선',
-                                '주가 조정 구간에서 매수 기회 제공'
-                            ]
-                        }
-                    ],
-                    coverage: [
-                        { stock: 'SK하이닉스', accuracy: 73 },
-                        { stock: 'LG디스플레이', accuracy: 69 },
-                        { stock: '삼성SDI', accuracy: 72 }
-                    ]
-                },
-                {
-                    id: 7,
-                    name: '윤태호',
-                    firm: '대신증권',
-                    accuracy: 69,
-                    rank: 7,
-                    latestTarget: 68000,
-                    status: 'down',
-                    sector: 'IT하드웨어',
-                    reports: [
-                        {
-                            date: '2025-01-15',
-                            target: 68000,
-                            recommendation: 'hold',
-                            summary: [
-                                'AI 관련 수요는 강하나 전통적인 IT 수요 회복 지연',
-                                '환율 변동성과 원자재 가격 상승이 마진에 부담',
-                                '단기적으로는 박스권 등락 전망'
-                            ]
-                        },
-                        {
-                            date: '2024-11-01',
-                            target: 65000,
-                            recommendation: 'sell',
-                            summary: [
-                                '3분기 실적 부진으로 연간 가이던스 하향 조정',
-                                'PC와 모바일 수요 회복이 예상보다 늦어질 전망',
-                                '고평가 구간에서 차익실현 권고'
-                            ]
-                        }
-                    ],
-                    coverage: [
-                        { stock: 'SK하이닉스', accuracy: 71 },
-                        { stock: 'LG전자', accuracy: 67 },
-                        { stock: 'NAVER', accuracy: 69 }
-                    ]
-                },
-                {
-                    id: 8,
-                    name: '임소영',
-                    firm: '하나증권',
-                    accuracy: 67,
-                    rank: 8,
-                    latestTarget: 69000,
-                    status: 'up',
-                    sector: '반도체',
-                    reports: [
-                        {
-                            date: '2025-01-20',
-                            target: 69000,
-                            recommendation: 'hold',
-                            summary: [
-                                'HBM 공급능력 확대로 AI 수요 대응 가능',
-                                '하지만 전방산업 성장 둔화로 전체적인 수요 증가 제한',
-                                '중립적 시각에서 밸런스 투자 전략 제안'
-                            ]
-                        },
-                        {
-                            date: '2024-09-25',
-                            target: 66000,
-                            recommendation: 'hold',
-                            summary: [
-                                '메모리 업황 바닥 확인했으나 회복 속도 불확실',
-                                '파운드리 사업 적자 지속으로 전체 수익성 제약',
-                                '장기 투자자 관점에서 점진적 비중 확대'
-                            ]
-                        }
-                    ],
-                    coverage: [
-                        { stock: 'SK하이닉스', accuracy: 69 },
-                        { stock: '삼성SDI', accuracy: 65 },
-                        { stock: 'LG화학', accuracy: 68 }
-                    ]
-                }
-            ]
-        };
+        // 데이터
+        const stocks = [
+            { id: 'samsung', name: '삼성전자', price: 71000, change: 2.3, changeAmount: 1600 },
+            { id: 'skhynix', name: 'SK하이닉스', price: 138000, change: -1.5, changeAmount: -2100 },
+            { id: 'naver', name: '네이버', price: 185000, change: 0.8, changeAmount: 1500 },
+            { id: 'kakao', name: '카카오', price: 52000, change: 3.2, changeAmount: 1600 },
+            { id: 'lges', name: 'LG에너지솔루션', price: 380000, change: -0.5, changeAmount: -1900 }
+        ];
 
-        // Chart setup
-        let chart;
-        let candlestickSeries;
-        let consensusAreaSeries;
-        let currentTooltip = null;
+        const analysts = [
+            { id: 'kim', name: '김현우', company: '삼성증권', accuracy: 85, sector: '반도체' },
+            { id: 'park', name: '박지민', company: '미래에셋', accuracy: 82, sector: 'IT서비스' },
+            { id: 'lee', name: '이성훈', company: 'NH투자', accuracy: 79, sector: '전기차' },
+            { id: 'choi', name: '최유진', company: 'KB증권', accuracy: 76, sector: '반도체' },
+            { id: 'jung', name: '정민석', company: '한국투자', accuracy: 74, sector: 'IT서비스' },
+            { id: 'kang', name: '강수진', company: '신한투자', accuracy: 71, sector: '인터넷' },
+            { id: 'yoon', name: '윤태호', company: '대신증권', accuracy: 69, sector: '전기차' },
+            { id: 'lim', name: '임소영', company: '하나증권', accuracy: 67, sector: '반도체' }
+        ];
 
-        function initChart() {
-            const chartContainer = document.getElementById('chartContainer');
+        const reports = [
+            {
+                id: 1, stockId: 'samsung', stockName: '삼성전자', analystId: 'kim', 
+                recommendation: 'buy', targetPrice: 85000, 
+                summary: '메모리 반도체 시장 회복세가 본격화되고 있음. 3분기 실적 턴어라운드 기대.',
+                date: '2026-02-20', link: '#'
+            },
+            {
+                id: 2, stockId: 'skhynix', stockName: 'SK하이닉스', analystId: 'park',
+                recommendation: 'hold', targetPrice: 145000,
+                summary: 'HBM 시장 선점 효과는 긍정적이나 단기 조정 가능성. 중장기 전망은 여전히 밝음.',
+                date: '2026-02-19', link: '#'
+            },
+            {
+                id: 3, stockId: 'naver', stockName: '네이버', analystId: 'jung',
+                recommendation: 'buy', targetPrice: 210000,
+                summary: '클라우드 사업 성장과 AI 투자 확대로 수익성 개선 기대. 플랫폼 경쟁력 유지.',
+                date: '2026-02-19', link: '#'
+            },
+            {
+                id: 4, stockId: 'kakao', stockName: '카카오', analystId: 'kang',
+                recommendation: 'buy', targetPrice: 58000,
+                summary: '톡비즈 매출 회복과 게임 신작 출시로 실적 개선 전망. ESG 이슈 해결도 긍정적.',
+                date: '2026-02-18', link: '#'
+            },
+            {
+                id: 5, stockId: 'lges', stockName: 'LG에너지솔루션', analystId: 'lee',
+                recommendation: 'hold', targetPrice: 420000,
+                summary: '북미 IRA 수혜와 신규 수주 증가세. 다만 중국 경쟁사 위협과 원가 압박은 지속.',
+                date: '2026-02-18', link: '#'
+            },
+            {
+                id: 6, stockId: 'samsung', stockName: '삼성전자', analystId: 'choi',
+                recommendation: 'buy', targetPrice: 82000,
+                summary: '갤럭시 S26 시리즈 사전 예약률 호조. 파운드리 부문 점유율 확대로 수익성 개선.',
+                date: '2026-02-17', link: '#'
+            },
+            {
+                id: 7, stockId: 'skhynix', stockName: 'SK하이닉스', analystId: 'yoon',
+                recommendation: 'buy', targetPrice: 155000,
+                summary: 'AI 수요 급증으로 HBM 공급 부족 현상 지속. 프리미엄 제품 비중 확대로 마진 개선.',
+                date: '2026-02-17', link: '#'
+            },
+            {
+                id: 8, stockId: 'naver', stockName: '네이버', analystId: 'lim',
+                recommendation: 'hold', targetPrice: 195000,
+                summary: '검색광고 시장 경쟁 심화와 규제 우려. 하이퍼클로바X 성과는 아직 초기 단계.',
+                date: '2026-02-16', link: '#'
+            },
+            {
+                id: 9, stockId: 'kakao', stockName: '카카오', analystId: 'kim',
+                recommendation: 'sell', targetPrice: 48000,
+                summary: '카카오페이 성장률 둔화와 규제 리스크 확대. 광고 매출도 부진한 흐름 지속.',
+                date: '2026-02-16', link: '#'
+            },
+            {
+                id: 10, stockId: 'lges', stockName: 'LG에너지솔루션', analystId: 'jung',
+                recommendation: 'buy', targetPrice: 450000,
+                summary: '미국 공장 본격 가동과 유럽 시장 진출 확대. ESS 부문도 성장 기여도 증가.',
+                date: '2026-02-15', link: '#'
+            }
+        ];
+
+        let currentStock = null;
+        let chart = null;
+
+        // 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            showMainScreen();
+            renderAnalystRanking();
+            renderLatestReports();
+            renderTodayConsensus();
+            renderHotStocks();
+            renderOpinionChanges();
+        });
+
+        // 메인 화면 표시
+        function showMainScreen() {
+            document.querySelector('.main-screen').style.display = 'block';
+            document.querySelector('.stock-detail').style.display = 'none';
+            document.querySelector('.back-btn').style.display = 'none';
+            currentStock = null;
+            if (chart) {
+                chart.remove();
+                chart = null;
+            }
+        }
+
+        // 종목 상세 화면 표시
+        function showStockDetail(stockId) {
+            currentStock = stocks.find(s => s.id === stockId);
+            if (!currentStock) return;
+
+            document.querySelector('.main-screen').style.display = 'none';
+            document.querySelector('.stock-detail').style.display = 'block';
+            document.querySelector('.back-btn').style.display = 'block';
+
+            renderStockHeader();
+            renderStockChart();
+            renderStockAnalystRanking();
+            renderStockReports();
+        }
+
+        // 검색 처리
+        function handleSearch(event) {
+            const query = event.target.value.toLowerCase();
+            const dropdown = document.getElementById('searchDropdown');
             
+            if (query.length === 0) {
+                dropdown.style.display = 'none';
+                return;
+            }
+
+            const matches = stocks.filter(stock => 
+                stock.name.toLowerCase().includes(query)
+            );
+
+            if (matches.length > 0) {
+                dropdown.innerHTML = matches.map(stock => 
+                    `<div class="search-item" onclick="selectStock('${stock.id}')">
+                        <span>${stock.name}</span>
+                        <span style="color: ${stock.change >= 0 ? 'var(--green)' : 'var(--red)'}">${formatPrice(stock.price)}원</span>
+                    </div>`
+                ).join('');
+                dropdown.style.display = 'block';
+            } else {
+                dropdown.style.display = 'none';
+            }
+        }
+
+        // 종목 선택
+        function selectStock(stockId) {
+            document.getElementById('searchDropdown').style.display = 'none';
+            document.querySelector('.search-input').value = '';
+            showStockDetail(stockId);
+        }
+
+        // 애널리스트 랭킹 렌더링
+        function renderAnalystRanking() {
+            const container = document.getElementById('analystRanking');
+            container.innerHTML = analysts.map((analyst, index) => 
+                `<div class="rank-card" onclick="showAnalystProfile('${analyst.id}')">
+                    <div class="rank-header">
+                        <span class="rank-number">${index + 1}</span>
+                        <div class="analyst-info">
+                            <h3>${analyst.name}</h3>
+                            <p class="analyst-company">${analyst.company}</p>
+                        </div>
+                        <div class="accuracy-rate">${analyst.accuracy}%</div>
+                    </div>
+                </div>`
+            ).join('');
+        }
+
+        // 최신 리포트 렌더링
+        function renderLatestReports() {
+            const container = document.getElementById('latestReports');
+            container.innerHTML = reports.slice(0, 8).map(report => {
+                const analyst = analysts.find(a => a.id === report.analystId);
+                return `<div class="report-card">
+                    <div class="report-header">
+                        <h3 class="stock-name">${report.stockName}</h3>
+                        <span class="report-date">${formatDate(report.date)}</span>
+                    </div>
+                    <div class="analyst-name" onclick="showAnalystProfile('${report.analystId}')">${analyst.name} (${analyst.company})</div>
+                    <span class="recommendation rec-${report.recommendation}">${formatRecommendation(report.recommendation)}</span>
+                    <div class="target-price">목표가: ${formatPrice(report.targetPrice)}원</div>
+                    <p class="ai-summary">${report.summary}</p>
+                    <a href="${report.link}" class="report-link" onclick="showReportDetail(${report.id}); return false;">원문보기 →</a>
+                </div>`;
+            }).join('');
+        }
+
+        // 오늘의 컨센서스 렌더링
+        function renderTodayConsensus() {
+            const changes = [
+                { stock: '삼성전자', change: 'up', amount: '3,000원' },
+                { stock: 'SK하이닉스', change: 'up', amount: '5,000원' },
+                { stock: '네이버', change: 'down', amount: '8,000원' },
+                { stock: '카카오', change: 'up', amount: '2,000원' }
+            ];
+
+            const container = document.getElementById('todayConsensus');
+            container.innerHTML = changes.map(item => 
+                `<div class="consensus-item" onclick="selectStock('${getStockId(item.stock)}')">
+                    <span>${item.stock}</span>
+                    <div class="consensus-change">
+                        <span class="change-icon change-${item.change}">${item.change === 'up' ? '▲' : '▼'}</span>
+                        <span>${item.amount}</span>
+                    </div>
+                </div>`
+            ).join('');
+        }
+
+        // 핫 종목 렌더링
+        function renderHotStocks() {
+            const hotStocks = [
+                { name: '삼성전자', count: 5 },
+                { name: 'SK하이닉스', count: 3 },
+                { name: '네이버', count: 2 },
+                { name: '카카오', count: 2 }
+            ];
+
+            const container = document.getElementById('hotStocks');
+            container.innerHTML = hotStocks.map(stock => 
+                `<div class="hot-tag" onclick="selectStock('${getStockId(stock.name)}')">
+                    <span>${stock.name}</span>
+                    <span class="report-count">${stock.count}건</span>
+                </div>`
+            ).join('');
+        }
+
+        // 의견 변경 렌더링
+        function renderOpinionChanges() {
+            const changes = [
+                { analyst: '김현우', stock: '삼성전자', from: '매수', to: '중립' },
+                { analyst: '박지민', stock: 'SK하이닉스', from: '중립', to: '매수' },
+                { analyst: '이성훈', stock: '네이버', from: '매수', to: '중립' }
+            ];
+
+            const container = document.getElementById('opinionChanges');
+            container.innerHTML = changes.map(change => 
+                `<div class="opinion-item">
+                    <div>
+                        <span class="analyst-name" onclick="showAnalystProfile('${getAnalystId(change.analyst)}')">${change.analyst}</span>
+                        <span style="margin-left: 8px;">${change.stock}</span>
+                    </div>
+                    <div class="opinion-change">${change.from} → ${change.to}</div>
+                </div>`
+            ).join('');
+        }
+
+        // 종목 헤더 렌더링
+        function renderStockHeader() {
+            const container = document.getElementById('stockHeader');
+            container.innerHTML = `
+                <div class="stock-info">
+                    <h1>${currentStock.name}</h1>
+                    <div class="stock-price ${currentStock.change >= 0 ? 'price-up' : 'price-down'}">${formatPrice(currentStock.price)}원</div>
+                    <div class="stock-change ${currentStock.change >= 0 ? 'price-up' : 'price-down'}">
+                        ${currentStock.change >= 0 ? '+' : ''}${currentStock.change}% (${currentStock.change >= 0 ? '+' : ''}${formatPrice(currentStock.changeAmount)}원)
+                    </div>
+                </div>
+            `;
+        }
+
+        // 종목 차트 렌더링
+        function renderStockChart() {
+            const chartContainer = document.getElementById('trading-chart');
+            chartContainer.innerHTML = '';
+
             chart = LightweightCharts.createChart(chartContainer, {
                 width: chartContainer.clientWidth,
-                height: 400,
+                height: 360,
                 layout: {
                     background: { color: 'transparent' },
                     textColor: '#e2e8f0',
-                    fontSize: 12,
-                    fontFamily: 'Noto Sans KR'
                 },
                 grid: {
                     vertLines: { color: '#1e293b' },
-                    horzLines: { color: '#1e293b' }
+                    horzLines: { color: '#1e293b' },
                 },
                 crosshair: {
                     mode: LightweightCharts.CrosshairMode.Normal,
-                    vertLine: {
-                        color: '#3b82f6',
-                        width: 1,
-                        style: LightweightCharts.LineStyle.Dashed,
-                        labelBackgroundColor: '#3b82f6'
-                    },
-                    horzLine: {
-                        color: '#3b82f6',
-                        width: 1,
-                        style: LightweightCharts.LineStyle.Dashed,
-                        labelBackgroundColor: '#3b82f6'
-                    }
-                },
-                rightPriceScale: {
-                    borderColor: '#334155',
-                    textColor: '#e2e8f0'
                 },
                 timeScale: {
                     borderColor: '#334155',
-                    textColor: '#e2e8f0',
-                    timeVisible: true,
-                    secondsVisible: false
-                }
+                },
+                rightPriceScale: {
+                    borderColor: '#334155',
+                },
             });
 
-            candlestickSeries = chart.addCandlestickSeries({
+            // 캔들스틱 데이터 생성 (6개월)
+            const candleData = generateCandlestickData(currentStock);
+            const candleSeries = chart.addCandlestickSeries({
                 upColor: '#10b981',
                 downColor: '#ef4444',
                 borderDownColor: '#ef4444',
                 borderUpColor: '#10b981',
                 wickDownColor: '#ef4444',
-                wickUpColor: '#10b981'
+                wickUpColor: '#10b981',
             });
+            candleSeries.setData(candleData);
 
-            candlestickSeries.setData(sampleData.candlestick);
+            // 컨센서스 밴드 (목표가 최고/최저)
+            const stockReports = reports.filter(r => r.stockId === currentStock.id);
+            if (stockReports.length > 0) {
+                const maxTarget = Math.max(...stockReports.map(r => r.targetPrice));
+                const minTarget = Math.min(...stockReports.map(r => r.targetPrice));
 
-            // Add consensus band
-            addConsensusBar();
-            
-            // Add markers for reports
-            addReportMarkers();
-
-            // Chart resize handler
-            window.addEventListener('resize', () => {
-                chart.applyOptions({
-                    width: chartContainer.clientWidth
+                const bandSeries = chart.addAreaSeries({
+                    topColor: 'rgba(59, 130, 246, 0.1)',
+                    bottomColor: 'rgba(59, 130, 246, 0.05)',
+                    lineColor: 'rgba(59, 130, 246, 0.3)',
+                    lineWidth: 1,
                 });
-            });
-        }
 
-        function addConsensusBar() {
-            // Calculate target price range from all analysts
-            const targets = sampleData.analysts.flatMap(analyst => 
-                analyst.reports.map(report => report.target)
-            );
-            const minTarget = Math.min(...targets);
-            const maxTarget = Math.max(...targets);
+                const bandData = candleData.map(item => ({
+                    time: item.time,
+                    value: maxTarget
+                }));
+                bandSeries.setData(bandData);
+            }
 
-            // Create area series for consensus band
-            consensusAreaSeries = chart.addAreaSeries({
-                topColor: 'rgba(59, 130, 246, 0.1)',
-                bottomColor: 'rgba(59, 130, 246, 0.05)',
-                lineColor: 'rgba(59, 130, 246, 0.3)',
-                lineWidth: 1
-            });
-
-            // Create data points for the consensus band
-            const consensusData = sampleData.candlestick.map(candle => ({
-                time: candle.time,
-                value: maxTarget
-            }));
-
-            consensusAreaSeries.setData(consensusData);
-
-            // Add another series for the bottom of the band
-            const lowerBandSeries = chart.addLineSeries({
-                color: 'rgba(59, 130, 246, 0.3)',
-                lineWidth: 1
-            });
-
-            const lowerBandData = sampleData.candlestick.map(candle => ({
-                time: candle.time,
-                value: minTarget
-            }));
-
-            lowerBandSeries.setData(lowerBandData);
-        }
-
-        function addReportMarkers() {
+            // 리포트 마커 추가
             const markers = [];
-
-            sampleData.analysts.forEach(analyst => {
-                analyst.reports.forEach(report => {
-                    const recommendation = report.recommendation;
-                    let color = '#f59e0b'; // default yellow for hold
-                    let text = '●';
-
-                    if (recommendation === 'buy') {
-                        color = '#10b981';
-                        text = '🟢';
-                    } else if (recommendation === 'sell') {
-                        color = '#ef4444';
-                        text = '🔴';
-                    } else {
-                        color = '#f59e0b';
-                        text = '🟡';
-                    }
-
+            stockReports.forEach(report => {
+                const reportDate = new Date(report.date).getTime() / 1000;
+                const candleAtDate = candleData.find(c => Math.abs(c.time - reportDate) < 86400);
+                
+                if (candleAtDate) {
                     markers.push({
-                        time: report.date,
-                        position: 'belowBar',
-                        color: color,
+                        time: reportDate,
+                        position: 'aboveBar',
+                        color: report.recommendation === 'buy' ? '#10b981' : 
+                               report.recommendation === 'sell' ? '#ef4444' : '#f59e0b',
                         shape: 'circle',
-                        text: text,
-                        id: `${analyst.id}-${report.date}`,
-                        analyst: analyst,
-                        report: report
+                        text: getRecommendationIcon(report.recommendation),
+                        size: 1.5,
+                        id: report.id
                     });
-                });
-            });
-
-            candlestickSeries.setMarkers(markers);
-
-            // Add marker click handlers
-            chart.subscribeClick((param) => {
-                if (param.hoveredMarkerId) {
-                    const marker = markers.find(m => m.id === param.hoveredMarkerId);
-                    if (marker) {
-                        showReportModal(marker.analyst, marker.report);
-                    }
                 }
             });
-
-            // Add hover handlers for tooltips
-            chart.subscribeCrosshairMove((param) => {
-                if (param.hoveredMarkerId) {
-                    const marker = markers.find(m => m.id === param.hoveredMarkerId);
-                    if (marker) {
-                        showTooltip(param, marker.analyst, marker.report);
-                    }
-                } else {
-                    hideTooltip();
-                }
-            });
-        }
-
-        function showTooltip(param, analyst, report) {
-            const tooltip = document.getElementById('chartTooltip');
-            const recommendation = report.recommendation;
-            let recommendationText = '중립';
-            let recommendationClass = 'hold';
-
-            if (recommendation === 'buy') {
-                recommendationText = '매수';
-                recommendationClass = 'buy';
-            } else if (recommendation === 'sell') {
-                recommendationText = '매도';
-                recommendationClass = 'sell';
-            }
-
-            tooltip.innerHTML = `
-                <div class="tooltip-header">
-                    <div>
-                        <div class="tooltip-analyst">${analyst.name}</div>
-                        <div class="tooltip-firm">${analyst.firm}</div>
-                    </div>
-                </div>
-                <div class="tooltip-recommendation">
-                    <span class="recommendation-badge ${recommendationClass}">${recommendationText}</span>
-                    <span class="tooltip-target">목표가: ${report.target.toLocaleString()}원</span>
-                </div>
-                <div class="tooltip-summary">${report.summary[0]}</div>
-            `;
-
-            const chartRect = document.getElementById('chartContainer').getBoundingClientRect();
-            tooltip.style.left = `${param.point.x + chartRect.left + 20}px`;
-            tooltip.style.top = `${param.point.y + chartRect.top - 20}px`;
-            tooltip.classList.add('visible');
             
-            currentTooltip = tooltip;
+            candleSeries.setMarkers(markers);
+
+            // 리사이즈 처리
+            const resizeObserver = new ResizeObserver(entries => {
+                if (chart && entries.length > 0) {
+                    chart.applyOptions({ width: entries[0].contentRect.width });
+                }
+            });
+            resizeObserver.observe(chartContainer);
+
+            // 마커 클릭 처리
+            chart.subscribeClick((param) => {
+                if (param.point && param.time) {
+                    const marker = markers.find(m => Math.abs(m.time - param.time) < 3600);
+                    if (marker) {
+                        showReportDetail(marker.id);
+                    }
+                }
+            });
         }
 
-        function hideTooltip() {
-            const tooltip = document.getElementById('chartTooltip');
-            tooltip.classList.remove('visible');
-            currentTooltip = null;
-        }
+        // 종목 애널 랭킹 렌더링
+        function renderStockAnalystRanking() {
+            const stockReports = reports.filter(r => r.stockId === currentStock.id);
+            const stockAnalysts = [...new Set(stockReports.map(r => r.analystId))]
+                .map(id => analysts.find(a => a.id === id))
+                .sort((a, b) => b.accuracy - a.accuracy);
 
-        function showReportModal(analyst, report) {
-            const modal = document.getElementById('reportModal');
-            const content = document.getElementById('reportContent');
-
-            const recommendation = report.recommendation;
-            let recommendationText = '중립';
-            let recommendationClass = 'hold';
-
-            if (recommendation === 'buy') {
-                recommendationText = '매수';
-                recommendationClass = 'buy';
-            } else if (recommendation === 'sell') {
-                recommendationText = '매도';
-                recommendationClass = 'sell';
-            }
-
-            content.innerHTML = `
-                <div class="report-summary">
-                    <div class="summary-title">AI 요약</div>
-                    ${report.summary.map(line => `<div class="summary-text">${line}</div>`).join('')}
-                </div>
-                
-                <div class="report-details">
-                    <div class="detail-card">
-                        <h4>투자의견</h4>
-                        <div class="value recommendation-badge ${recommendationClass}">${recommendationText}</div>
-                    </div>
-                    <div class="detail-card">
-                        <h4>목표가</h4>
-                        <div class="value target-price">${report.target.toLocaleString()}원</div>
-                    </div>
-                </div>
-                
-                <div style="text-align: center;">
-                    <a href="#" class="pdf-link" onclick="alert('PDF 다운로드 기능은 데모용입니다.')">
-                        📄 원문 리포트 다운로드
-                    </a>
-                </div>
-            `;
-
-            modal.classList.add('active');
-        }
-
-        function renderAnalysts() {
-            const grid = document.getElementById('analystsGrid');
-            const sortedAnalysts = [...sampleData.analysts].sort((a, b) => b.accuracy - a.accuracy);
-
-            grid.innerHTML = sortedAnalysts.map((analyst, index) => {
-                let rankIcon = `#${analyst.rank}`;
-                if (index === 0) rankIcon = '🥇';
-                else if (index === 1) rankIcon = '🥈';
-                else if (index === 2) rankIcon = '🥉';
-
-                const statusIcon = analyst.status === 'up' ? '✅' : '❌';
-
-                return `
-                    <div class="rank-card" onclick="showAnalystProfile(${analyst.id})">
-                        <div class="rank-header">
-                            <span class="rank-position">${rankIcon}</span>
-                            <div class="analyst-info">
-                                <div class="analyst-name">${analyst.name}</div>
-                                <div class="analyst-firm">${analyst.firm}</div>
-                            </div>
-                            <div class="accuracy-badge">${analyst.accuracy}%</div>
+            const container = document.getElementById('stockAnalystRanking');
+            container.innerHTML = stockAnalysts.map((analyst, index) => 
+                `<div class="rank-card" onclick="showAnalystProfile('${analyst.id}')">
+                    <div class="rank-header">
+                        <span class="rank-number">${index + 1}</span>
+                        <div class="analyst-info">
+                            <h3>${analyst.name}</h3>
+                            <p class="analyst-company">${analyst.company}</p>
                         </div>
-                        <div class="rank-details">
-                            <div class="detail-item">
-                                <div class="detail-label">최근 목표가</div>
-                                <div class="detail-value target-price">${analyst.latestTarget.toLocaleString()}원</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">적중률</div>
-                                <div class="detail-value">
-                                    <span class="status-icon">${statusIcon}</span>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="accuracy-rate">${analyst.accuracy}%</div>
                     </div>
-                `;
+                </div>`
+            ).join('');
+        }
+
+        // 종목 리포트 렌더링
+        function renderStockReports() {
+            const stockReports = reports.filter(r => r.stockId === currentStock.id)
+                .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            const container = document.getElementById('stockReports');
+            container.innerHTML = stockReports.map(report => {
+                const analyst = analysts.find(a => a.id === report.analystId);
+                return `<div class="report-card">
+                    <div class="report-header">
+                        <h3 class="stock-name">${report.stockName}</h3>
+                        <span class="report-date">${formatDate(report.date)}</span>
+                    </div>
+                    <div class="analyst-name" onclick="showAnalystProfile('${report.analystId}')">${analyst.name} (${analyst.company})</div>
+                    <span class="recommendation rec-${report.recommendation}">${formatRecommendation(report.recommendation)}</span>
+                    <div class="target-price">목표가: ${formatPrice(report.targetPrice)}원</div>
+                    <p class="ai-summary">${report.summary}</p>
+                    <a href="${report.link}" class="report-link" onclick="showReportDetail(${report.id}); return false;">원문보기 →</a>
+                </div>`;
             }).join('');
         }
 
+        // 애널리스트 프로필 모달 표시
         function showAnalystProfile(analystId) {
-            const analyst = sampleData.analysts.find(a => a.id === analystId);
-            const modal = document.getElementById('profileModal');
-            const content = document.getElementById('profileContent');
+            const analyst = analysts.find(a => a.id === analystId);
+            if (!analyst) return;
 
-            content.innerHTML = `
-                <div class="profile-section">
-                    <div class="profile-header">
-                        <div class="profile-avatar">${analyst.name.charAt(0)}</div>
-                        <div class="profile-details">
-                            <h3>${analyst.name}</h3>
-                            <p>${analyst.firm} • ${analyst.sector}</p>
+            const analystReports = reports.filter(r => r.analystId === analystId);
+            const stockAccuracies = {};
+            
+            analystReports.forEach(report => {
+                if (!stockAccuracies[report.stockId]) {
+                    stockAccuracies[report.stockId] = Math.floor(Math.random() * 20) + analyst.accuracy - 10;
+                }
+            });
+
+            const modalBody = document.getElementById('analystModalBody');
+            modalBody.innerHTML = `
+                <div class="analyst-profile">
+                    <h2>${analyst.name}</h2>
+                    <p class="company">${analyst.company}</p>
+                    <p class="sector">커버 섹터: ${analyst.sector}</p>
+                </div>
+
+                <div class="accuracy-section">
+                    <h3>적중률</h3>
+                    <div class="accuracy-grid">
+                        <div class="accuracy-item">
+                            <div class="stock">전체</div>
+                            <div class="rate">${analyst.accuracy}%</div>
                         </div>
+                        ${Object.entries(stockAccuracies).map(([stockId, rate]) => {
+                            const stock = stocks.find(s => s.id === stockId);
+                            return `<div class="accuracy-item">
+                                <div class="stock">${stock.name}</div>
+                                <div class="rate">${rate}%</div>
+                            </div>`;
+                        }).join('')}
                     </div>
                 </div>
 
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-value">#${analyst.rank}</div>
-                        <div class="stat-label">전체 랭킹</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">${analyst.accuracy}%</div>
-                        <div class="stat-label">적중률</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">${analyst.reports.length}</div>
-                        <div class="stat-label">리포트 수</div>
+                <div class="chart-section">
+                    <h3>목표가 히스토리</h3>
+                    <div class="history-chart">
+                        <canvas id="historyChart"></canvas>
                     </div>
                 </div>
 
-                <div class="history-chart">
-                    <div class="history-title">목표가 히스토리</div>
-                    <canvas id="historyChart"></canvas>
-                </div>
-
-                <div class="coverage-list">
-                    <div class="coverage-title">다른 커버 종목</div>
-                    ${analyst.coverage.map(stock => `
-                        <div class="coverage-item">
-                            <span class="coverage-stock">${stock.stock}</span>
-                            <span class="coverage-accuracy">${stock.accuracy}%</span>
-                        </div>
-                    `).join('')}
+                <div class="coverage-section">
+                    <h3>커버 종목</h3>
+                    <div class="hot-stocks">
+                        ${[...new Set(analystReports.map(r => r.stockName))].map(stockName => 
+                            `<div class="hot-tag">${stockName}</div>`
+                        ).join('')}
+                    </div>
                 </div>
             `;
 
-            modal.classList.add('active');
+            document.getElementById('analystModal').style.display = 'flex';
 
-            // Create history chart
+            // 히스토리 차트 렌더링
             setTimeout(() => {
-                createHistoryChart(analyst);
+                renderHistoryChart(analystReports);
             }, 100);
         }
 
-        function createHistoryChart(analyst) {
+        // 리포트 상세 모달 표시
+        function showReportDetail(reportId) {
+            const report = reports.find(r => r.id === reportId);
+            if (!report) return;
+
+            const analyst = analysts.find(a => a.id === report.analystId);
+            
+            const modalBody = document.getElementById('reportModalBody');
+            modalBody.innerHTML = `
+                <div class="report-meta">
+                    <h3>${report.stockName}</h3>
+                    <p><strong>${analyst.name}</strong> (${analyst.company})</p>
+                    <p>${formatDate(report.date)}</p>
+                    <span class="recommendation rec-${report.recommendation}">${formatRecommendation(report.recommendation)}</span>
+                    <div style="margin-top: 8px; font-size: 18px; font-weight: 600;">목표가: ${formatPrice(report.targetPrice)}원</div>
+                </div>
+
+                <div class="report-summary">
+                    <h3>AI 요약</h3>
+                    <p>${report.summary}</p>
+                    <p>투자 포인트를 종합적으로 검토한 결과, 현재 시점에서의 투자 매력도가 높은 것으로 판단됩니다.</p>
+                    <p>다만 시장 변동성과 거시경제 요인들을 지속적으로 모니터링할 필요가 있습니다.</p>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="${report.link}" class="report-link" style="font-size: 16px; padding: 12px 24px; background: var(--accent); color: white; border-radius: 8px; text-decoration: none; display: inline-block;">원문 보기 →</a>
+                </div>
+            `;
+
+            document.getElementById('reportModal').style.display = 'flex';
+        }
+
+        // 히스토리 차트 렌더링
+        function renderHistoryChart(analystReports) {
             const ctx = document.getElementById('historyChart');
             if (!ctx) return;
 
-            const dates = analyst.reports.map(r => r.date);
-            const targets = analyst.reports.map(r => r.target);
+            const chartData = {
+                labels: analystReports.slice(0, 6).reverse().map(r => formatDate(r.date)),
+                datasets: [{
+                    label: '목표가',
+                    data: analystReports.slice(0, 6).reverse().map(r => r.targetPrice),
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4
+                }]
+            };
 
             new Chart(ctx, {
                 type: 'line',
-                data: {
-                    labels: dates,
-                    datasets: [{
-                        label: '목표가',
-                        data: targets,
-                        borderColor: '#3b82f6',
-                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                        tension: 0.4,
-                        fill: true
-                    }]
-                },
+                data: chartData,
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: {
-                            display: false
-                        }
+                        legend: { display: false }
                     },
                     scales: {
-                        x: {
-                            grid: {
-                                color: '#1e293b'
-                            },
-                            ticks: {
-                                color: '#94a3b8'
-                            }
-                        },
                         y: {
-                            grid: {
-                                color: '#1e293b'
-                            },
-                            ticks: {
-                                color: '#94a3b8',
-                                callback: function(value) {
-                                    return value.toLocaleString() + '원';
-                                }
-                            }
+                            beginAtZero: false,
+                            ticks: { color: '#94a3b8' },
+                            grid: { color: '#1e293b' }
+                        },
+                        x: {
+                            ticks: { color: '#94a3b8' },
+                            grid: { color: '#1e293b' }
                         }
                     }
                 }
             });
         }
 
-        // Search functionality
-        function initSearch() {
-            const searchInput = document.querySelector('.search-input');
-            const dropdown = document.getElementById('searchDropdown');
-
-            searchInput.addEventListener('focus', () => {
-                dropdown.classList.add('active');
-            });
-
-            searchInput.addEventListener('blur', () => {
-                setTimeout(() => {
-                    dropdown.classList.remove('active');
-                }, 200);
-            });
-
-            searchInput.addEventListener('input', (e) => {
-                const value = e.target.value.toLowerCase();
-                const items = dropdown.querySelectorAll('.dropdown-item');
-                
-                items.forEach(item => {
-                    const text = item.textContent.toLowerCase();
-                    item.style.display = text.includes(value) ? 'block' : 'none';
-                });
-            });
-
-            dropdown.addEventListener('click', (e) => {
-                if (e.target.classList.contains('dropdown-item')) {
-                    searchInput.value = e.target.textContent;
-                    dropdown.classList.remove('active');
-                    
-                    // Update selected state
-                    dropdown.querySelectorAll('.dropdown-item').forEach(item => {
-                        item.classList.remove('selected');
-                    });
-                    e.target.classList.add('selected');
-                }
-            });
+        // 모달 닫기
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
         }
 
-        // Modal handlers
-        function initModals() {
-            const modals = document.querySelectorAll('.modal');
-            
-            modals.forEach(modal => {
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal || e.target.classList.contains('close-btn')) {
-                        modal.classList.remove('active');
+        // 모달 외부 클릭시 닫기
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        });
+
+        // 유틸리티 함수들
+        function formatPrice(price) {
+            return price.toLocaleString();
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return `${date.getMonth() + 1}/${date.getDate()}`;
+        }
+
+        function formatRecommendation(rec) {
+            const map = { buy: '매수', hold: '중립', sell: '매도' };
+            return map[rec] || rec;
+        }
+
+        function getRecommendationIcon(rec) {
+            return rec === 'buy' ? '🟢' : rec === 'sell' ? '🔴' : '🟡';
+        }
+
+        function getStockId(stockName) {
+            const stock = stocks.find(s => s.name === stockName);
+            return stock ? stock.id : '';
+        }
+
+        function getAnalystId(analystName) {
+            const analyst = analysts.find(a => a.name === analystName);
+            return analyst ? analyst.id : '';
+        }
+
+        // 캔들스틱 데이터 생성 (6개월)
+        function generateCandlestickData(stock) {
+            const data = [];
+            let price = stock.price;
+            let date = new Date();
+            date.setMonth(date.getMonth() - 6);
+
+            for (let i = 0; i < 180; i++) {
+                const volatility = 0.02;
+                const change = (Math.random() - 0.5) * volatility;
+                
+                const open = price;
+                const direction = Math.random() > 0.5 ? 1 : -1;
+                const close = price * (1 + change);
+                const high = Math.max(open, close) * (1 + Math.random() * 0.01);
+                const low = Math.min(open, close) * (1 - Math.random() * 0.01);
+
+                data.push({
+                    time: Math.floor(date.getTime() / 1000),
+                    open: Math.round(open),
+                    high: Math.round(high),
+                    low: Math.round(low),
+                    close: Math.round(close)
+                });
+
+                price = close;
+                date.setDate(date.getDate() + 1);
+            }
+
+            return data;
+        }
+
+        // ESC 키로 모달 닫기
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    if (modal.style.display === 'flex') {
+                        modal.style.display = 'none';
                     }
                 });
-            });
-        }
+            }
+        });
 
-        // Time period buttons
-        function initTimeButtons() {
-            const buttons = document.querySelectorAll('.time-btn');
-            
-            buttons.forEach(button => {
-                button.addEventListener('click', () => {
-                    buttons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-                    
-                    // Here you would typically filter the chart data
-                    // For demo purposes, we'll just show the active state
-                });
-            });
-        }
-
-        // Global function for analyst profile
-        window.showAnalystProfile = showAnalystProfile;
-
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', () => {
-            initChart();
-            renderAnalysts();
-            initSearch();
-            initModals();
-            initTimeButtons();
+        // 검색 드롭다운 외부 클릭시 닫기
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.search-wrapper')) {
+                document.getElementById('searchDropdown').style.display = 'none';
+            }
         });
     </script>
 </body>
