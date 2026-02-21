@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>코린이 아빠 시그널 검증 리뷰</title>
+    <title>유튜버 시그널 검증 리뷰</title>
     <style>
         * {
             margin: 0;
@@ -282,7 +282,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1 class="title">🔍 코린이 아빠 시그널 검증 리뷰</h1>
+            <h1 class="title">🔍 유튜버 시그널 검증 리뷰</h1>
             <p class="subtitle">3단계 검증 파이프라인: GPT-4o-mini 추출 → Claude 검증 → 인간 최종 리뷰</p>
             
             <div class="stats" id="stats">
@@ -375,13 +375,21 @@
         
         // 로컬 스토리지에서 리뷰 상태 로드
         function loadReviewStatus() {
-            const saved = localStorage.getItem('signal-reviews');
-            return saved ? JSON.parse(saved) : {};
+            try {
+                const saved = localStorage.getItem('signal-reviews');
+                return saved ? JSON.parse(saved) : {};
+            } catch(e) {
+                return {};
+            }
         }
         
         // 리뷰 상태 저장
         function saveReviewStatus(reviews) {
-            localStorage.setItem('signal-reviews', JSON.stringify(reviews));
+            try {
+                localStorage.setItem('signal-reviews', JSON.stringify(reviews));
+            } catch(e) {
+                console.warn('localStorage 사용 불가:', e);
+            }
         }
         
         // 시그널 카드 생성
@@ -425,7 +433,7 @@
                             <div class="stage-title">📝 1차: GPT-4o-mini 추출</div>
                             <div class="stage-content">
                                 <strong>종목:</strong> ${signal.asset}<br>
-                                <strong>시그널:</strong> ${signal.signal_type}<br>
+                                <strong>시그널:</strong> ${getSignalLabel(signal.signal_type)}<br>
                                 <strong>신뢰도:</strong> ${signal.confidence}<br>
                                 <strong>맥락:</strong> ${signal.context || 'N/A'}
                             </div>
@@ -488,14 +496,15 @@
         
         function extractCorrectedSignal(correction) {
             if (!correction) return '수정';
-            // "신호: XX" 또는 "시그널: XX" 패턴 찾기
-            const m = correction.match(/(?:신호|시그널|Signal)[:\s]+([^
-,]+)/i);
-            if (m) return m[1].trim();
-            // "→ XX" 패턴
-            const m2 = correction.match(/→\s*([^
-,]+)/);
-            if (m2) return m2[1].trim();
+            const text = (typeof correction === 'string' ? correction : JSON.stringify(correction)).toLowerCase();
+            if (text.includes('강력 매수') || text.includes('strong buy') || text.includes('strong-buy')) return '강력매수';
+            if (text.includes('강력 매도') || text.includes('strong sell') || text.includes('strong-sell')) return '강력매도';
+            if (text.includes('매수') || text.includes('buy')) return '매수';
+            if (text.includes('매도') || text.includes('sell')) return '매도';
+            if (text.includes('긍정') || text.includes('positive')) return '긍정';
+            if (text.includes('우려') || text.includes('concern') || text.includes('부정') || text.includes('negative')) return '우려';
+            if (text.includes('보유') || text.includes('hold')) return '보유';
+            if (text.includes('중립') || text.includes('neutral') || text.includes('전망') || text.includes('view')) return '중립';
             return '수정';
         }
         
