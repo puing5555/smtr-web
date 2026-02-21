@@ -85,10 +85,6 @@ class ReviewHandler(SimpleHTTPRequestHandler):
         pass  # suppress logs
 
 def build_review_html(signals, reviews):
-    # Escape </script> to prevent HTML parsing issues
-    signals_json = json.dumps(signals, ensure_ascii=False).replace('</script>', '<\\/script>')
-    reviews_json = json.dumps(reviews, ensure_ascii=False).replace('</script>', '<\\/script>')
-    
     return '''<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -208,8 +204,21 @@ def build_review_html(signals, reviews):
     </div>
 
     <script>
-        const SIGNALS_DATA = ''' + signals_json + ''';
-        const REVIEWS = ''' + reviews_json + ''';
+        let SIGNALS_DATA = [];
+        let REVIEWS = {};
+        
+        async function loadData() {
+            const [sigRes, revRes] = await Promise.all([
+                fetch('/api/signals').then(r => r.json()),
+                fetch('/api/reviews').then(r => r.json())
+            ]);
+            SIGNALS_DATA = sigRes;
+            REVIEWS = revRes;
+            initFilters();
+            render();
+        }
+        
+        loadData();
         
         const SIGNAL_LABELS = {
             'STRONG_BUY': '강력매수', 'BUY': '매수', 'POSITIVE': '긍정',
@@ -276,35 +285,61 @@ def build_review_html(signals, reviews):
             const ts = parseTimestamp(sig.timestamp);
             const tsUrl = ts ? 'https://youtube.com/watch?v=' + sig.video_id + '&t=' + ts : 'https://youtube.com/watch?v=' + sig.video_id;
             const reviewed = review.status !== 'pending' ? ' reviewed' : '';
-            const escId = id.replace(/'/g, "\\\\'");
             
-            return '<div class="signal-card' + reviewed + '" data-signal="' + sig.signal_type + '" data-review="' + review.status + '">' +
+            const card = document.createElement('div');
+            card.className = 'signal-card' + reviewed;
+            card.dataset.signal = sig.signal_type;
+            card.dataset.review = review.status;
+            card.dataset.id = id;
+            
+            const statusLabel = {pending:'검토대기',approved:'승인',rejected:'거부'}[review.status] || review.status;
+            
+            card.innerHTML = 
                 '<div class="signal-header">' +
                     '<div>' +
-                        '<span class="signal-asset">' + sig.asset + '</span> ' +
+                        '<span class="signal-asset">' + escHtml(sig.asset) + '</span> ' +
                         '<span class="signal-type ' + sig.signal_type + '">' + (SIGNAL_LABELS[sig.signal_type] || sig.signal_type) + '</span> ' +
                         '<span class="confidence ' + (sig.confidence || '') + '">' + (sig.confidence || '') + '</span> ' +
-                        '<span class="review-badge ' + review.status + '">' + ({pending:'검토대기',approved:'승인',rejected:'거부'}[review.status] || review.status) + '</span> ' +
-                        '<span class="date-badge">📅 ' + (sig.date || 'N/A') + '</span>' +
+                        '<span class="review-badge ' + review.status + '">' + statusLabel + '</span> ' +
+                        '<span class="date-badge">📅 ' + escHtml(sig.date || 'N/A') + '</span>' +
                     '</div>' +
                     '<div class="signal-actions">' +
-                        '<button class="btn' + (review.status==='approved'?' active-approve':'') + '" onclick="approveSignal(\\'' + escId + '\\')">✅</button>' +
-                        '<button class="btn' + (review.status==='rejected'?' active-reject':'') + '" onclick="rejectSignal(\\'' + escId + '\\')">❌</button>' +
+                        '<button class="btn approve-btn' + (review.status==='approved'?' active-approve':'') + '">✅</button>' +
+                        '<button class="btn reject-btn' + (review.status==='rejected'?' active-reject':'') + '">❌</button>' +
                     '</div>' +
                 '</div>' +
                 '<div class="quote">"' + escHtml(sig.content || '') + '"</div>' +
                 '<div class="meta">' +
-                    '<span>📺 <a href="' + tsUrl + '" target="_blank">' + escHtml((sig.title || sig.video_id).substring(0, 50)) + ' ▶️</a></span>' +
-                    '<span>⏱️ ' + (sig.timestamp || 'N/A') + '</span>' +
-                    '<span>🎙️ ' + (sig.channel || '코린이 아빠') + '</span>' +
+                    '<span>📺 <a href="' + escHtml(tsUrl) + '" target="_blank">' + escHtml((sig.title || sig.video_id).substring(0, 50)) + ' ▶️</a></span>' +
+                    '<span>⏱️ ' + escHtml(sig.timestamp || 'N/A') + '</span>' +
+                    '<span>🎙️ ' + escHtml(sig.channel || '코린이 아빠') + '</span>' +
                 '</div>' +
                 (sig.context ? '<div style="margin-top:8px;font-size:13px;color:#666;">💡 ' + escHtml(sig.context) + '</div>' : '') +
-                (review.status === 'rejected' && review.reason ? '<div style="margin-top:8px;font-size:13px;color:#991b1b;">❌ 거부 사유: ' + review.reason + '</div>' : '') +
-                '<div class="reject-input" id="reject-' + id + '">' +
-                    '<input type="text" placeholder="거부 사유 입력..." onkeypress="if(event.key===\\'Enter\\')submitReject(\\'' + escId + '\\')">' +
-                    '<button onclick="submitReject(\\'' + escId + '\\')">거부</button>' +
-                '</div>' +
-            '</div>';
+                (review.status === 'rejected' && review.reason ? '<div style="margin-top:8px;font-size:13px;color:#991b1b;">❌ 거부 사유: ' + escHtml(review.reason) + '</div>' : '') +
+                '<div class="reject-input">' +
+                    '<input type="text" placeholder="거부 사유 입력...">' +
+                    '<button class="reject-submit-btn">거부</button>' +
+                '</div>';
+            
+            // Event listeners
+            card.querySelector('.approve-btn').addEventListener('click', () => approveSignal(id));
+            card.querySelector('.reject-btn').addEventListener('click', () => {
+                const ri = card.querySelector('.reject-input');
+                ri.classList.toggle('show');
+                if (ri.classList.contains('show')) ri.querySelector('input').focus();
+            });
+            card.querySelector('.reject-submit-btn').addEventListener('click', () => {
+                const reason = card.querySelector('.reject-input input').value;
+                setReview(id, 'rejected', reason);
+            });
+            card.querySelector('.reject-input input').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const reason = e.target.value;
+                    setReview(id, 'rejected', reason);
+                }
+            });
+            
+            return card;
         }
         
         function render() {
@@ -314,7 +349,7 @@ def build_review_html(signals, reviews):
             const reviewF = document.getElementById('review-filter').value;
             const searchF = document.getElementById('search-input').value.toLowerCase();
             
-            let html = '';
+            container.innerHTML = '';
             let shown = 0, approved = 0, rejected = 0;
             
             SIGNALS_DATA.forEach(sig => {
@@ -330,11 +365,13 @@ def build_review_html(signals, reviews):
                 if (searchF && !(sig.content || '').toLowerCase().includes(searchF) && 
                     !(sig.asset || '').toLowerCase().includes(searchF)) return;
                 
-                html += buildCard(sig);
+                container.appendChild(buildCard(sig));
                 shown++;
             });
             
-            container.innerHTML = html || '<div style="text-align:center;padding:40px;color:#666;">필터 조건에 맞는 시그널이 없습니다.</div>';
+            if (shown === 0) {
+                container.innerHTML = '<div style="text-align:center;padding:40px;color:#666;">필터 조건에 맞는 시그널이 없습니다.</div>';
+            }
             
             const statsHtml = [
                 { n: SIGNALS_DATA.length, l: '총 시그널' },
@@ -356,10 +393,7 @@ def build_review_html(signals, reviews):
             document.getElementById('search-input').addEventListener('input', render);
         }
         
-        document.addEventListener('DOMContentLoaded', function() {
-            initFilters();
-            render();
-        });
+        // Data loaded via loadData() above
     </script>
 </body>
 </html>'''
