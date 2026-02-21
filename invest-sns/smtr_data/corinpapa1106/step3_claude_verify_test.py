@@ -96,7 +96,7 @@ def verify_signal_with_claude(client, signal, subtitle_content):
     
     try:
         response = client.messages.create(
-            model="claude-3-5-sonnet-20241022",
+            model="claude-3-sonnet-20240229",
             max_tokens=1000,
             messages=[{
                 "role": "user", 

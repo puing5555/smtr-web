@@ -107,7 +107,7 @@ def verify_signal_with_claude(client, signal, subtitle_content):
     
     try:
         response = client.messages.create(
-            model="claude-3-5-sonnet-20241022",
+            model="claude-3-haiku-20240307",
             max_tokens=1000,
             messages=[{
                 "role": "user", 
@@ -203,7 +203,7 @@ def main():
         # 비용 추정 (대략적)
         input_tokens = len(str(subtitle_content or "") + str(signal)) // 4  # 대략적 토큰 수
         output_tokens = len(str(verification_result)) // 4
-        cost = (input_tokens * 0.000003) + (output_tokens * 0.000015)  # Claude 3.5 Sonnet 가격
+        cost = (input_tokens * 0.00000025) + (output_tokens * 0.00000125)  # Claude 3 Haiku 가격
         total_cost += cost
         
         print(f"  -> {verification_result.get('judgment', 'error')} (신뢰도: {verification_result.get('confidence', 0)})")
