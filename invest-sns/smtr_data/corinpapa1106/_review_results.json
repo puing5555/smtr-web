@@ -333,5 +333,495 @@
     "status": "approved",
     "reason": "",
     "time": "2026. 2. 22. 오전 1:20:21"
+  },
+  "haqNGCpQKDg_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:21:06"
+  },
+  "haqNGCpQKDg_캔톤네트워크 (CC)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:21:45"
+  },
+  "6IYiaHn6Jls_이더질라 (ATNF)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:21:47"
+  },
+  "6IYiaHn6Jls_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:21:50"
+  },
+  "6IYiaHn6Jls_캔톤네트워크 (CC)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:21:52"
+  },
+  "6IYiaHn6Jls_마이크로스트래티지 (MSTR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:21:53"
+  },
+  "OOL77dtnR3g_캔톤네트워크 (CC)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:21:58"
+  },
+  "OOL77dtnR3g_서클 (Circle)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:22:06"
+  },
+  "bm_O5iqGiFg_캔톤네트워크 (CC)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:22:11"
+  },
+  "qKzql5TOQkg_캔톤네트워크 (CC)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:22:15"
+  },
+  "qKzql5TOQkg_서클 (Circle)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:22:25"
+  },
+  "Quyl_Xss93E_캔톤네트워크 (CC)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:22:26"
+  },
+  "Quyl_Xss93E_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:22:30"
+  },
+  "y2CCjhxS1QI_캔톤네트워크 (CC)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:22:32"
+  },
+  "y2CCjhxS1QI_XRP": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:22:35"
+  },
+  "WmZeNxf7ack_캔톤네트워크 (CC)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:22:39"
+  },
+  "OLdoaHelitU_캔톤네트워크 (CC)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:22:49"
+  },
+  "OLdoaHelitU_비트코인": {
+    "status": "rejected",
+    "reason": "과거에 비트마인 비트코인을 몰빵했지만 그거는 과거이야기라고 함. 현재는 문맥상 아닌듯",
+    "time": "2026. 2. 22. 오전 1:24:59"
+  },
+  "OLdoaHelitU_이더리움": {
+    "status": "rejected",
+    "reason": "과거에 비트마인 비트코인을 몰빵했지만 그거는 과거이야기라고 함. 현재는 문맥상 아닌듯",
+    "time": "2026. 2. 22. 오전 1:25:04"
+  },
+  "08FEwaGddCk_캔톤네트워크 (CC)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:26:04"
+  },
+  "GHTrpr3AOhY_캔톤네트워크 (CC)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:26:06"
+  },
+  "Qwdgrkfs-hE_캔톤네트워크 (CC)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:26:09"
+  },
+  "5HFHld3F5as_타르 (THAR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:26:16"
+  },
+  "5HFHld3F5as_캔톤네트워크 (CC)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:26:35"
+  },
+  "4uNZBw852Do_XRP": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:26:35"
+  },
+  "r0DKsSOaSR0_캐톤네트워크 (CC)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:26:39"
+  },
+  "ijzQXeQv8co_캔톤네트워크 (CC)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:26:41"
+  },
+  "dD0eVCXS7fg_비트마인 (BMNR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:26:54"
+  },
+  "dD0eVCXS7fg_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:27:19"
+  },
+  "dD0eVCXS7fg_비트코인": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:27:23"
+  },
+  "bi8ZfEB2mZ4_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:27:26"
+  },
+  "bi8ZfEB2mZ4_비트마인 (BMNR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:27:28"
+  },
+  "BVUT2DMnZlg_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:27:29"
+  },
+  "X8dT57ap91Q_비트마인 (BMNR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:29:50"
+  },
+  "X8dT57ap91Q_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:29:50"
+  },
+  "rOCkK9x9UyY_비트마인 (BMNR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:29:56"
+  },
+  "pTX3bb53q4w_비트마인 (BMNR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:30:58"
+  },
+  "pTX3bb53q4w_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:31:02"
+  },
+  "pTX3bb53q4w_미국 주식": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:31:06"
+  },
+  "RabsURttGlI_엔비디아 (NVDA)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:31:10"
+  },
+  "RabsURttGlI_팔란티어 (PLTR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:31:30"
+  },
+  "RabsURttGlI_오라클 (ORCL)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:31:34"
+  },
+  "RabsURttGlI_메타 (META)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:31:39"
+  },
+  "RabsURttGlI_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:31:41"
+  },
+  "0XEv66hwKqA_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:31:43"
+  },
+  "0XEv66hwKqA_비트마인 (BMNR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:31:45"
+  },
+  "DwAUo9LmoSo_비트코인": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:31:57"
+  },
+  "DwAUo9LmoSo_이더리움": {
+    "status": "rejected",
+    "reason": "그냥 다음주제 예고임",
+    "time": "2026. 2. 22. 오전 1:32:27"
+  },
+  "iAZogOLzUxg_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:32:46"
+  },
+  "iAZogOLzUxg_비트마인 (BMNR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:32:51"
+  },
+  "31dyiLfeqGk_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:32:54"
+  },
+  "31dyiLfeqGk_비트마인 (BMNR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:32:55"
+  },
+  "e7Pd9dn7uic_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:32:57"
+  },
+  "e7Pd9dn7uic_비트마인 (BMNR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:33:05"
+  },
+  "T_5EaLRwm8o_서클 (Circle)": {
+    "status": "rejected",
+    "reason": "삿팔삿팔했다는 내용인데 이건 시그널이 아님",
+    "time": "2026. 2. 22. 오전 1:33:45"
+  },
+  "T_5EaLRwm8o_블리시 (BLSH)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:33:52"
+  },
+  "T_5EaLRwm8o_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:33:53"
+  },
+  "SscZvgQJDfA_비트마인 (BMNR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:33:54"
+  },
+  "SscZvgQJDfA_월드코인": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:34:01"
+  },
+  "Je_JJcSzctY_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:34:20"
+  },
+  "avhNaXmgBeo_퍼지펭귄 (PENGU)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:34:23"
+  },
+  "aK-QNWiVMdc_비트마인 (BMNR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:34:33"
+  },
+  "aK-QNWiVMdc_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:34:34"
+  },
+  "CutCWEEnuEU_비트마인 (BMNR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:34:38"
+  },
+  "CutCWEEnuEU_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:34:39"
+  },
+  "-fmfJn1psbA_이더질라 (ATNF)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:34:40"
+  },
+  "-fmfJn1psbA_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:34:54"
+  },
+  "wpmzTlu5JcI_비트마인 (BMNR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:34:58"
+  },
+  "wpmzTlu5JcI_샤프링크": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:35:00"
+  },
+  "2wdlIAF0OrA_비트마인 (BMNR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:35:01"
+  },
+  "2wdlIAF0OrA_엔비디아": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:35:09"
+  },
+  "2wdlIAF0OrA_팔란티어 (PLTR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:35:13"
+  },
+  "v-w9X2m2V1s_XRP": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:35:16"
+  },
+  "v-w9X2m2V1s_SBI홀딩스": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:35:27"
+  },
+  "G1Nl97SgGJY_비트마인 (BMNR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:35:28"
+  },
+  "1l9mMgFjixk_비트마인 (BMNR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:35:31"
+  },
+  "1l9mMgFjixk_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:35:33"
+  },
+  "E4uoauB1dyM_XRP": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:35:38"
+  },
+  "H2OP8hKs-Tk_비트마인 (BMNR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:35:40"
+  },
+  "a1a52W1UnOU_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:35:44"
+  },
+  "HIdHdpfBwmA_비트마인 (BMNR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:35:50"
+  },
+  "HIdHdpfBwmA_체인링크": {
+    "status": "rejected",
+    "reason": "체인링크가 아니라 샤프링크를 샀다고함",
+    "time": "2026. 2. 22. 오전 1:36:20"
+  },
+  "HIdHdpfBwmA_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:36:24"
+  },
+  "5rcYk9nhmMU_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:36:25"
+  },
+  "5rcYk9nhmMU_비트마인 (BMNR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:36:26"
+  },
+  "5rcYk9nhmMU_XRP": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:36:29"
+  },
+  "bP58fA9rzzo_알트코인": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:36:31"
+  },
+  "bP58fA9rzzo_스테이블코인": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:36:32"
+  },
+  "bP58fA9rzzo_XRP": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:36:39"
+  },
+  "p2cJUnTXVPE_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:36:41"
+  },
+  "p2cJUnTXVPE_솔라나": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:36:42"
+  },
+  "p2cJUnTXVPE_XRP": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:36:44"
+  },
+  "p2cJUnTXVPE_서클 (Circle)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:36:50"
+  },
+  "jA8ngycEQNE_XRP": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:36:53"
+  },
+  "jA8ngycEQNE_삼성이엔지니어링 (ENA)": {
+    "status": "rejected",
+    "reason": "이게 무슨종목이지? 삼성이엔지니어링 맞나?",
+    "time": "2026. 2. 22. 오전 1:37:28"
+  },
+  "jA8ngycEQNE_코스피": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:37:34"
+  },
+  "bLxyJJd_oTg_XRP": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:38:07"
+  },
+  "ZKi5J5Z7SvE_XRP": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:38:12"
   }
 }
