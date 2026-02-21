@@ -390,6 +390,12 @@ def create_html_template():
                     </select>
                 </div>
                 <div class="filter-group">
+                    <label class="filter-label">유튜버</label>
+                    <select class="filter-select" id="youtuber-filter">
+                        <option value="">전체 유튜버</option>
+                    </select>
+                </div>
+                <div class="filter-group">
                     <label class="filter-label">검색</label>
                     <input type="text" class="filter-input" id="search-input" placeholder="내용 검색...">
                 </div>
@@ -435,7 +441,7 @@ def create_html_template():
             
             return `
                 <div class="signal-card" data-asset="${signal.asset}" data-signal="${signal.signal_type}" 
-                     data-review="${reviewStatus}" data-claude="${claude.judgment || 'none'}" data-index="${index}">
+                     data-review="${reviewStatus}" data-claude="${claude.judgment || 'none'}" data-youtuber="${signal.title || '코린이 아빠'}" data-index="${index}">
                     <div class="signal-header">
                         <div class="signal-meta">
                             <div class="signal-asset">${signal.asset} <span style="font-size:12px;font-weight:400">${signal.video_id ? '<a href="https://youtube.com/watch?v=' + signal.video_id + (signal.timestamp_seconds ? '&t=' + signal.timestamp_seconds : '') + '" target="_blank" style="color:#ef4444;text-decoration:none">▶ 영상보기</a>' : ''}</span></div>
@@ -467,9 +473,10 @@ def create_html_template():
                         <div class="stage">
                             <div class="stage-title">🔍 2차: Claude 검증</div>
                             <div class="stage-content">
-                                <strong>판정:</strong> ${claude.judgment || 'N/A'}<br>
+                                <strong>판정:</strong> ${getJudgmentKorean(claude.judgment)}<br>
                                 <strong>사유:</strong> ${claude.reason || 'N/A'}<br>
                                 ${claude.correction ? `<strong>수정의견:</strong> ${claude.correction}<br>` : ''}
+                                ${claude.corrected_signal ? `<strong>변경:</strong> ${signal.signal_type} → ${claude.corrected_signal}<br>` : ''}
                                 <div class="confidence-bar">
                                     <div class="confidence-fill" style="width: ${(claude.confidence || 0) * 100}%"></div>
                                 </div>
@@ -508,6 +515,15 @@ def create_html_template():
             }
             
             return `GPT-4o 검증: ${verifications.length}개 검증됨`;
+        }
+        
+        function getJudgmentKorean(judgment) {
+            const labels = {
+                'confirmed': '✅ 확인됨',
+                'corrected': '✏️ 수정됨',
+                'rejected': '❌ 거부됨'
+            };
+            return labels[judgment] || judgment || 'N/A';
         }
         
         function getStatusLabel(status) {
@@ -564,6 +580,7 @@ def create_html_template():
             const signalFilter = document.getElementById('signal-filter').value;
             const reviewFilter = document.getElementById('review-filter').value;
             const claudeFilter = document.getElementById('claude-filter').value;
+            const youtuberFilter = document.getElementById('youtuber-filter').value;
             const searchTerm = document.getElementById('search-input').value.toLowerCase();
             
             const cards = document.querySelectorAll('.signal-card');
@@ -575,13 +592,15 @@ def create_html_template():
                 const claude = card.dataset.claude;
                 const content = card.textContent.toLowerCase();
                 
+                const youtuber = card.dataset.youtuber;
                 const matchAsset = !assetFilter || asset === assetFilter;
                 const matchSignal = !signalFilter || signal === signalFilter;
                 const matchReview = !reviewFilter || review === reviewFilter;
                 const matchClaude = !claudeFilter || claude === claudeFilter;
+                const matchYoutuber = !youtuberFilter || youtuber === youtuberFilter;
                 const matchSearch = !searchTerm || content.includes(searchTerm);
                 
-                if (matchAsset && matchSignal && matchReview && matchClaude && matchSearch) {
+                if (matchAsset && matchSignal && matchReview && matchClaude && matchYoutuber && matchSearch) {
                     card.classList.remove('hide');
                 } else {
                     card.classList.add('hide');
@@ -600,11 +619,22 @@ def create_html_template():
                 assetFilter.appendChild(option);
             });
             
+            // 유튜버 필터 옵션 생성
+            const youtubers = [...new Set(SIGNALS_DATA.map(s => s.title || '코린이 아빠'))].sort();
+            const youtuberFilter = document.getElementById('youtuber-filter');
+            youtubers.forEach(yt => {
+                const option = document.createElement('option');
+                option.value = yt;
+                option.textContent = yt;
+                youtuberFilter.appendChild(option);
+            });
+            
             // 필터 이벤트 리스너
             document.getElementById('asset-filter').addEventListener('change', applyFilters);
             document.getElementById('signal-filter').addEventListener('change', applyFilters);
             document.getElementById('review-filter').addEventListener('change', applyFilters);
             document.getElementById('claude-filter').addEventListener('change', applyFilters);
+            document.getElementById('youtuber-filter').addEventListener('change', applyFilters);
             document.getElementById('search-input').addEventListener('input', applyFilters);
         }
         
@@ -647,6 +677,9 @@ def main():
     
     print(f"시그널 데이터: {len(signals_data)}개")
     print(f"GPT-4o 데이터: {len(gpt4o_data)}개")
+    
+    # 최신순 정렬 (verification_timestamp 기준)
+    signals_data.sort(key=lambda s: s.get('verification_timestamp', ''), reverse=True)
     
     # HTML 생성
     html_template = create_html_template()
