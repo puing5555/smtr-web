@@ -233,5 +233,90 @@
     "status": "approved",
     "reason": "",
     "time": "2026. 2. 22. 오전 1:09:35"
+  },
+  "6r5ZHidwBGs_엔비디아": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:10:29"
+  },
+  "6r5ZHidwBGs_금": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:10:34"
+  },
+  "arOUCh4C9kM_캔톤네트워크 (CC)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:10:43"
+  },
+  "arOUCh4C9kM_알트코인": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:10:52"
+  },
+  "arOUCh4C9kM_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:10:54"
+  },
+  "arOUCh4C9kM_BNB": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:10:58"
+  },
+  "arOUCh4C9kM_체인링크": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:11:01"
+  },
+  "arOUCh4C9kM_비트코인": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:11:05"
+  },
+  "arOUCh4C9kM_엔비디아 (NVDA)": {
+    "status": "rejected",
+    "reason": "이건 엔비디아 투자를 권유하는게 아니라 비트코인 투신할빠에는 차라리 엔비디아 같은 주식을 한다고 함-> 결론 비트코인 걱정 우려 정도 아닐까?",
+    "time": "2026. 2. 22. 오전 1:16:53"
+  },
+  "151ejJicjy4_캔톤네트워크 (CC)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:17:31"
+  },
+  "151ejJicjy4_타르 (THAR)": {
+    "status": "rejected",
+    "reason": "THAR이 타르 맞나?",
+    "time": "2026. 2. 22. 오전 1:17:56"
+  },
+  "axurZUkC5Dc_캔톤네트워크 (CC)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:18:02"
+  },
+  "axurZUkC5Dc_비트코인": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:18:21"
+  },
+  "axurZUkC5Dc_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:18:21"
+  },
+  "8VIfrqxW4wc_캐톤네트워크 (CC)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:18:27"
+  },
+  "8VIfrqxW4wc_브로드리지파이낸셜": {
+    "status": "rejected",
+    "reason": "주식이 아닌거 같음",
+    "time": "2026. 2. 22. 오전 1:18:52"
+  },
+  "azTr1P5of4E_캔톤네트워크": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:19:24"
   }
 }
