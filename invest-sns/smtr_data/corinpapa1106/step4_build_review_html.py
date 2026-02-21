@@ -438,10 +438,9 @@ def create_html_template():
                      data-review="${reviewStatus}" data-claude="${claude.judgment || 'none'}" data-index="${index}">
                     <div class="signal-header">
                         <div class="signal-meta">
-                            <div class="signal-asset">${signal.asset}</div>
+                            <div class="signal-asset">${signal.asset} <span style="font-size:12px;font-weight:400">${signal.video_id ? '<a href="https://youtube.com/watch?v=' + signal.video_id + (signal.timestamp_seconds ? '&t=' + signal.timestamp_seconds : '') + '" target="_blank" style="color:#ef4444;text-decoration:none">▶ 영상보기</a>' : ''}</span></div>
                             <span class="signal-type ${signal.signal_type}">${signal.signal_type}</span>
                             <span class="review-status status-${reviewStatus}">${getStatusLabel(reviewStatus)}</span>
-                            <div style="margin-top: 8px;">${timestampHtml}</div>
                         </div>
                         <div class="signal-actions">
                             <button class="btn btn-approve" onclick="setReviewStatus('${signalId}', 'approved')">✅ 승인</button>
@@ -632,7 +631,7 @@ def main():
     print("=== 리뷰 페이지 HTML 빌드 ===")
     
     # Claude 검증 결과 확인
-    claude_path = "_claude_verify_full.json"
+    claude_path = "_claude_partial_164.json"
     if not os.path.exists(claude_path):
         print("❌ Claude 검증 결과를 찾을 수 없습니다.")
         print("   Claude 검증이 완료된 후 다시 실행해주세요.")
