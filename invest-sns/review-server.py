@@ -112,26 +112,26 @@ def build_review_html(signals, reviews):
         .filter-select, .filter-input { padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; }
         .signals-grid { display: flex; flex-direction: column; gap: 16px; }
         .signal-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 4px solid #ccc; transition: opacity 0.3s; }
-        .signal-card[data-signal="STRONG_BUY"] { border-left-color: #dc2626; }
-        .signal-card[data-signal="BUY"] { border-left-color: #ef4444; }
-        .signal-card[data-signal="POSITIVE"] { border-left-color: #f97316; }
-        .signal-card[data-signal="HOLD"] { border-left-color: #eab308; }
-        .signal-card[data-signal="NEUTRAL"] { border-left-color: #6b7280; }
-        .signal-card[data-signal="CONCERN"] { border-left-color: #8b5cf6; }
-        .signal-card[data-signal="SELL"] { border-left-color: #3b82f6; }
-        .signal-card[data-signal="STRONG_SELL"] { border-left-color: #1d4ed8; }
+        .signal-card[data-signal="STRONG_BUY"] { border-left-color: #10b981; }
+        .signal-card[data-signal="BUY"] { border-left-color: #86efac; }
+        .signal-card[data-signal="POSITIVE"] { border-left-color: #60a5fa; }
+        .signal-card[data-signal="HOLD"] { border-left-color: #06b6d4; }
+        .signal-card[data-signal="NEUTRAL"] { border-left-color: #94a3b8; }
+        .signal-card[data-signal="CONCERN"] { border-left-color: #fdba74; }
+        .signal-card[data-signal="SELL"] { border-left-color: #fb923c; }
+        .signal-card[data-signal="STRONG_SELL"] { border-left-color: #f87171; }
         .signal-card.reviewed { opacity: 0.6; }
         .signal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
         .signal-asset { font-size: 18px; font-weight: 700; }
         .signal-type { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; color: white; }
-        .signal-type.STRONG_BUY { background: #dc2626; }
-        .signal-type.BUY { background: #ef4444; }
-        .signal-type.POSITIVE { background: #f97316; }
-        .signal-type.HOLD { background: #eab308; }
-        .signal-type.NEUTRAL { background: #6b7280; }
-        .signal-type.CONCERN { background: #8b5cf6; }
-        .signal-type.SELL { background: #3b82f6; }
-        .signal-type.STRONG_SELL { background: #1d4ed8; }
+        .signal-type.STRONG_BUY { background: #10b981; }
+        .signal-type.BUY { background: #86efac; color: #065f46; }
+        .signal-type.POSITIVE { background: #60a5fa; }
+        .signal-type.HOLD { background: #06b6d4; }
+        .signal-type.NEUTRAL { background: #94a3b8; }
+        .signal-type.CONCERN { background: #fdba74; color: #7c2d12; }
+        .signal-type.SELL { background: #fb923c; }
+        .signal-type.STRONG_SELL { background: #f87171; }
         .quote { background: #f8f9fa; padding: 12px 16px; border-radius: 8px; margin: 12px 0; font-style: italic; color: #333; border-left: 3px solid #667eea; }
         .meta { display: flex; gap: 16px; font-size: 13px; color: #666; margin-top: 8px; flex-wrap: wrap; }
         .meta a { color: #ef4444; text-decoration: none; }
