@@ -241,8 +241,9 @@ The goal: Be helpful without being annoying. Check in a few times a day, do usef
 - 이 8가지 외의 시그널 타입 (`PRICE_TARGET`, `MARKET_VIEW` 등) **절대 사용 금지**
 - **1영상 1종목 1시그널** (같은 영상 같은 종목은 맥락 합쳐서 1개, 다른 종목은 각각 OK)
 - **타임스탬프 필수** (발언 시점, 영상 시작부분 0초는 안 됨)
-- **파이프라인:** GPT-4o-mini(추출) → Claude Sonnet(검증) → 사람
-- **GPT-4o 2차 검증은 제거됨. 다시 넣지 마라**
+- **파이프라인:** Claude Sonnet(추출) → 사람
+- **GPT-4o-mini 추출 + 별도 검증 파이프라인은 제거됨. 다시 넣지 마라**
+- Claude가 자막 읽고 한번에 8개 시그널 타입으로 추출. 별도 검증 단계 없음
 
 ## 🔗 터널 규칙
 
