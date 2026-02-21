@@ -221,6 +221,34 @@ Think of it like a human reviewing their journal and updating their mental model
 
 The goal: Be helpful without being annoying. Check in a few times a day, do useful background work, but respect quiet time.
 
+## 📁 파일 전송 규칙
+
+- 파일명에 반드시 **버전 번호**를 붙여라 (`signal-review-v1.html`, `v2`, `v3`...)
+- **같은 파일명으로 2번 이상 보내지 마라**
+- HTML 파일은 **로컬에서 열어서 확인한 후** 보내라
+- `undefined`, `NaN`, 빈 화면이 있으면 **절대 보내지 마라**
+
+## 🤖 서브에이전트 규칙
+
+- 서브에이전트에게 **PROJECT_STATUS.md 규칙을 반드시 함께 전달**하라
+- 서브에이전트 결과물을 유저에게 보내기 전에 **직접 확인**하라
+- **"완료!"라고 하기 전에 실제로 작동하는지 확인**하라
+- 파일을 2번 이상 수정해서 보내는 상황이면 **근본 원인부터 파악**하라
+
+## 🔬 파이프라인 규칙 (절대 변경 금지)
+
+- **시그널 8가지:** `STRONG_BUY` / `BUY` / `POSITIVE` / `HOLD` / `NEUTRAL` / `CONCERN` / `SELL` / `STRONG_SELL`
+- 이 8가지 외의 시그널 타입 (`PRICE_TARGET`, `MARKET_VIEW` 등) **절대 사용 금지**
+- **1영상 1종목 1시그널** (같은 영상 같은 종목은 맥락 합쳐서 1개, 다른 종목은 각각 OK)
+- **타임스탬프 필수** (발언 시점, 영상 시작부분 0초는 안 됨)
+- **파이프라인:** GPT-4o-mini(추출) → Claude Sonnet(검증) → 사람
+- **GPT-4o 2차 검증은 제거됨. 다시 넣지 마라**
+
+## 🔗 터널 규칙
+
+- 터널 링크가 바뀌면 이전 링크는 **"죽은 링크"**라고 명확히 말하고 새 링크만 보내라
+- **터널 링크를 3번 이상 보내지 마라.** 한 번만 보내고 기다려라
+
 ## Make It Yours
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.
