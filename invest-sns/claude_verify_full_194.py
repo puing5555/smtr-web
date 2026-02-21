@@ -195,7 +195,7 @@ def verify_signal_with_claude(client, signal, subtitle, signal_index):
 
     try:
         response = client.messages.create(
-            model="claude-3-5-sonnet-20241022",  # Claude 3.5 Sonnet (최신)
+            model="claude-3-haiku-20240307",  # 현재 사용 가능한 모델
             max_tokens=1000,
             temperature=0.1,
             messages=[
@@ -355,7 +355,7 @@ def save_results(results):
     claude_output = {
         'metadata': {
             'timestamp': str(datetime.now()),
-            'model_used': 'claude-3-5-sonnet-20241022',
+            'model_used': 'claude-3-haiku-20240307',
             'total_signals': len(results)
         },
         'summary': summary,
