@@ -1,56 +1,95 @@
-#!/usr/bin/env python3
-"""Build signal review HTML v2 - 8 signal types, Claude-only pipeline"""
-import json
-import os
+"""Signal Review Web Server - serves review page and stores results"""
+import json, os, sys
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+from urllib.parse import urlparse, parse_qs
 
-with open('_deduped_signals_8types_dated.json', 'r', encoding='utf-8') as f:
-    signals = json.load(f)
+REVIEW_FILE = os.path.join('smtr_data', 'corinpapa1106', '_review_results.json')
+SIGNALS_FILE = os.path.join('smtr_data', 'corinpapa1106', '_deduped_signals_8types_dated.json')
 
-# Load video metadata
-videos_meta = {}
-if os.path.exists('_all_videos.json'):
-    with open('_all_videos.json', 'r', encoding='utf-8') as f:
-        for v in json.load(f):
-            vid = v.get('video_id') or v.get('id', '')
-            videos_meta[vid] = v
+def load_reviews():
+    if os.path.exists(REVIEW_FILE):
+        with open(REVIEW_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return {}
 
-# Enrich signals with video metadata
-for sig in signals:
-    vid = sig.get('video_id', '')
-    meta = videos_meta.get(vid, {})
-    if not sig.get('title'):
-        sig['title'] = meta.get('title', vid)
-    if not sig.get('channel'):
-        sig['channel'] = meta.get('channel', '코린이 아빠')
+def save_reviews(data):
+    with open(REVIEW_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
 
-# Convert timestamp string to seconds
-def parse_timestamp(ts_str):
-    if not ts_str:
-        return None
-    ts_str = ts_str.strip('[] ')
-    parts = ts_str.split(':')
-    try:
-        if len(parts) == 2:
-            return int(parts[0]) * 60 + int(parts[1])
-        elif len(parts) == 3:
-            return int(parts[0]) * 3600 + int(parts[1]) * 60 + int(parts[2])
-    except:
-        pass
-    return None
+class ReviewHandler(SimpleHTTPRequestHandler):
+    def do_GET(self):
+        parsed = urlparse(self.path)
+        
+        if parsed.path == '/' or parsed.path == '/review':
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/html; charset=utf-8')
+            self.end_headers()
+            
+            with open(SIGNALS_FILE, 'r', encoding='utf-8') as f:
+                signals = json.load(f)
+            reviews = load_reviews()
+            
+            html = build_review_html(signals, reviews)
+            self.wfile.write(html.encode('utf-8'))
+            
+        elif parsed.path == '/api/reviews':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            self.wfile.write(json.dumps(load_reviews(), ensure_ascii=False).encode('utf-8'))
+            
+        elif parsed.path == '/api/signals':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            with open(SIGNALS_FILE, 'r', encoding='utf-8') as f:
+                self.wfile.write(f.read().encode('utf-8'))
+        else:
+            self.send_response(404)
+            self.end_headers()
+    
+    def do_POST(self):
+        parsed = urlparse(self.path)
+        content_length = int(self.headers.get('Content-Length', 0))
+        body = self.rfile.read(content_length).decode('utf-8')
+        
+        if parsed.path == '/api/review':
+            data = json.loads(body)
+            reviews = load_reviews()
+            sig_id = data.get('id', '')
+            reviews[sig_id] = {
+                'status': data.get('status', 'pending'),
+                'reason': data.get('reason', ''),
+                'time': data.get('time', '')
+            }
+            save_reviews(reviews)
+            
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            self.wfile.write(json.dumps({'ok': True}).encode('utf-8'))
+        else:
+            self.send_response(404)
+            self.end_headers()
+    
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        self.end_headers()
+    
+    def log_message(self, format, *args):
+        pass  # suppress logs
 
-for sig in signals:
-    ts = sig.get('timestamp', '')
-    sig['timestamp_seconds'] = parse_timestamp(ts)
-
-# Sort by date (newest first)
-signals.sort(key=lambda s: s.get('date', ''), reverse=True)
-
-from collections import Counter
-types = Counter(s['signal_type'] for s in signals)
-print(f'Building HTML with {len(signals)} signals')
-print(f'Types: {dict(types)}')
-
-html = '''<!DOCTYPE html>
+def build_review_html(signals, reviews):
+    # Escape </script> to prevent HTML parsing issues
+    signals_json = json.dumps(signals, ensure_ascii=False).replace('</script>', '<\\/script>')
+    reviews_json = json.dumps(reviews, ensure_ascii=False).replace('</script>', '<\\/script>')
+    
+    return '''<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -73,7 +112,7 @@ html = '''<!DOCTYPE html>
         .filter-label { font-size: 12px; font-weight: 600; color: #666; }
         .filter-select, .filter-input { padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; }
         .signals-grid { display: flex; flex-direction: column; gap: 16px; }
-        .signal-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 4px solid #ccc; }
+        .signal-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 4px solid #ccc; transition: opacity 0.3s; }
         .signal-card[data-signal="STRONG_BUY"] { border-left-color: #dc2626; }
         .signal-card[data-signal="BUY"] { border-left-color: #ef4444; }
         .signal-card[data-signal="POSITIVE"] { border-left-color: #f97316; }
@@ -82,7 +121,7 @@ html = '''<!DOCTYPE html>
         .signal-card[data-signal="CONCERN"] { border-left-color: #8b5cf6; }
         .signal-card[data-signal="SELL"] { border-left-color: #3b82f6; }
         .signal-card[data-signal="STRONG_SELL"] { border-left-color: #1d4ed8; }
-        .signal-card.hide { display: none; }
+        .signal-card.reviewed { opacity: 0.6; }
         .signal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
         .signal-asset { font-size: 18px; font-weight: 700; }
         .signal-type { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; color: white; }
@@ -98,15 +137,11 @@ html = '''<!DOCTYPE html>
         .meta { display: flex; gap: 16px; font-size: 13px; color: #666; margin-top: 8px; flex-wrap: wrap; }
         .meta a { color: #ef4444; text-decoration: none; }
         .meta a:hover { text-decoration: underline; }
-        .signal-actions { display: flex; gap: 8px; }
-        .btn { padding: 6px 14px; border-radius: 8px; border: 1px solid #ddd; background: white; cursor: pointer; font-size: 13px; }
+        .signal-actions { display: flex; gap: 8px; align-items: center; }
+        .btn { padding: 8px 16px; border-radius: 8px; border: 1px solid #ddd; background: white; cursor: pointer; font-size: 16px; }
         .btn:hover { background: #f0f0f0; }
-        .btn-submit { background: #667eea; color: white; padding: 12px 24px; border-radius: 12px; border: none; cursor: pointer; font-size: 16px; font-weight: 600; }
-        .btn-submit:hover { background: #5a6fd6; }
-        .submit-bar { background: white; border-radius: 12px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
-        .reject-reason { display: none; margin-top: 8px; }
-        .reject-reason textarea { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 8px; font-size: 13px; resize: vertical; min-height: 40px; }
-        .reject-reason.show { display: block; }
+        .btn.active-approve { background: #d1fae5; border-color: #10b981; }
+        .btn.active-reject { background: #fee2e2; border-color: #ef4444; }
         .review-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }
         .review-badge.pending { background: #fef3c7; color: #92400e; }
         .review-badge.approved { background: #d1fae5; color: #065f46; }
@@ -115,13 +150,20 @@ html = '''<!DOCTYPE html>
         .confidence.HIGH { background: #d1fae5; color: #065f46; }
         .confidence.MEDIUM { background: #fef3c7; color: #92400e; }
         .confidence.LOW { background: #fee2e2; color: #991b1b; }
+        .date-badge { font-size: 13px; color: #888; }
+        .reject-input { margin-top: 8px; display: none; }
+        .reject-input.show { display: flex; gap: 8px; align-items: center; }
+        .reject-input input { flex: 1; padding: 6px 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; }
+        .reject-input button { padding: 6px 12px; background: #ef4444; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; }
+        .saving { position: fixed; top: 20px; right: 20px; background: #10b981; color: white; padding: 8px 16px; border-radius: 8px; display: none; z-index: 999; }
     </style>
 </head>
 <body>
+    <div class="saving" id="saving-indicator">저장 중...</div>
     <div class="container">
         <div class="header">
             <h1>🔍 유튜버 시그널 검증 리뷰 v3</h1>
-            <p>파이프라인: Claude Sonnet(추출) → 사람(최종 검토)</p>
+            <p>파이프라인: Claude Sonnet(추출) → 사람(최종 검토) | 서버 연동</p>
         </div>
         
         <div class="stats" id="stats-container"></div>
@@ -156,23 +198,9 @@ html = '''<!DOCTYPE html>
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label class="filter-label">유튜버</label>
-                    <select class="filter-select" id="youtuber-filter"><option value="">전체 유튜버</option></select>
-                </div>
-                <div class="filter-group">
                     <label class="filter-label">검색</label>
                     <input type="text" class="filter-input" id="search-input" placeholder="내용 검색...">
                 </div>
-            </div>
-        </div>
-        
-        <div class="submit-bar">
-            <div>
-                <span style="font-size:14px;color:#666;">리뷰 완료 후 결과를 제출하세요</span>
-            </div>
-            <div style="display:flex;gap:8px;">
-                <button class="btn-submit" onclick="exportResults()">📋 결과 복사</button>
-                <button class="btn-submit" style="background:#10b981;" onclick="downloadResults()">💾 JSON 다운로드</button>
             </div>
         </div>
         
@@ -180,119 +208,102 @@ html = '''<!DOCTYPE html>
     </div>
 
     <script>
-''' + f'        const SIGNALS_DATA = {json.dumps(signals, ensure_ascii=False)};\n' + '''
+        const SIGNALS_DATA = ''' + signals_json + ''';
+        const REVIEWS = ''' + reviews_json + ''';
+        
         const SIGNAL_LABELS = {
             'STRONG_BUY': '강력매수', 'BUY': '매수', 'POSITIVE': '긍정',
             'HOLD': '보유', 'NEUTRAL': '중립', 'CONCERN': '우려',
             'SELL': '매도', 'STRONG_SELL': '강력매도'
         };
         
-        function loadReviews() {
-            try { return JSON.parse(localStorage.getItem('signal-reviews-v2') || '{}'); }
-            catch(e) { return {}; }
-        }
-        function saveReviews(r) {
-            try { localStorage.setItem('signal-reviews-v2', JSON.stringify(r)); }
-            catch(e) {}
-        }
+        function getReview(id) { return REVIEWS[id] || { status: 'pending' }; }
         
-        function setReview(id, status) {
-            const r = loadReviews();
-            if (status === 'rejected') {
-                const reason = prompt('거부 사유를 입력하세요 (선택사항):');
-                r[id] = { status, time: new Date().toLocaleString('ko-KR'), reason: reason || '' };
-            } else {
-                r[id] = { status, time: new Date().toLocaleString('ko-KR') };
+        async function setReview(id, status, reason) {
+            const time = new Date().toLocaleString('ko-KR');
+            REVIEWS[id] = { status, reason: reason || '', time };
+            
+            document.getElementById('saving-indicator').style.display = 'block';
+            try {
+                await fetch('/api/review', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id, status, reason: reason || '', time })
+                });
+            } catch(e) {
+                console.error('Save failed:', e);
             }
-            saveReviews(r);
+            document.getElementById('saving-indicator').style.display = 'none';
             render();
         }
         
-        function exportResults() {
-            const reviews = loadReviews();
-            const results = { approved: [], rejected: [], pending: [] };
-            SIGNALS_DATA.forEach(sig => {
-                const id = sig.video_id + '_' + sig.asset;
-                const review = reviews[id] || {};
-                const entry = { asset: sig.asset, signal_type: sig.signal_type, video_id: sig.video_id, date: sig.date || '' };
-                if (review.status === 'approved') results.approved.push(entry);
-                else if (review.status === 'rejected') results.rejected.push({ ...entry, reason: review.reason || '' });
-                else results.pending.push(entry);
-            });
-            const summary = '=== 리뷰 결과 ===\\n' +
-                '승인: ' + results.approved.length + '개\\n' +
-                '거부: ' + results.rejected.length + '개\\n' +
-                '대기: ' + results.pending.length + '개\\n\\n' +
-                '--- 거부 목록 ---\\n' +
-                results.rejected.map(r => r.asset + ' (' + r.signal_type + ') [' + r.video_id + '] 사유: ' + (r.reason || '없음')).join('\\n');
-            
-            navigator.clipboard.writeText(summary).then(() => {
-                alert('클립보드에 복사됨! 텔레그램에 붙여넣기 하세요.');
-            }).catch(() => {
-                const ta = document.createElement('textarea');
-                ta.value = summary;
-                document.body.appendChild(ta);
-                ta.select();
-                document.execCommand('copy');
-                document.body.removeChild(ta);
-                alert('클립보드에 복사됨!');
-            });
+        function approveSignal(id) {
+            setReview(id, 'approved');
         }
         
-        function downloadResults() {
-            const reviews = loadReviews();
-            const results = SIGNALS_DATA.map(sig => {
-                const id = sig.video_id + '_' + sig.asset;
-                const review = reviews[id] || { status: 'pending' };
-                return {
-                    asset: sig.asset,
-                    signal_type: sig.signal_type,
-                    content: sig.content,
-                    video_id: sig.video_id,
-                    date: sig.date || '',
-                    review_status: review.status,
-                    review_reason: review.reason || '',
-                    review_time: review.time || ''
-                };
-            });
-            const blob = new Blob([JSON.stringify(results, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'signal-review-results.json';
-            a.click();
-            URL.revokeObjectURL(url);
+        function rejectSignal(id) {
+            const el = document.getElementById('reject-' + CSS.escape(id));
+            if (el) {
+                el.classList.toggle('show');
+                if (el.classList.contains('show')) {
+                    el.querySelector('input').focus();
+                }
+            }
         }
         
-        function buildCard(sig, idx) {
+        function submitReject(id) {
+            const el = document.getElementById('reject-' + CSS.escape(id));
+            const reason = el ? el.querySelector('input').value : '';
+            setReview(id, 'rejected', reason);
+        }
+        
+        function escHtml(s) {
+            if (!s) return '';
+            return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+        }
+        
+        function parseTimestamp(ts) {
+            if (!ts) return null;
+            const parts = ts.replace(/[\\[\\] ]/g, '').split(':');
+            if (parts.length === 2) return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+            if (parts.length === 3) return parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2]);
+            return null;
+        }
+        
+        function buildCard(sig) {
             const id = sig.video_id + '_' + sig.asset;
-            const reviews = loadReviews();
-            const review = reviews[id] || { status: 'pending' };
-            const tsUrl = sig.timestamp_seconds ? 
-                'https://youtube.com/watch?v=' + sig.video_id + '&t=' + sig.timestamp_seconds : 
-                'https://youtube.com/watch?v=' + sig.video_id;
+            const review = getReview(id);
+            const ts = parseTimestamp(sig.timestamp);
+            const tsUrl = ts ? 'https://youtube.com/watch?v=' + sig.video_id + '&t=' + ts : 'https://youtube.com/watch?v=' + sig.video_id;
+            const reviewed = review.status !== 'pending' ? ' reviewed' : '';
+            const escId = id.replace(/'/g, "\\\\'");
             
-            return '<div class="signal-card" data-signal="' + sig.signal_type + '" data-asset="' + sig.asset + '" data-review="' + review.status + '" data-youtuber="' + (sig.channel || '') + '" data-index="' + idx + '">' +
+            return '<div class="signal-card' + reviewed + '" data-signal="' + sig.signal_type + '" data-review="' + review.status + '">' +
                 '<div class="signal-header">' +
                     '<div>' +
                         '<span class="signal-asset">' + sig.asset + '</span> ' +
                         '<span class="signal-type ' + sig.signal_type + '">' + (SIGNAL_LABELS[sig.signal_type] || sig.signal_type) + '</span> ' +
                         '<span class="confidence ' + (sig.confidence || '') + '">' + (sig.confidence || '') + '</span> ' +
                         '<span class="review-badge ' + review.status + '">' + ({pending:'검토대기',approved:'승인',rejected:'거부'}[review.status] || review.status) + '</span> ' +
-                        '<span style="font-size:13px;color:#888;">📅 ' + (sig.date || 'N/A') + '</span>' +
+                        '<span class="date-badge">📅 ' + (sig.date || 'N/A') + '</span>' +
                     '</div>' +
                     '<div class="signal-actions">' +
-                        '<button class="btn" onclick="setReview(\\\'' + id.replace(/'/g,"\\\\'") + '\\\', \\\'approved\\\')">✅</button>' +
-                        '<button class="btn" onclick="setReview(\\\'' + id.replace(/'/g,"\\\\'") + '\\\', \\\'rejected\\\')">❌</button>' +
+                        '<button class="btn' + (review.status==='approved'?' active-approve':'') + '" onclick="approveSignal(\\'' + escId + '\\')">✅</button>' +
+                        '<button class="btn' + (review.status==='rejected'?' active-reject':'') + '" onclick="rejectSignal(\\'' + escId + '\\')">❌</button>' +
                     '</div>' +
                 '</div>' +
-                '<div class="quote">"' + (sig.content || '') + '"</div>' +
+                '<div class="quote">"' + escHtml(sig.content || '') + '"</div>' +
                 '<div class="meta">' +
-                    '<span>📺 <a href="' + tsUrl + '" target="_blank">' + (sig.title || sig.video_id).substring(0, 50) + ' ▶️</a></span>' +
+                    '<span>📺 <a href="' + tsUrl + '" target="_blank">' + escHtml((sig.title || sig.video_id).substring(0, 50)) + ' ▶️</a></span>' +
                     '<span>⏱️ ' + (sig.timestamp || 'N/A') + '</span>' +
                     '<span>🎙️ ' + (sig.channel || '코린이 아빠') + '</span>' +
                 '</div>' +
-                (sig.context ? '<div style="margin-top:8px;font-size:13px;color:#666;">💡 ' + sig.context + '</div>' : '') +
+                (sig.context ? '<div style="margin-top:8px;font-size:13px;color:#666;">💡 ' + escHtml(sig.context) + '</div>' : '') +
+                (review.status === 'rejected' && review.reason ? '<div style="margin-top:8px;font-size:13px;color:#991b1b;">❌ 거부 사유: ' + review.reason + '</div>' : '') +
+                '<div class="reject-input" id="reject-' + id + '">' +
+                    '<input type="text" placeholder="거부 사유 입력..." onkeypress="if(event.key===\\'Enter\\')submitReject(\\'' + escId + '\\')">' +
+                    '<button onclick="submitReject(\\'' + escId + '\\')">거부</button>' +
+                '</div>' +
             '</div>';
         }
         
@@ -301,39 +312,29 @@ html = '''<!DOCTYPE html>
             const assetF = document.getElementById('asset-filter').value;
             const signalF = document.getElementById('signal-filter').value;
             const reviewF = document.getElementById('review-filter').value;
-            const youtuberF = document.getElementById('youtuber-filter').value;
             const searchF = document.getElementById('search-input').value.toLowerCase();
             
-            const reviews = loadReviews();
             let html = '';
-            let shown = 0;
+            let shown = 0, approved = 0, rejected = 0;
             
-            SIGNALS_DATA.forEach((sig, idx) => {
+            SIGNALS_DATA.forEach(sig => {
                 const id = sig.video_id + '_' + sig.asset;
-                const review = (reviews[id] || {}).status || 'pending';
+                const review = getReview(id);
+                
+                if (review.status === 'approved') approved++;
+                if (review.status === 'rejected') rejected++;
                 
                 if (assetF && sig.asset !== assetF) return;
                 if (signalF && sig.signal_type !== signalF) return;
-                if (reviewF && review !== reviewF) return;
-                if (youtuberF && (sig.channel || '') !== youtuberF) return;
+                if (reviewF && review.status !== reviewF) return;
                 if (searchF && !(sig.content || '').toLowerCase().includes(searchF) && 
-                    !(sig.asset || '').toLowerCase().includes(searchF) &&
-                    !(sig.context || '').toLowerCase().includes(searchF)) return;
+                    !(sig.asset || '').toLowerCase().includes(searchF)) return;
                 
-                html += buildCard(sig, idx);
+                html += buildCard(sig);
                 shown++;
             });
             
             container.innerHTML = html || '<div style="text-align:center;padding:40px;color:#666;">필터 조건에 맞는 시그널이 없습니다.</div>';
-            
-            // Update stats
-            const reviews2 = loadReviews();
-            let approved = 0, rejected = 0;
-            SIGNALS_DATA.forEach(sig => {
-                const r = (reviews2[sig.video_id + '_' + sig.asset] || {}).status;
-                if (r === 'approved') approved++;
-                if (r === 'rejected') rejected++;
-            });
             
             const statsHtml = [
                 { n: SIGNALS_DATA.length, l: '총 시그널' },
@@ -350,11 +351,7 @@ html = '''<!DOCTYPE html>
             const af = document.getElementById('asset-filter');
             assets.forEach(a => { const o = document.createElement('option'); o.value = a; o.textContent = a; af.appendChild(o); });
             
-            const youtubers = [...new Set(SIGNALS_DATA.map(s => s.channel || '코린이 아빠'))].sort();
-            const yf = document.getElementById('youtuber-filter');
-            youtubers.forEach(y => { const o = document.createElement('option'); o.value = y; o.textContent = y; yf.appendChild(o); });
-            
-            ['asset-filter','signal-filter','review-filter','youtuber-filter'].forEach(id => 
+            ['asset-filter','signal-filter','review-filter'].forEach(id => 
                 document.getElementById(id).addEventListener('change', render));
             document.getElementById('search-input').addEventListener('input', render);
         }
@@ -367,7 +364,8 @@ html = '''<!DOCTYPE html>
 </body>
 </html>'''
 
-output_path = os.path.join('..', '..', 'signal-review-v3.html')
-with open(output_path, 'w', encoding='utf-8') as f:
-    f.write(html)
-print(f'Saved to {output_path}')
+if __name__ == '__main__':
+    port = 8899
+    server = HTTPServer(('0.0.0.0', port), ReviewHandler)
+    print(f'Review server running on http://localhost:{port}', flush=True)
+    server.serve_forever()

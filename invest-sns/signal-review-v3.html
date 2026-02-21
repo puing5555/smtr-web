@@ -49,6 +49,12 @@
         .signal-actions { display: flex; gap: 8px; }
         .btn { padding: 6px 14px; border-radius: 8px; border: 1px solid #ddd; background: white; cursor: pointer; font-size: 13px; }
         .btn:hover { background: #f0f0f0; }
+        .btn-submit { background: #667eea; color: white; padding: 12px 24px; border-radius: 12px; border: none; cursor: pointer; font-size: 16px; font-weight: 600; }
+        .btn-submit:hover { background: #5a6fd6; }
+        .submit-bar { background: white; border-radius: 12px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+        .reject-reason { display: none; margin-top: 8px; }
+        .reject-reason textarea { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 8px; font-size: 13px; resize: vertical; min-height: 40px; }
+        .reject-reason.show { display: block; }
         .review-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }
         .review-badge.pending { background: #fef3c7; color: #92400e; }
         .review-badge.approved { background: #d1fae5; color: #065f46; }
@@ -108,6 +114,16 @@
             </div>
         </div>
         
+        <div class="submit-bar">
+            <div>
+                <span style="font-size:14px;color:#666;">리뷰 완료 후 결과를 제출하세요</span>
+            </div>
+            <div style="display:flex;gap:8px;">
+                <button class="btn-submit" onclick="exportResults()">📋 결과 복사</button>
+                <button class="btn-submit" style="background:#10b981;" onclick="downloadResults()">💾 JSON 다운로드</button>
+            </div>
+        </div>
+        
         <div class="signals-grid" id="signals-container"></div>
     </div>
 
@@ -131,9 +147,70 @@
         
         function setReview(id, status) {
             const r = loadReviews();
-            r[id] = { status, time: new Date().toLocaleString('ko-KR') };
+            if (status === 'rejected') {
+                const reason = prompt('거부 사유를 입력하세요 (선택사항):');
+                r[id] = { status, time: new Date().toLocaleString('ko-KR'), reason: reason || '' };
+            } else {
+                r[id] = { status, time: new Date().toLocaleString('ko-KR') };
+            }
             saveReviews(r);
             render();
+        }
+        
+        function exportResults() {
+            const reviews = loadReviews();
+            const results = { approved: [], rejected: [], pending: [] };
+            SIGNALS_DATA.forEach(sig => {
+                const id = sig.video_id + '_' + sig.asset;
+                const review = reviews[id] || {};
+                const entry = { asset: sig.asset, signal_type: sig.signal_type, video_id: sig.video_id, date: sig.date || '' };
+                if (review.status === 'approved') results.approved.push(entry);
+                else if (review.status === 'rejected') results.rejected.push({ ...entry, reason: review.reason || '' });
+                else results.pending.push(entry);
+            });
+            const summary = '=== 리뷰 결과 ===\n' +
+                '승인: ' + results.approved.length + '개\n' +
+                '거부: ' + results.rejected.length + '개\n' +
+                '대기: ' + results.pending.length + '개\n\n' +
+                '--- 거부 목록 ---\n' +
+                results.rejected.map(r => r.asset + ' (' + r.signal_type + ') [' + r.video_id + '] 사유: ' + (r.reason || '없음')).join('\n');
+            
+            navigator.clipboard.writeText(summary).then(() => {
+                alert('클립보드에 복사됨! 텔레그램에 붙여넣기 하세요.');
+            }).catch(() => {
+                const ta = document.createElement('textarea');
+                ta.value = summary;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                alert('클립보드에 복사됨!');
+            });
+        }
+        
+        function downloadResults() {
+            const reviews = loadReviews();
+            const results = SIGNALS_DATA.map(sig => {
+                const id = sig.video_id + '_' + sig.asset;
+                const review = reviews[id] || { status: 'pending' };
+                return {
+                    asset: sig.asset,
+                    signal_type: sig.signal_type,
+                    content: sig.content,
+                    video_id: sig.video_id,
+                    date: sig.date || '',
+                    review_status: review.status,
+                    review_reason: review.reason || '',
+                    review_time: review.time || ''
+                };
+            });
+            const blob = new Blob([JSON.stringify(results, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'signal-review-results.json';
+            a.click();
+            URL.revokeObjectURL(url);
         }
         
         function buildCard(sig, idx) {
