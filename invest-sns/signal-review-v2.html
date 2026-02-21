@@ -102,6 +102,14 @@
                     <select class="filter-select" id="youtuber-filter"><option value="">전체 유튜버</option></select>
                 </div>
                 <div class="filter-group">
+                    <label class="filter-label">정렬</label>
+                    <select class="filter-select" id="sort-select">
+                        <option value="video">영상별</option>
+                        <option value="asset">종목명순</option>
+                        <option value="signal">시그널타입순</option>
+                    </select>
+                </div>
+                <div class="filter-group">
                     <label class="filter-label">검색</label>
                     <input type="text" class="filter-input" id="search-input" placeholder="내용 검색...">
                 </div>
@@ -187,8 +195,14 @@
             const reviews = loadReviews();
             let html = '';
             let shown = 0;
+            const sortBy = document.getElementById('sort-select').value;
+            const signalOrder = {'STRONG_BUY':0,'BUY':1,'POSITIVE':2,'HOLD':3,'NEUTRAL':4,'CONCERN':5,'SELL':6,'STRONG_SELL':7};
             
-            SIGNALS_DATA.forEach((sig, idx) => {
+            const indexed = SIGNALS_DATA.map((sig, idx) => ({sig, idx}));
+            if (sortBy === 'asset') indexed.sort((a,b) => a.sig.asset.localeCompare(b.sig.asset));
+            else if (sortBy === 'signal') indexed.sort((a,b) => (signalOrder[a.sig.signal_type]||4) - (signalOrder[b.sig.signal_type]||4));
+            
+            indexed.forEach(({sig, idx}) => {
                 const id = sig.video_id + '_' + sig.asset;
                 const review = (reviews[id] || {}).status || 'pending';
                 
@@ -256,7 +270,7 @@
             const yf = document.getElementById('youtuber-filter');
             youtubers.forEach(y => { const o = document.createElement('option'); o.value = y; o.textContent = y; yf.appendChild(o); });
             
-            ['asset-filter','signal-filter','review-filter','youtuber-filter'].forEach(id => 
+            ['asset-filter','signal-filter','review-filter','youtuber-filter','sort-select'].forEach(id => 
                 document.getElementById(id).addEventListener('change', render));
             document.getElementById('search-input').addEventListener('input', render);
         }
