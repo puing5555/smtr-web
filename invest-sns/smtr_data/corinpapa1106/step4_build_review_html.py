@@ -472,7 +472,7 @@ def create_html_template():
                             <div class="stage-title">📝 1차: GPT-4o-mini 추출</div>
                             <div class="stage-content">
                                 <strong>종목:</strong> ${signal.asset}<br>
-                                <strong>시그널:</strong> ${signal.signal_type}<br>
+                                <strong>시그널:</strong> ${getSignalLabel(signal.signal_type)}<br>
                                 <strong>신뢰도:</strong> ${signal.confidence}<br>
                                 <strong>맥락:</strong> ${signal.context || 'N/A'}
                             </div>
@@ -535,12 +535,15 @@ def create_html_template():
         
         function extractCorrectedSignal(correction) {
             if (!correction) return '수정';
-            // "신호: XX" 또는 "시그널: XX" 패턴 찾기
-            const m = correction.match(/(?:신호|시그널|Signal)[:\s]+([^\n,]+)/i);
-            if (m) return m[1].trim();
-            // "→ XX" 패턴
-            const m2 = correction.match(/→\s*([^\n,]+)/);
-            if (m2) return m2[1].trim();
+            const text = correction.toLowerCase();
+            if (text.includes('강력 매수') || text.includes('strong buy') || text.includes('strong-buy')) return '강력매수';
+            if (text.includes('강력 매도') || text.includes('strong sell') || text.includes('strong-sell')) return '강력매도';
+            if (text.includes('매수') || text.includes('buy')) return '매수';
+            if (text.includes('매도') || text.includes('sell')) return '매도';
+            if (text.includes('긍정') || text.includes('positive')) return '긍정';
+            if (text.includes('우려') || text.includes('concern') || text.includes('부정') || text.includes('negative')) return '우려';
+            if (text.includes('보유') || text.includes('hold')) return '보유';
+            if (text.includes('중립') || text.includes('neutral') || text.includes('전망') || text.includes('view')) return '중립';
             return '수정';
         }
         
