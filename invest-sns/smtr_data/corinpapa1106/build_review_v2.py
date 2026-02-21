@@ -3,7 +3,7 @@
 import json
 import os
 
-with open('_deduped_signals_8types.json', 'r', encoding='utf-8') as f:
+with open('_deduped_signals_8types_dated.json', 'r', encoding='utf-8') as f:
     signals = json.load(f)
 
 # Load video metadata
