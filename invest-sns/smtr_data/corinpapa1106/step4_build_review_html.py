@@ -197,10 +197,14 @@ def create_html_template():
             text-transform: uppercase;
         }
         
-        .signal-type.BUY { background: #dcfce7; color: #166534; }
-        .signal-type.SELL { background: #fecaca; color: #dc2626; }
-        .signal-type.HOLD { background: #fef3c7; color: #a16207; }
-        .signal-type.CONCERN { background: #e0e7ff; color: #3730a3; }
+        .signal-type.strong-buy { background: #d1fae5; color: #065f46; }
+        .signal-type.buy { background: #dcfce7; color: #166534; }
+        .signal-type.positive { background: #dbeafe; color: #1e40af; }
+        .signal-type.hold { background: #e0f2fe; color: #0369a1; }
+        .signal-type.neutral { background: #f1f5f9; color: #475569; }
+        .signal-type.concern { background: #fef3c7; color: #a16207; }
+        .signal-type.sell { background: #fed7aa; color: #c2410c; }
+        .signal-type.strong-sell { background: #fecaca; color: #dc2626; }
         
         .signal-actions {
             display: flex;
@@ -364,10 +368,14 @@ def create_html_template():
                     <label class="filter-label">시그널 타입</label>
                     <select class="filter-select" id="signal-filter">
                         <option value="">전체 시그널</option>
-                        <option value="BUY">매수</option>
-                        <option value="SELL">매도</option>
-                        <option value="HOLD">보유</option>
-                        <option value="CONCERN">우려</option>
+                        <option value="strong-buy">강력매수</option>
+                        <option value="buy">매수</option>
+                        <option value="positive">긍정</option>
+                        <option value="hold">보유</option>
+                        <option value="neutral">중립</option>
+                        <option value="concern">우려</option>
+                        <option value="sell">매도</option>
+                        <option value="strong-sell">강력매도</option>
                     </select>
                 </div>
                 <div class="filter-group">
@@ -441,11 +449,11 @@ def create_html_template():
             
             return `
                 <div class="signal-card" data-asset="${signal.asset}" data-signal="${signal.signal_type}" 
-                     data-review="${reviewStatus}" data-claude="${claude.judgment || 'none'}" data-youtuber="${signal.title || '코린이 아빠'}" data-index="${index}">
+                     data-review="${reviewStatus}" data-claude="${claude.judgment || 'none'}" data-youtuber="${signal.channel || '코린이 아빠'}" data-index="${index}">
                     <div class="signal-header">
                         <div class="signal-meta">
                             <div class="signal-asset">${signal.asset} <span style="font-size:12px;font-weight:400">${signal.video_id ? '<a href="https://youtube.com/watch?v=' + signal.video_id + (signal.timestamp_seconds ? '&t=' + signal.timestamp_seconds : '') + '" target="_blank" style="color:#ef4444;text-decoration:none">▶ 영상보기</a>' : ''}</span></div>
-                            <span class="signal-type ${signal.signal_type}">${signal.signal_type}</span>
+                            <span class="signal-type ${signal.signal_type}">${getSignalLabel(signal.signal_type)}</span>
                             <span class="review-status status-${reviewStatus}">${getStatusLabel(reviewStatus)}</span>
                         </div>
                         <div class="signal-actions">
@@ -473,10 +481,9 @@ def create_html_template():
                         <div class="stage">
                             <div class="stage-title">🔍 2차: Claude 검증</div>
                             <div class="stage-content">
-                                <strong>판정:</strong> ${getJudgmentKorean(claude.judgment)}<br>
+                                <strong>판정:</strong> ${getJudgmentKorean(claude.judgment)} ${claude.judgment === 'corrected' ? '(' + signal.signal_type + ' → ' + extractCorrectedSignal(claude.correction) + ')' : ''}<br>
                                 <strong>사유:</strong> ${claude.reason || 'N/A'}<br>
                                 ${claude.correction ? `<strong>수정의견:</strong> ${claude.correction}<br>` : ''}
-                                ${claude.corrected_signal ? `<strong>변경:</strong> ${signal.signal_type} → ${claude.corrected_signal}<br>` : ''}
                                 <div class="confidence-bar">
                                     <div class="confidence-fill" style="width: ${(claude.confidence || 0) * 100}%"></div>
                                 </div>
@@ -515,6 +522,26 @@ def create_html_template():
             }
             
             return `GPT-4o 검증: ${verifications.length}개 검증됨`;
+        }
+        
+        function getSignalLabel(type) {
+            const labels = {
+                'strong-buy': '강력매수', 'buy': '매수', 'positive': '긍정',
+                'hold': '보유', 'neutral': '중립', 'concern': '우려',
+                'sell': '매도', 'strong-sell': '강력매도'
+            };
+            return labels[type] || type;
+        }
+        
+        function extractCorrectedSignal(correction) {
+            if (!correction) return '수정';
+            // "신호: XX" 또는 "시그널: XX" 패턴 찾기
+            const m = correction.match(/(?:신호|시그널|Signal)[:\s]+([^\n,]+)/i);
+            if (m) return m[1].trim();
+            // "→ XX" 패턴
+            const m2 = correction.match(/→\s*([^\n,]+)/);
+            if (m2) return m2[1].trim();
+            return '수정';
         }
         
         function getJudgmentKorean(judgment) {
@@ -620,7 +647,7 @@ def create_html_template():
             });
             
             // 유튜버 필터 옵션 생성
-            const youtubers = [...new Set(SIGNALS_DATA.map(s => s.title || '코린이 아빠'))].sort();
+            const youtubers = [...new Set(SIGNALS_DATA.map(s => s.channel || '코린이 아빠'))].sort();
             const youtuberFilter = document.getElementById('youtuber-filter');
             youtubers.forEach(yt => {
                 const option = document.createElement('option');
