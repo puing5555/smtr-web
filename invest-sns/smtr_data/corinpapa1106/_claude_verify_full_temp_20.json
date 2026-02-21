@@ -1192,11 +1192,11 @@
     ],
     "merged_context": "기관의 보유량 증가에 따른 이더리움의 가격 상승 가능성; 이더리움의 업데이트와 리더십에 대한 긍정적인 전망",
     "claude_verification": {
-      "judgment": "error",
-      "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpv91ou7dH4eGK4Whr9'}",
-      "correction": null,
-      "verification_timestamp": "2026-02-21T14:33:49.958539"
+      "judgment": "corrected",
+      "confidence": 0.7,
+      "reason": "",
+      "correction": "",
+      "verification_timestamp": "2026-02-21T14:36:44.222538"
     }
   },
   {
@@ -1214,11 +1214,11 @@
     ],
     "merged_context": "BM에 대한 기관 투자자들의 긍정적인 움직임; BM에 대한 기관 투자자들의 매입 증가",
     "claude_verification": {
-      "judgment": "error",
-      "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpvALvXA3p8jyoPeoqE'}",
-      "correction": null,
-      "verification_timestamp": "2026-02-21T14:33:50.313570"
+      "judgment": "corrected",
+      "confidence": 0.6,
+      "reason": "",
+      "correction": "",
+      "verification_timestamp": "2026-02-21T14:36:48.274287"
     }
   },
   {
@@ -1237,11 +1237,11 @@
     ],
     "merged_context": "리플의 자금 확보 방안에 대한 논의; 개인 투자자의 포트폴리오 비중에 대한 언급; 리플의 가격 변동성과 관련된 논의 중",
     "claude_verification": {
-      "judgment": "error",
-      "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpvBshWsdHZbFMHZNWe'}",
-      "correction": null,
-      "verification_timestamp": "2026-02-21T14:33:50.659154"
+      "judgment": "corrected",
+      "confidence": 0.7,
+      "reason": "자막에서 XRP에 대한 논의가 있었으나, 추출된 시그널 \"SELL\"은 자막 내용과 일치하지 않습니다. 자막에서는 XRP의 가격 변동성에 대해 언급하고 있으며, 특정 매도 신호를 제시하고 있지 않습니다.",
+      "correction": "",
+      "verification_timestamp": "2026-02-21T14:36:51.724471"
     }
   },
   {
@@ -1253,11 +1253,11 @@
     "video_id": "bLxyJJd_oTg",
     "title": "Is Ripple Ditching XRP Now?",
     "claude_verification": {
-      "judgment": "error",
-      "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpvDMVyq5aK88G15tHy'}",
-      "correction": null,
-      "verification_timestamp": "2026-02-21T14:33:50.984774"
+      "judgment": "corrected",
+      "confidence": 0.7,
+      "reason": "",
+      "correction": "",
+      "verification_timestamp": "2026-02-21T14:36:55.880375"
     }
   },
   {
@@ -1269,11 +1269,11 @@
     "video_id": "bm_O5iqGiFg",
     "title": "US Treasury bonds rise above Canton (a clear signal of full-scale operation in 2026)",
     "claude_verification": {
-      "judgment": "error",
-      "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpvEjr6uj84nfTkUXCG'}",
+      "judgment": "rejected",
+      "confidence": 0.2,
+      "reason": "자막에서 테슬라 주식에 대한 투자 의견이나 매수/매도 신호가 명확하게 언급되지 않았습니다. 자막에서는 테슬라에 대한 언급이 없으며, 주식 투자와 관련된 내용도 찾기 어렵습니다. 따라서 추출된 투자 시그널은 자막 내용과 일치하지 않습니다.",
       "correction": null,
-      "verification_timestamp": "2026-02-21T14:33:51.286430"
+      "verification_timestamp": "2026-02-21T14:36:58.756984"
     }
   },
   {
@@ -1285,11 +1285,11 @@
     "video_id": "bm_O5iqGiFg",
     "title": "US Treasury bonds rise above Canton (a clear signal of full-scale operation in 2026)",
     "claude_verification": {
-      "judgment": "error",
-      "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpvG1zUNHA4AGFCDfxU'}",
+      "judgment": "rejected",
+      "confidence": 0.2,
+      "reason": "자막에서 팔란티어 종목과 투자 의견이 언급되지 않았습니다. 대신 캔톤 코인, 이더리움 등 다른 주제에 대해 언급하고 있습니다. 추출된 시그널은 자막 내용과 일치하지 않습니다.",
       "correction": null,
-      "verification_timestamp": "2026-02-21T14:33:51.600952"
+      "verification_timestamp": "2026-02-21T14:37:12.492984"
     }
   },
   {
@@ -1301,11 +1301,11 @@
     "video_id": "bm_O5iqGiFg",
     "title": "US Treasury bonds rise above Canton (a clear signal of full-scale operation in 2026)",
     "claude_verification": {
-      "judgment": "error",
-      "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpvHNrB16DVSmtk6C2V'}",
-      "correction": null,
-      "verification_timestamp": "2026-02-21T14:33:51.917443"
+      "judgment": "corrected",
+      "confidence": 0.7,
+      "reason": "",
+      "correction": "",
+      "verification_timestamp": "2026-02-21T14:37:19.464107"
     }
   },
   {
@@ -1323,11 +1323,11 @@
     ],
     "merged_context": "XRP의 가격 상승 가능성에 대한 논의; 크립토 3법 통과와 XRP의 미래에 대한 전망",
     "claude_verification": {
-      "judgment": "error",
-      "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpvJixio2zKNabD5idj'}",
+      "judgment": "confirmed",
+      "confidence": 0.9,
+      "reason": "자막에서 XRP 종목과 상승 전망이 언급되었고, 추출된 BUY 신호와 내용이 일치합니다. 인용 내용도 정확합니다.",
       "correction": null,
-      "verification_timestamp": "2026-02-21T14:33:52.231644"
+      "verification_timestamp": "2026-02-21T14:37:21.583409"
     }
   },
   {
@@ -1345,11 +1345,11 @@
     ],
     "merged_context": "스테이블 코인과 RW 시대에 대한 언급; 이더리움의 가치와 미래 전망에 대한 논의 중",
     "claude_verification": {
-      "judgment": "error",
-      "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpvL4pRGvbYaPbNp3NN'}",
+      "judgment": "confirmed",
+      "confidence": 0.9,
+      "reason": "",
       "correction": null,
-      "verification_timestamp": "2026-02-21T14:33:52.546148"
+      "verification_timestamp": "2026-02-21T14:37:24.514960"
     }
   },
   {
@@ -1361,11 +1361,11 @@
     "video_id": "CutCWEEnuEU",
     "title": "Why the National Pension Service Can't Hold Bitcoin (BMNR)",
     "claude_verification": {
-      "judgment": "error",
-      "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpvMQgbzy5W342dTgT8'}",
-      "correction": null,
-      "verification_timestamp": "2026-02-21T14:33:52.852015"
+      "judgment": "corrected",
+      "confidence": 0.8,
+      "reason": "",
+      "correction": "",
+      "verification_timestamp": "2026-02-21T14:37:27.970835"
     }
   },
   {
@@ -1377,11 +1377,11 @@
     "video_id": "CutCWEEnuEU",
     "title": "Why the National Pension Service Can't Hold Bitcoin (BMNR)",
     "claude_verification": {
-      "judgment": "error",
-      "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpvNj4bwVrqCbz2RXhB'}",
-      "correction": null,
-      "verification_timestamp": "2026-02-21T14:33:53.204061"
+      "judgment": "corrected",
+      "confidence": 0.7,
+      "reason": "자막에서 국민연금이 비트코인(MSTR)에 투자하지 않는다는 내용이 언급되었습니다. 따라서 추출된 시그널 \"국민연금이 MSTR에 투자를 했다\"는 정확하지 않습니다.",
+      "correction": "",
+      "verification_timestamp": "2026-02-21T14:37:30.994252"
     }
   },
   {
@@ -1393,11 +1393,11 @@
     "video_id": "CutCWEEnuEU",
     "title": "Why the National Pension Service Can't Hold Bitcoin (BMNR)",
     "claude_verification": {
-      "judgment": "error",
-      "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpvQK4MfTAS4GVP7oP1'}",
-      "correction": null,
-      "verification_timestamp": "2026-02-21T14:33:53.537932"
+      "judgment": "corrected",
+      "confidence": 0.7,
+      "reason": "",
+      "correction": "",
+      "verification_timestamp": "2026-02-21T14:37:34.743345"
     }
   },
   {
@@ -1415,11 +1415,11 @@
     ],
     "merged_context": "장기 홀더들의 심리적 약점을 월가가 포착하고 있다는 내용; 비트코인의 가격 전망에 대한 전문가 의견",
     "claude_verification": {
-      "judgment": "error",
-      "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpvRfB3z3wwcYjxLCt3'}",
-      "correction": null,
-      "verification_timestamp": "2026-02-21T14:33:53.867336"
+      "judgment": "corrected",
+      "confidence": 0.7,
+      "reason": "",
+      "correction": "",
+      "verification_timestamp": "2026-02-21T14:37:38.368214"
     }
   },
   {
@@ -1431,11 +1431,11 @@
     "video_id": "dD0eVCXS7fg",
     "title": "Why aren't Ethereum and Bitcoin going? The culprit is Bitcoin.",
     "claude_verification": {
-      "judgment": "error",
-      "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpvT4WZ4zVdi3sYczHc'}",
-      "correction": null,
-      "verification_timestamp": "2026-02-21T14:33:54.205745"
+      "judgment": "corrected",
+      "confidence": 0.8,
+      "reason": "",
+      "correction": "",
+      "verification_timestamp": "2026-02-21T14:37:41.449022"
     }
   },
   {
@@ -1454,11 +1454,11 @@
     ],
     "merged_context": "비트코인 가격 결정 구조의 변화에 대한 논의 중.; 글로벌 중앙은행의 유동성 공급이 비트코인 가격에 긍정적인 영향을 미칠 것이라는 분석.; 전문가 라울팔의 의견을 인용하며 비트코인과 글로벌 M2의 상관관계를 설명하는 중.",
     "claude_verification": {
-      "judgment": "error",
-      "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpvUWpPJEaKeekkX4Yn'}",
-      "correction": null,
-      "verification_timestamp": "2026-02-21T14:33:54.527227"
+      "judgment": "corrected",
+      "confidence": 0.7,
+      "reason": "",
+      "correction": "",
+      "verification_timestamp": "2026-02-21T14:37:45.714943"
     }
   },
   {
@@ -1476,11 +1476,11 @@
     ],
     "merged_context": "XRP의 미래 가능성과 스테이블 코인 시장의 변화에 대한 분석; XRP의 가격 전망과 관련된 개인적인 투자 결정",
     "claude_verification": {
-      "judgment": "error",
-      "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpvVtRHUapucTjXsHGy'}",
+      "judgment": "confirmed",
+      "confidence": 0.8,
+      "reason": "",
       "correction": null,
-      "verification_timestamp": "2026-02-21T14:33:54.868239"
+      "verification_timestamp": "2026-02-21T14:37:49.212882"
     }
   },
   {
@@ -1492,11 +1492,11 @@
     "video_id": "e7Pd9dn7uic",
     "title": "Buffett is addicted to the past, Son Jeong-ui is addicted to the future. What's your investment ...,618.0\nZXrCra_MaQ4,JP Morgan's Cockroach Debate - Why Cockroaches?,529.0\n2FIG4P52yxA,Real Inflation Seen in Hawaii - This Is How America Pays Off Debt",
     "claude_verification": {
-      "judgment": "error",
-      "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpvXPTSesefJyZg9gL2'}",
+      "judgment": "confirmed",
+      "confidence": 0.9,
+      "reason": "자막에서 실제로 애플 종목과 버핏의 투자 의견이 언급되었으며, 추출된 신호 \"HOLD\"와 자막 내용이 일치합니다. 인용 내용도 정확하게 반영되었습니다.",
       "correction": null,
-      "verification_timestamp": "2026-02-21T14:33:55.323987"
+      "verification_timestamp": "2026-02-21T14:37:51.483819"
     }
   },
   {
@@ -1508,11 +1508,11 @@
     "video_id": "e7Pd9dn7uic",
     "title": "Buffett is addicted to the past, Son Jeong-ui is addicted to the future. What's your investment ...,618.0\nZXrCra_MaQ4,JP Morgan's Cockroach Debate - Why Cockroaches?,529.0\n2FIG4P52yxA,Real Inflation Seen in Hawaii - This Is How America Pays Off Debt",
     "claude_verification": {
-      "judgment": "error",
-      "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpvZHZL8D65KS4bRoSF'}",
+      "judgment": "confirmed",
+      "confidence": 0.9,
+      "reason": "자막에서 코카콜라가 언급되었고, 장기 투자에 적합한 기업으로 평가되었습니다. 추출된 투자 시그널인 \"HOLD\"는 자막 내용과 일치합니다. 인용 내용도 정확합니다.",
       "correction": null,
-      "verification_timestamp": "2026-02-21T14:33:55.658591"
+      "verification_timestamp": "2026-02-21T14:37:53.819604"
     }
   },
   {
@@ -1524,11 +1524,11 @@
     "video_id": "e7Pd9dn7uic",
     "title": "Buffett is addicted to the past, Son Jeong-ui is addicted to the future. What's your investment ...,618.0\nZXrCra_MaQ4,JP Morgan's Cockroach Debate - Why Cockroaches?,529.0\n2FIG4P52yxA,Real Inflation Seen in Hawaii - This Is How America Pays Off Debt",
     "claude_verification": {
-      "judgment": "error",
-      "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpvaiP6N2dK9cStP3Xp'}",
-      "correction": null,
-      "verification_timestamp": "2026-02-21T14:33:55.979743"
+      "judgment": "corrected",
+      "confidence": 0.6,
+      "reason": "자막에서 쿠팡에 대한 언급은 없었습니다. 대신 버핏의 포트폴리오에 대한 내용이 주를 이루고 있습니다. 따라서 추출된 시그널은 자막 내용과 일치하지 않습니다.",
+      "correction": "",
+      "verification_timestamp": "2026-02-21T14:37:56.824793"
     }
   },
   {
@@ -1540,11 +1540,11 @@
     "video_id": "e7Pd9dn7uic",
     "title": "Buffett is addicted to the past, Son Jeong-ui is addicted to the future. What's your investment ...,618.0\nZXrCra_MaQ4,JP Morgan's Cockroach Debate - Why Cockroaches?,529.0\n2FIG4P52yxA,Real Inflation Seen in Hawaii - This Is How America Pays Off Debt",
     "claude_verification": {
-      "judgment": "error",
-      "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpvc5V5oRE2unoBixWX'}",
+      "judgment": "rejected",
+      "confidence": 0.2,
+      "reason": "자막에서 AI 관련 기업에 대한 투자 의견이나 손정희의 투자 포트폴리오 언급이 없습니다. 대신 버핏의 포트폴리오에 대한 내용이 주를 이루고 있습니다. 따라서 추출된 시그널은 자막 내용과 일치하지 않습니다.",
       "correction": null,
-      "verification_timestamp": "2026-02-21T14:33:56.288046"
+      "verification_timestamp": "2026-02-21T14:37:59.349194"
     }
   }
 ]
