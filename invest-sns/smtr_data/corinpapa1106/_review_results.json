@@ -318,5 +318,20 @@
     "status": "approved",
     "reason": "",
     "time": "2026. 2. 22. 오전 1:19:24"
+  },
+  "azTr1P5of4E_이더리움": {
+    "status": "rejected",
+    "reason": "이건 긍정이 아니라 중립아닌가?긍정->한계",
+    "time": "2026. 2. 22. 오전 1:20:15"
+  },
+  "haqNGCpQKDg_비트코인": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:20:18"
+  },
+  "haqNGCpQKDg_알트코인": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:20:21"
   }
 }
