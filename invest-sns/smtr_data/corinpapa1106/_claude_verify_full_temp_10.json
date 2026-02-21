@@ -1194,9 +1194,9 @@
     "claude_verification": {
       "judgment": "error",
       "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpx7nCZZUy796TahHtk'}",
+      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpyC5gntCyeaDzufWN1'}",
       "correction": null,
-      "verification_timestamp": "2026-02-21T14:34:16.798665"
+      "verification_timestamp": "2026-02-21T14:34:31.513418"
     }
   },
   {
@@ -1216,9 +1216,9 @@
     "claude_verification": {
       "judgment": "error",
       "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpx96a1YnFK5mrb29zv'}",
+      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpyE21xg9JjfgKbNfQC'}",
       "correction": null,
-      "verification_timestamp": "2026-02-21T14:34:17.099146"
+      "verification_timestamp": "2026-02-21T14:34:31.828005"
     }
   },
   {
@@ -1239,9 +1239,9 @@
     "claude_verification": {
       "judgment": "error",
       "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpxAPToiu1ZEyCSxxFr'}",
+      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpyFN8affVeZMqPEErQ'}",
       "correction": null,
-      "verification_timestamp": "2026-02-21T14:34:17.419339"
+      "verification_timestamp": "2026-02-21T14:34:32.140183"
     }
   },
   {
@@ -1255,9 +1255,9 @@
     "claude_verification": {
       "judgment": "error",
       "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpxBmJufyZ3xWAom8Xb'}",
+      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpyGhFUbWBNMtccDvXm'}",
       "correction": null,
-      "verification_timestamp": "2026-02-21T14:34:17.726959"
+      "verification_timestamp": "2026-02-21T14:34:32.474392"
     }
   },
   {
@@ -1271,9 +1271,9 @@
     "claude_verification": {
       "judgment": "error",
       "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpxD5w6ysE5r98A67uv'}",
+      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpyJ85NpACst3pYrC8D'}",
       "correction": null,
-      "verification_timestamp": "2026-02-21T14:34:18.040731"
+      "verification_timestamp": "2026-02-21T14:34:32.788212"
     }
   },
   {
@@ -1287,9 +1287,9 @@
     "claude_verification": {
       "judgment": "error",
       "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpxEQZAHDwcoGKd5tjt'}",
+      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpyKTwSKkmpRgG9RHnz'}",
       "correction": null,
-      "verification_timestamp": "2026-02-21T14:34:18.338379"
+      "verification_timestamp": "2026-02-21T14:34:33.133867"
     }
   },
   {
@@ -1303,9 +1303,9 @@
     "claude_verification": {
       "judgment": "error",
       "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpxFhwd2Q5FADkKC9MR'}",
+      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpyLxjWFrWGY7AsuGwg'}",
       "correction": null,
-      "verification_timestamp": "2026-02-21T14:34:18.736905"
+      "verification_timestamp": "2026-02-21T14:34:33.478429"
     }
   },
   {
@@ -1325,9 +1325,9 @@
     "claude_verification": {
       "judgment": "error",
       "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpxHPQ6JNXoe2xjE7uW'}",
+      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpyNUmDMds6ego1MYnM'}",
       "correction": null,
-      "verification_timestamp": "2026-02-21T14:34:19.080343"
+      "verification_timestamp": "2026-02-21T14:34:34.019085"
     }
   },
   {
@@ -1347,9 +1347,9 @@
     "claude_verification": {
       "judgment": "error",
       "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpxJrTLKyi5W5uG7EK7'}",
+      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpyQjSyuYeZW7uieNTi'}",
       "correction": null,
-      "verification_timestamp": "2026-02-21T14:34:19.377429"
+      "verification_timestamp": "2026-02-21T14:34:34.330854"
     }
   },
   {
@@ -1363,9 +1363,9 @@
     "claude_verification": {
       "judgment": "error",
       "confidence": 0.0,
-      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpxL9LhyxFEc5NcRE2B'}",
+      "reason": "API 오류: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYLpyS54Ympmo8WgfTSNc'}",
       "correction": null,
-      "verification_timestamp": "2026-02-21T14:34:19.692930"
+      "verification_timestamp": "2026-02-21T14:34:34.654922"
     }
   }
 ]
