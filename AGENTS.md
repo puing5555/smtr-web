@@ -29,6 +29,7 @@ When a task is completed, always update `PROJECT_STATUS.md` with the latest proj
 - 커밋 메시지는 **한글로**, 뭘 했는지 명확하게 (예: "노트 탭 통합 완료", "코린이 아빠 검증 파이프라인 실행")
 - 하루 끝날 때 반드시 `git status` + `git log --oneline -5` 보고하라
 - **절대 커밋 없이 다음 작업으로 넘어가지 마라**
+- 중요한 마일스톤에는 **`git tag`** 붙여라 (예: `v24-stable`, `sns-prototype-done`)
 
 ## Memory
 
