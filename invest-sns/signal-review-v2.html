@@ -108,6 +108,10 @@
             </div>
         </div>
         
+        <div style="margin-bottom:16px;display:flex;gap:12px;">
+            <button onclick="exportResults()" style="padding:10px 20px;background:#667eea;color:white;border:none;border-radius:8px;cursor:pointer;font-size:14px;">📥 검토 결과 내보내기 (JSON)</button>
+            <button onclick="if(confirm('모든 검토 기록을 초기화할까요?')){try{localStorage.removeItem('signal-reviews-v2')}catch(e){};render()}" style="padding:10px 20px;background:#ef4444;color:white;border:none;border-radius:8px;cursor:pointer;font-size:14px;">🗑️ 초기화</button>
+        </div>
         <div class="signals-grid" id="signals-container"></div>
     </div>
 
@@ -129,9 +133,13 @@
             catch(e) {}
         }
         
-        function setReview(id, status) {
+        function setReview(id, status, reason) {
+            if (status === 'rejected' && !reason) {
+                reason = prompt('거부 이유를 입력하세요:');
+                if (reason === null) return; // 취소
+            }
             const r = loadReviews();
-            r[id] = { status, time: new Date().toLocaleString('ko-KR') };
+            r[id] = { status, time: new Date().toLocaleString('ko-KR'), reason: reason || '' };
             saveReviews(r);
             render();
         }
@@ -164,6 +172,7 @@
                     '<span>🎙️ ' + (sig.channel || '코린이 아빠') + '</span>' +
                 '</div>' +
                 (sig.context ? '<div style="margin-top:8px;font-size:13px;color:#666;">💡 ' + sig.context + '</div>' : '') +
+                (review.reason ? '<div style="margin-top:8px;padding:8px 12px;background:#fee2e2;border-radius:8px;font-size:13px;color:#991b1b;">❌ 거부 이유: ' + review.reason + '</div>' : '') +
             '</div>';
         }
         
@@ -214,6 +223,28 @@
                 { n: shown, l: '현재 표시' }
             ].map(s => '<div class="stat-card"><div class="stat-number">' + s.n + '</div><div class="stat-label">' + s.l + '</div></div>').join('');
             document.getElementById('stats-container').innerHTML = statsHtml;
+        }
+        
+        function exportResults() {
+            const reviews = loadReviews();
+            const results = SIGNALS_DATA.map(sig => {
+                const id = sig.video_id + '_' + sig.asset;
+                const review = reviews[id] || { status: 'pending' };
+                return {
+                    video_id: sig.video_id,
+                    asset: sig.asset,
+                    signal_type: sig.signal_type,
+                    content: sig.content,
+                    review_status: review.status,
+                    review_reason: review.reason || '',
+                    review_time: review.time || ''
+                };
+            });
+            const blob = new Blob([JSON.stringify(results, null, 2)], {type: 'application/json'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'signal-review-results.json';
+            a.click();
         }
         
         function initFilters() {
