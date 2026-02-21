@@ -286,7 +286,7 @@ html = '''<!DOCTYPE html>
 </body>
 </html>'''
 
-output_path = os.path.join('..', '..', 'signal-review-v2.html')
+output_path = os.path.join('..', '..', 'signal-review-v3.html')
 with open(output_path, 'w', encoding='utf-8') as f:
     f.write(html)
 print(f'Saved to {output_path}')

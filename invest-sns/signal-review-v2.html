@@ -102,25 +102,12 @@
                     <select class="filter-select" id="youtuber-filter"><option value="">전체 유튜버</option></select>
                 </div>
                 <div class="filter-group">
-                    <label class="filter-label">정렬</label>
-                    <select class="filter-select" id="sort-select">
-                        <option value="date-desc">최신순</option>
-                        <option value="date-asc">오래된순</option>
-                        <option value="asset">종목명순</option>
-                        <option value="signal">시그널타입순</option>
-                    </select>
-                </div>
-                <div class="filter-group">
                     <label class="filter-label">검색</label>
                     <input type="text" class="filter-input" id="search-input" placeholder="내용 검색...">
                 </div>
             </div>
         </div>
         
-        <div style="margin-bottom:16px;display:flex;gap:12px;">
-            <button onclick="exportResults()" style="padding:10px 20px;background:#667eea;color:white;border:none;border-radius:8px;cursor:pointer;font-size:14px;">📥 검토 결과 내보내기 (JSON)</button>
-            <button onclick="if(confirm('모든 검토 기록을 초기화할까요?')){try{localStorage.removeItem('signal-reviews-v2')}catch(e){};render()}" style="padding:10px 20px;background:#ef4444;color:white;border:none;border-radius:8px;cursor:pointer;font-size:14px;">🗑️ 초기화</button>
-        </div>
         <div class="signals-grid" id="signals-container"></div>
     </div>
 
@@ -142,13 +129,9 @@
             catch(e) {}
         }
         
-        function setReview(id, status, reason) {
-            if (status === 'rejected' && !reason) {
-                reason = prompt('거부 이유를 입력하세요:');
-                if (reason === null) return;
-            }
+        function setReview(id, status) {
             const r = loadReviews();
-            r[id] = { status, time: new Date().toLocaleString('ko-KR'), reason: reason || '' };
+            r[id] = { status, time: new Date().toLocaleString('ko-KR') };
             saveReviews(r);
             render();
         }
@@ -167,8 +150,7 @@
                         '<span class="signal-asset">' + sig.asset + '</span> ' +
                         '<span class="signal-type ' + sig.signal_type + '">' + (SIGNAL_LABELS[sig.signal_type] || sig.signal_type) + '</span> ' +
                         '<span class="confidence ' + (sig.confidence || '') + '">' + (sig.confidence || '') + '</span> ' +
-                        '<span class="review-badge ' + review.status + '">' + ({pending:'검토대기',approved:'승인',rejected:'거부'}[review.status] || review.status) + '</span> ' +
-                        (sig.upload_date ? '<span style="font-size:12px;color:#888;">' + sig.upload_date + '</span>' : '') +
+                        '<span class="review-badge ' + review.status + '">' + ({pending:'검토대기',approved:'승인',rejected:'거부'}[review.status] || review.status) + '</span>' +
                     '</div>' +
                     '<div class="signal-actions">' +
                         '<button class="btn" onclick="setReview(\'' + id.replace(/'/g,"\\'") + '\', \'approved\')">✅</button>' +
@@ -180,10 +162,8 @@
                     '<span>📺 <a href="' + tsUrl + '" target="_blank">' + (sig.title || sig.video_id).substring(0, 50) + ' ▶️</a></span>' +
                     '<span>⏱️ ' + (sig.timestamp || 'N/A') + '</span>' +
                     '<span>🎙️ ' + (sig.channel || '코린이 아빠') + '</span>' +
-                    (sig.upload_date ? '<span>📅 ' + sig.upload_date + '</span>' : '') +
                 '</div>' +
                 (sig.context ? '<div style="margin-top:8px;font-size:13px;color:#666;">💡 ' + sig.context + '</div>' : '') +
-                (review.reason ? '<div style="margin-top:8px;padding:8px 12px;background:#fee2e2;border-radius:8px;font-size:13px;color:#991b1b;">❌ 거부 이유: ' + review.reason + '</div>' : '') +
             '</div>';
         }
         
@@ -198,16 +178,8 @@
             const reviews = loadReviews();
             let html = '';
             let shown = 0;
-            const sortBy = document.getElementById('sort-select').value;
-            const signalOrder = {'STRONG_BUY':0,'BUY':1,'POSITIVE':2,'HOLD':3,'NEUTRAL':4,'CONCERN':5,'SELL':6,'STRONG_SELL':7};
             
-            const indexed = SIGNALS_DATA.map((sig, idx) => ({sig, idx}));
-            if (sortBy === 'date-desc') indexed.sort((a,b) => (b.sig.upload_date||'').localeCompare(a.sig.upload_date||''));
-            else if (sortBy === 'date-asc') indexed.sort((a,b) => (a.sig.upload_date||'').localeCompare(b.sig.upload_date||''));
-            else if (sortBy === 'asset') indexed.sort((a,b) => a.sig.asset.localeCompare(b.sig.asset));
-            else if (sortBy === 'signal') indexed.sort((a,b) => (signalOrder[a.sig.signal_type]||4) - (signalOrder[b.sig.signal_type]||4));
-            
-            indexed.forEach(({sig, idx}) => {
+            SIGNALS_DATA.forEach((sig, idx) => {
                 const id = sig.video_id + '_' + sig.asset;
                 const review = (reviews[id] || {}).status || 'pending';
                 
@@ -244,20 +216,6 @@
             document.getElementById('stats-container').innerHTML = statsHtml;
         }
         
-        function exportResults() {
-            const reviews = loadReviews();
-            const results = SIGNALS_DATA.map(sig => {
-                const id = sig.video_id + '_' + sig.asset;
-                const review = reviews[id] || { status: 'pending' };
-                return { video_id: sig.video_id, asset: sig.asset, signal_type: sig.signal_type,
-                    content: sig.content, upload_date: sig.upload_date,
-                    review_status: review.status, review_reason: review.reason || '', review_time: review.time || '' };
-            });
-            const blob = new Blob([JSON.stringify(results, null, 2)], {type: 'application/json'});
-            const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-            a.download = 'signal-review-results.json'; a.click();
-        }
-        
         function initFilters() {
             const assets = [...new Set(SIGNALS_DATA.map(s => s.asset))].sort();
             const af = document.getElementById('asset-filter');
@@ -267,7 +225,7 @@
             const yf = document.getElementById('youtuber-filter');
             youtubers.forEach(y => { const o = document.createElement('option'); o.value = y; o.textContent = y; yf.appendChild(o); });
             
-            ['asset-filter','signal-filter','review-filter','youtuber-filter','sort-select'].forEach(id => 
+            ['asset-filter','signal-filter','review-filter','youtuber-filter'].forEach(id => 
                 document.getElementById(id).addEventListener('change', render));
             document.getElementById('search-input').addEventListener('input', render);
         }
