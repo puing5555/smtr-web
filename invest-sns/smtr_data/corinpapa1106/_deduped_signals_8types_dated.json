@@ -1384,7 +1384,7 @@
     "date": "2026-01-17"
   },
   {
-    "asset": "캔톤네트워크 (CNTN)",
+    "asset": "캔톤네트워크 (CC)",
     "signal_type": "BUY",
     "content": "그래서 야, 뭐 사야 돼? 그럼 어 캔톤사 이렇게 얘기하시면 돼요.",
     "confidence": "MEDIUM",
@@ -1392,11 +1392,11 @@
     "conditional": false,
     "skin_in_game": false,
     "hedged": false,
-    "context": "CNTN의 정확한 발음을 캔톤이라고 설명하면서, 마지막에 '캔톤 사라'는 매수 권유를 함",
+    "context": "CC의 정확한 발음을 캔톤이라고 설명하면서, 마지막에 '캔톤 사라'는 매수 권유를 함",
     "timestamp": "[3:16]",
     "video_id": "ULXCspCxaSg",
     "channel": "코린이 아빠",
-    "title": "\"Don't call me CNTN, from now on it's [Canton]!\"",
+    "title": "\"Don't call me CC, from now on it's [Canton]!\"",
     "date": "2026-02-18"
   },
   {
