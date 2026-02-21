@@ -945,6 +945,149 @@
       "video_id": "OOL77dtnR3g",
       "channel": "코린이 아빠",
       "title": "THAR, Tymune's secretive strategy. Why is the stock price stagnant?"
+    },
+    {
+      "asset": "Canton (XCC)",
+      "signal_type": "POSITIVE",
+      "content": "켄톤 네트워크가 탄지문 대형 기관들끼리의 거래다. 절대 그렇지 않다는 거예요. 리테일 시장 확장을 위한 2차 로켓 추진도 지금 준비 중에 있다라고 볼 수 있습니다.",
+      "confidence": "HIGH",
+      "context": "켄톤이 기관 전용 코인이라는 시각에 반박하며, 리테일 진출을 위한 인프라 구축이 진행 중이라는 긍정적 전망을 제시",
+      "timestamp": "[4:29]",
+      "video_id": "PGQW7nyoRRI",
+      "channel": "코린이 아빠",
+      "title": "\"Canton is an institution-only coin? That's your opinion~\""
+    },
+    {
+      "asset": "Canton (XCC)",
+      "signal_type": "POSITIVE",
+      "content": "올해 저는 올해 내 이게 거의 될 거라고 저는 봅니다. 앞으로 국내에서 하나 증권이나 아니면 뭐 일본하고 잘 연결되 있는 신한증 신한 은행 이런 데서도 앞으로 은행권에서도 코인을 살 수 있고 코인권에 코인 시장에서도 주식을 살 수 있는 그런 시대가 머지 않았다.",
+      "confidence": "MEDIUM",
+      "context": "올해 내로 켄톤을 통한 통합 거래 시스템이 구현될 것이라는 예측과 함께 긍정적 전망 제시",
+      "timestamp": "[7:18]",
+      "video_id": "PGQW7nyoRRI",
+      "channel": "코린이 아빠",
+      "title": "\"Canton is an institution-only coin? That's your opinion~\""
+    },
+    {
+      "asset": "CANTON",
+      "signal_type": "POSITIVE",
+      "content": "켄톤 네트워크는 시장의 비효율을 해결하기 위해서 10년 동안 준비해 왔다. 그리고 많은 기관들이 여기에 동의를 하기 때문에 여기 네트워크에 들어가 있다. 저는 그 현실만 보는 거예요.",
+      "confidence": "MEDIUM",
+      "context": "캔톤 네트워크의 현재 상태와 기관들의 참여를 긍정적으로 평가하며, 월가의 금융 시스템의 비효율성을 해결할 수 있는 프로젝트로 전망",
+      "timestamp": "[13:04]",
+      "video_id": "Pb_RkyKhOcM",
+      "channel": "코린이 아빠",
+      "title": "After reading \"Insider Insights\" (The Essence of Finance and Canton)"
+    },
+    {
+      "asset": "Bitcoin",
+      "signal_type": "CONCERN",
+      "content": "생각해 보세요. 비트코인 처음에 다 사기라고 했잖아요. 근데 지금 와서 어떻습니까? 지금 거의 뭐 1억이 넘잖아요. 그래서 이분들은 이미 다 그 영광에 대한 보상을 받아 갔습니다.",
+      "confidence": "MEDIUM",
+      "context": "과거의 영광에 과하게 집착하는 것에 대한 경계 메시지의 일환으로, 비트코인이 이미 충분한 보상을 받았다는 관점 제시",
+      "timestamp": "[9:47]",
+      "video_id": "Pb_RkyKhOcM",
+      "channel": "코린이 아빠",
+      "title": "After reading \"Insider Insights\" (The Essence of Finance and Canton)"
+    },
+    {
+      "asset": "Ethereum",
+      "signal_type": "CONCERN",
+      "content": "이더리움도 마찬가지죠. 옛날에 얼마였습니까? 막 300원, 500원 뭐 이랬거든요. 근데 지금 얼마예요? 거의 뭐 400만 원, 500만 원 왔다 갔다 하잖아요. 그러니까 이런 코인들은 이미 과거에 그 영광을 이미 다 가져갔다고 볼 수 있어요.",
+      "confidence": "MEDIUM",
+      "context": "과거 성과에 대한 과도한 의존을 경계하며, 이더리움 역시 이미 충분한 상승을 경험했다는 관점",
+      "timestamp": "[9:57]",
+      "video_id": "Pb_RkyKhOcM",
+      "channel": "코린이 아빠",
+      "title": "After reading \"Insider Insights\" (The Essence of Finance and Canton)"
+    },
+    {
+      "asset": "CC Coin",
+      "signal_type": "STRONG_BUY",
+      "content": "세상에 조롱할 때가 진짜 기회라는 생각이 듭니다. CC코인 독점 전략을 가지고 있고, RW 기관용 거래 코인으로서 소각 코인입니다. 골드만삭스, 도이츠뱅크, CME, 마이크로소프트, 딜로이트 등이 모두 노드로 참여하고 있습니다.",
+      "confidence": "HIGH",
+      "context": "유튜버가 Peter Thiel의 제로투원 책을 바탕으로 CC코인의 독점적 지위와 기관 채택을 강조하며 강력한 투자 기회로 제시",
+      "timestamp": "[0:44]",
+      "video_id": "Quyl_Xss93E",
+      "channel": "코린이 아빠",
+      "title": "CC Coin Exclusive Strategy - feat. Zero to One"
+    },
+    {
+      "asset": "Ethereum",
+      "signal_type": "CONCERN",
+      "content": "이더리움의 지위는 과연 독점적일까? 비트코인의 장벽을 넘을 수 있을까요? 운영체제가 훌륭한데 킬러앱이 나오지 않는다면 빈도가 굉장히 떨어지는 그냥 훌륭한 운영체제에 불과할 수 있습니다. 아직까지 제대로 터진 적이 없었다.",
+      "confidence": "MEDIUM",
+      "context": "이더리움의 독점적 지위와 실용성에 대한 의문 제기, 경쟁 네트워크들의 위협과 킬러앱 부재 우려",
+      "timestamp": "[1:15]",
+      "video_id": "Quyl_Xss93E",
+      "channel": "코린이 아빠",
+      "title": "CC Coin Exclusive Strategy - feat. Zero to One"
+    },
+    {
+      "asset": "Cantoncoin (CC)",
+      "signal_type": "POSITIVE",
+      "content": "내년도에 여러분 RW 안 할까요? 네. 지금 월가가 내년도에 RWA를 안 하고 내년부터 쏟아질 스테이블 코인이나이 시장이 엄청나게 시장을 변화를 시킬 건데 얘네들이 과연 구경만 하고 있을까요, 여러분?",
+      "confidence": "MEDIUM",
+      "context": "기관들이 2025년에 RWA(Real World Asset) 사업을 본격화하며 CC코인을 활용할 것이라는 전망을 제시하고 있음",
+      "timestamp": "[4:33]",
+      "video_id": "Qwdgrkfs-hE",
+      "channel": "코린이 아빠",
+      "title": "Why Cantoncoin (CC) Listed During November's Fear Zone"
+    },
+    {
+      "asset": "Cantoncoin (CC)",
+      "signal_type": "POSITIVE",
+      "content": "그들은 그냥이 블록체인의 해계모니 전체 RW 시장에 해계모니를 다 먹고 싶어 합니다",
+      "confidence": "MEDIUM",
+      "context": "골드만삭스, 마이크로소프트, 딜로이트 등 대형 기관들이 CC코인을 통해 RWA 시장의 헤게모니를 장악하려 한다는 분석",
+      "timestamp": "[5:26]",
+      "video_id": "Qwdgrkfs-hE",
+      "channel": "코린이 아빠",
+      "title": "Why Cantoncoin (CC) Listed During November's Fear Zone"
+    },
+    {
+      "asset": "Bitcoin (BTC)",
+      "signal_type": "CONCERN",
+      "content": "미국이 비트코인을 전략 자산으로 한다는 것은 거의 낭만주의의 착각에 불과하다. 비트코인은 달러에 봉사하는 슬레이브, 달러 슬레이브 코인이다.",
+      "confidence": "HIGH",
+      "context": "비트코인이 더 이상 달러에 위협적이지 않고 미국의 통제하에 있는 자산이라는 부정적 전망",
+      "timestamp": "3:25",
+      "video_id": "RIhGc56eSHo",
+      "channel": "코린이 아빠",
+      "title": "Romantic Bitcoin vs. Realistic Cantoncoin"
+    },
+    {
+      "asset": "Solana (SOL)",
+      "signal_type": "POSITIVE",
+      "content": "특히나 저는 좀 솔라나에 좀 주목을 해요. 솔라나는 앞으로 좀 더 괜찮지 않을까? 소각량도 괜찮고 지금 밸류에이션도 이더리움에 비해서 훨씬 낮은 편이죠. 솔라나 괜찮다라고 저 보고 있고",
+      "confidence": "MEDIUM",
+      "context": "RWA 시대에서 생존할 수 있는 알트코인 중 하나로 솔라나를 긍정적으로 평가",
+      "timestamp": "9:24",
+      "video_id": "RIhGc56eSHo",
+      "channel": "코린이 아빠",
+      "title": "Romantic Bitcoin vs. Realistic Cantoncoin"
+    },
+    {
+      "asset": "XRP (Ripple)",
+      "signal_type": "STRONG_SELL",
+      "content": "저는 리플은 사라질 코인이라고 저는 생각을 하죠. 리플은 결국에는 민코인이다라고 저는 생각을 합니다.",
+      "confidence": "HIGH",
+      "context": "RWA 시대에 생존할 코인 목록에서 리플을 제외하며 사라질 코인으로 단정",
+      "timestamp": "9:39",
+      "video_id": "RIhGc56eSHo",
+      "channel": "코린이 아빠",
+      "title": "Romantic Bitcoin vs. Realistic Cantoncoin"
+    },
+    {
+      "asset": "Toncoin (TON)",
+      "signal_type": "STRONG_BUY",
+      "content": "켄톤이야말로 RWA를 통해서 미국과 월스트리트의 이익을 극대화시킬 진정한 지정학적 자산이라고 저는 생각을 합니다.",
+      "confidence": "HIGH",
+      "context": "톤코인을 미국의 디지털 달러 패권 전략에 부합하는 핵심 자산으로 평가하며 매출 기반의 현실적 투자 관점으로 강력 추천",
+      "timestamp": "11:06",
+      "video_id": "RIhGc56eSHo",
+      "channel": "코린이 아빠",
+      "title": "Romantic Bitcoin vs. Realistic Cantoncoin"
     }
   ],
   "done_ids": [
@@ -952,7 +1095,9 @@
     "HIdHdpfBwmA",
     "0XEv66hwKqA",
     "82TEaq8GIfc",
+    "Quyl_Xss93E",
     "OOL77dtnR3g",
+    "RIhGc56eSHo",
     "2wdlIAF0OrA",
     "1l9mMgFjixk",
     "DwAUo9LmoSo",
@@ -964,6 +1109,7 @@
     "5HFHld3F5as",
     "5nfe_ZdUSoA",
     "08FEwaGddCk",
+    "Qwdgrkfs-hE",
     "A7qHwvcGh9A",
     "E4uoauB1dyM",
     "-brWAKvRaqI",
@@ -972,11 +1118,13 @@
     "8VIfrqxW4wc",
     "6r5ZHidwBGs",
     "G1Nl97SgGJY",
+    "Pb_RkyKhOcM",
     "4uNZBw852Do",
     "NeL2M9UvF24",
     "Je_JJcSzctY",
     "H2OP8hKs-Tk",
     "BVUT2DMnZlg",
+    "PGQW7nyoRRI",
     "-fmfJn1psbA"
   ]
 }
