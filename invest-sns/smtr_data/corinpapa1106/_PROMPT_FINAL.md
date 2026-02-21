@@ -213,7 +213,7 @@ Bitcoin/BTC → 비트코인 | Ethereum/ETH → 이더리움 | Solana/SOL → �
 XRP → XRP | BNB → BNB | NVIDIA → 엔비디아 (NVDA) | PALANTIR → 팔란티어 (PLTR) | MicroStrategy → 마이크로스트래티지 (MSTR)
 
 ### 3. 유사 단어 통일 사전
-- 켄턴/켄톤/Canton/CANTON/KANTON/Kantone/Canto/XCC/CC코인 → **캔톤네트워크 (CC)**
+- 켄턴/켄톤/Canton/CANTON/KANTON/Kantone/Canto/XCC/CC코인/CNTN/캔톤사 → **캔톤네트워크 (CC)**
 - BITMINE/BITMAIN/BMNR/BTMN/BTMM/MBNR → **비트마인 (BMNR)**
 - WLFI/월드리버티 → **월드리버티파이낸셜 (WLFI)**
 - Circle/CIRCLE/서클 → **서클 (Circle)**
@@ -249,12 +249,15 @@ Crypto Market, Cryptocurrency, US Stocks, 코스피 → 시그널로 추출하�
 
 ---
 
-## 🔄 복합 시그널 처리
+## 🔄 복합 시그널 처리 (1영상 1종목 1시그널 원칙)
 
-- 같은 종목 + 같은 방향 → 가장 강한 시그널 1개
-- 같은 종목 + 다른 방향 → 둘 다 출력
-  - 예: "장기 BUY인데 단기 빠질 수 있다" → BUY(LONG) + CONCERN(SHORT)
-- 다른 자산 → 당연히 각각 출력
+- **같은 영상 + 같은 종목 = 반드시 1개 시그널만 출력**
+- 같은 종목에서 여러 발언이 있으면 → 전체 맥락을 종합하여 가장 대표적인 시그널 1개로 합산
+- 매수+매도 혼재 시 → 화자의 **최종 결론/핵심 입장**이 무엇인지 판단
+  - 예: "캔톤 사라 근데 나는 수틀리면 먼저 빠진다" → 핵심은 매수 추천이지만 hedged → **BUY** (hedged: true, context에 조건부 설명)
+  - 예: "지금은 좋은데 단기적으로 빠질 수 있다" → **POSITIVE** (hedged: true)
+- 정말 완전히 반대 입장이 동등하게 나오는 극히 드문 경우 → **NEUTRAL** (context에 양쪽 설명)
+- 다른 자산 → 당연히 각각 출력 (1영상 N종목은 OK)
 
 ---
 
