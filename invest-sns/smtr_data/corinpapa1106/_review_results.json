@@ -138,5 +138,20 @@
     "status": "approved",
     "reason": "",
     "time": "2026. 2. 22. 오전 12:58:11"
+  },
+  "TjKVuAGhC1M_스테이블코인": {
+    "status": "rejected",
+    "reason": "이건 코인거래소에 대한 우려임 -> 코인거래소 우려",
+    "time": "2026. 2. 22. 오전 12:59:52"
+  },
+  "awXkJ9hK-a0_모네로": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:00:02"
+  },
+  "awXkJ9hK-a0_지캐시": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오전 1:00:09"
   }
 }
