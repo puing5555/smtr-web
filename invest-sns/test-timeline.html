@@ -1333,7 +1333,7 @@
                         <div style="margin-bottom: 12px;">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
                                 <span style="font-weight: 600;">비트코인</span>
-                                <span class="badge badge-strong-buy">STRONG BUY</span>
+                                <span class="badge badge-strong-buy">강력매수</span>
                             </div>
                             <div style="font-size: 14px; color: var(--text2);">세상학개론 · 4시간 전</div>
                         </div>
@@ -3936,14 +3936,14 @@
         // 시그널 라벨 가져오기
         function getSignalLabel(dirType) {
             const labels = {
-                'strong_buy': 'STRONG BUY',
-                'buy': 'BUY',
-                'positive': 'POSITIVE',
-                'hold': 'HOLD',
-                'neutral': 'NEUTRAL',
-                'concern': 'CONCERN',
-                'sell': 'SELL',
-                'strong_sell': 'STRONG SELL'
+                'strong_buy': '강력매수',
+                'buy': '매수',
+                'positive': '긍정',
+                'hold': '보유',
+                'neutral': '중립',
+                'concern': '우려',
+                'sell': '매도',
+                'strong_sell': '강력매도'
             };
             return labels[dirType] || 'NEUTRAL';
         }
