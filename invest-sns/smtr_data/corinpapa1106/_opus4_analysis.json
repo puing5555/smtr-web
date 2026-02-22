@@ -1,4 +1,4 @@
-﻿{
+{
   "7AaksU-R3dg_캔톤네트워크 (CC)": {
     "error": "Failed to parse JSON response",
     "raw_response": "{\n  \"sonnet_signal_correct\": false,\n  \"rejection_valid\": true,\n  \"correct_signal\": {\n    \"signal_type\": \"CONCERN\",\n    \"asset\": \"캔톤네트워크 (CC)\",\n    \"content\": \"수틀리면 제가 제일 먼저 탈출합니다. 제가 혹시라도 어 이거 뭔가 네러티브 데이터 이거 너무 잘못 가고 있는데 하면 제가 여러분들한테 경고도 하고 저부터 먼저 탈출할 겁니다\",\n    \"timestamp\": \"[6:29]\",\n    \"confidence\": \"MEDIUM\"\n  },\n  \"analysis\": {\n    \"1. Sonnet 시그널 검증\": \n      Sonnet이 추출한 시그널은 자막 내용과 일치하지 않습니다. 자막에서는 투자자가 수틀리면 탈출하겠다고 말하고 있지만, Sonnet은 이를 매도 시그널로 해석했습니다.\n    \"2. 거부 사유 타당성\":\n      인간의 거부 사유는 타당합니다. 이는 실제로는 매도 보다는 우려 수준의 시그널에 가깝기 때문입니다.\n    \"3. 올바른 시그널\":\n      올바른 시그널은 \"CONCERN\"입니다. 투자자가 수틀릴 경우 탈출하겠다고 말하고 있어, 이는 우려 수준의 시그널에 해당합니다.\n    \"4. 프롬프트 개선 제안\":\n      Sonnet의 추출 정확도를 높이기 위해서는 시그널 타입 정의에 \"CONCERN\" 항목을 추가하는 것이 필요합니다. 또한 매도 시그널과 우려 수준의 시그널을 구분할 수 있도록 프롬프트를 개선해야 합니다.\n  },\n  \"prompt_improvement\": \"시그널 타입 정의에 'CONCERN' 항목 추가, 매도 시그널과 우려 수준의 시그널을 구분할 수 있도록 프롬프트 개선\"\n}",
