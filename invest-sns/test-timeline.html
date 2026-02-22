@@ -3951,7 +3951,7 @@
         // 날짜 포맷팅
         function formatDate(dateStr) {
             const date = new Date(dateStr);
-            return date.toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' });
+            return date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'short', day: 'numeric' });
         }
 
         // 인플루언서 선택기 렌더링
