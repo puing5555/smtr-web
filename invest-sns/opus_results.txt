@@ -1,0 +1,10 @@
+﻿python :   File "<string>", line 9
+At line:1 char:36
++ cd C:\Users\Mario\work\invest-sns; python -c "
++                                    ~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (  File "<string>", line 9:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+    print(f'  Sonnet 정확: {r.get(" sonnet_accurate\,\?\)}')
+                                ^
+SyntaxError: unterminated string literal (detected at line 9)
