@@ -114,7 +114,7 @@ JSON 형식으로 답변해주세요:
 """
         
         response = client.messages.create(
-            model="claude-3-5-sonnet-20241022",  # 가용한 최신 모델 사용
+            model="claude-3-haiku-20240307",  # 가용한 모델 사용 
             max_tokens=4000,
             temperature=0.1,
             messages=[{"role": "user", "content": prompt}]
