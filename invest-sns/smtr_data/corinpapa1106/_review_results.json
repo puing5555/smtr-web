@@ -10,9 +10,9 @@
     "time": "2026-02-22 19:40:00"
   },
   "7AaksU-R3dg_알트코인": {
-    "status": "approved",
-    "reason": "",
-    "time": "2026. 2. 21. 오후 11:59:22"
+    "status": "rejected",
+    "reason": "시그널 근거 부족 및 타임스탬프 오류",
+    "time": "2026-02-22 19:50:00"
   },
   "7AaksU-R3dg_캔톤네트워크 (CC)": {
     "status": "rejected",

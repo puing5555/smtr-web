@@ -42,5 +42,28 @@
       "date": "2026-02-18"
     },
     "rejection_reason": "시그널 근거가 불분명하고 타임스탬프가 부정확함"
+  },
+  "7AaksU-R3dg_알트코인": {
+    "error": "Failed to parse JSON response",
+    "raw_response": "{\n  \"sonnet_signal_correct\": false,\n  \"rejection_valid\": true,\n  \"correct_signal\": {\n    \"signal_type\": \"SELL\",\n    \"asset\": \"알트코인\",\n    \"content\": \"대부분의 코인들이 지금 멸종 단계로 가고 있으며 계속 떨어지고 있다.\",\n    \"timestamp\": \"[5:31]\",\n    \"confidence\": \"HIGH\"\n  },\n  \"analysis\": {\n    \"1. Sonnet 시그널 검증\": Sonnet이 추출한 시그널은 자막 내용과 부분적으로 일치하지만, 타임스탬프가 정확하지 않다. 자막에서는 \"[5:31]\" 부근에서 대부분의 코인들이 멸종 단계로 가고 있다고 언급하고 있지만, Sonnet은 \"[5:22]\"에서 2026년 알트코인 대멸종을 언급하고 있다.\n    \"2. 거부 사유 타당성\": 인간의 거부 사유인 \"시그널 근거 부족 및 타임스탬프 오류\"는 타당하다. Sonnet이 추출한 시그널의 타임스탬프가 정확하지 않기 때문에 신뢰도가 낮다고 볼 수 있다.\n    \"3. 올바른 시그널\": 자막 내용을 종합해볼 때, 올바른 시그널 타입은 \"SELL\"이다. 대부분의 코인들이 멸종 단계로 가고 있으며 계속 떨어지고 있다고 언급되고 있기 때문이다. 타임스탬프는 \"[5:31]\"이 적절하다.\n    \"4. 프롬프트 개선 제안\": Sonnet의 추출 정확도를 높이기 위해서는 타임스탬프 추출 정확도를 개선할 필요가 있다. 자막 내용과 시그널 내용의 정확한 매칭을 위해 문맥 이해도를 높이는 것도 도움이 될 것으로 보인다.\n  },\n  \"prompt_improvement\": \"타임스탬프 추출 정확도 향상, 문맥 이해도 개선\"\n}",
+    "status": "completed",
+    "timestamp": 1771763275.9680343,
+    "signal_data": {
+      "asset": "알트코인",
+      "signal_type": "STRONG_SELL",
+      "content": "2026년 알트코인 제가 대멸종할 거라고 이제 얘기를 했었잖아요. 대부분의 코인들이 다 지금 멸종 단계로 가고 있죠. 계속 떨어지죠",
+      "confidence": "HIGH",
+      "timeframe": "LONG",
+      "conditional": false,
+      "skin_in_game": false,
+      "hedged": false,
+      "context": "화자가 예측한 2026년 알트코인 대멸종이 현실화되고 있다며 강력한 부정적 전망 표명",
+      "timestamp": "[5:22]",
+      "video_id": "7AaksU-R3dg",
+      "channel": "코린이 아빠",
+      "title": "\"Decision to Part with XRP (WLFI Mar-a-Lago Forum Impact)\"",
+      "date": "2026-02-18"
+    },
+    "rejection_reason": "시그널 근거 부족 및 타임스탬프 오류"
   }
 }
