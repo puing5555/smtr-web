@@ -1,6 +1,6 @@
 # PROJECT_STATUS.md
 
-_Last updated: 2026-02-22 00:51 (GMT+7)_
+_Last updated: 2026-02-22 19:55 (GMT+7)_
 
 ## 🏗️ SMTR 프로젝트 (투자자의 세컨드 브레인)
 
@@ -28,6 +28,13 @@ _Last updated: 2026-02-22 00:51 (GMT+7)_
 - 코린이 아빠 배치 → v24 프로토타입 (42개 시그널)
 - 검증 파이프라인 4단계 설계 + 구현
 - 코린이 아빠 28개 비디오 검증 배치 제출 (batch_6999165cf3608190b256076bd3cea0a9, 결과 대기중)
+- **🔥 Opus 4 검증 파이프라인 구현 완료** (2026-02-22):
+  - review-server.py → port 8901 (Claude Haiku 기반 자동 재검증)
+  - 거부(rejected) 시그널 자동 Claude 재분석 (비동기)
+  - 자막 전체 재검토 + Sonnet vs 인간 판단 검증
+  - 프롬프트 개선 제안 누적 저장
+  - 169개 시그널 + 리뷰 데이터 적재 완료
+  - Opus 4 분석 UI 표시 (분석중 스피너, 완료시 상세 결과)
 
 #### 트랙 2: SNS 웹앱
 - 5탭 SPA 완성
@@ -70,6 +77,7 @@ _Last updated: 2026-02-22 00:51 (GMT+7)_
 - `invest-sns/test-timeline.html` — 프론트 프로토타입
 - `C:\Users\Mario\.openclaw\workspace\guru_tracker_prototype_v24_with_corinpapa.html` — guru_tracker 최신
 
-### 현재 터널 URL (2026-02-21)
-- 프론트: https://interpretation-falling-falling-facilitate.trycloudflare.com
+### 현재 터널 URL (2026-02-22)
+- **Opus 4 리뷰서버**: https://bright-corners-bow.loca.lt (port 8901)
+- 프론트: https://interpretation-falling-falling-facilitate.trycloudflare.com  
 - 백엔드: https://permits-lamb-poem-hear.trycloudflare.com
