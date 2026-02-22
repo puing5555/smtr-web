@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>차트 API 연동 데모</title>
+    <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.1.0/dist/lightweight-charts.standalone.production.js"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #0a0e17;
+            color: #e2e8f0;
+            padding: 20px;
+        }
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .chart-container {
+            background: #111827;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .stock-buttons {
+            margin: 20px 0;
+        }
+        .stock-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .stock-btn:hover {
+            background: #2563eb;
+        }
+        .chart-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .chart-price {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        .change {
+            font-size: 16px;
+        }
+        .change.up { color: #10b981; }
+        .change.down { color: #ef4444; }
+        #chartDiv {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1>🚀 투자 차트 API 연동 데모</h1>
+        <p>CoinGecko API를 통해 실제 가격 데이터를 가져와서 표시합니다.</p>
+        
+        <div class="stock-buttons">
+            <button class="stock-btn" onclick="loadChart('비트코인')">비트코인</button>
+            <button class="stock-btn" onclick="loadChart('이더리움')">이더리움</button>
+            <button class="stock-btn" onclick="loadChart('솔라나')">솔라나</button>
+            <button class="stock-btn" onclick="loadChart('XRP')">XRP</button>
+            <button class="stock-btn" onclick="loadChart('엔비디아')">엔비디아 (더미)</button>
+        </div>
+        
+        <div class="chart-container">
+            <div class="chart-title" id="chartTitle">종목을 선택하세요</div>
+            <div class="chart-price" id="chartPrice">-</div>
+            <div class="change" id="chartChange">-</div>
+            <div id="chartDiv"></div>
+        </div>
+        
+        <div id="status" style="margin-top: 20px; padding: 10px; background: #1a2332; border-radius: 6px;">
+            <strong>상태:</strong> <span id="statusText">대기 중</span>
+        </div>
+    </div>
+
+    <script>
+        // 종목명 → API 심볼 매핑 테이블
+        const STOCK_SYMBOLS = {
+            '비트코인': { type: 'crypto', id: 'bitcoin' },
+            'XRP': { type: 'crypto', id: 'ripple' },
+            '이더리움': { type: 'crypto', id: 'ethereum' },
+            '솔라나': { type: 'crypto', id: 'solana' },
+            '체인링크': { type: 'crypto', id: 'chainlink' },
+            '엔비디아': { type: 'stock', symbol: 'NVDA' }
+        };
+
+        // API 데이터 캐시
+        const priceDataCache = new Map();
+        const CACHE_DURATION = 10 * 60 * 1000; // 10분
+
+        let chart = null;
+
+        // CoinGecko API로 코인 가격 데이터 가져오기
+        async function fetchCryptoData(cryptoId, days = 90) {
+            const cacheKey = `crypto_${cryptoId}_${days}`;
+            const cached = priceDataCache.get(cacheKey);
+            
+            if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+                updateStatus(`캐시된 데이터 사용: ${cryptoId}`);
+                return cached.data;
+            }
+
+            updateStatus(`API 호출 중: ${cryptoId}...`);
+
+            try {
+                const response = await fetch(`https://api.coingecko.com/api/v3/coins/${cryptoId}/ohlc?vs_currency=usd&days=${days}`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                
+                const data = await response.json();
+                const formattedData = data.map(([timestamp, open, high, low, close]) => ({
+                    time: new Date(timestamp).toISOString().split('T')[0],
+                    open: parseFloat(open.toFixed(8)),
+                    high: parseFloat(high.toFixed(8)),
+                    low: parseFloat(low.toFixed(8)),
+                    close: parseFloat(close.toFixed(8))
+                }));
+
+                // 캐시에 저장
+                priceDataCache.set(cacheKey, {
+                    data: formattedData,
+                    timestamp: Date.now()
+                });
+
+                updateStatus(`API 성공: ${formattedData.length}개 데이터 포인트`);
+                return formattedData;
+            } catch (error) {
+                updateStatus(`API 실패: ${error.message}`);
+                console.error('CoinGecko API 호출 실패:', error);
+                return null;
+            }
+        }
+
+        // 더미 데이터 생성 (주식용)
+        function generateDummyOHLC(stockName) {
+            updateStatus(`더미 데이터 생성: ${stockName}`);
+            const data = [];
+            const days = 90;
+            
+            let basePrice = stockName.includes('엔비디아') ? 140 : 100;
+            let currentPrice = basePrice;
+
+            for (let i = days; i >= 0; i--) {
+                const date = new Date();
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toISOString().split('T')[0];
+                
+                const changeRate = (Math.random() - 0.5) * 0.08; // -4% ~ +4%
+                const open = currentPrice;
+                const close = open * (1 + changeRate);
+                const high = Math.max(open, close) * (1 + Math.random() * 0.02);
+                const low = Math.min(open, close) * (1 - Math.random() * 0.02);
+
+                data.push({
+                    time: dateStr,
+                    open: parseFloat(open.toFixed(2)),
+                    high: parseFloat(high.toFixed(2)),
+                    low: parseFloat(low.toFixed(2)),
+                    close: parseFloat(close.toFixed(2))
+                });
+
+                currentPrice = close;
+            }
+
+            return data;
+        }
+
+        function updateStatus(message) {
+            document.getElementById('statusText').textContent = message;
+        }
+
+        async function loadChart(stockName) {
+            updateStatus('차트 로딩 중...');
+            
+            // 기존 차트 제거
+            if (chart) {
+                chart.remove();
+                chart = null;
+            }
+
+            const chartDiv = document.getElementById('chartDiv');
+            chartDiv.innerHTML = '<div style="display: flex; justify-content: center; align-items: center; height: 400px;">로딩 중...</div>';
+
+            try {
+                const symbolInfo = STOCK_SYMBOLS[stockName];
+                let chartData = null;
+
+                if (symbolInfo && symbolInfo.type === 'crypto') {
+                    chartData = await fetchCryptoData(symbolInfo.id, 90);
+                    
+                    if (!chartData) {
+                        chartData = generateDummyOHLC(stockName);
+                    }
+                } else {
+                    chartData = generateDummyOHLC(stockName);
+                }
+
+                // 차트 생성
+                chart = LightweightCharts.createChart(chartDiv, {
+                    width: chartDiv.clientWidth,
+                    height: 400,
+                    layout: {
+                        background: { color: 'transparent' },
+                        textColor: '#e2e8f0'
+                    },
+                    grid: {
+                        vertLines: { color: '#1e293b' },
+                        horzLines: { color: '#1e293b' }
+                    },
+                    crosshair: {
+                        mode: LightweightCharts.CrosshairMode.Normal,
+                    },
+                    rightPriceScale: {
+                        borderColor: '#334155',
+                    },
+                    timeScale: {
+                        borderColor: '#334155',
+                        timeVisible: true,
+                    }
+                });
+
+                // 캔들스틱 시리즈 추가
+                const candlestickSeries = chart.addCandlestickSeries({
+                    upColor: '#10b981',
+                    downColor: '#ef4444',
+                    borderUpColor: '#10b981',
+                    borderDownColor: '#ef4444',
+                    wickUpColor: '#10b981',
+                    wickDownColor: '#ef4444',
+                });
+
+                candlestickSeries.setData(chartData);
+
+                // 가격 정보 업데이트
+                const latestData = chartData[chartData.length - 1];
+                const prevData = chartData[chartData.length - 2];
+                
+                if (latestData && prevData) {
+                    const change = ((latestData.close - prevData.close) / prevData.close) * 100;
+                    const isUp = change >= 0;
+
+                    document.getElementById('chartTitle').textContent = stockName;
+                    document.getElementById('chartPrice').textContent = latestData.close >= 1000 ? 
+                        `$${latestData.close.toLocaleString()}` : 
+                        `$${latestData.close.toFixed(2)}`;
+                    document.getElementById('chartChange').textContent = `${isUp ? '+' : ''}${change.toFixed(2)}%`;
+                    document.getElementById('chartChange').className = `change ${isUp ? 'up' : 'down'}`;
+                }
+
+                updateStatus('차트 로딩 완료! ✅');
+
+            } catch (error) {
+                console.error('차트 로딩 실패:', error);
+                updateStatus(`차트 로딩 실패: ${error.message}`);
+                chartDiv.innerHTML = '<div style="text-align: center; padding: 40px; color: #ef4444;">차트 로딩 실패</div>';
+            }
+        }
+
+        // 페이지 로드시 기본 차트 표시
+        window.addEventListener('load', () => {
+            loadChart('비트코인');
+        });
+    </script>
+</body>
+</html>
