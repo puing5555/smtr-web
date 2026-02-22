@@ -106,11 +106,16 @@ JSON 형식으로 답변해주세요:
   "sonnet_signal_correct": true/false,
   "rejection_valid": true/false,
   "correct_signal": {{
-    "signal_type": "STRONG_BUY|BUY|...|null",
-    "asset": "종목명 또는 null",
-    "content": "올바른 시그널 내용",
+    "signal_type": "STRONG_BUY|BUY|POSITIVE|HOLD|NEUTRAL|CONCERN|SELL|STRONG_SELL 또는 null(시그널 없음)",
+    "asset": "올바른 종목명 또는 null",
+    "content": "올바른 시그널 내용 (자막에서 직접 인용)",
     "timestamp": "올바른 타임스탬프",
     "confidence": "HIGH|MEDIUM|LOW"
+  }},
+  "suggestion": {{
+    "action": "APPROVE|REJECT|MODIFY",
+    "changes": "변경 요약 (예: 'SELL → CONCERN', '종목명 XRP → 리플', '시그널 없음으로 삭제')",
+    "reason": "변경/승인/거부 사유 (한 줄 요약)"
   }},
   "analysis": "상세한 분석 내용",
   "prompt_improvement": "프롬프트 개선 제안"
@@ -241,7 +246,10 @@ class ReviewHandler(SimpleHTTPRequestHandler):
             reviews[sig_id] = {
                 'status': status,
                 'reason': reason,
-                'time': data.get('time', '')
+                'time': data.get('time', ''),
+                'review_note': data.get('review_note', ''),
+                'review_change': data.get('review_change', ''),
+                'review_reason': data.get('review_reason', '')
             }
             save_reviews(reviews)
             
@@ -483,16 +491,27 @@ def build_review_html(signals, reviews):
         
         function getReview(id) { return REVIEWS[id] || { status: 'pending' }; }
         
-        async function setReview(id, status, reason) {
+        function getReviewFields(card) {
+            return {
+                review_note: (card.querySelector('.review-field-note') || {}).value || '',
+                review_change: (card.querySelector('.review-field-change') || {}).value || '',
+                review_reason: (card.querySelector('.review-field-reason') || {}).value || ''
+            };
+        }
+        
+        async function setReview(id, status, reason, extraFields) {
             const time = new Date().toLocaleString('ko-KR');
-            REVIEWS[id] = { status, reason: reason || '', time };
+            const review_note = (extraFields && extraFields.review_note) || '';
+            const review_change = (extraFields && extraFields.review_change) || '';
+            const review_reason = (extraFields && extraFields.review_reason) || '';
+            REVIEWS[id] = { status, reason: reason || '', time, review_note, review_change, review_reason };
             
             document.getElementById('saving-indicator').style.display = 'block';
             try {
                 await fetch('/api/review', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ id, status, reason: reason || '', time })
+                    body: JSON.stringify({ id, status, reason: reason || '', time, review_note, review_change, review_reason })
                 });
             } catch(e) {
                 console.error('Save failed:', e);
@@ -547,14 +566,22 @@ def build_review_html(signals, reviews):
             
             if (analysis.status === 'completed') {
                 const correctSignal = analysis.correct_signal || {};
+                const suggestion = analysis.suggestion || {};
                 const signalTypeKor = {
                     'STRONG_BUY': '강력매수', 'BUY': '매수', 'POSITIVE': '긍정',
                     'HOLD': '보유', 'NEUTRAL': '중립', 'CONCERN': '우려',
                     'SELL': '매도', 'STRONG_SELL': '강력매도'
                 };
                 
+                const actionColors = {
+                    'APPROVE': {bg:'#d1fae5',border:'#10b981',text:'#065f46',label:'✅ 승인 제안'},
+                    'REJECT': {bg:'#fee2e2',border:'#ef4444',text:'#991b1b',label:'❌ 거부 제안'},
+                    'MODIFY': {bg:'#dbeafe',border:'#3b82f6',text:'#1e40af',label:'✏️ 수정 제안'}
+                };
+                const ac = actionColors[suggestion.action] || actionColors['MODIFY'];
+                
                 return '<div class="opus4-section">' +
-                    '<div style="margin-top:12px;padding:12px;background:#f0f9ff;border-radius:8px;border-left:3px solid:#0ea5e9;">' +
+                    '<div style="margin-top:12px;padding:12px;background:#f0f9ff;border-radius:8px;border-left:3px solid #0ea5e9;">' +
                         '<div style="font-weight:600;color:#0369a1;margin-bottom:12px;">🔥 Opus 4 분석 완료</div>' +
                         '<div style="margin-bottom:8px;">' +
                             '<strong>Sonnet 시그널 정확도:</strong> ' +
@@ -571,7 +598,15 @@ def build_review_html(signals, reviews):
                                 (correctSignal.asset ? ' (' + escHtml(correctSignal.asset) + ')' : '') +
                             '</div>' : ''
                         ) +
-                        '<div style="margin-bottom:8px;">' +
+                        (suggestion.action ? 
+                            '<div style="margin-top:12px;padding:10px;background:' + ac.bg + ';border:1px solid ' + ac.border + ';border-radius:8px;">' +
+                                '<div style="font-weight:600;color:' + ac.text + ';margin-bottom:6px;">' + ac.label + '</div>' +
+                                (suggestion.changes ? '<div style="font-size:13px;color:' + ac.text + ';margin-bottom:4px;"><strong>변경:</strong> ' + escHtml(suggestion.changes) + '</div>' : '') +
+                                (suggestion.reason ? '<div style="font-size:13px;color:' + ac.text + ';margin-bottom:8px;"><strong>사유:</strong> ' + escHtml(suggestion.reason) + '</div>' : '') +
+                                '<button class="apply-suggestion-btn" data-id="' + escHtml(id) + '" data-action="' + escHtml(suggestion.action || '') + '" data-changes="' + escHtml(suggestion.changes || '') + '" data-reason="' + escHtml(suggestion.reason || '') + '" style="padding:6px 16px;background:' + ac.border + ';color:white;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;">👆 제안 적용</button>' +
+                            '</div>' : ''
+                        ) +
+                        '<div style="margin-top:8px;">' +
                             '<strong>상세 분석:</strong><br>' +
                             '<div style="font-size:13px;color:#666;margin-top:4px;line-height:1.4;">' +
                                 escHtml(analysis.analysis || '분석 내용 없음') +
@@ -641,10 +676,27 @@ def build_review_html(signals, reviews):
                 '<div class="reject-input">' +
                     '<input type="text" placeholder="거부 사유 입력...">' +
                     '<button class="reject-submit-btn">거부</button>' +
+                '</div>' +
+                '<div style="margin-top:10px;padding-top:10px;border-top:1px solid #e2e8f0;display:flex;flex-direction:column;gap:4px;">' +
+                    '<div style="display:flex;align-items:center;gap:6px;">' +
+                        '<label style="min-width:36px;font-weight:600;font-size:13px;color:#666;">검토:</label>' +
+                        '<input type="text" class="review-field-note" value="' + escHtml(review.review_note || '') + '" placeholder="검토 결과" style="flex:1;padding:4px 8px;border:1px solid #ddd;border-radius:4px;font-size:13px;">' +
+                    '</div>' +
+                    '<div style="display:flex;align-items:center;gap:6px;">' +
+                        '<label style="min-width:36px;font-weight:600;font-size:13px;color:#666;">변경:</label>' +
+                        '<input type="text" class="review-field-change" value="' + escHtml(review.review_change || '') + '" placeholder="변경 내용" style="flex:1;padding:4px 8px;border:1px solid #ddd;border-radius:4px;font-size:13px;">' +
+                    '</div>' +
+                    '<div style="display:flex;align-items:center;gap:6px;">' +
+                        '<label style="min-width:36px;font-weight:600;font-size:13px;color:#666;">사유:</label>' +
+                        '<input type="text" class="review-field-reason" value="' + escHtml(review.review_reason || '') + '" placeholder="사유" style="flex:1;padding:4px 8px;border:1px solid #ddd;border-radius:4px;font-size:13px;">' +
+                    '</div>' +
                 '</div>';
             
             // Event listeners
-            card.querySelector('.approve-btn').addEventListener('click', () => approveSignal(id));
+            card.querySelector('.approve-btn').addEventListener('click', () => {
+                const fields = getReviewFields(card);
+                setReview(id, 'approved', '', fields);
+            });
             card.querySelector('.reject-btn').addEventListener('click', () => {
                 const ri = card.querySelector('.reject-input');
                 ri.classList.toggle('show');
@@ -652,14 +704,40 @@ def build_review_html(signals, reviews):
             });
             card.querySelector('.reject-submit-btn').addEventListener('click', () => {
                 const reason = card.querySelector('.reject-input input').value;
-                setReview(id, 'rejected', reason);
+                const fields = getReviewFields(card);
+                setReview(id, 'rejected', reason, fields);
             });
             card.querySelector('.reject-input input').addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
                     const reason = e.target.value;
-                    setReview(id, 'rejected', reason);
+                    const fields = getReviewFields(card);
+                    setReview(id, 'rejected', reason, fields);
                 }
             });
+            
+            // 제안 적용 버튼
+            const sugBtn = card.querySelector('.apply-suggestion-btn');
+            if (sugBtn) {
+                sugBtn.addEventListener('click', () => {
+                    const action = sugBtn.dataset.action;
+                    const changes = sugBtn.dataset.changes;
+                    const reason = sugBtn.dataset.reason;
+                    
+                    // 검토/변경/사유 필드에 제안 내용 자동 채움
+                    const noteEl = card.querySelector('.review-field-note');
+                    const changeEl = card.querySelector('.review-field-change');
+                    const reasonEl = card.querySelector('.review-field-reason');
+                    
+                    if (noteEl) noteEl.value = action === 'APPROVE' ? '승인 (Opus 제안)' : action === 'REJECT' ? '거부 (Opus 제안)' : '수정 (Opus 제안)';
+                    if (changeEl) changeEl.value = changes;
+                    if (reasonEl) reasonEl.value = reason;
+                    
+                    // 상태 자동 적용
+                    const status = action === 'APPROVE' ? 'approved' : action === 'REJECT' ? 'rejected' : 'approved';
+                    const fields = getReviewFields(card);
+                    setReview(id, status, action === 'REJECT' ? reason : '', fields);
+                });
+            }
             
             return card;
         }
