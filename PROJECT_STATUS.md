@@ -1,6 +1,6 @@
 # PROJECT_STATUS.md
 
-_Last updated: 2026-02-22 19:55 (GMT+7)_
+_Last updated: 2026-02-22 20:50 (GMT+7)_
 
 ## 🏗️ SMTR 프로젝트 (투자자의 세컨드 브레인)
 
@@ -49,6 +49,12 @@ _Last updated: 2026-02-22 19:55 (GMT+7)_
   - 프로필을 별도 탭 → 대시보드 우상단 아이콘으로 이동
   - 하단 5탭바, v24 색상 시스템, 모바일 반응형 완료
   - 단일 HTML 파일, v24 JS 데이터/차트/마커 모두 포함
+- **🚀 코린이 아빠 검증 시그널 169개 본사이트 통합 완료** (2026-02-22):
+  - `_deduped_signals_8types_dated.json` 169개 시그널 → `test-timeline.html` 통합
+  - `_review_results.json` 검증 결과 (전부 approved) 확인
+  - 인플루언서 메타데이터 stmtCount 29→169 업데이트
+  - Python 변환 스크립트 구현 (`integrate_corinpapa_signals.py`)
+  - 8가지 시그널 타입 CSS/JS 지원 확인 완료
 
 #### 트랙 3: 알림/데이터 수집
 - 네이버/미국/코인 뉴스 크롤러 완성
