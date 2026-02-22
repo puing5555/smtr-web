@@ -318,7 +318,12 @@ def build_review_html(signals, reviews):
                 '<div style="margin-top:10px;padding-top:10px;border-top:1px solid #2d2d44;display:flex;flex-direction:column;gap:4px;">' +
                     '<div style="display:flex;align-items:center;gap:6px;">' +
                         '<label style="min-width:36px;font-weight:600;font-size:13px;color:#94a3b8;">검토:</label>' +
-                        '<input type="text" class="review-field-note" value="' + escHtml(review.review_note || '') + '" placeholder="검토 결과" style="flex:1;padding:4px 8px;border:1px solid #2d2d44;border-radius:4px;font-size:13px;background:#0f0f23;color:#e2e8f0;">' +
+                        '<select class="review-field-note" style="flex:1;padding:4px 8px;border:1px solid #2d2d44;border-radius:4px;font-size:13px;background:#0f0f23;color:#e2e8f0;">' +
+                            '<option value=""' + (!(review.review_note) ? ' selected' : '') + '>-- 선택 --</option>' +
+                            '<option value="승인"' + (review.review_note === '승인' ? ' selected' : '') + '>승인</option>' +
+                            '<option value="수정 후 승인"' + (review.review_note === '수정 후 승인' ? ' selected' : '') + '>수정 후 승인</option>' +
+                            '<option value="거부"' + (review.review_note === '거부' ? ' selected' : '') + '>거부</option>' +
+                        '</select>' +
                     '</div>' +
                     '<div style="display:flex;align-items:center;gap:6px;">' +
                         '<label style="min-width:36px;font-weight:600;font-size:13px;color:#94a3b8;">변경:</label>' +
@@ -330,8 +335,12 @@ def build_review_html(signals, reviews):
                     '</div>' +
                 '</div>';
             
-            card.querySelector('.approve-btn').addEventListener('click', () => setReview(id, 'approved', '', getReviewFields(card)));
+            card.querySelector('.approve-btn').addEventListener('click', () => {
+                card.querySelector('.review-field-note').value = '승인';
+                setReview(id, 'approved', '', getReviewFields(card));
+            });
             card.querySelector('.reject-btn').addEventListener('click', () => {
+                card.querySelector('.review-field-note').value = '거부';
                 const ri = card.querySelector('.reject-input');
                 ri.classList.toggle('show');
                 if (ri.classList.contains('show')) ri.querySelector('input').focus();
