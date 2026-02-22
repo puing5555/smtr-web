@@ -669,14 +669,17 @@ def build_review_html(signals, reviews):
             const searchF = document.getElementById('search-input').value.toLowerCase();
             
             container.innerHTML = '';
-            let shown = 0, approved = 0, rejected = 0;
+            let shown = 0, approved = 0, rejected = 0, opus4Done = 0;
             
             SIGNALS_DATA.forEach(sig => {
                 const id = sig.video_id + '_' + sig.asset;
                 const review = getReview(id);
                 
                 if (review.status === 'approved') approved++;
-                if (review.status === 'rejected') rejected++;
+                if (review.status === 'rejected') {
+                    rejected++;
+                    if (OPUS4_ANALYSIS[id] && OPUS4_ANALYSIS[id].status === 'complete') opus4Done++;
+                }
                 
                 if (assetF && sig.asset !== assetF) return;
                 if (signalF && sig.signal_type !== signalF) return;
@@ -698,7 +701,7 @@ def build_review_html(signals, reviews):
                 { n: SIGNALS_DATA.length - approved - rejected, l: '검토 대기' },
                 { n: approved, l: '승인됨' },
                 { n: rejected, l: '거부됨' },
-                { n: shown, l: '현재 표시' }
+                { n: opus4Done + '/' + rejected, l: 'Opus 검토' }
             ].map(s => '<div class="stat-card"><div class="stat-number">' + s.n + '</div><div class="stat-label">' + s.l + '</div></div>').join('');
             document.getElementById('stats-container').innerHTML = statsHtml;
         }
