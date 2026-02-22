@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opus 4 검증 파이프라인 테스트</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f4f8; color: #1a1a2e; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 16px; margin-bottom: 24px; }
+        .test-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .success { border-left: 4px solid #10b981; }
+        .error { border-left: 4px solid #ef4444; }
+        .loading { border-left: 4px solid #f59e0b; }
+        pre { background: #f8f9fa; padding: 12px; border-radius: 8px; overflow-x: auto; font-size: 13px; margin: 10px 0; }
+        .btn { padding: 8px 16px; background: #667eea; color: white; border: none; border-radius: 8px; cursor: pointer; margin: 5px; }
+        .btn:hover { background: #5a67d8; }
+        .opus4-section { margin-top: 12px; padding: 12px; background: #f0f9ff; border-radius: 8px; border-left: 3px solid #0ea5e9; }
+        .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid #fbbf24; border-top: 2px solid transparent; border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔥 Opus 4 검증 파이프라인 테스트</h1>
+            <p>Claude Haiku 기반 자동 재검증 시스템</p>
+        </div>
+        
+        <div class="test-card success">
+            <h2>✅ API 연결 테스트</h2>
+            <button class="btn" onclick="testAPIs()">API 연결 확인</button>
+            <div id="api-results"></div>
+        </div>
+        
+        <div class="test-card loading">
+            <h2>🔍 시그널 분석 결과</h2>
+            <button class="btn" onclick="loadAnalysis()">분석 결과 불러오기</button>
+            <div id="analysis-results"></div>
+        </div>
+        
+        <div class="test-card">
+            <h2>📊 통계</h2>
+            <div id="stats-results"></div>
+        </div>
+    </div>
+
+    <script>
+        const BASE_URL = 'http://localhost:8901';
+        
+        async function testAPIs() {
+            const resultDiv = document.getElementById('api-results');
+            resultDiv.innerHTML = '<div class="spinner"></div> API 테스트 중...';
+            
+            try {
+                const [signals, reviews, analysis, suggestions] = await Promise.all([
+                    fetch(`${BASE_URL}/api/signals`).then(r => r.json()),
+                    fetch(`${BASE_URL}/api/reviews`).then(r => r.json()),
+                    fetch(`${BASE_URL}/api/opus4-analysis`).then(r => r.json()),
+                    fetch(`${BASE_URL}/api/prompt-suggestions`).then(r => r.json())
+                ]);
+                
+                resultDiv.innerHTML = `
+                    <div style="margin-top: 10px;">
+                        <div>✅ 시그널 데이터: ${signals.length}개</div>
+                        <div>✅ 리뷰 데이터: ${Object.keys(reviews).length}개</div>
+                        <div>✅ Opus 4 분석: ${Object.keys(analysis).length}개</div>
+                        <div>✅ 프롬프트 제안: ${suggestions.suggestions?.length || 0}개</div>
+                    </div>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `<div style="color: red; margin-top: 10px;">❌ API 연결 실패: ${error.message}</div>`;
+            }
+        }
+        
+        async function loadAnalysis() {
+            const resultDiv = document.getElementById('analysis-results');
+            resultDiv.innerHTML = '<div class="spinner"></div> 분석 결과 로드 중...';
+            
+            try {
+                const response = await fetch(`${BASE_URL}/api/opus4-analysis`);
+                const analysis = await response.json();
+                
+                let html = '';
+                for (const [signalId, data] of Object.entries(analysis)) {
+                    html += `<div class="opus4-section" style="margin: 10px 0;">`;
+                    html += `<h3>🎯 ${signalId}</h3>`;
+                    html += `<div><strong>상태:</strong> ${data.status}</div>`;
+                    
+                    if (data.error) {
+                        html += `<div style="color: red;"><strong>오류:</strong> ${data.error}</div>`;
+                    }
+                    
+                    if (data.raw_response) {
+                        // JSON 파싱 시도
+                        try {
+                            const parsed = JSON.parse(data.raw_response);
+                            html += `<div style="margin-top: 8px;">`;
+                            html += `<div><strong>Sonnet 시그널 정확:</strong> ${parsed.sonnet_signal_correct ? '✅' : '❌'}</div>`;
+                            html += `<div><strong>거부 사유 타당:</strong> ${parsed.rejection_valid ? '✅' : '❌'}</div>`;
+                            
+                            if (parsed.correct_signal) {
+                                html += `<div><strong>올바른 시그널:</strong> ${parsed.correct_signal.signal_type} (${parsed.correct_signal.asset})</div>`;
+                            }
+                            
+                            if (parsed.analysis) {
+                                html += `<div style="margin-top: 8px;"><strong>상세 분석:</strong></div>`;
+                                html += `<pre style="font-size: 12px; max-height: 200px; overflow-y: auto;">${JSON.stringify(parsed.analysis, null, 2)}</pre>`;
+                            }
+                            html += `</div>`;
+                        } catch (e) {
+                            html += `<div style="margin-top: 8px;"><strong>원본 응답:</strong></div>`;
+                            html += `<pre style="max-height: 200px; overflow-y: auto;">${data.raw_response}</pre>`;
+                        }
+                    }
+                    
+                    html += `</div>`;
+                }
+                
+                if (html === '') {
+                    html = '<div>분석 결과가 없습니다.</div>';
+                }
+                
+                resultDiv.innerHTML = html;
+            } catch (error) {
+                resultDiv.innerHTML = `<div style="color: red;">❌ 분석 결과 로드 실패: ${error.message}</div>`;
+            }
+        }
+        
+        async function updateStats() {
+            try {
+                const [signals, reviews, analysis] = await Promise.all([
+                    fetch(`${BASE_URL}/api/signals`).then(r => r.json()),
+                    fetch(`${BASE_URL}/api/reviews`).then(r => r.json()),
+                    fetch(`${BASE_URL}/api/opus4-analysis`).then(r => r.json())
+                ]);
+                
+                const rejected = Object.values(reviews).filter(r => r.status === 'rejected').length;
+                const approved = Object.values(reviews).filter(r => r.status === 'approved').length;
+                const analyzed = Object.keys(analysis).length;
+                const successful = Object.values(analysis).filter(a => !a.error && a.status === 'completed').length;
+                
+                document.getElementById('stats-results').innerHTML = `
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-top: 10px;">
+                        <div style="text-align: center; padding: 16px; background: #f8f9fa; border-radius: 8px;">
+                            <div style="font-size: 24px; font-weight: bold; color: #667eea;">${signals.length}</div>
+                            <div style="font-size: 12px; color: #666;">총 시그널</div>
+                        </div>
+                        <div style="text-align: center; padding: 16px; background: #fee2e2; border-radius: 8px;">
+                            <div style="font-size: 24px; font-weight: bold; color: #ef4444;">${rejected}</div>
+                            <div style="font-size: 12px; color: #666;">거부됨</div>
+                        </div>
+                        <div style="text-align: center; padding: 16px; background: #d1fae5; border-radius: 8px;">
+                            <div style="font-size: 24px; font-weight: bold; color: #10b981;">${approved}</div>
+                            <div style="font-size: 12px; color: #666;">승인됨</div>
+                        </div>
+                        <div style="text-align: center; padding: 16px; background: #fef3c7; border-radius: 8px;">
+                            <div style="font-size: 24px; font-weight: bold; color: #f59e0b;">${analyzed}</div>
+                            <div style="font-size: 12px; color: #666;">분석 시도</div>
+                        </div>
+                        <div style="text-align: center; padding: 16px; background: #e0f2fe; border-radius: 8px;">
+                            <div style="font-size: 24px; font-weight: bold; color: #0891b2;">${successful}</div>
+                            <div style="font-size: 12px; color: #666;">분석 성공</div>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                document.getElementById('stats-results').innerHTML = `<div style="color: red;">통계 로드 실패: ${error.message}</div>`;
+            }
+        }
+        
+        // 페이지 로드 시 자동 실행
+        document.addEventListener('DOMContentLoaded', () => {
+            testAPIs();
+            loadAnalysis(); 
+            updateStats();
+        });
+        
+        // 5초마다 자동 갱신
+        setInterval(() => {
+            updateStats();
+            loadAnalysis();
+        }, 5000);
+    </script>
+</body>
+</html>
