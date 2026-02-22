@@ -828,7 +828,8 @@ def build_review_html(signals, reviews):
                 if (review.status === 'approved') approved++;
                 if (review.status === 'rejected') {
                     rejected++;
-                    if (OPUS4_ANALYSIS[id] && OPUS4_ANALYSIS[id].status === 'complete') opus4Done++;
+                    // Opus 4 분석 완료 카운트는 Sonnet 탭에서만
+                    if (currentTab === 'sonnet' && OPUS4_ANALYSIS[id] && OPUS4_ANALYSIS[id].status === 'complete') opus4Done++;
                 }
                 
                 if (assetF && sig.asset !== assetF) return;
