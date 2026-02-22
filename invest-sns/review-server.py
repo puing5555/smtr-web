@@ -616,7 +616,14 @@ def build_review_html(signals, reviews):
             }
             
             if (analysis.status === 'completed') {
-                const correctSignal = analysis.correct_signal || {};
+                // 두 가지 데이터 구조 모두 지원
+                const r = analysis.result || {};
+                const correctSignal = (typeof analysis.correct_signal === 'object' && analysis.correct_signal) ? analysis.correct_signal : 
+                    (r.correct_signal ? { signal_type: r.correct_signal, asset: r.correct_asset, content: r.correct_content, timestamp: r.correct_timestamp } : {});
+                const sonnetCorrect = analysis.sonnet_signal_correct !== undefined ? analysis.sonnet_signal_correct : r.sonnet_accurate;
+                const rejectionValid = analysis.rejection_valid !== undefined ? analysis.rejection_valid : r.rejection_valid;
+                const analysisText = analysis.analysis || r.analysis || '분석 내용 없음';
+                const promptImprovement = analysis.prompt_improvement || r.prompt_improvement || '';
                 const suggestion = analysis.suggestion || {};
                 const signalTypeKor = {
                     'STRONG_BUY': '강력매수', 'BUY': '매수', 'POSITIVE': '긍정',
@@ -636,11 +643,11 @@ def build_review_html(signals, reviews):
                         '<div style="font-weight:600;color:#0369a1;margin-bottom:12px;">🔥 Opus 4 분석 완료</div>' +
                         '<div style="margin-bottom:8px;">' +
                             '<strong>Sonnet 시그널 정확도:</strong> ' +
-                            (analysis.sonnet_signal_correct ? '✅ 정확' : '❌ 부정확') +
+                            (sonnetCorrect ? '✅ 정확' : '❌ 부정확') +
                         '</div>' +
                         '<div style="margin-bottom:8px;">' +
                             '<strong>거부 사유 타당성:</strong> ' +
-                            (analysis.rejection_valid ? '✅ 타당함' : '❌ 부당함') +
+                            (rejectionValid ? '✅ 타당함' : '❌ 부당함') +
                         '</div>' +
                         (correctSignal.signal_type ? 
                             '<div style="margin-bottom:8px;">' +
@@ -660,14 +667,14 @@ def build_review_html(signals, reviews):
                         '<div style="margin-top:8px;">' +
                             '<strong>상세 분석:</strong><br>' +
                             '<div style="font-size:13px;color:#666;margin-top:4px;line-height:1.4;">' +
-                                escHtml(analysis.analysis || '분석 내용 없음') +
+                                escHtml(analysisText) +
                             '</div>' +
                         '</div>' +
-                        (analysis.prompt_improvement ? 
+                        (promptImprovement ? 
                             '<div style="margin-top:12px;padding:8px;background:#fef3c7;border-radius:6px;">' +
                                 '<strong style="color:#92400e;">💡 프롬프트 개선 제안:</strong><br>' +
                                 '<div style="font-size:13px;color:#92400e;margin-top:4px;line-height:1.4;">' +
-                                    escHtml(analysis.prompt_improvement) +
+                                    escHtml(promptImprovement) +
                                 '</div>' +
                             '</div>' : ''
                         ) +
@@ -811,7 +818,10 @@ def build_review_html(signals, reviews):
             container.innerHTML = '';
             let shown = 0, approved = 0, rejected = 0, opus4Done = 0;
             
-            SIGNALS_DATA.forEach(sig => {
+            // Use different data source based on current tab
+            const signals = currentTab === 'sonnet' ? SIGNALS_DATA : OPUS4_SIGNALS;
+            
+            signals.forEach(sig => {
                 const id = sig.video_id + '_' + sig.asset;
                 const review = getReview(id);
                 
@@ -836,28 +846,60 @@ def build_review_html(signals, reviews):
                 container.innerHTML = '<div style="text-align:center;padding:40px;color:#666;">필터 조건에 맞는 시그널이 없습니다.</div>';
             }
             
-            const statsHtml = [
-                { n: SIGNALS_DATA.length, l: '총 시그널' },
-                { n: SIGNALS_DATA.length - approved - rejected, l: '검토 대기' },
+            let statsItems = [
+                { n: signals.length, l: '총 시그널' },
+                { n: signals.length - approved - rejected, l: '검토 대기' },
                 { n: approved, l: '승인됨' },
-                { n: rejected, l: '거부됨' },
-                { n: opus4Done + '/' + rejected, l: 'Opus 검토' }
-            ].map(s => '<div class="stat-card"><div class="stat-number">' + s.n + '</div><div class="stat-label">' + s.l + '</div></div>').join('');
+                { n: rejected, l: '거부됨' }
+            ];
+            
+            // Opus 검토 통계는 Sonnet 탭에서만 표시
+            if (currentTab === 'sonnet') {
+                statsItems.push({ n: opus4Done + '/' + rejected, l: 'Opus 검토' });
+            } else {
+                statsItems.push({ n: shown, l: '현재 표시' });
+            }
+            
+            const statsHtml = statsItems.map(s => 
+                '<div class="stat-card"><div class="stat-number">' + s.n + '</div><div class="stat-label">' + s.l + '</div></div>'
+            ).join('');
             document.getElementById('stats-container').innerHTML = statsHtml;
         }
         
         function initFilters() {
-            const assets = [...new Set(SIGNALS_DATA.map(s => s.asset))].sort();
-            const af = document.getElementById('asset-filter');
-            assets.forEach(a => { const o = document.createElement('option'); o.value = a; o.textContent = a; af.appendChild(o); });
-            
-            const youtubers = [...new Set(SIGNALS_DATA.map(s => s.channel || '코린이 아빠'))].sort();
-            const yf = document.getElementById('youtuber-filter');
-            youtubers.forEach(y => { const o = document.createElement('option'); o.value = y; o.textContent = y; yf.appendChild(o); });
+            updateFilters();
             
             ['asset-filter','signal-filter','review-filter','youtuber-filter'].forEach(id => 
                 document.getElementById(id).addEventListener('change', render));
             document.getElementById('search-input').addEventListener('input', render);
+        }
+        
+        function updateFilters() {
+            const signals = currentTab === 'sonnet' ? SIGNALS_DATA : OPUS4_SIGNALS;
+            
+            const assets = [...new Set(signals.map(s => s.asset))].sort();
+            const af = document.getElementById('asset-filter');
+            const currentAsset = af.value;
+            af.innerHTML = '<option value="">전체 종목</option>';
+            assets.forEach(a => { 
+                const o = document.createElement('option'); 
+                o.value = a; 
+                o.textContent = a; 
+                o.selected = a === currentAsset;
+                af.appendChild(o); 
+            });
+            
+            const youtubers = [...new Set(signals.map(s => s.channel || '코린이 아빠'))].sort();
+            const yf = document.getElementById('youtuber-filter');
+            const currentYoutuber = yf.value;
+            yf.innerHTML = '<option value="">전체 유튜버</option>';
+            youtubers.forEach(y => { 
+                const o = document.createElement('option'); 
+                o.value = y; 
+                o.textContent = y; 
+                o.selected = y === currentYoutuber;
+                yf.appendChild(o); 
+            });
         }
         
         // Data loaded via loadData() above
