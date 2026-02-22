@@ -457,6 +457,20 @@
                             <div class="stage-content">
                                 <strong>상태:</strong> ${getStatusLabel(reviewStatus)}<br>
                                 <small>마지막 수정: ${reviews[signalId + '_timestamp'] || '없음'}</small>
+                                <div style="margin-top:8px;display:flex;flex-direction:column;gap:4px;">
+                                    <div style="display:flex;align-items:center;gap:6px;">
+                                        <label style="min-width:40px;font-weight:600;font-size:13px;">검토:</label>
+                                        <input type="text" id="review_note_${signalId}" value="${reviews[signalId + '_review_note'] || ''}" placeholder="검토 결과" style="flex:1;padding:4px 8px;border:1px solid #d1d5db;border-radius:4px;font-size:13px;">
+                                    </div>
+                                    <div style="display:flex;align-items:center;gap:6px;">
+                                        <label style="min-width:40px;font-weight:600;font-size:13px;">변경:</label>
+                                        <input type="text" id="review_change_${signalId}" value="${reviews[signalId + '_review_change'] || ''}" placeholder="변경 내용" style="flex:1;padding:4px 8px;border:1px solid #d1d5db;border-radius:4px;font-size:13px;">
+                                    </div>
+                                    <div style="display:flex;align-items:center;gap:6px;">
+                                        <label style="min-width:40px;font-weight:600;font-size:13px;">사유:</label>
+                                        <input type="text" id="review_reason_${signalId}" value="${reviews[signalId + '_review_reason'] || ''}" placeholder="사유" style="flex:1;padding:4px 8px;border:1px solid #d1d5db;border-radius:4px;font-size:13px;">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -531,10 +545,18 @@
             const reviews = loadReviewStatus();
             reviews[signalId] = status;
             reviews[signalId + '_timestamp'] = new Date().toLocaleString('ko-KR');
+            
+            // 검토/변경/사유 필드 저장
+            const noteEl = document.getElementById('review_note_' + signalId);
+            const changeEl = document.getElementById('review_change_' + signalId);
+            const reasonEl = document.getElementById('review_reason_' + signalId);
+            if (noteEl) reviews[signalId + '_review_note'] = noteEl.value;
+            if (changeEl) reviews[signalId + '_review_change'] = changeEl.value;
+            if (reasonEl) reviews[signalId + '_review_reason'] = reasonEl.value;
+            
             saveReviewStatus(reviews);
             
             // UI 업데이트
-            const card = document.querySelector(`[data-index]`);  // 실제로는 더 정확한 선택자 사용
             updateStats();
             applyFilters();
         }

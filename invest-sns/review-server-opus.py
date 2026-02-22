@@ -63,7 +63,10 @@ class ReviewHandler(SimpleHTTPRequestHandler):
             reviews[sig_id] = {
                 'status': data.get('status', 'pending'),
                 'reason': data.get('reason', ''),
-                'time': data.get('time', '')
+                'time': data.get('time', ''),
+                'review_note': data.get('review_note', ''),
+                'review_change': data.get('review_change', ''),
+                'review_reason': data.get('review_reason', '')
             }
             save_reviews(reviews)
             
@@ -232,20 +235,31 @@ def build_review_html(signals, reviews):
         
         function getReview(id) { return REVIEWS[id] || { status: 'pending' }; }
         
-        async function setReview(id, status, reason) {
+        async function setReview(id, status, reason, extraFields) {
             const time = new Date().toLocaleString('ko-KR');
-            REVIEWS[id] = { status, reason: reason || '', time };
+            const review_note = (extraFields && extraFields.review_note) || '';
+            const review_change = (extraFields && extraFields.review_change) || '';
+            const review_reason = (extraFields && extraFields.review_reason) || '';
+            REVIEWS[id] = { status, reason: reason || '', time, review_note, review_change, review_reason };
             
             document.getElementById('saving-indicator').style.display = 'block';
             try {
                 await fetch('/api/review', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ id, status, reason: reason || '', time })
+                    body: JSON.stringify({ id, status, reason: reason || '', time, review_note, review_change, review_reason })
                 });
             } catch(e) { console.error('Save failed:', e); }
             document.getElementById('saving-indicator').style.display = 'none';
             render();
+        }
+        
+        function getReviewFields(card) {
+            return {
+                review_note: (card.querySelector('.review-field-note') || {}).value || '',
+                review_change: (card.querySelector('.review-field-change') || {}).value || '',
+                review_reason: (card.querySelector('.review-field-reason') || {}).value || ''
+            };
         }
         
         function escHtml(s) {
@@ -300,9 +314,23 @@ def build_review_html(signals, reviews):
                 '<div class="reject-input">' +
                     '<input type="text" placeholder="거절 사유 입력...">' +
                     '<button class="reject-submit-btn">거절</button>' +
+                '</div>' +
+                '<div style="margin-top:10px;padding-top:10px;border-top:1px solid #2d2d44;display:flex;flex-direction:column;gap:4px;">' +
+                    '<div style="display:flex;align-items:center;gap:6px;">' +
+                        '<label style="min-width:36px;font-weight:600;font-size:13px;color:#94a3b8;">검토:</label>' +
+                        '<input type="text" class="review-field-note" value="' + escHtml(review.review_note || '') + '" placeholder="검토 결과" style="flex:1;padding:4px 8px;border:1px solid #2d2d44;border-radius:4px;font-size:13px;background:#0f0f23;color:#e2e8f0;">' +
+                    '</div>' +
+                    '<div style="display:flex;align-items:center;gap:6px;">' +
+                        '<label style="min-width:36px;font-weight:600;font-size:13px;color:#94a3b8;">변경:</label>' +
+                        '<input type="text" class="review-field-change" value="' + escHtml(review.review_change || '') + '" placeholder="변경 내용" style="flex:1;padding:4px 8px;border:1px solid #2d2d44;border-radius:4px;font-size:13px;background:#0f0f23;color:#e2e8f0;">' +
+                    '</div>' +
+                    '<div style="display:flex;align-items:center;gap:6px;">' +
+                        '<label style="min-width:36px;font-weight:600;font-size:13px;color:#94a3b8;">사유:</label>' +
+                        '<input type="text" class="review-field-reason" value="' + escHtml(review.review_reason || '') + '" placeholder="사유" style="flex:1;padding:4px 8px;border:1px solid #2d2d44;border-radius:4px;font-size:13px;background:#0f0f23;color:#e2e8f0;">' +
+                    '</div>' +
                 '</div>';
             
-            card.querySelector('.approve-btn').addEventListener('click', () => setReview(id, 'approved'));
+            card.querySelector('.approve-btn').addEventListener('click', () => setReview(id, 'approved', '', getReviewFields(card)));
             card.querySelector('.reject-btn').addEventListener('click', () => {
                 const ri = card.querySelector('.reject-input');
                 ri.classList.toggle('show');
@@ -310,10 +338,10 @@ def build_review_html(signals, reviews):
             });
             card.querySelector('.reject-submit-btn').addEventListener('click', () => {
                 const reason = card.querySelector('.reject-input input').value;
-                setReview(id, 'rejected', reason);
+                setReview(id, 'rejected', reason, getReviewFields(card));
             });
             card.querySelector('.reject-input input').addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') setReview(id, 'rejected', e.target.value);
+                if (e.key === 'Enter') setReview(id, 'rejected', e.target.value, getReviewFields(card));
             });
             
             return card;
