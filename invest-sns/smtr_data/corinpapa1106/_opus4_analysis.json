@@ -1,0 +1,46 @@
+{
+  "7AaksU-R3dg_XRP": {
+    "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-opus-20240229'}, 'request_id': 'req_011CYP71mFABvgemgWHU197i'}",
+    "status": "completed",
+    "timestamp": 1771763166.4937303,
+    "signal_data": {
+      "asset": "XRP",
+      "signal_type": "SELL",
+      "content": "XRP 헤어질 결심",
+      "confidence": "HIGH",
+      "timeframe": "MID",
+      "conditional": false,
+      "skin_in_game": true,
+      "hedged": false,
+      "context": "월드리버티파이낸셜이 USD1 스테이블코인으로 XRP의 국경간 송금 영역을 직접 대체하겠다고 선언했고, 화자가 XRP와 헤어질 결심을 표명",
+      "timestamp": "[0:01]",
+      "video_id": "7AaksU-R3dg",
+      "channel": "코린이 아빠",
+      "title": "\"Decision to Part with XRP (WLFI Mar-a-Lago Forum Impact)\"",
+      "date": "2026-02-18"
+    },
+    "rejection_reason": "테스트 거부 - 시그널 내용이 모호함"
+  },
+  "7AaksU-R3dg_월드리버티파이낸셜 (WLFI)": {
+    "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-20241022'}, 'request_id': 'req_011CYP75PmCEyy9X6fyCmzf7'}",
+    "status": "completed",
+    "timestamp": 1771763215.766069,
+    "signal_data": {
+      "asset": "월드리버티파이낸셜 (WLFI)",
+      "signal_type": "POSITIVE",
+      "content": "월드 리버티 파이낸셜이 토큰이 있거든요. 토큰 상장돼 있는데 20% 정도가 올랐습니다. 하루 만에",
+      "confidence": "MEDIUM",
+      "timeframe": "SHORT",
+      "conditional": false,
+      "skin_in_game": false,
+      "hedged": false,
+      "context": "마라라고 포럼 개최 후 WLFI 토큰이 하루 만에 20% 상승했다는 사실 전달과 함께 긍정적 언급",
+      "timestamp": "[1:08]",
+      "video_id": "7AaksU-R3dg",
+      "channel": "코린이 아빠",
+      "title": "\"Decision to Part with XRP (WLFI Mar-a-Lago Forum Impact)\"",
+      "date": "2026-02-18"
+    },
+    "rejection_reason": "시그널 근거가 불분명하고 타임스탬프가 부정확함"
+  }
+}

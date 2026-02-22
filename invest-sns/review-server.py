@@ -114,7 +114,7 @@ JSON 형식으로 답변해주세요:
 """
         
         response = client.messages.create(
-            model="claude-3-opus-20240229",
+            model="claude-3-5-sonnet-20241022",  # 가용한 최신 모델 사용
             max_tokens=4000,
             temperature=0.1,
             messages=[{"role": "user", "content": prompt}]
@@ -723,7 +723,7 @@ def build_review_html(signals, reviews):
 </html>'''
 
 if __name__ == '__main__':
-    port = 8899
+    port = 8901  # 다른 포트 사용 (8899는 기존 서버가 점유 중)
     server = HTTPServer(('0.0.0.0', port), ReviewHandler)
-    print(f'Review server running on http://localhost:{port}', flush=True)
+    print(f'Opus 4 enhanced review server running on http://localhost:{port}', flush=True)
     server.serve_forever()
