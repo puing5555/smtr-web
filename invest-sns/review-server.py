@@ -723,7 +723,7 @@ def build_review_html(signals, reviews):
 </html>'''
 
 if __name__ == '__main__':
-    port = 8901  # 다른 포트 사용 (8899는 기존 서버가 점유 중)
+    port = 8899  # 다른 포트 사용 (8899는 기존 서버가 점유 중)
     server = HTTPServer(('0.0.0.0', port), ReviewHandler)
     print(f'Opus 4 enhanced review server running on http://localhost:{port}', flush=True)
     server.serve_forever()
