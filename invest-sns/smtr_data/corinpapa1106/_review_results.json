@@ -823,5 +823,25 @@
     "status": "approved",
     "reason": "",
     "time": "2026. 2. 22. 오전 1:38:12"
+  },
+  "oC-mHWKj8m8_비트마인 (BMNR)": {
+    "status": "rejected",
+    "reason": "상대적으로 안전하다는거지 비트코인에 대한 긍정은 아님 -> 재검토",
+    "time": "2026. 2. 22. 오후 7:18:06"
+  },
+  "OOL77dtnR3g_타르 (THAR)": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오후 7:18:14"
+  },
+  "axurZUkC5Dc_솔라나": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오후 7:18:22"
+  },
+  "H2OP8hKs-Tk_이더리움": {
+    "status": "approved",
+    "reason": "",
+    "time": "2026. 2. 22. 오후 7:18:26"
   }
 }

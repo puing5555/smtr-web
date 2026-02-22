@@ -1,10 +1,20 @@
 """Signal Review Web Server - serves review page and stores results"""
-import json, os, sys
+import json, os, sys, threading, time
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
+import anthropic
 
 REVIEW_FILE = os.path.join('smtr_data', 'corinpapa1106', '_review_results.json')
 SIGNALS_FILE = os.path.join('smtr_data', 'corinpapa1106', '_deduped_signals_8types_dated.json')
+OPUS4_ANALYSIS_FILE = os.path.join('smtr_data', 'corinpapa1106', '_opus4_analysis.json')
+PROMPT_VERSIONS_FILE = os.path.join('smtr_data', '_prompt_versions.json')
+
+# Anthropic 클라이언트 초기화
+try:
+    client = anthropic.Anthropic(api_key=os.environ.get('ANTHROPIC_API_KEY'))
+except Exception as e:
+    print(f"Warning: Anthropic client init failed: {e}")
+    client = None
 
 def load_reviews():
     if os.path.exists(REVIEW_FILE):
@@ -15,6 +25,149 @@ def load_reviews():
 def save_reviews(data):
     with open(REVIEW_FILE, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+
+def load_opus4_analysis():
+    if os.path.exists(OPUS4_ANALYSIS_FILE):
+        with open(OPUS4_ANALYSIS_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return {}
+
+def save_opus4_analysis(data):
+    os.makedirs(os.path.dirname(OPUS4_ANALYSIS_FILE), exist_ok=True)
+    with open(OPUS4_ANALYSIS_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+def load_prompt_versions():
+    if os.path.exists(PROMPT_VERSIONS_FILE):
+        with open(PROMPT_VERSIONS_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return {"versions": [], "suggestions": []}
+
+def save_prompt_versions(data):
+    os.makedirs(os.path.dirname(PROMPT_VERSIONS_FILE), exist_ok=True)
+    with open(PROMPT_VERSIONS_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+def get_subtitle_content(video_id):
+    """자막 파일 내용 읽기"""
+    subtitle_file = os.path.join('smtr_data', 'corinpapa1106', f'{video_id}.txt')
+    if os.path.exists(subtitle_file):
+        with open(subtitle_file, 'r', encoding='utf-8') as f:
+            return f.read()
+    return None
+
+def opus4_analyze_signal(signal_id, signal_data, rejection_reason):
+    """Opus 4로 거부된 시그널을 재분석"""
+    if not client:
+        return {"error": "Anthropic client not available"}
+    
+    video_id = signal_data.get('video_id')
+    if not video_id:
+        return {"error": "video_id not found"}
+    
+    subtitle_content = get_subtitle_content(video_id)
+    if not subtitle_content:
+        return {"error": f"Subtitle file not found for video {video_id}"}
+    
+    try:
+        prompt = f"""
+다음은 유튜브 영상 자막과 Claude Sonnet이 추출한 시그널, 그리고 인간이 거부한 사유입니다.
+
+**영상 자막:**
+{subtitle_content}
+
+**Sonnet이 추출한 시그널:**
+- 종목: {signal_data.get('asset', 'N/A')}
+- 시그널 타입: {signal_data.get('signal_type', 'N/A')}
+- 내용: {signal_data.get('content', 'N/A')}
+- 타임스탬프: {signal_data.get('timestamp', 'N/A')}
+- 신뢰도: {signal_data.get('confidence', 'N/A')}
+
+**인간의 거부 사유:**
+{rejection_reason}
+
+**시그널 타입 정의 (절대 변경 금지):**
+STRONG_BUY / BUY / POSITIVE / HOLD / NEUTRAL / CONCERN / SELL / STRONG_SELL
+
+**분석 요청:**
+자막을 처음부터 끝까지 다시 읽고 다음을 분석해주세요:
+
+1. **Sonnet 시그널 검증**: Sonnet이 추출한 시그널이 자막 내용과 일치하는가?
+2. **거부 사유 타당성**: 인간의 거부 사유가 합리적인가?
+3. **올바른 시그널**: 실제로는 어떤 시그널이 맞는가? (위 8가지 타입 중 하나, 또는 시그널 없음)
+4. **프롬프트 개선 제안**: Sonnet의 추출 정확도를 높이려면 프롬프트를 어떻게 개선해야 하는가?
+
+JSON 형식으로 답변해주세요:
+{{
+  "sonnet_signal_correct": true/false,
+  "rejection_valid": true/false,
+  "correct_signal": {{
+    "signal_type": "STRONG_BUY|BUY|...|null",
+    "asset": "종목명 또는 null",
+    "content": "올바른 시그널 내용",
+    "timestamp": "올바른 타임스탬프",
+    "confidence": "HIGH|MEDIUM|LOW"
+  }},
+  "analysis": "상세한 분석 내용",
+  "prompt_improvement": "프롬프트 개선 제안"
+}}
+"""
+        
+        response = client.messages.create(
+            model="claude-3-opus-20240229",
+            max_tokens=4000,
+            temperature=0.1,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        
+        # JSON 응답 파싱 시도
+        try:
+            result = json.loads(response.content[0].text)
+            result['raw_response'] = response.content[0].text
+            return result
+        except json.JSONDecodeError:
+            return {
+                "error": "Failed to parse JSON response",
+                "raw_response": response.content[0].text
+            }
+            
+    except Exception as e:
+        return {"error": str(e)}
+
+def trigger_opus4_analysis(signal_id, signal_data, rejection_reason):
+    """비동기로 Opus 4 분석 실행"""
+    def analyze():
+        # 분석 중 상태로 표시
+        analysis_data = load_opus4_analysis()
+        analysis_data[signal_id] = {"status": "analyzing", "timestamp": time.time()}
+        save_opus4_analysis(analysis_data)
+        
+        # Opus 4 분석 실행
+        result = opus4_analyze_signal(signal_id, signal_data, rejection_reason)
+        
+        # 결과 저장
+        analysis_data = load_opus4_analysis()
+        analysis_data[signal_id] = {
+            **result,
+            "status": "completed",
+            "timestamp": time.time(),
+            "signal_data": signal_data,
+            "rejection_reason": rejection_reason
+        }
+        save_opus4_analysis(analysis_data)
+        
+        # 프롬프트 개선 제안 저장
+        if 'prompt_improvement' in result and result['prompt_improvement']:
+            prompt_data = load_prompt_versions()
+            prompt_data['suggestions'].append({
+                "timestamp": time.time(),
+                "signal_id": signal_id,
+                "suggestion": result['prompt_improvement']
+            })
+            save_prompt_versions(prompt_data)
+    
+    # 백그라운드에서 실행
+    threading.Thread(target=analyze, daemon=True).start()
 
 class ReviewHandler(SimpleHTTPRequestHandler):
     def do_GET(self):
@@ -48,6 +201,23 @@ class ReviewHandler(SimpleHTTPRequestHandler):
             # Sort by date descending (newest first)
             signals.sort(key=lambda s: s.get('date', ''), reverse=True)
             self.wfile.write(json.dumps(signals, ensure_ascii=False).encode('utf-8'))
+            
+        elif parsed.path == '/api/opus4-analysis':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            analysis_data = load_opus4_analysis()
+            self.wfile.write(json.dumps(analysis_data, ensure_ascii=False).encode('utf-8'))
+            
+        elif parsed.path == '/api/prompt-suggestions':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            prompt_data = load_prompt_versions()
+            self.wfile.write(json.dumps(prompt_data, ensure_ascii=False).encode('utf-8'))
+            
         else:
             self.send_response(404)
             self.end_headers()
@@ -61,18 +231,67 @@ class ReviewHandler(SimpleHTTPRequestHandler):
             data = json.loads(body)
             reviews = load_reviews()
             sig_id = data.get('id', '')
+            status = data.get('status', 'pending')
+            reason = data.get('reason', '')
+            
             reviews[sig_id] = {
-                'status': data.get('status', 'pending'),
-                'reason': data.get('reason', ''),
+                'status': status,
+                'reason': reason,
                 'time': data.get('time', '')
             }
             save_reviews(reviews)
+            
+            # 거부된 경우 Opus 4 재검증 트리거
+            if status == 'rejected' and reason:
+                # 시그널 데이터 찾기
+                with open(SIGNALS_FILE, 'r', encoding='utf-8') as f:
+                    signals = json.load(f)
+                
+                signal_data = None
+                for sig in signals:
+                    if sig['video_id'] + '_' + sig['asset'] == sig_id:
+                        signal_data = sig
+                        break
+                
+                if signal_data:
+                    trigger_opus4_analysis(sig_id, signal_data, reason)
             
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
             self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
             self.wfile.write(json.dumps({'ok': True}).encode('utf-8'))
+            
+        elif parsed.path == '/api/opus4-verify':
+            data = json.loads(body)
+            signal_id = data.get('signal_id', '')
+            
+            # 강제로 Opus 4 재검증 실행
+            with open(SIGNALS_FILE, 'r', encoding='utf-8') as f:
+                signals = json.load(f)
+            
+            signal_data = None
+            for sig in signals:
+                if sig['video_id'] + '_' + sig['asset'] == signal_id:
+                    signal_data = sig
+                    break
+            
+            if signal_data:
+                reviews = load_reviews()
+                rejection_reason = reviews.get(signal_id, {}).get('reason', '수동 재검증 요청')
+                trigger_opus4_analysis(signal_id, signal_data, rejection_reason)
+                
+                self.send_response(200)
+                self.send_header('Content-Type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(json.dumps({'ok': True, 'message': 'Opus 4 분석 시작됨'}).encode('utf-8'))
+            else:
+                self.send_response(404)
+                self.send_header('Content-Type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(json.dumps({'error': 'Signal not found'}).encode('utf-8'))
         else:
             self.send_response(404)
             self.end_headers()
@@ -155,6 +374,8 @@ def build_review_html(signals, reviews):
         .reject-input input { flex: 1; padding: 6px 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; }
         .reject-input button { padding: 6px 12px; background: #ef4444; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; }
         .saving { position: fixed; top: 20px; right: 20px; background: #10b981; color: white; padding: 8px 16px; border-radius: 8px; display: none; z-index: 999; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .opus4-section { margin-top: 8px; }
     </style>
 </head>
 <body>
@@ -213,19 +434,42 @@ def build_review_html(signals, reviews):
     <script>
         let SIGNALS_DATA = [];
         let REVIEWS = {};
+        let OPUS4_ANALYSIS = {};
         
         async function loadData() {
-            const [sigRes, revRes] = await Promise.all([
+            const [sigRes, revRes, opusRes] = await Promise.all([
                 fetch('/api/signals').then(r => r.json()),
-                fetch('/api/reviews').then(r => r.json())
+                fetch('/api/reviews').then(r => r.json()),
+                fetch('/api/opus4-analysis').then(r => r.json()).catch(() => ({}))
             ]);
             SIGNALS_DATA = sigRes;
             REVIEWS = revRes;
+            OPUS4_ANALYSIS = opusRes;
             initFilters();
             render();
         }
         
         loadData();
+        
+        // 5초마다 Opus 4 분석 상태 갱신
+        setInterval(async () => {
+            try {
+                const opusRes = await fetch('/api/opus4-analysis').then(r => r.json());
+                const oldAnalyzing = Object.keys(OPUS4_ANALYSIS).filter(k => OPUS4_ANALYSIS[k].status === 'analyzing');
+                const newCompleted = Object.keys(opusRes).filter(k => 
+                    oldAnalyzing.includes(k) && opusRes[k].status === 'completed'
+                );
+                
+                OPUS4_ANALYSIS = opusRes;
+                
+                // 새로 완료된 분석이 있으면 해당 카드만 업데이트
+                if (newCompleted.length > 0) {
+                    render();
+                }
+            } catch (e) {
+                console.error('Failed to update Opus 4 analysis:', e);
+            }
+        }, 5000);
         
         const SIGNAL_LABELS = {
             'STRONG_BUY': '강력매수', 'BUY': '매수', 'POSITIVE': '긍정',
@@ -278,6 +522,72 @@ def build_review_html(signals, reviews):
             return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
         }
         
+        function buildOpus4Section(id) {
+            const analysis = OPUS4_ANALYSIS[id];
+            const review = getReview(id);
+            
+            // 거부된 시그널만 표시
+            if (review.status !== 'rejected') return '';
+            
+            if (!analysis) return '';
+            
+            if (analysis.status === 'analyzing') {
+                return '<div class="opus4-section">' +
+                    '<div style="margin-top:12px;padding:12px;background:#fef3c7;border-radius:8px;border-left:3px solid #f59e0b;">' +
+                        '<div style="font-weight:600;color:#92400e;margin-bottom:8px;">🔥 Opus 4 분석 중...</div>' +
+                        '<div class="spinner" style="display:inline-block;width:16px;height:16px;border:2px solid #fbbf24;border-top:2px solid transparent;border-radius:50%;animation:spin 1s linear infinite;"></div>' +
+                        '<span style="margin-left:8px;font-size:13px;color:#92400e;">자막을 다시 읽고 분석 중입니다.</span>' +
+                    '</div>' +
+                '</div>';
+            }
+            
+            if (analysis.status === 'completed') {
+                const correctSignal = analysis.correct_signal || {};
+                const signalTypeKor = {
+                    'STRONG_BUY': '강력매수', 'BUY': '매수', 'POSITIVE': '긍정',
+                    'HOLD': '보유', 'NEUTRAL': '중립', 'CONCERN': '우려',
+                    'SELL': '매도', 'STRONG_SELL': '강력매도'
+                };
+                
+                return '<div class="opus4-section">' +
+                    '<div style="margin-top:12px;padding:12px;background:#f0f9ff;border-radius:8px;border-left:3px solid:#0ea5e9;">' +
+                        '<div style="font-weight:600;color:#0369a1;margin-bottom:12px;">🔥 Opus 4 분석 완료</div>' +
+                        '<div style="margin-bottom:8px;">' +
+                            '<strong>Sonnet 시그널 정확도:</strong> ' +
+                            (analysis.sonnet_signal_correct ? '✅ 정확' : '❌ 부정확') +
+                        '</div>' +
+                        '<div style="margin-bottom:8px;">' +
+                            '<strong>거부 사유 타당성:</strong> ' +
+                            (analysis.rejection_valid ? '✅ 타당함' : '❌ 부당함') +
+                        '</div>' +
+                        (correctSignal.signal_type ? 
+                            '<div style="margin-bottom:8px;">' +
+                                '<strong>올바른 시그널:</strong> ' + 
+                                (signalTypeKor[correctSignal.signal_type] || correctSignal.signal_type) +
+                                (correctSignal.asset ? ' (' + escHtml(correctSignal.asset) + ')' : '') +
+                            '</div>' : ''
+                        ) +
+                        '<div style="margin-bottom:8px;">' +
+                            '<strong>상세 분석:</strong><br>' +
+                            '<div style="font-size:13px;color:#666;margin-top:4px;line-height:1.4;">' +
+                                escHtml(analysis.analysis || '분석 내용 없음') +
+                            '</div>' +
+                        '</div>' +
+                        (analysis.prompt_improvement ? 
+                            '<div style="margin-top:12px;padding:8px;background:#fef3c7;border-radius:6px;">' +
+                                '<strong style="color:#92400e;">💡 프롬프트 개선 제안:</strong><br>' +
+                                '<div style="font-size:13px;color:#92400e;margin-top:4px;line-height:1.4;">' +
+                                    escHtml(analysis.prompt_improvement) +
+                                '</div>' +
+                            '</div>' : ''
+                        ) +
+                    '</div>' +
+                '</div>';
+            }
+            
+            return '';
+        }
+        
         function parseTimestamp(ts) {
             if (!ts) return null;
             const parts = ts.replace(/[\\[\\] ]/g, '').split(':');
@@ -323,6 +633,7 @@ def build_review_html(signals, reviews):
                 '</div>' +
                 (sig.context ? '<div style="margin-top:8px;font-size:13px;color:#666;">💡 ' + escHtml(sig.context) + '</div>' : '') +
                 (review.status === 'rejected' && review.reason ? '<div style="margin-top:8px;font-size:13px;color:#991b1b;">❌ 거부 사유: ' + escHtml(review.reason) + '</div>' : '') +
+                buildOpus4Section(id) +
                 '<div class="reject-input">' +
                     '<input type="text" placeholder="거부 사유 입력...">' +
                     '<button class="reject-submit-btn">거부</button>' +
