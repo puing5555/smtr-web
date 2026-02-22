@@ -3836,7 +3836,10 @@
             }
 
             try {
-                const response = await fetch(`https://api.coingecko.com/api/v3/coins/${cryptoId}/ohlc?vs_currency=usd&days=${days}`);
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 8000);
+                const response = await fetch(`https://api.coingecko.com/api/v3/coins/${cryptoId}/ohlc?vs_currency=usd&days=${days}`, { signal: controller.signal });
+                clearTimeout(timeoutId);
                 if (!response.ok) throw new Error('API request failed');
                 
                 const data = await response.json();
@@ -3962,25 +3965,13 @@
                 const symbolInfo = STOCK_SYMBOLS[stockName];
                 const dateRange = getSignalDateRange(stockName);
 
-                let chartData = null;
+                // 먼저 더미 데이터로 즉시 차트 표시 (API 응답 기다리지 않음)
+                let chartData = generateDummyOHLC(stockName, dateRange.start, dateRange.end);
+                const shouldTryApi = symbolInfo && symbolInfo.type === 'crypto';
+                const cryptoId = shouldTryApi ? symbolInfo.id : null;
 
-                // API 데이터 가져오기
-                if (symbolInfo && symbolInfo.type === 'crypto') {
-                    console.log(`CoinGecko API 호출: ${symbolInfo.id}`);
-                    chartData = await fetchCryptoData(symbolInfo.id, 365);
-                    
-                    // CoinGecko API 실패시 더미 데이터로 폴백
-                    if (!chartData) {
-                        console.log('CoinGecko API 실패, 더미 데이터 생성');
-                        chartData = generateDummyOHLC(stockName, dateRange.start, dateRange.end);
-                    }
-                } else {
-                    // 주식은 더미 데이터 생성 (Yahoo Finance CORS 문제)
-                    console.log(`주식 더미 데이터 생성: ${stockName}`);
-                    chartData = generateDummyOHLC(stockName, dateRange.start, dateRange.end);
-                }
-
-                // 차트 다시 생성
+                // 로딩 표시 제거 후 차트 생성
+                chartContainer.innerHTML = '';
                 chart = LightweightCharts.createChart(chartContainer, {
                     width: chartContainer.clientWidth,
                     height: 420,
@@ -4005,7 +3996,7 @@
                 });
 
                 // 캔들스틱 시리즈 추가
-                const candlestickSeries = chart.addCandlestickSeries({
+                let candlestickSeries = chart.addCandlestickSeries({
                     upColor: '#10b981',
                     downColor: '#ef4444',
                     borderUpColor: '#10b981',
@@ -4045,6 +4036,38 @@
                         `$${latestData.close.toFixed(2)}`;
                     document.getElementById('chartChange').textContent = `${isUp ? '+' : ''}${change.toFixed(2)}%`;
                     document.getElementById('chartChange').className = `change ${isUp ? 'up' : 'down'}`;
+                }
+
+                // 백그라운드에서 실제 API 데이터 로드 (코인만)
+                if (cryptoId) {
+                    console.log(`더미 차트 표시 완료, CoinGecko 백그라운드 로드: ${cryptoId}`);
+                    fetchCryptoData(cryptoId, 365).then(apiData => {
+                        if (apiData && candlestickSeries) {
+                            console.log('CoinGecko 실제 데이터로 차트 업데이트');
+                            candlestickSeries.setData(apiData);
+                            // 마커 다시 설정
+                            const markers2 = allStatements
+                                .filter(stmt => stmt.stock === stockName)
+                                .map(stmt => ({
+                                    time: stmt.date,
+                                    position: 'aboveBar',
+                                    color: getMarkerColor(stmt.dirType),
+                                    shape: 'circle',
+                                    text: stmt.influencer.charAt(0)
+                                }));
+                            if (markers2.length > 0) candlestickSeries.setMarkers(markers2);
+                            // 가격 업데이트
+                            const latest = apiData[apiData.length - 1];
+                            const prev = apiData[apiData.length - 2];
+                            if (latest && prev) {
+                                const chg = ((latest.close - prev.close) / prev.close) * 100;
+                                document.getElementById('chartPrice').textContent = latest.close >= 1000 ? 
+                                    `$${latest.close.toLocaleString()}` : `$${latest.close.toFixed(2)}`;
+                                document.getElementById('chartChange').textContent = `${chg >= 0 ? '+' : ''}${chg.toFixed(2)}%`;
+                                document.getElementById('chartChange').className = `change ${chg >= 0 ? 'up' : 'down'}`;
+                            }
+                        }
+                    }).catch(() => {});
                 }
 
             } catch (error) {
