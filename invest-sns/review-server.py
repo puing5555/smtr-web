@@ -387,10 +387,6 @@ def build_review_html(signals, reviews):
         .reject-input button { padding: 6px 12px; background: #ef4444; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; }
         .saving { position: fixed; top: 20px; right: 20px; background: #10b981; color: white; padding: 8px 16px; border-radius: 8px; display: none; z-index: 999; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .tabs { display: flex; background: white; border-radius: 12px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-        .tab { flex: 1; padding: 16px 24px; text-align: center; cursor: pointer; font-weight: 600; background: transparent; transition: background 0.3s ease; }
-        .tab:hover { background: rgba(102, 126, 234, 0.1); }
-        .tab.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
         .opus4-section { margin-top: 8px; }
     </style>
 </head>
@@ -400,11 +396,6 @@ def build_review_html(signals, reviews):
         <div class="header">
             <h1>🔍 유튜버 시그널 검증 리뷰 v3</h1>
             <p>파이프라인: Claude Sonnet(추출) → 사람(최종 검토) | 서버 연동</p>
-        </div>
-        
-        <div class="tabs">
-            <div class="tab active" data-tab="sonnet">Sonnet 추출 (169)</div>
-            <div class="tab" data-tab="opus4">Opus 4 추출 (129)</div>
         </div>
         
         <div class="stats" id="stats-container"></div>
@@ -455,52 +446,22 @@ def build_review_html(signals, reviews):
     <script>
         let SIGNALS_DATA = [];
         let REVIEWS = {};
-        let OPUS4_SIGNALS = [];
-        let OPUS4_REVIEWS = {};
         let OPUS4_ANALYSIS = {};
-        let currentTab = 'sonnet';
         
         async function loadData() {
-            const [sigRes, revRes, opus4SigRes, opus4RevRes, opusRes] = await Promise.all([
+            const [sigRes, revRes, opusRes] = await Promise.all([
                 fetch('/api/signals').then(r => r.json()),
                 fetch('/api/reviews').then(r => r.json()),
-                fetch('/api/opus4-signals').then(r => r.json()),
-                fetch('/api/opus4-reviews').then(r => r.json()),
                 fetch('/api/opus4-analysis').then(r => r.json()).catch(() => ({}))
             ]);
             SIGNALS_DATA = sigRes;
             REVIEWS = revRes;
-            OPUS4_SIGNALS = opus4SigRes;
-            OPUS4_REVIEWS = opus4RevRes;
             OPUS4_ANALYSIS = opusRes;
-            updateTabCounts();
             initFilters();
             render();
         }
         
         loadData();
-        
-        function updateTabCounts() {
-            document.querySelector('.tab[data-tab="sonnet"]').textContent = `Sonnet 추출 (${SIGNALS_DATA.length})`;
-            document.querySelector('.tab[data-tab="opus4"]').textContent = `Opus 4 추출 (${OPUS4_SIGNALS.length})`;
-        }
-        
-        function switchTab(tabName) {
-            currentTab = tabName;
-            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-            document.querySelector(`.tab[data-tab="${tabName}"]`).classList.add('active');
-            updateFilters();
-            render();
-        }
-        
-        // Tab click handlers
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.addEventListener('click', () => {
-                    switchTab(tab.dataset.tab);
-                });
-            });
-        });
         
         // 5초마다 Opus 4 분석 상태 갱신
         setInterval(async () => {
@@ -528,13 +489,7 @@ def build_review_html(signals, reviews):
             'SELL': '매도', 'STRONG_SELL': '강력매도'
         };
         
-        function getReview(id) { 
-            if (currentTab === 'sonnet') {
-                return REVIEWS[id] || { status: 'pending' }; 
-            } else {
-                return OPUS4_REVIEWS[id] || { status: 'pending' }; 
-            }
-        }
+        function getReview(id) { return REVIEWS[id] || { status: 'pending' }; }
         
         function getReviewFields(card) {
             return {
@@ -549,17 +504,11 @@ def build_review_html(signals, reviews):
             const review_note = (extraFields && extraFields.review_note) || '';
             const review_change = (extraFields && extraFields.review_change) || '';
             const review_reason = (extraFields && extraFields.review_reason) || '';
-            
-            if (currentTab === 'sonnet') {
-                REVIEWS[id] = { status, reason: reason || '', time, review_note, review_change, review_reason };
-            } else {
-                OPUS4_REVIEWS[id] = { status, reason: reason || '', time, review_note, review_change, review_reason };
-            }
+            REVIEWS[id] = { status, reason: reason || '', time, review_note, review_change, review_reason };
             
             document.getElementById('saving-indicator').style.display = 'block';
             try {
-                const endpoint = currentTab === 'sonnet' ? '/api/review' : '/api/opus4-review';
-                await fetch(endpoint, {
+                await fetch('/api/review', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ id, status, reason: reason || '', time, review_note, review_change, review_reason })
@@ -616,7 +565,6 @@ def build_review_html(signals, reviews):
             }
             
             if (analysis.status === 'completed') {
-                // 두 가지 데이터 구조 모두 지원
                 const r = analysis.result || {};
                 const correctSignal = (typeof analysis.correct_signal === 'object' && analysis.correct_signal) ? analysis.correct_signal : 
                     (r.correct_signal ? { signal_type: r.correct_signal, asset: r.correct_asset, content: r.correct_content, timestamp: r.correct_timestamp } : {});
@@ -818,18 +766,14 @@ def build_review_html(signals, reviews):
             container.innerHTML = '';
             let shown = 0, approved = 0, rejected = 0, opus4Done = 0;
             
-            // Use different data source based on current tab
-            const signals = currentTab === 'sonnet' ? SIGNALS_DATA : OPUS4_SIGNALS;
-            
-            signals.forEach(sig => {
+            SIGNALS_DATA.forEach(sig => {
                 const id = sig.video_id + '_' + sig.asset;
                 const review = getReview(id);
                 
                 if (review.status === 'approved') approved++;
                 if (review.status === 'rejected') {
                     rejected++;
-                    // Opus 4 분석 완료 카운트는 Sonnet 탭에서만
-                    if (currentTab === 'sonnet' && OPUS4_ANALYSIS[id] && OPUS4_ANALYSIS[id].status === 'complete') opus4Done++;
+                    if (OPUS4_ANALYSIS[id] && OPUS4_ANALYSIS[id].status === 'complete') opus4Done++;
                 }
                 
                 if (assetF && sig.asset !== assetF) return;
@@ -847,60 +791,28 @@ def build_review_html(signals, reviews):
                 container.innerHTML = '<div style="text-align:center;padding:40px;color:#666;">필터 조건에 맞는 시그널이 없습니다.</div>';
             }
             
-            let statsItems = [
-                { n: signals.length, l: '총 시그널' },
-                { n: signals.length - approved - rejected, l: '검토 대기' },
+            const statsHtml = [
+                { n: SIGNALS_DATA.length, l: '총 시그널' },
+                { n: SIGNALS_DATA.length - approved - rejected, l: '검토 대기' },
                 { n: approved, l: '승인됨' },
-                { n: rejected, l: '거부됨' }
-            ];
-            
-            // Opus 검토 통계는 Sonnet 탭에서만 표시
-            if (currentTab === 'sonnet') {
-                statsItems.push({ n: opus4Done + '/' + rejected, l: 'Opus 검토' });
-            } else {
-                statsItems.push({ n: shown, l: '현재 표시' });
-            }
-            
-            const statsHtml = statsItems.map(s => 
-                '<div class="stat-card"><div class="stat-number">' + s.n + '</div><div class="stat-label">' + s.l + '</div></div>'
-            ).join('');
+                { n: rejected, l: '거부됨' },
+                { n: opus4Done + '/' + rejected, l: 'Opus 검토' }
+            ].map(s => '<div class="stat-card"><div class="stat-number">' + s.n + '</div><div class="stat-label">' + s.l + '</div></div>').join('');
             document.getElementById('stats-container').innerHTML = statsHtml;
         }
         
         function initFilters() {
-            updateFilters();
+            const assets = [...new Set(SIGNALS_DATA.map(s => s.asset))].sort();
+            const af = document.getElementById('asset-filter');
+            assets.forEach(a => { const o = document.createElement('option'); o.value = a; o.textContent = a; af.appendChild(o); });
+            
+            const youtubers = [...new Set(SIGNALS_DATA.map(s => s.channel || '코린이 아빠'))].sort();
+            const yf = document.getElementById('youtuber-filter');
+            youtubers.forEach(y => { const o = document.createElement('option'); o.value = y; o.textContent = y; yf.appendChild(o); });
             
             ['asset-filter','signal-filter','review-filter','youtuber-filter'].forEach(id => 
                 document.getElementById(id).addEventListener('change', render));
             document.getElementById('search-input').addEventListener('input', render);
-        }
-        
-        function updateFilters() {
-            const signals = currentTab === 'sonnet' ? SIGNALS_DATA : OPUS4_SIGNALS;
-            
-            const assets = [...new Set(signals.map(s => s.asset))].sort();
-            const af = document.getElementById('asset-filter');
-            const currentAsset = af.value;
-            af.innerHTML = '<option value="">전체 종목</option>';
-            assets.forEach(a => { 
-                const o = document.createElement('option'); 
-                o.value = a; 
-                o.textContent = a; 
-                o.selected = a === currentAsset;
-                af.appendChild(o); 
-            });
-            
-            const youtubers = [...new Set(signals.map(s => s.channel || '코린이 아빠'))].sort();
-            const yf = document.getElementById('youtuber-filter');
-            const currentYoutuber = yf.value;
-            yf.innerHTML = '<option value="">전체 유튜버</option>';
-            youtubers.forEach(y => { 
-                const o = document.createElement('option'); 
-                o.value = y; 
-                o.textContent = y; 
-                o.selected = y === currentYoutuber;
-                yf.appendChild(o); 
-            });
         }
         
         // Data loaded via loadData() above
