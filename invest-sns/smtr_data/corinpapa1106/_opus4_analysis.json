@@ -1,8 +1,8 @@
-{
+﻿{
   "7AaksU-R3dg_캔톤네트워크 (CC)": {
     "error": "Failed to parse JSON response",
     "raw_response": "{\n  \"sonnet_signal_correct\": false,\n  \"rejection_valid\": true,\n  \"correct_signal\": {\n    \"signal_type\": \"CONCERN\",\n    \"asset\": \"캔톤네트워크 (CC)\",\n    \"content\": \"수틀리면 제가 제일 먼저 탈출합니다. 제가 혹시라도 어 이거 뭔가 네러티브 데이터 이거 너무 잘못 가고 있는데 하면 제가 여러분들한테 경고도 하고 저부터 먼저 탈출할 겁니다\",\n    \"timestamp\": \"[6:29]\",\n    \"confidence\": \"MEDIUM\"\n  },\n  \"analysis\": {\n    \"1. Sonnet 시그널 검증\": \n      Sonnet이 추출한 시그널은 자막 내용과 일치하지 않습니다. 자막에서는 투자자가 수틀리면 탈출하겠다고 말하고 있지만, Sonnet은 이를 매도 시그널로 해석했습니다.\n    \"2. 거부 사유 타당성\":\n      인간의 거부 사유는 타당합니다. 이는 실제로는 매도 보다는 우려 수준의 시그널에 가깝기 때문입니다.\n    \"3. 올바른 시그널\":\n      올바른 시그널은 \"CONCERN\"입니다. 투자자가 수틀릴 경우 탈출하겠다고 말하고 있어, 이는 우려 수준의 시그널에 해당합니다.\n    \"4. 프롬프트 개선 제안\":\n      Sonnet의 추출 정확도를 높이기 위해서는 시그널 타입 정의에 \"CONCERN\" 항목을 추가하는 것이 필요합니다. 또한 매도 시그널과 우려 수준의 시그널을 구분할 수 있도록 프롬프트를 개선해야 합니다.\n  },\n  \"prompt_improvement\": \"시그널 타입 정의에 'CONCERN' 항목 추가, 매도 시그널과 우려 수준의 시그널을 구분할 수 있도록 프롬프트 개선\"\n}",
-    "status": "complete",
+    "status": "completed",
     "timestamp": 1771765278.1084678,
     "signal_data": {
       "asset": "캔톤네트워크 (CC)",
@@ -35,7 +35,7 @@
   "5nfe_ZdUSoA_라이나스히토류": {
     "error": "Failed to parse JSON response",
     "raw_response": "{\n  \"sonnet_signal_correct\": false,\n  \"rejection_valid\": false,\n  \"correct_signal\": {\n    \"signal_type\": \"BUY\",\n    \"asset\": \"라이나스히토류\",\n    \"content\": \"라이나스히토류는 중국을 대체할 수 있는 유일한 히토류 생산 기업으로, 미국 국방부와 계약을 체결했기 때문에 투자 가치가 있다.\",\n    \"timestamp\": \"[10:21]\",\n    \"confidence\": \"MEDIUM\"\n  },\n  \"analysis\": {\n    \"1. Sonnet 시그널 검증\": Sonnet이 추출한 시그널은 자막 내용과 대체로 일치하지만, 시그널 타입이 \"POSITIVE\"로 다소 모호하다. 실제로는 \"BUY\" 시그널이 더 적절해 보인다.\n    \"2. 거부 사유 타당성\": 인간의 거부 사유는 타당하지 않다. 자막에서 라이나스히토류가 기업임을 명확히 언급하고 있다.\n    \"3. 올바른 시그널\": 라이나스히토류에 대한 시그널은 \"BUY\"가 적절하다. 자막에서 라이나스히토류가 중국을 대체할 수 있는 유일한 기업이며, 미국 국방부와 계약을 체결했다고 언급하고 있기 때문이다.\n    \"4. 프롬프트 개선 제안\": Sonnet의 추출 정확도를 높이기 위해서는 시그널 타입을 보다 구체적으로 정의할 필요가 있다. \"POSITIVE\"와 같은 모호한 표현보다는 \"BUY\", \"SELL\" 등의 명확한 타입을 사용하는 것이 좋다.\n  },\n  \"prompt_improvement\": \"시그널 타입을 보다 구체적으로 정의하고, 자막 내용과의 일치 여부를 면밀히 검토할 수 있도록 프롬프트를 개선할 필요가 있다.\"\n}",
-    "status": "complete",
+    "status": "completed",
     "timestamp": 1771765281.4439743,
     "signal_data": {
       "asset": "라이나스히토류",
@@ -68,7 +68,7 @@
   "TjKVuAGhC1M_스테이블코인": {
     "error": "Failed to parse JSON response",
     "raw_response": "{\n  \"sonnet_signal_correct\": true,\n  \"rejection_valid\": true,\n  \"correct_signal\": {\n    \"signal_type\": \"CONCERN\",\n    \"asset\": \"스테이블코인\",\n    \"content\": \"거래소는 은행처럼 원금을 보장하지 않으며, 만약 바이낸스가 파산하면 많은 사람들이 예금을 잃게 될 것이다.\",\n    \"timestamp\": \"[3:08]\",\n    \"confidence\": \"MEDIUM\"\n  },\n  \"analysis\": {\n    \"1. Sonnet 시그널 검증\": Sonnet이 추출한 시그널은 자막 내용과 일치합니다. 거래소가 원금을 보장하지 않고 파산 위험이 있다는 우려를 잘 포착했습니다.\",\n    \"2. 거부 사유 타당성\": 인간의 거부 사유가 합리적입니다. 이는 코인거래소에 대한 우려이기 때문입니다.\",\n    \"3. 올바른 시그널\": Sonnet이 추출한 CONCERN 시그널이 적절합니다. 자막에서 거래소의 원금 비보장과 파산 위험에 대한 우려가 잘 드러나고 있습니다.\",\n    \"4. 프롬프트 개선 제안\": Sonnet의 추출 정확도는 이미 높은 편이므로, 특별한 프롬프트 개선이 필요해 보이지 않습니다. 다만 시그널 타입 정의에 대한 이해도를 높이는 것이 도움이 될 수 있습니다.\"\n  },\n  \"prompt_improvement\": \"현재 프롬프트로도 Sonnet의 성능이 양호한 것으로 보이므로, 특별한 개선이 필요해 보이지 않습니다. 다만 시그널 타입 정의에 대한 이해도를 높이는 것이 도움이 될 수 있습니다.\"\n}",
-    "status": "complete",
+    "status": "completed",
     "timestamp": 1771765283.679294,
     "signal_data": {
       "asset": "스테이블코인",
@@ -101,7 +101,7 @@
   "YxekoL6IuvM_캔톤네트워크 (CC)": {
     "error": "Failed to parse JSON response",
     "raw_response": "{\n  \"sonnet_signal_correct\": false,\n  \"rejection_valid\": true,\n  \"correct_signal\": {\n    \"signal_type\": \"CONCERN\",\n    \"asset\": \"캔톤네트워크 (CC)\",\n    \"content\": \"절대 함부로 여러분 그 뭐 선물 투자 이거 되게 조심하시고 배율 쓸 때도 굉장히 조심하시고 그다음에 청산가를 하실 때도 굉장히 보수적으로 접근하실\",\n    \"timestamp\": \"[8:04]\",\n    \"confidence\": \"HIGH\"\n  },\n  \"analysis\": {\n    \"1. Sonnet 시그널 검증\": Sonnet이 추출한 시그널은 자막 내용과 일치합니다. 영상에서는 선물 거래와 레버리지 사용에 대한 우려를 표현하고 있습니다.\n    \"2. 거부 사유 타당성\": 인간의 거부 사유가 타당합니다. Sonnet이 추출한 시그널은 켄톤 네트워크에 대한 우려가 아니라 선물 거래와 레버리지 사용에 대한 우려입니다.\n    \"3. 올바른 시그널\": 올바른 시그널은 CONCERN입니다. 영상에서는 선물 거래와 레버리지 사용에 대한 우려를 표현하고 있습니다.\n    \"4. 프롬프트 개선 제안\": 프롬프트를 개선하여 Sonnet이 시그널 타입을 보다 정확하게 구분할 수 있도록 해야 합니다. 예를 들어 시그널 타입과 내용을 보다 명확하게 구분할 수 있는 프롬프트를 사용할 수 있습니다.\n  },\n  \"prompt_improvement\": \"프롬프트를 개선하여 시그널 타입과 내용을 보다 명확하게 구분할 수 있도록 해야 합니다. 예를 들어 시그널 타입과 내용을 별도의 필드로 구분하는 등의 방법을 사용할 수 있습니다.\"\n}",
-    "status": "complete",
+    "status": "completed",
     "timestamp": 1771765286.6462152,
     "signal_data": {
       "asset": "캔톤네트워크 (CC)",
@@ -135,7 +135,7 @@
   "arOUCh4C9kM_엔비디아 (NVDA)": {
     "error": "Failed to parse JSON response",
     "raw_response": "{\n  \"sonnet_signal_correct\": false,\n  \"rejection_valid\": true,\n  \"correct_signal\": {\n    \"signal_type\": \"CONCERN\",\n    \"asset\": \"비트코인\",\n    \"content\": \"비트코인에 대한 우려 표명. 비트코인이 미국의 신이 되어가고 있으며, 미국의 빅테크와 경쟁해야 하는 상황에서 비트코인이 더 밝은 미래를 제시하지 못하면 투자 가치가 떨어질 수 있다고 언급.\",\n    \"timestamp\": \"[11:23]\",\n    \"confidence\": \"HIGH\"\n  },\n  \"analysis\": {\n    \"1. Sonnet 시그널 검증\": Sonnet이 추출한 시그널은 자막 내용과 일치하지 않습니다. 자막에서는 비트코인에 대한 우려를 표명하고 있지만, Sonnet은 엔비디아 주식 투자를 권유하는 것으로 해석했습니다.\n    \"2. 거부 사유 타당성\": 인간의 거부 사유는 타당합니다. Sonnet이 추출한 시그널은 자막 내용과 부합하지 않기 때문에 거부하는 것이 합리적입니다.\n    \"3. 올바른 시그널\": 올바른 시그널은 \"CONCERN\" 유형입니다. 발화자는 비트코인에 대한 우려를 표명하고 있으며, 비트코인이 미국의 신이 되어가고 있다고 지적하면서 투자 가치에 대해 회의적인 입장을 보이고 있습니다.\n    \"4. 프롬프트 개선 제안\": Sonnet의 추출 정확도를 높이기 위해서는 시그널 추출 시 발화자의 전반적인 입장과 논조를 더 잘 파악할 수 있도록 프롬프트를 개선할 필요가 있습니다. 단순히 특정 키워드나 문장만을 추출하는 것이 아니라, 발화자의 전체적인 맥락과 의도를 이해할 수 있도록 프롬프트를 보완해야 합니다.\n  },\n  \"prompt_improvement\": \"발화자의 전반적인 입장과 논조를 더 잘 파악할 수 있도록 프롬프트를 개선할 필요가 있습니다. 단순히 특정 키워드나 문장만을 추출하는 것이 아니라, 발화자의 전체적인 맥락과 의도를 이해할 수 있도록 프롬프트를 보완해야 합니다. 예를 들어 발화자의 전반적인 투자 관점, 우려 사항, 권고 내용 등을 종합적으로 고려하여 시그널을 추출할 수 있도록 프롬프트를 개선할 수 있습니다.\"\n}",
-    "status": "complete",
+    "status": "completed",
     "timestamp": 1771765291.3235,
     "signal_data": {
       "asset": "엔비디아 (NVDA)",
@@ -168,7 +168,7 @@
   "151ejJicjy4_타르 (THAR)": {
     "error": "Failed to parse JSON response",
     "raw_response": "{\n  \"sonnet_signal_correct\": false,\n  \"rejection_valid\": true,\n  \"correct_signal\": {\n    \"signal_type\": \"POSITIVE\",\n    \"asset\": \"TRON (TRX)\",\n    \"content\": \"타임윤이 슬금슬금 오르고 있는데, 다른 자산들은 마이너스인 것이 이상하다는 내용\",\n    \"timestamp\": \"[4:18]\",\n    \"confidence\": \"MEDIUM\"\n  },\n  \"analysis\": {\n    \"1. Sonnet 시그널 검증\": Sonnet이 추출한 시그널의 종목명 \"타르 (THAR)\"는 자막 내용과 일치하지 않습니다. 자막에서는 \"타임윤\"에 대한 내용이 언급되고 있습니다.\n    \"2. 거부 사유 타당성\": 인간의 거부 사유 \"THAR이 타르 맞나?\"는 타당합니다. 자막에서 언급된 종목은 \"타임윤\"이지 \"타르\"가 아니기 때문입니다.\n    \"3. 올바른 시그널\": 자막 내용을 종합해볼 때, 올바른 시그널은 \"POSITIVE\"입니다. 타임윤이 다른 자산들과 달리 슬금슬금 오르고 있다는 내용이 언급되고 있습니다.\n    \"4. 프롬프트 개선 제안\": Sonnet의 추출 정확도를 높이기 위해서는 자막 내용을 보다 세밀하게 분석할 수 있도록 프롬프트를 개선할 필요가 있습니다. 특히 종목명 추출 부분에서 오류가 발생했으므로, 이를 보완할 수 있는 프롬프트 개선이 필요합니다.\n  },\n  \"prompt_improvement\": \"자막 내용을 보다 세밀하게 분석하여 종목명, 시그널 타입, 내용, 타임스탬프 등을 정확하게 추출할 수 있도록 프롬프트를 개선할 필요가 있습니다. 또한 자막 내용과 추출된 시그널 간의 일치 여부를 확인하는 과정도 추가할 수 있습니다.\"\n}",
-    "status": "complete",
+    "status": "completed",
     "timestamp": 1771765293.2570052,
     "signal_data": {
       "asset": "타르 (THAR)",
@@ -201,7 +201,7 @@
   "8VIfrqxW4wc_브로드리지파이낸셜": {
     "error": "Failed to parse JSON response",
     "raw_response": "{\n  \"sonnet_signal_correct\": false,\n  \"rejection_valid\": true,\n  \"correct_signal\": {\n    \"signal_type\": \"POSITIVE\",\n    \"asset\": \"브로드리지파이낸셜\",\n    \"content\": \"브로드리지 파이낸셜이 켄톤 네트워크와 연결되어 레포 거래를 활발히 하고 있으며, 이로 인해 주가가 전년 동기 대비 약 500% 상승했다.\",\n    \"timestamp\": \"[10:40]\",\n    \"confidence\": \"MEDIUM\"\n  },\n  \"analysis\": {\n    \"1. Sonnet 시그널 검증\": \n      Sonnet이 추출한 시그널은 자막 내용과 대체로 일치하나, 주식이 아닌 것으로 보인다는 인간의 거부 사유가 타당하다. 자막에서는 브로드리지 파이낸셜의 주식 가격 상승에 대해 언급하고 있지만, 이는 레포 거래 활성화로 인한 것으로 보인다.\n\n    \"2. 거부 사유 타당성\":\n      인간의 거부 사유는 타당하다. 자막에서 언급된 내용은 브로드리지 파이낸셜의 주식 가격 상승이 아닌 레포 거래 활성화에 따른 것으로 보인다.\n\n    \"3. 올바른 시그널\":\n      올바른 시그널 타입은 \"POSITIVE\"이며, 자산은 \"브로드리지파이낸셜\"이다. 내용은 브로드리지 파이낸셜이 켄톤 네트워크와 연결되어 레포 거래를 활발히 하고 있으며, 이로 인해 주가가 전년 동기 대비 약 500% 상승했다는 것이다. 신뢰도는 \"MEDIUM\"이다.\n\n    \"4. 프롬프트 개선 제안\":\n      Sonnet의 추출 정확도를 높이기 위해서는 주식 가격 상승과 관련된 내용을 레포 거래 활성화와 구분할 수 있도록 프롬프트를 개선할 필요가 있다. 또한 자막 내용에서 주식 가격 상승이 아닌 다른 유의미한 정보를 추출할 수 있도록 프롬프트를 보완해야 한다.\n  },\n  \"prompt_improvement\": \"주식 가격 상승과 레포 거래 활성화를 구분할 수 있도록 프롬프트를 개선하고, 자막 내용에서 주식 가격 상승 외에 다른 유의미한 정보를 추출할 수 있도록 프롬프트를 보완해야 한다.\"\n}",
-    "status": "complete",
+    "status": "completed",
     "timestamp": 1771765297.9586856,
     "signal_data": {
       "asset": "브로드리지파이낸셜",
@@ -234,7 +234,7 @@
   "azTr1P5of4E_이더리움": {
     "error": "Failed to parse JSON response",
     "raw_response": "{\n  \"sonnet_signal_correct\": false,\n  \"rejection_valid\": false,\n  \"correct_signal\": {\n    \"signal_type\": \"NEUTRAL\",\n    \"asset\": \"이더리움\",\n    \"content\": \"개인의 거래가 많은 부동산 거래의 경우 이더륨 기반도 매우 강력하다고 보고 있지만, 부동산 시장에서 오프라인 거래를 선호하는 사람들이 많아 이더리움의 적용이 당장은 어려울 것 같다.\",\n    \"timestamp\": \"[8:59]\",\n    \"confidence\": \"MEDIUM\"\n  },\n  \"analysis\": {\n    \"1. Sonnet 시그널 검증\": Sonnet이 추출한 시그널은 자막 내용과 부분적으로 일치하지만, 전체적인 맥락을 고려했을 때 \"POSITIVE\"보다는 \"NEUTRAL\"이 더 적절한 것으로 판단됩니다. 자막에서는 이더리움 기반의 부동산 거래가 강력하다고 말하지만, 실제로는 오프라인 거래를 선호하는 사람들이 많아 당장 적용하기 어려울 것이라고 언급하고 있습니다.\n    \"2. 거부 사유 타당성\": 인간의 거부 사유는 타당하지 않습니다. 자막 내용을 종합적으로 고려했을 때 \"POSITIVE\"보다는 \"NEUTRAL\"이 더 적절한 시그널이기 때문입니다.\n    \"3. 올바른 시그널\": 실제로는 \"NEUTRAL\"이 가장 적절한 시그널로 판단됩니다. 이더리움 기반의 부동산 거래가 강력하지만, 현실적인 어려움으로 인해 당장 적용하기는 어려울 것으로 보입니다.\n    \"4. 프롬프트 개선 제안\": 자막 내용을 보다 세부적으로 분석하고, 전체적인 맥락을 고려할 수 있도록 프롬프트를 개선할 필요가 있습니다. 단순히 특정 키워드를 추출하는 것 보다는 문장의 의미와 맥락을 종합적으로 파악할 수 있는 프롬프트가 필요할 것 같습니다.\n  },\n  \"prompt_improvement\": \"자막 내용을 보다 세부적으로 분석하고, 전체적인 맥락을 고려할 수 있도록 프롬프트를 개선할 필요가 있습니다. 단순히 특정 키워드를 추출하는 것 보다는 문장의 의미와 맥락을 종합적으로 파악할 수 있는 프롬프트가 필요할 것 같습니다.\"\n}",
-    "status": "complete",
+    "status": "completed",
     "timestamp": 1771765299.895149,
     "signal_data": {
       "asset": "이더리움",
@@ -268,7 +268,7 @@
   "OLdoaHelitU_비트코인": {
     "error": "Failed to parse JSON response",
     "raw_response": "{\n  \"sonnet_signal_correct\": false,\n  \"rejection_valid\": true,\n  \"correct_signal\": {\n    \"signal_type\": null,\n    \"asset\": null,\n    \"content\": null,\n    \"timestamp\": null,\n    \"confidence\": null\n  },\n  \"analysis\": {\n    \"1. Sonnet 시그널 검증\": \n    Sonnet이 추출한 시그널은 자막 내용과 일치하지 않습니다. 자막에서는 과거에 비트코인과 이더리움에 몰빵했다고 말하고 있지만, 현재는 그렇지 않다고 명시하고 있습니다.\n\n    \"2. 거부 사유 타당성\":\n    인간의 거부 사유는 타당합니다. 자막 내용상 과거의 일이며, 현재는 다른 상황이라고 볼 수 있기 때문입니다.\n\n    \"3. 올바른 시그널\":\n    자막 내용을 종합해볼 때, 특별한 매수/매도 시그널은 없는 것으로 보입니다. 다만 전통 금융 시장과 암호화폐 시장의 변화에 대한 분석과 전망을 제시하고 있습니다.\n\n    \"4. 프롬프트 개선 제안\":\n    이 자막에서는 특정 자산에 대한 매수/매도 시그널을 찾기 어려웠습니다. 대신 전반적인 시장 동향과 전망에 대한 내용이 주를 이루고 있습니다. 따라서 프롬프트를 개선하여 이러한 시장 분석 내용을 잘 포착할 수 있도록 하는 것이 필요해 보입니다.\n  },\n  \"prompt_improvement\": \"시장 분석 및 전망 내용을 잘 포착할 수 있도록 프롬프트를 개선하는 것이 필요합니다. 예를 들어 '시장 동향 및 전망에 대한 내용'이나 '거시적인 시장 분석' 등의 키워드를 추가하는 것이 도움이 될 수 있습니다.\"\n}",
-    "status": "complete",
+    "status": "completed",
     "timestamp": 1771765303.2519364,
     "signal_data": {
       "asset": "비트코인",
@@ -297,7 +297,7 @@
   "OLdoaHelitU_이더리움": {
     "error": "Failed to parse JSON response",
     "raw_response": "{\n  \"sonnet_signal_correct\": false,\n  \"rejection_valid\": true,\n  \"correct_signal\": {\n    \"signal_type\": null,\n    \"asset\": null,\n    \"content\": null,\n    \"timestamp\": null,\n    \"confidence\": null\n  },\n  \"analysis\": {\n    \"1. Sonnet 시그널 검증\": \n    Sonnet이 추출한 시그널은 자막 내용과 일치하지 않습니다. 자막에서는 과거에 비트마인과 이더리움에 몰빵했다고 언급했지만, 현재는 그렇지 않다고 명확히 말하고 있습니다.\n\n    \"2. 거부 사유 타당성\":\n    인간의 거부 사유는 타당합니다. 자막 내용을 종합적으로 볼 때 현재 이더리움에 대한 투자 의향은 없는 것으로 보입니다.\n\n    \"3. 올바른 시그널\":\n    자막 내용에서는 특정 자산에 대한 매수 또는 매도 시그널을 찾기 어렵습니다. 전반적으로 CC 코인에 대한 투자 가치에 대해 설명하고 있으며, 특정 자산에 대한 명확한 시그널은 없습니다.\n\n    \"4. 프롬프트 개선 제안\":\n    이 자막에서는 특정 자산에 대한 명확한 시그널을 찾기 어려웠습니다. 따라서 프롬프트를 개선하여 자막 내용에서 자산 투자 관련 시그널을 보다 정확하게 추출할 수 있도록 해야 합니다. 예를 들어 자산 투자 관련 문구나 문장을 보다 명확하게 인식할 수 있도록 프롬프트를 수정할 필요가 있습니다.\n  },\n  \"prompt_improvement\": \"자산 투자 관련 문구나 문장을 보다 명확하게 인식할 수 있도록 프롬프트를 수정하는 것이 필요합니다. 예를 들어 '자산', '투자', '매수', '매도' 등의 키워드를 보다 명확하게 인식할 수 있도록 프롬프트를 개선할 수 있습니다.\"\n}",
-    "status": "complete",
+    "status": "completed",
     "timestamp": 1771765306.7257612,
     "signal_data": {
       "asset": "이더리움",
@@ -326,7 +326,7 @@
   "DwAUo9LmoSo_이더리움": {
     "error": "Failed to parse JSON response",
     "raw_response": "{\n  \"sonnet_signal_correct\": false,\n  \"rejection_valid\": true,\n  \"correct_signal\": {\n    \"signal_type\": null,\n    \"asset\": null,\n    \"content\": null,\n    \"timestamp\": null,\n    \"confidence\": null\n  },\n  \"analysis\": {\n    \"1. Sonnet 시그널 검증\": Sonnet이 추출한 시그널은 자막 내용과 일치하지 않습니다. 자막에서는 다음 시간에 이더리움 투자에 대한 박해가 시작되었다는 주제로 다룰 것이라고 언급했지만, Sonnet이 추출한 시그널은 이더리움에 대한 CONCERN 시그널입니다.\n    \"2. 거부 사유 타당성\": 인간의 거부 사유가 타당합니다. 자막에서는 단순히 다음 주제에 대한 예고일 뿐이며, 이더리움에 대한 우려를 나타내는 시그널은 아닙니다.\n    \"3. 올바른 시그널\": 자막 내용에서는 특별한 시그널을 추출할 수 없습니다. 단순히 다음 주제에 대한 예고일 뿐입니다.\n    \"4. 프롬프트 개선 제안\": Sonnet이 시그널을 추출할 때 단순히 키워드 매칭만으로는 부족할 수 있습니다. 문맥을 더 깊이 있게 이해하고 분석할 수 있도록 프롬프트를 개선할 필요가 있습니다. 예를 들어 시그널 추출 시 자막 전체 맥락을 고려하도록 하는 등의 방법을 시도해볼 수 있습니다.\n  },\n  \"prompt_improvement\": \"Sonnet이 시그널을 추출할 때 단순히 키워드 매칭만으로는 부족할 수 있습니다. 문맥을 더 깊이 있게 이해하고 분석할 수 있도록 프롬프트를 개선할 필요가 있습니다. 예를 들어 시그널 추출 시 자막 전체 맥락을 고려하도록 하는 등의 방법을 시도해볼 수 있습니다.\"\n}",
-    "status": "complete",
+    "status": "completed",
     "timestamp": 1771765309.9768,
     "signal_data": {
       "asset": "이더리움",
@@ -355,7 +355,7 @@
   "T_5EaLRwm8o_서클 (Circle)": {
     "error": "Failed to parse JSON response",
     "raw_response": "{\n  \"sonnet_signal_correct\": false,\n  \"rejection_valid\": true,\n  \"correct_signal\": {\n    \"signal_type\": \"SELL\",\n    \"asset\": \"서클 (Circle)\",\n    \"content\": \"서클이 올랐을 때 10% 이상 올랐었는데, 그때 팔았다.\",\n    \"timestamp\": \"[3:12]\",\n    \"confidence\": \"MEDIUM\"\n  },\n  \"analysis\": {\n    \"1. Sonnet 시그널 검증\": Sonnet이 추출한 시그널은 자막 내용과 일치하지 않습니다. Sonnet은 서클 종목에 대한 SELL 시그널을 추출했지만, 실제로는 서클이 10% 이상 올랐을 때 팔았다는 내용입니다.\n    \"2. 거부 사유 타당성\": 인간의 거부 사유는 타당합니다. Sonnet이 추출한 시그널은 자막 내용과 일치하지 않기 때문에 거부하는 것이 합리적입니다.\n    \"3. 올바른 시그널\": 올바른 시그널은 SELL입니다. 자막에 따르면 서클이 10% 이상 올랐을 때 팔았다고 하므로, 이는 SELL 시그널에 해당합니다.\n    \"4. 프롬프트 개선 제안\": Sonnet의 추출 정확도를 높이기 위해서는 시그널 추출 시 자막 내용을 보다 세밀하게 분석할 수 있도록 프롬프트를 개선해야 합니다. 예를 들어 시그널 타입, 자산, 내용, 타임스탬프 등을 보다 정확하게 추출할 수 있도록 프롬프트를 수정할 필요가 있습니다.\n  },\n  \"prompt_improvement\": \"자막 내용을 보다 세밀하게 분석하여 시그널 타입, 자산, 내용, 타임스탬프 등을 정확하게 추출할 수 있도록 프롬프트를 개선해야 합니다. 예를 들어 자막에서 특정 종목에 대한 매수/매도 행위, 가격 변동 등의 정보를 추출할 수 있도록 프롬프트를 수정할 수 있습니다.\"\n}",
-    "status": "complete",
+    "status": "completed",
     "timestamp": 1771765312.754206,
     "signal_data": {
       "asset": "서클 (Circle)",
@@ -389,7 +389,7 @@
   "HIdHdpfBwmA_체인링크": {
     "error": "Failed to parse JSON response",
     "raw_response": "{\n  \"sonnet_signal_correct\": false,\n  \"rejection_valid\": true,\n  \"correct_signal\": {\n    \"signal_type\": \"BUY\",\n    \"asset\": \"Chainlink\",\n    \"content\": \"저도 어제 어, 비트마인이 안 사져 가지고 남는 돈으로 샤프링크를 좀 샀어요. 왜냐면 3일 연속 떨어졌거든요\",\n    \"timestamp\": \"[3:13]\",\n    \"confidence\": \"MEDIUM\"\n  },\n  \"analysis\": {\n    \"1. Sonnet 시그널 검증\": Sonnet이 추출한 시그널은 자막 내용과 일치하지 않습니다. Sonnet은 체인링크를 샀다고 했지만, 실제로는 샤프링크를 샀다고 합니다.\n    \"2. 거부 사유 타당성\": 인간의 거부 사유는 타당합니다. Sonnet이 추출한 시그널과 실제 내용이 다르기 때문에 거부하는 것이 합리적입니다.\n    \"3. 올바른 시그널\": 실제로는 샤프링크에 대한 BUY 시그널이 맞습니다.\n    \"4. 프롬프트 개선 제안\": Sonnet의 추출 정확도를 높이기 위해서는 자막 내용을 더 세밀하게 분석할 수 있도록 프롬프트를 개선해야 합니다. 특히 종목명과 구매 내역을 정확하게 파악할 수 있도록 프롬프트를 수정해야 합니다.\n  },\n  \"prompt_improvement\": \"자막 내용을 더 세밀하게 분석할 수 있도록 프롬프트를 개선해야 합니다. 특히 종목명과 구매 내역을 정확하게 파악할 수 있도록 프롬프트를 수정해야 합니다.\"\n}",
-    "status": "complete",
+    "status": "completed",
     "timestamp": 1771765313.669591,
     "signal_data": {
       "asset": "체인링크",
@@ -422,7 +422,7 @@
   "jA8ngycEQNE_삼성이엔지니어링 (ENA)": {
     "error": "Failed to parse JSON response",
     "raw_response": "{\n  \"sonnet_signal_correct\": true,\n  \"rejection_valid\": false,\n  \"correct_signal\": {\n    \"signal_type\": \"BUY\",\n    \"asset\": \"삼성이엔지니어링 (ENA)\",\n    \"content\": \"삼성 ENA 아, 네. 여기 정말 추천해 드리는데이 플러스예요. 네. 한번 공부 한번 해 보세요. 되게 좋은 기업입니다\",\n    \"timestamp\": \"[0:53]\",\n    \"confidence\": \"HIGH\"\n  },\n  \"analysis\": {\n    \"1. Sonnet 시그널 검증\": Sonnet이 추출한 시그널은 자막 내용과 정확하게 일치합니다. 삼성이엔지니어링(ENA)에 대한 BUY 시그널이 맞습니다.\n    \"2. 거부 사유 타당성\": 인간의 거부 사유는 타당하지 않습니다. 자막에서 명확하게 삼성이엔지니어링(ENA)에 대한 긍정적인 평가가 나오고 있기 때문입니다.\n    \"3. 올바른 시그널\": 자막 내용을 종합적으로 볼 때, 삼성이엔지니어링(ENA)에 대한 BUY 시그널이 맞습니다.\n    \"4. 프롬프트 개선 제안\": Sonnet의 추출 정확도는 이미 높은 편이므로, 특별한 프롬프트 개선이 필요해 보이지 않습니다. 다만 종목명 확인을 위해 자막 내용을 좀 더 세밀하게 분석하는 것이 도움이 될 수 있습니다.\n  },\n  \"prompt_improvement\": \"자막 내용을 좀 더 세밀하게 분석하여 종목명을 정확하게 확인하는 것이 도움이 될 수 있습니다.\"\n}",
-    "status": "complete",
+    "status": "completed",
     "timestamp": 1771765317.7723212,
     "signal_data": {
       "asset": "삼성이엔지니어링 (ENA)",
@@ -455,7 +455,7 @@
   "oC-mHWKj8m8_비트마인 (BMNR)": {
     "error": "Failed to parse JSON response",
     "raw_response": "{\n  \"sonnet_signal_correct\": false,\n  \"rejection_valid\": true,\n  \"correct_signal\": {\n    \"signal_type\": \"NEUTRAL\",\n    \"asset\": null,\n    \"content\": \"비트마인의 경우 주식을 통해 투자했기 때문에 상대적으로 안전하다는 의미이지, 비트코인에 대한 긍정적인 시그널은 아님\",\n    \"timestamp\": \"[0:54]\",\n    \"confidence\": \"MEDIUM\"\n  },\n  \"analysis\": {\n    \"1. Sonnet 시그널 검증\": Sonnet이 추출한 시그널은 자막 내용과 일치하지 않습니다. 자막에서는 비트마인이 상대적으로 안전하다고 언급했지만, Sonnet은 이를 긍정적인 시그널로 잘못 해석했습니다.\n    \"2. 거부 사유 타당성\": 인간의 거부 사유는 타당합니다. 비트마인이 상대적으로 안전하다는 것은 비트코인에 대한 긍정적인 시그널이 아니므로, 재검토가 필요합니다.\n    \"3. 올바른 시그널\": 이 부분에 대한 올바른 시그널은 NEUTRAL입니다. 비트마인이 상대적으로 안전하다는 것은 중립적인 의미이지, 긍정적이거나 부정적인 시그널은 아닙니다.\n    \"4. 프롬프트 개선 제안\": Sonnet의 추출 정확도를 높이기 위해서는 시그널 타입 정의를 보다 명확히 하고, 문맥을 더 잘 이해할 수 있도록 프롬프트를 개선해야 합니다. 예를 들어 \"상대적으로 안전하다\"와 같은 표현을 정확히 해석할 수 있도록 프롬프트를 수정할 필요가 있습니다.\n  },\n  \"prompt_improvement\": \"시그널 타입 정의를 보다 명확히 하고, 문맥 이해도를 높일 수 있도록 프롬프트를 개선해야 합니다. 예를 들어 \"상대적으로 안전하다\"와 같은 표현을 정확히 해석할 수 있도록 프롬프트를 수정할 필요가 있습니다.\"\n}",
-    "status": "complete",
+    "status": "completed",
     "timestamp": 1771765320.6748424,
     "signal_data": {
       "asset": "비트마인 (BMNR)",
