@@ -3792,6 +3792,13 @@
             dropdown.classList.add('show');
         }
 
+        // 종목 클릭 → 차트로 이동
+        function goToChart(stockName) {
+            currentStock = stockName;
+            document.getElementById('searchInput').value = stockName;
+            showInfSubTab('chart');
+        }
+
         // 종목 선택
         function selectStock(stockName) {
             currentStock = stockName;
@@ -4171,7 +4178,7 @@
             if (tbody) {
                 tbody.innerHTML = pageStatements.map(stmt => `
                     <tr class="clickable-row">
-                        <td style="font-weight: 700; color: var(--accent2);">${stmt.stock}</td>
+                        <td style="font-weight: 700; color: var(--accent2); cursor: pointer; text-decoration: underline;" onclick="goToChart('${stmt.stock.replace(/'/g, "\\'")}')">${stmt.stock}</td>
                         <td><span style="color: ${getInfluencerColor(stmt.influencer)}; font-weight: 600; font-size: 12px;">${stmt.influencer}</span></td>
                         <td><span class="badge badge-${stmt.dirType.replace('_', '-')}">${getSignalLabel(stmt.dirType)}</span></td>
                         <td style="max-width: 300px;">
