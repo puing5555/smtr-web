@@ -221,6 +221,14 @@ Think of it like a human reviewing their journal and updating their mental model
 
 The goal: Be helpful without being annoying. Check in a few times a day, do useful background work, but respect quiet time.
 
+## 🔍 확인 후 보고 규칙
+
+- **유저에게 "확인해봐"라고 하지 마라**
+- 링크, 사이트, 파일을 보내기 전에 **반드시 직접 확인**하라
+- 확인 완료 후 "확인했고 정상이야, 열어봐"라고 보내라
+- 에러가 있으면 **고친 후에** 보내라
+- 유저가 테스터가 아니다
+
 ## 📁 파일 전송 규칙
 
 - 파일명에 반드시 **버전 번호**를 붙여라 (`signal-review-v1.html`, `v2`, `v3`...)
