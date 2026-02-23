@@ -14,12 +14,14 @@ import {
   User,
   Menu,
   X,
-  Search
+  Search,
+  Users
 } from 'lucide-react';
 
 const navigation = [
   { name: '피드', href: '/feed', icon: Home },
   { name: '시그널', href: '/signals', icon: TrendingUp },
+  { name: '인플루언서', href: '/influencers', icon: Users },
   { name: '알림', href: '/alerts', icon: Bell },
   { name: 'AI봇', href: '/bots', icon: Bot },
   { name: '관심종목', href: '/stocks', icon: Star },
