@@ -42,6 +42,11 @@ for sig in signals:
     ts = sig.get('timestamp', '')
     sig['timestamp_seconds'] = parse_timestamp(ts)
 
+# Normalize date field
+for sig in signals:
+    if not sig.get('date') and sig.get('upload_date'):
+        sig['date'] = sig['upload_date']
+
 # Sort by date (newest first)
 signals.sort(key=lambda s: s.get('date', ''), reverse=True)
 

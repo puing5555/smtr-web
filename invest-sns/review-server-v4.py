@@ -408,6 +408,7 @@ card.innerHTML=`
 <span class="badge ${sig.signal_type}">${SL[sig.signal_type]||sig.signal_type}</span>
 <span class="badge conf-${sig.confidence||''}">${sig.confidence||''}</span>
 <span class="badge ${rev.status}">${revLabel}</span>
+${sig.upload_date?`<span style="font-size:12px;color:#aaa;margin-left:6px">📅 ${sig.upload_date}</span>`:''}
 </div>
 <div style="font-size:12px;color:#666">⏱ ${esc(sig.timestamp||'')}</div>
 </div>
