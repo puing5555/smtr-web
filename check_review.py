@@ -1,30 +1,21 @@
-import sys, json
-sys.stdout.reconfigure(encoding='utf-8')
+import json, re
 
-with open(r'C:\Users\Mario\work\smtr-web\signal-review-v3.html', 'r', encoding='utf-8') as f:
-    t = f.read()
+with open(r'invest-sns\smtr_data\corinpapa1106\_review_results_backup.json', 'rb') as f:
+    raw = f.read()
 
-i = t.find('SIGNALS_DATA = ') + 15
-e = t.find(';\n', i)
-d = t[i:e]
-data = json.loads(d)
+text = raw[2:].decode('utf-16-le')
+text = re.sub(r'[\x00-\x1f]', ' ', text)
+# Debug around char 2522
+print("Around 2522:", repr(text[2510:2540]))
+d = json.loads(text)
 
-# Check for content with quotes that could break buildCard's string concatenation
-issues = 0
-for s in data:
-    for field in ['content', 'asset', 'context', 'title']:
-        val = s.get(field, '')
-        if "'" in val:
-            issues += 1
-            if issues <= 3:
-                print(f"Single quote in {field}: {val[:80]}")
+print(f"Count: {len(d)}")
+approved = sum(1 for v in d.values() if v.get('status') == 'approved')
+rejected = sum(1 for v in d.values() if v.get('status') == 'rejected')
+pending = sum(1 for v in d.values() if v.get('status') == 'pending')
+print(f"Approved: {approved}, Rejected: {rejected}, Pending: {pending}")
 
-print(f"\nTotal fields with single quotes: {issues}")
-print(f"Total signals: {len(data)}")
-
-# The real issue: buildCard uses string concatenation with single quotes for onclick
-# Any single quote in asset name will break: onclick="setReview('video_id_asset', ...)"
-for s in data:
-    sid = s['video_id'] + '_' + s['asset']
-    if "'" in sid:
-        print(f"BREAKING: signal id has quote: {sid}")
+for k, v in d.items():
+    if v.get('status') == 'rejected':
+        reason = v.get('reason', '-')
+        print(f"  REJECTED: {k} => {reason}")

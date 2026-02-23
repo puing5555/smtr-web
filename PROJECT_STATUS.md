@@ -35,6 +35,17 @@ _Last updated: 2026-02-23 17:13 (GMT+7)_
   - 프롬프트 개선 제안 누적 저장
   - 169개 시그널 + 리뷰 데이터 적재 완료
   - Opus 4 분석 UI 표시 (분석중 스피너, 완료시 상세 결과)
+- **🚀 리뷰 서버 v5 완성** (2026-02-24):
+  - `review-server-v5.py` 신규 생성 (port 8900)
+  - v3 HTML UI 스타일 완전 유지 (밝은 테마, 깔끔한 디자인)
+  - 헤더에 "🧠 Opus 전체 검토" 버튼 추가
+  - 서버 기반 리뷰 데이터 저장 (`_review_results_v5.json`, `_opus_review_results.json`)
+  - Opus 검증 기능: Claude Sonnet-3.5로 각 시그널 자막 검증
+  - API 엔드포인트: GET /api/signals, /api/reviews, /api/opus-reviews, /api/opus-progress, POST /api/review, /api/opus-review-all
+  - 진행률 표시: Opus 검토 진행 상황 프로그레스바
+  - 통계 표시: 인간+Opus 승인/거절 수 병행 표시
+  - 한국어 UI, 필터링 (시그널타입/검토상태/종목/Opus검토), 최신순 정렬
+  - 시그널 데이터: `_deduped_signals_8types_dated.json` 177개 중복제거된 시그널 사용
 
 #### 트랙 2: SNS 웹앱
 - 5탭 SPA 완성
