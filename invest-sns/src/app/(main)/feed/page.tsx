@@ -23,6 +23,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 
+// basePath 처리를 위한 헬퍼 함수
+const getImagePath = (path: string) => {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  return `${basePath}${path}`;
+};
+
 // 더미 데이터
 const dummyPosts = [
   {
@@ -30,13 +36,13 @@ const dummyPosts = [
     author: {
       name: '박두환',
       handle: 'doohwan_park',
-      avatar: '/avatars/doohwan.jpg',
+      avatar: getImagePath('/avatars/doohwan.jpg'),
       verified: true
     },
     content: '비트코인이 $45,000을 돌파했습니다! 다음 저항선은 $48,000 수준으로 보입니다. 단기 조정 가능성도 있으니 리스크 관리 잊지 마세요.',
     translation: 'Bitcoin has broken through $45,000! The next resistance level appears to be around $48,000.',
     timeAgo: '13시간',
-    image: '/charts/bitcoin-chart.jpg',
+    image: getImagePath('/charts/bitcoin-chart.jpg'),
     stats: {
       comments: 142,
       retweets: 89,
@@ -49,7 +55,7 @@ const dummyPosts = [
     author: {
       name: '이효석',
       handle: 'hyoseok_lee',
-      avatar: '/avatars/hyoseok.jpg',
+      avatar: getImagePath('/avatars/hyoseok.jpg'),
       verified: true
     },
     content: 'NVIDIA 실적 발표 앞두고 있는데, 반도체 섹터 전반적으로 긴장감이 돌고 있네요. AI 관련주들 움직임 주의깊게 봐야겠습니다 📊',
@@ -66,7 +72,7 @@ const dummyPosts = [
     author: {
       name: '코린이 아빠',
       handle: 'korini_papa',
-      avatar: '/avatars/korini.jpg',
+      avatar: getImagePath('/avatars/korini.jpg'),
       verified: true
     },
     content: '오늘 코스피 2,500선 터치했다가 다시 하락. 개인투자자들 매수 물량이 늘고 있는데 외국인 매도세가 여전히 강하네요. 당분간 박스권 예상 📈',
@@ -83,7 +89,7 @@ const dummyPosts = [
     author: {
       name: 'CryptoWhale',
       handle: 'crypto_whale_kr',
-      avatar: '/avatars/whale.jpg',
+      avatar: getImagePath('/avatars/whale.jpg'),
       verified: false
     },
     content: '이더리움 스테이킹 수익률이 계속 하락 중이네요. DeFi 생태계 변화와 함께 수익 구조도 재편되고 있는 것 같습니다.',
@@ -101,7 +107,7 @@ const dummyPosts = [
     author: {
       name: '주식왕',
       handle: 'stock_king_2024',
-      avatar: '/avatars/stock-king.jpg',
+      avatar: getImagePath('/avatars/stock-king.jpg'),
       verified: false
     },
     content: '삼성전자 실적 시즌이 다가오고 있네요. 메모리 반도체 업황 회복 기대감이 커지고 있는데, 실제 실적이 어떻게 나올지 궁금합니다 🤔',
@@ -127,21 +133,21 @@ const suggestedFollows = [
   {
     name: '김작가',
     handle: 'writer_kim',
-    avatar: '/avatars/writer-kim.jpg',
+    avatar: getImagePath('/avatars/writer-kim.jpg'),
     verified: true,
     description: '투자 전문 작가'
   },
   {
     name: '부동산왕',
     handle: 'realestate_king',
-    avatar: '/avatars/realestate.jpg',
+    avatar: getImagePath('/avatars/realestate.jpg'),
     verified: false,
     description: '부동산 투자 전문가'
   },
   {
     name: '퀀트투자',
     handle: 'quant_invest',
-    avatar: '/avatars/quant.jpg',
+    avatar: getImagePath('/avatars/quant.jpg'),
     verified: true,
     description: '퀀트 투자 연구소'
   }
@@ -160,7 +166,7 @@ function XPost({ post }: PostProps) {
       <div className="flex space-x-3">
         <Avatar className="w-10 h-10 flex-shrink-0">
           <img 
-            src={post.author.avatar || '/avatars/default.jpg'} 
+            src={post.author.avatar || getImagePath('/avatars/default.jpg')} 
             alt={post.author.name}
             className="w-full h-full object-cover rounded-full"
           />
@@ -203,7 +209,7 @@ function XPost({ post }: PostProps) {
           {post.image && (
             <div className="mb-3 rounded-2xl overflow-hidden border border-[#eff3f4]">
               <img 
-                src={post.image || '/images/chart-placeholder.jpg'} 
+                src={post.image || getImagePath('/images/chart-placeholder.jpg')} 
                 alt="Post image"
                 className="w-full h-64 object-cover"
               />
@@ -324,7 +330,7 @@ function SuggestedFollows() {
             <div className="flex items-center space-x-3">
               <Avatar className="w-10 h-10">
                 <img 
-                  src={user.avatar || '/avatars/default.jpg'} 
+                  src={user.avatar || getImagePath('/avatars/default.jpg')} 
                   alt={user.name}
                   className="w-full h-full object-cover rounded-full"
                 />
@@ -380,7 +386,7 @@ export default function FeedPage() {
             <div className="flex space-x-3">
               <Avatar className="w-10 h-10">
                 <img 
-                  src="/avatars/me.jpg" 
+                  src={getImagePath("/avatars/me.jpg")} 
                   alt="Your avatar"
                   className="w-full h-full object-cover rounded-full"
                 />

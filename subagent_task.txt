@@ -1,0 +1,22 @@
+Next.js 앱(C:\Users\Mario\work\invest-sns)을 GitHub Pages에 정적 배포해야 해.
+
+현재 상황:
+- next.config.ts에 output: "export", basePath: "/smtr-web", images: { unoptimized: true }, typescript: { ignoreBuildErrors: true } 설정 완료
+- `npm run build` 하면 에러: Page "/stocks/[symbol]" is missing "generateStaticParams()" so it cannot be used with "output: export"
+- 동적 라우트가 여러 개 있을 수 있음: /stocks/[symbol], /influencers/[id] 등
+
+해야 할 일:
+1. 모든 동적 라우트에 generateStaticParams() 추가 (빈 배열 리턴해도 됨, 또는 실제 데이터 기반)
+2. 또는 동적 라우트를 클라이언트 사이드로 전환
+3. `npm run build` 성공시키기
+4. 빌드된 `out` 폴더를 C:\Users\Mario\work\smtr-web 에 복사 (기존 파일 덮어쓰기)
+5. C:\Users\Mario\work\smtr-web 에서 git add, commit, push
+
+GitHub 레포: puing5555/smtr-web (이미 존재, GitHub Pages 설정 완료)
+smtr-web 폴더에 이미 .git이 있고 origin이 설정돼있음.
+
+빌드 완료 후 https://puing5555.github.io/smtr-web/ 에서 투자SNS 피드 페이지가 나와야 함.
+
+주의: 기존 smtr-web 폴더의 guru_tracker_v24.html, signal-review-v3.html, smtr-v3.html도 유지해야 함.
+
+PROJECT_STATUS.md 규칙: 작업 완료 후 C:\Users\Mario\work\PROJECT_STATUS.md 업데이트.
