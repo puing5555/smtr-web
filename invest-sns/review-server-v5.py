@@ -125,7 +125,7 @@ JSON 형식으로 답변:
 """
         
         response = client.messages.create(
-            model="claude-3-5-sonnet-20241022",
+            model="claude-3-haiku-20240307",
             max_tokens=2000,
             temperature=0.1,
             messages=[{"role": "user", "content": prompt}]
