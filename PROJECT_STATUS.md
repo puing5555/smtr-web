@@ -1,6 +1,6 @@
 # PROJECT_STATUS.md
 
-_Last updated: 2026-02-23 09:30 (GMT+7)_
+_Last updated: 2026-02-23 10:15 (GMT+7)_
 
 ## 🏗️ SMTR 프로젝트 (투자자의 세컨드 브레인)
 
@@ -102,6 +102,16 @@ _Last updated: 2026-02-23 09:30 (GMT+7)_
     - **완벽한 X 다크 디자인**: 모던 슬라이드 패널, 오버레이 배경, 부드러운 애니메이션
   - **실시간 마켓 데이터**: 대시보드 탭 활성화 시 자동 시작, 다른 탭 이동 시 중지 (성능 최적화)
   - **파일 출력**: `test-timeline-v2-dashboard-v3.html` (백업: `test-timeline-v2-backup.html`)
+- **👥 SMTR v2 인플루언서 탭 서브탭 기능 완성** (2026-02-23):
+  - **🎯 3개 준비중 서브탭 완전 구현**:
+    1. **💬 발언 탭**: 인플루언서들의 발언 목록 - 날짜/종목/시그널타입/내용 카드 리스트, 시그널타입별 필터링 (전체/적극매수/매수/긍정/우려/매도)
+    2. **👥 인플루언서 탭**: 등록된 인플루언서 프로필 카드 - 이름/아바타/총발언수/시그널분포/최근발언, 정확도 표시
+    3. **📊 종목 탭**: 종목별 시그널 요약 - 종목명/관련시그널수/최근시그널방향/인플루언서별의견/시그널분포
+  - **v24 데이터 구조 완전 이식**: STOCK_TICKERS, INFLUENCERS 객체, parkStatements/hsStatements/corinpapaStatements 배열
+  - **8가지 시그널 타입 지원**: STRONG_BUY/BUY/POSITIVE/HOLD/NEUTRAL/CONCERN/SELL/STRONG_SELL + 색상 배지 시스템
+  - **X 다크모드 디자인 일관성**: 글래스모피즘 카드, 호버 효과, 모바일 반응형
+  - **인터랙티브 기능**: 필터링 버튼, 시그널 배지, 유튜브 링크, 프로필 카드 호버 효과
+  - **차트 서브탭 기존 기능 완전 유지**: v24 차트/마커/툴팁 시스템 그대로 보존
 
 #### 트랙 3: 알림/데이터 수집
 - 네이버/미국/코인 뉴스 크롤러 완성
@@ -127,9 +137,11 @@ _Last updated: 2026-02-23 09:30 (GMT+7)_
 - `invest-engine/main.py` — 백엔드 메인
 - `invest-engine/src/models.py` — DB 모델
 - `invest-engine/src/collectors/` — 뉴스 크롤러들
-- `invest-sns/test-timeline-v2.html` — **최신 통합 프론트 (SNS+v24차트+전체 탭 업그레이드)**
+- `invest-sns/test-timeline-v2-dashboard-v3.html` — **최신 본사이트 (인플루언서 서브탭 완성)**
+- `invest-sns/test-timeline-v2.html` — v2 통합 프론트 (SNS+v24차트+전체 탭 업그레이드)
 - `invest-sns/test-timeline.html` — SNS X 스타일 버전
 - `invest-sns/test-timeline-v25.html` — v24 차트 통합 버전
+- `invest-sns/guru_tracker_v24.html` — v24 원본 (8MB, 모든 기능)
 - `C:\Users\Mario\.openclaw\workspace\guru_tracker_prototype_v24_with_corinpapa.html` — guru_tracker 최신
 
 ### 현재 터널 URL (2026-02-22)
