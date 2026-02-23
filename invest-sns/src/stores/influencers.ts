@@ -44,6 +44,12 @@ export interface Signal {
     detail: string;
   };
   videoDate: string; // 영상 날짜
+  videoTitle?: string;
+  confidence?: string;
+  timeframe?: string;
+  conditional?: boolean;
+  skinInGame?: boolean;
+  context?: string;
 }
 
 export interface Stock {
@@ -252,9 +258,14 @@ export const useInfluencersStore = create<InfluencersState>((set, get) => ({
         timestamp: signal.timestamp,
         price: 0, // 가격 정보는 없으므로 0으로 설정
         youtubeLink: signal.youtubeLink,
-        returnRate: undefined, // 수익률 계산은 별도로
+        returnRate: undefined,
         analysis: signal.analysis,
-        videoDate: signal.videoDate
+        videoDate: signal.videoDate,
+        videoTitle: signal.videoTitle,
+        confidence: signal.confidence,
+        timeframe: signal.timeframe,
+        conditional: signal.conditional,
+        skinInGame: signal.skinInGame,
       }));
 
       // 다른 인플루언서들의 더미 데이터
