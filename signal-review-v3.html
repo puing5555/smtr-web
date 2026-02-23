@@ -356,8 +356,7 @@
             }
             
             if (!OPUS_API_URL) {
-                OPUS_API_URL = prompt('Opus API 서버 URL을 입력하세요 (예: http://localhost:8901)', 'http://localhost:8901');
-                if (!OPUS_API_URL) return;
+                OPUS_API_URL = 'http://localhost:8900';
             }
             
             var btn = document.getElementById('opus-review-btn');
