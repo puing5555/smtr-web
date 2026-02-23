@@ -253,6 +253,15 @@ The goal: Be helpful without being annoying. Check in a few times a day, do usef
 
 ## 🔬 파이프라인 규칙 (절대 변경 금지)
 
+- **시그널 데이터는 항상 중복제거된 데이터만 사용** (280개 원본 X → 177개 중복제거 O)
+- 리뷰서버, 본사이트, 어디든 중복제거 안 된 원본 데이터를 보여주지 마라
+- 파이프라인 완료 후 반드시 중복제거 단계를 거쳐라
+
+## 🔍 리뷰 페이지 규칙
+
+- 검토대기 옆에 **영상 날짜** 항상 표시
+- **최신순 정렬** (최신 영상이 위에)
+
 - **시그널 8가지:** `STRONG_BUY` / `BUY` / `POSITIVE` / `HOLD` / `NEUTRAL` / `CONCERN` / `SELL` / `STRONG_SELL`
 - 이 8가지 외의 시그널 타입 (`PRICE_TARGET`, `MARKET_VIEW` 등) **절대 사용 금지**
 - **1영상 1종목 1시그널** (같은 영상 같은 종목은 맥락 합쳐서 1개, 다른 종목은 각각 OK)
