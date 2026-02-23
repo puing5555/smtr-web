@@ -9,16 +9,16 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { useInfluencersStore } from '@/stores/influencers';
 
-// 시그널 타입 정의 (8가지)
+// 시그널 타입 정의 (8가지) - 요구사항에 맞는 색상
 const SIGNAL_TYPES = {
-  STRONG_BUY: { label: '적극매수', color: 'bg-green-600', textColor: 'text-green-100' },
-  BUY: { label: '매수', color: 'bg-green-500', textColor: 'text-green-100' },
-  POSITIVE: { label: '긍정', color: 'bg-blue-500', textColor: 'text-blue-100' },
-  HOLD: { label: '보유', color: 'bg-yellow-500', textColor: 'text-yellow-100' },
-  NEUTRAL: { label: '중립', color: 'bg-gray-500', textColor: 'text-gray-100' },
-  CONCERN: { label: '우려', color: 'bg-orange-500', textColor: 'text-orange-100' },
-  SELL: { label: '매도', color: 'bg-red-500', textColor: 'text-red-100' },
-  STRONG_SELL: { label: '적극매도', color: 'bg-red-600', textColor: 'text-red-100' },
+  STRONG_BUY: { label: '적극매수', color: 'bg-green-700', textColor: 'text-white', hexColor: '#16a34a' },
+  BUY: { label: '매수', color: 'bg-green-500', textColor: 'text-white', hexColor: '#22c55e' },
+  POSITIVE: { label: '긍정', color: 'bg-green-300', textColor: 'text-green-900', hexColor: '#86efac' },
+  HOLD: { label: '보유', color: 'bg-yellow-500', textColor: 'text-yellow-900', hexColor: '#eab308' },
+  NEUTRAL: { label: '중립', color: 'bg-gray-500', textColor: 'text-white', hexColor: '#9ca3af' },
+  CONCERN: { label: '우려', color: 'bg-orange-500', textColor: 'text-white', hexColor: '#f97316' },
+  SELL: { label: '매도', color: 'bg-red-500', textColor: 'text-white', hexColor: '#ef4444' },
+  STRONG_SELL: { label: '적극매도', color: 'bg-red-700', textColor: 'text-white', hexColor: '#dc2626' },
 };
 
 // 시그널 타입별 색상과 라벨 정의
@@ -289,7 +289,7 @@ export default function InfluencersPage() {
                     <div className="flex flex-wrap gap-1">
                       {Object.entries(influencer.signalDistribution).filter(([_, count]) => count > 0).map(([type, count]) => (
                         <div key={type} className="flex items-center gap-1">
-                          <div className={`w-2 h-2 rounded ${SIGNAL_TYPES[type].color}`}></div>
+                          <div className={`w-2 h-2 rounded ${SIGNAL_TYPES[type as keyof typeof SIGNAL_TYPES]?.color || 'bg-gray-300'}`}></div>
                           <span className="text-xs text-gray-600">{count}</span>
                         </div>
                       ))}
@@ -318,8 +318,8 @@ export default function InfluencersPage() {
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-sm text-gray-500">최근:</span>
-                    <Badge className={`${SIGNAL_TYPES[stock.recentSignal].color} ${SIGNAL_TYPES[stock.recentSignal].textColor}`}>
-                      {SIGNAL_TYPES[stock.recentSignal].label}
+                    <Badge className={`${SIGNAL_TYPES[stock.recentSignal as keyof typeof SIGNAL_TYPES]?.color || 'bg-gray-500'} ${SIGNAL_TYPES[stock.recentSignal as keyof typeof SIGNAL_TYPES]?.textColor || 'text-white'}`}>
+                      {SIGNAL_TYPES[stock.recentSignal as keyof typeof SIGNAL_TYPES]?.label || stock.recentSignal}
                     </Badge>
                   </div>
                 </div>
@@ -339,8 +339,8 @@ export default function InfluencersPage() {
                   <div className="flex flex-wrap gap-2">
                     {Object.entries(stock.signalDistribution).filter(([_, count]) => count > 0).map(([type, count]) => (
                       <div key={type} className="flex items-center gap-1">
-                        <div className={`w-3 h-3 rounded ${SIGNAL_TYPES[type].color}`}></div>
-                        <span className="text-sm text-gray-600">{SIGNAL_TYPES[type].label}: {count}</span>
+                        <div className={`w-3 h-3 rounded ${SIGNAL_TYPES[type as keyof typeof SIGNAL_TYPES]?.color || 'bg-gray-300'}`}></div>
+                        <span className="text-sm text-gray-600">{SIGNAL_TYPES[type as keyof typeof SIGNAL_TYPES]?.label || type}: {count}</span>
                       </div>
                     ))}
                   </div>

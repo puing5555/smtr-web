@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { supabase } from '@/lib/supabase';
+import { corinpapaSignals, corinpapaStats } from '@/data/corinpapa-signals';
 
 // 타입 정의
 export interface Influencer {
@@ -204,30 +205,21 @@ export const useInfluencersStore = create<InfluencersState>((set, get) => ({
           name: '코린이 아빠',
           avatar: '👨‍👧‍👦',
           verified: false,
-          totalSignals: 169,
-          accuracy: 71,
+          totalSignals: corinpapaStats.totalSignals,
+          accuracy: corinpapaStats.accuracy,
           recentActivity: '6시간 전',
-          signalDistribution: {
-            STRONG_BUY: 28,
-            BUY: 42,
-            POSITIVE: 35,
-            HOLD: 25,
-            NEUTRAL: 20,
-            CONCERN: 12,
-            SELL: 6,
-            STRONG_SELL: 1
-          },
-          channelName: '코린이 아빠의 주식일기',
+          signalDistribution: corinpapaStats.signalDistribution,
+          channelName: '코린이 아빠의 투자채널',
           country: '🇰🇷',
-          avgReturn: 15.3,
-          topStocks: ['삼성전자', '현대차', 'LG전자'],
+          avgReturn: corinpapaStats.avgReturn,
+          topStocks: corinpapaStats.topStocks,
           radarStats: {
-            accuracy: 71,
-            diversity: 82,
-            returns: 64,
-            riskMgmt: 76,
-            activity: 85,
-            consistency: 68
+            accuracy: corinpapaStats.accuracy,
+            diversity: 88,
+            returns: 62,
+            riskMgmt: 74,
+            activity: 92,
+            consistency: 71
           }
         }
       ];
@@ -249,8 +241,24 @@ export const useInfluencersStore = create<InfluencersState>((set, get) => ({
       //   .select('*')
       //   .order('created_at', { ascending: false });
       
-      // For now, use dummy data with extended SMTR-style information
-      const dummySignals: Signal[] = [
+      // 실제 코린이 아빠 데이터를 Signal 타입으로 변환
+      const realCorinpapaSignals: Signal[] = corinpapaSignals.map(signal => ({
+        id: signal.id,
+        influencer: signal.influencer,
+        stock: signal.stock,
+        stockName: signal.stockName,
+        signalType: signal.signalType,
+        content: signal.content,
+        timestamp: signal.timestamp,
+        price: 0, // 가격 정보는 없으므로 0으로 설정
+        youtubeLink: signal.youtubeLink,
+        returnRate: undefined, // 수익률 계산은 별도로
+        analysis: signal.analysis,
+        videoDate: signal.videoDate
+      }));
+
+      // 다른 인플루언서들의 더미 데이터
+      const otherInfluencerSignals: Signal[] = [
         {
           id: 1,
           influencer: '박두환',
@@ -352,44 +360,13 @@ export const useInfluencersStore = create<InfluencersState>((set, get) => ({
             detail: '프로토댕커샤딩 업그레이드로 트랜잭션 처리 속도 향상. DeFi 활성화 기대.'
           },
           videoDate: '2026-02-21'
-        },
-        {
-          id: 7,
-          influencer: '코린이 아빠',
-          stock: '005930.KS',
-          stockName: '삼성전자',
-          signalType: 'HOLD',
-          content: '삼성전자가 메모리 반도체 사이클 회복을 기다리는 구간입니다. 장기적으로는 긍정적입니다.',
-          timestamp: '6시간 전',
-          price: 58900,
-          youtubeLink: 'https://youtube.com/watch?v=example7',
-          returnRate: 5.2,
-          analysis: {
-            summary: '메모리 반도체 사이클 회복 대기',
-            detail: '2026년 하반기 메모리 슈퍼사이클 기대. AI 서버용 HBM 메모리 수요 급증 전망.'
-          },
-          videoDate: '2026-02-23'
-        },
-        {
-          id: 8,
-          influencer: '코린이 아빠',
-          stock: '000660.KS',
-          stockName: 'SK하이닉스',
-          signalType: 'BUY',
-          content: 'SK하이닉스의 HBM 메모리 독점 공급으로 실적 개선이 기대됩니다.',
-          timestamp: '1일 전',
-          price: 142000,
-          youtubeLink: 'https://youtube.com/watch?v=example8',
-          returnRate: 24.7,
-          analysis: {
-            summary: 'HBM 메모리 독점 공급으로 실적 급성장',
-            detail: '엔비디아 H100/H200 칩셋에 독점 공급. HBM4 양산으로 마진 개선 기대.'
-          },
-          videoDate: '2026-02-22'
         }
       ];
       
-      set({ signals: dummySignals });
+      // 모든 시그널 합치기 (실제 코린이 아빠 데이터 + 다른 인플루언서 더미 데이터)
+      const allSignals = [...realCorinpapaSignals, ...otherInfluencerSignals];
+      
+      set({ signals: allSignals });
     } catch (error) {
       console.error('Failed to load signals:', error);
     } finally {

@@ -8,19 +8,20 @@ import Link from 'next/link';
 import { useInfluencersStore } from '@/stores/influencers';
 
 const SIGNAL_TYPES: Record<string, { label: string; color: string; textColor: string }> = {
-  STRONG_BUY: { label: '적극매수', color: 'bg-green-600', textColor: 'text-green-100' },
-  BUY: { label: '매수', color: 'bg-green-500', textColor: 'text-green-100' },
-  POSITIVE: { label: '긍정', color: 'bg-blue-500', textColor: 'text-blue-100' },
-  HOLD: { label: '보유', color: 'bg-yellow-500', textColor: 'text-yellow-100' },
-  NEUTRAL: { label: '중립', color: 'bg-gray-500', textColor: 'text-gray-100' },
-  CONCERN: { label: '우려', color: 'bg-orange-500', textColor: 'text-orange-100' },
-  SELL: { label: '매도', color: 'bg-red-500', textColor: 'text-red-100' },
-  STRONG_SELL: { label: '적극매도', color: 'bg-red-600', textColor: 'text-red-100' },
+  STRONG_BUY: { label: '적극매수', color: 'bg-green-700', textColor: 'text-white' },
+  BUY: { label: '매수', color: 'bg-green-500', textColor: 'text-white' },
+  POSITIVE: { label: '긍정', color: 'bg-green-300', textColor: 'text-green-900' },
+  HOLD: { label: '보유', color: 'bg-yellow-500', textColor: 'text-yellow-900' },
+  NEUTRAL: { label: '중립', color: 'bg-gray-500', textColor: 'text-white' },
+  CONCERN: { label: '우려', color: 'bg-orange-500', textColor: 'text-white' },
+  SELL: { label: '매도', color: 'bg-red-500', textColor: 'text-white' },
+  STRONG_SELL: { label: '적극매도', color: 'bg-red-700', textColor: 'text-white' },
 };
 
 export default function InfluencerDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const [stockFilter, setStockFilter] = useState('ALL');
+  const [displayCount, setDisplayCount] = useState(20); // 처음에 20개 표시
   const { influencers, signals, loadInfluencers, loadSignals } = useInfluencersStore();
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function InfluencerDetailPage({ params }: { params: Promise<{ id:
     loadSignals();
   }, [loadInfluencers, loadSignals]);
 
-  const influencer = influencers.find((inf) => inf.id === Number(id));
+  const influencer = influencers.find((inf) => inf.id === Number(id) || (id === 'corinpapa1106' && inf.name === '코린이 아빠'));
   const influencerSignals = signals.filter((s) => s.influencer === influencer?.name);
   
   // 종목별 필터링된 시그널
@@ -36,6 +37,11 @@ export default function InfluencerDetailPage({ params }: { params: Promise<{ id:
     if (stockFilter === 'ALL') return influencerSignals;
     return influencerSignals.filter((s) => s.stock === stockFilter);
   }, [influencerSignals, stockFilter]);
+
+  // 표시할 시그널들 (displayCount만큼)
+  const displayedSignals = useMemo(() => {
+    return filteredSignals.slice(0, displayCount);
+  }, [filteredSignals, displayCount]);
 
   // 종목별 카운트 생성
   const stockCounts = useMemo(() => {
@@ -235,7 +241,7 @@ export default function InfluencerDetailPage({ params }: { params: Promise<{ id:
                     </td>
                   </tr>
                 ) : (
-                  filteredSignals
+                  displayedSignals
                     .sort((a, b) => new Date(b.videoDate).getTime() - new Date(a.videoDate).getTime())
                     .map((signal) => (
                       <tr key={signal.id} className="hover:bg-gray-50 transition-colors">
@@ -285,6 +291,19 @@ export default function InfluencerDetailPage({ params }: { params: Promise<{ id:
             </table>
           </div>
         </div>
+
+        {/* 더보기 버튼 */}
+        {filteredSignals.length > displayCount && (
+          <div className="text-center mt-6">
+            <Button 
+              onClick={() => setDisplayCount(prev => prev + 20)}
+              variant="outline" 
+              className="px-8 py-2"
+            >
+              더보기 ({filteredSignals.length - displayCount}개 더)
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );
