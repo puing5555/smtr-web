@@ -97,6 +97,169 @@
             transform: scale(1.05);
         }
 
+        /* 빠른 이동 카드 호버 효과 */
+        .quick-nav-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(29, 155, 240, 0.15);
+        }
+
+        /* 프로필 패널 */
+        .profile-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: var(--bg);
+            border-left: 1px solid var(--border);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .profile-panel.active {
+            right: 0;
+        }
+
+        .profile-panel-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: between;
+            align-items: center;
+        }
+
+        .profile-panel-title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .profile-close-btn {
+            background: none;
+            border: none;
+            color: var(--text2);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .profile-close-btn:hover {
+            background: var(--hover);
+            color: var(--text);
+        }
+
+        .profile-panel-content {
+            padding: 20px;
+        }
+
+        .profile-section {
+            margin-bottom: 32px;
+        }
+
+        .profile-section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        .profile-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .profile-option:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 48px;
+            height: 24px;
+            background: var(--bg3);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: var(--accent);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-switch.active::after {
+            transform: translateX(24px);
+        }
+
+        .investment-style-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .investment-style-card {
+            padding: 16px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .investment-style-card.selected {
+            border-color: var(--accent);
+            background: rgba(29, 155, 240, 0.1);
+        }
+
+        .investment-style-card:hover {
+            border-color: var(--accent);
+        }
+
+        .investment-style-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .investment-style-desc {
+            font-size: 12px;
+            color: var(--text2);
+        }
+
+        /* 프로필 패널 오버레이 */
+        .profile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .profile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
         /* 메인 컨테이너 */
         .container {
             max-width: 1400px;
@@ -1017,7 +1180,7 @@
                 SMTR
                 <span>v2.0</span>
             </div>
-            <div class="profile-icon">👤</div>
+            <div class="profile-icon" onclick="toggleProfilePanel()">👤</div>
         </div>
     </div>
 
@@ -1608,6 +1771,96 @@
                 <div class="tab-icon">📝</div>
                 <div class="tab-label">노트</div>
             </button>
+        </div>
+    </div>
+
+    <!-- 프로필 패널 오버레이 -->
+    <div class="profile-overlay" id="profileOverlay" onclick="closeProfilePanel()"></div>
+
+    <!-- 프로필 패널 -->
+    <div class="profile-panel" id="profilePanel">
+        <div class="profile-panel-header">
+            <div class="profile-panel-title">프로필 설정</div>
+            <button class="profile-close-btn" onclick="closeProfilePanel()">✕</button>
+        </div>
+        
+        <div class="profile-panel-content">
+            <!-- 사용자 정보 -->
+            <div class="profile-section">
+                <div class="profile-section-title">사용자 정보</div>
+                <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+                    <div style="width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--purple)); display: flex; align-items: center; justify-content: center; font-size: 28px;">👤</div>
+                    <div>
+                        <div style="font-size: 18px; font-weight: 600; margin-bottom: 4px;">투자자</div>
+                        <div style="font-size: 14px; color: var(--text2);">investor@smtr.com</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 투자 성향 -->
+            <div class="profile-section">
+                <div class="profile-section-title">투자 성향</div>
+                <div class="investment-style-grid">
+                    <div class="investment-style-card selected" onclick="selectInvestmentStyle(this)">
+                        <div class="investment-style-title">안정형 🛡️</div>
+                        <div class="investment-style-desc">안정적인 수익 추구</div>
+                    </div>
+                    <div class="investment-style-card" onclick="selectInvestmentStyle(this)">
+                        <div class="investment-style-title">성장형 📈</div>
+                        <div class="investment-style-desc">중장기 성장 중심</div>
+                    </div>
+                    <div class="investment-style-card" onclick="selectInvestmentStyle(this)">
+                        <div class="investment-style-title">공격형 🚀</div>
+                        <div class="investment-style-desc">고수익 고위험</div>
+                    </div>
+                    <div class="investment-style-card" onclick="selectInvestmentStyle(this)">
+                        <div class="investment-style-title">균형형 ⚖️</div>
+                        <div class="investment-style-desc">안정과 성장의 균형</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 앱 설정 -->
+            <div class="profile-section">
+                <div class="profile-section-title">앱 설정</div>
+                <div class="profile-option">
+                    <div>
+                        <div style="font-weight: 500;">다크 모드</div>
+                        <div style="font-size: 12px; color: var(--text2);">어두운 테마로 표시</div>
+                    </div>
+                    <div class="toggle-switch active" onclick="toggleDarkMode(this)"></div>
+                </div>
+                <div class="profile-option">
+                    <div>
+                        <div style="font-weight: 500;">푸시 알림</div>
+                        <div style="font-size: 12px; color: var(--text2);">중요한 시그널 알림 받기</div>
+                    </div>
+                    <div class="toggle-switch active" onclick="toggleNotifications(this)"></div>
+                </div>
+                <div class="profile-option">
+                    <div>
+                        <div style="font-weight: 500;">소리 효과</div>
+                        <div style="font-size: 12px; color: var(--text2);">버튼 클릭 및 알림 소리</div>
+                    </div>
+                    <div class="toggle-switch" onclick="toggleSounds(this)"></div>
+                </div>
+            </div>
+
+            <!-- 기타 옵션 -->
+            <div class="profile-section">
+                <div class="profile-section-title">기타</div>
+                <div style="display: grid; gap: 8px;">
+                    <button onclick="showHelp()" style="background: none; border: 1px solid var(--border); color: var(--text); padding: 12px; border-radius: 8px; cursor: pointer; text-align: left; transition: all 0.3s ease;">
+                        ❓ 도움말 & 튜토리얼
+                    </button>
+                    <button onclick="showAbout()" style="background: none; border: 1px solid var(--border); color: var(--text); padding: 12px; border-radius: 8px; cursor: pointer; text-align: left; transition: all 0.3s ease;">
+                        ℹ️ 앱 정보
+                    </button>
+                    <button onclick="logout()" style="background: none; border: 1px solid var(--red); color: var(--red); padding: 12px; border-radius: 8px; cursor: pointer; text-align: left; transition: all 0.3s ease;">
+                        🚪 로그아웃
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
