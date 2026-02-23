@@ -171,21 +171,14 @@ html = '''<!DOCTYPE html>
             </div>
         </div>
         
-        <div class="submit-bar">
-            <div>
-                <span style="font-size:14px;color:#666;">리뷰 완료 후 결과를 제출하세요</span>
-            </div>
-            <div style="display:flex;gap:8px;">
-                <button class="btn-submit" onclick="exportResults()">📋 결과 복사</button>
-                <button class="btn-submit" style="background:#10b981;" onclick="downloadResults()">💾 JSON 다운로드</button>
-            </div>
-        </div>
+<!-- submit bar removed -->
         
         <div class="signals-grid" id="signals-container"></div>
     </div>
 
     <script>
 ''' + f'        const SIGNALS_DATA = {json.dumps(signals, ensure_ascii=False)};\n' + '''
+        function esc(s){if(!s)return '';return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
         const SIGNAL_LABELS = {
             'STRONG_BUY': '강력매수', 'BUY': '매수', 'POSITIVE': '긍정',
             'HOLD': '보유', 'NEUTRAL': '중립', 'CONCERN': '우려',
@@ -277,27 +270,29 @@ html = '''<!DOCTYPE html>
                 'https://youtube.com/watch?v=' + sig.video_id + '&t=' + sig.timestamp_seconds : 
                 'https://youtube.com/watch?v=' + sig.video_id;
             
-            return '<div class="signal-card" data-signal="' + sig.signal_type + '" data-asset="' + sig.asset + '" data-review="' + review.status + '" data-youtuber="' + (sig.channel || '') + '" data-index="' + idx + '">' +
+            var safeId = id.replace(/'/g,"\\\\'");
+            return '<div class="signal-card" data-signal="' + sig.signal_type + '" data-asset="' + esc(sig.asset) + '" data-review="' + review.status + '" data-youtuber="' + esc(sig.channel || '') + '" data-index="' + idx + '">' +
                 '<div class="signal-header">' +
                     '<div>' +
-                        '<span class="signal-asset">' + sig.asset + '</span> ' +
+                        '<span class="signal-asset">' + esc(sig.asset) + '</span> ' +
                         '<span class="signal-type ' + sig.signal_type + '">' + (SIGNAL_LABELS[sig.signal_type] || sig.signal_type) + '</span> ' +
                         '<span class="confidence ' + (sig.confidence || '') + '">' + (sig.confidence || '') + '</span> ' +
                         '<span class="review-badge ' + review.status + '">' + ({pending:'검토대기',approved:'승인',rejected:'거부'}[review.status] || review.status) + '</span> ' +
-                        '<span style="font-size:13px;color:#888;">📅 ' + (sig.date || 'N/A') + '</span>' +
+                        '<span style="font-size:13px;color:#888;">📅 ' + esc(sig.upload_date || sig.date || 'N/A') + '</span>' +
                     '</div>' +
                     '<div class="signal-actions">' +
-                        '<button class="btn" onclick="setReview(\\\'' + id.replace(/'/g,"\\\\'") + '\\\', \\\'approved\\\')">✅</button>' +
-                        '<button class="btn" onclick="setReview(\\\'' + id.replace(/'/g,"\\\\'") + '\\\', \\\'rejected\\\')">❌</button>' +
+                        '<label style="cursor:pointer;display:flex;align-items:center;gap:4px;font-size:13px;color:#666;"><input type="checkbox" ' + (review.status==='approved'?'checked':'') + ' onchange="setReview(\\'' + safeId + '\\', this.checked?\\'approved\\':\\'pending\\')"> 승인</label>' +
+                        '<label style="cursor:pointer;display:flex;align-items:center;gap:4px;font-size:13px;color:#666;"><input type="checkbox" ' + (review.status==='rejected'?'checked':'') + ' onchange="setReview(\\'' + safeId + '\\', this.checked?\\'rejected\\':\\'pending\\')"> 거부</label>' +
                     '</div>' +
                 '</div>' +
-                '<div class="quote">"' + (sig.content || '') + '"</div>' +
+                '<div class="quote">"' + esc(sig.content || '') + '"</div>' +
                 '<div class="meta">' +
-                    '<span>📺 <a href="' + tsUrl + '" target="_blank">' + (sig.title || sig.video_id).substring(0, 50) + ' ▶️</a></span>' +
-                    '<span>⏱️ ' + (sig.timestamp || 'N/A') + '</span>' +
-                    '<span>🎙️ ' + (sig.channel || '코린이 아빠') + '</span>' +
+                    '<span>📺 <a href="' + esc(tsUrl) + '" target="_blank">' + esc((sig.title || sig.video_id).substring(0, 50)) + ' ▶️</a></span>' +
+                    '<span>⏱️ ' + esc(sig.timestamp || 'N/A') + '</span>' +
+                    '<span>🎙️ ' + esc(sig.channel || '코린이 아빠') + '</span>' +
                 '</div>' +
-                (sig.context ? '<div style="margin-top:8px;font-size:13px;color:#666;">💡 ' + sig.context + '</div>' : '') +
+                (sig.context ? '<div style="margin-top:8px;font-size:13px;color:#666;">💡 ' + esc(sig.context) + '</div>' : '') +
+                (sig.video_summary ? '<div style="margin-top:8px;font-size:12px;color:#999;cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\\'none\\'?\\'block\\':\\'none\\'">📋 영상요약 보기/접기</div><div style="display:none;margin-top:4px;font-size:12px;color:#888;background:#f5f5f5;padding:8px;border-radius:6px;">' + esc(sig.video_summary) + '</div>' : '') +
             '</div>';
         }
         

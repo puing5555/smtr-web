@@ -68,7 +68,7 @@
     "upload_date": "2026-02-19"
   },
   {
-    "asset": "캔톤네트워크 (CNTN)",
+    "asset": "캔톤 스트레티지 홀딩스 (CNTN)",
     "signal_type": "BUY",
     "content": "야, 뭐 사야 돼? 그럼 어 캔톤사 이렇게 얘기하시면 돼요",
     "confidence": "MEDIUM",
@@ -967,7 +967,7 @@
     "upload_date": "2026-01-03"
   },
   {
-    "asset": "캔톤네트워크",
+    "asset": "캔톤네트워크 (CC)",
     "signal_type": "POSITIVE",
     "content": "골드만삭스, JP모건, 무디스, 나스닥, S&P, BNY멜론즈, DTCC 등 45개 주요 1티어 기관들이 참여하고 있는 실제 프로젝트가 있어요",
     "confidence": "HIGH",
