@@ -145,43 +145,99 @@ JSON 형식으로 답변:
     except Exception as e:
         return {"error": str(e)}
 
-def opus_analyze_all_signals():
-    """모든 시그널에 대해 Opus 분석 실행"""
-    def analyze_all():
+def opus_analyze_rejected_signals():
+    """거부된 시그널만 Opus 분석 실행"""
+    def analyze_rejected():
         global opus_progress
         signals = load_signals()
+        reviews = load_reviews()
         opus_reviews = load_opus_reviews()
         
-        opus_progress = {"current": 0, "total": len(signals), "status": "running"}
-        
+        # 거부된 시그널만 필터링
+        rejected_signals = []
         for i, signal in enumerate(signals):
-            signal_id = f"{signal.get('video_id', '')}_{signal.get('asset', '')}_{i}"
+            signal_id = f"{signal.get('video_id', '')}_{signal.get('asset', '')}"
+            if reviews.get(signal_id, {}).get('status') == 'rejected':
+                rejected_signals.append((i, signal, signal_id, reviews[signal_id].get('reason', '')))
+        
+        if not rejected_signals:
+            opus_progress = {"current": 0, "total": 0, "status": "completed", "message": "거부된 시그널이 없습니다"}
+            return
+        
+        opus_progress = {"current": 0, "total": len(rejected_signals), "status": "running"}
+        
+        for idx, (i, signal, signal_id, rejection_reason) in enumerate(rejected_signals):
+            opus_progress["current"] = idx + 1
             
-            # 이미 분석된 것은 건너뛰기
-            if signal_id in opus_reviews:
-                opus_progress["current"] = i + 1
-                continue
+            # 거부 사유를 포함한 Opus 분석
+            result = opus_analyze_rejected_signal(signal, rejection_reason)
             
-            opus_progress["current"] = i + 1
-            
-            # Opus 분석 실행
-            result = opus_analyze_signal(signal)
-            
-            # 결과 저장
             opus_reviews[signal_id] = {
                 **result,
                 "signal_data": signal,
+                "rejection_reason": rejection_reason,
                 "timestamp": datetime.now().isoformat()
             }
             save_opus_reviews(opus_reviews)
-            
-            # 0.5초 딜레이 (API 제한 고려)
             time.sleep(0.5)
         
         opus_progress["status"] = "completed"
     
-    # 백그라운드에서 실행
-    threading.Thread(target=analyze_all, daemon=True).start()
+    threading.Thread(target=analyze_rejected, daemon=True).start()
+
+def opus_analyze_rejected_signal(signal, rejection_reason):
+    """거부된 시그널을 Opus로 재분석 (거부 사유 포함)"""
+    if not client:
+        return {"error": "Anthropic client not available"}
+    
+    video_id = signal.get('video_id')
+    subtitle_content = get_subtitle_content(video_id) if video_id else None
+    
+    try:
+        prompt = f"""다음은 유튜브 영상에서 Claude Sonnet이 추출한 시그널인데, 인간 리뷰어가 거부했습니다.
+
+**Sonnet이 추출한 시그널:**
+- 종목: {signal.get('asset', 'N/A')}
+- 시그널 타입: {signal.get('signal_type', 'N/A')}
+- 내용: {signal.get('content', 'N/A')}
+- 타임스탬프: {signal.get('timestamp', 'N/A')}
+- 신뢰도: {signal.get('confidence', 'N/A')}
+- 영상 제목: {signal.get('title', 'N/A')}
+
+**인간의 거부 사유:**
+{rejection_reason or '(사유 미기재)'}
+
+{f'**영상 자막:**{chr(10)}{subtitle_content[:5000]}' if subtitle_content else '(자막 없음)'}
+
+**분석 요청:**
+1. 인간의 거부가 타당한지 분석
+2. Sonnet 추출 프롬프트에서 개선할 점 제안
+3. 이런 유형의 오추출을 방지하기 위한 규칙 제안
+
+JSON으로 답변:
+{{
+  "verdict": "agree_reject|disagree_reject",
+  "reasoning": "거부 타당성 상세 분석 (한국어)",
+  "extraction_issue": "Sonnet이 왜 이걸 잘못 추출했는지 (한국어)",
+  "prompt_improvement": "프롬프트에 추가할 규칙 제안 (한국어)",
+  "pattern": "이 오류의 패턴 분류 (예: 일반논평을_시그널로, 조건부_무시, 종목_오인식 등)"
+}}"""
+        
+        response = client.messages.create(
+            model="claude-3-haiku-20240307",
+            max_tokens=2000,
+            temperature=0.1,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        
+        try:
+            result = json.loads(response.content[0].text)
+            result['analysis_timestamp'] = datetime.now().isoformat()
+            return result
+        except json.JSONDecodeError:
+            return {"error": "JSON parse failed", "raw_response": response.content[0].text}
+    except Exception as e:
+        return {"error": str(e)}
 
 def build_html():
     """HTML 페이지 생성"""
@@ -276,7 +332,7 @@ def build_html():
             <h1>시그널 리뷰 v5</h1>
             <p>코린이 아빠 시그널 검증 시스템 - Opus 통합</p>
             <button class="opus-btn" onclick="startOpusReview()" id="opusBtn">
-                🧠 Opus 전체 검토
+                🧠 Opus 거부 검토
             </button>
             <div class="progress-container" id="progressContainer" style="display: none;">
                 <div style="font-size: 12px; margin-bottom: 4px;">
@@ -517,7 +573,7 @@ def build_html():
         }}
 
         function startOpusReview() {{
-            if (confirm('모든 시그널에 대해 Opus 검토를 시작하시겠습니까? 시간이 오래 걸릴 수 있습니다.')) {{
+            if (confirm('거부된 시그널에 대해 Opus 검토를 시작하시겠습니까? 시간이 오래 걸릴 수 있습니다.')) {{
                 const btn = document.getElementById('opusBtn');
                 btn.disabled = true;
                 btn.textContent = '🧠 검토 중...';
@@ -532,7 +588,7 @@ def build_html():
                     }} else {{
                         alert('Opus 검토 시작 실패: ' + (data.error || '알 수 없는 오류'));
                         btn.disabled = false;
-                        btn.textContent = '🧠 Opus 전체 검토';
+                        btn.textContent = '🧠 Opus 거부 검토';
                     }}
                 }});
             }}
@@ -635,9 +691,9 @@ class ReviewHandler(SimpleHTTPRequestHandler):
                 self.send_json_response({"success": False, "error": str(e)})
                 
         elif path == '/api/opus-review-all':
-            # 전체 Opus 검토 시작
+            # 거부된 시그널 Opus 검토 시작
             try:
-                opus_analyze_all_signals()
+                opus_analyze_rejected_signals()
                 self.send_json_response({"success": True})
             except Exception as e:
                 self.send_json_response({"success": False, "error": str(e)})
