@@ -363,7 +363,7 @@ SYSTEM_PROMPT = f"""당신은 유튜브 투자 채널의 자막을 분석하여 
 
 다음 JSON 형식으로 출력하세요:
 {{
-  "video_summary": "영상 전체 내용 요약 (한국어, 2-4문장)",
+  "video_summary": "영상 전체 내용 상세 요약 (한국어, 문단급 8-15문장). 영상의 주요 주제, 화자의 핵심 논점과 근거, 언급된 종목별 분석 내용, 시장 상황 인식, 결론을 포함. 시청자가 영상을 보지 않아도 핵심 내용을 파악할 수 있을 정도로 상세하게 작성.",
   "signals": [
     {{
       "asset": "종목명 (한글명 (티커) 형식)",
@@ -449,9 +449,9 @@ def main():
             progress = json.load(f)
             all_signals = progress.get("signals", [])
             done_ids = set(progress.get("done_ids", []))
-        print(f"Resuming: {len(done_ids)} already done, {len(all_signals)} signals so far")
+        print(f"Resuming: {len(done_ids)} already done, {len(all_signals)} signals so far", flush=True)
     
-    print(f"Processing {len(txt_files)} subtitle files...")
+    print(f"Processing {len(txt_files)} subtitle files...", flush=True)
     
     for i, txt_path in enumerate(txt_files):
         video_id = os.path.splitext(os.path.basename(txt_path))[0]
@@ -481,7 +481,7 @@ def main():
                 sig["video_summary"] = video_summary
             all_signals.extend(signals)
             done_ids.add(video_id)
-            print(f"  [{len(done_ids)}/{len(txt_files)}] {video_id}: {len(signals)} signals ({title[:40]})")
+            print(f"  [{len(done_ids)}/{len(txt_files)}] {video_id}: {len(signals)} signals ({title[:40]})", flush=True)
             
             # Save progress every 5 videos
             if len(done_ids) % 5 == 0:
@@ -492,7 +492,7 @@ def main():
             time.sleep(0.5)
             
         except Exception as e:
-            print(f"  ERROR {video_id}: {e}")
+            print(f"  ERROR {video_id}: {e}", flush=True)
             time.sleep(2)
             continue
     
