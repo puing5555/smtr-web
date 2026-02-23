@@ -225,8 +225,8 @@
                         '<span style="font-size:13px;color:#888;">📅 ' + esc(sig.upload_date || sig.date || 'N/A') + '</span>' +
                     '</div>' +
                     '<div class="signal-actions">' +
-                        '<button class="btn" onclick="setReview(\'' + safeId + '\', \'approved\')">✅</button>' +
-                        '<button class="btn" onclick="setReview(\'' + safeId + '\', \'rejected\')">❌</button>' +
+                        '<label style="cursor:pointer;display:flex;align-items:center;gap:4px;font-size:13px;color:#666;"><input type="checkbox" ' + (review.status==='approved'?'checked':'') + ' onchange="setReview(\'' + safeId + '\', this.checked?\'approved\':\'pending\')"> 승인</label>' +
+                        '<label style="cursor:pointer;display:flex;align-items:center;gap:4px;font-size:13px;color:#666;"><input type="checkbox" ' + (review.status==='rejected'?'checked':'') + ' onchange="setReview(\'' + safeId + '\', this.checked?\'rejected\':\'pending\')"> 거부</label>' +
                     '</div>' +
                 '</div>' +
                 '<div class="quote">"' + esc(sig.content || '') + '"</div>' +
