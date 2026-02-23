@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Users, TrendingUp, Filter, Search, ChevronRight, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
@@ -170,20 +171,22 @@ export default function InfluencersPage() {
               <h3 className="text-lg font-semibold mb-4">인기 인플루언서</h3>
               <div className="space-y-4">
                 {influencers.slice(0, 3).map((influencer) => (
-                  <div key={influencer.id} className="flex items-center space-x-3 p-3 rounded-lg bg-gray-50">
-                    <div className="text-2xl">{influencer.avatar}</div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2">
-                        <span className="font-medium">{influencer.name}</span>
-                        {influencer.verified && <span className="text-blue-500">✓</span>}
+                  <Link key={influencer.id} href={`/influencers/${influencer.id}`}>
+                    <div className="flex items-center space-x-3 p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer">
+                      <div className="text-2xl">{influencer.avatar}</div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <span className="font-medium">{influencer.name}</span>
+                          {influencer.verified && <span className="text-blue-500">✓</span>}
+                        </div>
+                        <div className="flex items-center gap-4 text-sm text-gray-500">
+                          <span>시그널 {influencer.totalSignals}개</span>
+                          <span>정확도 {influencer.accuracy}%</span>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-4 text-sm text-gray-500">
-                        <span>시그널 {influencer.totalSignals}개</span>
-                        <span>정확도 {influencer.accuracy}%</span>
-                      </div>
+                      <ChevronRight className="w-5 h-5 text-gray-400" />
                     </div>
-                    <ChevronRight className="w-5 h-5 text-gray-400" />
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -294,9 +297,11 @@ export default function InfluencersPage() {
                   </div>
                 </div>
 
-                <Button variant="outline" size="sm" className="w-full mt-4">
-                  자세히 보기
-                </Button>
+                <Link href={`/influencers/${influencer.id}`}>
+                  <Button variant="outline" size="sm" className="w-full mt-4">
+                    자세히 보기
+                  </Button>
+                </Link>
               </div>
             ))}
           </div>
