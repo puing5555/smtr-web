@@ -1,284 +1,481 @@
 'use client';
 
-import { useEffect } from 'react';
-import { Plus, Filter, TrendingUp } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { 
+  Search, 
+  Image as ImageIcon, 
+  Smile, 
+  Calendar, 
+  MapPin, 
+  Bold, 
+  Italic, 
+  MoreHorizontal,
+  MessageCircle,
+  Repeat2,
+  Heart,
+  BarChart3,
+  Share,
+  Bookmark,
+  CheckCircle
+} from 'lucide-react';
+import { Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import PostCard from '@/components/feed/PostCard';
-import { useFeedStore } from '@/stores/feed';
 
-export default function FeedPage() {
-  const { 
-    posts, 
-    isLoading, 
-    hasMore, 
-    filters,
-    loadFeed, 
-    loadMore, 
-    toggleLike,
-    setFilters 
-  } = useFeedStore();
+// 더미 데이터
+const dummyPosts = [
+  {
+    id: '1',
+    author: {
+      name: '박두환',
+      handle: 'doohwan_park',
+      avatar: '/avatars/doohwan.jpg',
+      verified: true
+    },
+    content: '비트코인이 $45,000을 돌파했습니다! 다음 저항선은 $48,000 수준으로 보입니다. 단기 조정 가능성도 있으니 리스크 관리 잊지 마세요.',
+    translation: 'Bitcoin has broken through $45,000! The next resistance level appears to be around $48,000.',
+    timeAgo: '13시간',
+    image: '/charts/bitcoin-chart.jpg',
+    stats: {
+      comments: 142,
+      retweets: 89,
+      likes: 1247,
+      views: 15600
+    }
+  },
+  {
+    id: '2',
+    author: {
+      name: '이효석',
+      handle: 'hyoseok_lee',
+      avatar: '/avatars/hyoseok.jpg',
+      verified: true
+    },
+    content: 'NVIDIA 실적 발표 앞두고 있는데, 반도체 섹터 전반적으로 긴장감이 돌고 있네요. AI 관련주들 움직임 주의깊게 봐야겠습니다 📊',
+    timeAgo: '2시간',
+    stats: {
+      comments: 67,
+      retweets: 134,
+      likes: 892,
+      views: 8945
+    }
+  },
+  {
+    id: '3',
+    author: {
+      name: '코린이 아빠',
+      handle: 'korini_papa',
+      avatar: '/avatars/korini.jpg',
+      verified: true
+    },
+    content: '오늘 코스피 2,500선 터치했다가 다시 하락. 개인투자자들 매수 물량이 늘고 있는데 외국인 매도세가 여전히 강하네요. 당분간 박스권 예상 📈',
+    timeAgo: '5시간',
+    stats: {
+      comments: 203,
+      retweets: 156,
+      likes: 2134,
+      views: 23400
+    }
+  },
+  {
+    id: '4',
+    author: {
+      name: 'CryptoWhale',
+      handle: 'crypto_whale_kr',
+      avatar: '/avatars/whale.jpg',
+      verified: false
+    },
+    content: '이더리움 스테이킹 수익률이 계속 하락 중이네요. DeFi 생태계 변화와 함께 수익 구조도 재편되고 있는 것 같습니다.',
+    translation: 'Ethereum staking yield continues to decline. The profit structure seems to be restructuring along with DeFi ecosystem changes.',
+    timeAgo: '8시간',
+    stats: {
+      comments: 89,
+      retweets: 45,
+      likes: 567,
+      views: 4520
+    }
+  },
+  {
+    id: '5',
+    author: {
+      name: '주식왕',
+      handle: 'stock_king_2024',
+      avatar: '/avatars/stock-king.jpg',
+      verified: false
+    },
+    content: '삼성전자 실적 시즌이 다가오고 있네요. 메모리 반도체 업황 회복 기대감이 커지고 있는데, 실제 실적이 어떻게 나올지 궁금합니다 🤔',
+    timeAgo: '12시간',
+    stats: {
+      comments: 312,
+      retweets: 78,
+      likes: 1456,
+      views: 18900
+    }
+  }
+];
 
-  useEffect(() => {
-    loadFeed(true);
-  }, []);
+const trendingTopics = [
+  { category: '태국에서 트렌드 중', topic: '#비트코인', posts: '84.2K 게시물' },
+  { category: '비즈니스 · 트렌드 중', topic: '#NVIDIA실적', posts: '23.1K 게시물' },
+  { category: '투자 · 트렌드 중', topic: '#코스피2500', posts: '15.7K 게시물' },
+  { category: '크립토 · 트렌드 중', topic: '#이더리움스테이킹', posts: '9.8K 게시물' },
+  { category: '트렌드 중', topic: '#삼성전자실적', posts: '7.2K 게시물' }
+];
 
-  const handleLike = async (postId: string) => {
-    await toggleLike(postId);
-  };
+const suggestedFollows = [
+  {
+    name: '김작가',
+    handle: 'writer_kim',
+    avatar: '/avatars/writer-kim.jpg',
+    verified: true,
+    description: '투자 전문 작가'
+  },
+  {
+    name: '부동산왕',
+    handle: 'realestate_king',
+    avatar: '/avatars/realestate.jpg',
+    verified: false,
+    description: '부동산 투자 전문가'
+  },
+  {
+    name: '퀀트투자',
+    handle: 'quant_invest',
+    avatar: '/avatars/quant.jpg',
+    verified: true,
+    description: '퀀트 투자 연구소'
+  }
+];
 
-  const handleComment = (postId: string) => {
-    console.log('Comment on post:', postId);
-    // TODO: Navigate to post detail or open comment modal
-  };
+interface PostProps {
+  post: typeof dummyPosts[0];
+}
 
-  const handleShare = (postId: string) => {
-    console.log('Share post:', postId);
-    // TODO: Implement share functionality
-  };
-
-  const handleFilterChange = (newFilters: any) => {
-    setFilters(newFilters);
-    loadFeed(true);
-  };
+function XPost({ post }: PostProps) {
+  const [liked, setLiked] = useState(false);
+  const [retweeted, setRetweeted] = useState(false);
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">투자 피드</h1>
-          <p className="text-gray-600 mt-1">
-            인플루언서들의 최신 투자 인사이트를 확인해보세요
-          </p>
-        </div>
-        <Button className="bg-blue-600 hover:bg-blue-700">
-          <Plus className="w-4 h-4 mr-2" />
-          글 작성
-        </Button>
-      </div>
-
-      {/* Tabs and Filters */}
-      <div className="space-y-4">
-        <Tabs defaultValue="all" className="w-full">
-          <div className="flex items-center justify-between">
-            <TabsList className="grid w-full grid-cols-4 lg:w-auto">
-              <TabsTrigger 
-                value="all" 
-                onClick={() => handleFilterChange({})}
-              >
-                전체
-              </TabsTrigger>
-              <TabsTrigger 
-                value="following"
-                onClick={() => handleFilterChange({ following_only: true })}
-              >
-                팔로잉
-              </TabsTrigger>
-              <TabsTrigger 
-                value="signals"
-                onClick={() => handleFilterChange({ has_signals: true })}
-              >
-                시그널
-              </TabsTrigger>
-              <TabsTrigger 
-                value="premium"
-                onClick={() => handleFilterChange({ is_premium: true })}
-              >
-                프리미엄
-              </TabsTrigger>
-            </TabsList>
-
-            <Button variant="outline" size="sm">
-              <Filter className="w-4 h-4 mr-2" />
-              필터
-            </Button>
+    <article className="px-4 py-3 border-b border-[#eff3f4] hover:bg-gray-50/50 transition-colors cursor-pointer">
+      <div className="flex space-x-3">
+        <Avatar className="w-10 h-10 flex-shrink-0">
+          <img 
+            src={post.author.avatar || '/avatars/default.jpg'} 
+            alt={post.author.name}
+            className="w-full h-full object-cover rounded-full"
+          />
+        </Avatar>
+        
+        <div className="flex-1 min-w-0">
+          {/* Header */}
+          <div className="flex items-center space-x-1 mb-1">
+            <span className="font-bold text-[#0f1419] hover:underline cursor-pointer">
+              {post.author.name}
+            </span>
+            {post.author.verified && (
+              <CheckCircle className="w-5 h-5 text-[#1d9bf0]" fill="currentColor" />
+            )}
+            <span className="text-[#536471]">@{post.author.handle}</span>
+            <span className="text-[#536471]">·</span>
+            <span className="text-[#536471] hover:underline cursor-pointer">
+              {post.timeAgo}
+            </span>
+            <div className="ml-auto">
+              <Button variant="ghost" size="sm" className="w-8 h-8 p-0 text-[#536471] hover:bg-gray-100">
+                <MoreHorizontal className="w-4 h-4" />
+              </Button>
+            </div>
           </div>
 
-          {/* Active Filters */}
-          {(filters.stock_symbols?.length || filters.post_type) && (
-            <div className="flex flex-wrap gap-2">
-              {filters.stock_symbols?.map((symbol) => (
-                <Badge key={symbol} variant="secondary">
-                  {symbol}
-                </Badge>
-              ))}
-              {filters.post_type && (
-                <Badge variant="secondary">
-                  {filters.post_type}
-                </Badge>
-              )}
+          {/* Content */}
+          <div className="mb-3">
+            <p className="text-[#0f1419] text-[15px] leading-5 whitespace-pre-wrap">
+              {post.content}
+            </p>
+            {post.translation && (
+              <p className="text-[#1d9bf0] text-[15px] mt-2">
+                {post.translation}
+              </p>
+            )}
+          </div>
+
+          {/* Image */}
+          {post.image && (
+            <div className="mb-3 rounded-2xl overflow-hidden border border-[#eff3f4]">
+              <img 
+                src={post.image || '/images/chart-placeholder.jpg'} 
+                alt="Post image"
+                className="w-full h-64 object-cover"
+              />
             </div>
           )}
 
-          <TabsContent value="all" className="mt-6">
-            <FeedContent 
-              posts={posts}
-              isLoading={isLoading}
-              hasMore={hasMore}
-              onLike={handleLike}
-              onComment={handleComment}
-              onShare={handleShare}
-              onLoadMore={loadMore}
-            />
-          </TabsContent>
+          {/* Actions */}
+          <div className="flex items-center justify-between max-w-md mt-2">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="flex items-center space-x-1 text-[#536471] hover:text-[#1d9bf0] hover:bg-[#1d9bf0]/10 p-2 rounded-full group"
+            >
+              <div className="p-2 rounded-full group-hover:bg-[#1d9bf0]/10">
+                <MessageCircle className="w-4 h-4" />
+              </div>
+              <span className="text-sm">{post.stats.comments}</span>
+            </Button>
 
-          <TabsContent value="following" className="mt-6">
-            <FeedContent 
-              posts={posts}
-              isLoading={isLoading}
-              hasMore={hasMore}
-              onLike={handleLike}
-              onComment={handleComment}
-              onShare={handleShare}
-              onLoadMore={loadMore}
-            />
-          </TabsContent>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className={`flex items-center space-x-1 p-2 rounded-full group ${
+                retweeted 
+                  ? 'text-green-600' 
+                  : 'text-[#536471] hover:text-green-600 hover:bg-green-600/10'
+              }`}
+              onClick={() => setRetweeted(!retweeted)}
+            >
+              <div className="p-2 rounded-full group-hover:bg-green-600/10">
+                <Repeat2 className="w-4 h-4" />
+              </div>
+              <span className="text-sm">{post.stats.retweets}</span>
+            </Button>
 
-          <TabsContent value="signals" className="mt-6">
-            <FeedContent 
-              posts={posts}
-              isLoading={isLoading}
-              hasMore={hasMore}
-              onLike={handleLike}
-              onComment={handleComment}
-              onShare={handleShare}
-              onLoadMore={loadMore}
-            />
-          </TabsContent>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className={`flex items-center space-x-1 p-2 rounded-full group ${
+                liked 
+                  ? 'text-red-600' 
+                  : 'text-[#536471] hover:text-red-600 hover:bg-red-600/10'
+              }`}
+              onClick={() => setLiked(!liked)}
+            >
+              <div className="p-2 rounded-full group-hover:bg-red-600/10">
+                <Heart className={`w-4 h-4 ${liked ? 'fill-current' : ''}`} />
+              </div>
+              <span className="text-sm">{liked ? post.stats.likes + 1 : post.stats.likes}</span>
+            </Button>
 
-          <TabsContent value="premium" className="mt-6">
-            <FeedContent 
-              posts={posts}
-              isLoading={isLoading}
-              hasMore={hasMore}
-              onLike={handleLike}
-              onComment={handleComment}
-              onShare={handleShare}
-              onLoadMore={loadMore}
-            />
-          </TabsContent>
-        </Tabs>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="flex items-center space-x-1 text-[#536471] hover:text-[#1d9bf0] hover:bg-[#1d9bf0]/10 p-2 rounded-full group"
+            >
+              <div className="p-2 rounded-full group-hover:bg-[#1d9bf0]/10">
+                <BarChart3 className="w-4 h-4" />
+              </div>
+              <span className="text-sm">{post.stats.views}</span>
+            </Button>
+
+            <div className="flex items-center space-x-1">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="w-8 h-8 p-0 text-[#536471] hover:text-[#1d9bf0] hover:bg-[#1d9bf0]/10 rounded-full"
+              >
+                <Bookmark className="w-4 h-4" />
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="w-8 h-8 p-0 text-[#536471] hover:text-[#1d9bf0] hover:bg-[#1d9bf0]/10 rounded-full"
+              >
+                <Share className="w-4 h-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
+    </article>
+  );
+}
+
+function TrendingSection() {
+  return (
+    <div className="bg-[#f7f9fa] rounded-2xl p-4 mb-4">
+      <h2 className="text-xl font-bold text-[#0f1419] mb-4">무슨 일이 일어나고 있나요?</h2>
+      <div className="space-y-3">
+        {trendingTopics.map((trend, index) => (
+          <div key={index} className="hover:bg-gray-100 p-2 -m-2 rounded cursor-pointer transition-colors">
+            <div className="flex justify-between items-start">
+              <div>
+                <p className="text-[#536471] text-sm">{trend.category}</p>
+                <p className="font-bold text-[#0f1419]">{trend.topic}</p>
+                <p className="text-[#536471] text-sm">{trend.posts}</p>
+              </div>
+              <Button variant="ghost" size="sm" className="w-8 h-8 p-0 text-[#536471]">
+                <MoreHorizontal className="w-4 h-4" />
+              </Button>
+            </div>
+          </div>
+        ))}
+      </div>
+      <button className="text-[#1d9bf0] text-sm hover:underline mt-3">더 보기</button>
     </div>
   );
 }
 
-interface FeedContentProps {
-  posts: any[];
-  isLoading: boolean;
-  hasMore: boolean;
-  onLike: (postId: string) => void;
-  onComment: (postId: string) => void;
-  onShare: (postId: string) => void;
-  onLoadMore: () => void;
+function SuggestedFollows() {
+  return (
+    <div className="bg-[#f7f9fa] rounded-2xl p-4 mb-4">
+      <h2 className="text-xl font-bold text-[#0f1419] mb-4">팔로우할 계정</h2>
+      <div className="space-y-3">
+        {suggestedFollows.map((user, index) => (
+          <div key={index} className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <Avatar className="w-10 h-10">
+                <img 
+                  src={user.avatar || '/avatars/default.jpg'} 
+                  alt={user.name}
+                  className="w-full h-full object-cover rounded-full"
+                />
+              </Avatar>
+              <div>
+                <div className="flex items-center space-x-1">
+                  <span className="font-bold text-[#0f1419] text-sm">{user.name}</span>
+                  {user.verified && (
+                    <CheckCircle className="w-4 h-4 text-[#1d9bf0]" fill="currentColor" />
+                  )}
+                </div>
+                <p className="text-[#536471] text-sm">@{user.handle}</p>
+              </div>
+            </div>
+            <Button 
+              className="bg-[#0f1419] text-white hover:bg-[#272c30] px-4 py-1 h-8 rounded-full font-bold text-sm"
+            >
+              팔로우
+            </Button>
+          </div>
+        ))}
+      </div>
+      <button className="text-[#1d9bf0] text-sm hover:underline mt-3">더 보기</button>
+    </div>
+  );
 }
 
-function FeedContent({ 
-  posts, 
-  isLoading, 
-  hasMore, 
-  onLike, 
-  onComment, 
-  onShare, 
-  onLoadMore 
-}: FeedContentProps) {
+export default function FeedPage() {
+  const [newPostCount, setNewPostCount] = useState(70);
+  
   return (
-    <div className="space-y-6">
-      {/* Market Summary Card */}
-      <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg p-6 text-white">
-        <h3 className="text-lg font-semibold mb-3">오늘의 시장 동향</h3>
-        <div className="grid grid-cols-3 gap-4">
-          <div className="text-center">
-            <div className="flex items-center justify-center mb-1">
-              <TrendingUp className="w-4 h-4 mr-1 text-green-300" />
-              <span className="text-sm opacity-90">코스피</span>
+    <div className="max-w-6xl mx-auto bg-white min-h-screen">
+      <div className="flex">
+        {/* Main Content */}
+        <main className="flex-1 max-w-2xl border-x border-[#eff3f4]">
+          {/* Header Tabs */}
+          <div className="sticky top-0 bg-white/80 backdrop-blur z-10 border-b border-[#eff3f4]">
+            <div className="flex">
+              <button className="flex-1 py-4 px-4 text-[#0f1419] font-bold border-b-2 border-[#1d9bf0] hover:bg-gray-50">
+                추천
+              </button>
+              <button className="flex-1 py-4 px-4 text-[#536471] font-bold hover:bg-gray-50">
+                팔로잉
+              </button>
+              <button className="flex-1 py-4 px-4 text-[#536471] font-bold hover:bg-gray-50">
+                구독중
+              </button>
             </div>
-            <div className="font-bold">2,485.67</div>
-            <div className="text-sm text-green-300">+1.24%</div>
           </div>
-          <div className="text-center">
-            <div className="flex items-center justify-center mb-1">
-              <TrendingUp className="w-4 h-4 mr-1 text-green-300" />
-              <span className="text-sm opacity-90">코스닥</span>
-            </div>
-            <div className="font-bold">736.82</div>
-            <div className="text-sm text-green-300">+0.87%</div>
-          </div>
-          <div className="text-center">
-            <div className="flex items-center justify-center mb-1">
-              <span className="text-sm opacity-90">달러</span>
-            </div>
-            <div className="font-bold">1,340</div>
-            <div className="text-sm text-red-300">-0.45%</div>
-          </div>
-        </div>
-      </div>
 
-      {/* Posts */}
-      {posts.length === 0 && !isLoading ? (
-        <div className="text-center py-12">
-          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <TrendingUp className="w-8 h-8 text-gray-400" />
-          </div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">아직 게시물이 없습니다</h3>
-          <p className="text-gray-500">
-            첫 번째 게시물을 작성하거나 다른 사용자를 팔로우해보세요.
-          </p>
-          <Button className="mt-4 bg-blue-600 hover:bg-blue-700">
-            <Plus className="w-4 h-4 mr-2" />
-            첫 게시물 작성하기
-          </Button>
-        </div>
-      ) : (
-        <div className="space-y-6">
-          {posts.map((post) => (
-            <PostCard
-              key={post.id}
-              post={post}
-              onLike={onLike}
-              onComment={onComment}
-              onShare={onShare}
-            />
-          ))}
-        </div>
-      )}
-
-      {/* Load More */}
-      {hasMore && (
-        <div className="text-center">
-          <Button 
-            variant="outline" 
-            onClick={onLoadMore}
-            disabled={isLoading}
-          >
-            {isLoading ? '로딩 중...' : '더 보기'}
-          </Button>
-        </div>
-      )}
-
-      {/* Loading skeleton */}
-      {isLoading && (
-        <div className="space-y-6">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="bg-white rounded-lg p-6 space-y-4 animate-pulse">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
-                <div className="space-y-2 flex-1">
-                  <div className="h-4 bg-gray-200 rounded w-1/4"></div>
-                  <div className="h-3 bg-gray-200 rounded w-1/6"></div>
+          {/* Compose Tweet */}
+          <div className="border-b border-[#eff3f4] p-4">
+            <div className="flex space-x-3">
+              <Avatar className="w-10 h-10">
+                <img 
+                  src="/avatars/me.jpg" 
+                  alt="Your avatar"
+                  className="w-full h-full object-cover rounded-full"
+                />
+              </Avatar>
+              <div className="flex-1">
+                <div className="mb-3">
+                  <Input
+                    placeholder="무슨 일이 일어나고 있나요?"
+                    className="border-0 text-xl placeholder-[#536471] p-0 focus:ring-0 resize-none"
+                    style={{ boxShadow: 'none' }}
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <Button variant="ghost" size="sm" className="w-9 h-9 p-0 text-[#1d9bf0] hover:bg-[#1d9bf0]/10">
+                      <ImageIcon className="w-5 h-5" />
+                    </Button>
+                    <Button variant="ghost" size="sm" className="w-9 h-9 p-0 text-[#1d9bf0] hover:bg-[#1d9bf0]/10">
+                      <span className="text-sm font-bold">GIF</span>
+                    </Button>
+                    <Button variant="ghost" size="sm" className="w-9 h-9 p-0 text-[#1d9bf0] hover:bg-[#1d9bf0]/10">
+                      <span className="text-sm font-bold">📊</span>
+                    </Button>
+                    <Button variant="ghost" size="sm" className="w-9 h-9 p-0 text-[#1d9bf0] hover:bg-[#1d9bf0]/10">
+                      <Smile className="w-5 h-5" />
+                    </Button>
+                    <Button variant="ghost" size="sm" className="w-9 h-9 p-0 text-[#1d9bf0] hover:bg-[#1d9bf0]/10">
+                      <Calendar className="w-5 h-5" />
+                    </Button>
+                    <Button variant="ghost" size="sm" className="w-9 h-9 p-0 text-[#1d9bf0] hover:bg-[#1d9bf0]/10">
+                      <MapPin className="w-5 h-5" />
+                    </Button>
+                    <div className="w-px h-6 bg-[#eff3f4] mx-2"></div>
+                    <Button variant="ghost" size="sm" className="w-9 h-9 p-0 text-[#1d9bf0] hover:bg-[#1d9bf0]/10">
+                      <Bold className="w-5 h-5" />
+                    </Button>
+                    <Button variant="ghost" size="sm" className="w-9 h-9 p-0 text-[#1d9bf0] hover:bg-[#1d9bf0]/10">
+                      <Italic className="w-5 h-5" />
+                    </Button>
+                  </div>
+                  <Button className="bg-[#1d9bf0] text-white hover:bg-[#1a8cd8] px-6 py-1.5 h-9 rounded-full font-bold">
+                    게시하기
+                  </Button>
                 </div>
               </div>
-              <div className="space-y-2">
-                <div className="h-4 bg-gray-200 rounded"></div>
-                <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-              </div>
-              <div className="h-8 bg-gray-200 rounded"></div>
             </div>
-          ))}
-        </div>
-      )}
+          </div>
+
+          {/* New Posts Notification */}
+          <div className="border-b border-[#eff3f4] p-3 text-center hover:bg-gray-50 cursor-pointer transition-colors">
+            <span className="text-[#1d9bf0] text-sm font-medium">
+              {newPostCount} 게시물 보기
+            </span>
+          </div>
+
+          {/* Feed */}
+          <div>
+            {dummyPosts.map((post) => (
+              <XPost key={post.id} post={post} />
+            ))}
+          </div>
+        </main>
+
+        {/* Right Sidebar - Desktop only */}
+        <aside className="w-80 p-4 hidden lg:block">
+          {/* Search */}
+          <div className="mb-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-3 h-5 w-5 text-[#536471]" />
+              <Input
+                placeholder="검색"
+                className="pl-12 bg-[#f7f9fa] border-[#f7f9fa] rounded-full h-11 focus:bg-white focus:border-[#1d9bf0]"
+              />
+            </div>
+          </div>
+
+          <TrendingSection />
+          <SuggestedFollows />
+
+          {/* Footer Links */}
+          <div className="text-[#536471] text-sm space-y-1">
+            <div className="flex flex-wrap gap-x-3 gap-y-1">
+              <a href="#" className="hover:underline">이용약관</a>
+              <a href="#" className="hover:underline">개인정보 처리방침</a>
+              <a href="#" className="hover:underline">쿠키 정책</a>
+              <a href="#" className="hover:underline">접근성</a>
+              <a href="#" className="hover:underline">광고 정보</a>
+            </div>
+            <div className="flex flex-wrap gap-x-3 gap-y-1">
+              <a href="#" className="hover:underline">더 보기</a>
+              <span>© 2026 InvestSNS.</span>
+            </div>
+          </div>
+        </aside>
+      </div>
     </div>
   );
 }
