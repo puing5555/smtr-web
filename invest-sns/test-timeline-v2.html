@@ -1027,81 +1027,143 @@
         <div id="dashboard" class="tab-content active">
             <div style="margin-bottom: 32px;">
                 <h1 style="font-size: 28px; font-weight: 900; margin-bottom: 8px;">🏠 대시보드</h1>
-                <p style="color: var(--text2); font-size: 16px;">투자 포트폴리오 현황과 최신 시그널을 확인하세요</p>
+                <p style="color: var(--text2); font-size: 16px;">투자를 위한 모든 도구와 정보를 한 곳에서 확인하세요</p>
             </div>
 
-            <!-- 위젯 그리드 -->
-            <div class="dashboard-grid">
-                <div class="widget">
-                    <div class="widget-header">
-                        <div class="widget-title">💰 총 자산</div>
-                    </div>
-                    <div class="widget-value">₩125,430,000</div>
-                    <div class="widget-change positive">+12.3% (+₩13,750,000)</div>
-                </div>
-
-                <div class="widget">
-                    <div class="widget-header">
-                        <div class="widget-title">📈 일일 수익</div>
-                    </div>
-                    <div class="widget-value">+₩2,340,000</div>
-                    <div class="widget-change positive">+1.9%</div>
-                </div>
-
-                <div class="widget">
-                    <div class="widget-header">
-                        <div class="widget-title">🎯 활성 시그널</div>
-                    </div>
-                    <div class="widget-value">23</div>
-                    <div class="widget-change">Strong Buy: 8개</div>
-                </div>
-            </div>
-
-            <!-- 최신 시그널 -->
-            <div class="glass-card">
+            <!-- 빠른 이동 카드 -->
+            <div class="glass-card" style="margin-bottom: 24px;">
                 <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
-                    🚨 최신 시그널
+                    🚀 빠른 이동
                 </h3>
-                <div style="display: grid; gap: 16px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                    <div class="quick-nav-card" onclick="switchTab('sns')" style="background: linear-gradient(135deg, rgba(29, 155, 240, 0.1), rgba(29, 155, 240, 0.05)); border: 1px solid rgba(29, 155, 240, 0.2); border-radius: 16px; padding: 20px; cursor: pointer; transition: all 0.3s ease; text-align: center;">
+                        <div style="font-size: 32px; margin-bottom: 12px;">💬</div>
+                        <div style="font-weight: 600; font-size: 16px; margin-bottom: 6px;">투자 SNS</div>
+                        <div style="font-size: 13px; color: var(--text2);">투자자들과 소통하고 정보 공유</div>
+                    </div>
+                    <div class="quick-nav-card" onclick="switchTab('news')" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(168, 85, 247, 0.05)); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 16px; padding: 20px; cursor: pointer; transition: all 0.3s ease; text-align: center;">
+                        <div style="font-size: 32px; margin-bottom: 12px;">📰</div>
+                        <div style="font-weight: 600; font-size: 16px; margin-bottom: 6px;">뉴스 & 공시</div>
+                        <div style="font-size: 13px; color: var(--text2);">최신 시장 뉴스와 기업 공시</div>
+                    </div>
+                    <div class="quick-nav-card" onclick="switchTab('influencer')" style="background: linear-gradient(135deg, rgba(0, 186, 124, 0.1), rgba(0, 186, 124, 0.05)); border: 1px solid rgba(0, 186, 124, 0.2); border-radius: 16px; padding: 20px; cursor: pointer; transition: all 0.3s ease; text-align: center;">
+                        <div style="font-size: 32px; margin-bottom: 12px;">👥</div>
+                        <div style="font-weight: 600; font-size: 16px; margin-bottom: 6px;">인플루언서</div>
+                        <div style="font-size: 13px; color: var(--text2);">전문가 분석과 투자 시그널</div>
+                    </div>
+                    <div class="quick-nav-card" onclick="switchTab('notes')" style="background: linear-gradient(135deg, rgba(249, 24, 128, 0.1), rgba(249, 24, 128, 0.05)); border: 1px solid rgba(249, 24, 128, 0.2); border-radius: 16px; padding: 20px; cursor: pointer; transition: all 0.3s ease; text-align: center;">
+                        <div style="font-size: 32px; margin-bottom: 12px;">📝</div>
+                        <div style="font-weight: 600; font-size: 16px; margin-bottom: 6px;">투자 노트</div>
+                        <div style="font-size: 13px; color: var(--text2);">아이디어 기록과 분석 관리</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 인플루언서 시그널 요약 -->
+            <div class="glass-card" style="margin-bottom: 24px;">
+                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+                    🚨 최신 투자 시그널
+                </h3>
+                <div style="display: grid; gap: 16px;" id="latestSignals">
                     <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: rgba(52, 211, 153, 0.1); border-radius: 12px; border: 1px solid rgba(52, 211, 153, 0.2);">
                         <div>
                             <div style="font-weight: 600; color: var(--text); margin-bottom: 4px;">삼성전자 - STRONG BUY</div>
-                            <div style="font-size: 14px; color: var(--text2);">박두환 • 2시간 전</div>
+                            <div style="font-size: 14px; color: var(--text2);">박두환 • AI 반도체 시장에서의 성장 가능성</div>
+                            <div style="font-size: 12px; color: var(--text3);">2시간 전</div>
                         </div>
                         <div style="font-size: 24px;">📈</div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: rgba(168, 85, 247, 0.1); border-radius: 12px; border: 1px solid rgba(168, 85, 247, 0.2);">
+                        <div>
+                            <div style="font-weight: 600; color: var(--text); margin-bottom: 4px;">엔비디아 - STRONG BUY</div>
+                            <div style="font-size: 14px; color: var(--text2);">박두환 • AI 칩셋 시장의 절대 강자</div>
+                            <div style="font-size: 12px; color: var(--text3);">6시간 전</div>
+                        </div>
+                        <div style="font-size: 24px;">🚀</div>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: rgba(96, 165, 250, 0.1); border-radius: 12px; border: 1px solid rgba(96, 165, 250, 0.2);">
                         <div>
                             <div style="font-weight: 600; color: var(--text); margin-bottom: 4px;">테슬라 - POSITIVE</div>
-                            <div style="font-size: 14px; color: var(--text2);">박두환 • 4시간 전</div>
+                            <div style="font-size: 14px; color: var(--text2);">박두환 • 자율주행 기술의 발전 가능성</div>
+                            <div style="font-size: 12px; color: var(--text3);">1일 전</div>
                         </div>
                         <div style="font-size: 24px;">⚡</div>
                     </div>
                 </div>
+                <div style="text-align: center; margin-top: 16px;">
+                    <button onclick="switchTab('influencer')" style="background: none; border: 1px solid var(--accent); color: var(--accent); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 13px; transition: all 0.3s ease;">
+                        더 많은 시그널 보기 →
+                    </button>
+                </div>
             </div>
 
-            <!-- 마켓 요약 -->
+            <!-- 실시간 마켓 요약 -->
+            <div class="glass-card" style="margin-bottom: 24px;">
+                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+                    📊 실시간 마켓 요약
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px;" id="marketSummary">
+                    <div style="text-align: center; padding: 16px; background: var(--bg2); border-radius: 12px; border: 1px solid var(--border2);">
+                        <div style="font-size: 14px; color: var(--text2); margin-bottom: 8px;">BTC/USD</div>
+                        <div id="btcPrice" style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">$45,234</div>
+                        <div id="btcChange" style="font-size: 12px; color: var(--green);">+2.5%</div>
+                    </div>
+                    <div style="text-align: center; padding: 16px; background: var(--bg2); border-radius: 12px; border: 1px solid var(--border2);">
+                        <div style="font-size: 14px; color: var(--text2); margin-bottom: 8px;">ETH/USD</div>
+                        <div id="ethPrice" style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">$2,678</div>
+                        <div id="ethChange" style="font-size: 12px; color: var(--green);">+1.8%</div>
+                    </div>
+                    <div style="text-align: center; padding: 16px; background: var(--bg2); border-radius: 12px; border: 1px solid var(--border2);">
+                        <div style="font-size: 14px; color: var(--text2); margin-bottom: 8px;">코스피</div>
+                        <div id="kospiPrice" style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">2,654</div>
+                        <div id="kospiChange" style="font-size: 12px; color: var(--green);">+1.2%</div>
+                    </div>
+                    <div style="text-align: center; padding: 16px; background: var(--bg2); border-radius: 12px; border: 1px solid var(--border2);">
+                        <div style="font-size: 14px; color: var(--text2); margin-bottom: 8px;">나스닥</div>
+                        <div id="nasdaqPrice" style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">15,832</div>
+                        <div id="nasdaqChange" style="font-size: 12px; color: var(--red);">-0.8%</div>
+                    </div>
+                    <div style="text-align: center; padding: 16px; background: var(--bg2); border-radius: 12px; border: 1px solid var(--border2);">
+                        <div style="font-size: 14px; color: var(--text2); margin-bottom: 8px;">USD/KRW</div>
+                        <div id="usdkrwPrice" style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">1,320.5</div>
+                        <div id="usdkrwChange" style="font-size: 12px; color: var(--text);">+0.1%</div>
+                    </div>
+                </div>
+                <div style="font-size: 11px; color: var(--text3); text-align: center; margin-top: 12px;">
+                    📈 실시간 데이터 · 15분 지연 • CoinGecko API 연동
+                </div>
+            </div>
+
+            <!-- 최근 활동 -->
             <div class="glass-card">
                 <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
-                    🌍 마켓 요약
+                    ⏱️ 최근 활동
                 </h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 16px;">
-                    <div style="text-align: center; padding: 16px; background: var(--bg2); border-radius: 12px;">
-                        <div style="font-size: 14px; color: var(--text2); margin-bottom: 8px;">코스피</div>
-                        <div style="font-size: 18px; font-weight: 700; color: var(--green);">+1.2%</div>
+                <div style="display: grid; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(255, 255, 255, 0.02); border-radius: 8px;">
+                        <div style="font-size: 20px;">📝</div>
+                        <div style="flex: 1;">
+                            <div style="font-size: 14px; font-weight: 500; color: var(--text);">삼성전자 분석 노트 작성</div>
+                            <div style="font-size: 12px; color: var(--text3);">2시간 전</div>
+                        </div>
                     </div>
-                    <div style="text-align: center; padding: 16px; background: var(--bg2); border-radius: 12px;">
-                        <div style="font-size: 14px; color: var(--text2); margin-bottom: 8px;">나스닥</div>
-                        <div style="font-size: 18px; font-weight: 700; color: var(--red);">-0.8%</div>
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(255, 255, 255, 0.02); border-radius: 8px;">
+                        <div style="font-size: 20px;">👀</div>
+                        <div style="flex: 1;">
+                            <div style="font-size: 14px; font-weight: 500; color: var(--text);">테슬라 Q4 실적 뉴스 확인</div>
+                            <div style="font-size: 12px; color: var(--text3);">4시간 전</div>
+                        </div>
                     </div>
-                    <div style="text-align: center; padding: 16px; background: var(--bg2); border-radius: 12px;">
-                        <div style="font-size: 14px; color: var(--text2); margin-bottom: 8px;">비트코인</div>
-                        <div style="font-size: 18px; font-weight: 700; color: var(--green);">+2.5%</div>
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(255, 255, 255, 0.02); border-radius: 8px;">
+                        <div style="font-size: 20px;">💬</div>
+                        <div style="flex: 1;">
+                            <div style="font-size: 14px; font-weight: 500; color: var(--text);">투자 커뮤니티 게시글 작성</div>
+                            <div style="font-size: 12px; color: var(--text3);">6시간 전</div>
+                        </div>
                     </div>
-                    <div style="text-align: center; padding: 16px; background: var(--bg2); border-radius: 12px;">
-                        <div style="font-size: 14px; color: var(--text2); margin-bottom: 8px;">달러/원</div>
-                        <div style="font-size: 18px; font-weight: 700; color: var(--text);">1,320원</div>
-                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 16px;">
+                    <span style="font-size: 12px; color: var(--text3);">모든 활동이 암호화되어 안전하게 보관됩니다 🔒</span>
                 </div>
             </div>
         </div>

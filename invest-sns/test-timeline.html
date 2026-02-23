@@ -15,20 +15,20 @@
         }
 
         :root {
-            --bg: #0a0e17;
+            --bg: #000000;
             --bg2: #111827;
             --bg3: #1a2332;
             --bg4: #243044;
-            --accent: #3b82f6;
+            --accent: #1d9bf0;
             --accent2: #60a5fa;
-            --green: #10b981;
-            --red: #ef4444;
+            --green: #00ba7c;
+            --red: #f91880;
             --yellow: #f59e0b;
             --purple: #a855f7;
-            --text: #e2e8f0;
-            --text2: #94a3b8;
-            --text3: #64748b;
-            --border: #1e293b;
+            --text: #e7e9ea;
+            --text2: #71767b;
+            --text3: #71767b;
+            --border: #2f3336;
             --border2: #334155;
         }
 
@@ -217,130 +217,283 @@
             color: var(--red);
         }
 
-        /* SNS 피드 스타일 */
+        /* X(트위터) 스타일 SNS 피드 */
         .sns-compose {
-            background: var(--bg2);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
+            border-bottom: 1px solid #2f3336;
+            padding: 16px;
+            margin-bottom: 0;
+            background: transparent;
+        }
+
+        .sns-compose-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .sns-compose-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1d9bf0, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 16px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .sns-compose-main {
+            flex: 1;
+            min-width: 0;
         }
 
         .sns-compose textarea {
             width: 100%;
-            min-height: 80px;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text);
-            padding: 12px;
-            font-family: inherit;
-            resize: vertical;
-            margin-bottom: 12px;
+            min-height: 48px;
+            max-height: 300px;
+            background: transparent;
+            border: none;
+            color: #e7e9ea;
+            padding: 12px 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 20px;
+            line-height: 24px;
+            resize: none;
+            outline: none;
+            overflow: hidden;
         }
 
-        .sns-compose textarea:focus {
-            outline: none;
-            border-color: var(--accent);
+        .sns-compose textarea::placeholder {
+            color: #71767b;
+            font-size: 20px;
         }
 
         .sns-compose-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-top: 12px;
+            padding-top: 12px;
         }
 
-        .btn-primary {
-            background: var(--accent);
+        .sns-compose-toolbar {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .compose-tool-btn {
+            background: none;
+            border: none;
+            color: #1d9bf0;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: 0.2s;
+            font-size: 18px;
+        }
+
+        .compose-tool-btn:hover {
+            background: rgba(29, 155, 240, 0.1);
+        }
+
+        .btn-tweet {
+            background: #1d9bf0;
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
+            padding: 8px 24px;
+            border-radius: 20px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 15px;
+            font-family: inherit;
             transition: 0.2s;
+            min-width: 80px;
         }
 
-        .btn-primary:hover {
-            background: var(--accent2);
+        .btn-tweet:hover {
+            background: #1a8cd8;
+        }
+
+        .btn-tweet:disabled {
+            background: #1d9bf0;
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .sns-feed {
+            border-top: 1px solid #2f3336;
         }
 
         .sns-post {
-            background: var(--bg2);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 16px;
-            transition: 0.2s;
+            border-bottom: 1px solid #2f3336;
+            padding: 12px 16px;
+            background: transparent;
+            transition: background-color 0.2s;
+            cursor: pointer;
         }
 
         .sns-post:hover {
-            border-color: var(--border2);
+            background: rgba(255, 255, 255, 0.03);
         }
 
-        .sns-post-header {
+        .sns-post-wrapper {
             display: flex;
-            align-items: center;
             gap: 12px;
-            margin-bottom: 12px;
         }
 
         .sns-author-avatar {
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent), var(--purple));
+            background: linear-gradient(135deg, #1d9bf0, #8b5cf6);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            font-weight: 600;
             font-size: 16px;
+            color: white;
+            flex-shrink: 0;
         }
 
-        .sns-post-info {
+        .sns-post-main {
             flex: 1;
+            min-width: 0;
+        }
+
+        .sns-post-header {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            margin-bottom: 2px;
+            flex-wrap: wrap;
         }
 
         .sns-author-name {
-            font-weight: 600;
-            margin-bottom: 2px;
+            font-weight: 700;
+            color: #e7e9ea;
+            font-size: 15px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .sns-author-handle {
+            color: #71767b;
+            font-size: 15px;
+            font-weight: 400;
+        }
+
+        .verified-badge {
+            color: #1d9bf0;
+            font-size: 14px;
+            margin-left: 2px;
         }
 
         .sns-post-time {
-            font-size: 12px;
-            color: var(--text3);
+            color: #71767b;
+            font-size: 15px;
+            font-weight: 400;
+        }
+
+        .sns-post-time::before {
+            content: "·";
+            margin: 0 4px;
         }
 
         .sns-post-content {
-            margin-bottom: 12px;
-            line-height: 1.6;
+            color: #e7e9ea;
+            font-size: 15px;
+            line-height: 20px;
+            margin: 2px 0 12px 0;
+            word-wrap: break-word;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .hashtag {
+            color: #1d9bf0;
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        .hashtag:hover {
+            text-decoration: underline;
         }
 
         .sns-post-actions {
             display: flex;
-            gap: 16px;
-            align-items: center;
-            padding-top: 12px;
-            border-top: 1px solid var(--border);
+            justify-content: space-between;
+            max-width: 425px;
+            margin-top: 12px;
         }
 
         .sns-action-btn {
-            background: none;
-            border: none;
-            color: var(--text3);
-            cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 14px;
-            padding: 6px 12px;
+            gap: 8px;
+            background: none;
+            border: none;
+            color: #71767b;
+            cursor: pointer;
+            padding: 8px;
             border-radius: 20px;
+            font-size: 13px;
+            font-weight: 400;
             transition: 0.2s;
+            min-width: 0;
+        }
+
+        .sns-action-btn .action-icon {
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
         }
 
         .sns-action-btn:hover {
-            background: var(--bg3);
-            color: var(--text);
+            color: #1d9bf0;
+            background: rgba(29, 155, 240, 0.1);
+        }
+
+        .sns-action-btn.like-btn:hover {
+            color: #f91880;
+            background: rgba(249, 24, 128, 0.1);
+        }
+
+        .sns-action-btn.retweet-btn:hover {
+            color: #00ba7c;
+            background: rgba(0, 186, 124, 0.1);
+        }
+
+        .sns-action-btn.like-btn:hover .action-icon {
+            color: #f91880;
+        }
+
+        .sns-action-btn.retweet-btn:hover .action-icon {
+            color: #00ba7c;
+        }
+
+        /* 반응형 조정 */
+        @media (max-width: 640px) {
+            .sns-compose {
+                padding: 12px;
+            }
+            
+            .sns-post {
+                padding: 12px;
+            }
+            
+            .sns-compose textarea {
+                font-size: 18px;
+            }
+            
+            .sns-compose textarea::placeholder {
+                font-size: 18px;
+            }
         }
 
         /* 뉴스/공시 스타일 */
@@ -1384,95 +1537,169 @@
 
         <!-- SNS 탭 -->
         <div id="sns" class="tab-content">
-            <div style="margin-bottom: 24px;">
-                <h1 style="font-size: 24px; font-weight: 900; margin-bottom: 8px;">💬 투자 SNS</h1>
-                <p style="color: var(--text2);">투자자들과 실시간으로 소통하고 인사이트를 공유하세요</p>
+            <div style="margin-bottom: 0; border-bottom: 1px solid #2f3336;">
+                <div style="padding: 16px; background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(12px); position: sticky; top: 60px; z-index: 50;">
+                    <h1 style="font-size: 20px; font-weight: 800; margin-bottom: 0; color: #e7e9ea; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">투자 SNS</h1>
+                </div>
             </div>
 
+            <!-- 게시 영역 -->
             <div class="sns-compose">
-                <textarea placeholder="투자 생각이나 시장 분석을 공유해보세요..."></textarea>
-                <div class="sns-compose-footer">
-                    <div style="color: var(--text3); font-size: 14px;">
-                        💡 #종목명을 사용하면 자동으로 태그됩니다
+                <div class="sns-compose-header">
+                    <div class="sns-compose-avatar">👤</div>
+                    <div class="sns-compose-main">
+                        <textarea placeholder="무슨 일이 일어나고 있나요?" oninput="autoResize(this)"></textarea>
+                        <div class="sns-compose-footer">
+                            <div class="sns-compose-toolbar">
+                                <button class="compose-tool-btn" title="이미지 업로드">🖼️</button>
+                                <button class="compose-tool-btn" title="투표">📊</button>
+                                <button class="compose-tool-btn" title="이모지">😀</button>
+                                <button class="compose-tool-btn" title="일정">📅</button>
+                            </div>
+                            <button class="btn-tweet" onclick="postTweet()" disabled>게시하기</button>
+                        </div>
                     </div>
-                    <button class="btn-primary">게시</button>
                 </div>
             </div>
 
             <!-- SNS 피드 -->
-            <div class="sns-post">
-                <div class="sns-post-header">
-                    <div class="sns-author-avatar">박</div>
-                    <div class="sns-post-info">
-                        <div class="sns-author-name">박두환</div>
-                        <div class="sns-post-time">2시간 전</div>
+            <div class="sns-feed">
+                <div class="sns-post" onclick="openPostDetail(1)">
+                    <div class="sns-post-wrapper">
+                        <div class="sns-author-avatar">박</div>
+                        <div class="sns-post-main">
+                            <div class="sns-post-header">
+                                <span class="sns-author-name">박두환</span>
+                                <span class="verified-badge">✓</span>
+                                <span class="sns-author-handle">@parkdoohwan</span>
+                                <span class="sns-post-time">2h</span>
+                            </div>
+                            <div class="sns-post-content">
+                                오늘 비트코인 차트 보니까 정말 흥미로운 패턴이 나오고 있네요. 단기 조정은 있겠지만 장기적으로는 여전히 상승 전망입니다. 
+                                <a href="#" class="hashtag">#비트코인</a> <a href="#" class="hashtag">#BTC</a>
+                            </div>
+                            <div class="sns-post-actions">
+                                <button class="sns-action-btn" onclick="replyToPost(event, 1)">
+                                    <span class="action-icon">💬</span>
+                                    <span>5</span>
+                                </button>
+                                <button class="sns-action-btn retweet-btn" onclick="retweetPost(event, 1)">
+                                    <span class="action-icon">🔄</span>
+                                    <span>2</span>
+                                </button>
+                                <button class="sns-action-btn like-btn" onclick="likePost(event, 1)">
+                                    <span class="action-icon">❤️</span>
+                                    <span>12</span>
+                                </button>
+                                <button class="sns-action-btn" onclick="sharePost(event, 1)">
+                                    <span class="action-icon">📤</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="sns-post-content">
-                    오늘 비트코인 차트 보니까 정말 흥미로운 패턴이 나오고 있네요. 단기 조정은 있겠지만 장기적으로는 여전히 상승 전망입니다. 
-                    #비트코인 #BTC
-                </div>
-                <div class="sns-post-actions">
-                    <button class="sns-action-btn">👍 12</button>
-                    <button class="sns-action-btn">💬 5</button>
-                    <button class="sns-action-btn">📤 2</button>
-                </div>
-            </div>
 
-            <div class="sns-post">
-                <div class="sns-post-header">
-                    <div class="sns-author-avatar">세</div>
-                    <div class="sns-post-info">
-                        <div class="sns-author-name">세상학개론</div>
-                        <div class="sns-post-time">4시간 전</div>
+                <div class="sns-post" onclick="openPostDetail(2)">
+                    <div class="sns-post-wrapper">
+                        <div class="sns-author-avatar">세</div>
+                        <div class="sns-post-main">
+                            <div class="sns-post-header">
+                                <span class="sns-author-name">세상학개론</span>
+                                <span class="verified-badge">✓</span>
+                                <span class="sns-author-handle">@sesang_study</span>
+                                <span class="sns-post-time">4h</span>
+                            </div>
+                            <div class="sns-post-content">
+                                엔비디아 AI 칩 수요가 정말 폭발적이네요. 데이터센터 향 매출이 계속 증가하고 있어서 매수 관점에서 접근하고 있습니다.
+                                <a href="#" class="hashtag">#엔비디아</a> <a href="#" class="hashtag">#NVDA</a> <a href="#" class="hashtag">#AI주식</a>
+                            </div>
+                            <div class="sns-post-actions">
+                                <button class="sns-action-btn" onclick="replyToPost(event, 2)">
+                                    <span class="action-icon">💬</span>
+                                    <span>8</span>
+                                </button>
+                                <button class="sns-action-btn retweet-btn" onclick="retweetPost(event, 2)">
+                                    <span class="action-icon">🔄</span>
+                                    <span>6</span>
+                                </button>
+                                <button class="sns-action-btn like-btn" onclick="likePost(event, 2)">
+                                    <span class="action-icon">❤️</span>
+                                    <span>24</span>
+                                </button>
+                                <button class="sns-action-btn" onclick="sharePost(event, 2)">
+                                    <span class="action-icon">📤</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="sns-post-content">
-                    엔비디아 AI 칩 수요가 정말 폭발적이네요. 데이터센터 향 매출이 계속 증가하고 있어서 매수 관점에서 접근하고 있습니다.
-                    #엔비디아 #NVDA #AI주식
-                </div>
-                <div class="sns-post-actions">
-                    <button class="sns-action-btn">👍 24</button>
-                    <button class="sns-action-btn">💬 8</button>
-                    <button class="sns-action-btn">📤 6</button>
-                </div>
-            </div>
 
-            <div class="sns-post">
-                <div class="sns-post-header">
-                    <div class="sns-author-avatar">투</div>
-                    <div class="sns-post-info">
-                        <div class="sns-author-name">투자왕김대리</div>
-                        <div class="sns-post-time">6시간 전</div>
+                <div class="sns-post" onclick="openPostDetail(3)">
+                    <div class="sns-post-wrapper">
+                        <div class="sns-author-avatar">투</div>
+                        <div class="sns-post-main">
+                            <div class="sns-post-header">
+                                <span class="sns-author-name">투자왕김대리</span>
+                                <span class="sns-author-handle">@invest_king_kim</span>
+                                <span class="sns-post-time">6h</span>
+                            </div>
+                            <div class="sns-post-content">
+                                삼성전자 3분기 실적 발표가 다가오는데, 반도체 업황 개선으로 기대치보다 좋을 것 같습니다. 
+                                메모리 가격 상승과 foundry 사업 회복이 긍정적이네요. <a href="#" class="hashtag">#삼성전자</a>
+                            </div>
+                            <div class="sns-post-actions">
+                                <button class="sns-action-btn" onclick="replyToPost(event, 3)">
+                                    <span class="action-icon">💬</span>
+                                    <span>12</span>
+                                </button>
+                                <button class="sns-action-btn retweet-btn" onclick="retweetPost(event, 3)">
+                                    <span class="action-icon">🔄</span>
+                                    <span>3</span>
+                                </button>
+                                <button class="sns-action-btn like-btn" onclick="likePost(event, 3)">
+                                    <span class="action-icon">❤️</span>
+                                    <span>18</span>
+                                </button>
+                                <button class="sns-action-btn" onclick="sharePost(event, 3)">
+                                    <span class="action-icon">📤</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="sns-post-content">
-                    삼성전자 3분기 실적 발표가 다가오는데, 반도체 업황 개선으로 기대치보다 좋을 것 같습니다. 
-                    메모리 가격 상승과 foundry 사업 회복이 긍정적이네요. #삼성전자
-                </div>
-                <div class="sns-post-actions">
-                    <button class="sns-action-btn">👍 18</button>
-                    <button class="sns-action-btn">💬 12</button>
-                    <button class="sns-action-btn">📤 3</button>
-                </div>
-            </div>
 
-            <div class="sns-post">
-                <div class="sns-post-header">
-                    <div class="sns-author-avatar">코</div>
-                    <div class="sns-post-info">
-                        <div class="sns-author-name">코린이탈출</div>
-                        <div class="sns-post-time">8시간 전</div>
+                <div class="sns-post" onclick="openPostDetail(4)">
+                    <div class="sns-post-wrapper">
+                        <div class="sns-author-avatar">코</div>
+                        <div class="sns-post-main">
+                            <div class="sns-post-header">
+                                <span class="sns-author-name">코린이탈출</span>
+                                <span class="sns-author-handle">@korini_exit</span>
+                                <span class="sns-post-time">8h</span>
+                            </div>
+                            <div class="sns-post-content">
+                                초보자 질문입니다. 팔란티어 주식이 계속 화제인데, 이 회사가 정확히 뭘 하는 회사인가요? 
+                                AI 관련 사업이라고 하는데 투자해도 괜찮을까요? <a href="#" class="hashtag">#팔란티어</a> <a href="#" class="hashtag">#PLTR</a>
+                            </div>
+                            <div class="sns-post-actions">
+                                <button class="sns-action-btn" onclick="replyToPost(event, 4)">
+                                    <span class="action-icon">💬</span>
+                                    <span>15</span>
+                                </button>
+                                <button class="sns-action-btn retweet-btn" onclick="retweetPost(event, 4)">
+                                    <span class="action-icon">🔄</span>
+                                    <span>1</span>
+                                </button>
+                                <button class="sns-action-btn like-btn" onclick="likePost(event, 4)">
+                                    <span class="action-icon">❤️</span>
+                                    <span>7</span>
+                                </button>
+                                <button class="sns-action-btn" onclick="sharePost(event, 4)">
+                                    <span class="action-icon">📤</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="sns-post-content">
-                    초보자 질문입니다. 팔란티어 주식이 계속 화제인데, 이 회사가 정확히 뭘 하는 회사인가요? 
-                    AI 관련 사업이라고 하는데 투자해도 괜찮을까요? #팔란티어 #PLTR
-                </div>
-                <div class="sns-post-actions">
-                    <button class="sns-action-btn">👍 7</button>
-                    <button class="sns-action-btn">💬 15</button>
-                    <button class="sns-action-btn">📤 1</button>
                 </div>
             </div>
         </div>
@@ -4631,6 +4858,208 @@
         function openNoteModal() {
             alert('노트 작성 기능은 준비 중입니다.');
         }
+
+        // SNS X(트위터) 스타일 함수들
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 300) + 'px';
+            
+            const btn = textarea.closest('.sns-compose').querySelector('.btn-tweet');
+            btn.disabled = textarea.value.trim().length === 0;
+            
+            if (textarea.value.trim().length === 0) {
+                btn.style.opacity = '0.5';
+            } else {
+                btn.style.opacity = '1';
+            }
+        }
+
+        function postTweet() {
+            const textarea = document.querySelector('.sns-compose textarea');
+            const content = textarea.value.trim();
+            
+            if (!content) return;
+            
+            // 해시태그 처리
+            const processedContent = content.replace(/#([^\s]+)/g, '<a href="#" class="hashtag">#$1</a>');
+            
+            // 새 포스트 생성
+            const newPost = document.createElement('div');
+            newPost.className = 'sns-post';
+            newPost.onclick = () => openPostDetail(Date.now());
+            
+            newPost.innerHTML = `
+                <div class="sns-post-wrapper">
+                    <div class="sns-author-avatar">👤</div>
+                    <div class="sns-post-main">
+                        <div class="sns-post-header">
+                            <span class="sns-author-name">당신</span>
+                            <span class="sns-author-handle">@you</span>
+                            <span class="sns-post-time">방금</span>
+                        </div>
+                        <div class="sns-post-content">
+                            ${processedContent}
+                        </div>
+                        <div class="sns-post-actions">
+                            <button class="sns-action-btn" onclick="replyToPost(event, ${Date.now()})">
+                                <span class="action-icon">💬</span>
+                                <span>0</span>
+                            </button>
+                            <button class="sns-action-btn retweet-btn" onclick="retweetPost(event, ${Date.now()})">
+                                <span class="action-icon">🔄</span>
+                                <span>0</span>
+                            </button>
+                            <button class="sns-action-btn like-btn" onclick="likePost(event, ${Date.now()})">
+                                <span class="action-icon">❤️</span>
+                                <span>0</span>
+                            </button>
+                            <button class="sns-action-btn" onclick="sharePost(event, ${Date.now()})">
+                                <span class="action-icon">📤</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // 피드 맨 위에 추가
+            const feed = document.querySelector('.sns-feed');
+            feed.insertBefore(newPost, feed.firstChild);
+            
+            // 텍스트 영역 초기화
+            textarea.value = '';
+            textarea.style.height = '48px';
+            document.querySelector('.btn-tweet').disabled = true;
+            document.querySelector('.btn-tweet').style.opacity = '0.5';
+            
+            // 새 포스트 하이라이트 애니메이션
+            newPost.style.background = 'rgba(29, 155, 240, 0.1)';
+            setTimeout(() => {
+                newPost.style.background = 'transparent';
+                newPost.style.transition = 'background-color 0.3s';
+            }, 2000);
+        }
+
+        function replyToPost(event, postId) {
+            event.stopPropagation();
+            const btn = event.currentTarget;
+            const countSpan = btn.querySelector('span:last-child');
+            const currentCount = parseInt(countSpan.textContent) || 0;
+            countSpan.textContent = currentCount + 1;
+            
+            // 색상 변화 애니메이션
+            btn.style.color = '#1d9bf0';
+            setTimeout(() => {
+                btn.style.color = '#71767b';
+            }, 200);
+        }
+
+        function retweetPost(event, postId) {
+            event.stopPropagation();
+            const btn = event.currentTarget;
+            const countSpan = btn.querySelector('span:last-child');
+            const currentCount = parseInt(countSpan.textContent) || 0;
+            
+            // 리트윗 토글
+            if (btn.classList.contains('retweeted')) {
+                btn.classList.remove('retweeted');
+                countSpan.textContent = Math.max(0, currentCount - 1);
+                btn.style.color = '#71767b';
+            } else {
+                btn.classList.add('retweeted');
+                countSpan.textContent = currentCount + 1;
+                btn.style.color = '#00ba7c';
+                
+                // 애니메이션
+                btn.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    btn.style.transform = 'scale(1)';
+                }, 150);
+            }
+        }
+
+        function likePost(event, postId) {
+            event.stopPropagation();
+            const btn = event.currentTarget;
+            const countSpan = btn.querySelector('span:last-child');
+            const heartIcon = btn.querySelector('.action-icon');
+            const currentCount = parseInt(countSpan.textContent) || 0;
+            
+            // 좋아요 토글
+            if (btn.classList.contains('liked')) {
+                btn.classList.remove('liked');
+                countSpan.textContent = Math.max(0, currentCount - 1);
+                heartIcon.textContent = '🤍';
+                btn.style.color = '#71767b';
+            } else {
+                btn.classList.add('liked');
+                countSpan.textContent = currentCount + 1;
+                heartIcon.textContent = '❤️';
+                btn.style.color = '#f91880';
+                
+                // 하트 애니메이션
+                btn.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    btn.style.transform = 'scale(1)';
+                }, 150);
+                
+                // 하트 파티클 효과 (간단한 버전)
+                for (let i = 0; i < 3; i++) {
+                    const particle = document.createElement('div');
+                    particle.textContent = '❤️';
+                    particle.style.cssText = `
+                        position: absolute;
+                        pointer-events: none;
+                        font-size: 12px;
+                        color: #f91880;
+                        animation: heartFloat 1s ease-out forwards;
+                        z-index: 1000;
+                    `;
+                    
+                    const rect = btn.getBoundingClientRect();
+                    particle.style.left = (rect.left + Math.random() * 20 - 10) + 'px';
+                    particle.style.top = (rect.top - 10) + 'px';
+                    
+                    document.body.appendChild(particle);
+                    setTimeout(() => particle.remove(), 1000);
+                }
+            }
+        }
+
+        function sharePost(event, postId) {
+            event.stopPropagation();
+            navigator.clipboard.writeText(window.location.href + '#post-' + postId);
+            
+            const btn = event.currentTarget;
+            const originalIcon = btn.querySelector('.action-icon').textContent;
+            btn.querySelector('.action-icon').textContent = '✓';
+            btn.style.color = '#1d9bf0';
+            
+            setTimeout(() => {
+                btn.querySelector('.action-icon').textContent = originalIcon;
+                btn.style.color = '#71767b';
+            }, 1000);
+        }
+
+        function openPostDetail(postId) {
+            console.log('포스트 상세 보기:', postId);
+            // 포스트 상세 페이지 구현 예정
+        }
+
+        // 하트 플로팅 애니메이션 CSS 추가
+        const heartAnimation = document.createElement('style');
+        heartAnimation.textContent = `
+            @keyframes heartFloat {
+                0% {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateY(-30px) scale(0.3);
+                }
+            }
+        `;
+        document.head.appendChild(heartAnimation);
 
         // 반응형 처리
         window.addEventListener('resize', () => {

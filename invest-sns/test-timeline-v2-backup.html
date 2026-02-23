@@ -1,0 +1,2022 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMTR - 투자 통합 플랫폼</title>
+    <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.1.0/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* 통일된 다크 테마 - X 스타일 */
+            --bg: #000000;
+            --bg2: #111827;
+            --bg3: #1a2332;
+            --bg4: #243044;
+            --accent: #1d9bf0;
+            --accent2: #60a5fa;
+            --green: #00ba7c;
+            --red: #f91880;
+            --yellow: #f59e0b;
+            --purple: #a855f7;
+            --text: #e7e9ea;
+            --text2: #71767b;
+            --text3: #71767b;
+            --border: #2f3336;
+            --border2: #334155;
+            --hover: rgba(29, 155, 240, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, 'Noto Sans KR', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-bottom: 80px;
+        }
+
+        /* 상단 헤더 */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 20px;
+        }
+
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 20px;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            font-weight: 400;
+            font-size: 11px;
+            -webkit-text-fill-color: var(--text3);
+            margin-left: 6px;
+        }
+
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.2s;
+        }
+
+        .profile-icon:hover {
+            transform: scale(1.05);
+        }
+
+        /* 메인 컨테이너 */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 탭 콘텐츠 */
+        .tab-content {
+            display: none;
+            padding: 30px 0;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 카드 공통 스타일 */
+        .card {
+            background: linear-gradient(145deg, rgba(17, 24, 39, 0.7), rgba(26, 35, 50, 0.5));
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 8px 32px rgba(29, 155, 240, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* 글래스모피즘 카드 */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(29, 155, 240, 0.3);
+            box-shadow: 0 8px 32px rgba(29, 155, 240, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* 대시보드 스타일 */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .widget {
+            background: linear-gradient(145deg, rgba(17, 24, 39, 0.8), rgba(26, 35, 50, 0.6));
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 28px;
+            backdrop-filter: blur(15px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .widget::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--purple));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .widget:hover::before {
+            opacity: 1;
+        }
+
+        .widget:hover {
+            border-color: var(--accent);
+            box-shadow: 0 12px 40px rgba(29, 155, 240, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .widget-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .widget-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .widget-value {
+            font-size: 32px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .widget-change {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .widget-change.positive {
+            color: var(--green);
+        }
+
+        .widget-change.negative {
+            color: var(--red);
+        }
+
+        /* 뉴스 카드 스타일 */
+        .news-list {
+            display: grid;
+            gap: 16px;
+        }
+
+        .news-card {
+            background: linear-gradient(145deg, rgba(17, 24, 39, 0.7), rgba(26, 35, 50, 0.5));
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            gap: 16px;
+        }
+
+        .news-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 8px 32px rgba(29, 155, 240, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .news-thumbnail {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            background: var(--bg2);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .news-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .news-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text2);
+            margin-bottom: 8px;
+        }
+
+        .news-snippet {
+            font-size: 14px;
+            color: var(--text2);
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .news-filters {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tag {
+            padding: 8px 16px;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text);
+        }
+
+        .filter-tag:hover,
+        .filter-tag.active {
+            background: var(--hover);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* X(트위터) 스타일 SNS 피드 */
+        .sns-compose {
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 20px;
+            margin-bottom: 0;
+        }
+
+        .sns-compose-header {
+            display: flex;
+            gap: 12px;
+        }
+
+        .sns-compose-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--bg2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .sns-compose-main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .sns-compose textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text);
+            font-size: 20px;
+            font-family: inherit;
+            line-height: 1.25;
+            resize: none;
+            min-height: 50px;
+            margin-bottom: 12px;
+        }
+
+        .sns-compose textarea::placeholder {
+            color: var(--text2);
+        }
+
+        .sns-compose-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sns-compose-toolbar {
+            display: flex;
+            gap: 16px;
+        }
+
+        .compose-icon {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            color: var(--accent);
+            transition: color 0.2s ease;
+        }
+
+        .compose-icon:hover {
+            color: var(--accent2);
+        }
+
+        .btn-tweet {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 20px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .btn-tweet.enabled {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .btn-tweet:hover {
+            background: #1a8cd8;
+        }
+
+        .sns-feed {
+            background: var(--bg);
+        }
+
+        .sns-post {
+            border-bottom: 1px solid var(--border);
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .sns-post:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .sns-post-wrapper {
+            display: flex;
+            gap: 12px;
+        }
+
+        .sns-author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .sns-post-main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .sns-post-header {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 4px;
+        }
+
+        .sns-author-name {
+            font-weight: 700;
+            color: var(--text);
+            font-size: 15px;
+        }
+
+        .sns-author-handle {
+            color: var(--text2);
+            font-size: 15px;
+        }
+
+        .sns-author-handle::before {
+            content: '·';
+            margin: 0 4px;
+        }
+
+        .sns-post-time {
+            color: var(--text2);
+            font-size: 15px;
+        }
+
+        .sns-post-time::before {
+            content: '·';
+            margin: 0 4px;
+        }
+
+        .sns-post-content {
+            color: var(--text);
+            font-size: 15px;
+            line-height: 1.3125;
+            margin-bottom: 12px;
+            word-wrap: break-word;
+        }
+
+        .sns-post-content .highlight {
+            color: var(--accent);
+        }
+
+        .sns-post-content .tag {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .sns-post-actions {
+            display: flex;
+            justify-content: space-between;
+            max-width: 425px;
+            margin-top: 4px;
+        }
+
+        .sns-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: none;
+            border: none;
+            color: var(--text2);
+            font-size: 13px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .sns-action-btn .action-icon {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .sns-action-btn:hover {
+            background: rgba(29, 155, 240, 0.1);
+            color: var(--accent);
+        }
+
+        .sns-action-btn.like-btn:hover {
+            background: rgba(249, 24, 128, 0.1);
+            color: var(--red);
+        }
+
+        .sns-action-btn.retweet-btn:hover {
+            background: rgba(0, 186, 124, 0.1);
+            color: var(--green);
+        }
+
+        .sns-action-btn.like-btn:hover .action-icon {
+            fill: var(--red);
+        }
+
+        .sns-action-btn.retweet-btn:hover .action-icon {
+            fill: var(--green);
+        }
+
+        /* 노트 스타일 - 노션/Apple Notes 느낌 */
+        .notes-layout {
+            display: flex;
+            gap: 24px;
+            height: 600px;
+        }
+
+        .notes-sidebar {
+            width: 280px;
+            background: linear-gradient(145deg, rgba(17, 24, 39, 0.7), rgba(26, 35, 50, 0.5));
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            flex-shrink: 0;
+        }
+
+        .notes-main {
+            flex: 1;
+            background: linear-gradient(145deg, rgba(17, 24, 39, 0.7), rgba(26, 35, 50, 0.5));
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .note-item {
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 4px;
+        }
+
+        .note-item:hover {
+            background: var(--hover);
+        }
+
+        .note-item.active {
+            background: var(--hover);
+            border-color: var(--accent);
+        }
+
+        .note-title {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .note-preview {
+            font-size: 13px;
+            color: var(--text2);
+            line-height: 1.4;
+        }
+
+        .note-editor {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: var(--text);
+            font-size: 16px;
+            line-height: 1.6;
+            resize: none;
+            font-family: inherit;
+        }
+
+        .note-editor::placeholder {
+            color: var(--text3);
+        }
+
+        .new-note-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            margin-bottom: 16px;
+        }
+
+        .new-note-btn:hover {
+            background: #1a8cd8;
+        }
+
+        /* 인플루언서 탭 스타일 (v24 통합) */
+        .inf-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .inf-chip {
+            padding: 10px 18px;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.2s;
+            font-family: inherit;
+            color: var(--text);
+        }
+
+        .inf-chip:hover,
+        .inf-chip.active {
+            border-color: var(--accent);
+            background: rgba(29, 155, 240, 0.1);
+        }
+
+        .inf-subtab {
+            display: none;
+        }
+
+        .inf-subtab.active {
+            display: block;
+        }
+
+        /* 차트 스타일 */
+        .search-wrap {
+            position: relative;
+            margin-bottom: 20px;
+            max-width: 300px;
+        }
+
+        .search-wrap input {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .search-wrap input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .search-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-top: 4px;
+            z-index: 10;
+            display: none;
+        }
+
+        .search-dropdown.show {
+            display: block;
+        }
+
+        .search-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .search-item:hover {
+            background: var(--hover);
+        }
+
+        .chart-section {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .chart-header {
+            margin-bottom: 16px;
+        }
+
+        .chart-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .change {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .change.positive {
+            color: var(--green);
+        }
+
+        .change.negative {
+            color: var(--red);
+        }
+
+        #stockChart {
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* 마커 툴팁 */
+        .marker-tooltip {
+            position: absolute;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            z-index: 1000;
+            min-width: 280px;
+            max-width: 350px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            display: none;
+        }
+
+        .marker-tooltip.show {
+            display: block;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: none;
+            border: none;
+            color: var(--text2);
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .mt-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .mt-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .mt-name {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .mt-date-sub {
+            font-size: 12px;
+            color: var(--text3);
+        }
+
+        .mt-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .mt-content {
+            color: var(--text);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .mt-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .mt-count {
+            font-size: 11px;
+            color: var(--text3);
+            margin-top: 8px;
+        }
+
+        /* 발언 그리드 */
+        .statements-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .statement-card {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .statement-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .sc-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .sc-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .sc-name {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .sc-content {
+            color: var(--text2);
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .sc-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text3);
+        }
+
+        /* 하단 탭바 */
+        .bottom-tabs {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border);
+            z-index: 100;
+        }
+
+        .bottom-tabs-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 20px;
+        }
+
+        .tab-button {
+            flex: 1;
+            max-width: 80px;
+            background: none;
+            border: none;
+            padding: 8px 4px;
+            cursor: pointer;
+            transition: 0.2s;
+            border-radius: 12px;
+            color: var(--text2);
+        }
+
+        .tab-button.active {
+            color: var(--accent);
+        }
+
+        .tab-button:hover {
+            background: var(--hover);
+        }
+
+        .tab-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .tab-label {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .widget {
+                padding: 20px;
+            }
+
+            .notes-layout {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .notes-sidebar {
+                width: 100%;
+                height: 200px;
+                overflow-y: auto;
+            }
+
+            .sns-compose {
+                padding: 12px 16px;
+            }
+
+            .sns-compose textarea {
+                font-size: 16px;
+            }
+
+            .sns-compose textarea::placeholder {
+                font-size: 16px;
+            }
+
+            .sns-post {
+                padding: 12px 16px;
+            }
+
+            .search-wrap {
+                max-width: 100%;
+            }
+
+            #stockChart {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 상단 헤더 -->
+    <div class="header">
+        <div class="header-inner">
+            <div class="logo">
+                SMTR
+                <span>v2.0</span>
+            </div>
+            <div class="profile-icon">👤</div>
+        </div>
+    </div>
+
+    <!-- 메인 컨테이너 -->
+    <div class="container">
+        <!-- 대시보드 탭 -->
+        <div id="dashboard" class="tab-content active">
+            <div style="margin-bottom: 32px;">
+                <h1 style="font-size: 28px; font-weight: 900; margin-bottom: 8px;">🏠 대시보드</h1>
+                <p style="color: var(--text2); font-size: 16px;">투자 포트폴리오 현황과 최신 시그널을 확인하세요</p>
+            </div>
+
+            <!-- 위젯 그리드 -->
+            <div class="dashboard-grid">
+                <div class="widget">
+                    <div class="widget-header">
+                        <div class="widget-title">💰 총 자산</div>
+                    </div>
+                    <div class="widget-value">₩125,430,000</div>
+                    <div class="widget-change positive">+12.3% (+₩13,750,000)</div>
+                </div>
+
+                <div class="widget">
+                    <div class="widget-header">
+                        <div class="widget-title">📈 일일 수익</div>
+                    </div>
+                    <div class="widget-value">+₩2,340,000</div>
+                    <div class="widget-change positive">+1.9%</div>
+                </div>
+
+                <div class="widget">
+                    <div class="widget-header">
+                        <div class="widget-title">🎯 활성 시그널</div>
+                    </div>
+                    <div class="widget-value">23</div>
+                    <div class="widget-change">Strong Buy: 8개</div>
+                </div>
+            </div>
+
+            <!-- 최신 시그널 -->
+            <div class="glass-card">
+                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+                    🚨 최신 시그널
+                </h3>
+                <div style="display: grid; gap: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: rgba(52, 211, 153, 0.1); border-radius: 12px; border: 1px solid rgba(52, 211, 153, 0.2);">
+                        <div>
+                            <div style="font-weight: 600; color: var(--text); margin-bottom: 4px;">삼성전자 - STRONG BUY</div>
+                            <div style="font-size: 14px; color: var(--text2);">박두환 • 2시간 전</div>
+                        </div>
+                        <div style="font-size: 24px;">📈</div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: rgba(96, 165, 250, 0.1); border-radius: 12px; border: 1px solid rgba(96, 165, 250, 0.2);">
+                        <div>
+                            <div style="font-weight: 600; color: var(--text); margin-bottom: 4px;">테슬라 - POSITIVE</div>
+                            <div style="font-size: 14px; color: var(--text2);">박두환 • 4시간 전</div>
+                        </div>
+                        <div style="font-size: 24px;">⚡</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 마켓 요약 -->
+            <div class="glass-card">
+                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+                    🌍 마켓 요약
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 16px;">
+                    <div style="text-align: center; padding: 16px; background: var(--bg2); border-radius: 12px;">
+                        <div style="font-size: 14px; color: var(--text2); margin-bottom: 8px;">코스피</div>
+                        <div style="font-size: 18px; font-weight: 700; color: var(--green);">+1.2%</div>
+                    </div>
+                    <div style="text-align: center; padding: 16px; background: var(--bg2); border-radius: 12px;">
+                        <div style="font-size: 14px; color: var(--text2); margin-bottom: 8px;">나스닥</div>
+                        <div style="font-size: 18px; font-weight: 700; color: var(--red);">-0.8%</div>
+                    </div>
+                    <div style="text-align: center; padding: 16px; background: var(--bg2); border-radius: 12px;">
+                        <div style="font-size: 14px; color: var(--text2); margin-bottom: 8px;">비트코인</div>
+                        <div style="font-size: 18px; font-weight: 700; color: var(--green);">+2.5%</div>
+                    </div>
+                    <div style="text-align: center; padding: 16px; background: var(--bg2); border-radius: 12px;">
+                        <div style="font-size: 14px; color: var(--text2); margin-bottom: 8px;">달러/원</div>
+                        <div style="font-size: 18px; font-weight: 700; color: var(--text);">1,320원</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SNS 탭 (X 스타일 유지) -->
+        <div id="sns" class="tab-content">
+            <div style="margin-bottom: 24px; padding: 0 20px;">
+                <h1 style="font-size: 20px; font-weight: 800; margin-bottom: 0; color: #e7e9ea; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">투자 SNS</h1>
+            </div>
+
+            <!-- SNS 작성 영역 -->
+            <div class="sns-compose">
+                <div class="sns-compose-header">
+                    <div class="sns-compose-avatar">👤</div>
+                    <div class="sns-compose-main">
+                        <textarea placeholder="무슨 일이 일어나고 있나요?" oninput="updateTweetButton()"></textarea>
+                        <div class="sns-compose-footer">
+                            <div class="sns-compose-toolbar">
+                                <span class="compose-icon">🖼️</span>
+                                <span class="compose-icon">📊</span>
+                                <span class="compose-icon">😊</span>
+                                <span class="compose-icon">📍</span>
+                            </div>
+                            <button class="btn-tweet" onclick="postTweet()">게시하기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SNS 피드 -->
+            <div class="sns-feed">
+                <div class="sns-post" onclick="openPostDetail(1)">
+                    <div class="sns-post-wrapper">
+                        <div class="sns-author-avatar">박</div>
+                        <div class="sns-post-main">
+                            <div class="sns-post-header">
+                                <span class="sns-author-name">박두환</span>
+                                <span class="sns-author-handle">@parkdoohwan</span>
+                                <span class="sns-post-time">2h</span>
+                            </div>
+                            <div class="sns-post-content">
+                                <span class="highlight">#삼성전자</span> AI 반도체 시장 전망이 정말 밝습니다. 🚀<br>
+                                HBM 수요 급증으로 올해 실적이 기대됩니다. <span class="tag">#반도체</span> <span class="tag">#AI</span>
+                            </div>
+                            <div class="sns-post-actions">
+                                <button class="sns-action-btn" onclick="replyToPost(event, 1)">
+                                    <span class="action-icon">💬</span>
+                                    <span>24</span>
+                                </button>
+                                <button class="sns-action-btn retweet-btn" onclick="retweetPost(event, 1)">
+                                    <span class="action-icon">🔄</span>
+                                    <span>156</span>
+                                </button>
+                                <button class="sns-action-btn like-btn" onclick="likePost(event, 1)">
+                                    <span class="action-icon">❤️</span>
+                                    <span>342</span>
+                                </button>
+                                <button class="sns-action-btn" onclick="sharePost(event, 1)">
+                                    <span class="action-icon">📤</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sns-post" onclick="openPostDetail(2)">
+                    <div class="sns-post-wrapper">
+                        <div class="sns-author-avatar">세</div>
+                        <div class="sns-post-main">
+                            <div class="sns-post-header">
+                                <span class="sns-author-name">세상학개론</span>
+                                <span class="sns-author-handle">@sesang_study</span>
+                                <span class="sns-post-time">4h</span>
+                            </div>
+                            <div class="sns-post-content">
+                                시장 변동성이 클 때일수록 기본에 충실해야 합니다.<br>
+                                <span class="highlight">#장기투자</span>의 힘을 믿고 꾸준히 가세요! 💪
+                            </div>
+                            <div class="sns-post-actions">
+                                <button class="sns-action-btn" onclick="replyToPost(event, 2)">
+                                    <span class="action-icon">💬</span>
+                                    <span>18</span>
+                                </button>
+                                <button class="sns-action-btn retweet-btn" onclick="retweetPost(event, 2)">
+                                    <span class="action-icon">🔄</span>
+                                    <span>89</span>
+                                </button>
+                                <button class="sns-action-btn like-btn" onclick="likePost(event, 2)">
+                                    <span class="action-icon">❤️</span>
+                                    <span>267</span>
+                                </button>
+                                <button class="sns-action-btn" onclick="sharePost(event, 2)">
+                                    <span class="action-icon">📤</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sns-post" onclick="openPostDetail(3)">
+                    <div class="sns-post-wrapper">
+                        <div class="sns-author-avatar">투</div>
+                        <div class="sns-post-main">
+                            <div class="sns-post-header">
+                                <span class="sns-author-name">투자왕김대리</span>
+                                <span class="sns-author-handle">@invest_king_kim</span>
+                                <span class="sns-post-time">6h</span>
+                            </div>
+                            <div class="sns-post-content">
+                                오늘 <span class="highlight">#테슬라</span> 실적 발표 주목! 📊<br>
+                                자율주행 관련 업데이트가 주가에 큰 영향을 줄 것 같네요.
+                            </div>
+                            <div class="sns-post-actions">
+                                <button class="sns-action-btn" onclick="replyToPost(event, 3)">
+                                    <span class="action-icon">💬</span>
+                                    <span>31</span>
+                                </button>
+                                <button class="sns-action-btn retweet-btn" onclick="retweetPost(event, 3)">
+                                    <span class="action-icon">🔄</span>
+                                    <span>124</span>
+                                </button>
+                                <button class="sns-action-btn like-btn" onclick="likePost(event, 3)">
+                                    <span class="action-icon">❤️</span>
+                                    <span>198</span>
+                                </button>
+                                <button class="sns-action-btn" onclick="sharePost(event, 3)">
+                                    <span class="action-icon">📤</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sns-post" onclick="openPostDetail(4)">
+                    <div class="sns-post-wrapper">
+                        <div class="sns-author-avatar">코</div>
+                        <div class="sns-post-main">
+                            <div class="sns-post-header">
+                                <span class="sns-author-name">코린이탈출</span>
+                                <span class="sns-author-handle">@korini_exit</span>
+                                <span class="sns-post-time">8h</span>
+                            </div>
+                            <div class="sns-post-content">
+                                초보 투자자 분들께 드리는 조언:<br>
+                                1️⃣ 분산투자 2️⃣ 장기관점 3️⃣ 꾸준한 공부<br>
+                                <span class="tag">#투자초보</span> <span class="tag">#주식공부</span>
+                            </div>
+                            <div class="sns-post-actions">
+                                <button class="sns-action-btn" onclick="replyToPost(event, 4)">
+                                    <span class="action-icon">💬</span>
+                                    <span>45</span>
+                                </button>
+                                <button class="sns-action-btn retweet-btn" onclick="retweetPost(event, 4)">
+                                    <span class="action-icon">🔄</span>
+                                    <span>278</span>
+                                </button>
+                                <button class="sns-action-btn like-btn" onclick="likePost(event, 4)">
+                                    <span class="action-icon">❤️</span>
+                                    <span>456</span>
+                                </button>
+                                <button class="sns-action-btn" onclick="sharePost(event, 4)">
+                                    <span class="action-icon">📤</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 뉴스/공시 탭 -->
+        <div id="news" class="tab-content">
+            <div style="margin-bottom: 32px;">
+                <h1 style="font-size: 28px; font-weight: 900; margin-bottom: 8px;">📰 뉴스 & 공시</h1>
+                <p style="color: var(--text2); font-size: 16px;">최신 시장 뉴스와 기업 공시를 확인하세요</p>
+            </div>
+
+            <!-- 필터 태그 -->
+            <div class="news-filters">
+                <div class="filter-tag active">전체</div>
+                <div class="filter-tag">주식</div>
+                <div class="filter-tag">암호화폐</div>
+                <div class="filter-tag">거시경제</div>
+                <div class="filter-tag">공시</div>
+            </div>
+
+            <!-- 뉴스 리스트 -->
+            <div class="news-list">
+                <div class="news-card">
+                    <div class="news-thumbnail">📈</div>
+                    <div class="news-content">
+                        <div class="news-title">삼성전자, AI 반도체 투자 확대 발표</div>
+                        <div class="news-meta">
+                            <span>한국경제</span>
+                            <span>•</span>
+                            <span>2시간 전</span>
+                        </div>
+                        <div class="news-snippet">
+                            삼성전자가 AI 반도체 시장 선점을 위해 대규모 투자 계획을 발표했다. HBM 생산 능력을 2배로 확대하고...
+                        </div>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-thumbnail">⚡</div>
+                    <div class="news-content">
+                        <div class="news-title">테슬라 Q4 실적, 시장 예상 상회</div>
+                        <div class="news-meta">
+                            <span>Bloomberg</span>
+                            <span>•</span>
+                            <span>4시간 전</span>
+                        </div>
+                        <div class="news-snippet">
+                            테슬라가 발표한 4분기 실적이 월스트리트 예상을 크게 웃돌았다. 특히 자율주행 소프트웨어 매출이...
+                        </div>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-thumbnail">₿</div>
+                    <div class="news-content">
+                        <div class="news-title">비트코인, 기관 투자 유입으로 상승세</div>
+                        <div class="news-meta">
+                            <span>CoinDesk</span>
+                            <span>•</span>
+                            <span>6시간 전</span>
+                        </div>
+                        <div class="news-snippet">
+                            대형 기관들의 비트코인 ETF 매수세가 이어지며 가격이 상승하고 있다. BlackRock과 Fidelity가...
+                        </div>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-thumbnail">🏭</div>
+                    <div class="news-content">
+                        <div class="news-title">SK하이닉스, HBM3E 양산 본격 시작</div>
+                        <div class="news-meta">
+                            <span>전자신문</span>
+                            <span>•</span>
+                            <span>8시간 전</span>
+                        </div>
+                        <div class="news-snippet">
+                            SK하이닉스가 차세대 고대역폭 메모리(HBM3E) 양산에 돌입했다고 발표했다. 엔비디아 H200 GPU에...
+                        </div>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-thumbnail">🌍</div>
+                    <div class="news-content">
+                        <div class="news-title">Fed, 기준금리 동결 결정</div>
+                        <div class="news-meta">
+                            <span>Reuters</span>
+                            <span>•</span>
+                            <span>12시간 전</span>
+                        </div>
+                        <div class="news-snippet">
+                            미국 연방준비제도(Fed)가 기준금리를 현 수준에서 동결하기로 결정했다. 인플레이션 둔화 속도를...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 인플루언서 탭 (v24 통합) -->
+        <div id="influencer" class="tab-content">
+            <div style="margin-bottom: 24px;">
+                <h1 style="font-size: 28px; font-weight: 900; margin-bottom: 8px;">📊 인플루언서</h1>
+                <p style="color: var(--text2); font-size: 16px;">투자 인플루언서들의 종목 분석과 시그널을 추적하세요</p>
+            </div>
+
+            <!-- 인플루언서 탭 상단 선택기 -->
+            <div class="inf-selector" id="infSubTabs">
+                <button class="inf-chip active" onclick="showInfSubTab('chart')">📈 차트</button>
+                <button class="inf-chip" onclick="showInfSubTab('statements')">💬 발언</button>
+                <button class="inf-chip" onclick="showInfSubTab('influencers')">👥 인플루언서</button>
+                <button class="inf-chip" onclick="showInfSubTab('stocks')">📊 종목</button>
+            </div>
+
+            <!-- 차트 서브탭 -->
+            <div id="inf-chart" class="inf-subtab active">
+                <div class="search-wrap">
+                    <input type="text" id="searchInput" placeholder="종목명 검색..." oninput="onSearch(this.value)" onfocus="onSearch(this.value)">
+                    <div class="search-dropdown" id="searchDropdown"></div>
+                </div>
+                
+                <div class="chart-section">
+                    <div class="chart-header">
+                        <div>
+                            <h2 id="chartTitle">종목을 선택하세요</h2>
+                            <div style="display:flex;align-items:baseline;gap:4px;margin-top:4px">
+                                <span class="price" id="chartPrice"></span>
+                                <span class="change" id="chartChange"></span>
+                            </div>
+                        </div>
+                        <div id="stockInfChipBar" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px"></div>
+                        <div id="chartMarkerInfo" style="font-size:12px;color:var(--text3);text-align:right">📌 인플루언서 발언 마커 · 클릭하여 상세 보기</div>
+                    </div>
+                    <div id="stockChart"></div>
+                    <div class="marker-tooltip" id="markerTooltip">
+                        <button class="close-btn" onclick="closeTooltip()">✕</button>
+                        <div class="mt-header">
+                            <div class="mt-avatar"><img src="https://randomuser.me/api/portraits/men/75.jpg" style="width:100%;height:100%;border-radius:50%"></div>
+                            <div style="flex:1;min-width:0">
+                                <div class="mt-name">박두환</div>
+                                <div class="mt-date-sub" id="ttDateSub"></div>
+                            </div>
+                            <span class="mt-badge" id="ttBadge"></span>
+                        </div>
+                        <div class="mt-body">
+                            <div class="mt-content" id="ttContent"></div>
+                            <a class="mt-link" id="ttLink" href="#" target="_blank">▶ YouTube 타임스탬프로 이동</a>
+                            <div class="mt-count" id="ttCount"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+                    <h3 style="font-size:16px">📋 최근 발언</h3>
+                    <span style="font-size:12px;color:var(--text3)">최신 영상 기준</span>
+                </div>
+                <div class="statements-grid" id="statementsGrid"></div>
+            </div>
+
+            <!-- 기타 서브탭들 -->
+            <div id="inf-statements" class="inf-subtab">
+                <div class="card">
+                    <div style="text-align: center; padding: 40px; color: var(--text3);">
+                        💬 발언 탭 준비 중...
+                    </div>
+                </div>
+            </div>
+
+            <div id="inf-influencers" class="inf-subtab">
+                <div class="card">
+                    <div style="text-align: center; padding: 40px; color: var(--text3);">
+                        👥 인플루언서 탭 준비 중...
+                    </div>
+                </div>
+            </div>
+
+            <div id="inf-stocks" class="inf-subtab">
+                <div class="card">
+                    <div style="text-align: center; padding: 40px; color: var(--text3);">
+                        📊 종목 탭 준비 중...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 노트 탭 -->
+        <div id="notes" class="tab-content">
+            <div style="margin-bottom: 32px;">
+                <h1 style="font-size: 28px; font-weight: 900; margin-bottom: 8px;">📝 노트</h1>
+                <p style="color: var(--text2); font-size: 16px;">투자 아이디어와 분석을 기록하고 관리하세요</p>
+            </div>
+            
+            <div class="notes-layout">
+                <div class="notes-sidebar">
+                    <button class="new-note-btn">+ 새 노트</button>
+                    <div class="note-item active">
+                        <div class="note-title">삼성전자 분석</div>
+                        <div class="note-preview">AI 반도체 시장 성장 전망과 HBM 수요 분석...</div>
+                    </div>
+                    <div class="note-item">
+                        <div class="note-title">테슬라 투자 아이디어</div>
+                        <div class="note-preview">자율주행 기술 발전과 로보택시 사업 가능성...</div>
+                    </div>
+                    <div class="note-item">
+                        <div class="note-title">2024 투자 복기</div>
+                        <div class="note-preview">올해 투자 성과 정리 및 내년 전략 수립...</div>
+                    </div>
+                    <div class="note-item">
+                        <div class="note-title">암호화폐 전망</div>
+                        <div class="note-preview">비트코인 ETF 승인 이후 시장 변화 분석...</div>
+                    </div>
+                </div>
+
+                <div class="notes-main">
+                    <textarea class="note-editor" placeholder="여기에 투자 노트를 작성하세요...
+
+💡 팁:
+- 투자 아이디어와 근거를 명확히 기록하세요
+- 매수/매도 이유와 목표가를 설정하세요
+- 정기적으로 투자 결과를 복기하세요
+
+삼성전자 분석 (2024.02.23)
+
+📊 현재 상황:
+- 주가: 75,000원 (-2.3%)
+- PER: 12.5x (업계 평균 대비 저평가)
+- 메모리 반도체 사이클 회복 초기 단계
+
+🔍 투자 근거:
+1. AI 반도체 수요 급증
+   - ChatGPT, 생성형 AI 확산으로 HBM 수요 폭증
+   - 삼성 HBM3E 양산 본격화 (2024 Q2 예정)
+   
+2. 메모리 사이클 회복
+   - 재고 조정 완료, 수급 균형 회복
+   - 중국 메모리 업체들과 기술 격차 유지
+
+3. 파운드리 사업 개선
+   - 3나노 공정 수율 개선
+   - 고객사 다변화 진행
+
+🎯 투자 전략:
+- 목표가: 85,000원 (12개월)
+- 손절가: 65,000원
+- 분할 매수 (현재 50% 비중)
+
+⚠️ 리스크:
+- 중국 경기 둔화로 인한 수요 감소
+- 메모리 가격 변동성
+- 지정학적 리스크"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 하단 탭바 -->
+    <div class="bottom-tabs">
+        <div class="bottom-tabs-inner">
+            <button class="tab-button active" onclick="switchTab('dashboard')">
+                <div class="tab-icon">🏠</div>
+                <div class="tab-label">대시보드</div>
+            </button>
+            <button class="tab-button" onclick="switchTab('sns')">
+                <div class="tab-icon">💬</div>
+                <div class="tab-label">SNS</div>
+            </button>
+            <button class="tab-button" onclick="switchTab('news')">
+                <div class="tab-icon">📰</div>
+                <div class="tab-label">뉴스</div>
+            </button>
+            <button class="tab-button" onclick="switchTab('influencer')">
+                <div class="tab-icon">👥</div>
+                <div class="tab-label">인플루언서</div>
+            </button>
+            <button class="tab-button" onclick="switchTab('notes')">
+                <div class="tab-icon">📝</div>
+                <div class="tab-label">노트</div>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ===== v24 데이터 통합 =====
+        const STOCK_TICKERS = {
+            "두산": "000150.KS",
+            "두산 에너빌리티": "034020.KS",
+            "두산에너빌리티": "034020.KS",
+            "삼성전자": "005930.KS",
+            "삼성": "005930.KS",
+            "SK하이닉스": "000660.KS",
+            "SK 하이닉스": "000660.KS",
+            "하이닉스": "000660.KS",
+            "한국전력": "015760.KS",
+            "한국 전력": "015760.KS",
+            "현대차": "005380.KS",
+            "현대": "005380.KS",
+            "기아": "000270.KS",
+            "엔비디아": "NVDA",
+            "테슬라": "TSLA",
+            "비트코인": "BTC-USD",
+            "애플": "AAPL",
+            "구글": "GOOGL",
+            "마이크로소프트": "MSFT",
+            "아마존": "AMZN",
+            "메타": "META"
+        };
+
+        const SEARCHABLE_STOCKS = [
+            {name: "삼성전자", ticker: "005930.KS"},
+            {name: "SK하이닉스", ticker: "000660.KS"},
+            {name: "테슬라", ticker: "TSLA"},
+            {name: "엔비디아", ticker: "NVDA"},
+            {name: "비트코인", ticker: "BTC-USD"},
+            {name: "애플", ticker: "AAPL"},
+            {name: "두산에너빌리티", ticker: "034020.KS"},
+            {name: "현대차", ticker: "005380.KS"},
+            {name: "기아", ticker: "000270.KS"}
+        ];
+
+        var parkStatements = [
+            {"stock": "삼성전자", "dirType": "buy", "detail": "AI 반도체 시장에서의 성장 가능성이 높다고 판단됩니다.", "quote": "삼성전자는 AI 시대의 핵심 기업이 될 것입니다.", "influencer": "박두환", "video_id": "test123", "ts": "5:30", "date": "2026-02-20", "url": "https://www.youtube.com/watch?v=test123"},
+            {"stock": "테슬라", "dirType": "positive", "detail": "자율주행 기술의 발전으로 미래 가치가 증가할 것입니다.", "quote": "테슬라의 FSD 기술은 게임 체인저입니다.", "influencer": "박두환", "video_id": "test124", "ts": "8:15", "date": "2026-02-18", "url": "https://www.youtube.com/watch?v=test124"},
+            {"stock": "엔비디아", "dirType": "strong_buy", "detail": "AI 칩셋 시장의 절대 강자로서 투자 가치가 매우 높습니다.", "quote": "엔비디아는 AI 혁명의 중심에 있습니다.", "influencer": "박두환", "video_id": "test125", "ts": "12:45", "date": "2026-02-15", "url": "https://www.youtube.com/watch?v=test125"},
+            {"stock": "비트코인", "dirType": "hold", "detail": "현재 구간에서는 관망하는 것이 좋겠습니다.", "quote": "비트코인은 잠시 숨고르기 시간이 필요해 보입니다.", "influencer": "박두환", "video_id": "test126", "ts": "3:22", "date": "2026-02-12", "url": "https://www.youtube.com/watch?v=test126"}
+        ];
+
+        var hsStatements = [
+            {"stock": "SK하이닉스", "dirType": "buy", "detail": "HBM 메모리 시장에서의 독보적 위치가 강점입니다.", "quote": "하이닉스는 메모리 반도체의 미래를 선도하고 있습니다.", "influencer": "이효석", "video_id": "hs001", "ts": "6:40", "date": "2026-02-19", "url": "https://www.youtube.com/watch?v=hs001"},
+            {"stock": "애플", "dirType": "concern", "detail": "중국 시장에서의 부진이 우려스럽습니다.", "quote": "애플의 중국 실적을 주의깊게 봐야 합니다.", "influencer": "이효석", "video_id": "hs002", "ts": "4:18", "date": "2026-02-17", "url": "https://www.youtube.com/watch?v=hs002"},
+            {"stock": "두산에너빌리티", "dirType": "positive", "detail": "친환경 에너지 전환 수혜주로 주목됩니다.", "quote": "두산에너빌리티는 에너지 전환의 핵심 기업입니다.", "influencer": "이효석", "video_id": "hs003", "ts": "9:55", "date": "2026-02-14", "url": "https://www.youtube.com/watch?v=hs003"}
+        ];
+
+        var allStatements = parkStatements.concat(hsStatements);
+
+        // 차트 관련 전역 변수
+        let chart, series, currentStock = '삼성전자';
+        let overlayContainer;
+
+        // ===== 탭 관리 =====
+        function switchTab(tabName) {
+            // 모든 탭 콘텐츠 숨기기
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // 모든 탭 버튼 비활성화
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // 선택된 탭 표시
+            document.getElementById(tabName).classList.add('active');
+            
+            // 클릭된 탭 버튼 활성화
+            event.currentTarget.classList.add('active');
+            
+            // 인플루언서 탭이 선택되었을 때 차트 로드
+            if (tabName === 'influencer' && typeof LightweightCharts !== 'undefined') {
+                setTimeout(() => {
+                    if (currentStock) {
+                        loadStockChart(currentStock);
+                    }
+                }, 100);
+            }
+        }
+
+        // ===== 인플루언서 서브탭 관리 =====
+        function showInfSubTab(subTabName) {
+            // 서브탭 버튼들 업데이트
+            document.querySelectorAll('.inf-chip').forEach(chip => {
+                chip.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            // 서브탭 콘텐츠 전환
+            document.querySelectorAll('.inf-subtab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            const targetTab = document.getElementById('inf-' + subTabName);
+            if (targetTab) {
+                targetTab.classList.add('active');
+            }
+
+            // 차트 탭이 선택되었을 때 차트 초기화
+            if (subTabName === 'chart' && typeof LightweightCharts !== 'undefined') {
+                setTimeout(() => {
+                    if (currentStock) {
+                        loadStockChart(currentStock);
+                    }
+                }, 100);
+            }
+        }
+
+        // ===== 검색 기능 =====
+        function onSearch(query) {
+            const dropdown = document.getElementById('searchDropdown');
+            
+            if (!query.trim()) {
+                dropdown.classList.remove('show');
+                return;
+            }
+
+            const filtered = SEARCHABLE_STOCKS.filter(stock => 
+                stock.name.toLowerCase().includes(query.toLowerCase())
+            );
+
+            if (filtered.length > 0) {
+                dropdown.innerHTML = filtered.map(stock => 
+                    `<div class="search-item" onclick="selectStock('${stock.name}')">${stock.name}</div>`
+                ).join('');
+                dropdown.classList.add('show');
+            } else {
+                dropdown.classList.remove('show');
+            }
+        }
+
+        function selectStock(stockName) {
+            document.getElementById('searchInput').value = stockName;
+            document.getElementById('searchDropdown').classList.remove('show');
+            currentStock = stockName;
+            loadStockChart(stockName);
+        }
+
+        // ===== 차트 로딩 =====
+        function loadStockChart(stockName) {
+            if (!LightweightCharts) return;
+
+            const chartContainer = document.getElementById('stockChart');
+            if (!chartContainer) return;
+
+            // 기존 차트 제거
+            if (chart) {
+                chart.remove();
+                chart = null;
+            }
+
+            // 차트 생성
+            chart = LightweightCharts.createChart(chartContainer, {
+                width: chartContainer.clientWidth,
+                height: 400,
+                layout: {
+                    background: { color: '#000000' },
+                    textColor: '#e7e9ea',
+                },
+                grid: {
+                    vertLines: { color: '#2f3336' },
+                    horzLines: { color: '#2f3336' },
+                },
+                crosshair: {
+                    mode: LightweightCharts.CrosshairMode.Normal,
+                },
+                rightPriceScale: {
+                    borderColor: '#2f3336',
+                },
+                timeScale: {
+                    borderColor: '#2f3336',
+                },
+            });
+
+            series = chart.addCandlestickSeries({
+                upColor: '#00ba7c',
+                downColor: '#f91880',
+                borderDownColor: '#f91880',
+                borderUpColor: '#00ba7c',
+                wickDownColor: '#f91880',
+                wickUpColor: '#00ba7c',
+            });
+
+            // 샘플 데이터 생성
+            const data = generateSampleData(stockName);
+            series.setData(data);
+
+            // 마커 추가
+            const markers = generateMarkers(stockName);
+            series.setMarkers(markers);
+
+            // 차트 제목 업데이트
+            document.getElementById('chartTitle').textContent = stockName;
+            
+            // 가격 정보 업데이트 (샘플)
+            const lastPrice = data[data.length - 1];
+            const change = ((lastPrice.close - data[data.length - 2].close) / data[data.length - 2].close * 100).toFixed(2);
+            
+            document.getElementById('chartPrice').textContent = `₩${lastPrice.close.toLocaleString()}`;
+            document.getElementById('chartChange').textContent = `${change > 0 ? '+' : ''}${change}%`;
+            document.getElementById('chartChange').className = `change ${change > 0 ? 'positive' : 'negative'}`;
+
+            // 발언 그리드 업데이트
+            updateStatementsGrid(stockName);
+
+            // 리사이즈 처리
+            const resizeObserver = new ResizeObserver(entries => {
+                if (chart) {
+                    chart.applyOptions({ width: chartContainer.clientWidth });
+                }
+            });
+            resizeObserver.observe(chartContainer);
+        }
+
+        // 샘플 데이터 생성
+        function generateSampleData(stockName) {
+            const data = [];
+            let basePrice = 75000;
+            
+            if (stockName === '테슬라') basePrice = 250;
+            if (stockName === '엔비디아') basePrice = 800;
+            if (stockName === 'SK하이닉스') basePrice = 120000;
+
+            for (let i = 30; i >= 0; i--) {
+                const date = new Date();
+                date.setDate(date.getDate() - i);
+                
+                const open = basePrice + (Math.random() - 0.5) * basePrice * 0.02;
+                const close = open + (Math.random() - 0.5) * basePrice * 0.03;
+                const high = Math.max(open, close) + Math.random() * basePrice * 0.01;
+                const low = Math.min(open, close) - Math.random() * basePrice * 0.01;
+
+                data.push({
+                    time: date.toISOString().split('T')[0],
+                    open: Math.round(open),
+                    high: Math.round(high),
+                    low: Math.round(low),
+                    close: Math.round(close)
+                });
+
+                basePrice = close;
+            }
+
+            return data;
+        }
+
+        // 마커 생성
+        function generateMarkers(stockName) {
+            const statements = allStatements.filter(s => s.stock === stockName);
+            
+            return statements.map(stmt => {
+                const color = getSignalColor(stmt.dirType);
+                const date = new Date(stmt.date);
+                
+                return {
+                    time: date.toISOString().split('T')[0],
+                    position: 'aboveBar',
+                    color: color,
+                    shape: 'circle',
+                    text: stmt.influencer.charAt(0),
+                    size: 1,
+                    data: stmt
+                };
+            });
+        }
+
+        // 시그널 색상
+        function getSignalColor(dirType) {
+            const colors = {
+                'strong_buy': '#34d399',
+                'buy': '#86efac',
+                'positive': '#60a5fa',
+                'hold': '#06b6d4',
+                'neutral': '#64748b',
+                'concern': '#fdba74',
+                'sell': '#fb923c',
+                'strong_sell': '#f87171'
+            };
+            return colors[dirType] || '#64748b';
+        }
+
+        // 발언 그리드 업데이트
+        function updateStatementsGrid(stockName) {
+            const statements = allStatements.filter(s => s.stock === stockName);
+            const grid = document.getElementById('statementsGrid');
+            
+            if (statements.length === 0) {
+                grid.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--text3);">해당 종목에 대한 발언이 없습니다.</div>';
+                return;
+            }
+
+            grid.innerHTML = statements.map(stmt => `
+                <div class="statement-card" onclick="openStatement('${stmt.video_id}', '${stmt.ts}')">
+                    <div class="sc-header">
+                        <div class="sc-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" style="width:100%;height:100%;border-radius:50%">
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="sc-name">${stmt.influencer}</div>
+                            <div style="font-size: 12px; color: var(--text3);">${stmt.date} · ${stmt.ts}</div>
+                        </div>
+                        <div class="mt-badge" style="background: ${getSignalColor(stmt.dirType)}; color: #000; padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: 600;">
+                            ${stmt.dirType.toUpperCase().replace('_', ' ')}
+                        </div>
+                    </div>
+                    <div class="sc-content">"${stmt.quote}"</div>
+                    <div class="sc-meta">
+                        <span>${stmt.stock}</span>
+                        <span>▶ YouTube에서 보기</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 발언 상세 열기
+        function openStatement(videoId, timestamp) {
+            window.open(`https://www.youtube.com/watch?v=${videoId}&t=${timestamp}`, '_blank');
+        }
+
+        // 툴팁 닫기
+        function closeTooltip() {
+            document.getElementById('markerTooltip').classList.remove('show');
+        }
+
+        // SNS X(트위터) 스타일 함수들
+        function updateTweetButton() {
+            const textarea = document.querySelector('.sns-compose textarea');
+            const btn = textarea.closest('.sns-compose').querySelector('.btn-tweet');
+            
+            if (textarea.value.trim().length > 0) {
+                btn.classList.add('enabled');
+            } else {
+                btn.classList.remove('enabled');
+            }
+        }
+
+        function postTweet() {
+            const textarea = document.querySelector('.sns-compose textarea');
+            const content = textarea.value.trim();
+            
+            if (!content) return;
+
+            // 새 게시물 생성
+            const newPost = document.createElement('div');
+            newPost.className = 'sns-post';
+            newPost.innerHTML = `
+                <div class="sns-post-wrapper">
+                    <div class="sns-author-avatar">👤</div>
+                    <div class="sns-post-main">
+                        <div class="sns-post-header">
+                            <span class="sns-author-name">당신</span>
+                            <span class="sns-author-handle">@you</span>
+                            <span class="sns-post-time">방금</span>
+                        </div>
+                        <div class="sns-post-content">
+                            ${content.replace(/\n/g, '<br>')}
+                        </div>
+                        <div class="sns-post-actions">
+                            <button class="sns-action-btn" onclick="replyToPost(event, ${Date.now()})">
+                                <span class="action-icon">💬</span>
+                                <span>0</span>
+                            </button>
+                            <button class="sns-action-btn retweet-btn" onclick="retweetPost(event, ${Date.now()})">
+                                <span class="action-icon">🔄</span>
+                                <span>0</span>
+                            </button>
+                            <button class="sns-action-btn like-btn" onclick="likePost(event, ${Date.now()})">
+                                <span class="action-icon">❤️</span>
+                                <span>0</span>
+                            </button>
+                            <button class="sns-action-btn" onclick="sharePost(event, ${Date.now()})">
+                                <span class="action-icon">📤</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // 피드 상단에 추가
+            const feed = document.querySelector('.sns-feed');
+            feed.insertBefore(newPost, feed.firstChild);
+
+            // 입력창 초기화
+            textarea.value = '';
+            updateTweetButton();
+        }
+
+        // SNS 액션 함수들
+        function replyToPost(event, postId) {
+            event.stopPropagation();
+            console.log('Reply to post:', postId);
+        }
+
+        function retweetPost(event, postId) {
+            event.stopPropagation();
+            console.log('Retweet post:', postId);
+        }
+
+        function likePost(event, postId) {
+            event.stopPropagation();
+            const btn = event.currentTarget;
+            const countSpan = btn.querySelector('span:last-child');
+            let count = parseInt(countSpan.textContent);
+            countSpan.textContent = count + 1;
+            btn.style.color = 'var(--red)';
+        }
+
+        function sharePost(event, postId) {
+            event.stopPropagation();
+            console.log('Share post:', postId);
+        }
+
+        function openPostDetail(postId) {
+            console.log('Open post detail:', postId);
+        }
+
+        // 뉴스 필터 기능
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterTags = document.querySelectorAll('.filter-tag');
+            filterTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    filterTags.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // 노트 아이템 클릭 이벤트
+            const noteItems = document.querySelectorAll('.note-item');
+            noteItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    noteItems.forEach(n => n.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // 새 노트 버튼 클릭 이벤트
+            const newNoteBtn = document.querySelector('.new-note-btn');
+            if (newNoteBtn) {
+                newNoteBtn.addEventListener('click', function() {
+                    const editor = document.querySelector('.note-editor');
+                    editor.value = '';
+                    editor.placeholder = '새 노트를 작성하세요...';
+                    editor.focus();
+                });
+            }
+
+            // 초기 차트 로드
+            setTimeout(() => {
+                if (currentStock && typeof LightweightCharts !== 'undefined') {
+                    loadStockChart(currentStock);
+                }
+            }, 1000);
+        });
+
+        // 클릭 외부 이벤트로 검색 드롭다운 닫기
+        document.addEventListener('click', function(event) {
+            const searchWrap = document.querySelector('.search-wrap');
+            const dropdown = document.getElementById('searchDropdown');
+            
+            if (searchWrap && !searchWrap.contains(event.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMTR - 투자 통합 플랫폼</title>
+    <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.1.0/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0e17;
+            --bg2: #111827;
+            --bg3: #1a2332;
+            --bg4: #243044;
+            --accent: #3b82f6;
+            --accent2: #60a5fa;
+            --green: #10b981;
+            --red: #ef4444;
+            --yellow: #f59e0b;
+            --purple: #a855f7;
+            --text: #e2e8f0;
+            --text2: #94a3b8;
+            --text3: #64748b;
+            --border: #1e293b;
+            --border2: #334155;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-bottom: 80px; /* 하단 탭바 공간 */
+        }
+
+        /* 상단 헤더 */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 14, 23, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 20px;
+        }
+
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 20px;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            font-weight: 400;
+            font-size: 11px;
+            -webkit-text-fill-color: var(--text3);
+            margin-left: 6px;
+        }
+
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.2s;
+        }
+
+        .profile-icon:hover {
+            transform: scale(1.05);
+        }
+
+        /* 메인 컨테이너 */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* 공통 스타일 */
+        .card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            border-color: var(--border2);
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            border-color: var(--accent);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        /* v24 차트 및 마커 스타일 (v24에서 가져온 것) */
+        .search-wrap {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-wrap input {
+            width: 100%;
+            padding: 14px 20px 14px 48px;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .search-wrap input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        .search-wrap::before {
+            content: '🔍';
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+        }
+
+        .search-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--bg2);
+            border: 1px solid var(--border2);
+            border-radius: 12px;
+            margin-top: 4px;
+            overflow: hidden;
+            display: none;
+            z-index: 50;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .search-dropdown.show {
+            display: block;
+        }
+
+        .search-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            transition: 0.15s;
+        }
+
+        .search-item:hover {
+            background: var(--bg3);
+        }
+
+        .search-item .ticker {
+            color: var(--accent2);
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .chart-section {
+            position: relative;
+            background: var(--bg2);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .chart-header {
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .chart-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .chart-header .price {
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .chart-header .change {
+            font-size: 14px;
+            margin-left: 8px;
+            font-weight: 600;
+        }
+
+        .chart-header .change.up {
+            color: var(--green);
+        }
+
+        .chart-header .change.down {
+            color: var(--red);
+        }
+
+        #stockChart {
+            width: 100%;
+            height: 420px;
+        }
+
+        @media(max-width: 640px) {
+            #stockChart {
+                height: 300px;
+            }
+        }
+
+        /* v24 마커 툴팁 스타일 */
+        .marker-tooltip {
+            position: absolute;
+            z-index: 60;
+            background: linear-gradient(135deg, var(--bg3) 0%, #1e2a3d 100%);
+            border: 1px solid var(--border2);
+            border-radius: 16px;
+            padding: 0;
+            min-width: 300px;
+            max-width: 400px;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6);
+            pointer-events: auto;
+            opacity: 0;
+            transform: translateY(8px) scale(0.97);
+            transition: opacity 0.25s, transform 0.25s;
+            visibility: hidden;
+        }
+
+        .marker-tooltip.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            visibility: visible;
+        }
+
+        .marker-tooltip .mt-header {
+            padding: 16px 18px 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .marker-tooltip .mt-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .marker-tooltip .mt-name {
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .marker-tooltip .mt-date-sub {
+            font-size: 11px;
+            color: var(--text3);
+            margin-top: 1px;
+        }
+
+        .marker-tooltip .mt-badge {
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .marker-tooltip .mt-body {
+            padding: 14px 18px;
+        }
+
+        .marker-tooltip .mt-content {
+            color: var(--text);
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 14px;
+            padding-left: 14px;
+            border-left: 3px solid var(--accent);
+            border-radius: 2px;
+        }
+
+        .marker-tooltip .mt-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #ff0000;
+            font-size: 13px;
+            text-decoration: none;
+            padding: 8px 14px;
+            background: rgba(255, 0, 0, 0.08);
+            border-radius: 10px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .marker-tooltip .mt-link:hover {
+            background: rgba(255, 0, 0, 0.18);
+        }
+
+        .marker-tooltip .mt-count {
+            font-size: 11px;
+            color: var(--text3);
+            margin-top: 8px;
+        }
+
+        .marker-tooltip .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            background: rgba(255, 255, 255, 0.06);
+            border: none;
+            color: var(--text3);
+            cursor: pointer;
+            font-size: 14px;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.15s;
+        }
+
+        .marker-tooltip .close-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: var(--text);
+        }
+
+        /* v24 마커 도트 스타일 */
+        .marker-overlay-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 50;
+        }
+
+        .marker-dot {
+            position: absolute;
+            pointer-events: auto;
+            cursor: pointer;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            transition: transform 0.15s, box-shadow 0.15s;
+            z-index: 51;
+        }
+
+        .marker-dot:hover {
+            transform: scale(1.6);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+            z-index: 55;
+        }
+
+        .marker-dot.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .marker-dot.type-strong-buy {
+            background: #34d399;
+        }
+
+        .marker-dot.type-buy {
+            background: #86efac;
+        }
+
+        .marker-dot.type-neutral {
+            background: #64748b;
+        }
+
+        .marker-dot.type-sell {
+            background: #fb923c;
+        }
+
+        .marker-dot.type-strong-sell {
+            background: #f87171;
+        }
+
+        .marker-dot.type-hold {
+            background: #06b6d4;
+        }
+
+        .marker-dot.type-positive {
+            background: #60a5fa;
+        }
+
+        .marker-dot.type-concern {
+            background: #fdba74;
+        }
+
+        .marker-dot .dot-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 800;
+            min-width: 14px;
+            height: 14px;
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 3px;
+            line-height: 1;
+        }
+
+        /* 인플루언서 스타일들 */
+        .inf-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .inf-chip {
+            padding: 10px 18px;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.2s;
+            font-family: inherit;
+            color: var(--text);
+        }
+
+        .inf-chip:hover,
+        .inf-chip.active {
+            border-color: var(--accent);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        /* 발언 스타일들 (v24에서 가져온 것) */
+        .statements-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            max-width: 700px;
+        }
+
+        .stmt-chat {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .stmt-chat .sc-avatar-wrap {
+            position: relative;
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+        }
+
+        .stmt-chat .sc-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .stmt-chat .sc-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .stmt-chat .sc-right {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .stmt-chat .sc-meta {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .stmt-chat .sc-name {
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .stmt-chat .sc-date {
+            font-size: 11px;
+            color: var(--text3);
+        }
+
+        .stmt-chat .sc-bubble {
+            position: relative;
+            background: #1a2332;
+            border-radius: 0 12px 12px 12px;
+            padding: 12px 14px;
+            border-left: 3px solid var(--text3);
+            max-width: 520px;
+            transition: 0.2s;
+        }
+
+        .stmt-chat .sc-bubble::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -9px;
+            width: 0;
+            height: 0;
+            border-top: 0 solid transparent;
+            border-bottom: 8px solid transparent;
+            border-right: 9px solid #1a2332;
+        }
+
+        .stmt-chat .sc-bubble:hover {
+            filter: brightness(1.1);
+        }
+
+        .stmt-chat .sc-bubble.border-strong-buy {
+            border-left-color: #34d399;
+        }
+
+        .stmt-chat .sc-bubble.border-buy {
+            border-left-color: #86efac;
+        }
+
+        .stmt-chat .sc-bubble.border-neutral {
+            border-left-color: #94a3b8;
+        }
+
+        .stmt-chat .sc-bubble.border-sell {
+            border-left-color: #fb923c;
+        }
+
+        .stmt-chat .sc-bubble.border-strong-sell {
+            border-left-color: #f87171;
+        }
+
+        .stmt-chat .sc-bubble.border-hold {
+            border-left-color: #06b6d4;
+        }
+
+        .stmt-chat .sc-bubble.border-positive {
+            border-left-color: #60a5fa;
+        }
+
+        .stmt-chat .sc-bubble.border-concern {
+            border-left-color: #fdba74;
+        }
+
+        .sc-text {
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .stmt-chat .sc-bottom {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .badge {
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .badge-strong-buy {
+            background: rgba(16, 185, 129, 0.18);
+            color: #34d399;
+        }
+
+        .badge-buy {
+            background: rgba(134, 239, 172, 0.18);
+            color: #86efac;
+        }
+
+        .badge-neutral {
+            background: rgba(148, 163, 184, 0.15);
+            color: #94a3b8;
+        }
+
+        .badge-hold {
+            background: rgba(6, 182, 212, 0.18);
+            color: #22d3ee;
+        }
+
+        .badge-positive {
+            background: rgba(96, 165, 250, 0.18);
+            color: #60a5fa;
+        }
+
+        .badge-concern {
+            background: rgba(253, 186, 116, 0.18);
+            color: #fdba74;
+        }
+
+        .badge-sell {
+            background: rgba(249, 115, 22, 0.18);
+            color: #fb923c;
+        }
+
+        .badge-strong-sell {
+            background: rgba(248, 113, 113, 0.18);
+            color: #f87171;
+        }
+
+        /* 하단 탭 바 */
+        .bottom-tabs {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(17, 24, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border);
+            padding: 8px 0;
+            z-index: 1000;
+        }
+
+        .bottom-tabs-inner {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .tab-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 12px;
+            border: none;
+            background: none;
+            color: var(--text3);
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+            border-radius: 8px;
+        }
+
+        .tab-button:hover,
+        .tab-button.active {
+            color: var(--accent);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .tab-icon {
+            font-size: 20px;
+        }
+
+        .tab-label {
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        /* 기타 기존 스타일들 유지 */
+        .news-item {
+            border-bottom: 1px solid var(--border);
+            padding: 16px 0;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .news-content {
+            font-size: 14px;
+            color: var(--text2);
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .news-meta {
+            display: flex;
+            gap: 12px;
+            font-size: 12px;
+            color: var(--text3);
+            flex-wrap: wrap;
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .card {
+                padding: 16px;
+            }
+
+            .chart-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .inf-selector {
+                gap: 6px;
+            }
+
+            .inf-chip {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 상단 헤더 -->
+    <div class="header">
+        <div class="header-inner">
+            <div class="logo">
+                SMTR
+                <span>v2.5</span>
+            </div>
+            <div class="profile-icon">👤</div>
+        </div>
+    </div>
+
+    <!-- 메인 컨테이너 -->
+    <div class="container">
+        <!-- 대시보드 탭 -->
+        <div id="dashboard" class="tab-content active">
+            <div style="margin-bottom: 24px;">
+                <h1 style="font-size: 24px; font-weight: 900; margin-bottom: 8px;">📊 대시보드</h1>
+                <p style="color: var(--text2);">투자 현황과 주요 지표를 한눈에</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                <div class="card">
+                    <div class="card-title">💰 총 투자금액</div>
+                    <div style="font-size: 28px; font-weight: 900; color: var(--green); margin-bottom: 4px;">₩12,500,000</div>
+                    <div style="font-size: 12px; color: var(--text3);">전일대비 +2.3% (+280,000원)</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">📈 수익률</div>
+                    <div style="font-size: 28px; font-weight: 900; color: var(--green); margin-bottom: 4px;">+8.7%</div>
+                    <div style="font-size: 12px; color: var(--text3);">총 수익: +1,087,500원</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🎯 오늘의 추천</div>
+                    <div style="font-size: 18px; font-weight: 700; margin-bottom: 4px;">삼성전자</div>
+                    <div style="font-size: 12px; color: var(--green);">AI 주권 신호: 매수</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SNS 탭 -->
+        <div id="sns" class="tab-content">
+            <div style="margin-bottom: 24px;">
+                <h1 style="font-size: 24px; font-weight: 900; margin-bottom: 8px;">💬 SNS</h1>
+                <p style="color: var(--text2);">투자 아이디어를 공유하고 소통하세요</p>
+            </div>
+            
+            <div class="card">
+                <div style="font-size: 16px; font-weight: 600; margin-bottom: 16px;">💡 새 글 작성</div>
+                <textarea style="width: 100%; min-height: 100px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; color: var(--text); font-family: inherit; resize: vertical; margin-bottom: 12px;" placeholder="어떤 투자 아이디어가 있으신가요?"></textarea>
+                <button class="btn active">게시하기</button>
+            </div>
+        </div>
+
+        <!-- 뉴스 탭 -->
+        <div id="news" class="tab-content">
+            <div style="margin-bottom: 24px;">
+                <h1 style="font-size: 24px; font-weight: 900; margin-bottom: 8px;">📰 뉴스</h1>
+                <p style="color: var(--text2);">실시간 금융 뉴스와 시장 동향</p>
+            </div>
+
+            <div class="card">
+                <div class="news-item">
+                    <div class="news-title">삼성전자, AI 반도체 대규모 투자 발표... "2025년 글로벌 1위 목표"</div>
+                    <div class="news-content">
+                        삼성전자가 AI 반도체 시장 선점을 위해 올해 15조원 규모의 대규모 투자를 단행한다고 발표했다. 
+                        특히 차세대 HBM 메모리와 AI 프로세서 개발에 집중할 예정이다.
+                    </div>
+                    <div class="news-meta">
+                        <span>연합뉴스 · 2시간 전</span>
+                        <span style="color: var(--green);">📈 삼성전자 +4.2%</span>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-title">비트코인 6만달러 돌파... "기관 자금 유입 본격화"</div>
+                    <div class="news-content">
+                        비트코인이 6만달러를 돌파하며 연고점에 근접했다. 
+                        전문가들은 미국 비트코인 ETF 승인 기대감과 기관투자자들의 본격적인 자금 유입이 주요 원인이라고 분석했다.
+                    </div>
+                    <div class="news-meta">
+                        <span>코인데스크 코리아 · 8시간 전</span>
+                        <span style="color: var(--yellow);">₿ BTC +3.2%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 인플루언서 탭 (v24 통합 버전) -->
+        <div id="influencer" class="tab-content">
+            <div style="margin-bottom: 24px;">
+                <h1 style="font-size: 24px; font-weight: 900; margin-bottom: 8px;">📊 인플루언서</h1>
+                <p style="color: var(--text2);">투자 인플루언서들의 종목 분석과 시그널을 추적</p>
+            </div>
+
+            <!-- 인플루언서 탭 상단 선택기 -->
+            <div style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;" id="infSubTabs">
+                <button class="inf-chip active" onclick="showInfSubTab('chart')">📈 차트</button>
+                <button class="inf-chip" onclick="showInfSubTab('statements')">💬 발언</button>
+                <button class="inf-chip" onclick="showInfSubTab('influencers')">👥 인플루언서</button>
+                <button class="inf-chip" onclick="showInfSubTab('stocks')">📊 종목</button>
+            </div>
+
+            <!-- 차트 서브탭 -->
+            <div id="inf-chart" class="inf-subtab">
+                <div class="search-wrap">
+                    <input type="text" id="searchInput" placeholder="종목명 검색..." oninput="onSearch(this.value)" onfocus="onSearch(this.value)">
+                    <div class="search-dropdown" id="searchDropdown"></div>
+                </div>
+                
+                <div class="chart-section">
+                    <div class="chart-header">
+                        <div>
+                            <h2 id="chartTitle">종목을 선택하세요</h2>
+                            <div style="display:flex;align-items:baseline;gap:4px;margin-top:4px">
+                                <span class="price" id="chartPrice"></span>
+                                <span class="change" id="chartChange"></span>
+                            </div>
+                        </div>
+                        <div id="stockInfChipBar" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px"></div>
+                        <div id="chartMarkerInfo" style="font-size:12px;color:var(--text3);text-align:right">📌 인플루언서 발언 마커 · 클릭하여 상세 보기</div>
+                    </div>
+                    <div id="stockChart"></div>
+                    <div class="marker-tooltip" id="markerTooltip">
+                        <button class="close-btn" onclick="closeTooltip()">✕</button>
+                        <div class="mt-header">
+                            <div class="mt-avatar"><img src="https://randomuser.me/api/portraits/men/75.jpg" style="width:100%;height:100%;border-radius:50%"></div>
+                            <div style="flex:1;min-width:0">
+                                <div class="mt-name">박두환</div>
+                                <div class="mt-date-sub" id="ttDateSub"></div>
+                            </div>
+                            <span class="mt-badge" id="ttBadge"></span>
+                        </div>
+                        <div class="mt-body">
+                            <div class="mt-content" id="ttContent"></div>
+                            <a class="mt-link" id="ttLink" href="#" target="_blank">▶ YouTube 타임스탬프로 이동</a>
+                            <div class="mt-count" id="ttCount"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+                    <h3 style="font-size:16px">📋 최근 발언</h3>
+                    <span style="font-size:12px;color:var(--text3)">최신 영상 기준</span>
+                </div>
+                <div class="statements-grid" id="statementsGrid"></div>
+            </div>
+
+            <!-- 기타 서브탭들 (기존 유지) -->
+            <div id="inf-statements" class="inf-subtab" style="display: none;">
+                <div class="card">
+                    <div style="text-align: center; padding: 40px; color: var(--text3);">
+                        💬 발언 탭 준비 중...
+                    </div>
+                </div>
+            </div>
+
+            <div id="inf-influencers" class="inf-subtab" style="display: none;">
+                <div class="card">
+                    <div style="text-align: center; padding: 40px; color: var(--text3);">
+                        👥 인플루언서 탭 준비 중...
+                    </div>
+                </div>
+            </div>
+
+            <div id="inf-stocks" class="inf-subtab" style="display: none;">
+                <div class="card">
+                    <div style="text-align: center; padding: 40px; color: var(--text3);">
+                        📊 종목 탭 준비 중...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 노트 탭 -->
+        <div id="notes" class="tab-content">
+            <div style="margin-bottom: 24px;">
+                <h1 style="font-size: 24px; font-weight: 900; margin-bottom: 8px;">📝 노트</h1>
+                <p style="color: var(--text2);">투자 아이디어와 메모를 기록하세요</p>
+            </div>
+            
+            <div class="card">
+                <div style="text-align: center; padding: 60px; color: var(--text3);">
+                    📝 노트 기능 준비 중...
+                    <br><br>
+                    <small>투자 일지, 메모, 분석 등을 작성할 수 있습니다</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 하단 탭 바 -->
+    <div class="bottom-tabs">
+        <div class="bottom-tabs-inner">
+            <button class="tab-button active" onclick="showTab('dashboard')">
+                <div class="tab-icon">📊</div>
+                <div class="tab-label">대시보드</div>
+            </button>
+            <button class="tab-button" onclick="showTab('sns')">
+                <div class="tab-icon">💬</div>
+                <div class="tab-label">SNS</div>
+            </button>
+            <button class="tab-button" onclick="showTab('news')">
+                <div class="tab-icon">📰</div>
+                <div class="tab-label">뉴스</div>
+            </button>
+            <button class="tab-button" onclick="showTab('influencer')">
+                <div class="tab-icon">👥</div>
+                <div class="tab-label">인플루언서</div>
+            </button>
+            <button class="tab-button" onclick="showTab('notes')">
+                <div class="tab-icon">📝</div>
+                <div class="tab-label">노트</div>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ===== v24 데이터 (전체 복사) =====
+        const STOCK_TICKERS = {"두산": "000150.KS", "두산 에너빌리티": "034020.KS", "두산에너빌리티": "034020.KS", "삼성전자": "005930.KS", "삼성": "005930.KS", "SK하이닉스": "000660.KS", "SK 하이닉스": "000660.KS", "하이닉스": "000660.KS", "한국전력": "015760.KS", "한국 전력": "015760.KS", "한전기술": "052690.KS", "HD현대중공업": "329180.KS", "현대차": "005380.KS", "현대": "005380.KS", "기아": "000270.KS", "대한항공": "003490.KS", "LG전자": "066570.KS", "LG 전자": "066570.KS", "한미반도체": "042700.KS", "한미 반도체": "042700.KS", "이수페타시스": "007660.KS", "포스코": "005490.KS", "엔비디아": "NVDA", "테슬라": "TSLA", "비트코인": "BTC-USD", "애플": "AAPL", "팔란티어": "PLTR", "구글": "GOOGL", "마이크로소프트": "MSFT", "아마존": "AMZN", "메타": "META", "TSMC": "TSM", "반도체 섹터": "SOXX", "AI 섹터": "BOTZ", "금": "GC=F"};
+
+        const SEARCHABLE_STOCKS = [
+            {name: "삼성전자", ticker: "005930.KS"},
+            {name: "SK하이닉스", ticker: "000660.KS"},
+            {name: "테슬라", ticker: "TSLA"},
+            {name: "엔비디아", ticker: "NVDA"},
+            {name: "비트코인", ticker: "BTC-USD"},
+            {name: "애플", ticker: "AAPL"},
+            {name: "두산에너빌리티", ticker: "034020.KS"},
+            {name: "한국전력", ticker: "015760.KS"},
+            {name: "현대차", ticker: "005380.KS"},
+            {name: "기아", ticker: "000270.KS"}
+        ];
+
+        // 간단한 데이터 (v24의 축약 버전)
+        var parkStatements = [
+            {"stock": "삼성전자", "dirType": "buy", "detail": "AI 반도체 시장에서의 성장 가능성이 높다고 판단됩니다.", "quote": "삼성전자는 AI 시대의 핵심 기업이 될 것입니다.", "influencer": "박두환", "video_id": "test123", "ts": "5:30", "date": "2026-02-20", "url": "https://www.youtube.com/watch?v=test123"},
+            {"stock": "테슬라", "dirType": "positive", "detail": "자율주행 기술의 발전으로 미래 가치가 증가할 것입니다.", "quote": "테슬라의 FSD 기술은 게임 체인저입니다.", "influencer": "박두환", "video_id": "test124", "ts": "8:15", "date": "2026-02-18", "url": "https://www.youtube.com/watch?v=test124"},
+            {"stock": "엔비디아", "dirType": "strong_buy", "detail": "AI 칩셋 시장의 절대 강자로서 투자 가치가 매우 높습니다.", "quote": "엔비디아는 AI 혁명의 중심에 있습니다.", "influencer": "박두환", "video_id": "test125", "ts": "12:45", "date": "2026-02-15", "url": "https://www.youtube.com/watch?v=test125"},
+            {"stock": "비트코인", "dirType": "hold", "detail": "현재 구간에서는 관망하는 것이 좋겠습니다.", "quote": "비트코인은 잠시 숨고르기 시간이 필요해 보입니다.", "influencer": "박두환", "video_id": "test126", "ts": "3:22", "date": "2026-02-12", "url": "https://www.youtube.com/watch?v=test126"}
+        ];
+
+        var hsStatements = [
+            {"stock": "SK하이닉스", "dirType": "buy", "detail": "HBM 메모리 시장에서의 독보적 위치가 강점입니다.", "quote": "하이닉스는 메모리 반도체의 미래를 선도하고 있습니다.", "influencer": "이효석", "video_id": "hs001", "ts": "6:40", "date": "2026-02-19", "url": "https://www.youtube.com/watch?v=hs001"},
+            {"stock": "애플", "dirType": "concern", "detail": "중국 시장에서의 부진이 우려스럽습니다.", "quote": "애플의 중국 실적을 주의깊게 봐야 합니다.", "influencer": "이효석", "video_id": "hs002", "ts": "4:18", "date": "2026-02-17", "url": "https://www.youtube.com/watch?v=hs002"},
+            {"stock": "두산에너빌리티", "dirType": "positive", "detail": "친환경 에너지 전환 수혜주로 주목됩니다.", "quote": "두산에너빌리티는 에너지 전환의 핵심 기업입니다.", "influencer": "이효석", "video_id": "hs003", "ts": "9:55", "date": "2026-02-14", "url": "https://www.youtube.com/watch?v=hs003"}
+        ];
+
+        var allStatements = parkStatements.concat(hsStatements);
+
+        // 차트 관련 전역 변수
+        let chart, series, currentStock = '삼성전자';
+        let overlayContainer;
+
+        // ===== 탭 관리 =====
+        function showTab(tabName) {
+            // 모든 탭 숨기기
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // 모든 탭 버튼 비활성화
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // 선택된 탭 표시
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+            
+            // 인플루언서 탭이 선택되었을 때 차트 로드
+            if (tabName === 'influencer' && typeof LightweightCharts !== 'undefined') {
+                setTimeout(() => {
+                    if (currentStock) {
+                        loadStockChart(currentStock);
+                    }
+                }, 100);
+            }
+        }
+
+        // ===== 인플루언서 서브탭 관리 =====
+        function showInfSubTab(subTabName) {
+            // 서브탭 버튼들 업데이트
+            document.querySelectorAll('.inf-chip').forEach(chip => {
+                chip.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+            
+            // 서브탭 내용들 숨기기
+            document.querySelectorAll('.inf-subtab').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            
+            // 선택된 서브탭 표시
+            document.getElementById('inf-' + subTabName).style.display = 'block';
+            
+            // 차트 서브탭이 선택되었을 때 차트 로드
+            if (subTabName === 'chart' && typeof LightweightCharts !== 'undefined') {
+                setTimeout(() => {
+                    if (currentStock) {
+                        loadStockChart(currentStock);
+                    }
+                }, 100);
+            }
+        }
+
+        // ===== v24 차트 함수들 =====
+        function resolveStockTicker(stockName) {
+            return STOCK_TICKERS[stockName] || null;
+        }
+
+        function generatePriceData(stockName) {
+            // 임시 데이터 생성 (실제로는 API에서 가져와야 함)
+            const data = [];
+            const startDate = new Date('2025-01-01');
+            let price = 50000 + Math.random() * 50000; // 시작 가격
+
+            for (let i = 0; i < 365; i++) {
+                const date = new Date(startDate);
+                date.setDate(date.getDate() + i);
+                
+                const change = (Math.random() - 0.5) * 0.1; // -5% ~ +5% 변동
+                price = price * (1 + change);
+                
+                const dateStr = date.toISOString().split('T')[0];
+                data.push({
+                    time: dateStr,
+                    open: price * 0.99,
+                    high: price * 1.02,
+                    low: price * 0.97,
+                    close: price,
+                    value: price
+                });
+            }
+            
+            return data;
+        }
+
+        function buildMarkersFromStatements(statements) {
+            return statements.map((s, index) => {
+                return {
+                    stock: s.stock,
+                    time: s.date,
+                    type: s.dirType,
+                    text: s.quote,
+                    detail: s.detail,
+                    influencer: s.influencer,
+                    count: 1,
+                    url: s.url,
+                    _offset: index
+                };
+            });
+        }
+
+        const allMarkers = buildMarkersFromStatements(allStatements);
+
+        function loadStockChart(stockName) {
+            const el = document.getElementById('stockChart');
+            if (!el) return;
+
+            const markers = allMarkers.filter(m => m.stock === stockName);
+            
+            // 차트 제목 업데이트
+            document.getElementById('chartTitle').textContent = stockName;
+            document.getElementById('chartPrice').textContent = '₩' + (Math.random() * 100000 + 50000).toFixed(0);
+            document.getElementById('chartChange').textContent = '+2.3% (+1,200)';
+            document.getElementById('chartChange').className = 'change up';
+            document.getElementById('chartMarkerInfo').textContent = `📌 인플루언서 발언 마커 ${markers.length}개 · 클릭하여 상세 보기`;
+
+            if (chart) {
+                try { chart.remove() } catch(e) {}
+            }
+
+            chart = LightweightCharts.createChart(el, {
+                layout: {background: {type: 'solid', color: '#111827'}, textColor: '#94a3b8', fontSize: 12},
+                grid: {vertLines: {color: '#1e293b'}, horzLines: {color: '#1e293b'}},
+                crosshair: {mode: 0},
+                rightPriceScale: {borderColor: '#1e293b'},
+                timeScale: {borderColor: '#1e293b'},
+                width: el.clientWidth,
+                height: 420
+            });
+
+            series = chart.addCandlestickSeries({
+                upColor: '#10b981',
+                downColor: '#ef4444',
+                borderDownColor: '#ef4444',
+                borderUpColor: '#10b981',
+                wickDownColor: '#ef4444',
+                wickUpColor: '#10b981'
+            });
+
+            el.style.position = 'relative';
+            
+            const data = generatePriceData(stockName);
+            series.setData(data.map(d => ({
+                time: d.time,
+                open: d.open,
+                high: d.high,
+                low: d.low,
+                close: d.close
+            })));
+
+            // 마커 오버레이 생성
+            if (overlayContainer) overlayContainer.remove();
+            overlayContainer = document.createElement('div');
+            overlayContainer.className = 'marker-overlay-container';
+            el.appendChild(overlayContainer);
+
+            // 마커 도트 생성
+            markers.forEach((mk, i) => {
+                const dot = document.createElement('div');
+                const signalColors = {
+                    'strong-buy': '#34d399',
+                    'buy': '#86efac',
+                    'positive': '#60a5fa',
+                    'hold': '#22d3ee',
+                    'neutral': '#94a3b8',
+                    'concern': '#fdba74',
+                    'sell': '#fb923c',
+                    'strong-sell': '#f87171'
+                };
+                const dotColor = signalColors[mk.type] || '#94a3b8';
+                
+                dot.className = 'marker-dot type-' + mk.type;
+                dot.style.background = dotColor;
+                dot.style.boxShadow = '0 0 6px ' + dotColor + '80';
+                
+                // 위치 설정 (임시)
+                dot.style.left = (20 + i * 50) + 'px';
+                dot.style.top = (50 + Math.random() * 200) + 'px';
+                
+                dot.addEventListener('click', () => showTooltip(mk, dot));
+                overlayContainer.appendChild(dot);
+            });
+
+            // 차트 크기 조정
+            chart.applyOptions({width: el.clientWidth});
+            chart.timeScale().fitContent();
+        }
+
+        function showTooltip(marker, dotElement) {
+            const tooltip = document.getElementById('markerTooltip');
+            const badgeColors = {
+                'strong-buy': {bg: 'rgba(52, 211, 153, 0.2)', color: '#34d399', text: 'STRONG BUY'},
+                'buy': {bg: 'rgba(134, 239, 172, 0.2)', color: '#86efac', text: 'BUY'},
+                'positive': {bg: 'rgba(96, 165, 250, 0.2)', color: '#60a5fa', text: 'POSITIVE'},
+                'hold': {bg: 'rgba(34, 211, 238, 0.2)', color: '#22d3ee', text: 'HOLD'},
+                'neutral': {bg: 'rgba(148, 163, 184, 0.2)', color: '#94a3b8', text: 'NEUTRAL'},
+                'concern': {bg: 'rgba(253, 186, 116, 0.2)', color: '#fdba74', text: 'CONCERN'},
+                'sell': {bg: 'rgba(249, 115, 22, 0.2)', color: '#fb923c', text: 'SELL'},
+                'strong-sell': {bg: 'rgba(248, 113, 113, 0.2)', color: '#f87171', text: 'STRONG SELL'}
+            };
+
+            const badgeStyle = badgeColors[marker.type] || badgeColors['neutral'];
+            
+            // 툴팁 내용 업데이트
+            tooltip.querySelector('.mt-name').textContent = marker.influencer;
+            tooltip.querySelector('#ttDateSub').textContent = marker.time;
+            tooltip.querySelector('#ttContent').textContent = marker.detail;
+            tooltip.querySelector('#ttLink').href = marker.url;
+            tooltip.querySelector('#ttCount').textContent = `${marker.influencer} · ${marker.time}`;
+
+            const badge = tooltip.querySelector('#ttBadge');
+            badge.textContent = badgeStyle.text;
+            badge.style.background = badgeStyle.bg;
+            badge.style.color = badgeStyle.color;
+
+            // 위치 설정
+            const rect = dotElement.getBoundingClientRect();
+            const chartRect = document.getElementById('stockChart').getBoundingClientRect();
+            
+            tooltip.style.left = (rect.left - chartRect.left + 20) + 'px';
+            tooltip.style.top = (rect.top - chartRect.top - 100) + 'px';
+            tooltip.classList.add('show');
+        }
+
+        function closeTooltip() {
+            document.getElementById('markerTooltip').classList.remove('show');
+        }
+
+        // 검색 기능
+        function onSearch(value) {
+            const dropdown = document.getElementById('searchDropdown');
+            if (!value) {
+                dropdown.classList.remove('show');
+                return;
+            }
+
+            const filteredStocks = SEARCHABLE_STOCKS.filter(stock => 
+                stock.name.toLowerCase().includes(value.toLowerCase())
+            );
+
+            if (filteredStocks.length === 0) {
+                dropdown.innerHTML = '<div class="search-item">검색 결과가 없습니다.</div>';
+            } else {
+                dropdown.innerHTML = filteredStocks.map(stock => 
+                    `<div class="search-item" onclick="selectStock('${stock.name}')">
+                        <span>${stock.name}</span>
+                        <span class="ticker">${stock.ticker}</span>
+                    </div>`
+                ).join('');
+            }
+            
+            dropdown.classList.add('show');
+        }
+
+        function selectStock(stockName) {
+            currentStock = stockName;
+            document.getElementById('searchInput').value = stockName;
+            document.getElementById('searchDropdown').classList.remove('show');
+            
+            if (typeof LightweightCharts !== 'undefined') {
+                loadStockChart(stockName);
+            }
+            
+            renderStockStatements(stockName);
+        }
+
+        function renderStockStatements(stockName) {
+            const statements = allStatements.filter(s => s.stock === stockName);
+            const grid = document.getElementById('statementsGrid');
+            
+            if (statements.length === 0) {
+                grid.innerHTML = '<div style="color:var(--text3);padding:20px">이 종목에 대한 발언이 없습니다.</div>';
+                return;
+            }
+
+            grid.innerHTML = statements.map(stmt => {
+                const badgeClass = `badge-${stmt.dirType.replace('_', '-')}`;
+                const bubbleClass = `border-${stmt.dirType.replace('_', '-')}`;
+                
+                return `
+                    <div class="stmt-chat">
+                        <div class="sc-avatar-wrap">
+                            <div class="sc-avatar">
+                                <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="${stmt.influencer}">
+                            </div>
+                        </div>
+                        <div class="sc-right">
+                            <div class="sc-meta">
+                                <span class="sc-name">${stmt.influencer}</span>
+                                <span class="sc-date">${stmt.date}</span>
+                            </div>
+                            <div class="sc-bubble ${bubbleClass}">
+                                <div class="sc-text">${stmt.detail}</div>
+                                <div class="sc-bottom">
+                                    <span class="badge ${badgeClass}">${stmt.dirType.toUpperCase()}</span>
+                                    <a href="${stmt.url}" target="_blank" style="color: var(--accent2); font-size: 11px; text-decoration: none;">영상 보기</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // 툴팁 외부 클릭시 닫기
+        document.addEventListener('click', e => {
+            if (!e.target.closest('.marker-tooltip') && !e.target.closest('.marker-dot')) {
+                closeTooltip();
+            }
+        });
+
+        // 초기화
+        window.addEventListener('load', () => {
+            // 기본 종목으로 삼성전자 선택
+            if (typeof LightweightCharts !== 'undefined') {
+                loadStockChart(currentStock);
+            }
+            renderStockStatements(currentStock);
+        });
+
+        // 창 크기 변경시 차트 리사이즈
+        window.addEventListener('resize', () => {
+            if (chart) {
+                try {
+                    chart.applyOptions({width: document.getElementById('stockChart').clientWidth});
+                } catch(e) {}
+            }
+        });
+    </script>
+</body>
+</html>
