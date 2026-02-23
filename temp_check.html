@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMTR - 투자 통합 플랫폼</title>
+    <title>SMTR - í¬ì íµí© íë«í¼</title>
     <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.1.0/dist/lightweight-charts.standalone.production.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
         }
 
         :root {
-            /* 통일된 다크 테마 - X 스타일 */
+            /* íµì¼ë ë¤í¬ íë§ - X ì¤íì¼ */
             --bg: #000000;
             --bg2: #111827;
             --bg3: #1a2332;
@@ -43,7 +43,7 @@
             padding-bottom: 80px;
         }
 
-        /* 상단 헤더 */
+        /* ìë¨ í¤ë */
         .header {
             position: sticky;
             top: 0;
@@ -97,13 +97,13 @@
             transform: scale(1.05);
         }
 
-        /* 빠른 이동 카드 호버 효과 */
+        /* ë¹ ë¥¸ ì´ë ì¹´ë í¸ë² í¨ê³¼ */
         .quick-nav-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 25px rgba(29, 155, 240, 0.15);
         }
 
-        /* 프로필 패널 */
+        /* íë¡í í¨ë */
         .profile-panel {
             position: fixed;
             top: 0;
@@ -241,7 +241,7 @@
             color: var(--text2);
         }
 
-        /* 프로필 패널 오버레이 */
+        /* íë¡í í¨ë ì¤ë²ë ì´ */
         .profile-overlay {
             position: fixed;
             top: 0;
@@ -260,14 +260,14 @@
             visibility: visible;
         }
 
-        /* 메인 컨테이너 */
+        /* ë©ì¸ ì»¨íì´ë */
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* 탭 콘텐츠 */
+        /* í­ ì½íì¸  */
         .tab-content {
             display: none;
             padding: 30px 0;
@@ -283,7 +283,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 카드 공통 스타일 */
+        /* ì¹´ë ê³µíµ ì¤íì¼ */
         .card {
             background: linear-gradient(145deg, rgba(17, 24, 39, 0.7), rgba(26, 35, 50, 0.5));
             border: 1px solid var(--border);
@@ -300,7 +300,7 @@
             transform: translateY(-2px);
         }
 
-        /* 글래스모피즘 카드 */
+        /* ê¸ëì¤ëª¨í¼ì¦ ì¹´ë */
         .glass-card {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -317,7 +317,7 @@
             transform: translateY(-2px);
         }
 
-        /* 대시보드 스타일 */
+        /* ëìë³´ë ì¤íì¼ */
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -396,7 +396,7 @@
             color: var(--red);
         }
 
-        /* 뉴스 카드 스타일 */
+        /* ë´ì¤ ì¹´ë ì¤íì¼ */
         .news-list {
             display: grid;
             gap: 16px;
@@ -489,7 +489,7 @@
             color: var(--accent);
         }
 
-        /* X(트위터) 스타일 SNS 피드 */
+        /* X(í¸ìí°) ì¤íì¼ SNS í¼ë */
         .sns-compose {
             background: var(--bg);
             border-bottom: 1px solid var(--border);
@@ -640,7 +640,7 @@
         }
 
         .sns-author-handle::before {
-            content: '·';
+            content: 'Â·';
             margin: 0 4px;
         }
 
@@ -650,7 +650,7 @@
         }
 
         .sns-post-time::before {
-            content: '·';
+            content: 'Â·';
             margin: 0 4px;
         }
 
@@ -721,7 +721,7 @@
             fill: var(--green);
         }
 
-        /* 노트 스타일 - 노션/Apple Notes 느낌 */
+        /* ë¸í¸ ì¤íì¼ - ë¸ì/Apple Notes ëë */
         .notes-layout {
             display: flex;
             gap: 24px;
@@ -810,7 +810,7 @@
             background: #1a8cd8;
         }
 
-        /* 인플루언서 탭 스타일 (v24 통합) */
+        /* ì¸íë£¨ì¸ì í­ ì¤íì¼ (v24 íµí©) */
         .inf-selector {
             display: flex;
             gap: 8px;
@@ -845,7 +845,7 @@
             display: block;
         }
 
-        /* 차트 스타일 */
+        /* ì°¨í¸ ì¤íì¼ */
         .search-wrap {
             position: relative;
             margin-bottom: 20px;
@@ -939,7 +939,7 @@
             overflow: hidden;
         }
 
-        /* 마커 툴팁 */
+        /* ë§ì»¤ í´í */
         .marker-tooltip {
             position: absolute;
             background: var(--bg2);
@@ -1017,7 +1017,7 @@
             margin-top: 8px;
         }
 
-        /* 발언 그리드 */
+        /* ë°ì¸ ê·¸ë¦¬ë */
         .statements-grid {
             display: grid;
             gap: 16px;
@@ -1070,7 +1070,7 @@
             color: var(--text3);
         }
 
-        /* 하단 탭바 */
+        /* íë¨ í­ë° */
         .bottom-tabs {
             position: fixed;
             bottom: 0;
@@ -1120,7 +1120,7 @@
             font-weight: 500;
         }
 
-        /* 반응형 */
+        /* ë°ìí */
         @media (max-width: 768px) {
             .container {
                 padding: 0 16px;
@@ -1173,97 +1173,97 @@
     </style>
 </head>
 <body>
-    <!-- 상단 헤더 -->
+    <!-- ìë¨ í¤ë -->
     <div class="header">
         <div class="header-inner">
             <div class="logo">
                 SMTR
                 <span>v2.0</span>
             </div>
-            <div class="profile-icon" onclick="toggleProfilePanel()">👤</div>
+            <div class="profile-icon" onclick="toggleProfilePanel()">ð¤</div>
         </div>
     </div>
 
-    <!-- 메인 컨테이너 -->
+    <!-- ë©ì¸ ì»¨íì´ë -->
     <div class="container">
-        <!-- 대시보드 탭 -->
+        <!-- ëìë³´ë í­ -->
         <div id="dashboard" class="tab-content active">
             <div style="margin-bottom: 32px;">
-                <h1 style="font-size: 28px; font-weight: 900; margin-bottom: 8px;">🏠 대시보드</h1>
-                <p style="color: var(--text2); font-size: 16px;">투자를 위한 모든 도구와 정보를 한 곳에서 확인하세요</p>
+                <h1 style="font-size: 28px; font-weight: 900; margin-bottom: 8px;">ð  ëìë³´ë</h1>
+                <p style="color: var(--text2); font-size: 16px;">í¬ìë¥¼ ìí ëª¨ë  ëêµ¬ì ì ë³´ë¥¼ í ê³³ìì íì¸íì¸ì</p>
             </div>
 
-            <!-- 빠른 이동 카드 -->
+            <!-- ë¹ ë¥¸ ì´ë ì¹´ë -->
             <div class="glass-card" style="margin-bottom: 24px;">
                 <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
-                    🚀 빠른 이동
+                    ð ë¹ ë¥¸ ì´ë
                 </h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
                     <div class="quick-nav-card" onclick="switchTab('sns')" style="background: linear-gradient(135deg, rgba(29, 155, 240, 0.1), rgba(29, 155, 240, 0.05)); border: 1px solid rgba(29, 155, 240, 0.2); border-radius: 16px; padding: 20px; cursor: pointer; transition: all 0.3s ease; text-align: center;">
-                        <div style="font-size: 32px; margin-bottom: 12px;">💬</div>
-                        <div style="font-weight: 600; font-size: 16px; margin-bottom: 6px;">투자 SNS</div>
-                        <div style="font-size: 13px; color: var(--text2);">투자자들과 소통하고 정보 공유</div>
+                        <div style="font-size: 32px; margin-bottom: 12px;">ð¬</div>
+                        <div style="font-weight: 600; font-size: 16px; margin-bottom: 6px;">í¬ì SNS</div>
+                        <div style="font-size: 13px; color: var(--text2);">í¬ììë¤ê³¼ ìíµíê³  ì ë³´ ê³µì </div>
                     </div>
                     <div class="quick-nav-card" onclick="switchTab('news')" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(168, 85, 247, 0.05)); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 16px; padding: 20px; cursor: pointer; transition: all 0.3s ease; text-align: center;">
-                        <div style="font-size: 32px; margin-bottom: 12px;">📰</div>
-                        <div style="font-weight: 600; font-size: 16px; margin-bottom: 6px;">뉴스 & 공시</div>
-                        <div style="font-size: 13px; color: var(--text2);">최신 시장 뉴스와 기업 공시</div>
+                        <div style="font-size: 32px; margin-bottom: 12px;">ð°</div>
+                        <div style="font-weight: 600; font-size: 16px; margin-bottom: 6px;">ë´ì¤ & ê³µì</div>
+                        <div style="font-size: 13px; color: var(--text2);">ìµì  ìì¥ ë´ì¤ì ê¸°ì ê³µì</div>
                     </div>
                     <div class="quick-nav-card" onclick="switchTab('influencer')" style="background: linear-gradient(135deg, rgba(0, 186, 124, 0.1), rgba(0, 186, 124, 0.05)); border: 1px solid rgba(0, 186, 124, 0.2); border-radius: 16px; padding: 20px; cursor: pointer; transition: all 0.3s ease; text-align: center;">
-                        <div style="font-size: 32px; margin-bottom: 12px;">👥</div>
-                        <div style="font-weight: 600; font-size: 16px; margin-bottom: 6px;">인플루언서</div>
-                        <div style="font-size: 13px; color: var(--text2);">전문가 분석과 투자 시그널</div>
+                        <div style="font-size: 32px; margin-bottom: 12px;">ð¥</div>
+                        <div style="font-weight: 600; font-size: 16px; margin-bottom: 6px;">ì¸íë£¨ì¸ì</div>
+                        <div style="font-size: 13px; color: var(--text2);">ì ë¬¸ê° ë¶ìê³¼ í¬ì ìê·¸ë</div>
                     </div>
                     <div class="quick-nav-card" onclick="switchTab('notes')" style="background: linear-gradient(135deg, rgba(249, 24, 128, 0.1), rgba(249, 24, 128, 0.05)); border: 1px solid rgba(249, 24, 128, 0.2); border-radius: 16px; padding: 20px; cursor: pointer; transition: all 0.3s ease; text-align: center;">
-                        <div style="font-size: 32px; margin-bottom: 12px;">📝</div>
-                        <div style="font-weight: 600; font-size: 16px; margin-bottom: 6px;">투자 노트</div>
-                        <div style="font-size: 13px; color: var(--text2);">아이디어 기록과 분석 관리</div>
+                        <div style="font-size: 32px; margin-bottom: 12px;">ð</div>
+                        <div style="font-weight: 600; font-size: 16px; margin-bottom: 6px;">í¬ì ë¸í¸</div>
+                        <div style="font-size: 13px; color: var(--text2);">ìì´ëì´ ê¸°ë¡ê³¼ ë¶ì ê´ë¦¬</div>
                     </div>
                 </div>
             </div>
 
-            <!-- 인플루언서 시그널 요약 -->
+            <!-- ì¸íë£¨ì¸ì ìê·¸ë ìì½ -->
             <div class="glass-card" style="margin-bottom: 24px;">
                 <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
-                    🚨 최신 투자 시그널
+                    ð¨ ìµì  í¬ì ìê·¸ë
                 </h3>
                 <div style="display: grid; gap: 16px;" id="latestSignals">
                     <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: rgba(52, 211, 153, 0.1); border-radius: 12px; border: 1px solid rgba(52, 211, 153, 0.2);">
                         <div>
-                            <div style="font-weight: 600; color: var(--text); margin-bottom: 4px;">삼성전자 - STRONG BUY</div>
-                            <div style="font-size: 14px; color: var(--text2);">박두환 • AI 반도체 시장에서의 성장 가능성</div>
-                            <div style="font-size: 12px; color: var(--text3);">2시간 전</div>
+                            <div style="font-weight: 600; color: var(--text); margin-bottom: 4px;">ì¼ì±ì ì - STRONG BUY</div>
+                            <div style="font-size: 14px; color: var(--text2);">ë°ëí â¢ AI ë°ëì²´ ìì¥ììì ì±ì¥ ê°ë¥ì±</div>
+                            <div style="font-size: 12px; color: var(--text3);">2ìê° ì </div>
                         </div>
-                        <div style="font-size: 24px;">📈</div>
+                        <div style="font-size: 24px;">ð</div>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: rgba(168, 85, 247, 0.1); border-radius: 12px; border: 1px solid rgba(168, 85, 247, 0.2);">
                         <div>
-                            <div style="font-weight: 600; color: var(--text); margin-bottom: 4px;">엔비디아 - STRONG BUY</div>
-                            <div style="font-size: 14px; color: var(--text2);">박두환 • AI 칩셋 시장의 절대 강자</div>
-                            <div style="font-size: 12px; color: var(--text3);">6시간 전</div>
+                            <div style="font-weight: 600; color: var(--text); margin-bottom: 4px;">ìë¹ëì - STRONG BUY</div>
+                            <div style="font-size: 14px; color: var(--text2);">ë°ëí â¢ AI ì¹©ì ìì¥ì ì ë ê°ì</div>
+                            <div style="font-size: 12px; color: var(--text3);">6ìê° ì </div>
                         </div>
-                        <div style="font-size: 24px;">🚀</div>
+                        <div style="font-size: 24px;">ð</div>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: rgba(96, 165, 250, 0.1); border-radius: 12px; border: 1px solid rgba(96, 165, 250, 0.2);">
                         <div>
-                            <div style="font-weight: 600; color: var(--text); margin-bottom: 4px;">테슬라 - POSITIVE</div>
-                            <div style="font-size: 14px; color: var(--text2);">박두환 • 자율주행 기술의 발전 가능성</div>
-                            <div style="font-size: 12px; color: var(--text3);">1일 전</div>
+                            <div style="font-weight: 600; color: var(--text); margin-bottom: 4px;">íì¬ë¼ - POSITIVE</div>
+                            <div style="font-size: 14px; color: var(--text2);">ë°ëí â¢ ìì¨ì£¼í ê¸°ì ì ë°ì  ê°ë¥ì±</div>
+                            <div style="font-size: 12px; color: var(--text3);">1ì¼ ì </div>
                         </div>
-                        <div style="font-size: 24px;">⚡</div>
+                        <div style="font-size: 24px;">â¡</div>
                     </div>
                 </div>
                 <div style="text-align: center; margin-top: 16px;">
                     <button onclick="switchTab('influencer')" style="background: none; border: 1px solid var(--accent); color: var(--accent); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 13px; transition: all 0.3s ease;">
-                        더 많은 시그널 보기 →
+                        ë ë§ì ìê·¸ë ë³´ê¸° â
                     </button>
                 </div>
             </div>
 
-            <!-- 실시간 마켓 요약 -->
+            <!-- ì¤ìê° ë§ì¼ ìì½ -->
             <div class="glass-card" style="margin-bottom: 24px;">
                 <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
-                    📊 실시간 마켓 요약
+                    ð ì¤ìê° ë§ì¼ ìì½
                 </h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px;" id="marketSummary">
                     <div style="text-align: center; padding: 16px; background: var(--bg2); border-radius: 12px; border: 1px solid var(--border2);">
@@ -1277,12 +1277,12 @@
                         <div id="ethChange" style="font-size: 12px; color: var(--green);">+1.8%</div>
                     </div>
                     <div style="text-align: center; padding: 16px; background: var(--bg2); border-radius: 12px; border: 1px solid var(--border2);">
-                        <div style="font-size: 14px; color: var(--text2); margin-bottom: 8px;">코스피</div>
+                        <div style="font-size: 14px; color: var(--text2); margin-bottom: 8px;">ì½ì¤í¼</div>
                         <div id="kospiPrice" style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">2,654</div>
                         <div id="kospiChange" style="font-size: 12px; color: var(--green);">+1.2%</div>
                     </div>
                     <div style="text-align: center; padding: 16px; background: var(--bg2); border-radius: 12px; border: 1px solid var(--border2);">
-                        <div style="font-size: 14px; color: var(--text2); margin-bottom: 8px;">나스닥</div>
+                        <div style="font-size: 14px; color: var(--text2); margin-bottom: 8px;">ëì¤ë¥</div>
                         <div id="nasdaqPrice" style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">15,832</div>
                         <div id="nasdaqChange" style="font-size: 12px; color: var(--red);">-0.8%</div>
                     </div>
@@ -1293,99 +1293,99 @@
                     </div>
                 </div>
                 <div style="font-size: 11px; color: var(--text3); text-align: center; margin-top: 12px;">
-                    📈 실시간 데이터 · 15분 지연 • CoinGecko API 연동
+                    ð ì¤ìê° ë°ì´í° Â· 15ë¶ ì§ì° â¢ CoinGecko API ì°ë
                 </div>
             </div>
 
-            <!-- 최근 활동 -->
+            <!-- ìµê·¼ íë -->
             <div class="glass-card">
                 <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
-                    ⏱️ 최근 활동
+                    â±ï¸ ìµê·¼ íë
                 </h3>
                 <div style="display: grid; gap: 12px;">
                     <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(255, 255, 255, 0.02); border-radius: 8px;">
-                        <div style="font-size: 20px;">📝</div>
+                        <div style="font-size: 20px;">ð</div>
                         <div style="flex: 1;">
-                            <div style="font-size: 14px; font-weight: 500; color: var(--text);">삼성전자 분석 노트 작성</div>
-                            <div style="font-size: 12px; color: var(--text3);">2시간 전</div>
+                            <div style="font-size: 14px; font-weight: 500; color: var(--text);">ì¼ì±ì ì ë¶ì ë¸í¸ ìì±</div>
+                            <div style="font-size: 12px; color: var(--text3);">2ìê° ì </div>
                         </div>
                     </div>
                     <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(255, 255, 255, 0.02); border-radius: 8px;">
-                        <div style="font-size: 20px;">👀</div>
+                        <div style="font-size: 20px;">ð</div>
                         <div style="flex: 1;">
-                            <div style="font-size: 14px; font-weight: 500; color: var(--text);">테슬라 Q4 실적 뉴스 확인</div>
-                            <div style="font-size: 12px; color: var(--text3);">4시간 전</div>
+                            <div style="font-size: 14px; font-weight: 500; color: var(--text);">íì¬ë¼ Q4 ì¤ì  ë´ì¤ íì¸</div>
+                            <div style="font-size: 12px; color: var(--text3);">4ìê° ì </div>
                         </div>
                     </div>
                     <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(255, 255, 255, 0.02); border-radius: 8px;">
-                        <div style="font-size: 20px;">💬</div>
+                        <div style="font-size: 20px;">ð¬</div>
                         <div style="flex: 1;">
-                            <div style="font-size: 14px; font-weight: 500; color: var(--text);">투자 커뮤니티 게시글 작성</div>
-                            <div style="font-size: 12px; color: var(--text3);">6시간 전</div>
+                            <div style="font-size: 14px; font-weight: 500; color: var(--text);">í¬ì ì»¤ë®¤ëí° ê²ìê¸ ìì±</div>
+                            <div style="font-size: 12px; color: var(--text3);">6ìê° ì </div>
                         </div>
                     </div>
                 </div>
                 <div style="text-align: center; margin-top: 16px;">
-                    <span style="font-size: 12px; color: var(--text3);">모든 활동이 암호화되어 안전하게 보관됩니다 🔒</span>
+                    <span style="font-size: 12px; color: var(--text3);">ëª¨ë  íëì´ ìí¸íëì´ ìì íê² ë³´ê´ë©ëë¤ ð</span>
                 </div>
             </div>
         </div>
 
-        <!-- SNS 탭 (X 스타일 유지) -->
+        <!-- SNS í­ (X ì¤íì¼ ì ì§) -->
         <div id="sns" class="tab-content">
             <div style="margin-bottom: 24px; padding: 0 20px;">
-                <h1 style="font-size: 20px; font-weight: 800; margin-bottom: 0; color: #e7e9ea; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">투자 SNS</h1>
+                <h1 style="font-size: 20px; font-weight: 800; margin-bottom: 0; color: #e7e9ea; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">í¬ì SNS</h1>
             </div>
 
-            <!-- SNS 작성 영역 -->
+            <!-- SNS ìì± ìì­ -->
             <div class="sns-compose">
                 <div class="sns-compose-header">
-                    <div class="sns-compose-avatar">👤</div>
+                    <div class="sns-compose-avatar">ð¤</div>
                     <div class="sns-compose-main">
-                        <textarea placeholder="무슨 일이 일어나고 있나요?" oninput="updateTweetButton()"></textarea>
+                        <textarea placeholder="ë¬´ì¨ ì¼ì´ ì¼ì´ëê³  ìëì?" oninput="updateTweetButton()"></textarea>
                         <div class="sns-compose-footer">
                             <div class="sns-compose-toolbar">
-                                <span class="compose-icon">🖼️</span>
-                                <span class="compose-icon">📊</span>
-                                <span class="compose-icon">😊</span>
-                                <span class="compose-icon">📍</span>
+                                <span class="compose-icon">ð¼ï¸</span>
+                                <span class="compose-icon">ð</span>
+                                <span class="compose-icon">ð</span>
+                                <span class="compose-icon">ð</span>
                             </div>
-                            <button class="btn-tweet" onclick="postTweet()">게시하기</button>
+                            <button class="btn-tweet" onclick="postTweet()">ê²ìíê¸°</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- SNS 피드 -->
+            <!-- SNS í¼ë -->
             <div class="sns-feed">
                 <div class="sns-post" onclick="openPostDetail(1)">
                     <div class="sns-post-wrapper">
-                        <div class="sns-author-avatar">박</div>
+                        <div class="sns-author-avatar">ë°</div>
                         <div class="sns-post-main">
                             <div class="sns-post-header">
-                                <span class="sns-author-name">박두환</span>
+                                <span class="sns-author-name">ë°ëí</span>
                                 <span class="sns-author-handle">@parkdoohwan</span>
                                 <span class="sns-post-time">2h</span>
                             </div>
                             <div class="sns-post-content">
-                                <span class="highlight">#삼성전자</span> AI 반도체 시장 전망이 정말 밝습니다. 🚀<br>
-                                HBM 수요 급증으로 올해 실적이 기대됩니다. <span class="tag">#반도체</span> <span class="tag">#AI</span>
+                                <span class="highlight">#ì¼ì±ì ì</span> AI ë°ëì²´ ìì¥ ì ë§ì´ ì ë§ ë°ìµëë¤. ð<br>
+                                HBM ìì ê¸ì¦ì¼ë¡ ì¬í´ ì¤ì ì´ ê¸°ëë©ëë¤. <span class="tag">#ë°ëì²´</span> <span class="tag">#AI</span>
                             </div>
                             <div class="sns-post-actions">
                                 <button class="sns-action-btn" onclick="replyToPost(event, 1)">
-                                    <span class="action-icon">💬</span>
+                                    <span class="action-icon">ð¬</span>
                                     <span>24</span>
                                 </button>
                                 <button class="sns-action-btn retweet-btn" onclick="retweetPost(event, 1)">
-                                    <span class="action-icon">🔄</span>
+                                    <span class="action-icon">ð</span>
                                     <span>156</span>
                                 </button>
                                 <button class="sns-action-btn like-btn" onclick="likePost(event, 1)">
-                                    <span class="action-icon">❤️</span>
+                                    <span class="action-icon">â¤ï¸</span>
                                     <span>342</span>
                                 </button>
                                 <button class="sns-action-btn" onclick="sharePost(event, 1)">
-                                    <span class="action-icon">📤</span>
+                                    <span class="action-icon">ð¤</span>
                                 </button>
                             </div>
                         </div>
@@ -1394,32 +1394,32 @@
 
                 <div class="sns-post" onclick="openPostDetail(2)">
                     <div class="sns-post-wrapper">
-                        <div class="sns-author-avatar">세</div>
+                        <div class="sns-author-avatar">ì¸</div>
                         <div class="sns-post-main">
                             <div class="sns-post-header">
-                                <span class="sns-author-name">세상학개론</span>
+                                <span class="sns-author-name">ì¸ìíê°ë¡ </span>
                                 <span class="sns-author-handle">@sesang_study</span>
                                 <span class="sns-post-time">4h</span>
                             </div>
                             <div class="sns-post-content">
-                                시장 변동성이 클 때일수록 기본에 충실해야 합니다.<br>
-                                <span class="highlight">#장기투자</span>의 힘을 믿고 꾸준히 가세요! 💪
+                                ìì¥ ë³ëì±ì´ í´ ëì¼ìë¡ ê¸°ë³¸ì ì¶©ì¤í´ì¼ í©ëë¤.<br>
+                                <span class="highlight">#ì¥ê¸°í¬ì</span>ì íì ë¯¿ê³  ê¾¸ì¤í ê°ì¸ì! ðª
                             </div>
                             <div class="sns-post-actions">
                                 <button class="sns-action-btn" onclick="replyToPost(event, 2)">
-                                    <span class="action-icon">💬</span>
+                                    <span class="action-icon">ð¬</span>
                                     <span>18</span>
                                 </button>
                                 <button class="sns-action-btn retweet-btn" onclick="retweetPost(event, 2)">
-                                    <span class="action-icon">🔄</span>
+                                    <span class="action-icon">ð</span>
                                     <span>89</span>
                                 </button>
                                 <button class="sns-action-btn like-btn" onclick="likePost(event, 2)">
-                                    <span class="action-icon">❤️</span>
+                                    <span class="action-icon">â¤ï¸</span>
                                     <span>267</span>
                                 </button>
                                 <button class="sns-action-btn" onclick="sharePost(event, 2)">
-                                    <span class="action-icon">📤</span>
+                                    <span class="action-icon">ð¤</span>
                                 </button>
                             </div>
                         </div>
@@ -1428,32 +1428,32 @@
 
                 <div class="sns-post" onclick="openPostDetail(3)">
                     <div class="sns-post-wrapper">
-                        <div class="sns-author-avatar">투</div>
+                        <div class="sns-author-avatar">í¬</div>
                         <div class="sns-post-main">
                             <div class="sns-post-header">
-                                <span class="sns-author-name">투자왕김대리</span>
+                                <span class="sns-author-name">í¬ììê¹ëë¦¬</span>
                                 <span class="sns-author-handle">@invest_king_kim</span>
                                 <span class="sns-post-time">6h</span>
                             </div>
                             <div class="sns-post-content">
-                                오늘 <span class="highlight">#테슬라</span> 실적 발표 주목! 📊<br>
-                                자율주행 관련 업데이트가 주가에 큰 영향을 줄 것 같네요.
+                                ì¤ë <span class="highlight">#íì¬ë¼</span> ì¤ì  ë°í ì£¼ëª©! ð<br>
+                                ìì¨ì£¼í ê´ë ¨ ìë°ì´í¸ê° ì£¼ê°ì í° ìí¥ì ì¤ ê² ê°ë¤ì.
                             </div>
                             <div class="sns-post-actions">
                                 <button class="sns-action-btn" onclick="replyToPost(event, 3)">
-                                    <span class="action-icon">💬</span>
+                                    <span class="action-icon">ð¬</span>
                                     <span>31</span>
                                 </button>
                                 <button class="sns-action-btn retweet-btn" onclick="retweetPost(event, 3)">
-                                    <span class="action-icon">🔄</span>
+                                    <span class="action-icon">ð</span>
                                     <span>124</span>
                                 </button>
                                 <button class="sns-action-btn like-btn" onclick="likePost(event, 3)">
-                                    <span class="action-icon">❤️</span>
+                                    <span class="action-icon">â¤ï¸</span>
                                     <span>198</span>
                                 </button>
                                 <button class="sns-action-btn" onclick="sharePost(event, 3)">
-                                    <span class="action-icon">📤</span>
+                                    <span class="action-icon">ð¤</span>
                                 </button>
                             </div>
                         </div>
@@ -1462,33 +1462,33 @@
 
                 <div class="sns-post" onclick="openPostDetail(4)">
                     <div class="sns-post-wrapper">
-                        <div class="sns-author-avatar">코</div>
+                        <div class="sns-author-avatar">ì½</div>
                         <div class="sns-post-main">
                             <div class="sns-post-header">
-                                <span class="sns-author-name">코린이탈출</span>
+                                <span class="sns-author-name">ì½ë¦°ì´íì¶</span>
                                 <span class="sns-author-handle">@korini_exit</span>
                                 <span class="sns-post-time">8h</span>
                             </div>
                             <div class="sns-post-content">
-                                초보 투자자 분들께 드리는 조언:<br>
-                                1️⃣ 분산투자 2️⃣ 장기관점 3️⃣ 꾸준한 공부<br>
-                                <span class="tag">#투자초보</span> <span class="tag">#주식공부</span>
+                                ì´ë³´ í¬ìì ë¶ë¤ê» ëë¦¬ë ì¡°ì¸:<br>
+                                1ï¸â£ ë¶ì°í¬ì 2ï¸â£ ì¥ê¸°ê´ì  3ï¸â£ ê¾¸ì¤í ê³µë¶<br>
+                                <span class="tag">#í¬ìì´ë³´</span> <span class="tag">#ì£¼ìê³µë¶</span>
                             </div>
                             <div class="sns-post-actions">
                                 <button class="sns-action-btn" onclick="replyToPost(event, 4)">
-                                    <span class="action-icon">💬</span>
+                                    <span class="action-icon">ð¬</span>
                                     <span>45</span>
                                 </button>
                                 <button class="sns-action-btn retweet-btn" onclick="retweetPost(event, 4)">
-                                    <span class="action-icon">🔄</span>
+                                    <span class="action-icon">ð</span>
                                     <span>278</span>
                                 </button>
                                 <button class="sns-action-btn like-btn" onclick="likePost(event, 4)">
-                                    <span class="action-icon">❤️</span>
+                                    <span class="action-icon">â¤ï¸</span>
                                     <span>456</span>
                                 </button>
                                 <button class="sns-action-btn" onclick="sharePost(event, 4)">
-                                    <span class="action-icon">📤</span>
+                                    <span class="action-icon">ð¤</span>
                                 </button>
                             </div>
                         </div>
@@ -1497,166 +1497,166 @@
             </div>
         </div>
 
-        <!-- 뉴스/공시 탭 -->
+        <!-- ë´ì¤/ê³µì í­ -->
         <div id="news" class="tab-content">
             <div style="margin-bottom: 32px;">
-                <h1 style="font-size: 28px; font-weight: 900; margin-bottom: 8px;">📰 뉴스 & 공시</h1>
-                <p style="color: var(--text2); font-size: 16px;">최신 시장 뉴스와 기업 공시를 확인하세요</p>
+                <h1 style="font-size: 28px; font-weight: 900; margin-bottom: 8px;">ð° ë´ì¤ & ê³µì</h1>
+                <p style="color: var(--text2); font-size: 16px;">ìµì  ìì¥ ë´ì¤ì ê¸°ì ê³µìë¥¼ íì¸íì¸ì</p>
             </div>
 
-            <!-- 필터 태그 -->
+            <!-- íí° íê·¸ -->
             <div class="news-filters">
-                <div class="filter-tag active">전체</div>
-                <div class="filter-tag">주식</div>
-                <div class="filter-tag">암호화폐</div>
-                <div class="filter-tag">거시경제</div>
-                <div class="filter-tag">공시</div>
+                <div class="filter-tag active">ì ì²´</div>
+                <div class="filter-tag">ì£¼ì</div>
+                <div class="filter-tag">ìí¸íí</div>
+                <div class="filter-tag">ê±°ìê²½ì </div>
+                <div class="filter-tag">ê³µì</div>
             </div>
 
-            <!-- 뉴스 리스트 -->
+            <!-- ë´ì¤ ë¦¬ì¤í¸ -->
             <div class="news-list">
                 <div class="news-card">
-                    <div class="news-thumbnail">📈</div>
+                    <div class="news-thumbnail">ð</div>
                     <div class="news-content">
-                        <div class="news-title">삼성전자, AI 반도체 투자 확대 발표</div>
+                        <div class="news-title">ì¼ì±ì ì, AI ë°ëì²´ í¬ì íë ë°í</div>
                         <div class="news-meta">
-                            <span>한국경제</span>
-                            <span>•</span>
-                            <span>2시간 전</span>
+                            <span>íêµ­ê²½ì </span>
+                            <span>â¢</span>
+                            <span>2ìê° ì </span>
                         </div>
                         <div class="news-snippet">
-                            삼성전자가 AI 반도체 시장 선점을 위해 대규모 투자 계획을 발표했다. HBM 생산 능력을 2배로 확대하고...
+                            ì¼ì±ì ìê° AI ë°ëì²´ ìì¥ ì ì ì ìí´ ëê·ëª¨ í¬ì ê³íì ë°ííë¤. HBM ìì° ë¥ë ¥ì 2ë°°ë¡ íëíê³ ...
                         </div>
                     </div>
                 </div>
 
                 <div class="news-card">
-                    <div class="news-thumbnail">⚡</div>
+                    <div class="news-thumbnail">â¡</div>
                     <div class="news-content">
-                        <div class="news-title">테슬라 Q4 실적, 시장 예상 상회</div>
+                        <div class="news-title">íì¬ë¼ Q4 ì¤ì , ìì¥ ìì ìí</div>
                         <div class="news-meta">
                             <span>Bloomberg</span>
-                            <span>•</span>
-                            <span>4시간 전</span>
+                            <span>â¢</span>
+                            <span>4ìê° ì </span>
                         </div>
                         <div class="news-snippet">
-                            테슬라가 발표한 4분기 실적이 월스트리트 예상을 크게 웃돌았다. 특히 자율주행 소프트웨어 매출이...
+                            íì¬ë¼ê° ë°íí 4ë¶ê¸° ì¤ì ì´ ìì¤í¸ë¦¬í¸ ììì í¬ê² ìëìë¤. í¹í ìì¨ì£¼í ìíí¸ì¨ì´ ë§¤ì¶ì´...
                         </div>
                     </div>
                 </div>
 
                 <div class="news-card">
-                    <div class="news-thumbnail">₿</div>
+                    <div class="news-thumbnail">â¿</div>
                     <div class="news-content">
-                        <div class="news-title">비트코인, 기관 투자 유입으로 상승세</div>
+                        <div class="news-title">ë¹í¸ì½ì¸, ê¸°ê´ í¬ì ì ìì¼ë¡ ìì¹ì¸</div>
                         <div class="news-meta">
                             <span>CoinDesk</span>
-                            <span>•</span>
-                            <span>6시간 전</span>
+                            <span>â¢</span>
+                            <span>6ìê° ì </span>
                         </div>
                         <div class="news-snippet">
-                            대형 기관들의 비트코인 ETF 매수세가 이어지며 가격이 상승하고 있다. BlackRock과 Fidelity가...
+                            ëí ê¸°ê´ë¤ì ë¹í¸ì½ì¸ ETF ë§¤ìì¸ê° ì´ì´ì§ë©° ê°ê²©ì´ ìì¹íê³  ìë¤. BlackRockê³¼ Fidelityê°...
                         </div>
                     </div>
                 </div>
 
                 <div class="news-card">
-                    <div class="news-thumbnail">🏭</div>
+                    <div class="news-thumbnail">ð­</div>
                     <div class="news-content">
-                        <div class="news-title">SK하이닉스, HBM3E 양산 본격 시작</div>
+                        <div class="news-title">SKíì´ëì¤, HBM3E ìì° ë³¸ê²© ìì</div>
                         <div class="news-meta">
-                            <span>전자신문</span>
-                            <span>•</span>
-                            <span>8시간 전</span>
+                            <span>ì ìì ë¬¸</span>
+                            <span>â¢</span>
+                            <span>8ìê° ì </span>
                         </div>
                         <div class="news-snippet">
-                            SK하이닉스가 차세대 고대역폭 메모리(HBM3E) 양산에 돌입했다고 발표했다. 엔비디아 H200 GPU에...
+                            SKíì´ëì¤ê° ì°¨ì¸ë ê³ ëì­í­ ë©ëª¨ë¦¬(HBM3E) ìì°ì ëìíë¤ê³  ë°ííë¤. ìë¹ëì H200 GPUì...
                         </div>
                     </div>
                 </div>
 
                 <div class="news-card">
-                    <div class="news-thumbnail">🌍</div>
+                    <div class="news-thumbnail">ð</div>
                     <div class="news-content">
-                        <div class="news-title">Fed, 기준금리 동결 결정</div>
+                        <div class="news-title">Fed, ê¸°ì¤ê¸ë¦¬ ëê²° ê²°ì </div>
                         <div class="news-meta">
                             <span>Reuters</span>
-                            <span>•</span>
-                            <span>12시간 전</span>
+                            <span>â¢</span>
+                            <span>12ìê° ì </span>
                         </div>
                         <div class="news-snippet">
-                            미국 연방준비제도(Fed)가 기준금리를 현 수준에서 동결하기로 결정했다. 인플레이션 둔화 속도를...
+                            ë¯¸êµ­ ì°ë°©ì¤ë¹ì ë(Fed)ê° ê¸°ì¤ê¸ë¦¬ë¥¼ í ìì¤ìì ëê²°íê¸°ë¡ ê²°ì íë¤. ì¸íë ì´ì ëí ìëë¥¼...
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 인플루언서 탭 (v24 통합) -->
+        <!-- ì¸íë£¨ì¸ì í­ (v24 íµí©) -->
         <div id="influencer" class="tab-content">
             <div style="margin-bottom: 24px;">
-                <h1 style="font-size: 28px; font-weight: 900; margin-bottom: 8px;">📊 인플루언서</h1>
-                <p style="color: var(--text2); font-size: 16px;">투자 인플루언서들의 종목 분석과 시그널을 추적하세요</p>
+                <h1 style="font-size: 28px; font-weight: 900; margin-bottom: 8px;">ð ì¸íë£¨ì¸ì</h1>
+                <p style="color: var(--text2); font-size: 16px;">í¬ì ì¸íë£¨ì¸ìë¤ì ì¢ëª© ë¶ìê³¼ ìê·¸ëì ì¶ì íì¸ì</p>
             </div>
 
-            <!-- 인플루언서 탭 상단 선택기 -->
+            <!-- ì¸íë£¨ì¸ì í­ ìë¨ ì íê¸° -->
             <div class="inf-selector" id="infSubTabs">
-                <button class="inf-chip active" onclick="showInfSubTab('chart')">📈 차트</button>
-                <button class="inf-chip" onclick="showInfSubTab('statements')">💬 발언</button>
-                <button class="inf-chip" onclick="showInfSubTab('influencers')">👥 인플루언서</button>
-                <button class="inf-chip" onclick="showInfSubTab('stocks')">📊 종목</button>
+                <button class="inf-chip active" onclick="showInfSubTab('chart')">ð ì°¨í¸</button>
+                <button class="inf-chip" onclick="showInfSubTab('statements')">ð¬ ë°ì¸</button>
+                <button class="inf-chip" onclick="showInfSubTab('influencers')">ð¥ ì¸íë£¨ì¸ì</button>
+                <button class="inf-chip" onclick="showInfSubTab('stocks')">ð ì¢ëª©</button>
             </div>
 
-            <!-- 차트 서브탭 -->
+            <!-- ì°¨í¸ ìë¸í­ -->
             <div id="inf-chart" class="inf-subtab active">
                 <div class="search-wrap">
-                    <input type="text" id="searchInput" placeholder="종목명 검색..." oninput="onSearch(this.value)" onfocus="onSearch(this.value)">
+                    <input type="text" id="searchInput" placeholder="ì¢ëª©ëª ê²ì..." oninput="onSearch(this.value)" onfocus="onSearch(this.value)">
                     <div class="search-dropdown" id="searchDropdown"></div>
                 </div>
                 
                 <div class="chart-section">
                     <div class="chart-header">
                         <div>
-                            <h2 id="chartTitle">종목을 선택하세요</h2>
+                            <h2 id="chartTitle">ì¢ëª©ì ì ííì¸ì</h2>
                             <div style="display:flex;align-items:baseline;gap:4px;margin-top:4px">
                                 <span class="price" id="chartPrice"></span>
                                 <span class="change" id="chartChange"></span>
                             </div>
                         </div>
                         <div id="stockInfChipBar" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px"></div>
-                        <div id="chartMarkerInfo" style="font-size:12px;color:var(--text3);text-align:right">📌 인플루언서 발언 마커 · 클릭하여 상세 보기</div>
+                        <div id="chartMarkerInfo" style="font-size:12px;color:var(--text3);text-align:right">ð ì¸íë£¨ì¸ì ë°ì¸ ë§ì»¤ Â· í´ë¦­íì¬ ìì¸ ë³´ê¸°</div>
                     </div>
                     <div id="stockChart"></div>
                     <div class="marker-tooltip" id="markerTooltip">
-                        <button class="close-btn" onclick="closeTooltip()">✕</button>
+                        <button class="close-btn" onclick="closeTooltip()">â</button>
                         <div class="mt-header">
                             <div class="mt-avatar"><img src="https://randomuser.me/api/portraits/men/75.jpg" style="width:100%;height:100%;border-radius:50%"></div>
                             <div style="flex:1;min-width:0">
-                                <div class="mt-name">박두환</div>
+                                <div class="mt-name">ë°ëí</div>
                                 <div class="mt-date-sub" id="ttDateSub"></div>
                             </div>
                             <span class="mt-badge" id="ttBadge"></span>
                         </div>
                         <div class="mt-body">
                             <div class="mt-content" id="ttContent"></div>
-                            <a class="mt-link" id="ttLink" href="#" target="_blank">▶ YouTube 타임스탬프로 이동</a>
+                            <a class="mt-link" id="ttLink" href="#" target="_blank">â¶ YouTube íìì¤í¬íë¡ ì´ë</a>
                             <div class="mt-count" id="ttCount"></div>
                         </div>
                     </div>
                 </div>
 
                 <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
-                    <h3 style="font-size:16px">📋 최근 발언</h3>
-                    <span style="font-size:12px;color:var(--text3)">최신 영상 기준</span>
+                    <h3 style="font-size:16px">ð ìµê·¼ ë°ì¸</h3>
+                    <span style="font-size:12px;color:var(--text3)">ìµì  ìì ê¸°ì¤</span>
                 </div>
                 <div class="statements-grid" id="statementsGrid"></div>
             </div>
 
-            <!-- 기타 서브탭들 -->
+            <!-- ê¸°í ìë¸í­ë¤ -->
             <div id="inf-statements" class="inf-subtab">
                 <div class="card">
                     <div style="text-align: center; padding: 40px; color: var(--text3);">
-                        💬 발언 탭 준비 중...
+                        ð¬ ë°ì¸ í­ ì¤ë¹ ì¤...
                     </div>
                 </div>
             </div>
@@ -1664,7 +1664,7 @@
             <div id="inf-influencers" class="inf-subtab">
                 <div class="card">
                     <div style="text-align: center; padding: 40px; color: var(--text3);">
-                        👥 인플루언서 탭 준비 중...
+                        ð¥ ì¸íë£¨ì¸ì í­ ì¤ë¹ ì¤...
                     </div>
                 </div>
             </div>
@@ -1672,279 +1672,279 @@
             <div id="inf-stocks" class="inf-subtab">
                 <div class="card">
                     <div style="text-align: center; padding: 40px; color: var(--text3);">
-                        📊 종목 탭 준비 중...
+                        ð ì¢ëª© í­ ì¤ë¹ ì¤...
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 노트 탭 -->
+        <!-- ë¸í¸ í­ -->
         <div id="notes" class="tab-content">
             <div style="margin-bottom: 32px;">
-                <h1 style="font-size: 28px; font-weight: 900; margin-bottom: 8px;">📝 노트</h1>
-                <p style="color: var(--text2); font-size: 16px;">투자 아이디어와 분석을 기록하고 관리하세요</p>
+                <h1 style="font-size: 28px; font-weight: 900; margin-bottom: 8px;">ð ë¸í¸</h1>
+                <p style="color: var(--text2); font-size: 16px;">í¬ì ìì´ëì´ì ë¶ìì ê¸°ë¡íê³  ê´ë¦¬íì¸ì</p>
             </div>
             
             <div class="notes-layout">
                 <div class="notes-sidebar">
-                    <button class="new-note-btn">+ 새 노트</button>
+                    <button class="new-note-btn">+ ì ë¸í¸</button>
                     <div class="note-item active">
-                        <div class="note-title">삼성전자 분석</div>
-                        <div class="note-preview">AI 반도체 시장 성장 전망과 HBM 수요 분석...</div>
+                        <div class="note-title">ì¼ì±ì ì ë¶ì</div>
+                        <div class="note-preview">AI ë°ëì²´ ìì¥ ì±ì¥ ì ë§ê³¼ HBM ìì ë¶ì...</div>
                     </div>
                     <div class="note-item">
-                        <div class="note-title">테슬라 투자 아이디어</div>
-                        <div class="note-preview">자율주행 기술 발전과 로보택시 사업 가능성...</div>
+                        <div class="note-title">íì¬ë¼ í¬ì ìì´ëì´</div>
+                        <div class="note-preview">ìì¨ì£¼í ê¸°ì  ë°ì ê³¼ ë¡ë³´íì ì¬ì ê°ë¥ì±...</div>
                     </div>
                     <div class="note-item">
-                        <div class="note-title">2024 투자 복기</div>
-                        <div class="note-preview">올해 투자 성과 정리 및 내년 전략 수립...</div>
+                        <div class="note-title">2024 í¬ì ë³µê¸°</div>
+                        <div class="note-preview">ì¬í´ í¬ì ì±ê³¼ ì ë¦¬ ë° ë´ë ì ëµ ìë¦½...</div>
                     </div>
                     <div class="note-item">
-                        <div class="note-title">암호화폐 전망</div>
-                        <div class="note-preview">비트코인 ETF 승인 이후 시장 변화 분석...</div>
+                        <div class="note-title">ìí¸íí ì ë§</div>
+                        <div class="note-preview">ë¹í¸ì½ì¸ ETF ì¹ì¸ ì´í ìì¥ ë³í ë¶ì...</div>
                     </div>
                 </div>
 
                 <div class="notes-main">
-                    <textarea class="note-editor" placeholder="여기에 투자 노트를 작성하세요...
+                    <textarea class="note-editor" placeholder="ì¬ê¸°ì í¬ì ë¸í¸ë¥¼ ìì±íì¸ì...
 
-💡 팁:
-- 투자 아이디어와 근거를 명확히 기록하세요
-- 매수/매도 이유와 목표가를 설정하세요
-- 정기적으로 투자 결과를 복기하세요
+ð¡ í:
+- í¬ì ìì´ëì´ì ê·¼ê±°ë¥¼ ëªíí ê¸°ë¡íì¸ì
+- ë§¤ì/ë§¤ë ì´ì ì ëª©íê°ë¥¼ ì¤ì íì¸ì
+- ì ê¸°ì ì¼ë¡ í¬ì ê²°ê³¼ë¥¼ ë³µê¸°íì¸ì
 
-삼성전자 분석 (2024.02.23)
+ì¼ì±ì ì ë¶ì (2024.02.23)
 
-📊 현재 상황:
-- 주가: 75,000원 (-2.3%)
-- PER: 12.5x (업계 평균 대비 저평가)
-- 메모리 반도체 사이클 회복 초기 단계
+ð íì¬ ìí©:
+- ì£¼ê°: 75,000ì (-2.3%)
+- PER: 12.5x (ìê³ íê·  ëë¹ ì íê°)
+- ë©ëª¨ë¦¬ ë°ëì²´ ì¬ì´í´ íë³µ ì´ê¸° ë¨ê³
 
-🔍 투자 근거:
-1. AI 반도체 수요 급증
-   - ChatGPT, 생성형 AI 확산으로 HBM 수요 폭증
-   - 삼성 HBM3E 양산 본격화 (2024 Q2 예정)
+ð í¬ì ê·¼ê±°:
+1. AI ë°ëì²´ ìì ê¸ì¦
+   - ChatGPT, ìì±í AI íì°ì¼ë¡ HBM ìì í­ì¦
+   - ì¼ì± HBM3E ìì° ë³¸ê²©í (2024 Q2 ìì )
    
-2. 메모리 사이클 회복
-   - 재고 조정 완료, 수급 균형 회복
-   - 중국 메모리 업체들과 기술 격차 유지
+2. ë©ëª¨ë¦¬ ì¬ì´í´ íë³µ
+   - ì¬ê³  ì¡°ì  ìë£, ìê¸ ê· í íë³µ
+   - ì¤êµ­ ë©ëª¨ë¦¬ ìì²´ë¤ê³¼ ê¸°ì  ê²©ì°¨ ì ì§
 
-3. 파운드리 사업 개선
-   - 3나노 공정 수율 개선
-   - 고객사 다변화 진행
+3. íì´ëë¦¬ ì¬ì ê°ì 
+   - 3ëë¸ ê³µì  ìì¨ ê°ì 
+   - ê³ ê°ì¬ ë¤ë³í ì§í
 
-🎯 투자 전략:
-- 목표가: 85,000원 (12개월)
-- 손절가: 65,000원
-- 분할 매수 (현재 50% 비중)
+ð¯ í¬ì ì ëµ:
+- ëª©íê°: 85,000ì (12ê°ì)
+- ìì ê°: 65,000ì
+- ë¶í  ë§¤ì (íì¬ 50% ë¹ì¤)
 
-⚠️ 리스크:
-- 중국 경기 둔화로 인한 수요 감소
-- 메모리 가격 변동성
-- 지정학적 리스크"></textarea>
+â ï¸ ë¦¬ì¤í¬:
+- ì¤êµ­ ê²½ê¸° ëíë¡ ì¸í ìì ê°ì
+- ë©ëª¨ë¦¬ ê°ê²© ë³ëì±
+- ì§ì íì  ë¦¬ì¤í¬"></textarea>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 하단 탭바 -->
+    <!-- íë¨ í­ë° -->
     <div class="bottom-tabs">
         <div class="bottom-tabs-inner">
             <button class="tab-button active" onclick="switchTab('dashboard')">
-                <div class="tab-icon">🏠</div>
-                <div class="tab-label">대시보드</div>
+                <div class="tab-icon">ð </div>
+                <div class="tab-label">ëìë³´ë</div>
             </button>
             <button class="tab-button" onclick="switchTab('sns')">
-                <div class="tab-icon">💬</div>
+                <div class="tab-icon">ð¬</div>
                 <div class="tab-label">SNS</div>
             </button>
             <button class="tab-button" onclick="switchTab('news')">
-                <div class="tab-icon">📰</div>
-                <div class="tab-label">뉴스</div>
+                <div class="tab-icon">ð°</div>
+                <div class="tab-label">ë´ì¤</div>
             </button>
             <button class="tab-button" onclick="switchTab('influencer')">
-                <div class="tab-icon">👥</div>
-                <div class="tab-label">인플루언서</div>
+                <div class="tab-icon">ð¥</div>
+                <div class="tab-label">ì¸íë£¨ì¸ì</div>
             </button>
             <button class="tab-button" onclick="switchTab('notes')">
-                <div class="tab-icon">📝</div>
-                <div class="tab-label">노트</div>
+                <div class="tab-icon">ð</div>
+                <div class="tab-label">ë¸í¸</div>
             </button>
         </div>
     </div>
 
-    <!-- 프로필 패널 오버레이 -->
+    <!-- íë¡í í¨ë ì¤ë²ë ì´ -->
     <div class="profile-overlay" id="profileOverlay" onclick="closeProfilePanel()"></div>
 
-    <!-- 프로필 패널 -->
+    <!-- íë¡í í¨ë -->
     <div class="profile-panel" id="profilePanel">
         <div class="profile-panel-header">
-            <div class="profile-panel-title">프로필 설정</div>
-            <button class="profile-close-btn" onclick="closeProfilePanel()">✕</button>
+            <div class="profile-panel-title">íë¡í ì¤ì </div>
+            <button class="profile-close-btn" onclick="closeProfilePanel()">â</button>
         </div>
         
         <div class="profile-panel-content">
-            <!-- 사용자 정보 -->
+            <!-- ì¬ì©ì ì ë³´ -->
             <div class="profile-section">
-                <div class="profile-section-title">사용자 정보</div>
+                <div class="profile-section-title">ì¬ì©ì ì ë³´</div>
                 <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
-                    <div style="width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--purple)); display: flex; align-items: center; justify-content: center; font-size: 28px;">👤</div>
+                    <div style="width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--purple)); display: flex; align-items: center; justify-content: center; font-size: 28px;">ð¤</div>
                     <div>
-                        <div style="font-size: 18px; font-weight: 600; margin-bottom: 4px;">투자자</div>
-                        <div style="font-size: 14px; color: var(--text2);">investor@smtr.com</div>
+                        <div style="font-size: 18px; font-weight: 600; margin-bottom: 4px;">í¬ìì</div>
+                        <div style="font-size: 14px; color: var(--text2);"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="167f7860736562796456657b62643875797b">[email&#160;protected]</a></div>
                     </div>
                 </div>
             </div>
 
-            <!-- 투자 성향 -->
+            <!-- í¬ì ì±í¥ -->
             <div class="profile-section">
-                <div class="profile-section-title">투자 성향</div>
+                <div class="profile-section-title">í¬ì ì±í¥</div>
                 <div class="investment-style-grid">
                     <div class="investment-style-card selected" onclick="selectInvestmentStyle(this)">
-                        <div class="investment-style-title">안정형 🛡️</div>
-                        <div class="investment-style-desc">안정적인 수익 추구</div>
+                        <div class="investment-style-title">ìì í ð¡ï¸</div>
+                        <div class="investment-style-desc">ìì ì ì¸ ììµ ì¶êµ¬</div>
                     </div>
                     <div class="investment-style-card" onclick="selectInvestmentStyle(this)">
-                        <div class="investment-style-title">성장형 📈</div>
-                        <div class="investment-style-desc">중장기 성장 중심</div>
+                        <div class="investment-style-title">ì±ì¥í ð</div>
+                        <div class="investment-style-desc">ì¤ì¥ê¸° ì±ì¥ ì¤ì¬</div>
                     </div>
                     <div class="investment-style-card" onclick="selectInvestmentStyle(this)">
-                        <div class="investment-style-title">공격형 🚀</div>
-                        <div class="investment-style-desc">고수익 고위험</div>
+                        <div class="investment-style-title">ê³µê²©í ð</div>
+                        <div class="investment-style-desc">ê³ ììµ ê³ ìí</div>
                     </div>
                     <div class="investment-style-card" onclick="selectInvestmentStyle(this)">
-                        <div class="investment-style-title">균형형 ⚖️</div>
-                        <div class="investment-style-desc">안정과 성장의 균형</div>
+                        <div class="investment-style-title">ê· íí âï¸</div>
+                        <div class="investment-style-desc">ìì ê³¼ ì±ì¥ì ê· í</div>
                     </div>
                 </div>
             </div>
 
-            <!-- 앱 설정 -->
+            <!-- ì± ì¤ì  -->
             <div class="profile-section">
-                <div class="profile-section-title">앱 설정</div>
+                <div class="profile-section-title">ì± ì¤ì </div>
                 <div class="profile-option">
                     <div>
-                        <div style="font-weight: 500;">다크 모드</div>
-                        <div style="font-size: 12px; color: var(--text2);">어두운 테마로 표시</div>
+                        <div style="font-weight: 500;">ë¤í¬ ëª¨ë</div>
+                        <div style="font-size: 12px; color: var(--text2);">ì´ëì´ íë§ë¡ íì</div>
                     </div>
                     <div class="toggle-switch active" onclick="toggleDarkMode(this)"></div>
                 </div>
                 <div class="profile-option">
                     <div>
-                        <div style="font-weight: 500;">푸시 알림</div>
-                        <div style="font-size: 12px; color: var(--text2);">중요한 시그널 알림 받기</div>
+                        <div style="font-weight: 500;">í¸ì ìë¦¼</div>
+                        <div style="font-size: 12px; color: var(--text2);">ì¤ìí ìê·¸ë ìë¦¼ ë°ê¸°</div>
                     </div>
                     <div class="toggle-switch active" onclick="toggleNotifications(this)"></div>
                 </div>
                 <div class="profile-option">
                     <div>
-                        <div style="font-weight: 500;">소리 효과</div>
-                        <div style="font-size: 12px; color: var(--text2);">버튼 클릭 및 알림 소리</div>
+                        <div style="font-weight: 500;">ìë¦¬ í¨ê³¼</div>
+                        <div style="font-size: 12px; color: var(--text2);">ë²í¼ í´ë¦­ ë° ìë¦¼ ìë¦¬</div>
                     </div>
                     <div class="toggle-switch" onclick="toggleSounds(this)"></div>
                 </div>
             </div>
 
-            <!-- 기타 옵션 -->
+            <!-- ê¸°í ìµì -->
             <div class="profile-section">
-                <div class="profile-section-title">기타</div>
+                <div class="profile-section-title">ê¸°í</div>
                 <div style="display: grid; gap: 8px;">
                     <button onclick="showHelp()" style="background: none; border: 1px solid var(--border); color: var(--text); padding: 12px; border-radius: 8px; cursor: pointer; text-align: left; transition: all 0.3s ease;">
-                        ❓ 도움말 & 튜토리얼
+                        â ëìë§ & íí ë¦¬ì¼
                     </button>
                     <button onclick="showAbout()" style="background: none; border: 1px solid var(--border); color: var(--text); padding: 12px; border-radius: 8px; cursor: pointer; text-align: left; transition: all 0.3s ease;">
-                        ℹ️ 앱 정보
+                        â¹ï¸ ì± ì ë³´
                     </button>
                     <button onclick="logout()" style="background: none; border: 1px solid var(--red); color: var(--red); padding: 12px; border-radius: 8px; cursor: pointer; text-align: left; transition: all 0.3s ease;">
-                        🚪 로그아웃
+                        ðª ë¡ê·¸ìì
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        // ===== v24 데이터 통합 =====
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // ===== v24 ë°ì´í° íµí© =====
         const STOCK_TICKERS = {
-            "두산": "000150.KS",
-            "두산 에너빌리티": "034020.KS",
-            "두산에너빌리티": "034020.KS",
-            "삼성전자": "005930.KS",
-            "삼성": "005930.KS",
-            "SK하이닉스": "000660.KS",
-            "SK 하이닉스": "000660.KS",
-            "하이닉스": "000660.KS",
-            "한국전력": "015760.KS",
-            "한국 전력": "015760.KS",
-            "현대차": "005380.KS",
-            "현대": "005380.KS",
-            "기아": "000270.KS",
-            "엔비디아": "NVDA",
-            "테슬라": "TSLA",
-            "비트코인": "BTC-USD",
-            "애플": "AAPL",
-            "구글": "GOOGL",
-            "마이크로소프트": "MSFT",
-            "아마존": "AMZN",
-            "메타": "META"
+            "ëì°": "000150.KS",
+            "ëì° ìëë¹ë¦¬í°": "034020.KS",
+            "ëì°ìëë¹ë¦¬í°": "034020.KS",
+            "ì¼ì±ì ì": "005930.KS",
+            "ì¼ì±": "005930.KS",
+            "SKíì´ëì¤": "000660.KS",
+            "SK íì´ëì¤": "000660.KS",
+            "íì´ëì¤": "000660.KS",
+            "íêµ­ì ë ¥": "015760.KS",
+            "íêµ­ ì ë ¥": "015760.KS",
+            "íëì°¨": "005380.KS",
+            "íë": "005380.KS",
+            "ê¸°ì": "000270.KS",
+            "ìë¹ëì": "NVDA",
+            "íì¬ë¼": "TSLA",
+            "ë¹í¸ì½ì¸": "BTC-USD",
+            "ì í": "AAPL",
+            "êµ¬ê¸": "GOOGL",
+            "ë§ì´í¬ë¡ìíí¸": "MSFT",
+            "ìë§ì¡´": "AMZN",
+            "ë©í": "META"
         };
 
         const SEARCHABLE_STOCKS = [
-            {name: "삼성전자", ticker: "005930.KS"},
-            {name: "SK하이닉스", ticker: "000660.KS"},
-            {name: "테슬라", ticker: "TSLA"},
-            {name: "엔비디아", ticker: "NVDA"},
-            {name: "비트코인", ticker: "BTC-USD"},
-            {name: "애플", ticker: "AAPL"},
-            {name: "두산에너빌리티", ticker: "034020.KS"},
-            {name: "현대차", ticker: "005380.KS"},
-            {name: "기아", ticker: "000270.KS"}
+            {name: "ì¼ì±ì ì", ticker: "005930.KS"},
+            {name: "SKíì´ëì¤", ticker: "000660.KS"},
+            {name: "íì¬ë¼", ticker: "TSLA"},
+            {name: "ìë¹ëì", ticker: "NVDA"},
+            {name: "ë¹í¸ì½ì¸", ticker: "BTC-USD"},
+            {name: "ì í", ticker: "AAPL"},
+            {name: "ëì°ìëë¹ë¦¬í°", ticker: "034020.KS"},
+            {name: "íëì°¨", ticker: "005380.KS"},
+            {name: "ê¸°ì", ticker: "000270.KS"}
         ];
 
         var parkStatements = [
-            {"stock": "삼성전자", "dirType": "buy", "detail": "AI 반도체 시장에서의 성장 가능성이 높다고 판단됩니다.", "quote": "삼성전자는 AI 시대의 핵심 기업이 될 것입니다.", "influencer": "박두환", "video_id": "test123", "ts": "5:30", "date": "2026-02-20", "url": "https://www.youtube.com/watch?v=test123"},
-            {"stock": "테슬라", "dirType": "positive", "detail": "자율주행 기술의 발전으로 미래 가치가 증가할 것입니다.", "quote": "테슬라의 FSD 기술은 게임 체인저입니다.", "influencer": "박두환", "video_id": "test124", "ts": "8:15", "date": "2026-02-18", "url": "https://www.youtube.com/watch?v=test124"},
-            {"stock": "엔비디아", "dirType": "strong_buy", "detail": "AI 칩셋 시장의 절대 강자로서 투자 가치가 매우 높습니다.", "quote": "엔비디아는 AI 혁명의 중심에 있습니다.", "influencer": "박두환", "video_id": "test125", "ts": "12:45", "date": "2026-02-15", "url": "https://www.youtube.com/watch?v=test125"},
-            {"stock": "비트코인", "dirType": "hold", "detail": "현재 구간에서는 관망하는 것이 좋겠습니다.", "quote": "비트코인은 잠시 숨고르기 시간이 필요해 보입니다.", "influencer": "박두환", "video_id": "test126", "ts": "3:22", "date": "2026-02-12", "url": "https://www.youtube.com/watch?v=test126"}
+            {"stock": "ì¼ì±ì ì", "dirType": "buy", "detail": "AI ë°ëì²´ ìì¥ììì ì±ì¥ ê°ë¥ì±ì´ ëë¤ê³  íë¨ë©ëë¤.", "quote": "ì¼ì±ì ìë AI ìëì íµì¬ ê¸°ìì´ ë  ê²ìëë¤.", "influencer": "ë°ëí", "video_id": "test123", "ts": "5:30", "date": "2026-02-20", "url": "https://www.youtube.com/watch?v=test123"},
+            {"stock": "íì¬ë¼", "dirType": "positive", "detail": "ìì¨ì£¼í ê¸°ì ì ë°ì ì¼ë¡ ë¯¸ë ê°ì¹ê° ì¦ê°í  ê²ìëë¤.", "quote": "íì¬ë¼ì FSD ê¸°ì ì ê²ì ì²´ì¸ì ìëë¤.", "influencer": "ë°ëí", "video_id": "test124", "ts": "8:15", "date": "2026-02-18", "url": "https://www.youtube.com/watch?v=test124"},
+            {"stock": "ìë¹ëì", "dirType": "strong_buy", "detail": "AI ì¹©ì ìì¥ì ì ë ê°ìë¡ì í¬ì ê°ì¹ê° ë§¤ì° ëìµëë¤.", "quote": "ìë¹ëìë AI íëªì ì¤ì¬ì ììµëë¤.", "influencer": "ë°ëí", "video_id": "test125", "ts": "12:45", "date": "2026-02-15", "url": "https://www.youtube.com/watch?v=test125"},
+            {"stock": "ë¹í¸ì½ì¸", "dirType": "hold", "detail": "íì¬ êµ¬ê°ììë ê´ë§íë ê²ì´ ì¢ê² ìµëë¤.", "quote": "ë¹í¸ì½ì¸ì ì ì ì¨ê³ ë¥´ê¸° ìê°ì´ íìí´ ë³´ìëë¤.", "influencer": "ë°ëí", "video_id": "test126", "ts": "3:22", "date": "2026-02-12", "url": "https://www.youtube.com/watch?v=test126"}
         ];
 
         var hsStatements = [
-            {"stock": "SK하이닉스", "dirType": "buy", "detail": "HBM 메모리 시장에서의 독보적 위치가 강점입니다.", "quote": "하이닉스는 메모리 반도체의 미래를 선도하고 있습니다.", "influencer": "이효석", "video_id": "hs001", "ts": "6:40", "date": "2026-02-19", "url": "https://www.youtube.com/watch?v=hs001"},
-            {"stock": "애플", "dirType": "concern", "detail": "중국 시장에서의 부진이 우려스럽습니다.", "quote": "애플의 중국 실적을 주의깊게 봐야 합니다.", "influencer": "이효석", "video_id": "hs002", "ts": "4:18", "date": "2026-02-17", "url": "https://www.youtube.com/watch?v=hs002"},
-            {"stock": "두산에너빌리티", "dirType": "positive", "detail": "친환경 에너지 전환 수혜주로 주목됩니다.", "quote": "두산에너빌리티는 에너지 전환의 핵심 기업입니다.", "influencer": "이효석", "video_id": "hs003", "ts": "9:55", "date": "2026-02-14", "url": "https://www.youtube.com/watch?v=hs003"}
+            {"stock": "SKíì´ëì¤", "dirType": "buy", "detail": "HBM ë©ëª¨ë¦¬ ìì¥ììì ëë³´ì  ìì¹ê° ê°ì ìëë¤.", "quote": "íì´ëì¤ë ë©ëª¨ë¦¬ ë°ëì²´ì ë¯¸ëë¥¼ ì ëíê³  ììµëë¤.", "influencer": "ì´í¨ì", "video_id": "hs001", "ts": "6:40", "date": "2026-02-19", "url": "https://www.youtube.com/watch?v=hs001"},
+            {"stock": "ì í", "dirType": "concern", "detail": "ì¤êµ­ ìì¥ììì ë¶ì§ì´ ì°ë ¤ì¤ë½ìµëë¤.", "quote": "ì íì ì¤êµ­ ì¤ì ì ì£¼ìê¹ê² ë´ì¼ í©ëë¤.", "influencer": "ì´í¨ì", "video_id": "hs002", "ts": "4:18", "date": "2026-02-17", "url": "https://www.youtube.com/watch?v=hs002"},
+            {"stock": "ëì°ìëë¹ë¦¬í°", "dirType": "positive", "detail": "ì¹íê²½ ìëì§ ì í ìíì£¼ë¡ ì£¼ëª©ë©ëë¤.", "quote": "ëì°ìëë¹ë¦¬í°ë ìëì§ ì íì íµì¬ ê¸°ììëë¤.", "influencer": "ì´í¨ì", "video_id": "hs003", "ts": "9:55", "date": "2026-02-14", "url": "https://www.youtube.com/watch?v=hs003"}
         ];
 
         var allStatements = parkStatements.concat(hsStatements);
 
-        // 차트 관련 전역 변수
-        let chart, series, currentStock = '삼성전자';
+        // ì°¨í¸ ê´ë ¨ ì ì­ ë³ì
+        let chart, series, currentStock = 'ì¼ì±ì ì';
         let overlayContainer;
 
-        // ===== 탭 관리 =====
+        // ===== í­ ê´ë¦¬ =====
         function switchTab(tabName) {
-            // 모든 탭 콘텐츠 숨기기
+            // ëª¨ë  í­ ì½íì¸  ì¨ê¸°ê¸°
             document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.remove('active');
             });
             
-            // 모든 탭 버튼 비활성화
+            // ëª¨ë  í­ ë²í¼ ë¹íì±í
             document.querySelectorAll('.tab-button').forEach(btn => {
                 btn.classList.remove('active');
             });
             
-            // 선택된 탭 표시
+            // ì íë í­ íì
             var targetTab = document.getElementById(tabName);
             if (targetTab) targetTab.classList.add('active');
             
-            // 해당 탭 버튼 활성화
+            // í´ë¹ í­ ë²í¼ íì±í
             document.querySelectorAll('.tab-button').forEach(btn => {
                 if (btn.getAttribute('onclick') && btn.getAttribute('onclick').indexOf(tabName) !== -1) {
                     btn.classList.add('active');
                 }
             });
             
-            // 인플루언서 탭이 선택되었을 때 차트 로드
+            // ì¸íë£¨ì¸ì í­ì´ ì íëìì ë ì°¨í¸ ë¡ë
             if (tabName === 'influencer' && typeof LightweightCharts !== 'undefined') {
                 setTimeout(() => {
                     if (currentStock) {
@@ -1953,7 +1953,7 @@
                 }, 100);
             }
 
-            // 대시보드 탭에서만 마켓 데이터 업데이트
+            // ëìë³´ë í­ììë§ ë§ì¼ ë°ì´í° ìë°ì´í¸
             if (tabName === 'dashboard') {
                 startMarketDataUpdates();
             } else {
@@ -1961,15 +1961,15 @@
             }
         }
 
-        // ===== 인플루언서 서브탭 관리 =====
+        // ===== ì¸íë£¨ì¸ì ìë¸í­ ê´ë¦¬ =====
         function showInfSubTab(subTabName) {
-            // 서브탭 버튼들 업데이트
+            // ìë¸í­ ë²í¼ë¤ ìë°ì´í¸
             document.querySelectorAll('.inf-chip').forEach(chip => {
                 chip.classList.remove('active');
             });
             event.currentTarget.classList.add('active');
 
-            // 서브탭 콘텐츠 전환
+            // ìë¸í­ ì½íì¸  ì í
             document.querySelectorAll('.inf-subtab').forEach(tab => {
                 tab.classList.remove('active');
             });
@@ -1979,7 +1979,7 @@
                 targetTab.classList.add('active');
             }
 
-            // 차트 탭이 선택되었을 때 차트 초기화
+            // ì°¨í¸ í­ì´ ì íëìì ë ì°¨í¸ ì´ê¸°í
             if (subTabName === 'chart' && typeof LightweightCharts !== 'undefined') {
                 setTimeout(() => {
                     if (currentStock) {
@@ -1989,7 +1989,7 @@
             }
         }
 
-        // ===== 검색 기능 =====
+        // ===== ê²ì ê¸°ë¥ =====
         function onSearch(query) {
             const dropdown = document.getElementById('searchDropdown');
             
@@ -2019,20 +2019,20 @@
             loadStockChart(stockName);
         }
 
-        // ===== 차트 로딩 =====
+        // ===== ì°¨í¸ ë¡ë© =====
         function loadStockChart(stockName) {
             if (!LightweightCharts) return;
 
             const chartContainer = document.getElementById('stockChart');
             if (!chartContainer) return;
 
-            // 기존 차트 제거
+            // ê¸°ì¡´ ì°¨í¸ ì ê±°
             if (chart) {
                 chart.remove();
                 chart = null;
             }
 
-            // 차트 생성
+            // ì°¨í¸ ìì±
             chart = LightweightCharts.createChart(chartContainer, {
                 width: chartContainer.clientWidth,
                 height: 400,
@@ -2064,29 +2064,29 @@
                 wickUpColor: '#00ba7c',
             });
 
-            // 샘플 데이터 생성
+            // ìí ë°ì´í° ìì±
             const data = generateSampleData(stockName);
             series.setData(data);
 
-            // 마커 추가
+            // ë§ì»¤ ì¶ê°
             const markers = generateMarkers(stockName);
             series.setMarkers(markers);
 
-            // 차트 제목 업데이트
+            // ì°¨í¸ ì ëª© ìë°ì´í¸
             document.getElementById('chartTitle').textContent = stockName;
             
-            // 가격 정보 업데이트 (샘플)
+            // ê°ê²© ì ë³´ ìë°ì´í¸ (ìí)
             const lastPrice = data[data.length - 1];
             const change = ((lastPrice.close - data[data.length - 2].close) / data[data.length - 2].close * 100).toFixed(2);
             
-            document.getElementById('chartPrice').textContent = `₩${lastPrice.close.toLocaleString()}`;
+            document.getElementById('chartPrice').textContent = `â©${lastPrice.close.toLocaleString()}`;
             document.getElementById('chartChange').textContent = `${change > 0 ? '+' : ''}${change}%`;
             document.getElementById('chartChange').className = `change ${change > 0 ? 'positive' : 'negative'}`;
 
-            // 발언 그리드 업데이트
+            // ë°ì¸ ê·¸ë¦¬ë ìë°ì´í¸
             updateStatementsGrid(stockName);
 
-            // 리사이즈 처리
+            // ë¦¬ì¬ì´ì¦ ì²ë¦¬
             const resizeObserver = new ResizeObserver(entries => {
                 if (chart) {
                     chart.applyOptions({ width: chartContainer.clientWidth });
@@ -2095,14 +2095,14 @@
             resizeObserver.observe(chartContainer);
         }
 
-        // 샘플 데이터 생성
+        // ìí ë°ì´í° ìì±
         function generateSampleData(stockName) {
             const data = [];
             let basePrice = 75000;
             
-            if (stockName === '테슬라') basePrice = 250;
-            if (stockName === '엔비디아') basePrice = 800;
-            if (stockName === 'SK하이닉스') basePrice = 120000;
+            if (stockName === 'íì¬ë¼') basePrice = 250;
+            if (stockName === 'ìë¹ëì') basePrice = 800;
+            if (stockName === 'SKíì´ëì¤') basePrice = 120000;
 
             for (let i = 30; i >= 0; i--) {
                 const date = new Date();
@@ -2127,7 +2127,7 @@
             return data;
         }
 
-        // 마커 생성
+        // ë§ì»¤ ìì±
         function generateMarkers(stockName) {
             const statements = allStatements.filter(s => s.stock === stockName);
             
@@ -2147,7 +2147,7 @@
             });
         }
 
-        // 시그널 색상
+        // ìê·¸ë ìì
         function getSignalColor(dirType) {
             const colors = {
                 'strong_buy': '#34d399',
@@ -2162,13 +2162,13 @@
             return colors[dirType] || '#64748b';
         }
 
-        // 발언 그리드 업데이트
+        // ë°ì¸ ê·¸ë¦¬ë ìë°ì´í¸
         function updateStatementsGrid(stockName) {
             const statements = allStatements.filter(s => s.stock === stockName);
             const grid = document.getElementById('statementsGrid');
             
             if (statements.length === 0) {
-                grid.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--text3);">해당 종목에 대한 발언이 없습니다.</div>';
+                grid.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--text3);">í´ë¹ ì¢ëª©ì ëí ë°ì¸ì´ ììµëë¤.</div>';
                 return;
             }
 
@@ -2180,7 +2180,7 @@
                         </div>
                         <div style="flex: 1;">
                             <div class="sc-name">${stmt.influencer}</div>
-                            <div style="font-size: 12px; color: var(--text3);">${stmt.date} · ${stmt.ts}</div>
+                            <div style="font-size: 12px; color: var(--text3);">${stmt.date} Â· ${stmt.ts}</div>
                         </div>
                         <div class="mt-badge" style="background: ${getSignalColor(stmt.dirType)}; color: #000; padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: 600;">
                             ${stmt.dirType.toUpperCase().replace('_', ' ')}
@@ -2189,23 +2189,23 @@
                     <div class="sc-content">"${stmt.quote}"</div>
                     <div class="sc-meta">
                         <span>${stmt.stock}</span>
-                        <span>▶ YouTube에서 보기</span>
+                        <span>â¶ YouTubeìì ë³´ê¸°</span>
                     </div>
                 </div>
             `).join('');
         }
 
-        // 발언 상세 열기
+        // ë°ì¸ ìì¸ ì´ê¸°
         function openStatement(videoId, timestamp) {
             window.open(`https://www.youtube.com/watch?v=${videoId}&t=${timestamp}`, '_blank');
         }
 
-        // 툴팁 닫기
+        // í´í ë«ê¸°
         function closeTooltip() {
             document.getElementById('markerTooltip').classList.remove('show');
         }
 
-        // SNS X(트위터) 스타일 함수들
+        // SNS X(í¸ìí°) ì¤íì¼ í¨ìë¤
         function updateTweetButton() {
             const textarea = document.querySelector('.sns-compose textarea');
             const btn = textarea.closest('.sns-compose').querySelector('.btn-tweet');
@@ -2223,52 +2223,52 @@
             
             if (!content) return;
 
-            // 새 게시물 생성
+            // ì ê²ìë¬¼ ìì±
             const newPost = document.createElement('div');
             newPost.className = 'sns-post';
             newPost.innerHTML = `
                 <div class="sns-post-wrapper">
-                    <div class="sns-author-avatar">👤</div>
+                    <div class="sns-author-avatar">ð¤</div>
                     <div class="sns-post-main">
                         <div class="sns-post-header">
-                            <span class="sns-author-name">당신</span>
+                            <span class="sns-author-name">ë¹ì </span>
                             <span class="sns-author-handle">@you</span>
-                            <span class="sns-post-time">방금</span>
+                            <span class="sns-post-time">ë°©ê¸</span>
                         </div>
                         <div class="sns-post-content">
                             ${content.replace(/\n/g, '<br>')}
                         </div>
                         <div class="sns-post-actions">
                             <button class="sns-action-btn" onclick="replyToPost(event, ${Date.now()})">
-                                <span class="action-icon">💬</span>
+                                <span class="action-icon">ð¬</span>
                                 <span>0</span>
                             </button>
                             <button class="sns-action-btn retweet-btn" onclick="retweetPost(event, ${Date.now()})">
-                                <span class="action-icon">🔄</span>
+                                <span class="action-icon">ð</span>
                                 <span>0</span>
                             </button>
                             <button class="sns-action-btn like-btn" onclick="likePost(event, ${Date.now()})">
-                                <span class="action-icon">❤️</span>
+                                <span class="action-icon">â¤ï¸</span>
                                 <span>0</span>
                             </button>
                             <button class="sns-action-btn" onclick="sharePost(event, ${Date.now()})">
-                                <span class="action-icon">📤</span>
+                                <span class="action-icon">ð¤</span>
                             </button>
                         </div>
                     </div>
                 </div>
             `;
 
-            // 피드 상단에 추가
+            // í¼ë ìë¨ì ì¶ê°
             const feed = document.querySelector('.sns-feed');
             feed.insertBefore(newPost, feed.firstChild);
 
-            // 입력창 초기화
+            // ìë ¥ì°½ ì´ê¸°í
             textarea.value = '';
             updateTweetButton();
         }
 
-        // SNS 액션 함수들
+        // SNS ì¡ì í¨ìë¤
         function replyToPost(event, postId) {
             event.stopPropagation();
             console.log('Reply to post:', postId);
@@ -2297,7 +2297,7 @@
             console.log('Open post detail:', postId);
         }
 
-        // 뉴스 필터 기능
+        // ë´ì¤ íí° ê¸°ë¥
         document.addEventListener('DOMContentLoaded', function() {
             const filterTags = document.querySelectorAll('.filter-tag');
             filterTags.forEach(tag => {
@@ -2307,7 +2307,7 @@
                 });
             });
 
-            // 노트 아이템 클릭 이벤트
+            // ë¸í¸ ìì´í í´ë¦­ ì´ë²¤í¸
             const noteItems = document.querySelectorAll('.note-item');
             noteItems.forEach(item => {
                 item.addEventListener('click', function() {
@@ -2316,18 +2316,18 @@
                 });
             });
 
-            // 새 노트 버튼 클릭 이벤트
+            // ì ë¸í¸ ë²í¼ í´ë¦­ ì´ë²¤í¸
             const newNoteBtn = document.querySelector('.new-note-btn');
             if (newNoteBtn) {
                 newNoteBtn.addEventListener('click', function() {
                     const editor = document.querySelector('.note-editor');
                     editor.value = '';
-                    editor.placeholder = '새 노트를 작성하세요...';
+                    editor.placeholder = 'ì ë¸í¸ë¥¼ ìì±íì¸ì...';
                     editor.focus();
                 });
             }
 
-            // 초기 차트 로드
+            // ì´ê¸° ì°¨í¸ ë¡ë
             setTimeout(() => {
                 if (currentStock && typeof LightweightCharts !== 'undefined') {
                     loadStockChart(currentStock);
@@ -2335,7 +2335,7 @@
             }, 1000);
         });
 
-        // 클릭 외부 이벤트로 검색 드롭다운 닫기
+        // í´ë¦­ ì¸ë¶ ì´ë²¤í¸ë¡ ê²ì ëë¡­ë¤ì´ ë«ê¸°
         document.addEventListener('click', function(event) {
             const searchWrap = document.querySelector('.search-wrap');
             const dropdown = document.getElementById('searchDropdown');
@@ -2345,7 +2345,7 @@
             }
         });
 
-        // ===== 프로필 패널 기능 =====
+        // ===== íë¡í í¨ë ê¸°ë¥ =====
         function toggleProfilePanel() {
             const panel = document.getElementById('profilePanel');
             const overlay = document.getElementById('profileOverlay');
@@ -2376,63 +2376,63 @@
         }
 
         function selectInvestmentStyle(card) {
-            // 모든 카드에서 selected 클래스 제거
+            // ëª¨ë  ì¹´ëìì selected í´ëì¤ ì ê±°
             document.querySelectorAll('.investment-style-card').forEach(c => {
                 c.classList.remove('selected');
             });
-            // 선택된 카드에 selected 클래스 추가
+            // ì íë ì¹´ëì selected í´ëì¤ ì¶ê°
             card.classList.add('selected');
         }
 
         function toggleDarkMode(toggle) {
             toggle.classList.toggle('active');
-            // 다크 모드는 이미 적용되어 있으므로 여기서는 시각적 토글만
+            // ë¤í¬ ëª¨ëë ì´ë¯¸ ì ì©ëì´ ìì¼ë¯ë¡ ì¬ê¸°ìë ìê°ì  í ê¸ë§
             if (toggle.classList.contains('active')) {
-                console.log('다크 모드 활성화');
+                console.log('ë¤í¬ ëª¨ë íì±í');
             } else {
-                console.log('라이트 모드 활성화');
+                console.log('ë¼ì´í¸ ëª¨ë íì±í');
             }
         }
 
         function toggleNotifications(toggle) {
             toggle.classList.toggle('active');
             if (toggle.classList.contains('active')) {
-                console.log('푸시 알림 활성화');
+                console.log('í¸ì ìë¦¼ íì±í');
             } else {
-                console.log('푸시 알림 비활성화');
+                console.log('í¸ì ìë¦¼ ë¹íì±í');
             }
         }
 
         function toggleSounds(toggle) {
             toggle.classList.toggle('active');
             if (toggle.classList.contains('active')) {
-                console.log('소리 효과 활성화');
+                console.log('ìë¦¬ í¨ê³¼ íì±í');
             } else {
-                console.log('소리 효과 비활성화');
+                console.log('ìë¦¬ í¨ê³¼ ë¹íì±í');
             }
         }
 
         function showHelp() {
-            alert('📚 SMTR 도움말\n\n• 대시보드: 투자 정보 종합 확인\n• SNS: 투자자들과 소통\n• 뉴스: 최신 시장 소식\n• 인플루언서: 전문가 분석\n• 노트: 투자 아이디어 기록');
+            alert('ð SMTR ëìë§\n\nâ¢ ëìë³´ë: í¬ì ì ë³´ ì¢í© íì¸\nâ¢ SNS: í¬ììë¤ê³¼ ìíµ\nâ¢ ë´ì¤: ìµì  ìì¥ ìì\nâ¢ ì¸íë£¨ì¸ì: ì ë¬¸ê° ë¶ì\nâ¢ ë¸í¸: í¬ì ìì´ëì´ ê¸°ë¡');
         }
 
         function showAbout() {
-            alert('ℹ️ SMTR v2.0\n\n스마트 투자 통합 플랫폼\n개발: SMTR Team\n\n모든 투자 정보를 한 곳에서!');
+            alert('â¹ï¸ SMTR v2.0\n\nì¤ë§í¸ í¬ì íµí© íë«í¼\nê°ë°: SMTR Team\n\nëª¨ë  í¬ì ì ë³´ë¥¼ í ê³³ìì!');
         }
 
         function logout() {
-            if (confirm('정말 로그아웃 하시겠습니까?')) {
-                alert('로그아웃 되었습니다.');
+            if (confirm('ì ë§ ë¡ê·¸ìì íìê² ìµëê¹?')) {
+                alert('ë¡ê·¸ìì ëììµëë¤.');
                 closeProfilePanel();
             }
         }
 
-        // ===== 실시간 마켓 데이터 =====
+        // ===== ì¤ìê° ë§ì¼ ë°ì´í° =====
         let marketDataInterval;
 
         function updateMarketData() {
-            // 실제 환경에서는 CoinGecko API 등을 사용
-            // 여기서는 데모용 랜덤 데이터 생성
+            // ì¤ì  íê²½ììë CoinGecko API ë±ì ì¬ì©
+            // ì¬ê¸°ìë ë°ëª¨ì© ëë¤ ë°ì´í° ìì±
             const marketData = {
                 btc: {
                     price: (45000 + Math.random() * 5000).toFixed(0),
@@ -2456,7 +2456,7 @@
                 }
             };
 
-            // DOM 업데이트
+            // DOM ìë°ì´í¸
             if (document.getElementById('btcPrice')) {
                 document.getElementById('btcPrice').textContent = `$${marketData.btc.price}`;
                 document.getElementById('btcChange').textContent = `${marketData.btc.change > 0 ? '+' : ''}${marketData.btc.change}%`;
@@ -2489,66 +2489,77 @@
             }
         }
 
-        // 마켓 데이터 자동 업데이트 시작
+        // ë§ì¼ ë°ì´í° ìë ìë°ì´í¸ ìì
         function startMarketDataUpdates() {
-            updateMarketData(); // 즉시 한 번 업데이트
-            marketDataInterval = setInterval(updateMarketData, 30000); // 30초마다 업데이트
+            updateMarketData(); // ì¦ì í ë² ìë°ì´í¸
+            marketDataInterval = setInterval(updateMarketData, 30000); // 30ì´ë§ë¤ ìë°ì´í¸
         }
 
-        // 마켓 데이터 업데이트 중지
+        // ë§ì¼ ë°ì´í° ìë°ì´í¸ ì¤ì§
         function stopMarketDataUpdates() {
             if (marketDataInterval) {
                 clearInterval(marketDataInterval);
             }
         }
 
-        // 대시보드 마켓 데이터 연동은 switchTab 내부에서 처리됨
+        // ëìë³´ë ë§ì¼ ë°ì´í° ì°ë - ê¸°ì¡´ switchTabì í ì¶ê°
+        (function() {
+            var _origSwitchTab = switchTab;
+            switchTab = function(tabName) {
+                _origSwitchTab(tabName);
+                if (tabName === 'dashboard') {
+                    startMarketDataUpdates();
+                } else {
+                    stopMarketDataUpdates();
+                }
+            };
+        })();
 
-        // 페이지 로드 시 마켓 데이터 업데이트 시작 (대시보드가 기본 활성 탭이므로)
+        // íì´ì§ ë¡ë ì ë§ì¼ ë°ì´í° ìë°ì´í¸ ìì (ëìë³´ëê° ê¸°ë³¸ íì± í­ì´ë¯ë¡)
         document.addEventListener('DOMContentLoaded', function() {
             startMarketDataUpdates();
         });
 
-        // ===== 인플루언서 데이터 =====
+        // ===== ì¸íë£¨ì¸ì ë°ì´í° =====
         const STOCK_TICKERS = {
-            "두산": "000150.KS", "두산 에너빌리티": "034020.KS", "두산에너빌리티": "034020.KS", 
-            "삼성전자": "005930.KS", "삼성": "005930.KS", "SK하이닉스": "000660.KS", "SK 하이닉스": "000660.KS",
-            "엔비디아": "NVDA", "테슬라": "TSLA", "비트코인": "BTC-USD", "애플": "AAPL", "팔란티어": "PLTR",
-            "구글": "GOOGL", "마이크로소프트": "MSFT", "아마존": "AMZN", "메타": "META", "이더리움": "ETH-USD",
-            "XRP": "XRP-USD", "솔라나": "SOL-USD", "도지코인": "DOGE-USD"
+            "ëì°": "000150.KS", "ëì° ìëë¹ë¦¬í°": "034020.KS", "ëì°ìëë¹ë¦¬í°": "034020.KS", 
+            "ì¼ì±ì ì": "005930.KS", "ì¼ì±": "005930.KS", "SKíì´ëì¤": "000660.KS", "SK íì´ëì¤": "000660.KS",
+            "ìë¹ëì": "NVDA", "íì¬ë¼": "TSLA", "ë¹í¸ì½ì¸": "BTC-USD", "ì í": "AAPL", "íëí°ì´": "PLTR",
+            "êµ¬ê¸": "GOOGL", "ë§ì´í¬ë¡ìíí¸": "MSFT", "ìë§ì¡´": "AMZN", "ë©í": "META", "ì´ëë¦¬ì": "ETH-USD",
+            "XRP": "XRP-USD", "ìë¼ë": "SOL-USD", "ëì§ì½ì¸": "DOGE-USD"
         };
 
         const INFLUENCERS = {
-            6: {id: 6, name: '박두환', ch: 'YouTube 채널 @duhwanpark534', followers: '22.7만', 
-                acc: 85, avgRet: '보통', color: '#3b82f6', 
+            6: {id: 6, name: 'ë°ëí', ch: 'YouTube ì±ë @duhwanpark534', followers: '22.7ë§', 
+                acc: 85, avgRet: 'ë³´íµ', color: '#3b82f6', 
                 img: 'https://yt3.googleusercontent.com/SBkexxx2OF_UrrTfmVLNtaQ-lB-GFH_SjmUQZmC3lOh9NK1YTHq3foddDKbLCc5V_u-Qy83PCA=s900-c-k-c0x00ffffff-no-rj'},
-            11: {id: 11, name: '한승우', ch: 'YouTube 채널 한승우카피탈', followers: '구독자수', 
-                acc: 70, avgRet: '보통', color: '#a855f7',
+            11: {id: 11, name: 'íì¹ì°', ch: 'YouTube ì±ë íì¹ì°ì¹´í¼í', followers: 'êµ¬ëìì', 
+                acc: 70, avgRet: 'ë³´íµ', color: '#a855f7',
                 img: 'https://yt3.googleusercontent.com/GZorXpbNosUQkhi32M8ejQ8V_pA_K_szZpr9ELJQDOKep4UiSeMNjPWMDf5Js958fngLQGQWSg=s900-c-k-c0x00ffffff-no-rj'},
-            99: {id: 99, name: '코린이 아빠', ch: 'YouTube 채널', followers: '구독자수',
-                acc: 75, avgRet: '보통', color: '#10b981',
-                img: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="%2310b981"/><text x="24" y="30" text-anchor="middle" fill="white" font-size="16" font-weight="bold">코</text></svg>'}
+            99: {id: 99, name: 'ì½ë¦°ì´ ìë¹ ', ch: 'YouTube ì±ë', followers: 'êµ¬ëìì',
+                acc: 75, avgRet: 'ë³´íµ', color: '#10b981',
+                img: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="%2310b981"/><text x="24" y="30" text-anchor="middle" fill="white" font-size="16" font-weight="bold">ì½</text></svg>'}
         };
 
         const parkStatements = [
-            {"stock": "테슬라","dirType": "positive","headline": "자율주행 테슬라에 관한 긍정적인 전망을 나타내고 있습니다.","quote": "지금 너무 테슬라에 올인하면서 거의 5개월 정도 동안 정말로 아무 말도 안 하고 있었습니다.","detail": "자율주행 테슬라에 관한 긍정적인 전망을 나타내고 있습니다.","date": "12:42","url": "https://www.youtube.com/watch?v=-y7NqisGWKE","videoUrl": "https://www.youtube.com/watch?v=-y7NqisGWKE","videoTitle": "","ts": "12:42","speaker": "박두환","video_id": "-y7NqisGWKE","influencer": "박두환","influencer_id": 6},
-            {"stock": "엔비디아","dirType": "strong_buy","headline": "엔비디아 AI 시장 전망 긍정적","quote": "AI 혁명의 핵심 기업","detail": "AI 반도체 시장에서 독보적 위치","date": "14:20","url": "https://www.youtube.com/watch?v=example1","videoUrl": "https://www.youtube.com/watch?v=example1","ts": "14:20","speaker": "박두환","video_id": "example1","influencer": "박두환","influencer_id": 6},
-            {"stock": "삼성전자","dirType": "buy","headline": "삼성전자 HBM 시장 진입 긍정적","quote": "메모리 반도체 시장 선두주자","detail": "HBM 시장에서의 경쟁력 강화","date": "16:15","url": "https://www.youtube.com/watch?v=example2","videoUrl": "https://www.youtube.com/watch?v=example2","ts": "16:15","speaker": "박두환","video_id": "example2","influencer": "박두환","influencer_id": 6}
+            {"stock": "íì¬ë¼","dirType": "positive","headline": "ìì¨ì£¼í íì¬ë¼ì ê´í ê¸ì ì ì¸ ì ë§ì ëíë´ê³  ììµëë¤.","quote": "ì§ê¸ ëë¬´ íì¬ë¼ì ì¬ì¸íë©´ì ê±°ì 5ê°ì ì ë ëì ì ë§ë¡ ìë¬´ ë§ë ì íê³  ìììµëë¤.","detail": "ìì¨ì£¼í íì¬ë¼ì ê´í ê¸ì ì ì¸ ì ë§ì ëíë´ê³  ììµëë¤.","date": "12:42","url": "https://www.youtube.com/watch?v=-y7NqisGWKE","videoUrl": "https://www.youtube.com/watch?v=-y7NqisGWKE","videoTitle": "","ts": "12:42","speaker": "ë°ëí","video_id": "-y7NqisGWKE","influencer": "ë°ëí","influencer_id": 6},
+            {"stock": "ìë¹ëì","dirType": "strong_buy","headline": "ìë¹ëì AI ìì¥ ì ë§ ê¸ì ì ","quote": "AI íëªì íµì¬ ê¸°ì","detail": "AI ë°ëì²´ ìì¥ìì ëë³´ì  ìì¹","date": "14:20","url": "https://www.youtube.com/watch?v=example1","videoUrl": "https://www.youtube.com/watch?v=example1","ts": "14:20","speaker": "ë°ëí","video_id": "example1","influencer": "ë°ëí","influencer_id": 6},
+            {"stock": "ì¼ì±ì ì","dirType": "buy","headline": "ì¼ì±ì ì HBM ìì¥ ì§ì ê¸ì ì ","quote": "ë©ëª¨ë¦¬ ë°ëì²´ ìì¥ ì ëì£¼ì","detail": "HBM ìì¥ììì ê²½ìë ¥ ê°í","date": "16:15","url": "https://www.youtube.com/watch?v=example2","videoUrl": "https://www.youtube.com/watch?v=example2","ts": "16:15","speaker": "ë°ëí","video_id": "example2","influencer": "ë°ëí","influencer_id": 6}
         ];
 
         const hsStatements = [
-            {"stock": "비트코인", "dirType": "strong_buy", "detail": "암호화폐 시장 강세 전망", "quote": "디지털 금 역할 강화", "influencer": "한승우", "video_id": "hs001", "ts": "5:30", "date": "2026-02-20", "url": "https://www.youtube.com/watch?v=hs001", "influencer_id": 11},
-            {"stock": "테슬라", "dirType": "hold", "detail": "전기차 시장 경쟁 심화", "quote": "장기적으로 긍정적이지만 단기 조정 가능", "influencer": "한승우", "video_id": "hs002", "ts": "8:15", "date": "2026-02-19", "url": "https://www.youtube.com/watch?v=hs002", "influencer_id": 11}
+            {"stock": "ë¹í¸ì½ì¸", "dirType": "strong_buy", "detail": "ìí¸íí ìì¥ ê°ì¸ ì ë§", "quote": "ëì§í¸ ê¸ ì­í  ê°í", "influencer": "íì¹ì°", "video_id": "hs001", "ts": "5:30", "date": "2026-02-20", "url": "https://www.youtube.com/watch?v=hs001", "influencer_id": 11},
+            {"stock": "íì¬ë¼", "dirType": "hold", "detail": "ì ê¸°ì°¨ ìì¥ ê²½ì ì¬í", "quote": "ì¥ê¸°ì ì¼ë¡ ê¸ì ì ì´ì§ë§ ë¨ê¸° ì¡°ì  ê°ë¥", "influencer": "íì¹ì°", "video_id": "hs002", "ts": "8:15", "date": "2026-02-19", "url": "https://www.youtube.com/watch?v=hs002", "influencer_id": 11}
         ];
 
         const corinpapaStatements = [
-            {"stock": "비트코인", "dirType": "concern", "detail": "화자는 비트코인에 대한 우려의 목소리를 내고 있습니다.", "quote": "비트코인에서 만드는 만큼 돈이든지 엄청나게 만들 수가 있을 것 같습니다.", "influencer": "코린이 아빠", "video_id": "-brWAKvRaqI", "ts": "5:39", "date": "2026-02-01", "url": "https://www.youtube.com/watch?v=-brWAKvRaqI", "influencer_id": 99},
-            {"stock": "이더리움", "dirType": "positive", "detail": "화자는 이더리움의 기술적 발전 가능성을 긍정적으로 평가합니다.", "quote": "이더리움 생태계는 계속 발전하고 있다고 봅니다.", "influencer": "코린이 아빠", "video_id": "eth001", "ts": "10:20", "date": "2026-02-18", "url": "https://www.youtube.com/watch?v=eth001", "influencer_id": 99}
+            {"stock": "ë¹í¸ì½ì¸", "dirType": "concern", "detail": "íìë ë¹í¸ì½ì¸ì ëí ì°ë ¤ì ëª©ìë¦¬ë¥¼ ë´ê³  ììµëë¤.", "quote": "ë¹í¸ì½ì¸ìì ë§ëë ë§í¼ ëì´ë ì§ ìì²­ëê² ë§ë¤ ìê° ìì ê² ê°ìµëë¤.", "influencer": "ì½ë¦°ì´ ìë¹ ", "video_id": "-brWAKvRaqI", "ts": "5:39", "date": "2026-02-01", "url": "https://www.youtube.com/watch?v=-brWAKvRaqI", "influencer_id": 99},
+            {"stock": "ì´ëë¦¬ì", "dirType": "positive", "detail": "íìë ì´ëë¦¬ìì ê¸°ì ì  ë°ì  ê°ë¥ì±ì ê¸ì ì ì¼ë¡ íê°í©ëë¤.", "quote": "ì´ëë¦¬ì ìíê³ë ê³ì ë°ì íê³  ìë¤ê³  ë´ëë¤.", "influencer": "ì½ë¦°ì´ ìë¹ ", "video_id": "eth001", "ts": "10:20", "date": "2026-02-18", "url": "https://www.youtube.com/watch?v=eth001", "influencer_id": 99}
         ];
 
         let allStatements = [...parkStatements, ...hsStatements, ...corinpapaStatements];
 
-        // ===== 시그널 타입별 색상 및 배지 =====
+        // ===== ìê·¸ë íìë³ ìì ë° ë°°ì§ =====
         const signalColors = {
             'strong_buy': '#10b981',
             'buy': '#86efac', 
@@ -2561,14 +2572,14 @@
         };
 
         const signalLabels = {
-            'strong_buy': '적극매수',
-            'buy': '매수',
-            'positive': '긍정',
-            'hold': '보유', 
-            'neutral': '중립',
-            'concern': '우려',
-            'sell': '매도',
-            'strong_sell': '적극매도'
+            'strong_buy': 'ì ê·¹ë§¤ì',
+            'buy': 'ë§¤ì',
+            'positive': 'ê¸ì ',
+            'hold': 'ë³´ì ', 
+            'neutral': 'ì¤ë¦½',
+            'concern': 'ì°ë ¤',
+            'sell': 'ë§¤ë',
+            'strong_sell': 'ì ê·¹ë§¤ë'
         };
 
         function getSignalBadge(dirType) {
@@ -2582,9 +2593,9 @@
             return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : '148, 163, 184';
         }
 
-        // ===== 인플루언서 탭 서브탭 기능 =====
+        // ===== ì¸íë£¨ì¸ì í­ ìë¸í­ ê¸°ë¥ =====
         
-        // 발언 탭 렌더링
+        // ë°ì¸ í­ ë ëë§
         function renderStatementsTab() {
             const container = document.getElementById('inf-statements');
             const sortedStatements = [...allStatements].sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -2592,12 +2603,12 @@
             let html = `
                 <div style="margin-bottom: 20px;">
                     <div style="display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap;">
-                        <button class="filter-btn active" onclick="filterStatements('all')">전체</button>
-                        <button class="filter-btn" onclick="filterStatements('strong_buy')">적극매수</button>
-                        <button class="filter-btn" onclick="filterStatements('buy')">매수</button>
-                        <button class="filter-btn" onclick="filterStatements('positive')">긍정</button>
-                        <button class="filter-btn" onclick="filterStatements('concern')">우려</button>
-                        <button class="filter-btn" onclick="filterStatements('sell')">매도</button>
+                        <button class="filter-btn active" onclick="filterStatements('all')">ì ì²´</button>
+                        <button class="filter-btn" onclick="filterStatements('strong_buy')">ì ê·¹ë§¤ì</button>
+                        <button class="filter-btn" onclick="filterStatements('buy')">ë§¤ì</button>
+                        <button class="filter-btn" onclick="filterStatements('positive')">ê¸ì </button>
+                        <button class="filter-btn" onclick="filterStatements('concern')">ì°ë ¤</button>
+                        <button class="filter-btn" onclick="filterStatements('sell')">ë§¤ë</button>
                     </div>
                 </div>
                 <div id="statements-list" style="display: flex; flex-direction: column; gap: 16px;">
@@ -2621,7 +2632,7 @@
                                 </div>
                                 <div style="font-weight: 600; color: var(--accent); margin-bottom: 8px;">${stmt.stock}</div>
                                 <div style="color: var(--text2); line-height: 1.5; margin-bottom: 12px;">${stmt.quote || stmt.detail}</div>
-                                ${stmt.url ? `<a href="${stmt.url}" target="_blank" style="color: var(--red); text-decoration: none; font-size: 12px; font-weight: 600;">📺 영상 보기</a>` : ''}
+                                ${stmt.url ? `<a href="${stmt.url}" target="_blank" style="color: var(--red); text-decoration: none; font-size: 12px; font-weight: 600;">ðº ìì ë³´ê¸°</a>` : ''}
                             </div>
                         </div>
                     </div>
@@ -2632,7 +2643,7 @@
             container.innerHTML = html;
         }
 
-        // 인플루언서 탭 렌더링
+        // ì¸íë£¨ì¸ì í­ ë ëë§
         function renderInfluencersTab() {
             const container = document.getElementById('inf-influencers');
             
@@ -2657,17 +2668,17 @@
                         
                         <div style="margin-bottom: 16px;">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                <span style="color: var(--text2); font-size: 14px;">총 발언</span>
-                                <span style="color: var(--text); font-weight: 600;">${userStatements.length}건</span>
+                                <span style="color: var(--text2); font-size: 14px;">ì´ ë°ì¸</span>
+                                <span style="color: var(--text); font-weight: 600;">${userStatements.length}ê±´</span>
                             </div>
                             <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                <span style="color: var(--text2); font-size: 14px;">정확도</span>
+                                <span style="color: var(--text2); font-size: 14px;">ì íë</span>
                                 <span style="color: ${inf.acc > 70 ? 'var(--green)' : 'var(--yellow)'}; font-weight: 600;">${inf.acc}%</span>
                             </div>
                         </div>
 
                         <div style="margin-bottom: 16px;">
-                            <p style="color: var(--text3); font-size: 12px; margin-bottom: 8px;">시그널 분포</p>
+                            <p style="color: var(--text3); font-size: 12px; margin-bottom: 8px;">ìê·¸ë ë¶í¬</p>
                             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                                 ${signalDist.map(item => `
                                     <span style="background: rgba(${hexToRgb(signalColors[item.type])}, 0.2); color: ${signalColors[item.type]}; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600;">
@@ -2679,7 +2690,7 @@
 
                         ${userStatements.length > 0 ? `
                             <div>
-                                <p style="color: var(--text3); font-size: 12px; margin-bottom: 8px;">최근 발언</p>
+                                <p style="color: var(--text3); font-size: 12px; margin-bottom: 8px;">ìµê·¼ ë°ì¸</p>
                                 <div style="background: var(--bg3); border-radius: 8px; padding: 12px; border-left: 3px solid ${signalColors[userStatements[0].dirType]};">
                                     <div style="font-weight: 600; color: var(--accent); margin-bottom: 4px;">${userStatements[0].stock}</div>
                                     <div style="color: var(--text2); font-size: 12px; line-height: 1.4;">${userStatements[0].quote || userStatements[0].detail}</div>
@@ -2694,7 +2705,7 @@
             container.innerHTML = html;
         }
 
-        // 종목 탭 렌더링  
+        // ì¢ëª© í­ ë ëë§  
         function renderStocksTab() {
             const container = document.getElementById('inf-stocks');
             const stockStats = getStockStatistics();
@@ -2709,13 +2720,13 @@
                     <div class="stock-card" style="background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 20px;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                             <h3 style="color: var(--text); font-size: 18px; font-weight: 700;">${stock}</h3>
-                            <span style="color: var(--text3); font-size: 12px;">${stats.totalCount}개 시그널</span>
+                            <span style="color: var(--text3); font-size: 12px;">${stats.totalCount}ê° ìê·¸ë</span>
                         </div>
                         
                         ${recentSignal ? `
                             <div style="margin-bottom: 16px;">
                                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                                    <span style="color: var(--text2); font-size: 12px;">최근 시그널</span>
+                                    <span style="color: var(--text2); font-size: 12px;">ìµê·¼ ìê·¸ë</span>
                                     ${getSignalBadge(recentSignal.dirType)}
                                     <span style="color: var(--text3); font-size: 11px;">${recentSignal.date}</span>
                                 </div>
@@ -2725,7 +2736,7 @@
                         ` : ''}
                         
                         <div style="margin-bottom: 12px;">
-                            <p style="color: var(--text3); font-size: 12px; margin-bottom: 8px;">시그널 분포</p>
+                            <p style="color: var(--text3); font-size: 12px; margin-bottom: 8px;">ìê·¸ë ë¶í¬</p>
                             <div style="display: flex; gap: 6px; flex-wrap: wrap;">
                                 ${Object.entries(signalCounts).map(([type, count]) => `
                                     <span style="background: rgba(${hexToRgb(signalColors[type])}, 0.2); color: ${signalColors[type]}; padding: 2px 6px; border-radius: 8px; font-size: 10px; font-weight: 600;">
@@ -2736,7 +2747,7 @@
                         </div>
                         
                         <div>
-                            <p style="color: var(--text3); font-size: 12px; margin-bottom: 8px;">참여 인플루언서</p>
+                            <p style="color: var(--text3); font-size: 12px; margin-bottom: 8px;">ì°¸ì¬ ì¸íë£¨ì¸ì</p>
                             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                                 ${stats.influencers.map(inf => `
                                     <span style="background: var(--bg3); color: var(--text2); padding: 2px 8px; border-radius: 8px; font-size: 11px;">
@@ -2753,7 +2764,7 @@
             container.innerHTML = html;
         }
 
-        // 유틸리티 함수들
+        // ì í¸ë¦¬í° í¨ìë¤
         function getSignalDistribution(statements) {
             const dist = {};
             statements.forEach(s => {
@@ -2787,7 +2798,7 @@
                 }
             });
             
-            // 최신 시그널 순으로 정렬
+            // ìµì  ìê·¸ë ìì¼ë¡ ì ë ¬
             Object.values(stats).forEach(stat => {
                 stat.signals.sort((a, b) => new Date(b.date) - new Date(a.date));
             });
@@ -2795,7 +2806,7 @@
             return stats;
         }
 
-        // 필터링 함수
+        // íí°ë§ í¨ì
         function filterStatements(type) {
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
@@ -2810,7 +2821,7 @@
             });
         }
 
-        // CSS 스타일 추가
+        // CSS ì¤íì¼ ì¶ê°
         const additionalStyles = `
             <style>
             .filter-btn {
@@ -2845,10 +2856,10 @@
             </style>
         `;
 
-        // 스타일 추가
+        // ì¤íì¼ ì¶ê°
         document.head.insertAdjacentHTML('beforeend', additionalStyles);
 
-        // 초기 렌더링 - DOM 로드 완료 후 실행
+        // ì´ê¸° ë ëë§ - DOM ë¡ë ìë£ í ì¤í
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 renderStatementsTab();

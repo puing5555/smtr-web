@@ -1593,7 +1593,10 @@
         </div>
 
         <!-- 인플루언서 탭 (v24 통합) -->
-        <div id="influencer" class="tab-content">
+        <div id="influencer" class="tab-content" style="padding:0;margin:0;">
+            <iframe src="guru_tracker_v24.html" style="width:100%;height:calc(100vh - 70px);border:none;"></iframe>
+        </div>
+        <div id="influencer_old_disabled" class="tab-content" style="display:none !important">
             <div style="margin-bottom: 24px;">
                 <h1 style="font-size: 28px; font-weight: 900; margin-bottom: 8px;">📊 인플루언서</h1>
                 <p style="color: var(--text2); font-size: 16px;">투자 인플루언서들의 종목 분석과 시그널을 추적하세요</p>
@@ -2509,16 +2512,10 @@
             startMarketDataUpdates();
         });
 
-        // ===== 인플루언서 데이터 =====
-        const STOCK_TICKERS = {
-            "두산": "000150.KS", "두산 에너빌리티": "034020.KS", "두산에너빌리티": "034020.KS", 
-            "삼성전자": "005930.KS", "삼성": "005930.KS", "SK하이닉스": "000660.KS", "SK 하이닉스": "000660.KS",
-            "엔비디아": "NVDA", "테슬라": "TSLA", "비트코인": "BTC-USD", "애플": "AAPL", "팔란티어": "PLTR",
-            "구글": "GOOGL", "마이크로소프트": "MSFT", "아마존": "AMZN", "메타": "META", "이더리움": "ETH-USD",
-            "XRP": "XRP-USD", "솔라나": "SOL-USD", "도지코인": "DOGE-USD"
-        };
+        // ===== 인플루언서 데이터 (서브탭용) =====
+        // STOCK_TICKERS는 위 script에서 이미 선언됨
 
-        const INFLUENCERS = {
+        var INFLUENCERS = {
             6: {id: 6, name: '박두환', ch: 'YouTube 채널 @duhwanpark534', followers: '22.7만', 
                 acc: 85, avgRet: '보통', color: '#3b82f6', 
                 img: 'https://yt3.googleusercontent.com/SBkexxx2OF_UrrTfmVLNtaQ-lB-GFH_SjmUQZmC3lOh9NK1YTHq3foddDKbLCc5V_u-Qy83PCA=s900-c-k-c0x00ffffff-no-rj'},
@@ -2530,23 +2527,24 @@
                 img: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="%2310b981"/><text x="24" y="30" text-anchor="middle" fill="white" font-size="16" font-weight="bold">코</text></svg>'}
         };
 
-        const parkStatements = [
+        // parkStatements/hsStatements는 위에서 var로 선언됨 — 덮어쓰기
+        parkStatements = [
             {"stock": "테슬라","dirType": "positive","headline": "자율주행 테슬라에 관한 긍정적인 전망을 나타내고 있습니다.","quote": "지금 너무 테슬라에 올인하면서 거의 5개월 정도 동안 정말로 아무 말도 안 하고 있었습니다.","detail": "자율주행 테슬라에 관한 긍정적인 전망을 나타내고 있습니다.","date": "12:42","url": "https://www.youtube.com/watch?v=-y7NqisGWKE","videoUrl": "https://www.youtube.com/watch?v=-y7NqisGWKE","videoTitle": "","ts": "12:42","speaker": "박두환","video_id": "-y7NqisGWKE","influencer": "박두환","influencer_id": 6},
             {"stock": "엔비디아","dirType": "strong_buy","headline": "엔비디아 AI 시장 전망 긍정적","quote": "AI 혁명의 핵심 기업","detail": "AI 반도체 시장에서 독보적 위치","date": "14:20","url": "https://www.youtube.com/watch?v=example1","videoUrl": "https://www.youtube.com/watch?v=example1","ts": "14:20","speaker": "박두환","video_id": "example1","influencer": "박두환","influencer_id": 6},
             {"stock": "삼성전자","dirType": "buy","headline": "삼성전자 HBM 시장 진입 긍정적","quote": "메모리 반도체 시장 선두주자","detail": "HBM 시장에서의 경쟁력 강화","date": "16:15","url": "https://www.youtube.com/watch?v=example2","videoUrl": "https://www.youtube.com/watch?v=example2","ts": "16:15","speaker": "박두환","video_id": "example2","influencer": "박두환","influencer_id": 6}
         ];
 
-        const hsStatements = [
+        hsStatements = [
             {"stock": "비트코인", "dirType": "strong_buy", "detail": "암호화폐 시장 강세 전망", "quote": "디지털 금 역할 강화", "influencer": "한승우", "video_id": "hs001", "ts": "5:30", "date": "2026-02-20", "url": "https://www.youtube.com/watch?v=hs001", "influencer_id": 11},
             {"stock": "테슬라", "dirType": "hold", "detail": "전기차 시장 경쟁 심화", "quote": "장기적으로 긍정적이지만 단기 조정 가능", "influencer": "한승우", "video_id": "hs002", "ts": "8:15", "date": "2026-02-19", "url": "https://www.youtube.com/watch?v=hs002", "influencer_id": 11}
         ];
 
-        const corinpapaStatements = [
+        var corinpapaStatements = [
             {"stock": "비트코인", "dirType": "concern", "detail": "화자는 비트코인에 대한 우려의 목소리를 내고 있습니다.", "quote": "비트코인에서 만드는 만큼 돈이든지 엄청나게 만들 수가 있을 것 같습니다.", "influencer": "코린이 아빠", "video_id": "-brWAKvRaqI", "ts": "5:39", "date": "2026-02-01", "url": "https://www.youtube.com/watch?v=-brWAKvRaqI", "influencer_id": 99},
             {"stock": "이더리움", "dirType": "positive", "detail": "화자는 이더리움의 기술적 발전 가능성을 긍정적으로 평가합니다.", "quote": "이더리움 생태계는 계속 발전하고 있다고 봅니다.", "influencer": "코린이 아빠", "video_id": "eth001", "ts": "10:20", "date": "2026-02-18", "url": "https://www.youtube.com/watch?v=eth001", "influencer_id": 99}
         ];
 
-        let allStatements = [...parkStatements, ...hsStatements, ...corinpapaStatements];
+        allStatements = [...parkStatements, ...hsStatements, ...corinpapaStatements];
 
         // ===== 시그널 타입별 색상 및 배지 =====
         const signalColors = {
