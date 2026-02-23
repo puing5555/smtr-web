@@ -2531,6 +2531,354 @@
         document.addEventListener('DOMContentLoaded', function() {
             startMarketDataUpdates();
         });
+
+        // ===== 인플루언서 데이터 =====
+        const STOCK_TICKERS = {
+            "두산": "000150.KS", "두산 에너빌리티": "034020.KS", "두산에너빌리티": "034020.KS", 
+            "삼성전자": "005930.KS", "삼성": "005930.KS", "SK하이닉스": "000660.KS", "SK 하이닉스": "000660.KS",
+            "엔비디아": "NVDA", "테슬라": "TSLA", "비트코인": "BTC-USD", "애플": "AAPL", "팔란티어": "PLTR",
+            "구글": "GOOGL", "마이크로소프트": "MSFT", "아마존": "AMZN", "메타": "META", "이더리움": "ETH-USD",
+            "XRP": "XRP-USD", "솔라나": "SOL-USD", "도지코인": "DOGE-USD"
+        };
+
+        const INFLUENCERS = {
+            6: {id: 6, name: '박두환', ch: 'YouTube 채널 @duhwanpark534', followers: '22.7만', 
+                acc: 85, avgRet: '보통', color: '#3b82f6', 
+                img: 'https://yt3.googleusercontent.com/SBkexxx2OF_UrrTfmVLNtaQ-lB-GFH_SjmUQZmC3lOh9NK1YTHq3foddDKbLCc5V_u-Qy83PCA=s900-c-k-c0x00ffffff-no-rj'},
+            11: {id: 11, name: '한승우', ch: 'YouTube 채널 한승우카피탈', followers: '구독자수', 
+                acc: 70, avgRet: '보통', color: '#a855f7',
+                img: 'https://yt3.googleusercontent.com/GZorXpbNosUQkhi32M8ejQ8V_pA_K_szZpr9ELJQDOKep4UiSeMNjPWMDf5Js958fngLQGQWSg=s900-c-k-c0x00ffffff-no-rj'},
+            99: {id: 99, name: '코린이 아빠', ch: 'YouTube 채널', followers: '구독자수',
+                acc: 75, avgRet: '보통', color: '#10b981',
+                img: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="%2310b981"/><text x="24" y="30" text-anchor="middle" fill="white" font-size="16" font-weight="bold">코</text></svg>'}
+        };
+
+        const parkStatements = [
+            {"stock": "테슬라","dirType": "positive","headline": "자율주행 테슬라에 관한 긍정적인 전망을 나타내고 있습니다.","quote": "지금 너무 테슬라에 올인하면서 거의 5개월 정도 동안 정말로 아무 말도 안 하고 있었습니다.","detail": "자율주행 테슬라에 관한 긍정적인 전망을 나타내고 있습니다.","date": "12:42","url": "https://www.youtube.com/watch?v=-y7NqisGWKE","videoUrl": "https://www.youtube.com/watch?v=-y7NqisGWKE","videoTitle": "","ts": "12:42","speaker": "박두환","video_id": "-y7NqisGWKE","influencer": "박두환","influencer_id": 6},
+            {"stock": "엔비디아","dirType": "strong_buy","headline": "엔비디아 AI 시장 전망 긍정적","quote": "AI 혁명의 핵심 기업","detail": "AI 반도체 시장에서 독보적 위치","date": "14:20","url": "https://www.youtube.com/watch?v=example1","videoUrl": "https://www.youtube.com/watch?v=example1","ts": "14:20","speaker": "박두환","video_id": "example1","influencer": "박두환","influencer_id": 6},
+            {"stock": "삼성전자","dirType": "buy","headline": "삼성전자 HBM 시장 진입 긍정적","quote": "메모리 반도체 시장 선두주자","detail": "HBM 시장에서의 경쟁력 강화","date": "16:15","url": "https://www.youtube.com/watch?v=example2","videoUrl": "https://www.youtube.com/watch?v=example2","ts": "16:15","speaker": "박두환","video_id": "example2","influencer": "박두환","influencer_id": 6}
+        ];
+
+        const hsStatements = [
+            {"stock": "비트코인", "dirType": "strong_buy", "detail": "암호화폐 시장 강세 전망", "quote": "디지털 금 역할 강화", "influencer": "한승우", "video_id": "hs001", "ts": "5:30", "date": "2026-02-20", "url": "https://www.youtube.com/watch?v=hs001", "influencer_id": 11},
+            {"stock": "테슬라", "dirType": "hold", "detail": "전기차 시장 경쟁 심화", "quote": "장기적으로 긍정적이지만 단기 조정 가능", "influencer": "한승우", "video_id": "hs002", "ts": "8:15", "date": "2026-02-19", "url": "https://www.youtube.com/watch?v=hs002", "influencer_id": 11}
+        ];
+
+        const corinpapaStatements = [
+            {"stock": "비트코인", "dirType": "concern", "detail": "화자는 비트코인에 대한 우려의 목소리를 내고 있습니다.", "quote": "비트코인에서 만드는 만큼 돈이든지 엄청나게 만들 수가 있을 것 같습니다.", "influencer": "코린이 아빠", "video_id": "-brWAKvRaqI", "ts": "5:39", "date": "2026-02-01", "url": "https://www.youtube.com/watch?v=-brWAKvRaqI", "influencer_id": 99},
+            {"stock": "이더리움", "dirType": "positive", "detail": "화자는 이더리움의 기술적 발전 가능성을 긍정적으로 평가합니다.", "quote": "이더리움 생태계는 계속 발전하고 있다고 봅니다.", "influencer": "코린이 아빠", "video_id": "eth001", "ts": "10:20", "date": "2026-02-18", "url": "https://www.youtube.com/watch?v=eth001", "influencer_id": 99}
+        ];
+
+        let allStatements = [...parkStatements, ...hsStatements, ...corinpapaStatements];
+
+        // ===== 시그널 타입별 색상 및 배지 =====
+        const signalColors = {
+            'strong_buy': '#10b981',
+            'buy': '#86efac', 
+            'positive': '#60a5fa',
+            'hold': '#06b6d4',
+            'neutral': '#94a3b8',
+            'concern': '#fdba74',
+            'sell': '#fb923c',
+            'strong_sell': '#f87171'
+        };
+
+        const signalLabels = {
+            'strong_buy': '적극매수',
+            'buy': '매수',
+            'positive': '긍정',
+            'hold': '보유', 
+            'neutral': '중립',
+            'concern': '우려',
+            'sell': '매도',
+            'strong_sell': '적극매도'
+        };
+
+        function getSignalBadge(dirType) {
+            const color = signalColors[dirType] || '#94a3b8';
+            const label = signalLabels[dirType] || dirType;
+            return `<span class="signal-badge" style="background: rgba(${hexToRgb(color)}, 0.2); color: ${color}; padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 700;">${label}</span>`;
+        }
+
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : '148, 163, 184';
+        }
+
+        // ===== 인플루언서 탭 서브탭 기능 =====
+        
+        // 발언 탭 렌더링
+        function renderStatementsTab() {
+            const container = document.getElementById('inf-statements');
+            const sortedStatements = [...allStatements].sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            let html = `
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap;">
+                        <button class="filter-btn active" onclick="filterStatements('all')">전체</button>
+                        <button class="filter-btn" onclick="filterStatements('strong_buy')">적극매수</button>
+                        <button class="filter-btn" onclick="filterStatements('buy')">매수</button>
+                        <button class="filter-btn" onclick="filterStatements('positive')">긍정</button>
+                        <button class="filter-btn" onclick="filterStatements('concern')">우려</button>
+                        <button class="filter-btn" onclick="filterStatements('sell')">매도</button>
+                    </div>
+                </div>
+                <div id="statements-list" style="display: flex; flex-direction: column; gap: 16px;">
+            `;
+            
+            sortedStatements.forEach(stmt => {
+                const influencer = INFLUENCERS[stmt.influencer_id];
+                const signalBadge = getSignalBadge(stmt.dirType);
+                
+                html += `
+                    <div class="statement-card" data-signal="${stmt.dirType}" style="background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 20px; transition: all 0.2s;">
+                        <div style="display: flex; align-items: flex-start; gap: 12px;">
+                            <div style="width: 48px; height: 48px; border-radius: 50%; overflow: hidden; flex-shrink: 0;">
+                                <img src="${influencer?.img || ''}" alt="${stmt.influencer}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.background='var(--bg4)'; this.alt='${stmt.influencer[0]}';">
+                            </div>
+                            <div style="flex: 1; min-width: 0;">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                                    <span style="font-weight: 700; color: var(--text);">${stmt.influencer}</span>
+                                    <span style="font-size: 12px; color: var(--text3);">${stmt.date}</span>
+                                    ${signalBadge}
+                                </div>
+                                <div style="font-weight: 600; color: var(--accent); margin-bottom: 8px;">${stmt.stock}</div>
+                                <div style="color: var(--text2); line-height: 1.5; margin-bottom: 12px;">${stmt.quote || stmt.detail}</div>
+                                ${stmt.url ? `<a href="${stmt.url}" target="_blank" style="color: var(--red); text-decoration: none; font-size: 12px; font-weight: 600;">📺 영상 보기</a>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        // 인플루언서 탭 렌더링
+        function renderInfluencersTab() {
+            const container = document.getElementById('inf-influencers');
+            
+            let html = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">';
+            
+            Object.values(INFLUENCERS).forEach(inf => {
+                const userStatements = allStatements.filter(s => s.influencer_id === inf.id);
+                const signalDist = getSignalDistribution(userStatements);
+                
+                html += `
+                    <div class="influencer-card" style="background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 24px; transition: all 0.2s;">
+                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+                            <div style="width: 64px; height: 64px; border-radius: 50%; overflow: hidden;">
+                                <img src="${inf.img}" alt="${inf.name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.background='${inf.color}'; this.alt='${inf.name[0]}';">
+                            </div>
+                            <div>
+                                <h3 style="color: var(--text); margin-bottom: 4px;">${inf.name}</h3>
+                                <p style="color: var(--text3); font-size: 12px;">${inf.ch}</p>
+                                <p style="color: var(--text3); font-size: 12px;">${inf.followers}</p>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 16px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span style="color: var(--text2); font-size: 14px;">총 발언</span>
+                                <span style="color: var(--text); font-weight: 600;">${userStatements.length}건</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span style="color: var(--text2); font-size: 14px;">정확도</span>
+                                <span style="color: ${inf.acc > 70 ? 'var(--green)' : 'var(--yellow)'}; font-weight: 600;">${inf.acc}%</span>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 16px;">
+                            <p style="color: var(--text3); font-size: 12px; margin-bottom: 8px;">시그널 분포</p>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                ${signalDist.map(item => `
+                                    <span style="background: rgba(${hexToRgb(signalColors[item.type])}, 0.2); color: ${signalColors[item.type]}; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600;">
+                                        ${signalLabels[item.type]} ${item.count}
+                                    </span>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        ${userStatements.length > 0 ? `
+                            <div>
+                                <p style="color: var(--text3); font-size: 12px; margin-bottom: 8px;">최근 발언</p>
+                                <div style="background: var(--bg3); border-radius: 8px; padding: 12px; border-left: 3px solid ${signalColors[userStatements[0].dirType]};">
+                                    <div style="font-weight: 600; color: var(--accent); margin-bottom: 4px;">${userStatements[0].stock}</div>
+                                    <div style="color: var(--text2); font-size: 12px; line-height: 1.4;">${userStatements[0].quote || userStatements[0].detail}</div>
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        // 종목 탭 렌더링  
+        function renderStocksTab() {
+            const container = document.getElementById('inf-stocks');
+            const stockStats = getStockStatistics();
+            
+            let html = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">';
+            
+            Object.entries(stockStats).forEach(([stock, stats]) => {
+                const recentSignal = stats.signals[0];
+                const signalCounts = stats.signalDistribution;
+                
+                html += `
+                    <div class="stock-card" style="background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <h3 style="color: var(--text); font-size: 18px; font-weight: 700;">${stock}</h3>
+                            <span style="color: var(--text3); font-size: 12px;">${stats.totalCount}개 시그널</span>
+                        </div>
+                        
+                        ${recentSignal ? `
+                            <div style="margin-bottom: 16px;">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                    <span style="color: var(--text2); font-size: 12px;">최근 시그널</span>
+                                    ${getSignalBadge(recentSignal.dirType)}
+                                    <span style="color: var(--text3); font-size: 11px;">${recentSignal.date}</span>
+                                </div>
+                                <div style="color: var(--text2); font-size: 12px; line-height: 1.4;">"${recentSignal.quote || recentSignal.detail}"</div>
+                                <div style="color: var(--text3); font-size: 11px; margin-top: 4px;">- ${recentSignal.influencer}</div>
+                            </div>
+                        ` : ''}
+                        
+                        <div style="margin-bottom: 12px;">
+                            <p style="color: var(--text3); font-size: 12px; margin-bottom: 8px;">시그널 분포</p>
+                            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                                ${Object.entries(signalCounts).map(([type, count]) => `
+                                    <span style="background: rgba(${hexToRgb(signalColors[type])}, 0.2); color: ${signalColors[type]}; padding: 2px 6px; border-radius: 8px; font-size: 10px; font-weight: 600;">
+                                        ${signalLabels[type]} ${count}
+                                    </span>
+                                `).join('')}
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <p style="color: var(--text3); font-size: 12px; margin-bottom: 8px;">참여 인플루언서</p>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                ${stats.influencers.map(inf => `
+                                    <span style="background: var(--bg3); color: var(--text2); padding: 2px 8px; border-radius: 8px; font-size: 11px;">
+                                        ${inf.name} (${inf.count})
+                                    </span>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        // 유틸리티 함수들
+        function getSignalDistribution(statements) {
+            const dist = {};
+            statements.forEach(s => {
+                dist[s.dirType] = (dist[s.dirType] || 0) + 1;
+            });
+            return Object.entries(dist).map(([type, count]) => ({type, count}));
+        }
+
+        function getStockStatistics() {
+            const stats = {};
+            
+            allStatements.forEach(stmt => {
+                if (!stats[stmt.stock]) {
+                    stats[stmt.stock] = {
+                        totalCount: 0,
+                        signals: [],
+                        signalDistribution: {},
+                        influencers: []
+                    };
+                }
+                
+                stats[stmt.stock].totalCount++;
+                stats[stmt.stock].signals.push(stmt);
+                stats[stmt.stock].signalDistribution[stmt.dirType] = (stats[stmt.stock].signalDistribution[stmt.dirType] || 0) + 1;
+                
+                const existingInf = stats[stmt.stock].influencers.find(i => i.name === stmt.influencer);
+                if (existingInf) {
+                    existingInf.count++;
+                } else {
+                    stats[stmt.stock].influencers.push({name: stmt.influencer, count: 1});
+                }
+            });
+            
+            // 최신 시그널 순으로 정렬
+            Object.values(stats).forEach(stat => {
+                stat.signals.sort((a, b) => new Date(b.date) - new Date(a.date));
+            });
+            
+            return stats;
+        }
+
+        // 필터링 함수
+        function filterStatements(type) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const cards = document.querySelectorAll('.statement-card');
+            cards.forEach(card => {
+                if (type === 'all' || card.dataset.signal === type) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // CSS 스타일 추가
+        const additionalStyles = `
+            <style>
+            .filter-btn {
+                background: var(--bg3);
+                border: 1px solid var(--border);
+                color: var(--text2);
+                padding: 6px 14px;
+                border-radius: 20px;
+                font-size: 12px;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            .filter-btn:hover {
+                background: var(--bg4);
+                color: var(--text);
+            }
+            .filter-btn.active {
+                background: var(--accent);
+                color: white;
+                border-color: var(--accent);
+            }
+            .statement-card:hover, .influencer-card:hover, .stock-card:hover {
+                border-color: var(--border2);
+                background: var(--bg3);
+            }
+            @media (max-width: 768px) {
+                .statement-card, .influencer-card, .stock-card {
+                    margin: 0 -10px;
+                    border-radius: 0;
+                }
+            }
+            </style>
+        `;
+
+        // 스타일 추가
+        document.head.insertAdjacentHTML('beforeend', additionalStyles);
+
+        // 초기 렌더링 - DOM 로드 완료 후 실행
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                renderStatementsTab();
+                renderInfluencersTab(); 
+                renderStocksTab();
+            }, 500);
+        });
     </script>
 </body>
 </html>
