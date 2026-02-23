@@ -26,7 +26,7 @@ export interface CorinpapaSignal {
 // 실제 시그널 데이터 (169개, 최신순 정렬)
 export const corinpapaSignals: CorinpapaSignal[] = [
   {
-    "id": 1033,
+    "id": 1000,
     "influencer": "코린이 아빠",
     "stock": "XRP",
     "stockName": "XRP",
@@ -38,7 +38,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "월드리버티파이낸셜이 USD1 스테이블코인으로 XRP의 국경간 송금 영역을 직접 대체하겠다고...",
       "detail": "월드리버티파이낸셜이 USD1 스테이블코인으로 XRP의 국경간 송금 영역을 직접 대체하겠다고 선언했고, 화자가 XRP와 헤어질 결심을 표명"
     },
-    "videoDate": "2026-02-18",
+    "videoDate": "2026-02-19",
     "videoTitle": "\"Decision to Part with XRP (WLFI Mar-a-Lago Forum Impact)\"",
     "confidence": "HIGH",
     "timeframe": "MID",
@@ -47,7 +47,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1034,
+    "id": 1001,
     "influencer": "코린이 아빠",
     "stock": "WLFI",
     "stockName": "월드리버티파이낸셜 (WLFI)",
@@ -59,7 +59,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "마라라고 포럼 개최 후 WLFI 토큰이 하루 만에 20% 상승했다는 사실 전달과 함께 긍정...",
       "detail": "마라라고 포럼 개최 후 WLFI 토큰이 하루 만에 20% 상승했다는 사실 전달과 함께 긍정적 언급"
     },
-    "videoDate": "2026-02-18",
+    "videoDate": "2026-02-19",
     "videoTitle": "\"Decision to Part with XRP (WLFI Mar-a-Lago Forum Impact)\"",
     "confidence": "MEDIUM",
     "timeframe": "SHORT",
@@ -68,7 +68,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1035,
+    "id": 1002,
     "influencer": "코린이 아빠",
     "stock": "알트코인",
     "stockName": "알트코인",
@@ -80,7 +80,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 예측한 2026년 알트코인 대멸종이 현실화되고 있다며 강력한 부정적 전망 표명...",
       "detail": "화자가 예측한 2026년 알트코인 대멸종이 현실화되고 있다며 강력한 부정적 전망 표명"
     },
-    "videoDate": "2026-02-18",
+    "videoDate": "2026-02-19",
     "videoTitle": "\"Decision to Part with XRP (WLFI Mar-a-Lago Forum Impact)\"",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -89,7 +89,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1036,
+    "id": 1003,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -101,7 +101,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 캔톤에 투자하고 있지만, 상황이 나빠지면 본인이 먼저 탈출할 것이라고 명시적으로 언...",
       "detail": "화자가 캔톤에 투자하고 있지만, 상황이 나빠지면 본인이 먼저 탈출할 것이라고 명시적으로 언급"
     },
-    "videoDate": "2026-02-18",
+    "videoDate": "2026-02-19",
     "videoTitle": "\"Decision to Part with XRP (WLFI Mar-a-Lago Forum Impact)\"",
     "confidence": "MEDIUM",
     "timeframe": "MID",
@@ -110,20 +110,20 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1085,
+    "id": 1004,
     "influencer": "코린이 아빠",
-    "stock": "CC",
-    "stockName": "캔톤네트워크 (CC)",
+    "stock": "CNTN",
+    "stockName": "캔톤네트워크 (CNTN)",
     "signalType": "BUY",
     "content": "그래서 야, 뭐 사야 돼? 그럼 어 캔톤사 이렇게 얘기하시면 돼요.",
     "timestamp": "[3:16]",
     "youtubeLink": "https://youtube.com/watch?v=ULXCspCxaSg&t=196s",
     "analysis": {
-      "summary": "CC의 정확한 발음을 캔톤이라고 설명하면서, 마지막에 '캔톤 사라'는 매수 권유를 함...",
-      "detail": "CC의 정확한 발음을 캔톤이라고 설명하면서, 마지막에 '캔톤 사라'는 매수 권유를 함"
+      "summary": "CNTN의 정확한 발음을 캔톤이라고 설명하면서, 마지막에 '캔톤 사라'는 매수 권유를 함...",
+      "detail": "CNTN의 정확한 발음을 캔톤이라고 설명하면서, 마지막에 '캔톤 사라'는 매수 권유를 함"
     },
     "videoDate": "2026-02-18",
-    "videoTitle": "\"Don't call me CC, from now on it's [Canton]!\"",
+    "videoTitle": "\"Don't call me CNTN, from now on it's [Canton]!\"",
     "confidence": "MEDIUM",
     "timeframe": "MID",
     "conditional": false,
@@ -131,7 +131,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1092,
+    "id": 1005,
     "influencer": "코린이 아빠",
     "stock": "비트코인",
     "stockName": "비트코인",
@@ -143,7 +143,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 M2 증가와 비트코인 상관관계에 대한 가설이 틀렸음을 인정하며 매도를 권유한 상황...",
       "detail": "화자가 M2 증가와 비트코인 상관관계에 대한 가설이 틀렸음을 인정하며 매도를 권유한 상황"
     },
-    "videoDate": "2026-02-16",
+    "videoDate": "2026-02-17",
     "videoTitle": "Is my investment, which endures even in a bear market, a \"belief\" or a \"delusion\"? (Subtitle: It'...",
     "confidence": "HIGH",
     "timeframe": "MID",
@@ -152,7 +152,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1093,
+    "id": 1006,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -164,7 +164,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 이더리움의 울트라사운드 머니 가설이 틀렸다고 판단하고 매도를 권유한 상황...",
       "detail": "화자가 이더리움의 울트라사운드 머니 가설이 틀렸다고 판단하고 매도를 권유한 상황"
     },
-    "videoDate": "2026-02-16",
+    "videoDate": "2026-02-17",
     "videoTitle": "Is my investment, which endures even in a bear market, a \"belief\" or a \"delusion\"? (Subtitle: It'...",
     "confidence": "HIGH",
     "timeframe": "MID",
@@ -173,7 +173,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1094,
+    "id": 1007,
     "influencer": "코린이 아빠",
     "stock": "XRP",
     "stockName": "XRP",
@@ -185,7 +185,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 XRP의 여러 긍정적 내러티브들을 망상이라고 평가하며 탈출을 권유한 상황...",
       "detail": "화자가 XRP의 여러 긍정적 내러티브들을 망상이라고 평가하며 탈출을 권유한 상황"
     },
-    "videoDate": "2026-02-16",
+    "videoDate": "2026-02-17",
     "videoTitle": "Is my investment, which endures even in a bear market, a \"belief\" or a \"delusion\"? (Subtitle: It'...",
     "confidence": "HIGH",
     "timeframe": "MID",
@@ -194,7 +194,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1095,
+    "id": 1008,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -206,7 +206,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 친구와 함께 기존 투자 종목들을 모두 매도하고 캔톤으로 이동했으며, 그 결과 수익률...",
       "detail": "화자가 친구와 함께 기존 투자 종목들을 모두 매도하고 캔톤으로 이동했으며, 그 결과 수익률이 좋다고 언급한 상황"
     },
-    "videoDate": "2026-02-16",
+    "videoDate": "2026-02-17",
     "videoTitle": "Is my investment, which endures even in a bear market, a \"belief\" or a \"delusion\"? (Subtitle: It'...",
     "confidence": "HIGH",
     "timeframe": "MID",
@@ -215,7 +215,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1096,
+    "id": 1009,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -227,7 +227,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 비트마인을 포함하여 기존 투자 종목들을 모두 매도했다고 언급한 상황...",
       "detail": "화자가 비트마인을 포함하여 기존 투자 종목들을 모두 매도했다고 언급한 상황"
     },
-    "videoDate": "2026-02-16",
+    "videoDate": "2026-02-17",
     "videoTitle": "Is my investment, which endures even in a bear market, a \"belief\" or a \"delusion\"? (Subtitle: It'...",
     "confidence": "HIGH",
     "timeframe": "MID",
@@ -236,7 +236,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1144,
+    "id": 1010,
     "influencer": "코린이 아빠",
     "stock": "MSTR",
     "stockName": "마이크로스트래티지 (MSTR)",
@@ -257,7 +257,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1145,
+    "id": 1011,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -278,7 +278,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": true
   },
   {
-    "id": 1146,
+    "id": 1012,
     "influencer": "코린이 아빠",
     "stock": "XRP",
     "stockName": "XRP",
@@ -299,7 +299,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1147,
+    "id": 1013,
     "influencer": "코린이 아빠",
     "stock": "비트코인",
     "stockName": "비트코인",
@@ -320,7 +320,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1148,
+    "id": 1014,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -341,7 +341,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1040,
+    "id": 1015,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -362,7 +362,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1000,
+    "id": 1016,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -383,7 +383,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1001,
+    "id": 1017,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -404,7 +404,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1062,
+    "id": 1018,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -425,7 +425,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1086,
+    "id": 1019,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -437,7 +437,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "AI 버블 붕괴 시나리오에서도 캔톤의 디지털 뱅크런 대응 시스템과 자산 토큰화 기능이 핵심...",
       "detail": "AI 버블 붕괴 시나리오에서도 캔톤의 디지털 뱅크런 대응 시스템과 자산 토큰화 기능이 핵심 역할을 할 것이라는 강한 확신을 표현. 버블이 지속되든 붕괴하든 상관없이 캔톤의 성장은 필연적이라고 단언"
     },
-    "videoDate": "2026-01-23",
+    "videoDate": "2026-01-24",
     "videoTitle": "Why Canton Will Survive the AI ​​Bubble Burst",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -446,7 +446,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1019,
+    "id": 1020,
     "influencer": "코린이 아빠",
     "stock": "MP머티리얼즈",
     "stockName": "MP머티리얼즈",
@@ -467,7 +467,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1020,
+    "id": 1021,
     "influencer": "코린이 아빠",
     "stock": "라이나스히토류",
     "stockName": "라이나스히토류",
@@ -488,7 +488,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1021,
+    "id": 1022,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -509,7 +509,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1022,
+    "id": 1023,
     "influencer": "코린이 아빠",
     "stock": "구글",
     "stockName": "알파벳 (구글)",
@@ -530,7 +530,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1063,
+    "id": 1024,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -551,7 +551,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1064,
+    "id": 1025,
     "influencer": "코린이 아빠",
     "stock": "비트코인",
     "stockName": "비트코인",
@@ -572,7 +572,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1065,
+    "id": 1026,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -593,7 +593,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1037,
+    "id": 1027,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -614,7 +614,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1083,
+    "id": 1028,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -635,7 +635,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1084,
+    "id": 1029,
     "influencer": "코린이 아빠",
     "stock": "스테이블코인",
     "stockName": "스테이블코인",
@@ -656,7 +656,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1110,
+    "id": 1030,
     "influencer": "코린이 아빠",
     "stock": "모네로",
     "stockName": "모네로",
@@ -677,7 +677,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1111,
+    "id": 1031,
     "influencer": "코린이 아빠",
     "stock": "지캐시",
     "stockName": "지캐시",
@@ -698,7 +698,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1112,
+    "id": 1032,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -719,7 +719,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1135,
+    "id": 1033,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -740,7 +740,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1165,
+    "id": 1034,
     "influencer": "코린이 아빠",
     "stock": "THAR",
     "stockName": "타르 (THAR)",
@@ -761,7 +761,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1166,
+    "id": 1035,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -782,7 +782,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1069,
+    "id": 1036,
     "influencer": "코린이 아빠",
     "stock": "비트코인",
     "stockName": "비트코인",
@@ -803,7 +803,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1070,
+    "id": 1037,
     "influencer": "코린이 아빠",
     "stock": "솔라나",
     "stockName": "솔라나",
@@ -824,7 +824,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1071,
+    "id": 1038,
     "influencer": "코린이 아빠",
     "stock": "리플",
     "stockName": "리플",
@@ -845,7 +845,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1072,
+    "id": 1039,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -866,7 +866,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1142,
+    "id": 1040,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -887,7 +887,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1097,
+    "id": 1041,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -899,7 +899,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "레버리지 거래의 위험성과 청산 위험에 대한 강한 경고...",
       "detail": "레버리지 거래의 위험성과 청산 위험에 대한 강한 경고"
     },
-    "videoDate": "2026-01-09",
+    "videoDate": "2026-01-10",
     "videoTitle": "\"Canton's price plunge just before the halving. Is this a ripple effect?\"",
     "confidence": "HIGH",
     "timeframe": "SHORT",
@@ -908,7 +908,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1143,
+    "id": 1042,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -929,7 +929,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1055,
+    "id": 1043,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -950,7 +950,49 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1153,
+    "id": 1044,
+    "influencer": "코린이 아빠",
+    "stock": "이더리움",
+    "stockName": "이더리움",
+    "signalType": "CONCERN",
+    "content": "RWA를 이더리움이 주도하기 어려운 이유... 금융 기관들은 거래 내용이나 포지셔닝이 낱낱이 공개되는 퍼블릭 블록체인을 싫어합니다. 진짜 싫어해요",
+    "timestamp": "[8:00]",
+    "youtubeLink": "https://youtube.com/watch?v=Xhqm11HDPNU&t=480s",
+    "analysis": {
+      "summary": "RWA 시장에서 이더리움의 구조적 한계를 지적하며 금융기관들이 퍼블릭 블록체인을 기피한다고...",
+      "detail": "RWA 시장에서 이더리움의 구조적 한계를 지적하며 금융기관들이 퍼블릭 블록체인을 기피한다고 설명"
+    },
+    "videoDate": "2026-01-03",
+    "videoTitle": "\"Hey buddy, throw some Ethereum in too\" (Is Ethereum the king of RWA?)",
+    "confidence": "HIGH",
+    "timeframe": "LONG",
+    "conditional": false,
+    "skinInGame": false,
+    "hedged": false
+  },
+  {
+    "id": 1045,
+    "influencer": "코린이 아빠",
+    "stock": "CC",
+    "stockName": "캔톤네트워크 (CC)",
+    "signalType": "POSITIVE",
+    "content": "캔톤 네트워크가 약 6조 달러입니다. 캔톤이 약 250배가 크죠? 이거 아직 시작도 안 했죠?",
+    "timestamp": "[8:50]",
+    "youtubeLink": "https://youtube.com/watch?v=Xhqm11HDPNU&t=530s",
+    "analysis": {
+      "summary": "이더리움과 캔톤네트워크의 연결 자산 규모를 비교하며 캔톤이 압도적으로 크다는 점을 강조...",
+      "detail": "이더리움과 캔톤네트워크의 연결 자산 규모를 비교하며 캔톤이 압도적으로 크다는 점을 강조"
+    },
+    "videoDate": "2026-01-03",
+    "videoTitle": "\"Hey buddy, throw some Ethereum in too\" (Is Ethereum the king of RWA?)",
+    "confidence": "HIGH",
+    "timeframe": "LONG",
+    "conditional": false,
+    "skinInGame": true,
+    "hedged": false
+  },
+  {
+    "id": 1046,
     "influencer": "코린이 아빠",
     "stock": "XRP",
     "stockName": "XRP",
@@ -971,49 +1013,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1090,
-    "influencer": "코린이 아빠",
-    "stock": "이더리움",
-    "stockName": "이더리움",
-    "signalType": "CONCERN",
-    "content": "RWA를 이더리움이 주도하기 어려운 이유... 금융 기관들은 거래 내용이나 포지셔닝이 낱낱이 공개되는 퍼블릭 블록체인을 싫어합니다. 진짜 싫어해요",
-    "timestamp": "[8:00]",
-    "youtubeLink": "https://youtube.com/watch?v=Xhqm11HDPNU&t=480s",
-    "analysis": {
-      "summary": "RWA 시장에서 이더리움의 구조적 한계를 지적하며 금융기관들이 퍼블릭 블록체인을 기피한다고...",
-      "detail": "RWA 시장에서 이더리움의 구조적 한계를 지적하며 금융기관들이 퍼블릭 블록체인을 기피한다고 설명"
-    },
-    "videoDate": "2026-01-02",
-    "videoTitle": "\"Hey buddy, throw some Ethereum in too\" (Is Ethereum the king of RWA?)",
-    "confidence": "HIGH",
-    "timeframe": "LONG",
-    "conditional": false,
-    "skinInGame": false,
-    "hedged": false
-  },
-  {
-    "id": 1091,
-    "influencer": "코린이 아빠",
-    "stock": "CC",
-    "stockName": "캔톤네트워크 (CC)",
-    "signalType": "POSITIVE",
-    "content": "캔톤 네트워크가 약 6조 달러입니다. 캔톤이 약 250배가 크죠? 이거 아직 시작도 안 했죠?",
-    "timestamp": "[8:50]",
-    "youtubeLink": "https://youtube.com/watch?v=Xhqm11HDPNU&t=530s",
-    "analysis": {
-      "summary": "이더리움과 캔톤네트워크의 연결 자산 규모를 비교하며 캔톤이 압도적으로 크다는 점을 강조...",
-      "detail": "이더리움과 캔톤네트워크의 연결 자산 규모를 비교하며 캔톤이 압도적으로 크다는 점을 강조"
-    },
-    "videoDate": "2026-01-02",
-    "videoTitle": "\"Hey buddy, throw some Ethereum in too\" (Is Ethereum the king of RWA?)",
-    "confidence": "HIGH",
-    "timeframe": "LONG",
-    "conditional": false,
-    "skinInGame": true,
-    "hedged": false
-  },
-  {
-    "id": 1030,
+    "id": 1047,
     "influencer": "코린이 아빠",
     "stock": "비트코인",
     "stockName": "비트코인",
@@ -1025,7 +1025,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "제목과 영상 첫머리에서 친구에게 비트코인을 던지라고(매도하라고) 직접 권유하는 발언. M2...",
       "detail": "제목과 영상 첫머리에서 친구에게 비트코인을 던지라고(매도하라고) 직접 권유하는 발언. M2가 다른 곳으로 갔다는 논리로 뒷받침"
     },
-    "videoDate": "2026-01-01",
+    "videoDate": "2026-01-02",
     "videoTitle": "\"Hey buddy, throw your Bitcoins away now\" (M2 has already been diverted elsewhere)",
     "confidence": "HIGH",
     "timeframe": "MID",
@@ -1034,7 +1034,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1031,
+    "id": 1048,
     "influencer": "코린이 아빠",
     "stock": "엔비디아",
     "stockName": "엔비디아",
@@ -1046,7 +1046,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "엔비디아의 실적을 긍정적으로 평가하며 유동성이 빅테크로 향하고 있다는 논리의 근거로 제시...",
       "detail": "엔비디아의 실적을 긍정적으로 평가하며 유동성이 빅테크로 향하고 있다는 논리의 근거로 제시"
     },
-    "videoDate": "2026-01-01",
+    "videoDate": "2026-01-02",
     "videoTitle": "\"Hey buddy, throw your Bitcoins away now\" (M2 has already been diverted elsewhere)",
     "confidence": "MEDIUM",
     "timeframe": "MID",
@@ -1055,7 +1055,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1032,
+    "id": 1049,
     "influencer": "코린이 아빠",
     "stock": "금",
     "stockName": "금",
@@ -1067,7 +1067,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "러시아-우크라이나 전쟁 이후 안전자산으로서 금의 역할을 강조하며 중국의 금 매입 증가를 근...",
       "detail": "러시아-우크라이나 전쟁 이후 안전자산으로서 금의 역할을 강조하며 중국의 금 매입 증가를 근거로 제시"
     },
-    "videoDate": "2026-01-01",
+    "videoDate": "2026-01-02",
     "videoTitle": "\"Hey buddy, throw your Bitcoins away now\" (M2 has already been diverted elsewhere)",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -1076,7 +1076,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1102,
+    "id": 1050,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -1097,7 +1097,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1103,
+    "id": 1051,
     "influencer": "코린이 아빠",
     "stock": "알트코인",
     "stockName": "알트코인",
@@ -1118,7 +1118,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1104,
+    "id": 1052,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -1139,7 +1139,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1105,
+    "id": 1053,
     "influencer": "코린이 아빠",
     "stock": "BNB",
     "stockName": "BNB",
@@ -1160,7 +1160,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1106,
+    "id": 1054,
     "influencer": "코린이 아빠",
     "stock": "체인링크",
     "stockName": "체인링크",
@@ -1181,7 +1181,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1107,
+    "id": 1055,
     "influencer": "코린이 아빠",
     "stock": "비트코인",
     "stockName": "비트코인",
@@ -1202,7 +1202,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1108,
+    "id": 1056,
     "influencer": "코린이 아빠",
     "stock": "NVDA",
     "stockName": "엔비디아 (NVDA)",
@@ -1223,7 +1223,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1007,
+    "id": 1057,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -1244,7 +1244,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1008,
+    "id": 1058,
     "influencer": "코린이 아빠",
     "stock": "THAR",
     "stockName": "타르 (THAR)",
@@ -1265,7 +1265,49 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1113,
+    "id": 1059,
+    "influencer": "코린이 아빠",
+    "stock": "CC",
+    "stockName": "캐톤네트워크 (CC)",
+    "signalType": "POSITIVE",
+    "content": "금융 기관에게 RWA는 생존의 기술입니다. 실리콘 밸리 은행이 안 되려면, 캔톤에 들어와서 유동성을 실시간 유동성을 확보할 수 있어야 되겠죠",
+    "timestamp": "[13:52]",
+    "youtubeLink": "https://youtube.com/watch?v=8VIfrqxW4wc&t=832s",
+    "analysis": {
+      "summary": "SVB 파산 사례를 통해 디지털 뱅크런 시대에 프라이빗 블록체인 기반의 실시간 유동성 확보...",
+      "detail": "SVB 파산 사례를 통해 디지털 뱅크런 시대에 프라이빗 블록체인 기반의 실시간 유동성 확보가 금융기관에게 필수적임을 설명하며, 캔톤 네트워크의 구조적 필요성을 강조"
+    },
+    "videoDate": "2025-12-27",
+    "videoTitle": "Causes of SVB's Bankruptcy and the Need for Canton",
+    "confidence": "HIGH",
+    "timeframe": "LONG",
+    "conditional": false,
+    "skinInGame": false,
+    "hedged": false
+  },
+  {
+    "id": 1060,
+    "influencer": "코린이 아빠",
+    "stock": "브로드리지파이낸셜",
+    "stockName": "브로드리지파이낸셜",
+    "signalType": "POSITIVE",
+    "content": "브로드리지 파이낸셜이 뭐냐면 레포거래 하는 기관인데 보시면 주식이 상승하는 아주 우량 기업입니다. 캔톤 네트워크하고 연결이 돼 있어 가지고 여기서 분산 원장 레포거래를 하는데 이게 전년 동기 대비 거의 500%가 폭증했습니다",
+    "timestamp": "[10:40]",
+    "youtubeLink": "https://youtube.com/watch?v=8VIfrqxW4wc&t=640s",
+    "analysis": {
+      "summary": "캔톤 네트워크와 연결된 브로드리지 파이낸셜의 레포거래 급증(500%)을 통해 실제 비즈니스...",
+      "detail": "캔톤 네트워크와 연결된 브로드리지 파이낸셜의 레포거래 급증(500%)을 통해 실제 비즈니스 성과와 캔톤 생태계 활용도를 설명"
+    },
+    "videoDate": "2025-12-27",
+    "videoTitle": "Causes of SVB's Bankruptcy and the Need for Canton",
+    "confidence": "MEDIUM",
+    "timeframe": "MID",
+    "conditional": false,
+    "skinInGame": false,
+    "hedged": false
+  },
+  {
+    "id": 1061,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -1286,7 +1328,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": true
   },
   {
-    "id": 1114,
+    "id": 1062,
     "influencer": "코린이 아빠",
     "stock": "비트코인",
     "stockName": "비트코인",
@@ -1307,7 +1349,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1115,
+    "id": 1063,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -1328,7 +1370,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1116,
+    "id": 1064,
     "influencer": "코린이 아빠",
     "stock": "솔라나",
     "stockName": "솔라나",
@@ -1349,49 +1391,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1038,
-    "influencer": "코린이 아빠",
-    "stock": "CC",
-    "stockName": "캐톤네트워크 (CC)",
-    "signalType": "POSITIVE",
-    "content": "금융 기관에게 RWA는 생존의 기술입니다. 실리콘 밸리 은행이 안 되려면, 캔톤에 들어와서 유동성을 실시간 유동성을 확보할 수 있어야 되겠죠",
-    "timestamp": "[13:52]",
-    "youtubeLink": "https://youtube.com/watch?v=8VIfrqxW4wc&t=832s",
-    "analysis": {
-      "summary": "SVB 파산 사례를 통해 디지털 뱅크런 시대에 프라이빗 블록체인 기반의 실시간 유동성 확보...",
-      "detail": "SVB 파산 사례를 통해 디지털 뱅크런 시대에 프라이빗 블록체인 기반의 실시간 유동성 확보가 금융기관에게 필수적임을 설명하며, 캔톤 네트워크의 구조적 필요성을 강조"
-    },
-    "videoDate": "2025-12-26",
-    "videoTitle": "Causes of SVB's Bankruptcy and the Need for Canton",
-    "confidence": "HIGH",
-    "timeframe": "LONG",
-    "conditional": false,
-    "skinInGame": false,
-    "hedged": false
-  },
-  {
-    "id": 1039,
-    "influencer": "코린이 아빠",
-    "stock": "브로드리지파이낸셜",
-    "stockName": "브로드리지파이낸셜",
-    "signalType": "POSITIVE",
-    "content": "브로드리지 파이낸셜이 뭐냐면 레포거래 하는 기관인데 보시면 주식이 상승하는 아주 우량 기업입니다. 캔톤 네트워크하고 연결이 돼 있어 가지고 여기서 분산 원장 레포거래를 하는데 이게 전년 동기 대비 거의 500%가 폭증했습니다",
-    "timestamp": "[10:40]",
-    "youtubeLink": "https://youtube.com/watch?v=8VIfrqxW4wc&t=640s",
-    "analysis": {
-      "summary": "캔톤 네트워크와 연결된 브로드리지 파이낸셜의 레포거래 급증(500%)을 통해 실제 비즈니스...",
-      "detail": "캔톤 네트워크와 연결된 브로드리지 파이낸셜의 레포거래 급증(500%)을 통해 실제 비즈니스 성과와 캔톤 생태계 활용도를 설명"
-    },
-    "videoDate": "2025-12-26",
-    "videoTitle": "Causes of SVB's Bankruptcy and the Need for Canton",
-    "confidence": "MEDIUM",
-    "timeframe": "MID",
-    "conditional": false,
-    "skinInGame": false,
-    "hedged": false
-  },
-  {
-    "id": 1117,
+    "id": 1065,
     "influencer": "코린이 아빠",
     "stock": "캔톤네트워크",
     "stockName": "캔톤네트워크",
@@ -1403,7 +1403,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 캔톤에 대한 설명을 시작하기 전에 투자 리스크에 대해 강하게 경고하고 있음...",
       "detail": "화자가 캔톤에 대한 설명을 시작하기 전에 투자 리스크에 대해 강하게 경고하고 있음"
     },
-    "videoDate": "2025-12-25",
+    "videoDate": "2025-12-26",
     "videoTitle": "The World's Easiest RWA Explained (With Real Estate Transactions as an Example)",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -1412,7 +1412,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1118,
+    "id": 1066,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -1424,7 +1424,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "RWA 분야에서 이더리움의 가능성을 긍정적으로 평가하되, 절박성 측면에서 한계가 있다고 언...",
       "detail": "RWA 분야에서 이더리움의 가능성을 긍정적으로 평가하되, 절박성 측면에서 한계가 있다고 언급"
     },
-    "videoDate": "2025-12-25",
+    "videoDate": "2025-12-26",
     "videoTitle": "The World's Easiest RWA Explained (With Real Estate Transactions as an Example)",
     "confidence": "MEDIUM",
     "timeframe": "LONG",
@@ -1433,7 +1433,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": true
   },
   {
-    "id": 1131,
+    "id": 1067,
     "influencer": "코린이 아빠",
     "stock": "비트코인",
     "stockName": "비트코인",
@@ -1454,7 +1454,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1132,
+    "id": 1068,
     "influencer": "코린이 아빠",
     "stock": "알트코인",
     "stockName": "알트코인",
@@ -1475,7 +1475,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1133,
+    "id": 1069,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -1496,7 +1496,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1134,
+    "id": 1070,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -1517,7 +1517,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1026,
+    "id": 1071,
     "influencer": "코린이 아빠",
     "stock": "ATNF",
     "stockName": "이더질라 (ATNF)",
@@ -1529,7 +1529,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "이더질라가 이더리움 매집을 포기하고 RWA로 전환하면서 서브프라임 대출채권, 온라인 카지노...",
       "detail": "이더질라가 이더리움 매집을 포기하고 RWA로 전환하면서 서브프라임 대출채권, 온라인 카지노 등 의심스러운 사업으로 방향을 바꾸는 것에 대해 부정적 평가"
     },
-    "videoDate": "2025-12-23",
+    "videoDate": "2025-12-24",
     "videoTitle": "Etherzilla Sells Ethereum and Implements RWA? Peter Thiel's Proof of a Fraudulent Transaction",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -1538,7 +1538,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1027,
+    "id": 1072,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -1550,7 +1550,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 이더리움에서 완전히 빠지기 위해 언스테이킹을 신청하고 1이더리움 1국민 운동도 중단...",
       "detail": "화자가 이더리움에서 완전히 빠지기 위해 언스테이킹을 신청하고 1이더리움 1국민 운동도 중단하겠다고 선언"
     },
-    "videoDate": "2025-12-23",
+    "videoDate": "2025-12-24",
     "videoTitle": "Etherzilla Sells Ethereum and Implements RWA? Peter Thiel's Proof of a Fraudulent Transaction",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -1559,7 +1559,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1028,
+    "id": 1073,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -1571,7 +1571,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "시장과 독립적으로 움직이는 특성을 매력적으로 보며 이더리움에서 캔톤으로 자산을 이동할 예정...",
       "detail": "시장과 독립적으로 움직이는 특성을 매력적으로 보며 이더리움에서 캔톤으로 자산을 이동할 예정이라고 발표"
     },
-    "videoDate": "2025-12-23",
+    "videoDate": "2025-12-24",
     "videoTitle": "Etherzilla Sells Ethereum and Implements RWA? Peter Thiel's Proof of a Fraudulent Transaction",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -1580,7 +1580,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1029,
+    "id": 1074,
     "influencer": "코린이 아빠",
     "stock": "MSTR",
     "stockName": "마이크로스트래티지 (MSTR)",
@@ -1592,7 +1592,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "MSTR이 비트코인 매입 중단을 발표하고 주가가 순자산가치 대비 1배 수준까지 하락한 상황...",
       "detail": "MSTR이 비트코인 매입 중단을 발표하고 주가가 순자산가치 대비 1배 수준까지 하락한 상황에서 추가 하락 시 비트코인 매도 압박 우려"
     },
-    "videoDate": "2025-12-23",
+    "videoDate": "2025-12-24",
     "videoTitle": "Etherzilla Sells Ethereum and Implements RWA? Peter Thiel's Proof of a Fraudulent Transaction",
     "confidence": "MEDIUM",
     "timeframe": "SHORT",
@@ -1601,7 +1601,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": true
   },
   {
-    "id": 1059,
+    "id": 1075,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -1613,7 +1613,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "CC코인을 직접 사기 어려운 개인투자자들에게 THAR을 통한 우회 투자를 추천...",
       "detail": "CC코인을 직접 사기 어려운 개인투자자들에게 THAR을 통한 우회 투자를 추천"
     },
-    "videoDate": "2025-12-19",
+    "videoDate": "2025-12-20",
     "videoTitle": "THAR, Tymune's secretive strategy. Why is the stock price stagnant?",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -1622,7 +1622,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1060,
+    "id": 1076,
     "influencer": "코린이 아빠",
     "stock": "THAR",
     "stockName": "타르 (THAR)",
@@ -1634,7 +1634,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "개인이 접근하기 어려운 CC코인 스테이킹 수익을 THAR을 통해 간접 투자할 수 있다고 설...",
       "detail": "개인이 접근하기 어려운 CC코인 스테이킹 수익을 THAR을 통해 간접 투자할 수 있다고 설명"
     },
-    "videoDate": "2025-12-19",
+    "videoDate": "2025-12-20",
     "videoTitle": "THAR, Tymune's secretive strategy. Why is the stock price stagnant?",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -1643,7 +1643,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1061,
+    "id": 1077,
     "influencer": "코린이 아빠",
     "stock": "Circle",
     "stockName": "서클 (Circle)",
@@ -1655,7 +1655,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "캔톤 네트워크에서 USDC가 주요 스테이블코인으로 채택될 가능성이 높다는 분석...",
       "detail": "캔톤 네트워크에서 USDC가 주요 스테이블코인으로 채택될 가능성이 높다는 분석"
     },
-    "videoDate": "2025-12-19",
+    "videoDate": "2025-12-20",
     "videoTitle": "THAR, Tymune's secretive strategy. Why is the stock price stagnant?",
     "confidence": "MEDIUM",
     "timeframe": "MID",
@@ -1664,7 +1664,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1125,
+    "id": 1078,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -1676,7 +1676,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "DTCC와 캔톤네트워크의 미국 국채 토큰화 협력, SEC 승인, 전통 금융기관들의 캔톤 재...",
       "detail": "DTCC와 캔톤네트워크의 미국 국채 토큰화 협력, SEC 승인, 전통 금융기관들의 캔톤 재단 참여 등을 종합적으로 분석한 후 캔톤에 대한 강한 확신을 표현. 화자가 '미쳤다'고 표현할 정도로 강한 신념을 보임"
     },
-    "videoDate": "2025-12-18",
+    "videoDate": "2025-12-19",
     "videoTitle": "US Treasury bonds rise above Canton (a clear signal of full-scale operation in 2026)",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -1685,7 +1685,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1157,
+    "id": 1079,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -1697,7 +1697,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "연준 회의에서 캔톤네트워크가 직접 소개되고 DTCC와의 실제 테스트 완료를 근거로 캔톤에 ...",
       "detail": "연준 회의에서 캔톤네트워크가 직접 소개되고 DTCC와의 실제 테스트 완료를 근거로 캔톤에 대한 강한 긍정적 전망을 표현. 잡코인이라는 의견을 강하게 반박하며 실질적 성과를 강조"
     },
-    "videoDate": "2025-12-12",
+    "videoDate": "2025-12-13",
     "videoTitle": "월가가 RWA에 진심인 이유 (이제 연준과 SEC까지 나섰다고?)",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -1706,7 +1706,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1158,
+    "id": 1080,
     "influencer": "코린이 아빠",
     "stock": "Circle",
     "stockName": "서클 (Circle)",
@@ -1718,7 +1718,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "USDC 발행사인 서클이 미국 국채 운용을 통한 이자 수익 구조로 인해 주가가 높다고 분석...",
       "detail": "USDC 발행사인 서클이 미국 국채 운용을 통한 이자 수익 구조로 인해 주가가 높다고 분석하며 긍정적 전망"
     },
-    "videoDate": "2025-12-12",
+    "videoDate": "2025-12-13",
     "videoTitle": "월가가 RWA에 진심인 이유 (이제 연준과 SEC까지 나섰다고?)",
     "confidence": "MEDIUM",
     "timeframe": "MID",
@@ -1727,7 +1727,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1066,
+    "id": 1081,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -1739,7 +1739,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "피터 틸의 독점 기업 4대 요소를 캔톤 네트워크에 적용하여 분석하며, 독자적 기술력과 경쟁...",
       "detail": "피터 틸의 독점 기업 4대 요소를 캔톤 네트워크에 적용하여 분석하며, 독자적 기술력과 경쟁 우위를 강조"
     },
-    "videoDate": "2025-12-11",
+    "videoDate": "2025-12-12",
     "videoTitle": "CC Coin Exclusive Strategy - feat. Zero to One",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -1748,7 +1748,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1067,
+    "id": 1082,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -1760,7 +1760,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "이더리움의 독점적 지위와 성장 가능성에 대해 의문을 제기하며, 킬러앱 부재와 실제 사용률 ...",
       "detail": "이더리움의 독점적 지위와 성장 가능성에 대해 의문을 제기하며, 킬러앱 부재와 실제 사용률 저조를 지적"
     },
-    "videoDate": "2025-12-11",
+    "videoDate": "2025-12-12",
     "videoTitle": "CC Coin Exclusive Strategy - feat. Zero to One",
     "confidence": "MEDIUM",
     "timeframe": "LONG",
@@ -1769,7 +1769,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1167,
+    "id": 1083,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -1790,7 +1790,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1168,
+    "id": 1084,
     "influencer": "코린이 아빠",
     "stock": "XRP",
     "stockName": "XRP",
@@ -1811,7 +1811,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1087,
+    "id": 1085,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -1832,7 +1832,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1056,
+    "id": 1086,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -1844,7 +1844,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "CC코인의 단기적 상승 가능성이 낮다고 언급하며 단기 투자에 대한 회의적 시각을 표현...",
       "detail": "CC코인의 단기적 상승 가능성이 낮다고 언급하며 단기 투자에 대한 회의적 시각을 표현"
     },
-    "videoDate": "2025-12-04",
+    "videoDate": "2025-12-05",
     "videoTitle": "Canton Network and Wall Street's Big Picture: Creating Their Own Deflationary Currency?",
     "confidence": "HIGH",
     "timeframe": "SHORT",
@@ -1853,7 +1853,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1057,
+    "id": 1087,
     "influencer": "코린이 아빠",
     "stock": "비트코인",
     "stockName": "비트코인",
@@ -1865,7 +1865,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 비트코인과 이더리움에 집중 투자했다고 언급하며 강한 신뢰를 표현...",
       "detail": "화자가 비트코인과 이더리움에 집중 투자했다고 언급하며 강한 신뢰를 표현"
     },
-    "videoDate": "2025-12-04",
+    "videoDate": "2025-12-05",
     "videoTitle": "Canton Network and Wall Street's Big Picture: Creating Their Own Deflationary Currency?",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -1874,7 +1874,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1058,
+    "id": 1088,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -1886,7 +1886,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 비트코인과 이더리움에 집중 투자했다고 언급하며 강한 신뢰를 표현...",
       "detail": "화자가 비트코인과 이더리움에 집중 투자했다고 언급하며 강한 신뢰를 표현"
     },
-    "videoDate": "2025-12-04",
+    "videoDate": "2025-12-05",
     "videoTitle": "Canton Network and Wall Street's Big Picture: Creating Their Own Deflationary Currency?",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -1895,7 +1895,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1004,
+    "id": 1089,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -1907,7 +1907,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 캔톤네트워크(CC)에 대해 투자 시 주의사항을 강조하며 한번에 많은 금액을 투자하지...",
       "detail": "화자가 캔톤네트워크(CC)에 대해 투자 시 주의사항을 강조하며 한번에 많은 금액을 투자하지 말고 분할매수를 권하고 있음"
     },
-    "videoDate": "2025-12-03",
+    "videoDate": "2025-12-04",
     "videoTitle": "Why is Canton Network's ticker CC? Canton's ambitions revealed through AlchemyPay News.",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -1916,7 +1916,70 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1048,
+    "id": 1090,
+    "influencer": "코린이 아빠",
+    "stock": "CC",
+    "stockName": "캔톤네트워크 (CC)",
+    "signalType": "POSITIVE",
+    "content": "기관들은 블록체인의 해계모니를 원합니다. 그들은 CC코인의 당장의 가격이 뭐 이게 두 배가고 300하고 관심이 없습니다. 골드만 삭스가 그걸 위해서 이걸 했겠습니까? 마이크로소프트하고 지금 딜로이트하고 전부 노드르에 참여를 하고 있거든요.",
+    "timestamp": "[4:58]",
+    "youtubeLink": "https://youtube.com/watch?v=Qwdgrkfs-hE&t=298s",
+    "analysis": {
+      "summary": "화자는 CC코인이 11월 공포 구간에 상장한 이유를 분석하면서, 기관들이 단순한 가격 차익...",
+      "detail": "화자는 CC코인이 11월 공포 구간에 상장한 이유를 분석하면서, 기관들이 단순한 가격 차익이 아닌 RWA 시장의 헤게모니를 위해 참여하고 있다고 설명. 골드만 삭스, 마이크로소프트, 딜로이트 등 대형 기관들의 노드 참여를 언급하며 장기적 가치를 시사"
+    },
+    "videoDate": "2025-12-04",
+    "videoTitle": "Why Cantoncoin (CC) Listed During November's Fear Zone",
+    "confidence": "HIGH",
+    "timeframe": "LONG",
+    "conditional": false,
+    "skinInGame": false,
+    "hedged": false
+  },
+  {
+    "id": 1091,
+    "influencer": "코린이 아빠",
+    "stock": "THAR",
+    "stockName": "타르 (THAR)",
+    "signalType": "BUY",
+    "content": "저는 네. 당연히이 블록체인과이 CC코인과이 매집 회사에 투자를 강행했습니다. 했어요. 네. 포션은 뭐 제가 정확하게 말씀드릴 순 없지만 어떻든 지금 포션을 저는 늘려가고 있는 중입니다.",
+    "timestamp": "[11:56]",
+    "youtubeLink": "https://youtube.com/watch?v=5HFHld3F5as&t=716s",
+    "analysis": {
+      "summary": "캐시우드가 타르에 5억 4천만 달러를 투자한 이유를 분석하며, 월스트리트가 RWA를 퍼블릭...",
+      "detail": "캐시우드가 타르에 5억 4천만 달러를 투자한 이유를 분석하며, 월스트리트가 RWA를 퍼블릭 체인에 양보할 생각이 없다는 판단 하에 CC코인 매집 회사인 타르에 본인도 투자했다고 밝힘"
+    },
+    "videoDate": "2025-12-03",
+    "videoTitle": "Why Cashwood Invested in THAR, a Zackcoin Collecting Company",
+    "confidence": "HIGH",
+    "timeframe": "LONG",
+    "conditional": false,
+    "skinInGame": true,
+    "hedged": false
+  },
+  {
+    "id": 1092,
+    "influencer": "코린이 아빠",
+    "stock": "CC",
+    "stockName": "캔톤네트워크 (CC)",
+    "signalType": "POSITIVE",
+    "content": "CC 코인은이 기관들이이 거래를 할 때 사용되는 네트워크 수수료 코인입니다. 네. 그래서 이게 예측 가능한 수수료 구조이기 때문에 그래요.",
+    "timestamp": "[7:51]",
+    "youtubeLink": "https://youtube.com/watch?v=5HFHld3F5as&t=471s",
+    "analysis": {
+      "summary": "CC코인의 기술적 구조와 기관 친화적 특성을 설명하며, 예측 가능한 수수료 구조와 시장 가...",
+      "detail": "CC코인의 기술적 구조와 기관 친화적 특성을 설명하며, 예측 가능한 수수료 구조와 시장 가치를 정직하게 반영하는 설계에 대해 긍정적으로 평가"
+    },
+    "videoDate": "2025-12-03",
+    "videoTitle": "Why Cashwood Invested in THAR, a Zackcoin Collecting Company",
+    "confidence": "HIGH",
+    "timeframe": "LONG",
+    "conditional": false,
+    "skinInGame": false,
+    "hedged": false
+  },
+  {
+    "id": 1093,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캔톤네트워크 (CC)",
@@ -1937,70 +2000,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1068,
-    "influencer": "코린이 아빠",
-    "stock": "CC",
-    "stockName": "캔톤네트워크 (CC)",
-    "signalType": "POSITIVE",
-    "content": "기관들은 블록체인의 해계모니를 원합니다. 그들은 CC코인의 당장의 가격이 뭐 이게 두 배가고 300하고 관심이 없습니다. 골드만 삭스가 그걸 위해서 이걸 했겠습니까? 마이크로소프트하고 지금 딜로이트하고 전부 노드르에 참여를 하고 있거든요.",
-    "timestamp": "[4:58]",
-    "youtubeLink": "https://youtube.com/watch?v=Qwdgrkfs-hE&t=298s",
-    "analysis": {
-      "summary": "화자는 CC코인이 11월 공포 구간에 상장한 이유를 분석하면서, 기관들이 단순한 가격 차익...",
-      "detail": "화자는 CC코인이 11월 공포 구간에 상장한 이유를 분석하면서, 기관들이 단순한 가격 차익이 아닌 RWA 시장의 헤게모니를 위해 참여하고 있다고 설명. 골드만 삭스, 마이크로소프트, 딜로이트 등 대형 기관들의 노드 참여를 언급하며 장기적 가치를 시사"
-    },
-    "videoDate": "2025-12-03",
-    "videoTitle": "Why Cantoncoin (CC) Listed During November's Fear Zone",
-    "confidence": "HIGH",
-    "timeframe": "LONG",
-    "conditional": false,
-    "skinInGame": false,
-    "hedged": false
-  },
-  {
-    "id": 1017,
-    "influencer": "코린이 아빠",
-    "stock": "THAR",
-    "stockName": "타르 (THAR)",
-    "signalType": "BUY",
-    "content": "저는 네. 당연히이 블록체인과이 CC코인과이 매집 회사에 투자를 강행했습니다. 했어요. 네. 포션은 뭐 제가 정확하게 말씀드릴 순 없지만 어떻든 지금 포션을 저는 늘려가고 있는 중입니다.",
-    "timestamp": "[11:56]",
-    "youtubeLink": "https://youtube.com/watch?v=5HFHld3F5as&t=716s",
-    "analysis": {
-      "summary": "캐시우드가 타르에 5억 4천만 달러를 투자한 이유를 분석하며, 월스트리트가 RWA를 퍼블릭...",
-      "detail": "캐시우드가 타르에 5억 4천만 달러를 투자한 이유를 분석하며, 월스트리트가 RWA를 퍼블릭 체인에 양보할 생각이 없다는 판단 하에 CC코인 매집 회사인 타르에 본인도 투자했다고 밝힘"
-    },
-    "videoDate": "2025-12-02",
-    "videoTitle": "Why Cashwood Invested in THAR, a Zackcoin Collecting Company",
-    "confidence": "HIGH",
-    "timeframe": "LONG",
-    "conditional": false,
-    "skinInGame": true,
-    "hedged": false
-  },
-  {
-    "id": 1018,
-    "influencer": "코린이 아빠",
-    "stock": "CC",
-    "stockName": "캔톤네트워크 (CC)",
-    "signalType": "POSITIVE",
-    "content": "CC 코인은이 기관들이이 거래를 할 때 사용되는 네트워크 수수료 코인입니다. 네. 그래서 이게 예측 가능한 수수료 구조이기 때문에 그래요.",
-    "timestamp": "[7:51]",
-    "youtubeLink": "https://youtube.com/watch?v=5HFHld3F5as&t=471s",
-    "analysis": {
-      "summary": "CC코인의 기술적 구조와 기관 친화적 특성을 설명하며, 예측 가능한 수수료 구조와 시장 가...",
-      "detail": "CC코인의 기술적 구조와 기관 친화적 특성을 설명하며, 예측 가능한 수수료 구조와 시장 가치를 정직하게 반영하는 설계에 대해 긍정적으로 평가"
-    },
-    "videoDate": "2025-12-02",
-    "videoTitle": "Why Cashwood Invested in THAR, a Zackcoin Collecting Company",
-    "confidence": "HIGH",
-    "timeframe": "LONG",
-    "conditional": false,
-    "skinInGame": false,
-    "hedged": false
-  },
-  {
-    "id": 1016,
+    "id": 1094,
     "influencer": "코린이 아빠",
     "stock": "XRP",
     "stockName": "XRP",
@@ -2021,7 +2021,28 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1159,
+    "id": 1095,
+    "influencer": "코린이 아빠",
+    "stock": "CC",
+    "stockName": "캔톤네트워크 (CC)",
+    "signalType": "POSITIVE",
+    "content": "월가의 큰 손들이네 직접 만들었습니다. 골드만 삭스가 가장 대표적인 파트너고 그다음에네 프랑스 최고의 은행 도이치뱅크부터 해가죠. 독일 최대 은행 그리고 시카고 옵션 거래소. 예. 거대한 기업들이 지금 다 들어와 있죠.",
+    "timestamp": "[1:44]",
+    "youtubeLink": "https://youtube.com/watch?v=ijzQXeQv8co&t=104s",
+    "analysis": {
+      "summary": "화자가 CC코인(캔톤네트워크)을 소개하면서 월가 대형 금융기관들이 참여하고 있다는 점을 강...",
+      "detail": "화자가 CC코인(캔톤네트워크)을 소개하면서 월가 대형 금융기관들이 참여하고 있다는 점을 강조. 하지만 투자 주의를 당부하고 다음 영상에서 허점을 다룰 것이라고 예고하며 hedged 발언"
+    },
+    "videoDate": "2025-11-28",
+    "videoTitle": "Monopolizing the $2 trillion RWA market. Introducing the Wall Street tycoon's secret \"CC Coin\" pr...",
+    "confidence": "MEDIUM",
+    "timeframe": "LONG",
+    "conditional": false,
+    "skinInGame": true,
+    "hedged": true
+  },
+  {
+    "id": 1096,
     "influencer": "코린이 아빠",
     "stock": "CC",
     "stockName": "캐톤네트워크 (CC)",
@@ -2042,28 +2063,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1138,
-    "influencer": "코린이 아빠",
-    "stock": "CC",
-    "stockName": "캔톤네트워크 (CC)",
-    "signalType": "POSITIVE",
-    "content": "월가의 큰 손들이네 직접 만들었습니다. 골드만 삭스가 가장 대표적인 파트너고 그다음에네 프랑스 최고의 은행 도이치뱅크부터 해가죠. 독일 최대 은행 그리고 시카고 옵션 거래소. 예. 거대한 기업들이 지금 다 들어와 있죠.",
-    "timestamp": "[1:44]",
-    "youtubeLink": "https://youtube.com/watch?v=ijzQXeQv8co&t=104s",
-    "analysis": {
-      "summary": "화자가 CC코인(캔톤네트워크)을 소개하면서 월가 대형 금융기관들이 참여하고 있다는 점을 강...",
-      "detail": "화자가 CC코인(캔톤네트워크)을 소개하면서 월가 대형 금융기관들이 참여하고 있다는 점을 강조. 하지만 투자 주의를 당부하고 다음 영상에서 허점을 다룰 것이라고 예고하며 hedged 발언"
-    },
-    "videoDate": "2025-11-27",
-    "videoTitle": "Monopolizing the $2 trillion RWA market. Introducing the Wall Street tycoon's secret \"CC Coin\" pr...",
-    "confidence": "MEDIUM",
-    "timeframe": "LONG",
-    "conditional": false,
-    "skinInGame": true,
-    "hedged": true
-  },
-  {
-    "id": 1126,
+    "id": 1097,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -2075,7 +2075,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "비트마인이 20% 상승한 상황에서 이더리움이 동반 상승하지 않아 혼자서는 지속적 상승이 어...",
       "detail": "비트마인이 20% 상승한 상황에서 이더리움이 동반 상승하지 않아 혼자서는 지속적 상승이 어렵다는 분석과 함께 추매 경고"
     },
-    "videoDate": "2025-11-25",
+    "videoDate": "2025-11-26",
     "videoTitle": "\"Why aren't Ethereum and Bitcoin going? The culprit is Bitcoin.\"",
     "confidence": "MEDIUM",
     "timeframe": "SHORT",
@@ -2084,7 +2084,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1127,
+    "id": 1098,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -2096,7 +2096,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "반감기와 무관하게 스테이블코인과 대기업 코인 출시로 인한 시장 파이 확장으로 장기적 슈퍼사...",
       "detail": "반감기와 무관하게 스테이블코인과 대기업 코인 출시로 인한 시장 파이 확장으로 장기적 슈퍼사이클 전망"
     },
-    "videoDate": "2025-11-25",
+    "videoDate": "2025-11-26",
     "videoTitle": "\"Why aren't Ethereum and Bitcoin going? The culprit is Bitcoin.\"",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -2105,7 +2105,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1128,
+    "id": 1099,
     "influencer": "코린이 아빠",
     "stock": "비트코인",
     "stockName": "비트코인",
@@ -2117,7 +2117,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "비트코인 장기 홀더들의 매도와 4년 사이클 종료 인식으로 인해 이더리움과 비트마인의 상승을...",
       "detail": "비트코인 장기 홀더들의 매도와 4년 사이클 종료 인식으로 인해 이더리움과 비트마인의 상승을 제약하고 있다는 분석"
     },
-    "videoDate": "2025-11-25",
+    "videoDate": "2025-11-26",
     "videoTitle": "\"Why aren't Ethereum and Bitcoin going? The culprit is Bitcoin.\"",
     "confidence": "MEDIUM",
     "timeframe": "MID",
@@ -2126,7 +2126,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": true
   },
   {
-    "id": 1123,
+    "id": 1100,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -2147,7 +2147,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1124,
+    "id": 1101,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -2168,7 +2168,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1041,
+    "id": 1102,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -2189,7 +2189,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1088,
+    "id": 1103,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -2201,7 +2201,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "AI 위험성과 청산 공포로 인한 패닉셀로 롱 포지션 전량 정리...",
       "detail": "AI 위험성과 청산 공포로 인한 패닉셀로 롱 포지션 전량 정리"
     },
-    "videoDate": "2025-11-14",
+    "videoDate": "2025-11-15",
     "videoTitle": "\"After BMNR's severance, Corin's father makes excuses.\"",
     "confidence": "HIGH",
     "timeframe": "SHORT",
@@ -2210,7 +2210,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1089,
+    "id": 1104,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -2222,7 +2222,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "위험 관리 차원에서 레버리지 상품인 비트마인 전량 매도...",
       "detail": "위험 관리 차원에서 레버리지 상품인 비트마인 전량 매도"
     },
-    "videoDate": "2025-11-14",
+    "videoDate": "2025-11-15",
     "videoTitle": "\"After BMNR's severance, Corin's father makes excuses.\"",
     "confidence": "HIGH",
     "timeframe": "SHORT",
@@ -2231,7 +2231,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1160,
+    "id": 1105,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -2243,7 +2243,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "피터 틸의 지분 매각이 악재가 아니라고 강조하며, 이는 벤처투자 회사의 일반적인 익절 패턴...",
       "detail": "피터 틸의 지분 매각이 악재가 아니라고 강조하며, 이는 벤처투자 회사의 일반적인 익절 패턴이라고 설명"
     },
-    "videoDate": "2025-11-14",
+    "videoDate": "2025-11-15",
     "videoTitle": "BMNR Breaking News - The Real Implications of Peter Thiel's Sale and CEO Change",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -2252,7 +2252,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1154,
+    "id": 1106,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -2264,7 +2264,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "중국 AI(키미 K2)의 GPT 능가 성능에 대한 우려와 AI 버블 붕괴 가능성에 따른 패...",
       "detail": "중국 AI(키미 K2)의 GPT 능가 성능에 대한 우려와 AI 버블 붕괴 가능성에 따른 패닉 매도 실행"
     },
-    "videoDate": "2025-11-13",
+    "videoDate": "2025-11-14",
     "videoTitle": "\"What did Son Jeong-ui hear? As a Corin, I panicked about BMNR.\"",
     "confidence": "HIGH",
     "timeframe": "SHORT",
@@ -2273,7 +2273,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1155,
+    "id": 1107,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -2285,7 +2285,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "미국 주식은 매각했지만 이더리움은 변동성이 상대적으로 작다고 판단하여 보유 유지...",
       "detail": "미국 주식은 매각했지만 이더리움은 변동성이 상대적으로 작다고 판단하여 보유 유지"
     },
-    "videoDate": "2025-11-13",
+    "videoDate": "2025-11-14",
     "videoTitle": "\"What did Son Jeong-ui hear? As a Corin, I panicked about BMNR.\"",
     "confidence": "MEDIUM",
     "timeframe": "MID",
@@ -2294,7 +2294,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1156,
+    "id": 1108,
     "influencer": "코린이 아빠",
     "stock": "미국 주식",
     "stockName": "미국 주식",
@@ -2306,7 +2306,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "AI 패권 경쟁의 불확실성과 중국 AI 기술 발전에 따른 시장 전망 불투명으로 관망 결정...",
       "detail": "AI 패권 경쟁의 불확실성과 중국 AI 기술 발전에 따른 시장 전망 불투명으로 관망 결정"
     },
-    "videoDate": "2025-11-13",
+    "videoDate": "2025-11-14",
     "videoTitle": "\"What did Son Jeong-ui hear? As a Corin, I panicked about BMNR.\"",
     "confidence": "MEDIUM",
     "timeframe": "MID",
@@ -2315,7 +2315,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1073,
+    "id": 1109,
     "influencer": "코린이 아빠",
     "stock": "NVDA",
     "stockName": "엔비디아 (NVDA)",
@@ -2336,7 +2336,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1074,
+    "id": 1110,
     "influencer": "코린이 아빠",
     "stock": "PLTR",
     "stockName": "팔란티어 (PLTR)",
@@ -2357,7 +2357,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1075,
+    "id": 1111,
     "influencer": "코린이 아빠",
     "stock": "ORCL",
     "stockName": "오라클 (ORCL)",
@@ -2378,7 +2378,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1076,
+    "id": 1112,
     "influencer": "코린이 아빠",
     "stock": "META",
     "stockName": "메타 (META)",
@@ -2399,7 +2399,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1077,
+    "id": 1113,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -2420,7 +2420,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1005,
+    "id": 1114,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -2441,7 +2441,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1006,
+    "id": 1115,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -2462,7 +2462,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1044,
+    "id": 1116,
     "influencer": "코린이 아빠",
     "stock": "비트코인",
     "stockName": "비트코인",
@@ -2474,7 +2474,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "글로벌 M2와 비트코인의 상관관계가 깨졌다고 주장. 2025년 들어 상관계수가 0.36까지...",
       "detail": "글로벌 M2와 비트코인의 상관관계가 깨졌다고 주장. 2025년 들어 상관계수가 0.36까지 떨어졌으며, 비트코인이 미국 자산화되고 기관 중심으로 움직이면서 달러에 종속되었다는 분석"
     },
-    "videoDate": "2025-11-07",
+    "videoDate": "2025-11-08",
     "videoTitle": "The global M2 myth is over. Bitcoin is tied to the dollar.",
     "confidence": "HIGH",
     "timeframe": "MID",
@@ -2483,7 +2483,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1045,
+    "id": 1117,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -2495,7 +2495,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "다음 영상 예고로 언급된 내용으로, 이더리움에 대한 부정적 전망을 시사...",
       "detail": "다음 영상 예고로 언급된 내용으로, 이더리움에 대한 부정적 전망을 시사"
     },
-    "videoDate": "2025-11-07",
+    "videoDate": "2025-11-08",
     "videoTitle": "The global M2 myth is over. Bitcoin is tied to the dollar.",
     "confidence": "MEDIUM",
     "timeframe": "MID",
@@ -2504,7 +2504,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1136,
+    "id": 1118,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -2516,7 +2516,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "이더리움이 3,000달러 무너질 뻔하는 상황에서 공포로 인해 직접 매도 행동을 취함...",
       "detail": "이더리움이 3,000달러 무너질 뻔하는 상황에서 공포로 인해 직접 매도 행동을 취함"
     },
-    "videoDate": "2025-11-04",
+    "videoDate": "2025-11-05",
     "videoTitle": "Is the Ethereum crash due to a hack?",
     "confidence": "HIGH",
     "timeframe": "SHORT",
@@ -2525,7 +2525,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1137,
+    "id": 1119,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -2537,7 +2537,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "플러스 2억까지 갔던 비트마인이 음전으로 강제 전환되는 상황 발생...",
       "detail": "플러스 2억까지 갔던 비트마인이 음전으로 강제 전환되는 상황 발생"
     },
-    "videoDate": "2025-11-04",
+    "videoDate": "2025-11-05",
     "videoTitle": "Is the Ethereum crash due to a hack?",
     "confidence": "HIGH",
     "timeframe": "SHORT",
@@ -2546,7 +2546,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1014,
+    "id": 1120,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -2558,7 +2558,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 401K 관련 법안 시행과 연기금 자금 유입을 근거로 2026년 2-3월까지 홀딩 ...",
       "detail": "화자가 401K 관련 법안 시행과 연기금 자금 유입을 근거로 2026년 2-3월까지 홀딩 의지를 명확히 표현"
     },
-    "videoDate": "2025-10-30",
+    "videoDate": "2025-10-31",
     "videoTitle": "Is Ethereum finally finished? Goodbye, departing holders!",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -2567,7 +2567,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1015,
+    "id": 1121,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -2579,7 +2579,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 본인 포트폴리오에서 비트마인이 꼴찌 수익률이지만 장기적 관점에서 홀딩 의지를 강하게...",
       "detail": "화자가 본인 포트폴리오에서 비트마인이 꼴찌 수익률이지만 장기적 관점에서 홀딩 의지를 강하게 표현"
     },
-    "videoDate": "2025-10-30",
+    "videoDate": "2025-10-31",
     "videoTitle": "Is Ethereum finally finished? Goodbye, departing holders!",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -2588,7 +2588,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1129,
+    "id": 1122,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -2609,7 +2609,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1130,
+    "id": 1123,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -2630,7 +2630,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1080,
+    "id": 1124,
     "influencer": "코린이 아빠",
     "stock": "Circle",
     "stockName": "서클 (Circle)",
@@ -2642,7 +2642,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 서클을 매수 후 10여% 상승했을 때 익절했다고 설명...",
       "detail": "화자가 서클을 매수 후 10여% 상승했을 때 익절했다고 설명"
     },
-    "videoDate": "2025-09-16",
+    "videoDate": "2025-09-17",
     "videoTitle": "Between Cool and Passion – What Does Ethereum Mean to You?",
     "confidence": "MEDIUM",
     "timeframe": "SHORT",
@@ -2651,7 +2651,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1081,
+    "id": 1125,
     "influencer": "코린이 아빠",
     "stock": "BLSH",
     "stockName": "블리시 (BLSH)",
@@ -2663,7 +2663,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 97달러에 매수한 블리시가 크게 하락하자 세금 문제로 손실 처리했다고 언급...",
       "detail": "화자가 97달러에 매수한 블리시가 크게 하락하자 세금 문제로 손실 처리했다고 언급"
     },
-    "videoDate": "2025-09-16",
+    "videoDate": "2025-09-17",
     "videoTitle": "Between Cool and Passion – What Does Ethereum Mean to You?",
     "confidence": "HIGH",
     "timeframe": "SHORT",
@@ -2672,7 +2672,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1082,
+    "id": 1126,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -2684,7 +2684,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 이더리움의 장기적 상승 가능성을 언급하며 열정을 가지고 장기 보유해야 한다고 강조...",
       "detail": "화자가 이더리움의 장기적 상승 가능성을 언급하며 열정을 가지고 장기 보유해야 한다고 강조"
     },
-    "videoDate": "2025-09-16",
+    "videoDate": "2025-09-17",
     "videoTitle": "Between Cool and Passion – What Does Ethereum Mean to You?",
     "confidence": "MEDIUM",
     "timeframe": "LONG",
@@ -2693,7 +2693,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1078,
+    "id": 1127,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -2714,7 +2714,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1079,
+    "id": 1128,
     "influencer": "코린이 아빠",
     "stock": "월드코인",
     "stockName": "월드코인",
@@ -2735,7 +2735,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1054,
+    "id": 1129,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -2747,7 +2747,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "FOMO(공포 심리)가 아직 오지 않았다고 판단하며, 보수적인 투자자들이 아직 진입하지 않...",
       "detail": "FOMO(공포 심리)가 아직 오지 않았다고 판단하며, 보수적인 투자자들이 아직 진입하지 않은 상황을 이더리움의 상승 여력이 남아있다는 긍정적 신호로 해석"
     },
-    "videoDate": "2025-09-10",
+    "videoDate": "2025-09-11",
     "videoTitle": "Ethereum Unstaking for 57 Days? Is This a Sign of a Crash?",
     "confidence": "MEDIUM",
     "timeframe": "LONG",
@@ -2756,7 +2756,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1109,
+    "id": 1130,
     "influencer": "코린이 아빠",
     "stock": "PENGU",
     "stockName": "퍼지펭귄 (PENGU)",
@@ -2768,7 +2768,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 과거에 놓쳤던 퍼지펭귄에 대해 지난 주말에 실제로 매수했다고 밝히면서, 앞으로 더 ...",
       "detail": "화자가 과거에 놓쳤던 퍼지펭귄에 대해 지난 주말에 실제로 매수했다고 밝히면서, 앞으로 더 상승할 것 같다는 전망을 표현"
     },
-    "videoDate": "2025-09-07",
+    "videoDate": "2025-09-08",
     "videoTitle": "Peter Thiel Swallows Memecoin – The Secret of Fuzzy Penguin",
     "confidence": "MEDIUM",
     "timeframe": "MID",
@@ -2777,7 +2777,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1100,
+    "id": 1131,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -2789,7 +2789,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 비트마인 투자자들이 현재 손실(물림) 상태에 있다고 직접적으로 인정하며, 이더리움 ...",
       "detail": "화자가 비트마인 투자자들이 현재 손실(물림) 상태에 있다고 직접적으로 인정하며, 이더리움 대비 40% 이상 하락한 상황을 설명"
     },
-    "videoDate": "2025-09-04",
+    "videoDate": "2025-09-05",
     "videoTitle": "비트마인(BMNR)에 저는 물린건가요?",
     "confidence": "HIGH",
     "timeframe": "SHORT",
@@ -2798,7 +2798,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1101,
+    "id": 1132,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -2810,7 +2810,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "비트마인 대비 이더리움이 더 안전한 투자처라고 판단하며, 초보 투자자들에게 이더리움을 추천...",
       "detail": "비트마인 대비 이더리움이 더 안전한 투자처라고 판단하며, 초보 투자자들에게 이더리움을 추천. 화자 본인도 이더리움 포지션 보유 중"
     },
-    "videoDate": "2025-09-04",
+    "videoDate": "2025-09-05",
     "videoTitle": "비트마인(BMNR)에 저는 물린건가요?",
     "confidence": "MEDIUM",
     "timeframe": "MID",
@@ -2819,7 +2819,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1042,
+    "id": 1133,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -2831,7 +2831,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "국민연금이 비트마인을 담지 않는 상황을 비판하며, 국민연금이 비트마인에 투자해야 한다고 강...",
       "detail": "국민연금이 비트마인을 담지 않는 상황을 비판하며, 국민연금이 비트마인에 투자해야 한다고 강력히 주장"
     },
-    "videoDate": "2025-08-20",
+    "videoDate": "2025-08-21",
     "videoTitle": "Why the National Pension Service Can't Hold Bitcoin (BMNR)",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -2840,7 +2840,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1043,
+    "id": 1134,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -2852,7 +2852,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "'1국민 1이더리움' 캠페인을 통해 모든 국민이 이더리움을 보유해야 한다고 주장하며, 60...",
       "detail": "'1국민 1이더리움' 캠페인을 통해 모든 국민이 이더리움을 보유해야 한다고 주장하며, 600만원으로 구매 가능하다고 언급"
     },
-    "videoDate": "2025-08-20",
+    "videoDate": "2025-08-21",
     "videoTitle": "Why the National Pension Service Can't Hold Bitcoin (BMNR)",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -2861,7 +2861,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1002,
+    "id": 1135,
     "influencer": "코린이 아빠",
     "stock": "ATNF",
     "stockName": "이더질라 (ATNF)",
@@ -2873,7 +2873,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 피터틸의 유사한 투자 패턴이 반복될 경우 초반 매수에 대한 조건부 긍정적 전망을 제...",
       "detail": "화자가 피터틸의 유사한 투자 패턴이 반복될 경우 초반 매수에 대한 조건부 긍정적 전망을 제시"
     },
-    "videoDate": "2025-08-15",
+    "videoDate": "2025-08-16",
     "videoTitle": "Is Peter Thiel investing in the next Bitcoin? What is Etherzilla (ATNF)?",
     "confidence": "MEDIUM",
     "timeframe": "SHORT",
@@ -2882,7 +2882,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": true
   },
   {
-    "id": 1003,
+    "id": 1136,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -2894,7 +2894,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "피터틸과 관련 투자자들의 이더리움에 대한 강한 투자 의지를 분석하며 장기적 긍정 전망 표현...",
       "detail": "피터틸과 관련 투자자들의 이더리움에 대한 강한 투자 의지를 분석하며 장기적 긍정 전망 표현"
     },
-    "videoDate": "2025-08-15",
+    "videoDate": "2025-08-16",
     "videoTitle": "Is Peter Thiel investing in the next Bitcoin? What is Etherzilla (ATNF)?",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -2903,7 +2903,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1163,
+    "id": 1137,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -2924,7 +2924,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1164,
+    "id": 1138,
     "influencer": "코린이 아빠",
     "stock": "샤프링크",
     "stockName": "샤프링크",
@@ -2945,7 +2945,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": true
   },
   {
-    "id": 1011,
+    "id": 1139,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -2957,7 +2957,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "비트마인의 변동성과 위험성을 경고하며, 리스크를 감당할 수 없다면 투자하지 말라고 조언...",
       "detail": "비트마인의 변동성과 위험성을 경고하며, 리스크를 감당할 수 없다면 투자하지 말라고 조언"
     },
-    "videoDate": "2025-08-04",
+    "videoDate": "2025-08-05",
     "videoTitle": "“Sharplink is up… but why is Bitmine (BMNR) stock price like this?”",
     "confidence": "MEDIUM",
     "timeframe": "MID",
@@ -2966,7 +2966,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1012,
+    "id": 1140,
     "influencer": "코린이 아빠",
     "stock": "엔비디아",
     "stockName": "엔비디아",
@@ -2978,7 +2978,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "비트마인 대신 안전한 투자처로 엔비디아 추천, 고가지만 지속 상승 전망...",
       "detail": "비트마인 대신 안전한 투자처로 엔비디아 추천, 고가지만 지속 상승 전망"
     },
-    "videoDate": "2025-08-04",
+    "videoDate": "2025-08-05",
     "videoTitle": "“Sharplink is up… but why is Bitmine (BMNR) stock price like this?”",
     "confidence": "MEDIUM",
     "timeframe": "LONG",
@@ -2987,7 +2987,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": true
   },
   {
-    "id": 1013,
+    "id": 1141,
     "influencer": "코린이 아빠",
     "stock": "PLTR",
     "stockName": "팔란티어 (PLTR)",
@@ -2999,7 +2999,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "비트마인 대신 안전한 투자처로 팔란티어 추천, 고가지만 지속 상승 전망...",
       "detail": "비트마인 대신 안전한 투자처로 팔란티어 추천, 고가지만 지속 상승 전망"
     },
-    "videoDate": "2025-08-04",
+    "videoDate": "2025-08-05",
     "videoTitle": "“Sharplink is up… but why is Bitmine (BMNR) stock price like this?”",
     "confidence": "MEDIUM",
     "timeframe": "LONG",
@@ -3008,7 +3008,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": true
   },
   {
-    "id": 1161,
+    "id": 1142,
     "influencer": "코린이 아빠",
     "stock": "XRP",
     "stockName": "XRP",
@@ -3020,7 +3020,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 XRP에 대한 7가지 의심점을 제시하며 전량 매도했다고 밝힘. 리플과 XRP 분리,...",
       "detail": "화자가 XRP에 대한 7가지 의심점을 제시하며 전량 매도했다고 밝힘. 리플과 XRP 분리, SBI 투자가 토큰이 아닌 주식, RLUSD 개발로 XRP 필요성 감소, IPO 계획, 창업자 익절, CEO 복장 등을 근거로 제시"
     },
-    "videoDate": "2025-08-01",
+    "videoDate": "2025-08-02",
     "videoTitle": "Why I Sold 100% of My XRP and Invested in Ripple",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -3029,7 +3029,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1162,
+    "id": 1143,
     "influencer": "코린이 아빠",
     "stock": "SBI홀딩스",
     "stockName": "SBI홀딩스",
@@ -3041,7 +3041,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "XRP를 전량 매도하고 대신 리플 지분 8-9%를 보유한 SBI홀딩스에 투자. 리플 IPO...",
       "detail": "XRP를 전량 매도하고 대신 리플 지분 8-9%를 보유한 SBI홀딩스에 투자. 리플 IPO시 수혜 기대하지만 '가설'이라고 언급하며 불확실성 표현"
     },
-    "videoDate": "2025-08-01",
+    "videoDate": "2025-08-02",
     "videoTitle": "Why I Sold 100% of My XRP and Invested in Ripple",
     "confidence": "MEDIUM",
     "timeframe": "LONG",
@@ -3050,7 +3050,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": true
   },
   {
-    "id": 1047,
+    "id": 1144,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -3062,7 +3062,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 피터 틸의 페이팔 마피아 철학과 이더리움 생태계를 연결하여 BMNR에 대한 강한 확...",
       "detail": "화자가 피터 틸의 페이팔 마피아 철학과 이더리움 생태계를 연결하여 BMNR에 대한 강한 확신을 표현하며 본인이 실제로 투자했다고 밝힘"
     },
-    "videoDate": "2025-07-31",
+    "videoDate": "2025-08-01",
     "videoTitle": "The Big Picture of Bitmine (BMNR) and Peter Thiel",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -3071,7 +3071,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1009,
+    "id": 1145,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -3083,7 +3083,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "비트마인의 이더리움 5% 지분 확보 전략을 피터 틸의 관점에서 긍정적으로 분석...",
       "detail": "비트마인의 이더리움 5% 지분 확보 전략을 피터 틸의 관점에서 긍정적으로 분석"
     },
-    "videoDate": "2025-07-29",
+    "videoDate": "2025-07-30",
     "videoTitle": "Bitcoin to Become Ethereum's Safe – Why Peter Thiel Chose It",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -3092,7 +3092,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1010,
+    "id": 1146,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -3104,7 +3104,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "크립토 3법에서 4년 이상 유지된 탈중앙화 블록체인 기준을 통과할 수 있는 대표적 블록체인...",
       "detail": "크립토 3법에서 4년 이상 유지된 탈중앙화 블록체인 기준을 통과할 수 있는 대표적 블록체인으로 이더리움을 언급"
     },
-    "videoDate": "2025-07-29",
+    "videoDate": "2025-07-30",
     "videoTitle": "Bitcoin to Become Ethereum's Safe – Why Peter Thiel Chose It",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -3113,7 +3113,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1046,
+    "id": 1147,
     "influencer": "코린이 아빠",
     "stock": "XRP",
     "stockName": "XRP",
@@ -3125,7 +3125,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "XRP의 핵심 네러티브인 스위프트 대체에 대해 의문을 제기하며 투자자들에게 재고를 요구...",
       "detail": "XRP의 핵심 네러티브인 스위프트 대체에 대해 의문을 제기하며 투자자들에게 재고를 요구"
     },
-    "videoDate": "2025-07-27",
+    "videoDate": "2025-07-28",
     "videoTitle": "The Inconvenient Truth for Those Who Believe in XRP",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -3134,7 +3134,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1049,
+    "id": 1148,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -3146,7 +3146,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "비트마인의 공격적 매집 전략으로 인해 이더리움 상승 시 빠른 주가 상승 예상...",
       "detail": "비트마인의 공격적 매집 전략으로 인해 이더리움 상승 시 빠른 주가 상승 예상"
     },
-    "videoDate": "2025-07-25",
+    "videoDate": "2025-07-26",
     "videoTitle": "Bitmine vs. Sharplink: Who Will Win the Ethereum Accumulation War?",
     "confidence": "HIGH",
     "timeframe": "SHORT",
@@ -3155,7 +3155,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1050,
+    "id": 1149,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -3167,7 +3167,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "이더리움이 현재 횡보하는 이유를 기관 매집 미완료로 설명하며, 향후 상승 가능성을 시사...",
       "detail": "이더리움이 현재 횡보하는 이유를 기관 매집 미완료로 설명하며, 향후 상승 가능성을 시사"
     },
-    "videoDate": "2025-07-25",
+    "videoDate": "2025-07-26",
     "videoTitle": "Bitmine vs. Sharplink: Who Will Win the Ethereum Accumulation War?",
     "confidence": "MEDIUM",
     "timeframe": "MID",
@@ -3176,7 +3176,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1099,
+    "id": 1150,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -3188,7 +3188,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 이더리움이 현재 사이클의 주인공이 될 가능성이 매우 높다고 명시적으로 전망을 밝힘...",
       "detail": "화자가 이더리움이 현재 사이클의 주인공이 될 가능성이 매우 높다고 명시적으로 전망을 밝힘"
     },
-    "videoDate": "2025-07-24",
+    "videoDate": "2025-07-25",
     "videoTitle": "Is Ethereum Staking Just Interest?",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -3197,7 +3197,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1051,
+    "id": 1151,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -3218,7 +3218,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1052,
+    "id": 1152,
     "influencer": "코린이 아빠",
     "stock": "체인링크",
     "stockName": "체인링크",
@@ -3239,7 +3239,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1053,
+    "id": 1153,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -3260,7 +3260,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1023,
+    "id": 1154,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -3272,7 +3272,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "현재를 불장 초기로 보며 이더리움의 상승 가능성을 긍정적으로 전망...",
       "detail": "현재를 불장 초기로 보며 이더리움의 상승 가능성을 긍정적으로 전망"
     },
-    "videoDate": "2025-07-19",
+    "videoDate": "2025-07-20",
     "videoTitle": "Is Peter Thiel Behind Ethereum? (Part 3 of the Passage of the Crypto 3 Laws)",
     "confidence": "MEDIUM",
     "timeframe": "MID",
@@ -3281,7 +3281,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1024,
+    "id": 1155,
     "influencer": "코린이 아빠",
     "stock": "BMNR",
     "stockName": "비트마인 (BMNR)",
@@ -3293,7 +3293,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "화자가 피터틸의 투자와 연결하여 자신도 비트마인에 투자했다고 밝힘...",
       "detail": "화자가 피터틸의 투자와 연결하여 자신도 비트마인에 투자했다고 밝힘"
     },
-    "videoDate": "2025-07-19",
+    "videoDate": "2025-07-20",
     "videoTitle": "Is Peter Thiel Behind Ethereum? (Part 3 of the Passage of the Crypto 3 Laws)",
     "confidence": "MEDIUM",
     "timeframe": "LONG",
@@ -3302,7 +3302,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1025,
+    "id": 1156,
     "influencer": "코린이 아빠",
     "stock": "XRP",
     "stockName": "XRP",
@@ -3314,7 +3314,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "자신의 포트폴리오에서 XRP 비중이 과도하게 높아 리스크를 우려...",
       "detail": "자신의 포트폴리오에서 XRP 비중이 과도하게 높아 리스크를 우려"
     },
-    "videoDate": "2025-07-19",
+    "videoDate": "2025-07-20",
     "videoTitle": "Is Peter Thiel Behind Ethereum? (Part 3 of the Passage of the Crypto 3 Laws)",
     "confidence": "MEDIUM",
     "timeframe": "SHORT",
@@ -3323,7 +3323,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1120,
+    "id": 1157,
     "influencer": "코린이 아빠",
     "stock": "알트코인",
     "stockName": "알트코인",
@@ -3344,7 +3344,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1121,
+    "id": 1158,
     "influencer": "코린이 아빠",
     "stock": "스테이블코인",
     "stockName": "스테이블코인",
@@ -3365,7 +3365,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1122,
+    "id": 1159,
     "influencer": "코린이 아빠",
     "stock": "XRP",
     "stockName": "XRP",
@@ -3386,7 +3386,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1149,
+    "id": 1160,
     "influencer": "코린이 아빠",
     "stock": "이더리움",
     "stockName": "이더리움",
@@ -3407,7 +3407,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1150,
+    "id": 1161,
     "influencer": "코린이 아빠",
     "stock": "솔라나",
     "stockName": "솔라나",
@@ -3428,7 +3428,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1151,
+    "id": 1162,
     "influencer": "코린이 아빠",
     "stock": "XRP",
     "stockName": "XRP",
@@ -3449,7 +3449,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": true
   },
   {
-    "id": 1152,
+    "id": 1163,
     "influencer": "코린이 아빠",
     "stock": "Circle",
     "stockName": "서클 (Circle)",
@@ -3470,7 +3470,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1139,
+    "id": 1164,
     "influencer": "코린이 아빠",
     "stock": "XRP",
     "stockName": "XRP",
@@ -3491,7 +3491,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1140,
+    "id": 1165,
     "influencer": "코린이 아빠",
     "stock": "ENA",
     "stockName": "삼성이엔지니어링 (ENA)",
@@ -3512,7 +3512,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1141,
+    "id": 1166,
     "influencer": "코린이 아빠",
     "stock": "코스피",
     "stockName": "코스피",
@@ -3533,7 +3533,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1119,
+    "id": 1167,
     "influencer": "코린이 아빠",
     "stock": "XRP",
     "stockName": "XRP",
@@ -3545,7 +3545,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "summary": "GPT를 통해 학습한 결과, RLUSD가 XRP의 브릿지 역할을 대체할 수 있다는 기술적 ...",
       "detail": "GPT를 통해 학습한 결과, RLUSD가 XRP의 브릿지 역할을 대체할 수 있다는 기술적 가능성에 대한 우려"
     },
-    "videoDate": "2025-05-20",
+    "videoDate": "2025-05-21",
     "videoTitle": "Is Ripple Ditching XRP Now?",
     "confidence": "HIGH",
     "timeframe": "LONG",
@@ -3554,7 +3554,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "hedged": false
   },
   {
-    "id": 1098,
+    "id": 1168,
     "influencer": "코린이 아빠",
     "stock": "XRP",
     "stockName": "XRP",

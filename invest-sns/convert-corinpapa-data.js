@@ -40,7 +40,7 @@ try {
         summary: signal.context ? signal.context.slice(0, 50) + '...' : '분석 내용 없음',
         detail: signal.context || signal.content
       },
-      videoDate: signal.date,
+      videoDate: signal.upload_date,
       videoTitle: signal.title,
       confidence: signal.confidence,
       timeframe: signal.timeframe,
