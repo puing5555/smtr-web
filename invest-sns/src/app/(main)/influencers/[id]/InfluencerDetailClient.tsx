@@ -23,7 +23,8 @@ const SIGNAL_TYPES: Record<string, { label: string; color: string; textColor: st
 export default function InfluencerDetailClient({ id }: { id: string }) {
   const [stockFilter, setStockFilter] = useState('ALL');
   const [displayCount, setDisplayCount] = useState(20); // 처음에 20개 표시
-  const [modalSignal, setModalSignal] = useState<typeof influencerSignals[0] | null>(null); // 모달에 표시할 시그널
+  const [modalSignal, setModalSignal] = useState<typeof influencerSignals[0] | null>(null); // 모달
+  const [showSummary, setShowSummary] = useState(false); // 영상요약 토글에 표시할 시그널
   const { influencers, signals, loadInfluencers, loadSignals } = useInfluencersStore();
 
   useEffect(() => {
@@ -289,7 +290,7 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
                   displayedSignals
                     .sort((a, b) => new Date(b.videoDate).getTime() - new Date(a.videoDate).getTime())
                     .map((signal) => (
-                      <tr key={signal.id} className="hover:bg-gray-50 transition-colors cursor-pointer" onClick={() => setModalSignal(signal)}>
+                      <tr key={signal.id} className="hover:bg-gray-50 transition-colors cursor-pointer" onClick={() => { setModalSignal(signal); setShowSummary(false); }}>
                         <td className="py-4 px-6">
                           <div className="font-medium text-blue-600">{signal.stockName}</div>
                           <div className="text-xs text-gray-500">{signal.stock}</div>
@@ -399,12 +400,6 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
                 <span className="text-sm text-gray-500">{modalSignal.videoDate}</span>
               </div>
 
-              {/* 영상 제목 */}
-              <div>
-                <h5 className="text-sm font-semibold text-gray-700 mb-2">📺 영상 제목</h5>
-                <p className="text-gray-900 font-medium">{modalSignal.videoTitle || '영상 제목 없음'}</p>
-              </div>
-
               {/* 발언 내용 */}
               <div>
                 <h5 className="text-sm font-semibold text-gray-700 mb-2">💬 발언 내용</h5>
@@ -414,59 +409,54 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
                 </div>
               </div>
 
-              {/* 맥락 정보 */}
+              {/* 분석 컨텍스트 */}
               {modalSignal.context && (
                 <div>
-                  <h5 className="text-sm font-semibold text-gray-700 mb-2">🔍 맥락</h5>
+                  <h5 className="text-sm font-semibold text-gray-700 mb-2">🔍 분석 컨텍스트</h5>
                   <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
                     <p className="text-gray-800 leading-relaxed">{modalSignal.context}</p>
                   </div>
                 </div>
               )}
 
-              {/* 분석 요약 */}
-              <div>
-                <h5 className="text-sm font-semibold text-gray-700 mb-2">📊 분석 요약</h5>
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                  <p className="font-medium text-green-900 mb-2">{modalSignal.analysis.summary}</p>
-                  <p className="text-green-800 text-sm leading-relaxed">{modalSignal.analysis.detail}</p>
+              {/* 영상요약 토글 */}
+              {modalSignal.videoSummary && (
+                <div>
+                  <button
+                    onClick={() => setShowSummary(!showSummary)}
+                    className="text-sm text-blue-500 hover:text-blue-700 font-medium flex items-center gap-1"
+                  >
+                    📋 영상요약 {showSummary ? '접기 ▲' : '보기 ▼'}
+                  </button>
+                  {showSummary && (
+                    <div className="mt-2 bg-gray-50 border border-gray-200 rounded-lg p-4">
+                      <p className="text-gray-800 text-sm leading-relaxed">{modalSignal.videoSummary}</p>
+                    </div>
+                  )}
                 </div>
-              </div>
+              )}
 
-              {/* 메타데이터 */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-gray-200">
-                <div>
-                  <span className="text-xs text-gray-500">신뢰도</span>
-                  <div className="font-medium text-gray-900">{modalSignal.confidence || '-'}</div>
-                </div>
-                <div>
-                  <span className="text-xs text-gray-500">시간 프레임</span>
-                  <div className="font-medium text-gray-900">{modalSignal.timeframe || '-'}</div>
-                </div>
-                <div>
-                  <span className="text-xs text-gray-500">조건부</span>
-                  <div className="font-medium text-gray-900">{modalSignal.conditional ? '예' : '아니오'}</div>
-                </div>
-                <div>
-                  <span className="text-xs text-gray-500">실전 투자</span>
-                  <div className="font-medium text-gray-900">{modalSignal.skinInGame ? '예' : '아니오'}</div>
-                </div>
-              </div>
-
-              {/* YouTube 링크 */}
-              {modalSignal.youtubeLink && (
-                <div className="pt-4 border-t border-gray-200">
+              {/* 차트보기 + 영상보기 버튼 */}
+              <div className="flex gap-3 pt-4 border-t border-gray-200">
+                <a
+                  href={`/smtr-web/guru_tracker_v24.html`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium"
+                >
+                  📊 차트보기
+                </a>
+                {modalSignal.youtubeLink && (
                   <a
                     href={modalSignal.youtubeLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm font-medium"
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm font-medium"
                   >
-                    <ExternalLink className="w-4 h-4" />
-                    YouTube에서 원본 영상 보기
+                    ▶ 영상보기
                   </a>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
         </div>

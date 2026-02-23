@@ -21,6 +21,7 @@ export interface CorinpapaSignal {
   conditional: boolean;
   skinInGame: boolean;
   hedged: boolean;
+  videoSummary?: string;
 }
 
 // 실제 시그널 데이터 (169개, 최신순 정렬)
