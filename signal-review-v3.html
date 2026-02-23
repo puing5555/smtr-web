@@ -63,6 +63,7 @@
         .confidence.HIGH { background: #d1fae5; color: #065f46; }
         .confidence.MEDIUM { background: #fef3c7; color: #92400e; }
         .confidence.LOW { background: #fee2e2; color: #991b1b; }
+        .opus-result { background: #f0f4ff; border: 1px solid #c7d2fe; border-radius: 8px; padding: 12px; margin-top: 10px; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -73,6 +74,13 @@
         </div>
         
         <div class="stats" id="stats-container"></div>
+        
+        <div style="text-align:center; margin-bottom:24px;">
+            <span id="opus-count" style="font-size:14px; color:#667eea; font-weight:700;"></span>
+            <br>
+            <button id="opus-review-btn" onclick="startOpusReview()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 28px; border-radius: 12px; border: none; cursor: pointer; font-size: 16px; font-weight: 700; margin-top: 8px; box-shadow: 0 4px 12px rgba(102,126,234,0.3);">🧠 OPUS검토</button>
+            <div id="opus-progress" style="margin-top:8px; font-size:13px; color:#666; display:none;"></div>
+        </div>
         
         <div class="filters">
             <div class="filter-row">
@@ -302,6 +310,128 @@
                 document.getElementById(id).addEventListener('change', render));
             document.getElementById('search-input').addEventListener('input', render);
         }
+        
+        // Opus Review
+        var OPUS_API_URL = '';
+        function loadOpusResults() {
+            try { return JSON.parse(localStorage.getItem('opus-review-results') || '{}'); } catch(e) { return {}; }
+        }
+        function saveOpusResults(r) {
+            try { localStorage.setItem('opus-review-results', JSON.stringify(r)); } catch(e) {}
+        }
+        
+        function updateOpusCount() {
+            var reviews = loadReviews();
+            var rejCount = 0;
+            var opusResults = loadOpusResults();
+            var opusDone = 0;
+            SIGNALS_DATA.forEach(function(sig) {
+                var id = sig.video_id + '_' + sig.asset;
+                if ((reviews[id] || {}).status === 'rejected') {
+                    rejCount++;
+                    if (opusResults[id]) opusDone++;
+                }
+            });
+            var el = document.getElementById('opus-count');
+            if (el) el.textContent = opusDone + '/' + rejCount;
+        }
+        
+        async function startOpusReview() {
+            var reviews = loadReviews();
+            var rejected = [];
+            SIGNALS_DATA.forEach(function(sig) {
+                var id = sig.video_id + '_' + sig.asset;
+                var rev = reviews[id] || {};
+                if (rev.status === 'rejected') {
+                    rejected.push({id: id, signal: sig, reason: rev.reason || ''});
+                }
+            });
+            
+            if (rejected.length === 0) {
+                alert('거부된 시그널이 없습니다.');
+                return;
+            }
+            
+            if (!OPUS_API_URL) {
+                OPUS_API_URL = prompt('Opus API 서버 URL을 입력하세요 (예: http://localhost:8901)', 'http://localhost:8901');
+                if (!OPUS_API_URL) return;
+            }
+            
+            var btn = document.getElementById('opus-review-btn');
+            var prog = document.getElementById('opus-progress');
+            btn.disabled = true;
+            btn.textContent = '🧠 검토 중...';
+            prog.style.display = 'block';
+            
+            var opusResults = loadOpusResults();
+            var done = 0;
+            
+            for (var i = 0; i < rejected.length; i++) {
+                var item = rejected[i];
+                if (opusResults[item.id]) { done++; continue; }
+                
+                prog.textContent = (done+1) + '/' + rejected.length + ' 분석 중: ' + item.signal.asset;
+                
+                try {
+                    var resp = await fetch(OPUS_API_URL + '/api/opus-review', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({signal: item.signal, reason: item.reason})
+                    });
+                    var result = await resp.json();
+                    opusResults[item.id] = result;
+                    saveOpusResults(opusResults);
+                } catch(e) {
+                    prog.textContent = '❌ 오류: ' + e.message;
+                    btn.disabled = false;
+                    btn.textContent = '🧠 OPUS검토';
+                    return;
+                }
+                done++;
+            }
+            
+            prog.textContent = '✅ 완료! ' + done + '개 분석';
+            btn.disabled = false;
+            btn.textContent = '🧠 OPUS검토';
+            updateOpusCount();
+            render();
+        }
+        
+        // Override render to show opus results on rejected cards
+        var _origRender = render;
+        render = function() {
+            _origRender();
+            updateOpusCount();
+            var opusResults = loadOpusResults();
+            var cards = document.querySelectorAll('.signal-card');
+            cards.forEach(function(card) {
+                var reviewBadge = card.querySelector('.review-badge.rejected');
+                if (!reviewBadge) return;
+                
+                // Find signal id from card
+                var idx = parseInt(card.dataset.index);
+                if (isNaN(idx)) return;
+                var sig = SIGNALS_DATA[idx];
+                if (!sig) return;
+                var id = sig.video_id + '_' + sig.asset;
+                var opus = opusResults[id];
+                if (!opus) return;
+                
+                // Don't add twice
+                if (card.querySelector('.opus-result')) return;
+                
+                var agree = opus.agree_with_rejection !== false;
+                var div = document.createElement('div');
+                div.className = 'opus-result';
+                div.innerHTML = '<div class="opus-verdict">' +
+                    '<span class="review-badge ' + (agree ? 'rejected' : 'approved') + '">' + (agree ? '거부 동의' : '거부 반대') + '</span> Opus 검토</div>' +
+                    '<div class="opus-detail">' + esc(opus.reasoning || '') + '</div>' +
+                    (opus.extraction_error ? '<div class="opus-meta">💡 추출 오류: ' + esc(opus.extraction_error) + '</div>' : '') +
+                    (opus.prompt_fix ? '<div class="opus-meta">🔧 프롬프트 개선: ' + esc(opus.prompt_fix) + '</div>' : '') +
+                    (opus.pattern ? '<div style="margin-top:6px;"><span class="opus-pattern">' + esc(opus.pattern) + '</span></div>' : '');
+                card.appendChild(div);
+            });
+        };
         
         document.addEventListener('DOMContentLoaded', function() {
             initFilters();
