@@ -1,6 +1,6 @@
 # PROJECT_STATUS.md
 
-_Last updated: 2026-02-23 10:15 (GMT+7)_
+_Last updated: 2026-02-23 11:51 (GMT+7)_
 
 ## 🏗️ SMTR 프로젝트 (투자자의 세컨드 브레인)
 
@@ -112,6 +112,18 @@ _Last updated: 2026-02-23 10:15 (GMT+7)_
   - **X 다크모드 디자인 일관성**: 글래스모피즘 카드, 호버 효과, 모바일 반응형
   - **인터랙티브 기능**: 필터링 버튼, 시그널 배지, 유튜브 링크, 프로필 카드 호버 효과
   - **차트 서브탭 기존 기능 완전 유지**: v24 차트/마커/툴팁 시스템 그대로 보존
+- **🚀 SMTR v3 완전체 탄생** (2026-02-23):
+  - **v24 guru_tracker를 베이스로 5탭 SPA 완성**: `smtr-v3.html` (8.5MB)
+  - **핵심 전략**: v24를 베이스로 하고 나머지 4탭 추가 (기존 방식 대신)
+  - **인플루언서 탭**: v24 전체 내용 그대로 보존 (종목뷰/인플루언서/랭킹 서브탭 포함)
+  - **v24 CSS/JS 원본 유지**: 차트, 마커, 데이터, 검색, 필터, 툴팁 모든 기능 보존
+  - **하단 5탭바**: v24 디자인 언어 (#0a0e17, #f59e0b), 모바일 고정 하단
+  - **새로운 4개 탭**:
+    - 🏠 대시보드: 빠른이동 카드 + 최신 시그널 + 마켓 요약
+    - 💬 SNS: X(트위터) 스타일 피드 (작성/좋아요/리트윗/공유 기능)
+    - 📰 뉴스: 뉴스 카드 + 카테고리 필터 (증권/가상화폐/경제/기술/공시)
+    - 📝 노트: 노션 스타일 에디터 (사이드바 + 에디터, 검색/저장 기능)
+  - **우상단 프로필 아이콘**: 클릭하면 프로필 패널 (설정/프로필/앱정보)
 
 #### 트랙 3: 알림/데이터 수집
 - 네이버/미국/코인 뉴스 크롤러 완성
@@ -137,7 +149,8 @@ _Last updated: 2026-02-23 10:15 (GMT+7)_
 - `invest-engine/main.py` — 백엔드 메인
 - `invest-engine/src/models.py` — DB 모델
 - `invest-engine/src/collectors/` — 뉴스 크롤러들
-- `invest-sns/test-timeline-v2-dashboard-v3.html` — **최신 본사이트 (인플루언서 서브탭 완성)**
+- `invest-sns/smtr-v3.html` — **🚀 SMTR v3 완전체 (8.5MB)** - v24 베이스 5탭 SPA
+- `invest-sns/test-timeline-v2-dashboard-v3.html` — 인플루언서 서브탭 완성 버전
 - `invest-sns/test-timeline-v2.html` — v2 통합 프론트 (SNS+v24차트+전체 탭 업그레이드)
 - `invest-sns/test-timeline.html` — SNS X 스타일 버전
 - `invest-sns/test-timeline-v25.html` — v24 차트 통합 버전
