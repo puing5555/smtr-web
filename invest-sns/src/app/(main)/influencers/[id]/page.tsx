@@ -1,11 +1,13 @@
 'use client';
 
-import { useState, useEffect, use, useMemo } from 'react';
-import { ArrowLeft, ExternalLink, Filter, Star, Globe, TrendingUp, Activity } from 'lucide-react';
+import React, { useState, useEffect, use, useMemo } from 'react';
+import { ArrowLeft, ExternalLink, Filter, Star, Globe, TrendingUp, Activity, ChevronDown, ChevronRight, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import { useInfluencersStore } from '@/stores/influencers';
+import { useSignalReturns } from '@/lib/hooks/useSignalReturns';
+import { formatReturn, getReturnColor } from '@/lib/api/coingecko';
 
 const SIGNAL_TYPES: Record<string, { label: string; color: string; textColor: string }> = {
   STRONG_BUY: { label: '적극매수', color: 'bg-green-700', textColor: 'text-white' },
@@ -22,6 +24,7 @@ export default function InfluencerDetailPage({ params }: { params: Promise<{ id:
   const { id } = use(params);
   const [stockFilter, setStockFilter] = useState('ALL');
   const [displayCount, setDisplayCount] = useState(20); // 처음에 20개 표시
+  const [expandedAnalysis, setExpandedAnalysis] = useState<number | null>(null); // 확장된 분석 ID
   const { influencers, signals, loadInfluencers, loadSignals } = useInfluencersStore();
 
   useEffect(() => {
@@ -31,6 +34,9 @@ export default function InfluencerDetailPage({ params }: { params: Promise<{ id:
 
   const influencer = influencers.find((inf) => inf.id === Number(id) || (id === 'corinpapa1106' && inf.name === '코린이 아빠'));
   const influencerSignals = signals.filter((s) => s.influencer === influencer?.name);
+  
+  // 수익률 데이터 가져오기
+  const { returns, loading: returnsLoading } = useSignalReturns(influencerSignals);
   
   // 종목별 필터링된 시그널
   const filteredSignals = useMemo(() => {
@@ -45,7 +51,7 @@ export default function InfluencerDetailPage({ params }: { params: Promise<{ id:
 
   // 월별로 그룹핑된 시그널들 (주요 발언 타임라인용)
   const signalsByMonth = useMemo(() => {
-    const grouped: { [key: string]: Signal[] } = {};
+    const grouped: { [key: string]: typeof influencerSignals } = {};
     
     influencerSignals
       .sort((a, b) => new Date(b.videoDate).getTime() - new Date(a.videoDate).getTime())
@@ -150,7 +156,7 @@ export default function InfluencerDetailPage({ params }: { params: Promise<{ id:
 
         {/* Top Stocks */}
         <div className="mt-6 pt-6 border-t border-gray-200">
-          <h3 className="text-sm font-semibold text-gray-700 mb-3">주력 종목</h3>
+          <h3 className="text-sm font-semibold text-gray-700 mb-3">관심 종목</h3>
           <div className="flex flex-wrap gap-2">
             {influencer.topStocks.map((stock, index) => (
               <span 
@@ -163,34 +169,54 @@ export default function InfluencerDetailPage({ params }: { params: Promise<{ id:
           </div>
         </div>
 
-        {/* Signal Distribution */}
+        {/* Major Statements Timeline */}
         <div className="mt-6 pt-6 border-t border-gray-200">
-          <h3 className="text-sm font-semibold text-gray-700 mb-3">시그널 분포</h3>
-          <div className="flex rounded-full overflow-hidden h-2 bg-gray-100 mb-3">
-            {Object.entries(influencer.signalDistribution)
-              .filter(([_, count]) => count > 0)
-              .map(([type, count]) => (
-                <div
-                  key={type}
-                  className={`${SIGNAL_TYPES[type]?.color || 'bg-gray-300'}`}
-                  style={{ width: `${(count / influencer.totalSignals) * 100}%` }}
-                  title={`${SIGNAL_TYPES[type]?.label}: ${count}개`}
-                />
-              ))}
-          </div>
-          <div className="flex flex-wrap gap-3">
-            {Object.entries(influencer.signalDistribution)
-              .filter(([_, count]) => count > 0)
-              .slice(0, 4) // 주요 4개만 표시
-              .map(([type, count]) => (
-                <div key={type} className="flex items-center gap-2">
-                  <div className={`w-3 h-3 rounded-full ${SIGNAL_TYPES[type]?.color || 'bg-gray-300'}`}></div>
-                  <span className="text-xs text-gray-600 font-medium">
-                    {SIGNAL_TYPES[type]?.label} {count}개
-                  </span>
-                </div>
-              ))}
-          </div>
+          <h3 className="text-sm font-semibold text-gray-700 mb-3">📋 주요 발언 요약</h3>
+          {(() => {
+            // 가장 강한 시그널 우선: STRONG_BUY/STRONG_SELL > HIGH confidence > 최신순
+            const strengthOrder: Record<string, number> = {
+              STRONG_BUY: 6, STRONG_SELL: 6, BUY: 4, SELL: 4, POSITIVE: 2, CONCERN: 2, HOLD: 1, NEUTRAL: 0
+            };
+            const confOrder: Record<string, number> = { HIGH: 3, MEDIUM: 2, LOW: 1 };
+            const sorted = [...influencerSignals]
+              .sort((a, b) => {
+                const sa = strengthOrder[a.signalType] || 0;
+                const sb = strengthOrder[b.signalType] || 0;
+                if (sb !== sa) return sb - sa;
+                const ca = confOrder[a.confidence || ''] || 0;
+                const cb = confOrder[b.confidence || ''] || 0;
+                if (cb !== ca) return cb - ca;
+                return new Date(b.videoDate).getTime() - new Date(a.videoDate).getTime();
+              });
+            const seenStocks = new Set<string>();
+            const topSignals: typeof sorted = [];
+            for (const s of sorted) {
+              if (!seenStocks.has(s.stock) && topSignals.length < 3) {
+                seenStocks.add(s.stock);
+                topSignals.push(s);
+              }
+            }
+            return topSignals.length === 0 ? (
+              <p className="text-sm text-gray-500">발언 이력이 없습니다.</p>
+            ) : (
+              <div className="space-y-2">
+                {topSignals.map((signal) => {
+                  const date = new Date(signal.videoDate);
+                  const dateStr = `${date.getFullYear()}.${date.getMonth() + 1}/${date.getDate()}`;
+                  return (
+                    <div key={signal.id} className="flex items-center gap-3 text-sm">
+                      <span className="text-gray-400 font-mono text-xs w-16">{dateStr}</span>
+                      <span className="font-medium text-gray-900">{signal.stockName}</span>
+                      <Badge className={`${SIGNAL_TYPES[signal.signalType]?.color || 'bg-gray-500'} ${SIGNAL_TYPES[signal.signalType]?.textColor || 'text-white'} text-xs`}>
+                        {SIGNAL_TYPES[signal.signalType]?.label || signal.signalType}
+                      </Badge>
+                      <span className="text-gray-600 truncate">"{signal.content.slice(0, 40)}..."</span>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })()}
         </div>
       </div>
 
@@ -264,47 +290,182 @@ export default function InfluencerDetailPage({ params }: { params: Promise<{ id:
                   displayedSignals
                     .sort((a, b) => new Date(b.videoDate).getTime() - new Date(a.videoDate).getTime())
                     .map((signal) => (
-                      <tr key={signal.id} className="hover:bg-gray-50 transition-colors">
-                        <td className="py-4 px-6">
-                          <div className="font-medium text-gray-900">{signal.stockName}</div>
-                          <div className="text-xs text-gray-500">{signal.stock}</div>
-                        </td>
-                        <td className="py-4 px-6">
-                          <Badge className={`${SIGNAL_TYPES[signal.signalType].color} ${SIGNAL_TYPES[signal.signalType].textColor} text-xs font-bold`}>
-                            {SIGNAL_TYPES[signal.signalType].label}
-                          </Badge>
-                        </td>
-                        <td className="py-4 px-6 max-w-md">
-                          <div className="text-sm font-medium text-gray-900 mb-1">{signal.analysis.summary}</div>
-                          <div className="text-xs text-gray-600 line-clamp-2">{signal.analysis.detail}</div>
-                        </td>
-                        <td className="py-4 px-6">
-                          <div className="text-sm text-gray-900">{signal.videoDate}</div>
-                          <div className="text-xs text-gray-500">{signal.timestamp}</div>
-                        </td>
-                        <td className="py-4 px-6">
-                          {signal.returnRate ? (
-                            <span className={`text-sm font-bold ${signal.returnRate > 0 ? 'text-green-600' : 'text-red-600'}`}>
-                              {signal.returnRate > 0 ? '+' : ''}{signal.returnRate}%
-                            </span>
-                          ) : (
-                            <span className="text-xs text-gray-400">-</span>
-                          )}
-                        </td>
-                        <td className="py-4 px-6">
-                          {signal.youtubeLink && (
-                            <a
-                              href={signal.youtubeLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1 text-red-600 hover:text-red-700 text-xs font-medium"
+                      <React.Fragment key={signal.id}>
+                        <tr className="hover:bg-gray-50 transition-colors">
+                          <td className="py-4 px-6">
+                            <Link href={`/stocks/${signal.stock}`} className="block hover:bg-blue-50 rounded p-1 -m-1 transition-colors">
+                              <div className="font-medium text-blue-600 hover:text-blue-800">{signal.stockName}</div>
+                              <div className="text-xs text-gray-500">{signal.stock}</div>
+                            </Link>
+                          </td>
+                          <td className="py-4 px-6">
+                            <Badge className={`${SIGNAL_TYPES[signal.signalType].color} ${SIGNAL_TYPES[signal.signalType].textColor} text-xs font-bold`}>
+                              {SIGNAL_TYPES[signal.signalType].label}
+                            </Badge>
+                          </td>
+                          <td className="py-4 px-6 max-w-md">
+                            <button
+                              onClick={() => setExpandedAnalysis(expandedAnalysis === signal.id ? null : signal.id)}
+                              className="text-left w-full hover:bg-blue-50 rounded p-2 -m-2 transition-all duration-200 group"
                             >
-                              <ExternalLink className="w-3 h-3" />
-                              YouTube
-                            </a>
-                          )}
-                        </td>
-                      </tr>
+                              <div className="flex items-start gap-2">
+                                <div className="flex-1">
+                                  <div className="text-sm font-medium text-gray-900 mb-1 group-hover:text-blue-600">
+                                    {signal.analysis.summary}
+                                  </div>
+                                  <div className="text-xs text-gray-600 line-clamp-2">
+                                    {signal.analysis.detail}
+                                  </div>
+                                </div>
+                                <div className="mt-1 text-gray-400 group-hover:text-blue-500 transition-colors">
+                                  {expandedAnalysis === signal.id ? (
+                                    <ChevronDown className="w-4 h-4" />
+                                  ) : (
+                                    <ChevronRight className="w-4 h-4" />
+                                  )}
+                                </div>
+                              </div>
+                            </button>
+                          </td>
+                          <td className="py-4 px-6">
+                            <div className="text-sm text-gray-900">{signal.videoDate}</div>
+                            <div className="text-xs text-gray-500">{signal.timestamp}</div>
+                          </td>
+                          <td className="py-4 px-6">
+                            {(() => {
+                              const returnData = returns[signal.id];
+                              if (returnsLoading || returnData?.loading) {
+                                return <span className="text-xs text-gray-400">로딩중...</span>;
+                              }
+                              if (returnData?.error) {
+                                return <span className="text-xs text-gray-400">-</span>;
+                              }
+                              if (returnData?.returnRate !== null && returnData?.returnRate !== undefined) {
+                                return (
+                                  <span className={`text-sm font-bold ${getReturnColor(returnData.returnRate)}`}>
+                                    {formatReturn(returnData.returnRate)}
+                                  </span>
+                                );
+                              }
+                              return <span className="text-xs text-gray-400">-</span>;
+                            })()}
+                          </td>
+                          <td className="py-4 px-6">
+                            {signal.youtubeLink && (
+                              <a
+                                href={signal.youtubeLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 text-red-600 hover:text-red-700 text-xs font-medium"
+                              >
+                                <ExternalLink className="w-3 h-3" />
+                                YouTube
+                              </a>
+                            )}
+                          </td>
+                        </tr>
+                        
+                        {/* 확장 가능한 분석 패널 */}
+                        {expandedAnalysis === signal.id && (
+                          <tr className="bg-blue-50">
+                            <td colSpan={6} className="px-6 py-0">
+                              <div className="py-6 animate-in slide-in-from-top duration-200">
+                                <div className="bg-white rounded-xl border border-blue-200 p-6 shadow-sm">
+                                  <div className="flex items-center gap-3 mb-4">
+                                    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                                      <Play className="w-4 h-4 text-white" />
+                                    </div>
+                                    <h4 className="text-lg font-semibold text-gray-900">영상 분석</h4>
+                                  </div>
+                                  
+                                  <div className="space-y-4">
+                                    {/* 영상 제목 */}
+                                    <div>
+                                      <h5 className="text-sm font-medium text-gray-700 mb-2">📺 영상 제목</h5>
+                                      <p className="text-gray-900 font-medium">
+                                        {(signal as any).videoTitle || '영상 제목 없음'}
+                                      </p>
+                                    </div>
+
+                                    {/* 발언 내용 */}
+                                    <div>
+                                      <h5 className="text-sm font-medium text-gray-700 mb-2">💬 발언 내용</h5>
+                                      <div className="bg-gray-50 rounded-lg p-4">
+                                        <p className="text-gray-800 leading-relaxed">{signal.content}</p>
+                                        <div className="mt-2 text-xs text-gray-500">
+                                          타임스탬프: {signal.timestamp}
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    {/* 맥락 정보 */}
+                                    {(signal as any).context && (
+                                      <div>
+                                        <h5 className="text-sm font-medium text-gray-700 mb-2">🔍 맥락</h5>
+                                        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                                          <p className="text-gray-800 leading-relaxed">{(signal as any).context}</p>
+                                        </div>
+                                      </div>
+                                    )}
+
+                                    {/* 분석 요약 */}
+                                    <div>
+                                      <h5 className="text-sm font-medium text-gray-700 mb-2">📊 분석 요약</h5>
+                                      <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                                        <p className="font-medium text-green-900 mb-2">{signal.analysis.summary}</p>
+                                        <p className="text-green-800 text-sm leading-relaxed">{signal.analysis.detail}</p>
+                                      </div>
+                                    </div>
+
+                                    {/* 추가 메타데이터 */}
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-gray-200">
+                                      <div>
+                                        <span className="text-xs text-gray-500">신뢰도</span>
+                                        <div className="font-medium text-gray-900">
+                                          {(signal as any).confidence || '-'}
+                                        </div>
+                                      </div>
+                                      <div>
+                                        <span className="text-xs text-gray-500">시간 프레임</span>
+                                        <div className="font-medium text-gray-900">
+                                          {(signal as any).timeframe || '-'}
+                                        </div>
+                                      </div>
+                                      <div>
+                                        <span className="text-xs text-gray-500">조건부</span>
+                                        <div className="font-medium text-gray-900">
+                                          {(signal as any).conditional ? '예' : '아니오'}
+                                        </div>
+                                      </div>
+                                      <div>
+                                        <span className="text-xs text-gray-500">실전 투자</span>
+                                        <div className="font-medium text-gray-900">
+                                          {(signal as any).skinInGame ? '예' : '아니오'}
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    {/* YouTube 링크 */}
+                                    {signal.youtubeLink && (
+                                      <div className="pt-4 border-t border-gray-200">
+                                        <a
+                                          href={signal.youtubeLink}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="inline-flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm font-medium"
+                                        >
+                                          <ExternalLink className="w-4 h-4" />
+                                          YouTube에서 원본 영상 보기
+                                        </a>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        )}
+                      </React.Fragment>
                     ))
                 )}
               </tbody>

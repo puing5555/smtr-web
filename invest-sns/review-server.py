@@ -654,36 +654,35 @@ def build_review_html(signals, reviews):
             card.dataset.review = review.status;
             card.dataset.id = id;
             
-            const statusLabel = {pending:'검토대기',approved:'승인',rejected:'거부'}[review.status] || review.status;
+            const statusLabel = {pending:'검토대기',approved:'✅ 승인됨',rejected:'❌ 거부됨'}[review.status] || review.status;
             
-            card.innerHTML = 
-                '<div class="signal-header">' +
-                    '<div>' +
-                        '<span class="signal-asset">' + escHtml(sig.asset) + '</span> ' +
-                        '<span class="signal-type ' + sig.signal_type + '">' + (SIGNAL_LABELS[sig.signal_type] || sig.signal_type) + '</span> ' +
-                        '<span class="confidence ' + (sig.confidence || '') + '">' + (sig.confidence || '') + '</span> ' +
-                        '<span class="review-badge ' + review.status + '">' + statusLabel + '</span> ' +
-                        '<span class="date-badge">📅 ' + escHtml(sig.date || 'N/A') + '</span>' +
+            let reviewFormHtml = '';
+            let actionButtonsHtml = '';
+            
+            // 상태별 UI 결정
+            if (review.status === 'approved') {
+                // 승인된 시그널: 승인 배지만 표시, 검토창 숨김
+                actionButtonsHtml = '<div class="approved-status" style="padding:8px 12px;background:#d1fae5;color:#065f46;border-radius:6px;font-weight:600;text-align:center;">' +
+                    '✅ 승인됨</div>';
+                reviewFormHtml = ''; // 검토창 숨김
+            } else if (review.status === 'rejected') {
+                // 거부된 시그널: Opus 재분석 검토창만 표시, approve/reject 버튼 비활성화
+                actionButtonsHtml = '<div class="signal-actions">' +
+                        '<button class="btn approve-btn" disabled style="opacity:0.3;">✅</button>' +
+                        '<button class="btn reject-btn active-reject" disabled style="opacity:0.7;">❌</button>' +
+                    '</div>';
+                reviewFormHtml = '<div style="margin-top:10px;padding-top:10px;border-top:1px solid #e2e8f0;display:flex;flex-direction:column;gap:4px;">' +
+                    '<div style="padding:8px;background:#fef2f2;border:1px solid #fecaca;border-radius:6px;color:#991b1b;font-size:13px;">' +
+                        '<strong>❌ 거부됨:</strong> ' + escHtml(review.reason || '사유 없음') +
                     '</div>' +
-                    '<div class="signal-actions">' +
-                        '<button class="btn approve-btn' + (review.status==='approved'?' active-approve':'') + '">✅</button>' +
-                        '<button class="btn reject-btn' + (review.status==='rejected'?' active-reject':'') + '">❌</button>' +
-                    '</div>' +
-                '</div>' +
-                '<div class="quote">"' + escHtml(sig.content || '') + '"</div>' +
-                '<div class="meta">' +
-                    '<span>📺 <a href="' + escHtml(tsUrl) + '" target="_blank">' + escHtml((sig.title || sig.video_id).substring(0, 50)) + ' ▶️</a></span>' +
-                    '<span>⏱️ ' + escHtml(sig.timestamp || 'N/A') + '</span>' +
-                    '<span>🎙️ ' + escHtml(sig.channel || '코린이 아빠') + '</span>' +
-                '</div>' +
-                (sig.context ? '<div style="margin-top:8px;font-size:13px;color:#666;">💡 ' + escHtml(sig.context) + '</div>' : '') +
-                (review.status === 'rejected' && review.reason ? '<div style="margin-top:8px;font-size:13px;color:#991b1b;">❌ 거부 사유: ' + escHtml(review.reason) + '</div>' : '') +
-                buildOpus4Section(id) +
-                '<div class="reject-input">' +
-                    '<input type="text" placeholder="거부 사유 입력...">' +
-                    '<button class="reject-submit-btn">거부</button>' +
-                '</div>' +
-                '<div style="margin-top:10px;padding-top:10px;border-top:1px solid #e2e8f0;display:flex;flex-direction:column;gap:4px;">' +
+                '</div>';
+            } else {
+                // 미검토(pending): 모든 검토 기능 활성화
+                actionButtonsHtml = '<div class="signal-actions">' +
+                        '<button class="btn approve-btn">✅</button>' +
+                        '<button class="btn reject-btn">❌</button>' +
+                    '</div>';
+                reviewFormHtml = '<div style="margin-top:10px;padding-top:10px;border-top:1px solid #e2e8f0;display:flex;flex-direction:column;gap:4px;">' +
                     '<div style="display:flex;align-items:center;gap:6px;">' +
                         '<label style="min-width:36px;font-weight:600;font-size:13px;color:#666;">검토:</label>' +
                         '<select class="review-field-note" style="flex:1;padding:4px 8px;border:1px solid #ddd;border-radius:4px;font-size:13px;">' +
@@ -702,31 +701,77 @@ def build_review_html(signals, reviews):
                         '<input type="text" class="review-field-reason" value="' + escHtml(review.review_reason || '') + '" placeholder="사유" style="flex:1;padding:4px 8px;border:1px solid #ddd;border-radius:4px;font-size:13px;">' +
                     '</div>' +
                 '</div>';
+            }
             
-            // Event listeners
-            card.querySelector('.approve-btn').addEventListener('click', () => {
-                card.querySelector('.review-field-note').value = '승인';
-                const fields = getReviewFields(card);
-                setReview(id, 'approved', '', fields);
-            });
-            card.querySelector('.reject-btn').addEventListener('click', () => {
-                card.querySelector('.review-field-note').value = '거부';
-                const ri = card.querySelector('.reject-input');
-                ri.classList.toggle('show');
-                if (ri.classList.contains('show')) ri.querySelector('input').focus();
-            });
-            card.querySelector('.reject-submit-btn').addEventListener('click', () => {
-                const reason = card.querySelector('.reject-input input').value;
-                const fields = getReviewFields(card);
-                setReview(id, 'rejected', reason, fields);
-            });
-            card.querySelector('.reject-input input').addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    const reason = e.target.value;
-                    const fields = getReviewFields(card);
-                    setReview(id, 'rejected', reason, fields);
+            card.innerHTML = 
+                '<div class="signal-header">' +
+                    '<div>' +
+                        '<span class="signal-asset">' + escHtml(sig.asset) + '</span> ' +
+                        '<span class="signal-type ' + sig.signal_type + '">' + (SIGNAL_LABELS[sig.signal_type] || sig.signal_type) + '</span> ' +
+                        '<span class="confidence ' + (sig.confidence || '') + '">' + (sig.confidence || '') + '</span> ' +
+                        '<span class="review-badge ' + review.status + '">' + statusLabel + '</span> ' +
+                        '<span class="date-badge">📅 ' + escHtml(sig.date || 'N/A') + '</span>' +
+                    '</div>' +
+                    actionButtonsHtml +
+                '</div>' +
+                '<div class="quote">"' + escHtml(sig.content || '') + '"</div>' +
+                '<div class="meta">' +
+                    '<span>📺 <a href="' + escHtml(tsUrl) + '" target="_blank">' + escHtml((sig.title || sig.video_id).substring(0, 50)) + ' ▶️</a></span>' +
+                    '<span>⏱️ ' + escHtml(sig.timestamp || 'N/A') + '</span>' +
+                    '<span>🎙️ ' + escHtml(sig.channel || '코린이 아빠') + '</span>' +
+                '</div>' +
+                (sig.context ? '<div style="margin-top:8px;font-size:13px;color:#666;">💡 ' + escHtml(sig.context) + '</div>' : '') +
+                (review.status === 'pending' ? '<div class="reject-input"><input type="text" placeholder="거부 사유 입력..."><button class="reject-submit-btn">거부</button></div>' : '') +
+                buildOpus4Section(id) +
+                reviewFormHtml;
+            
+            // Event listeners (pending 상태에서만 활성화)
+            if (review.status === 'pending') {
+                const approveBtn = card.querySelector('.approve-btn');
+                const rejectBtn = card.querySelector('.reject-btn');
+                const rejectSubmitBtn = card.querySelector('.reject-submit-btn');
+                const rejectInput = card.querySelector('.reject-input input');
+                
+                if (approveBtn) {
+                    approveBtn.addEventListener('click', () => {
+                        const noteEl = card.querySelector('.review-field-note');
+                        if (noteEl) noteEl.value = '승인';
+                        const fields = getReviewFields(card);
+                        setReview(id, 'approved', '', fields);
+                    });
                 }
-            });
+                
+                if (rejectBtn) {
+                    rejectBtn.addEventListener('click', () => {
+                        const noteEl = card.querySelector('.review-field-note');
+                        if (noteEl) noteEl.value = '거부';
+                        const ri = card.querySelector('.reject-input');
+                        if (ri) {
+                            ri.classList.toggle('show');
+                            const input = ri.querySelector('input');
+                            if (input && ri.classList.contains('show')) input.focus();
+                        }
+                    });
+                }
+                
+                if (rejectSubmitBtn) {
+                    rejectSubmitBtn.addEventListener('click', () => {
+                        const reason = rejectInput ? rejectInput.value : '';
+                        const fields = getReviewFields(card);
+                        setReview(id, 'rejected', reason, fields);
+                    });
+                }
+                
+                if (rejectInput) {
+                    rejectInput.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') {
+                            const reason = e.target.value;
+                            const fields = getReviewFields(card);
+                            setReview(id, 'rejected', reason, fields);
+                        }
+                    });
+                }
+            }
             
             // 제안 적용 버튼
             const sugBtn = card.querySelector('.apply-suggestion-btn');

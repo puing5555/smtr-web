@@ -133,9 +133,8 @@ export default function InfluencersPage() {
 
       {/* Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="overview">개요</TabsTrigger>
-          <TabsTrigger value="signals">시그널</TabsTrigger>
           <TabsTrigger value="influencers">인플루언서</TabsTrigger>
           <TabsTrigger value="stocks">종목</TabsTrigger>
         </TabsList>
@@ -189,69 +188,6 @@ export default function InfluencersPage() {
                   </Link>
                 ))}
               </div>
-            </div>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="signals" className="mt-6">
-          <div className="space-y-6">
-            {/* 시그널 필터 */}
-            <div className="flex flex-wrap gap-2">
-              <Button
-                variant={signalFilter === 'ALL' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setSignalFilter('ALL')}
-              >
-                전체
-              </Button>
-              {Object.entries(SIGNAL_TYPES).map(([type, config]) => (
-                <Button
-                  key={type}
-                  variant={signalFilter === type ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setSignalFilter(type)}
-                  className={signalFilter === type ? `${config.color} ${config.textColor}` : ''}
-                >
-                  {config.label}
-                </Button>
-              ))}
-            </div>
-
-            {/* 시그널 목록 */}
-            <div className="grid gap-4">
-              {filteredSignals.map((signal) => (
-                <div key={signal.id} className="bg-white rounded-lg p-6 border border-gray-200">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <span className="font-medium">{signal.influencer}</span>
-                        <Badge 
-                          className={`${SIGNAL_TYPES[signal.signalType].color} ${SIGNAL_TYPES[signal.signalType].textColor}`}
-                        >
-                          {SIGNAL_TYPES[signal.signalType].label}
-                        </Badge>
-                        <span className="text-sm text-gray-600">{signal.stock} - {signal.stockName}</span>
-                        <span className="text-sm text-gray-500">${signal.price}</span>
-                      </div>
-                      <p className="text-gray-700 mb-2">{signal.content}</p>
-                      <div className="flex items-center gap-4 text-sm text-gray-500">
-                        <span>{signal.timestamp}</span>
-                        {signal.youtubeLink && (
-                          <a 
-                            href={signal.youtubeLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-1 text-blue-600 hover:text-blue-800"
-                          >
-                            <ExternalLink className="w-3 h-3" />
-                            유튜브 보기
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </TabsContent>
