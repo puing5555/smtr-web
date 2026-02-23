@@ -63,6 +63,7 @@
         .confidence.HIGH { background: #d1fae5; color: #065f46; }
         .confidence.MEDIUM { background: #fef3c7; color: #92400e; }
         .confidence.LOW { background: #fee2e2; color: #991b1b; }
+        .opus-result { background: #f0f4ff; border: 1px solid #c7d2fe; border-radius: 8px; padding: 12px; margin-top: 10px; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -70,6 +71,8 @@
         <div class="header">
             <h1>🔍 유튜버 시그널 검증 리뷰 v3</h1>
             <p>파이프라인: Claude Sonnet(추출) → 사람(최종 검토)</p>
+            <button id="opus-review-btn" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); color: white; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; margin-top: 12px;">🧠 Opus 거부 검토</button>
+            <span id="opus-progress" style="color: rgba(255,255,255,0.8); font-size: 13px; margin-left: 12px;"></span>
         </div>
         
         <div class="stats" id="stats-container"></div>
