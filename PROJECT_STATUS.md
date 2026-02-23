@@ -1,6 +1,6 @@
 # PROJECT_STATUS.md
 
-_Last updated: 2026-02-22 20:50 (GMT+7)_
+_Last updated: 2026-02-23 09:15 (GMT+7)_
 
 ## 🏗️ SMTR 프로젝트 (투자자의 세컨드 브레인)
 
@@ -55,6 +55,37 @@ _Last updated: 2026-02-22 20:50 (GMT+7)_
   - 인플루언서 메타데이터 stmtCount 29→169 업데이트
   - Python 변환 스크립트 구현 (`integrate_corinpapa_signals.py`)
   - 8가지 시그널 타입 CSS/JS 지원 확인 완료
+- **🎯 v24 차트/마커 시스템 본사이트 완전 통합 완료** (2026-02-23):
+  - `test-timeline-v25.html` 생성 - v24 모든 차트/마커 기능 통합
+  - 마커 CSS (`.marker-tooltip`, `.marker-dot`, `.marker-overlay-container`) 완전 이식
+  - 차트 생성 코드 (`createChart`, 캔들스틱 옵션) 통합
+  - 마커 dot 시스템 (커스텀 HTML 마커 오버레이) 적용
+  - 마커 툴팁 (클릭시 상세 툴팁 - mt-header, mt-avatar, mt-badge, mt-body) 완전 구현
+  - 8가지 시그널 타입별 색상 시스템 완벽 적용
+  - `showTooltip/closeTooltip` 함수, 검색 기능, 모든 인터랙션 정상 작동
+  - v24 데이터 (STOCK_TICKERS, SEARCHABLE_STOCKS, allStatements) 완전 포함
+  - 5탭 구조 유지하면서 인플루언서 탭에서 v24 경험 완전 재현
+- **🐦 SNS 탭 X(트위터) 스타일 리디자인 완료** (2026-02-23):
+  - X 스타일 레이아웃: 좌측 아바타 + 우측 이름/핸들/@/시간 배치
+  - 카드 배경 제거, 얇은 border-bottom 구분선으로 깔끔하게
+  - X 스타일 액션바: ❤️ 좋아요, 🔄 리트윗, 💬 댓글, 📤 공유 아이콘 + 호버 효과
+  - 해시태그 파란색 링크 스타일: #비트코인 #BTC 등
+  - "무슨 일이 일어나고 있나요?" 게시 영역 + 둥근 파란 "게시하기" 버튼
+  - 시간 표시 X 스타일: "2h", "4h", "6h" 등 짧은 포맷
+  - 인플루언서 인증 뱃지: ✓ 파란 체크 (박두환, 세상학개론)
+  - X 다크모드 색상: #000000 배경 + #1D9BF0 액센트 + #71767b 보조텍스트
+  - 산세리프 폰트 + X 호버 효과 (포스트 호버시 약간 밝아짐)
+  - JavaScript 인터랙션: 포스트 작성, 좋아요/리트윗/댓글/공유 기능
+- **🎨 SMTR v2 전체 디자인 통합 + 모든 탭 업그레이드 완료** (2026-02-23):
+  - **통합 작업**: test-timeline.html(SNS X스타일) + test-timeline-v25.html(v24 차트/마커) → `test-timeline-v2.html`
+  - **통일된 디자인 언어**: X 다크모드 #000000 + #1d9bf0 액센트, -apple-system 폰트 스택
+  - **🏠 대시보드 탭**: 글래스모피즘 위젯 그리드, 포트폴리오/시그널/마켓 요약, 호버 효과
+  - **📰 뉴스/공시 탭**: 뉴스카드 UI, 썸네일+제목+출처+시간, 카테고리 필터 태그
+  - **📝 노트 탭**: 노션/Apple Notes 느낌, 사이드바+에디터 레이아웃, 노트 리스트
+  - **💬 SNS 탭**: X(트위터) 스타일 완전 유지
+  - **👥 인플루언서 탭**: v24 차트/마커/툴팁 시스템 완전 통합
+  - **모바일 반응형**: 모든 탭 적응형 레이아웃, 터치 친화적 인터페이스
+  - **통일된 하단 탭바**: 부드러운 애니메이션, 일관된 스타일링
 
 #### 트랙 3: 알림/데이터 수집
 - 네이버/미국/코인 뉴스 크롤러 완성
@@ -80,7 +111,9 @@ _Last updated: 2026-02-22 20:50 (GMT+7)_
 - `invest-engine/main.py` — 백엔드 메인
 - `invest-engine/src/models.py` — DB 모델
 - `invest-engine/src/collectors/` — 뉴스 크롤러들
-- `invest-sns/test-timeline.html` — 프론트 프로토타입
+- `invest-sns/test-timeline-v2.html` — **최신 통합 프론트 (SNS+v24차트+전체 탭 업그레이드)**
+- `invest-sns/test-timeline.html` — SNS X 스타일 버전
+- `invest-sns/test-timeline-v25.html` — v24 차트 통합 버전
 - `C:\Users\Mario\.openclaw\workspace\guru_tracker_prototype_v24_with_corinpapa.html` — guru_tracker 최신
 
 ### 현재 터널 URL (2026-02-22)
