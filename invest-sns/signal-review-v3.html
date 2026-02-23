@@ -71,11 +71,16 @@
         <div class="header">
             <h1>🔍 유튜버 시그널 검증 리뷰 v3</h1>
             <p>파이프라인: Claude Sonnet(추출) → 사람(최종 검토)</p>
-            <button id="opus-review-btn" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); color: white; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; margin-top: 12px;">🧠 Opus 거부 검토</button>
-            <span id="opus-progress" style="color: rgba(255,255,255,0.8); font-size: 13px; margin-left: 12px;"></span>
         </div>
         
         <div class="stats" id="stats-container"></div>
+        
+        <div style="text-align:center; margin-bottom:24px;">
+            <span id="opus-count" style="font-size:14px; color:#667eea; font-weight:700;"></span>
+            <br>
+            <button id="opus-review-btn" onclick="startOpusReview()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 28px; border-radius: 12px; border: none; cursor: pointer; font-size: 16px; font-weight: 700; margin-top: 8px; box-shadow: 0 4px 12px rgba(102,126,234,0.3);">🧠 OPUS검토</button>
+            <div id="opus-progress" style="margin-top:8px; font-size:13px; color:#666; display:none;"></div>
+        </div>
         
         <div class="filters">
             <div class="filter-row">
@@ -305,6 +310,131 @@
                 document.getElementById(id).addEventListener('change', render));
             document.getElementById('search-input').addEventListener('input', render);
         }
+        
+        // Opus Review
+        var OPUS_API_URL = '';
+        var PRELOADED_OPUS = {"oC-mHWKj8m8_비트마인 (BMNR)": {"agree_with_rejection": true, "reasoning": "이 영상은 코인 폭락 상황에서 투자자들의 심리적 편향을 분석하는 교육 콘텐츠입니다. 비트마인에 대한 언급은 마이크로스트래티지와의 자본조달 방식 차이를 설명하는 맥락에서 나온 일반적인 비교 분석이지, 투자 추천이나 매수 시그널이 아닙니다.", "extraction_error": "Sonnet이 교육적 맥락에서의 객관적 비교 분석을 투자 시그널로 오해석했습니다. '상대적으로 더 안전하다'는 표현을 긍정적 투자 신호로 잘못 판단했습니다.", "prompt_fix": "교육/분석 콘텐츠에서 단순 비교나 객관적 설명은 시그널로 추출하지 말 것. 특히 '상대적으로', '비교하면', '~에 비해' 등의 비교 표현이 포함된 중립적 분석은 제외할 것. 투자 추천 의도가 명확하지 않은 일반론은 시그널이 아님.", "pattern": "일반논평_시그널화"}, "hr5v-QUws9c_캐톤네트워크 (CC)": {"agree_with_rejection": true, "reasoning": "이는 명확한 투자 시그널이 아니라 정부 규제 상황에서 불안해하는 투자자들에게 주는 일반적인 조건부 조언입니다. 발화자는 '불안하신 분들'이라는 특정 조건을 명시했고, 이는 개인 상황에 따른 선택지 제시에 가깝습니다.", "extraction_error": "조건부 언급을 무조건적 시그널로 해석했고, 맥락상 규제 대응 방안 설명의 일부를 독립적인 매도 추천으로 오인했습니다.", "prompt_fix": "'불안하신 분들', '걱정하시는 분들', '리스크로 보는 분들' 등 특정 조건의 투자자에게만 해당하는 조건부 조언은 시그널로 추출하지 않는다. 또한 정부 규제나 외부 환경 변화에 대한 대응 방안 설명 중 언급되는 선택지들은 일반적인 정보 제공으로 간주한다.", "pattern": "조건부_과대해석"}, "axurZUkC5Dc_이더리움": {"agree_with_rejection": true, "reasoning": "이는 명확한 투자 시그널이 아니라 개인적인 투자 계획에 대한 일반적인 언급입니다. '나중에 수익 창출을 하면'이라는 조건부 표현과 함께 비트코인과 이더리움을 동시에 언급하며, 구체적인 매수 시점이나 근거 없이 막연한 계획을 표현한 것입니다.", "extraction_error": "조건부 표현('수익이 나면')을 실제 매수 시그널로 잘못 해석했고, 개인적 투자 계획 언급을 구체적인 투자 추천으로 오인했습니다.", "prompt_fix": "조건부 표현('~하면', '~할 때', '나중에')이 포함된 투자 언급은 시그널로 추출하지 말 것. 개인적 투자 계획이나 일반적 선호도 표현은 시그널에서 제외할 것. 구체적인 매수/매도 근거나 타이밍이 명시되지 않은 막연한 투자 의향은 시그널로 간주하지 말 것.", "pattern": "조건부_과대해석"}, "2wdlIAF0OrA_엔비디아 (NVDA)": {"agree_with_rejection": true, "reasoning": "제공된 자막에는 엔비디아에 대한 언급이 전혀 없으며, 타임스탬프 [3:54]도 자막 범위를 벗어납니다. Sonnet이 추출한 '좀 더 안전한 대로 가세요. 엔비디아나 팔란티어도 좋은 대답이 될 수 있어요'라는 내용은 제공된 자막에서 찾을 수 없습니다.", "extraction_error": "Sonnet이 제공되지 않은 영상 구간의 내용을 추출했거나, 실제로는 존재하지 않는 발언을 생성한 것으로 보입니다. 할루시네이션 현상이 발생했을 가능성이 높습니다.", "prompt_fix": "시그널 추출 시 반드시 제공된 자막 텍스트 내에서만 정보를 추출하도록 하고, 추출한 내용의 정확한 타임스탬프가 제공된 자막 범위 내에 있는지 검증하는 단계를 추가해야 합니다. 또한 추출된 발언 내용을 원문 자막과 대조 확인하는 검증 과정을 포함해야 합니다.", "pattern": "할루시네이션_허위시그널생성"}, "2wdlIAF0OrA_팔란티어 (PLTR)": {"agree_with_rejection": true, "reasoning": "제공된 자막에서 팔란티어 언급은 전혀 찾을 수 없으며, 타임스탬프 [3:54]도 자막 범위를 벗어납니다. 자막은 [2:58]에서 끝나는데 Sonnet이 추출한 내용은 완전히 허위입니다.", "extraction_error": "Sonnet이 실제 자막에 존재하지 않는 내용을 환각(hallucination)하여 가짜 시그널을 생성했습니다. 자막 범위를 벗어난 타임스탬프까지 제시한 심각한 오류입니다.", "prompt_fix": "시그널 추출 전 반드시 제공된 자막 텍스트 내에서만 해당 종목명과 투자 의견이 실제로 존재하는지 확인하고, 존재하지 않으면 '시그널 없음'으로 응답하도록 명시. 타임스탬프도 제공된 자막 범위 내에서만 선택하도록 제한.", "pattern": "환각_가짜시그널생성"}};
+        // Auto-load preloaded opus results
+        (function(){ var ex = loadOpusResults(); var pre = PRELOADED_OPUS; for(var k in pre){ if(!ex[k]) ex[k] = pre[k]; } saveOpusResults(ex); })();
+        function loadOpusResults() {
+            try { return JSON.parse(localStorage.getItem('opus-review-results') || '{}'); } catch(e) { return {}; }
+        }
+        function saveOpusResults(r) {
+            try { localStorage.setItem('opus-review-results', JSON.stringify(r)); } catch(e) {}
+        }
+        
+        function updateOpusCount() {
+            var reviews = loadReviews();
+            var rejCount = 0;
+            var opusResults = loadOpusResults();
+            var opusDone = 0;
+            SIGNALS_DATA.forEach(function(sig) {
+                var id = sig.video_id + '_' + sig.asset;
+                if ((reviews[id] || {}).status === 'rejected') {
+                    rejCount++;
+                    if (opusResults[id]) opusDone++;
+                }
+            });
+            var el = document.getElementById('opus-count');
+            if (el) el.textContent = opusDone + '/' + rejCount;
+        }
+        
+        async function startOpusReview() {
+            var reviews = loadReviews();
+            var rejected = [];
+            SIGNALS_DATA.forEach(function(sig) {
+                var id = sig.video_id + '_' + sig.asset;
+                var rev = reviews[id] || {};
+                if (rev.status === 'rejected') {
+                    rejected.push({id: id, signal: sig, reason: rev.reason || ''});
+                }
+            });
+            
+            if (rejected.length === 0) {
+                alert('거부된 시그널이 없습니다.');
+                return;
+            }
+            
+            if (!OPUS_API_URL) {
+                OPUS_API_URL = prompt('Opus API 서버 URL을 입력하세요 (예: http://localhost:8901)', 'http://localhost:8901');
+                if (!OPUS_API_URL) return;
+            }
+            
+            var btn = document.getElementById('opus-review-btn');
+            var prog = document.getElementById('opus-progress');
+            btn.disabled = true;
+            btn.textContent = '🧠 검토 중...';
+            prog.style.display = 'block';
+            
+            var opusResults = loadOpusResults();
+            var done = 0;
+            
+            for (var i = 0; i < rejected.length; i++) {
+                var item = rejected[i];
+                if (opusResults[item.id]) { done++; continue; }
+                
+                prog.textContent = (done+1) + '/' + rejected.length + ' 분석 중: ' + item.signal.asset;
+                
+                try {
+                    var resp = await fetch(OPUS_API_URL + '/api/opus-review', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({signal: item.signal, reason: item.reason})
+                    });
+                    var result = await resp.json();
+                    opusResults[item.id] = result;
+                    saveOpusResults(opusResults);
+                } catch(e) {
+                    prog.textContent = '❌ 오류: ' + e.message;
+                    btn.disabled = false;
+                    btn.textContent = '🧠 OPUS검토';
+                    return;
+                }
+                done++;
+            }
+            
+            prog.textContent = '✅ 완료! ' + done + '개 분석';
+            btn.disabled = false;
+            btn.textContent = '🧠 OPUS검토';
+            updateOpusCount();
+            render();
+        }
+        
+        // Override render to show opus results on rejected cards
+        var _origRender = render;
+        render = function() {
+            _origRender();
+            updateOpusCount();
+            var opusResults = loadOpusResults();
+            var cards = document.querySelectorAll('.signal-card');
+            cards.forEach(function(card) {
+                var reviewBadge = card.querySelector('.review-badge.rejected');
+                if (!reviewBadge) return;
+                
+                // Find signal id from card
+                var idx = parseInt(card.dataset.index);
+                if (isNaN(idx)) return;
+                var sig = SIGNALS_DATA[idx];
+                if (!sig) return;
+                var id = sig.video_id + '_' + sig.asset;
+                var opus = opusResults[id];
+                if (!opus) return;
+                
+                // Don't add twice
+                if (card.querySelector('.opus-result')) return;
+                
+                var agree = opus.agree_with_rejection !== false;
+                var div = document.createElement('div');
+                div.className = 'opus-result';
+                div.innerHTML = '<div class="opus-verdict">' +
+                    '<span class="review-badge ' + (agree ? 'rejected' : 'approved') + '">' + (agree ? '거부 동의' : '거부 반대') + '</span> Opus 검토</div>' +
+                    '<div class="opus-detail">' + esc(opus.reasoning || '') + '</div>' +
+                    (opus.extraction_error ? '<div class="opus-meta">💡 추출 오류: ' + esc(opus.extraction_error) + '</div>' : '') +
+                    (opus.prompt_fix ? '<div class="opus-meta">🔧 프롬프트 개선: ' + esc(opus.prompt_fix) + '</div>' : '') +
+                    (opus.pattern ? '<div style="margin-top:6px;"><span class="opus-pattern">' + esc(opus.pattern) + '</span></div>' : '');
+                card.appendChild(div);
+            });
+        };
         
         document.addEventListener('DOMContentLoaded', function() {
             initFilters();
