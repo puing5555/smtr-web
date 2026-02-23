@@ -2332,6 +2332,189 @@
                 dropdown.classList.remove('show');
             }
         });
+
+        // ===== 프로필 패널 기능 =====
+        function toggleProfilePanel() {
+            const panel = document.getElementById('profilePanel');
+            const overlay = document.getElementById('profileOverlay');
+            
+            if (panel.classList.contains('active')) {
+                closeProfilePanel();
+            } else {
+                openProfilePanel();
+            }
+        }
+
+        function openProfilePanel() {
+            const panel = document.getElementById('profilePanel');
+            const overlay = document.getElementById('profileOverlay');
+            
+            panel.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProfilePanel() {
+            const panel = document.getElementById('profilePanel');
+            const overlay = document.getElementById('profileOverlay');
+            
+            panel.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function selectInvestmentStyle(card) {
+            // 모든 카드에서 selected 클래스 제거
+            document.querySelectorAll('.investment-style-card').forEach(c => {
+                c.classList.remove('selected');
+            });
+            // 선택된 카드에 selected 클래스 추가
+            card.classList.add('selected');
+        }
+
+        function toggleDarkMode(toggle) {
+            toggle.classList.toggle('active');
+            // 다크 모드는 이미 적용되어 있으므로 여기서는 시각적 토글만
+            if (toggle.classList.contains('active')) {
+                console.log('다크 모드 활성화');
+            } else {
+                console.log('라이트 모드 활성화');
+            }
+        }
+
+        function toggleNotifications(toggle) {
+            toggle.classList.toggle('active');
+            if (toggle.classList.contains('active')) {
+                console.log('푸시 알림 활성화');
+            } else {
+                console.log('푸시 알림 비활성화');
+            }
+        }
+
+        function toggleSounds(toggle) {
+            toggle.classList.toggle('active');
+            if (toggle.classList.contains('active')) {
+                console.log('소리 효과 활성화');
+            } else {
+                console.log('소리 효과 비활성화');
+            }
+        }
+
+        function showHelp() {
+            alert('📚 SMTR 도움말\n\n• 대시보드: 투자 정보 종합 확인\n• SNS: 투자자들과 소통\n• 뉴스: 최신 시장 소식\n• 인플루언서: 전문가 분석\n• 노트: 투자 아이디어 기록');
+        }
+
+        function showAbout() {
+            alert('ℹ️ SMTR v2.0\n\n스마트 투자 통합 플랫폼\n개발: SMTR Team\n\n모든 투자 정보를 한 곳에서!');
+        }
+
+        function logout() {
+            if (confirm('정말 로그아웃 하시겠습니까?')) {
+                alert('로그아웃 되었습니다.');
+                closeProfilePanel();
+            }
+        }
+
+        // ===== 실시간 마켓 데이터 =====
+        let marketDataInterval;
+
+        function updateMarketData() {
+            // 실제 환경에서는 CoinGecko API 등을 사용
+            // 여기서는 데모용 랜덤 데이터 생성
+            const marketData = {
+                btc: {
+                    price: (45000 + Math.random() * 5000).toFixed(0),
+                    change: ((Math.random() - 0.5) * 10).toFixed(1)
+                },
+                eth: {
+                    price: (2600 + Math.random() * 200).toFixed(0),
+                    change: ((Math.random() - 0.5) * 8).toFixed(1)
+                },
+                kospi: {
+                    price: (2650 + Math.random() * 50).toFixed(0),
+                    change: ((Math.random() - 0.5) * 4).toFixed(1)
+                },
+                nasdaq: {
+                    price: (15800 + Math.random() * 100).toFixed(0),
+                    change: ((Math.random() - 0.5) * 3).toFixed(1)
+                },
+                usdkrw: {
+                    price: (1320 + Math.random() * 10).toFixed(1),
+                    change: ((Math.random() - 0.5) * 2).toFixed(1)
+                }
+            };
+
+            // DOM 업데이트
+            if (document.getElementById('btcPrice')) {
+                document.getElementById('btcPrice').textContent = `$${marketData.btc.price}`;
+                document.getElementById('btcChange').textContent = `${marketData.btc.change > 0 ? '+' : ''}${marketData.btc.change}%`;
+                document.getElementById('btcChange').className = marketData.btc.change > 0 ? 'positive' : 'negative';
+                document.getElementById('btcChange').style.color = marketData.btc.change > 0 ? 'var(--green)' : 'var(--red)';
+            }
+
+            if (document.getElementById('ethPrice')) {
+                document.getElementById('ethPrice').textContent = `$${marketData.eth.price}`;
+                document.getElementById('ethChange').textContent = `${marketData.eth.change > 0 ? '+' : ''}${marketData.eth.change}%`;
+                document.getElementById('ethChange').style.color = marketData.eth.change > 0 ? 'var(--green)' : 'var(--red)';
+            }
+
+            if (document.getElementById('kospiPrice')) {
+                document.getElementById('kospiPrice').textContent = marketData.kospi.price;
+                document.getElementById('kospiChange').textContent = `${marketData.kospi.change > 0 ? '+' : ''}${marketData.kospi.change}%`;
+                document.getElementById('kospiChange').style.color = marketData.kospi.change > 0 ? 'var(--green)' : 'var(--red)';
+            }
+
+            if (document.getElementById('nasdaqPrice')) {
+                document.getElementById('nasdaqPrice').textContent = marketData.nasdaq.price;
+                document.getElementById('nasdaqChange').textContent = `${marketData.nasdaq.change > 0 ? '+' : ''}${marketData.nasdaq.change}%`;
+                document.getElementById('nasdaqChange').style.color = marketData.nasdaq.change > 0 ? 'var(--green)' : 'var(--red)';
+            }
+
+            if (document.getElementById('usdkrwPrice')) {
+                document.getElementById('usdkrwPrice').textContent = marketData.usdkrw.price;
+                document.getElementById('usdkrwChange').textContent = `${marketData.usdkrw.change > 0 ? '+' : ''}${marketData.usdkrw.change}%`;
+                document.getElementById('usdkrwChange').style.color = marketData.usdkrw.change > 0 ? 'var(--green)' : 'var(--red)';
+            }
+        }
+
+        // 마켓 데이터 자동 업데이트 시작
+        function startMarketDataUpdates() {
+            updateMarketData(); // 즉시 한 번 업데이트
+            marketDataInterval = setInterval(updateMarketData, 30000); // 30초마다 업데이트
+        }
+
+        // 마켓 데이터 업데이트 중지
+        function stopMarketDataUpdates() {
+            if (marketDataInterval) {
+                clearInterval(marketDataInterval);
+            }
+        }
+
+        // 대시보드 탭이 활성화되면 마켓 데이터 업데이트 시작
+        function switchTab(tabName) {
+            // 기존 switchTab 기능 유지
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+
+            // 대시보드 탭에서만 마켓 데이터 업데이트
+            if (tabName === 'dashboard') {
+                startMarketDataUpdates();
+            } else {
+                stopMarketDataUpdates();
+            }
+        }
+
+        // 페이지 로드 시 마켓 데이터 업데이트 시작 (대시보드가 기본 활성 탭이므로)
+        document.addEventListener('DOMContentLoaded', function() {
+            startMarketDataUpdates();
+        });
     </script>
 </body>
 </html>
