@@ -38,7 +38,7 @@ def merge_signals(signals):
     return deduped
 
 def main():
-    input_path = "_all_signals_194.json"
+    input_path = "_all_signals_8types.json"
     output_path = "_deduped_signals.json"
     
     print(f"Loading signals from {input_path}...")
