@@ -472,11 +472,13 @@ def main():
         
         try:
             result = extract_signals_from_subtitle(client, video_id, subtitle, title, channel)
+            video_summary = result.get("video_summary", "")
             signals = result.get("signals", [])
             for sig in signals:
                 sig["video_id"] = video_id
                 sig["channel"] = channel
                 sig["title"] = title
+                sig["video_summary"] = video_summary
             all_signals.extend(signals)
             done_ids.add(video_id)
             print(f"  [{len(done_ids)}/{len(txt_files)}] {video_id}: {len(signals)} signals ({title[:40]})")

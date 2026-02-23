@@ -1,0 +1,29 @@
+{
+  "video_summary": "유튜버가 르네 지라르의 '욕망의 삼각형' 이론을 통해 비트마인(BMNR) 투자 열풍을 분석하며, 피터 틸과 캐시 우드 등 유명 투자자들의 영향으로 한국 개미투자자들이 몰린 현상을 비판적으로 평가. 자신도 손절을 경험했다고 고백하며 맹목적 추종보다는 독립적 판단의 중요성을 강조하고 있습니다.",
+  "signals": [
+    {
+      "asset": "비트마인 (BMNR)",
+      "signal_type": "SELL",
+      "content": "저는 손절을 했거든요. 마이너스 뭐 엄청나게 봤습니다. 엄청나게 손절을 했는데도 불구하고",
+      "confidence": "HIGH",
+      "timeframe": "SHORT",
+      "conditional": false,
+      "skin_in_game": true,
+      "hedged": false,
+      "context": "화자가 울트라사운드머니 실현 가능성에 의구심을 갖고 실제로 손절매를 단행했다고 고백",
+      "timestamp": "[8:52]"
+    },
+    {
+      "asset": "이더리움",
+      "signal_type": "CONCERN",
+      "content": "스테이블 코인이 아무리 폭발해도 이더리움 상승이 일어나지 않습니다. 절대로",
+      "confidence": "HIGH",
+      "timeframe": "LONG",
+      "conditional": false,
+      "skin_in_game": false,
+      "hedged": false,
+      "context": "이더리움의 울트라사운드머니 메커니즘에 대한 근본적 의구심을 표현하며 스테이블코인 성장이 이더리움 상승으로 이어지지 않는다고 주장",
+      "timestamp": "[8:29]"
+    }
+  ]
+}
