@@ -43,6 +43,26 @@ export default function InfluencerDetailPage({ params }: { params: Promise<{ id:
     return filteredSignals.slice(0, displayCount);
   }, [filteredSignals, displayCount]);
 
+  // 월별로 그룹핑된 시그널들 (주요 발언 타임라인용)
+  const signalsByMonth = useMemo(() => {
+    const grouped: { [key: string]: Signal[] } = {};
+    
+    influencerSignals
+      .sort((a, b) => new Date(b.videoDate).getTime() - new Date(a.videoDate).getTime())
+      .slice(0, 50) // 최근 50개만 표시
+      .forEach(signal => {
+        const date = new Date(signal.videoDate);
+        const monthKey = `${date.getFullYear()}년 ${date.getMonth() + 1}월`;
+        
+        if (!grouped[monthKey]) {
+          grouped[monthKey] = [];
+        }
+        grouped[monthKey].push(signal);
+      });
+    
+    return Object.entries(grouped);
+  }, [influencerSignals]);
+
   // 종목별 카운트 생성
   const stockCounts = useMemo(() => {
     const counts = influencerSignals.reduce((acc, signal) => {
