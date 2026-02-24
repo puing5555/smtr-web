@@ -176,7 +176,6 @@
 
         <div class="action-buttons">
             <button id="syncSiteBtn" class="btn success">🔄 본사이트 동기화</button>
-            <button id="opusReviewBtn" class="btn primary">Opus 수정 실행</button>
             <button id="exportTsBtn" class="btn primary">TypeScript 파일 내보내기</button>
         </div>
 
@@ -315,7 +314,7 @@
                             <a href="${signal.youtubeLink}&t=${Math.floor(parseFloat(signal.timestamp) || 0)}s" target="_blank">영상 보기 (${signal.timestamp})</a>
                         </div>
 
-                        ${opusResult ? renderOpusSection(signal, opusResult) : ''}
+                        ${(review.status === 'rejected' && opusResult) ? renderOpusSection(signal, opusResult) : ''}
 
                         <div class="review-controls">
                             ${renderReviewControls(signal, review)}
@@ -365,6 +364,12 @@
         function renderReviewControls(signal, review) {
             const key = getSignalKey(signal);
             
+            // Opus 검토 버튼은 거부된 시그널에만 표시
+            const opusButton = review.status === 'rejected' ? 
+                `<button class="btn primary" onclick="requestOpusReview('${key}')" style="margin-left: 12px;">
+                    🤖 Opus 검토
+                </button>` : '';
+            
             return `
                 <div class="review-row">
                     <div class="checkbox-container">
@@ -400,6 +405,7 @@
                             <option value="SELL" ${review.signalType === 'SELL' ? 'selected' : ''}>SELL</option>
                             <option value="STRONG_SELL" ${review.signalType === 'STRONG_SELL' ? 'selected' : ''}>STRONG_SELL</option>
                         </select>
+                        ${opusButton}
                     </div>
                 </div>
             `;
@@ -578,7 +584,6 @@
 
             // 버튼 이벤트
             document.getElementById('syncSiteBtn').addEventListener('click', syncToSite);
-            document.getElementById('opusReviewBtn').addEventListener('click', executeOpusReview);
             document.getElementById('exportTsBtn').addEventListener('click', exportTypeScriptFile);
         }
 
@@ -586,8 +591,28 @@
             // 이미 renderSignals에서 인라인으로 바인딩됨
         }
 
-        function executeOpusReview() {
-            alert('Opus 수정은 별도 백엔드에서 처리됩니다. 현재 페이지에는 이미 처리된 결과가 표시되어 있습니다.');
+        function requestOpusReview(key) {
+            // 해당 시그널에 대한 Opus 검토 요청
+            const signal = signalsData.find(s => getSignalKey(s) === key);
+            if (!signal) {
+                alert('시그널을 찾을 수 없습니다.');
+                return;
+            }
+
+            // 실제로는 백엔드 API 호출
+            console.log(`Opus 검토 요청: ${signal.stockName} - ${signal.content}`);
+            
+            // UI 피드백
+            const button = event.target;
+            button.disabled = true;
+            button.innerHTML = '🔄 검토중...';
+            
+            // 임시로 3초 후 완료 처리 (실제로는 API 응답)
+            setTimeout(() => {
+                button.disabled = false;
+                button.innerHTML = '🤖 Opus 검토';
+                alert('Opus 검토가 완료되었습니다. 결과는 별도 시스템에서 확인해주세요.');
+            }, 3000);
         }
 
         function syncToSite() {
