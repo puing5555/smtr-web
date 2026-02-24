@@ -142,21 +142,22 @@ _Last updated: 2026-02-24 16:50 (GMT+7)_
 - 텔레그램 알림 시스템 (현재 봇 kicked 상태)
 - 자동 수집 스케줄러 (APScheduler)
 
-- **🎯 signal-review-v4 원본 데이터 기반 완전 동기화 달성** (2026-02-24):
-  - **원본 데이터 문제 해결**: 168개 vs 177개 불일치 → 177개 원본 기준 통일 완료
-  - **원본 데이터 변환**: `sync_to_site_v2.js` - 원본 `_deduped_signals_8types_dated.json` 177개 → TypeScript 변환
-    - 필드 매핑: asset→stockName, signal_type→signalType, video_id→youtubeLink 등
-    - 키 변환: 원본 `video_id_asset` → 변환 `watch?v=video_id_stockName` 
-    - 변환 결과: 177개 → 173개 (거부된 4개 제외)
-  - **리뷰 시스템**: `signal-review-v4.html` + `signal-review-v4-embedded.html` (468KB)
-    - 173개 변환된 시그널 + 변환된 리뷰 상태 + 116개 Opus 검토 결과
-    - 원본 데이터 기반 정확한 종목명/시그널 표시
-  - **동기화 시스템**: `sync_to_site.js` - 변환된 키 형식으로 완벽 동기화
-    - 테스트 성공: 173개 → 172개 (XRP 삭제, 캔톤 BUY→HOLD 수정)
-    - `_matched_reviews_converted.json` 자동 생성 및 활용
-  - **완전한 워크플로우**: 원본변환 → 임베딩 → 리뷰 → 동기화 → 빌드 (4단계)
-  - **사용법 가이드**: `SIGNAL_REVIEW_V4_GUIDE.md` 원본 데이터 기반으로 완성
-  - **핵심 성과**: ✅ **원본 데이터와 100% 동기화, 리뷰↔본사이트 완전 연동**
+- **🚀 signal-review-v4.2 효율적 2단계 검증 시스템 완성** (2026-02-24):
+  - **워크플로우 혁신**: Opus 전체 검토 → 거부된 시그널만 검토 (효율성 극대화)
+    - **1단계**: 사람이 177개 시그널 승인/거부 (승인된 것은 바로 사이트 반영)
+    - **2단계**: 거부된 시그널만 Opus 재검토 → 대체 시그널 제안 or 삭제 추천  
+    - **최종**: Opus 수정안을 사람이 최종 확인 → 본사이트 반영
+  - **스마트 UI**: 상황별 버튼 표시/숨김
+    - 승인된 시그널: Opus 버튼 불필요 (이미 승인됨)
+    - 거부된 시그널: "🤖 Opus 검토" 버튼 표시
+    - 검토대기 시그널: Opus 버튼 숨김 (사람이 먼저 판단)
+  - **원본 데이터 기반**: `sync_to_site_v2.js` - 177개 → 172개 완전 변환
+    - 필드 매핑: asset→stockName, signal_type→signalType, video_id→youtubeLink
+    - 키 변환: `video_id_asset` → `watch?v=video_id_stockName`
+  - **리뷰 시스템**: `signal-review-v4-embedded.html` (468KB) - 172개 시그널
+  - **동기화 시스템**: `sync_to_site.js` - 변환된 키 형식 완벽 동기화
+  - **사용법 가이드**: `SIGNAL_REVIEW_V4_GUIDE.md` 새 플로우 반영
+  - **핵심 성과**: ✅ **효율적 2단계 검증 + 원본 데이터 100% 동기화**
 
 ### 🔄 진행중
 - 코린이 아빠 검증 배치 결과 대기중 (batch_6999165cf3608190b256076bd3cea0a9)
