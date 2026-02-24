@@ -182,8 +182,12 @@ export default function StockChart({ stockName, signals, className = '' }: Stock
     chartRef.current = chart;
     seriesRef.current = series;
 
-    // 가격 데이터 생성
-    const priceData = generatePriceData(stockName, 365);
+    // 시그널 중 가장 오래된 날짜 기준으로 데이터 기간 결정
+    const oldestSignalDate = signals.length > 0
+      ? Math.min(...signals.map(s => new Date(s.videoDate).getTime()))
+      : Date.now() - 365 * 86400000;
+    const daysSinceOldest = Math.max(365, Math.ceil((Date.now() - oldestSignalDate) / 86400000) + 60);
+    const priceData = generatePriceData(stockName, daysSinceOldest);
     series.setData(priceData);
 
     // 현재 가격 설정
@@ -193,6 +197,9 @@ export default function StockChart({ stockName, signals, className = '' }: Stock
       setCurrentPrice(lastPrice);
       setPriceChange(((lastPrice - prevPrice) / prevPrice) * 100);
     }
+
+    // 전체 기간 표시
+    chart.timeScale().fitContent();
 
     // 시그널 마커 생성
     const markers: MarkerData[] = signals.map((signal) => {
