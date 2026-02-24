@@ -9,15 +9,16 @@ import { getCoinId, COIN_MAPPING } from '@/lib/api/coingecko';
 
 const SUPPORTED_SYMBOLS = ['BTC', 'ETH', 'XRP', 'SOL', 'ADA', 'DOT'];
 
+// guru_tracker_v24 스타일 색상 적용
 const SIGNAL_COLORS = {
-  STRONG_BUY: '#16a34a',
-  BUY: '#22c55e', 
-  POSITIVE: '#86efac',
-  HOLD: '#eab308',
-  NEUTRAL: '#9ca3af',
-  CONCERN: '#f97316',
-  SELL: '#ef4444',
-  STRONG_SELL: '#dc2626',
+  STRONG_BUY: '#34d399',
+  BUY: '#86efac',
+  POSITIVE: '#60a5fa', 
+  HOLD: '#22d3ee',
+  NEUTRAL: '#94a3b8',
+  CONCERN: '#fdba74',
+  SELL: '#fb923c',
+  STRONG_SELL: '#f87171',
 } as const;
 
 const SIGNAL_LABELS = {
@@ -85,16 +86,25 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
     })();
   }, [symbol, isSupported]);
 
-  // lightweight-charts 렌더링
+  // lightweight-charts 렌더링 (guru_tracker 도트 마커 스타일 적용)
   useEffect(() => {
     if (!chartContainerRef.current || chartData.length === 0) return;
     const container = chartContainerRef.current;
     let cancelled = false;
+    let markerOverlayRef: HTMLDivElement | null = null;
+    let markerTooltipRef: HTMLDivElement | null = null;
+    let resizeObserver: ResizeObserver | null = null;
 
     (async () => {
       if (chartInstanceRef.current) {
         chartInstanceRef.current.remove();
         chartInstanceRef.current = null;
+      }
+
+      // 기존 마커 오버레이 제거
+      const existingOverlay = container.querySelector('.marker-overlay-container');
+      if (existingOverlay) {
+        existingOverlay.remove();
       }
 
       const { createChart, ColorType } = await import('lightweight-charts');
@@ -135,39 +145,270 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
         close: d.close,
       })));
 
-      // 시그널 마커 추가 (v4 API)
-      const markers = filteredSignals
-        .filter(s => s.videoDate)
-        .map(signal => {
-          const isBuy = ['STRONG_BUY', 'BUY', 'POSITIVE'].includes(signal.signalType);
-          return {
-            time: signal.videoDate as string,
-            position: isBuy ? 'belowBar' : 'aboveBar' as any,
-            color: SIGNAL_COLORS[signal.signalType as keyof typeof SIGNAL_COLORS] || '#9ca3af',
-            shape: isBuy ? 'arrowUp' : 'arrowDown' as any,
-            text: `${signal.influencer}: ${SIGNAL_LABELS[signal.signalType as keyof typeof SIGNAL_LABELS] || signal.signalType}`,
-            size: 2,
-          };
-        })
-        .sort((a: any, b: any) => a.time.localeCompare(b.time));
+      // guru_tracker_v24 스타일 도트 마커 오버레이 생성
+      markerOverlayRef = document.createElement('div');
+      markerOverlayRef.className = 'marker-overlay-container';
+      markerOverlayRef.style.cssText = `
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 50;
+      `;
+      
+      const svgContainer = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svgContainer.style.cssText = `
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 49;
+      `;
+      
+      markerOverlayRef.appendChild(svgContainer);
+      container.appendChild(markerOverlayRef);
 
-      if (markers.length > 0) {
-        series.setMarkers(markers as any);
-      }
+      // 툴팁 생성
+      markerTooltipRef = document.createElement('div');
+      markerTooltipRef.className = 'marker-tooltip';
+      markerTooltipRef.style.cssText = `
+        position: absolute;
+        z-index: 60;
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 0;
+        min-width: 300px;
+        max-width: 400px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        pointer-events: auto;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s, visibility 0.2s;
+      `;
+      container.appendChild(markerTooltipRef);
 
       chart.timeScale().fitContent();
       chartInstanceRef.current = chart;
 
+      // 도트 마커 생성 및 위치 업데이트 함수
+      const createMarkerDots = () => {
+        if (!markerOverlayRef || !svgContainer) return;
+        
+        // 기존 도트들 제거
+        const existingDots = markerOverlayRef.querySelectorAll('.marker-dot');
+        existingDots.forEach(dot => dot.remove());
+        
+        svgContainer.innerHTML = '';
+
+        filteredSignals.forEach((signal, index) => {
+          if (!signal.videoDate) return;
+
+          // 도트 생성
+          const dot = document.createElement('div');
+          dot.className = `marker-dot type-${signal.signalType.toLowerCase().replace('_', '-')}`;
+          dot.style.cssText = `
+            position: absolute;
+            pointer-events: auto;
+            cursor: pointer;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: transform 0.15s, box-shadow 0.15s;
+            z-index: 51;
+            background: ${SIGNAL_COLORS[signal.signalType as keyof typeof SIGNAL_COLORS] || '#94a3b8'};
+          `;
+
+          // SVG 대시 라인 생성
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('stroke', SIGNAL_COLORS[signal.signalType as keyof typeof SIGNAL_COLORS] || '#94a3b8');
+          line.setAttribute('stroke-width', '2');
+          line.setAttribute('stroke-dasharray', '4,3');
+          line.style.opacity = '0';
+          line.style.transition = 'opacity 0.2s';
+          svgContainer.appendChild(line);
+
+          // 프리뷰 생성
+          const preview = document.createElement('div');
+          preview.className = 'dot-preview';
+          preview.style.cssText = `
+            position: absolute;
+            z-index: 56;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 6px 10px;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s;
+            font-size: 12px;
+            color: #374151;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+          `;
+          preview.innerHTML = `<span style="font-weight: 700; color: #3b82f6; margin-right: 6px;">${symbol}</span><span style="font-weight: 600;">${SIGNAL_LABELS[signal.signalType as keyof typeof SIGNAL_LABELS] || signal.signalType}</span>`;
+          container.appendChild(preview);
+
+          // 호버 이벤트
+          dot.addEventListener('mouseenter', () => {
+            dot.style.transform = 'scale(1.6)';
+            dot.style.boxShadow = '0 0 12px rgba(59,130,246,0.3)';
+            dot.style.zIndex = '55';
+            line.style.opacity = '0.7';
+            
+            const rect = dot.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            preview.style.left = `${rect.left - containerRect.left + 12}px`;
+            preview.style.top = `${rect.top - containerRect.top - 35}px`;
+            preview.style.opacity = '1';
+          });
+
+          dot.addEventListener('mouseleave', () => {
+            dot.style.transform = 'scale(1)';
+            dot.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+            dot.style.zIndex = '51';
+            line.style.opacity = '0';
+            preview.style.opacity = '0';
+          });
+
+          // 클릭 이벤트 - 툴팁 표시
+          dot.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (!markerTooltipRef) return;
+
+            markerTooltipRef.innerHTML = `
+              <button onclick="this.parentElement.style.opacity='0'; this.parentElement.style.visibility='hidden';" style="position: absolute; top: 10px; right: 12px; background: rgba(0,0,0,0.06); border: none; color: #6b7280; cursor: pointer; font-size: 14px; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">✕</button>
+              <div style="padding: 16px 18px 12px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #f3f4f6;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: ${SIGNAL_COLORS[signal.signalType as keyof typeof SIGNAL_COLORS] || '#94a3b8'}; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 14px;">${signal.influencer.charAt(0)}</div>
+                <div style="flex: 1;">
+                  <div style="font-weight: 700; font-size: 15px; color: #111827;">${signal.influencer}</div>
+                  <div style="font-size: 11px; color: #6b7280; margin-top: 1px;">${signal.videoDate}</div>
+                </div>
+                <span style="padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 800; color: white; background: ${SIGNAL_COLORS[signal.signalType as keyof typeof SIGNAL_COLORS] || '#94a3b8'};">${SIGNAL_LABELS[signal.signalType as keyof typeof SIGNAL_LABELS] || signal.signalType}</span>
+              </div>
+              <div style="padding: 14px 18px;">
+                <div style="color: #374151; font-size: 13px; line-height: 1.6; margin-bottom: 14px; padding-left: 14px; border-left: 3px solid #3b82f6; border-radius: 2px;">${signal.content || '내용 없음'}</div>
+                ${signal.youtubeLink ? `<a href="${signal.youtubeLink}" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; color: #dc2626; font-size: 13px; text-decoration: none; padding: 8px 14px; background: rgba(220,38,38,0.08); border-radius: 10px; font-weight: 600;">▶ YouTube에서 보기</a>` : ''}
+              </div>
+            `;
+
+            const rect = dot.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            markerTooltipRef.style.left = `${rect.left - containerRect.left + 15}px`;
+            markerTooltipRef.style.top = `${rect.top - containerRect.top - 10}px`;
+            markerTooltipRef.style.opacity = '1';
+            markerTooltipRef.style.visibility = 'visible';
+            
+            line.style.opacity = '1';
+          });
+
+          markerOverlayRef.appendChild(dot);
+
+          // 도트에 참조 저장 (위치 업데이트용)
+          (dot as any)._signal = signal;
+          (dot as any)._line = line;
+          (dot as any)._preview = preview;
+        });
+      };
+
+      // 도트 위치 업데이트 함수
+      const updateDotPositions = () => {
+        if (!markerOverlayRef) return;
+        
+        const dots = markerOverlayRef.querySelectorAll('.marker-dot');
+        dots.forEach((dot) => {
+          const signal = (dot as any)._signal;
+          const line = (dot as any)._line;
+          if (!signal || !signal.videoDate) return;
+
+          try {
+            const timeCoord = chart.timeScale().timeToCoordinate(signal.videoDate as any);
+            if (timeCoord === null) {
+              (dot as HTMLElement).style.display = 'none';
+              if (line) line.style.display = 'none';
+              return;
+            }
+
+            // 해당 날짜의 캔들 데이터 찾기
+            const candleData = chartData.find(d => d.time === signal.videoDate) || 
+                              chartData.find(d => Math.abs(new Date(d.time).getTime() - new Date(signal.videoDate).getTime()) < 24 * 60 * 60 * 1000) ||
+                              chartData[Math.floor(chartData.length / 2)]; // fallback
+
+            const priceCoord = series.priceToCoordinate(candleData.close);
+            if (priceCoord === null) {
+              (dot as HTMLElement).style.display = 'none';
+              if (line) line.style.display = 'none';
+              return;
+            }
+
+            const dotX = timeCoord - 6; // 도트 중심점 맞추기
+            const dotY = priceCoord - 18 - 6; // 18px 위 + 도트 중심점
+
+            (dot as HTMLElement).style.left = `${dotX}px`;
+            (dot as HTMLElement).style.top = `${dotY}px`;
+            (dot as HTMLElement).style.display = 'block';
+
+            // SVG 라인 업데이트
+            if (line) {
+              line.setAttribute('x1', `${timeCoord}`);
+              line.setAttribute('y1', `${priceCoord}`);
+              line.setAttribute('x2', `${timeCoord}`);
+              line.setAttribute('y2', `${dotY + 6}`);
+              line.style.display = 'block';
+            }
+          } catch (error) {
+            (dot as HTMLElement).style.display = 'none';
+            if (line) line.style.display = 'none';
+          }
+        });
+      };
+
+      // 도트 생성
+      createMarkerDots();
+      updateDotPositions();
+
+      // 차트 이벤트 구독
+      chart.timeScale().subscribeVisibleLogicalRangeChange(updateDotPositions);
+
+      // 툴팁 닫기 (전역 클릭)
+      const closeTooltip = (e: MouseEvent) => {
+        if (markerTooltipRef && !markerTooltipRef.contains(e.target as Node)) {
+          markerTooltipRef.style.opacity = '0';
+          markerTooltipRef.style.visibility = 'hidden';
+          
+          // 모든 라인 숨기기
+          const svgLines = svgContainer.querySelectorAll('line');
+          svgLines.forEach(line => {
+            if (line.style.opacity === '1') {
+              line.style.opacity = '0';
+            }
+          });
+        }
+      };
+      document.addEventListener('click', closeTooltip);
+
       // 리사이즈 대응
-      const ro = new ResizeObserver(() => {
+      resizeObserver = new ResizeObserver(() => {
         if (chartInstanceRef.current && container.clientWidth > 0) {
           chartInstanceRef.current.applyOptions({
             width: container.clientWidth,
             height: Math.max(container.clientHeight, window.innerHeight - 300, 500),
           });
+          setTimeout(updateDotPositions, 100);
         }
       });
-      ro.observe(container);
+      resizeObserver.observe(container);
+
+      return () => {
+        document.removeEventListener('click', closeTooltip);
+      };
     })();
 
     return () => {
@@ -175,6 +416,15 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
       if (chartInstanceRef.current) {
         chartInstanceRef.current.remove();
         chartInstanceRef.current = null;
+      }
+      if (markerOverlayRef) {
+        markerOverlayRef.remove();
+      }
+      if (markerTooltipRef) {
+        markerTooltipRef.remove();
+      }
+      if (resizeObserver) {
+        resizeObserver.disconnect();
       }
     };
   }, [chartData, filteredSignals]);
@@ -273,7 +523,7 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
             <p className="text-red-500">{error}</p>
           </div>
         ) : (
-          <div ref={chartContainerRef} style={{ width: '100%', height: 'calc(100vh - 280px)', minHeight: 400 }} />
+          <div ref={chartContainerRef} style={{ width: '100%', height: 'calc(100vh - 280px)', minHeight: 400, position: 'relative' }} />
         )}
       </div>
 
