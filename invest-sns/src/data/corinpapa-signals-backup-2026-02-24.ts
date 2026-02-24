@@ -1,6 +1,6 @@
-// 코린이 아빠 실제 시그널 데이터 (174개)
+// 코린이 아빠 실제 시그널 데이터 (175개)
 // 자동 생성됨 - 수정하지 마세요
-// 마지막 동기화: 2026-02-24T12:51:59.094Z
+// 마지막 동기화: 2026-02-24T12:51:44.036Z
 
 export interface CorinpapaSignal {
   id: number;
@@ -25,8 +25,30 @@ export interface CorinpapaSignal {
   videoSummary?: string;
 }
 
-// 실제 시그널 데이터 (174개, 최신순 정렬)
+// 실제 시그널 데이터 (175개, 최신순 정렬)
 export const corinpapaSignals: CorinpapaSignal[] = [
+  {
+    "id": 1000,
+    "influencer": "코린이 아빠",
+    "stock": "XRP",
+    "stockName": "XRP",
+    "signalType": "SELL",
+    "content": "XRP 헤어질 결심",
+    "timestamp": "[0:01]",
+    "youtubeLink": "https://youtube.com/watch?v=7AaksU-R3dg",
+    "analysis": {
+      "summary": "영상 제목부터 XRP와의 헤어질 결심을 명시하고 있으며, WLFI의 USD1이 XRP의 핵심 네러티브인 국경간 송금을 정면으로 대체하겠다고 나서면서 XRP의 존재 가치가 위협받는다...",
+      "detail": "영상 제목부터 XRP와의 헤어질 결심을 명시하고 있으며, WLFI의 USD1이 XRP의 핵심 네러티브인 국경간 송금을 정면으로 대체하겠다고 나서면서 XRP의 존재 가치가 위협받는다고 분석"
+    },
+    "videoDate": "2026-02-19",
+    "videoTitle": "\"Decision to Part with XRP (WLFI Mar-a-Lago Forum Impact)\"",
+    "confidence": "HIGH",
+    "timeframe": "LONG",
+    "conditional": false,
+    "skinInGame": true,
+    "hedged": false,
+    "videoSummary": "화자는 트럼프 일가가 운영하는 월드리버티파이낸셜(WLFI)의 마라라고 포럼 개최와 그 영향을 분석하며, 이것이 XRP에게 치명적 위협이 된다고 주장한다. 포럼에는 400여명의 금융계 거물들이 참석했고, 골드만삭스 회장은 규제 기반 시스템의 중요성을 강조하며 무규제 암호화폐 지지자들을 비판했다. WLFI는 자체 스테이블코인 USD1을 활용한 국경간 송금 플랫폼을 출시한다고 발표했는데, 이는 기존 XRP의 핵심 네러티브를 정면으로 겨냥한 것이다. XRP가 기술적 브릿지 통화를 지향했다면, WLFI는 USD1을 제도적 브릿지 통화로 만들겠다고 선언했다. 멀티체인 전략으로 바이낸스, 트론, 솔라나, 이더리움 등에서 USD1을 발행하며 이미 50억 달러를 넘어섰다. 화자는 2026년 알트코인 대멸종을 예측했던 자신의 시각이 현실화되고 있다고 주장하며, 비탈릭 부테린이 80%를 매도한 것도 같은 맥락으로 해석한다. 그는 코인 유튜버들의 편향된 시각을 경계하라고 당부하며, 자신도 상황이 나빠지면 가장 먼저 탈출할 것이라고 솔직하게 밝힌다. 결론적으로 네러티브에 빠지지 말고 오직 데이터와 개인 판단에만 의존하라고 강조한다."
+  },
   {
     "id": 1001,
     "influencer": "코린이 아빠",
@@ -98,7 +120,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
     "influencer": "코린이 아빠",
     "stock": "CNTN",
     "stockName": "캔톤 스트레티지 홀딩스 (CNTN)",
-    "signalType": "HOLD",
+    "signalType": "BUY",
     "content": "야, 뭐 사야 돼? 그럼 어 캔톤사 이렇게 얘기하시면 돼요",
     "timestamp": "[3:16]",
     "youtubeLink": "https://youtube.com/watch?v=ULXCspCxaSg",

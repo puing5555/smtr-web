@@ -1,0 +1,17 @@
+{
+  "reviews": {
+    "watch?v=7AaksU-R3dg_XRP": {
+      "status": "rejected",
+      "action": "delete",
+      "time": "2026-02-24 19:52:00"
+    },
+    "watch?v=ULXCspCxaSg_캔톤 스트레티지 홀딩스 (CNTN)": {
+      "status": "rejected",
+      "action": "modify",
+      "signalType": "HOLD",
+      "time": "2026-02-24 19:52:00"
+    }
+  },
+  "timestamp": "2026-02-24T12:52:00.000Z",
+  "totalSignals": 175
+}
