@@ -315,7 +315,6 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
                         </td>
                         <td className="py-4 px-3 whitespace-nowrap">
                           <div className="text-sm text-gray-900">{signal.videoDate}</div>
-                          <div className="text-xs text-gray-500">{signal.timestamp}</div>
                         </td>
                         <td className="py-4 px-3" style={{ minWidth: '60px' }}>
                           {(() => {
