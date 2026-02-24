@@ -301,11 +301,11 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
                           </Badge>
                         </td>
                         <td className="py-4 px-6 max-w-md">
-                          <div className="text-sm font-medium text-gray-900 mb-1">
-                            {signal.videoTitle || signal.analysis.summary}
+                          <div className="text-sm font-medium text-gray-900 mb-1 line-clamp-2">
+                            &quot;{signal.content}&quot;
                           </div>
                           <div className="text-xs text-gray-600 line-clamp-1">
-                            {signal.analysis.detail}
+                            {signal.analysis.summary}
                           </div>
                         </td>
                         <td className="py-4 px-6">
