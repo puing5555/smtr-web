@@ -7,7 +7,35 @@ import Link from 'next/link';
 import { useInfluencersStore } from '@/stores/influencers';
 import { getCoinId, COIN_MAPPING } from '@/lib/api/coingecko';
 
-const SUPPORTED_SYMBOLS = ['BTC', 'ETH', 'XRP', 'SOL', 'ADA', 'DOT'];
+// 한글 종목명 → CryptoCompare 심볼 매핑
+const SYMBOL_TO_CRYPTO: Record<string, string> = {
+  '비트코인': 'BTC', 'BTC': 'BTC',
+  '이더리움': 'ETH', 'ETH': 'ETH',
+  'XRP': 'XRP', '리플': 'XRP',
+  '솔라나': 'SOL', 'SOL': 'SOL',
+  'BNB': 'BNB',
+  '체인링크': 'LINK', 'LINK': 'LINK',
+  '모네로': 'XMR', 'XMR': 'XMR',
+  '월드코인': 'WLD', 'WLD': 'WLD',
+  'CC': 'CC', '캔톤네트워크': 'CC', '캐톤네트워크': 'CC',
+  '알트코인': '', '스테이블코인': '', '암호화폐': '',
+  '기술주': '', '미국 주식': '', '금': '',
+};
+
+function getCryptoSymbol(sym: string): string | null {
+  // 직접 매핑
+  if (SYMBOL_TO_CRYPTO[sym] !== undefined) return SYMBOL_TO_CRYPTO[sym] || null;
+  // 괄호 안 티커 추출: "캔톤네트워크 (CC)" → CC
+  const m = sym.match(/\(([^)]+)\)/);
+  if (m) {
+    const ticker = m[1];
+    if (SYMBOL_TO_CRYPTO[ticker] !== undefined) return SYMBOL_TO_CRYPTO[ticker] || null;
+    return ticker; // 매핑에 없어도 티커 그대로 시도
+  }
+  return sym; // 그대로 시도
+}
+
+const SUPPORTED_SYMBOLS = Object.values(SYMBOL_TO_CRYPTO).filter(Boolean);
 
 // guru_tracker_v24 스타일 색상 - 8가지 시그널별 뚜렷한 색상
 const SIGNAL_COLORS = {
@@ -61,15 +89,16 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
   }, [stockSignals]);
 
   const stockName = stockSignals[0]?.stockName || symbol;
-  const isSupported = SUPPORTED_SYMBOLS.includes(symbol);
+  const cryptoSymbol = getCryptoSymbol(symbol);
+  const isSupported = !!cryptoSymbol && SUPPORTED_SYMBOLS.includes(cryptoSymbol);
 
   // 차트 데이터 로드
   useEffect(() => {
-    if (!isSupported) { setLoading(false); return; }
+    if (!isSupported || !cryptoSymbol) { setLoading(false); return; }
     (async () => {
       try {
         setLoading(true);
-        const res = await fetch(`https://min-api.cryptocompare.com/data/v2/histoday?fsym=${symbol}&tsym=USD&limit=730`);
+        const res = await fetch(`https://min-api.cryptocompare.com/data/v2/histoday?fsym=${cryptoSymbol}&tsym=USD&limit=730`);
         const json = await res.json();
         if (json.Response === 'Error') throw new Error(json.Message);
         const data = (json.Data?.Data || []).map((d: any) => ({
