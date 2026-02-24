@@ -40,8 +40,6 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedInfluencer, setSelectedInfluencer] = useState('ALL');
-  const [selectedSignalType, setSelectedSignalType] = useState('ALL');
-
   const { signals, loadSignals } = useInfluencersStore();
 
   useEffect(() => { loadSignals(); }, [loadSignals]);
@@ -53,9 +51,8 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
   const filteredSignals = useMemo(() => {
     let filtered = stockSignals;
     if (selectedInfluencer !== 'ALL') filtered = filtered.filter(s => s.influencer === selectedInfluencer);
-    if (selectedSignalType !== 'ALL') filtered = filtered.filter(s => s.signalType === selectedSignalType);
     return filtered;
-  }, [stockSignals, selectedInfluencer, selectedSignalType]);
+  }, [stockSignals, selectedInfluencer]);
 
   const influencers = useMemo(() => {
     return [...new Set(stockSignals.map(s => s.influencer))];
@@ -481,26 +478,6 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
                   <button key={inf} onClick={() => setSelectedInfluencer(inf)}
                     className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${selectedInfluencer === inf ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
                     {inf} ({count})
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">시그널 타입</label>
-            <div className="flex flex-wrap gap-2">
-              <button onClick={() => setSelectedSignalType('ALL')}
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${selectedSignalType === 'ALL' ? 'bg-purple-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
-                전체
-              </button>
-              {Object.entries(SIGNAL_LABELS).map(([type, label]) => {
-                const count = stockSignals.filter(s => s.signalType === type).length;
-                if (count === 0) return null;
-                return (
-                  <button key={type} onClick={() => setSelectedSignalType(type)}
-                    className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${selectedSignalType === type ? 'text-white' : 'text-gray-700 hover:bg-gray-200'}`}
-                    style={{ backgroundColor: selectedSignalType === type ? SIGNAL_COLORS[type as keyof typeof SIGNAL_COLORS] : undefined }}>
-                    {label} ({count})
                   </button>
                 );
               })}
