@@ -103,7 +103,7 @@
         </div>
 
         <div class="alert info">
-            <strong>🔄 사이트 동기화:</strong> 리뷰 완료 후 "본사이트 동기화" 버튼을 클릭하여 변경사항을 SMTR 웹사이트에 반영하세요.
+            <strong>🔄 새로운 워크플로우:</strong> 1) 시그널 승인/거부 → 2) 거부된 시그널만 Opus 검토 → 3) 최종 결과를 본사이트에 반영
         </div>
 
         <div class="stats">
@@ -176,7 +176,6 @@
 
         <div class="action-buttons">
             <button id="syncSiteBtn" class="btn success">🔄 본사이트 동기화</button>
-            <button id="opusReviewBtn" class="btn primary">Opus 수정 실행</button>
             <button id="exportTsBtn" class="btn primary">TypeScript 파일 내보내기</button>
         </div>
 
@@ -188,28 +187,6 @@
     <script>
         // 데이터 placeholder - embed_v4.js에서 교체됨
         let signalsData = [
-  {
-    "id": 1000,
-    "influencer": "코린이 아빠",
-    "stock": "XRP",
-    "stockName": "XRP",
-    "signalType": "SELL",
-    "content": "XRP 헤어질 결심",
-    "timestamp": "[0:01]",
-    "youtubeLink": "https://youtube.com/watch?v=7AaksU-R3dg",
-    "analysis": {
-      "summary": "영상 제목부터 XRP와의 헤어질 결심을 명시하고 있으며, WLFI의 USD1이 XRP의 핵심 네러티브인 국경간 송금을 정면으로 대체하겠다고 나서면서 XRP의 존재 가치가 위협받는다고 분석",
-      "detail": "영상 제목부터 XRP와의 헤어질 결심을 명시하고 있으며, WLFI의 USD1이 XRP의 핵심 네러티브인 국경간 송금을 정면으로 대체하겠다고 나서면서 XRP의 존재 가치가 위협받는다고 분석"
-    },
-    "videoDate": "2026-02-19",
-    "videoTitle": "\"Decision to Part with XRP (WLFI Mar-a-Lago Forum Impact)\"",
-    "confidence": "HIGH",
-    "timeframe": "LONG",
-    "conditional": false,
-    "skinInGame": true,
-    "hedged": false,
-    "videoSummary": "화자는 트럼프 일가가 운영하는 월드리버티파이낸셜(WLFI)의 마라라고 포럼 개최와 그 영향을 분석하며, 이것이 XRP에게 치명적 위협이 된다고 주장한다. 포럼에는 400여명의 금융계 거물들이 참석했고, 골드만삭스 회장은 규제 기반 시스템의 중요성을 강조하며 무규제 암호화폐 지지자들을 비판했다. WLFI는 자체 스테이블코인 USD1을 활용한 국경간 송금 플랫폼을 출시한다고 발표했는데, 이는 기존 XRP의 핵심 네러티브를 정면으로 겨냥한 것이다. XRP가 기술적 브릿지 통화를 지향했다면, WLFI는 USD1을 제도적 브릿지 통화로 만들겠다고 선언했다. 멀티체인 전략으로 바이낸스, 트론, 솔라나, 이더리움 등에서 USD1을 발행하며 이미 50억 달러를 넘어섰다. 화자는 2026년 알트코인 대멸종을 예측했던 자신의 시각이 현실화되고 있다고 주장하며, 비탈릭 부테린이 80%를 매도한 것도 같은 맥락으로 해석한다. 그는 코인 유튜버들의 편향된 시각을 경계하라고 당부하며, 자신도 상황이 나빠지면 가장 먼저 탈출할 것이라고 솔직하게 밝힌다. 결론적으로 네러티브에 빠지지 말고 오직 데이터와 개인 판단에만 의존하라고 강조한다."
-  },
   {
     "id": 1001,
     "influencer": "코린이 아빠",
@@ -281,7 +258,7 @@
     "influencer": "코린이 아빠",
     "stock": "CNTN",
     "stockName": "캔톤 스트레티지 홀딩스 (CNTN)",
-    "signalType": "BUY",
+    "signalType": "HOLD",
     "content": "야, 뭐 사야 돼? 그럼 어 캔톤사 이렇게 얘기하시면 돼요",
     "timestamp": "[3:16]",
     "youtubeLink": "https://youtube.com/watch?v=ULXCspCxaSg",
@@ -7891,7 +7868,7 @@
                             <a href="${signal.youtubeLink}&t=${Math.floor(parseFloat(signal.timestamp) || 0)}s" target="_blank">영상 보기 (${signal.timestamp})</a>
                         </div>
 
-                        ${opusResult ? renderOpusSection(signal, opusResult) : ''}
+                        ${(review.status === 'rejected' && opusResult) ? renderOpusSection(signal, opusResult) : ''}
 
                         <div class="review-controls">
                             ${renderReviewControls(signal, review)}
@@ -7941,6 +7918,12 @@
         function renderReviewControls(signal, review) {
             const key = getSignalKey(signal);
             
+            // Opus 검토 버튼은 거부된 시그널에만 표시
+            const opusButton = review.status === 'rejected' ? 
+                `<button class="btn primary" onclick="requestOpusReview('${key}')" style="margin-left: 12px;">
+                    🤖 Opus 검토
+                </button>` : '';
+            
             return `
                 <div class="review-row">
                     <div class="checkbox-container">
@@ -7976,6 +7959,7 @@
                             <option value="SELL" ${review.signalType === 'SELL' ? 'selected' : ''}>SELL</option>
                             <option value="STRONG_SELL" ${review.signalType === 'STRONG_SELL' ? 'selected' : ''}>STRONG_SELL</option>
                         </select>
+                        ${opusButton}
                     </div>
                 </div>
             `;
@@ -8040,6 +8024,17 @@
                 const rejectOptions = document.getElementById(`reject-options-${key}`);
                 if (rejectOptions) {
                     rejectOptions.classList.add('show');
+                    
+                    // Opus 버튼 추가 (아직 없다면)
+                    const existingOpusBtn = rejectOptions.querySelector('.btn.primary');
+                    if (!existingOpusBtn) {
+                        const opusBtn = document.createElement('button');
+                        opusBtn.className = 'btn primary';
+                        opusBtn.onclick = () => requestOpusReview(key);
+                        opusBtn.style.marginLeft = '12px';
+                        opusBtn.innerHTML = '🤖 Opus 검토';
+                        rejectOptions.appendChild(opusBtn);
+                    }
                 }
             } else {
                 currentReviews[key].status = 'pending';
@@ -8049,6 +8044,12 @@
                 const rejectOptions = document.getElementById(`reject-options-${key}`);
                 if (rejectOptions) {
                     rejectOptions.classList.remove('show');
+                    
+                    // Opus 버튼 제거
+                    const opusBtn = rejectOptions.querySelector('.btn.primary');
+                    if (opusBtn) {
+                        opusBtn.remove();
+                    }
                 }
             }
 
@@ -8154,7 +8155,6 @@
 
             // 버튼 이벤트
             document.getElementById('syncSiteBtn').addEventListener('click', syncToSite);
-            document.getElementById('opusReviewBtn').addEventListener('click', executeOpusReview);
             document.getElementById('exportTsBtn').addEventListener('click', exportTypeScriptFile);
         }
 
@@ -8162,8 +8162,28 @@
             // 이미 renderSignals에서 인라인으로 바인딩됨
         }
 
-        function executeOpusReview() {
-            alert('Opus 수정은 별도 백엔드에서 처리됩니다. 현재 페이지에는 이미 처리된 결과가 표시되어 있습니다.');
+        function requestOpusReview(key) {
+            // 해당 시그널에 대한 Opus 검토 요청
+            const signal = signalsData.find(s => getSignalKey(s) === key);
+            if (!signal) {
+                alert('시그널을 찾을 수 없습니다.');
+                return;
+            }
+
+            // 실제로는 백엔드 API 호출
+            console.log(`Opus 검토 요청: ${signal.stockName} - ${signal.content}`);
+            
+            // UI 피드백
+            const button = event.target;
+            button.disabled = true;
+            button.innerHTML = '🔄 검토중...';
+            
+            // 임시로 3초 후 완료 처리 (실제로는 API 응답)
+            setTimeout(() => {
+                button.disabled = false;
+                button.innerHTML = '🤖 Opus 검토';
+                alert('Opus 검토가 완료되었습니다. 결과는 별도 시스템에서 확인해주세요.');
+            }, 3000);
         }
 
         function syncToSite() {

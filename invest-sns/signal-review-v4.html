@@ -103,7 +103,7 @@
         </div>
 
         <div class="alert info">
-            <strong>🔄 사이트 동기화:</strong> 리뷰 완료 후 "본사이트 동기화" 버튼을 클릭하여 변경사항을 SMTR 웹사이트에 반영하세요.
+            <strong>🔄 새로운 워크플로우:</strong> 1) 시그널 승인/거부 → 2) 거부된 시그널만 Opus 검토 → 3) 최종 결과를 본사이트에 반영
         </div>
 
         <div class="stats">
@@ -470,6 +470,17 @@
                 const rejectOptions = document.getElementById(`reject-options-${key}`);
                 if (rejectOptions) {
                     rejectOptions.classList.add('show');
+                    
+                    // Opus 버튼 추가 (아직 없다면)
+                    const existingOpusBtn = rejectOptions.querySelector('.btn.primary');
+                    if (!existingOpusBtn) {
+                        const opusBtn = document.createElement('button');
+                        opusBtn.className = 'btn primary';
+                        opusBtn.onclick = () => requestOpusReview(key);
+                        opusBtn.style.marginLeft = '12px';
+                        opusBtn.innerHTML = '🤖 Opus 검토';
+                        rejectOptions.appendChild(opusBtn);
+                    }
                 }
             } else {
                 currentReviews[key].status = 'pending';
@@ -479,6 +490,12 @@
                 const rejectOptions = document.getElementById(`reject-options-${key}`);
                 if (rejectOptions) {
                     rejectOptions.classList.remove('show');
+                    
+                    // Opus 버튼 제거
+                    const opusBtn = rejectOptions.querySelector('.btn.primary');
+                    if (opusBtn) {
+                        opusBtn.remove();
+                    }
                 }
             }
 
