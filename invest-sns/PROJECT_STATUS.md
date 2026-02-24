@@ -1,6 +1,44 @@
 # invest-sns PROJECT STATUS
 
-## ✅ 최신 완료 작업: 차트보기 기능을 인라인 차트로 변환 (라이트 테마) (2026-02-24 12:15)
+## ✅ 최신 완료 작업: 리뷰 사이트 v4 완성 - Opus diff 표시 기능 추가 (2026-02-24 19:43)
+
+### 📊 리뷰 사이트 v4 재구축 완료
+
+#### ✅ 완료된 작업
+1. **signal-review-v4.html 생성**
+   - v3-final.html 디자인 유지하면서 새로운 기능 추가
+   - Opus 수정 결과를 diff 형태로 표시하는 기능 추가
+   - 8가지 시그널 타입만 지원 (STRONG_BUY, BUY, POSITIVE, HOLD, NEUTRAL, CONCERN, SELL, STRONG_SELL)
+   - 영상날짜를 검토대기 옆에 항상 표시
+   - 최신순 정렬 구현
+
+2. **embed_v4.js 생성**
+   - 중복제거된 시그널 데이터 (_deduped_signals_8types_dated.json) 파싱
+   - _matched_reviews.json 및 _opus_review_results.json 로드
+   - Opus 수정사항 diff 생성 알고리즘 구현
+   - 데이터를 HTML에 자동 임베딩
+
+3. **신규 기능 구현**
+   - **Opus 수정사항 비교**: Original vs Opus 수정된 내용을 시각적으로 비교 표시
+   - **수정사항 토글**: 클릭으로 diff 내용을 펼치기/접기
+   - **Opus 필터링**: 수정사항 있음/없음으로 필터링 가능
+   - **영상날짜 표시**: 검토대기 상태 옆에 영상 날짜 항상 표시
+
+#### 📊 최종 결과
+- **177개 시그널** 데이터 처리 완료
+- **승인 173개, 거부 4개** 상태 반영
+- **Opus 수정사항 0개** (현재 데이터 기준)
+- **signal-review-v4-embedded.html** (572KB) 생성 완료
+
+#### 🔧 기술 스택
+- HTML5 + CSS3 (모던 디자인)
+- Vanilla JavaScript (프레임워크 없음)
+- Node.js 데이터 처리 스크립트
+- Git 버전 관리
+
+---
+
+## 이전 완료 작업: 차트보기 기능을 인라인 차트로 변환 (라이트 테마) (2026-02-24 12:15)
 
 ### 📊 차트보기 기능 인라인 변환 완료 (라이트 테마)
 
