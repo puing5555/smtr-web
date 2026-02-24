@@ -300,12 +300,12 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
                             {SIGNAL_TYPES[signal.signalType].label}
                           </Badge>
                         </td>
-                        <td className="py-4 px-6 max-w-md">
-                          <div className="text-sm font-medium text-gray-900 mb-1 line-clamp-2">
-                            &quot;{signal.content}&quot;
-                          </div>
-                          <div className="text-xs text-gray-600 line-clamp-1">
+                        <td className="py-4 px-6">
+                          <div className="text-sm font-medium text-gray-900 mb-1">
                             {signal.analysis.summary}
+                          </div>
+                          <div className="text-xs text-gray-500 italic">
+                            &quot;{signal.content}&quot;
                           </div>
                         </td>
                         <td className="py-4 px-6">
@@ -391,16 +391,19 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
             </div>
 
             <div className="p-6 space-y-5">
-              {/* 종목 + 시그널 뱃지 */}
-              <div className="flex items-center gap-3">
+              {/* 2번째줄: 종목 + 신호 + 영상제목(한글) + 날짜 */}
+              <div className="flex flex-wrap items-center gap-3">
                 <span className="text-xl font-bold text-gray-900">{modalSignal.stockName}</span>
                 <Badge className={`${SIGNAL_TYPES[modalSignal.signalType].color} ${SIGNAL_TYPES[modalSignal.signalType].textColor} text-sm font-bold`}>
                   {SIGNAL_TYPES[modalSignal.signalType].label}
                 </Badge>
+                {modalSignal.videoTitle && (
+                  <span className="text-sm text-gray-600">{modalSignal.videoTitle}</span>
+                )}
                 <span className="text-sm text-gray-500">{modalSignal.videoDate}</span>
               </div>
 
-              {/* 발언 내용 */}
+              {/* 3~4번째줄: 발언내용 */}
               <div>
                 <h5 className="text-sm font-semibold text-gray-700 mb-2">💬 발언 내용</h5>
                 <div className="bg-gray-50 rounded-lg p-4">
@@ -409,32 +412,17 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
                 </div>
               </div>
 
-              {/* 분석 컨텍스트 */}
-              {modalSignal.context && (
-                <div>
-                  <h5 className="text-sm font-semibold text-gray-700 mb-2">🔍 분석 컨텍스트</h5>
-                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-                    <p className="text-gray-800 leading-relaxed">{modalSignal.context}</p>
-                  </div>
-                </div>
-              )}
-
-              {/* 영상요약 토글 */}
-              {modalSignal.videoSummary && (
-                <div>
-                  <button
-                    onClick={() => setShowSummary(!showSummary)}
-                    className="text-sm text-blue-500 hover:text-blue-700 font-medium flex items-center gap-1"
-                  >
-                    📋 영상요약 {showSummary ? '접기 ▲' : '보기 ▼'}
-                  </button>
-                  {showSummary && (
-                    <div className="mt-2 bg-gray-50 border border-gray-200 rounded-lg p-4">
-                      <p className="text-gray-800 text-sm leading-relaxed">{modalSignal.videoSummary}</p>
-                    </div>
+              {/* 5~6번째줄: 영상요약 (항상 표시) */}
+              <div>
+                <h5 className="text-sm font-semibold text-gray-700 mb-2">📋 영상 요약</h5>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  {modalSignal.videoSummary ? (
+                    <p className="text-gray-800 leading-relaxed whitespace-pre-line">{modalSignal.videoSummary}</p>
+                  ) : (
+                    <p className="text-gray-800 leading-relaxed">{modalSignal.analysis.detail}</p>
                   )}
                 </div>
-              )}
+              </div>
 
               {/* 차트보기 + 영상보기 버튼 */}
               <div className="flex gap-3 pt-4 border-t border-gray-200">
