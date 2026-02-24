@@ -6,8 +6,18 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import { useInfluencersStore } from '@/stores/influencers';
-import { coinGeckoAPI, getCoinId, COIN_MAPPING } from '@/lib/api/coingecko';
+import { getCoinId, COIN_MAPPING } from '@/lib/api/coingecko';
 import type { IChartApi, ISeriesApi, CandlestickData, Time } from 'lightweight-charts';
+
+// Binance 심볼 매핑 (CoinGecko 대신 Binance API 사용)
+const BINANCE_SYMBOL_MAP: Record<string, string> = {
+  'BTC': 'BTCUSDT',
+  'ETH': 'ETHUSDT',
+  'XRP': 'XRPUSDT',
+  'SOL': 'SOLUSDT',
+  'ADA': 'ADAUSDT',
+  'DOT': 'DOTUSDT',
+};
 
 const SIGNAL_COLORS = {
   STRONG_BUY: '#16a34a',
@@ -99,10 +109,13 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
   const coinId = getCoinId(symbol);
   const stockName = stockSignals[0]?.stockName || symbol;
 
-  // 차트 데이터 로드
+  // Binance 심볼
+  const binanceSymbol = BINANCE_SYMBOL_MAP[symbol] || '';
+
+  // 차트 데이터 로드 (Binance API)
   useEffect(() => {
     const loadChartData = async () => {
-      if (!coinId) {
+      if (!binanceSymbol) {
         setError('지원하지 않는 종목입니다.');
         setLoading(false);
         return;
@@ -112,23 +125,24 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
         setLoading(true);
         setError(null);
 
-        // 최근 90일 OHLC 데이터 가져오기
+        // Binance Klines API - 무료, 키 불필요, 안정적
         const response = await fetch(
-          `https://api.coingecko.com/api/v3/coins/${coinId}/ohlc?vs_currency=usd&days=90`
+          `https://api.binance.com/api/v3/klines?symbol=${binanceSymbol}&interval=1d&limit=90`
         );
 
         if (!response.ok) {
           throw new Error('차트 데이터를 가져올 수 없습니다.');
         }
 
-        const ohlcData = await response.json();
+        const klines = await response.json();
         
-        const formattedData: ChartData[] = ohlcData.map((item: number[]) => ({
-          time: new Date(item[0]).toISOString().split('T')[0],
-          open: item[1],
-          high: item[2], 
-          low: item[3],
-          close: item[4],
+        // Binance kline format: [openTime, open, high, low, close, volume, closeTime, ...]
+        const formattedData: ChartData[] = klines.map((k: any[]) => ({
+          time: new Date(k[0]).toISOString().split('T')[0],
+          open: parseFloat(k[1]),
+          high: parseFloat(k[2]),
+          low: parseFloat(k[3]),
+          close: parseFloat(k[4]),
         }));
 
         setChartData(formattedData);
@@ -141,11 +155,13 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
     };
 
     loadChartData();
-  }, [coinId]);
+  }, [binanceSymbol]);
 
   // 차트 초기화 및 업데이트
   useEffect(() => {
     if (!chartContainerRef.current || chartData.length === 0) return;
+    const container = chartContainerRef.current;
+    let cancelled = false;
     const initChart = async () => {
 
     // 기존 차트 정리
@@ -155,8 +171,9 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
 
     // 새 차트 생성
     const { createChart, ColorType } = await import('lightweight-charts');
-    const chart = createChart(chartContainerRef.current, {
-      width: chartContainerRef.current.clientWidth,
+    if (cancelled) return;
+    const chart = createChart(container, {
+      width: container.clientWidth,
       height: 500,
       layout: {
         background: { type: ColorType.Solid, color: 'white' },
@@ -243,18 +260,19 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
       chartRef.current.applyOptions({ width: newRect.width });
     });
 
-    resizeObserver.observe(chartContainerRef.current);
+    resizeObserver.observe(container);
     };
     initChart();
 
     return () => {
+      cancelled = true;
       if (chartRef.current) {
         chartRef.current.remove();
       }
     };
   }, [chartData, filteredSignals]);
 
-  if (!coinId) {
+  if (!binanceSymbol) {
     return (
       <div className="max-w-6xl mx-auto p-6">
         <Link href="/influencers" className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6">
@@ -280,7 +298,7 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
           </Link>
           <div>
             <h1 className="text-2xl font-bold text-gray-900">{stockName}</h1>
-            <p className="text-sm text-gray-500">{symbol} • CoinGecko ID: {coinId}</p>
+            <p className="text-sm text-gray-500">{symbol} • {binanceSymbol || coinId}</p>
           </div>
         </div>
         
