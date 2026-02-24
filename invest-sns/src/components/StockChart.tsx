@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { createChart, IChartApi, ISeriesApi, LineData, UTCTimestamp } from 'lightweight-charts';
-import { coinGeckoAPI, getCoinId, formatReturn, getReturnColor } from '@/lib/api/coingecko';
+import { createChart, ColorType, IChartApi, ISeriesApi, LineData, UTCTimestamp } from 'lightweight-charts';
+import { getCoinId, formatReturn, getReturnColor } from '@/lib/api/coingecko';
 
 interface Signal {
   id: number;
@@ -111,13 +111,16 @@ export default function StockChart({ stockName, signals, className = '' }: Stock
   const [priceChange, setPriceChange] = useState<number | null>(null);
   const [selectedMarker, setSelectedMarker] = useState<Signal | null>(null);
 
+  const [chartError, setChartError] = useState<string | null>(null);
+
   useEffect(() => {
     if (!chartContainerRef.current) return;
 
+    try {
     // 차트 생성 (라이트 테마)
     const chart = createChart(chartContainerRef.current, {
       layout: {
-        background: { type: 'solid', color: '#ffffff' },
+        background: { type: ColorType.Solid, color: '#ffffff' },
         textColor: '#374151', // gray-700
         fontSize: 12,
         fontFamily: '"Noto Sans KR", sans-serif',
@@ -246,6 +249,10 @@ export default function StockChart({ stockName, signals, className = '' }: Stock
       window.removeEventListener('resize', handleResize);
       chart.remove();
     };
+    } catch (err) {
+      console.error('Chart error:', err);
+      setChartError(err instanceof Error ? err.message : 'Chart failed to load');
+    }
   }, [stockName, signals]);
 
   // 기간 필터 적용
@@ -269,6 +276,14 @@ export default function StockChart({ stockName, signals, className = '' }: Stock
       });
     }
   };
+
+  if (chartError) {
+    return (
+      <div className={`bg-white rounded-xl border border-red-200 p-6 text-center ${className}`}>
+        <p className="text-red-500 text-sm">차트를 불러올 수 없습니다: {chartError}</p>
+      </div>
+    );
+  }
 
   return (
     <div className={`bg-white rounded-xl border border-gray-200 overflow-hidden ${className}`}>

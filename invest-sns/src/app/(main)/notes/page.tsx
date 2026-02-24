@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Search, Trash2, Edit3, Heart, StickyNote, X, Play, ExternalLink } from 'lucide-react';
+import { Search, Trash2, Edit3, Heart, StickyNote, X, Play, ExternalLink, Plus, ChevronDown } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { useScrapsStore } from '@/stores/scraps';
@@ -19,7 +19,7 @@ const SIGNAL_TYPES: Record<string, { label: string; color: string; textColor: st
 };
 
 export default function NotesPage() {
-  const { scraps, watchlistStocks, watchlistInfluencers, loadFromStorage, removeScrap, updateScrapMemo } = useScrapsStore();
+  const { scraps, watchlistStocks, watchlistInfluencers, loadFromStorage, addScrap, removeScrap, updateScrapMemo } = useScrapsStore();
   const { signals, loadSignals } = useInfluencersStore();
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState<'all' | 'stock' | 'influencer'>('all');
@@ -27,6 +27,9 @@ export default function NotesPage() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editMemo, setEditMemo] = useState('');
   const [viewSignalScrap, setViewSignalScrap] = useState<typeof scraps[0] | null>(null);
+  const [showNewMemo, setShowNewMemo] = useState(false);
+  const [newMemoText, setNewMemoText] = useState('');
+  const [newMemoStock, setNewMemoStock] = useState('');
 
   useEffect(() => {
     loadFromStorage();
@@ -120,6 +123,77 @@ export default function NotesPage() {
             ))}
           </optgroup>
         </select>
+      </div>
+
+      {/* 새 메모 작성 */}
+      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        {!showNewMemo ? (
+          <button
+            onClick={() => setShowNewMemo(true)}
+            className="w-full flex items-center justify-center gap-2 py-4 text-sm text-gray-500 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+          >
+            <Plus className="w-4 h-4" />
+            새 메모 작성
+          </button>
+        ) : (
+          <div className="p-5 space-y-3">
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-semibold text-gray-700">✏️ 새 메모 작성</h3>
+              <button onClick={() => { setShowNewMemo(false); setNewMemoText(''); setNewMemoStock(''); }} className="text-gray-400 hover:text-gray-600">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <select
+              value={newMemoStock}
+              onChange={(e) => setNewMemoStock(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-300"
+            >
+              <option value="">종목 선택 (선택사항)</option>
+              {watchlistStocks.map(s => (
+                <option key={s.ticker} value={`${s.ticker}|${s.name}`}>{s.name} ({s.ticker})</option>
+              ))}
+            </select>
+            <textarea
+              value={newMemoText}
+              onChange={(e) => setNewMemoText(e.target.value)}
+              placeholder="메모를 작성하세요..."
+              className="w-full p-3 border border-gray-200 rounded-lg text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-300"
+              rows={3}
+              autoFocus
+            />
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => { setShowNewMemo(false); setNewMemoText(''); setNewMemoStock(''); }}
+                className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                취소
+              </button>
+              <button
+                onClick={() => {
+                  if (!newMemoText.trim()) return;
+                  const [ticker, name] = newMemoStock ? newMemoStock.split('|') : ['', ''];
+                  addScrap({
+                    signalId: -Date.now(),
+                    stock: ticker || 'MEMO',
+                    stockName: name || '자유 메모',
+                    influencer: '나',
+                    signalType: 'NEUTRAL',
+                    content: newMemoText.trim(),
+                    memo: '',
+                    videoDate: new Date().toISOString().split('T')[0],
+                  });
+                  setNewMemoText('');
+                  setNewMemoStock('');
+                  setShowNewMemo(false);
+                }}
+                disabled={!newMemoText.trim()}
+                className="px-4 py-2 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                💾 저장
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* 스크랩 리스트 */}

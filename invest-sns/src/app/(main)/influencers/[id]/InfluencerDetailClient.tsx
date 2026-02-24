@@ -9,8 +9,6 @@ import { useInfluencersStore } from '@/stores/influencers';
 import { useScrapsStore } from '@/stores/scraps';
 import { useSignalReturns } from '@/lib/hooks/useSignalReturns';
 import { formatReturn, getReturnColor } from '@/lib/api/coingecko';
-import StockChart from '@/components/StockChart';
-
 const SIGNAL_TYPES: Record<string, { label: string; color: string; textColor: string }> = {
   STRONG_BUY: { label: '적극매수', color: 'bg-green-700', textColor: 'text-white' },
   BUY: { label: '매수', color: 'bg-green-500', textColor: 'text-white' },
@@ -33,7 +31,6 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
   const [reportReason, setReportReason] = useState('signal_error');
   const [reportDetail, setReportDetail] = useState('');
   const [reportSubmitted, setReportSubmitted] = useState(false);
-  const [showChart, setShowChart] = useState(false);
   const { influencers, signals, loadInfluencers, loadSignals } = useInfluencersStore();
   const { scraps, loadFromStorage, addScrap, removeScrap, isScraped, getScrapBySignalId, updateScrapMemo, addReport } = useScrapsStore();
 
@@ -525,12 +522,14 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
 
               {/* 차트보기 + 영상보기 버튼 */}
               <div className="flex gap-3 pt-4 border-t border-gray-200">
-                <button
-                  onClick={() => setShowChart(!showChart)}
+                <a
+                  href={`/smtr-web/guru_tracker_v24.html`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium"
                 >
-                  📊 {showChart ? '차트 닫기' : '차트보기'}
-                </button>
+                  📊 차트보기
+                </a>
                 {modalSignal.youtubeLink && (
                   <a
                     href={modalSignal.youtubeLink}
@@ -543,15 +542,6 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
                 )}
               </div>
 
-              {/* 인라인 차트 */}
-              {showChart && (
-                <div className="mt-4">
-                  <StockChart 
-                    stockName={modalSignal.stockName}
-                    signals={influencerSignals.filter(s => s.stock === modalSignal.stockName)}
-                  />
-                </div>
-              )}
             </div>
           </div>
         </div>
