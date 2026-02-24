@@ -60,7 +60,8 @@ const SIGNAL_LABELS = {
   STRONG_SELL: '적극매도',
 } as const;
 
-export default function StockChartClient({ symbol }: { symbol: string }) {
+export default function StockChartClient({ symbol: rawSymbol }: { symbol: string }) {
+  const symbol = decodeURIComponent(rawSymbol);
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartInstanceRef = useRef<any>(null);
   
@@ -703,7 +704,7 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
     };
   }, [chartData, filteredSignals]);
 
-  if (!isSupported) {
+  if (!isSupported && stockSignals.length === 0) {
     return (
       <div className="max-w-6xl mx-auto p-6">
         <Link href="/influencers" className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6">
@@ -764,6 +765,7 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
       </div>
 
       {/* 차트 영역 - lightweight-charts + 시그널 마커 */}
+      {isSupported && (
       <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
         {loading ? (
           <div style={{ height: 'calc(100vh - 280px)', minHeight: 400 }} className="flex items-center justify-center">
@@ -780,6 +782,14 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
           <div ref={chartContainerRef} style={{ width: '100%', height: 'calc(100vh - 280px)', minHeight: 400, position: 'relative' }} />
         )}
       </div>
+      )}
+      {!isSupported && (
+      <div className="bg-white rounded-xl border border-gray-200 p-6 text-center">
+        <Info className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+        <p className="text-gray-500">이 종목은 차트 데이터를 지원하지 않습니다.</p>
+        <p className="text-sm text-gray-400 mt-1">시그널 정보는 아래에서 확인하세요.</p>
+      </div>
+      )}
 
       {/* 시그널 타입 필터 */}
       <div className="bg-white rounded-xl border border-gray-200 p-4">
