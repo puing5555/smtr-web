@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-console.log('🔄 SMTR 사이트 동기화 시작...');
+console.log('🔄 SMTR 사이트 동기화 시작 (원본 데이터 기반)...');
 
 function loadJSON(filepath) {
     try {
@@ -76,7 +76,7 @@ function getSignalKey(signal) {
 }
 
 function main() {
-    // 1. 현재 시그널 데이터 로드
+    // 1. 현재 시그널 데이터 로드 (원본 데이터 기반으로 변환됨)
     console.log('📖 현재 시그널 데이터 로드 중...');
     const originalSignals = loadSignalsFromTS();
     if (!originalSignals) {
@@ -85,12 +85,21 @@ function main() {
     }
     console.log(`✅ 원본 시그널: ${originalSignals.length}개`);
 
-    // 2. 리뷰 상태 로드 (여러 소스에서)
+    // 2. 리뷰 상태 로드
     console.log('📖 리뷰 상태 로드 중...');
     
-    // 기본 리뷰 데이터
-    const reviewsData = loadJSON('./_matched_reviews.json') || {};
-    console.log(`📋 기본 리뷰 데이터: ${Object.keys(reviewsData).length}개`);
+    // 변환된 리뷰 데이터 우선 사용
+    let reviewsData = {};
+    const convertedReviewsPath = './_matched_reviews_converted.json';
+    const originalReviewsPath = './_matched_reviews.json';
+    
+    if (fs.existsSync(convertedReviewsPath)) {
+        reviewsData = loadJSON(convertedReviewsPath) || {};
+        console.log(`📋 변환된 리뷰 데이터: ${Object.keys(reviewsData).length}개`);
+    } else {
+        reviewsData = loadJSON(originalReviewsPath) || {};
+        console.log(`📋 기본 리뷰 데이터: ${Object.keys(reviewsData).length}개`);
+    }
     
     // 브라우저 로컬스토리지에서 다운로드한 리뷰 상태
     const reviewStateFiles = fs.readdirSync('.')

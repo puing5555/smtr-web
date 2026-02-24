@@ -28,10 +28,19 @@ if (!exportMatch) {
 function embedData(signalsData) {
     console.log(`✅ 시그널 데이터 로드 완료: ${signalsData.length}개`);
     
-    // 2. _matched_reviews.json 로드
-    console.log('📖 _matched_reviews.json 로드 중...');
-    const reviewsPath = path.join(__dirname, '_matched_reviews.json');
-    const reviewsData = JSON.parse(fs.readFileSync(reviewsPath, 'utf8'));
+    // 2. _matched_reviews_converted.json 로드 (원본 데이터 기반 변환됨)
+    console.log('📖 _matched_reviews_converted.json 로드 중...');
+    let reviewsData = {};
+    const convertedReviewsPath = path.join(__dirname, '_matched_reviews_converted.json');
+    const originalReviewsPath = path.join(__dirname, '_matched_reviews.json');
+    
+    if (fs.existsSync(convertedReviewsPath)) {
+        reviewsData = JSON.parse(fs.readFileSync(convertedReviewsPath, 'utf8'));
+        console.log('📋 변환된 리뷰 데이터 사용');
+    } else {
+        reviewsData = JSON.parse(fs.readFileSync(originalReviewsPath, 'utf8'));
+        console.log('📋 원본 리뷰 데이터 사용');
+    }
     
     console.log(`✅ 리뷰 데이터 로드 완료: ${Object.keys(reviewsData).length}개`);
     
