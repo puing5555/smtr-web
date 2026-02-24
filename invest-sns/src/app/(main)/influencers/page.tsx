@@ -25,7 +25,18 @@ const SIGNAL_TYPES = {
 
 export default function InfluencersPage() {
   const [activeTab, setActiveTab] = useState('overview');
+  const [categoryFilters, setCategoryFilters] = useState<Set<string>>(new Set());
+  const [influencerSearch, setInfluencerSearch] = useState('');
   
+  const toggleCategory = (cat: string) => {
+    setCategoryFilters(prev => {
+      const next = new Set(prev);
+      if (next.has(cat)) next.delete(cat);
+      else next.add(cat);
+      return next;
+    });
+  };
+
   const {
     influencers,
     signals,
@@ -66,21 +77,7 @@ export default function InfluencersPage() {
             투자 인플루언서들의 시그널과 발언을 추적해보세요
           </p>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-            <Input
-              placeholder="인플루언서, 종목 검색..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 w-64"
-            />
-          </div>
-          <Button variant="outline" size="sm">
-            <Filter className="w-4 h-4 mr-2" />
-            필터
-          </Button>
-        </div>
+        {/* 검색/필터 제거됨 */}
       </div>
 
       {/* Tabs */}
@@ -132,8 +129,44 @@ export default function InfluencersPage() {
         </TabsContent>
 
         <TabsContent value="influencers" className="mt-6">
+          {/* 카테고리 필터 + 검색 */}
+          <div className="flex flex-wrap items-center gap-3 mb-6">
+            {[
+              { key: 'kr_stock', label: '🇰🇷 한국주식' },
+              { key: 'us_stock', label: '🇺🇸 미국주식' },
+              { key: 'crypto', label: '₿ 암호화폐' },
+            ].map(cat => (
+              <button
+                key={cat.key}
+                onClick={() => toggleCategory(cat.key)}
+                className={`px-4 py-2 rounded-full text-sm font-medium border transition-all ${
+                  categoryFilters.has(cat.key)
+                    ? 'bg-blue-500 text-white border-blue-500'
+                    : 'bg-white text-gray-700 border-gray-300 hover:border-blue-300'
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+            <div className="relative flex-1 min-w-[200px]">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Input
+                placeholder="인플루언서 검색..."
+                value={influencerSearch}
+                onChange={(e) => setInfluencerSearch(e.target.value)}
+                className="pl-10"
+              />
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredInfluencers.map((influencer) => (
+            {filteredInfluencers
+              .filter(inf => {
+                if (influencerSearch && !inf.name.toLowerCase().includes(influencerSearch.toLowerCase())) return false;
+                // 카테고리 필터 (TODO: 인플루언서에 category 필드 추가 후 실제 필터링)
+                return true;
+              })
+              .map((influencer) => (
               <div key={influencer.id} className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-md transition-shadow">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center gap-3">
