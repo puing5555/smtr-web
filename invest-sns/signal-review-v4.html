@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유튜버 시그널 검증 리뷰 v4</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f4f8; color: #1a1a2e; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 16px; margin-bottom: 24px; }
+        .header h1 { font-size: 24px; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 14px; }
+        .stats { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+        .stat-card { background: white; border-radius: 12px; padding: 16px 20px; flex: 1; min-width: 120px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .stat-number { font-size: 28px; font-weight: 700; color: #667eea; }
+        .stat-label { font-size: 12px; color: #666; margin-top: 4px; }
+        .filters { background: white; border-radius: 12px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .filter-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: end; }
+        .filter-group { display: flex; flex-direction: column; gap: 4px; }
+        .filter-label { font-size: 12px; font-weight: 600; color: #666; }
+        .filter-select, .filter-input { padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; }
+        .signals-grid { display: flex; flex-direction: column; gap: 16px; }
+        
+        /* Signal Cards */
+        .signal-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 4px solid #ccc; }
+        .signal-card[data-signal="STRONG_BUY"] { border-left-color: #dc2626; }
+        .signal-card[data-signal="BUY"] { border-left-color: #ef4444; }
+        .signal-card[data-signal="POSITIVE"] { border-left-color: #f97316; }
+        .signal-card[data-signal="HOLD"] { border-left-color: #eab308; }
+        .signal-card[data-signal="NEUTRAL"] { border-left-color: #6b7280; }
+        .signal-card[data-signal="CONCERN"] { border-left-color: #8b5cf6; }
+        .signal-card[data-signal="SELL"] { border-left-color: #3b82f6; }
+        .signal-card[data-signal="STRONG_SELL"] { border-left-color: #1d4ed8; }
+        .signal-card.hide { display: none; }
+        
+        .signal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+        .signal-asset { font-size: 18px; font-weight: 700; }
+        .signal-type { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; color: white; }
+        .signal-type.STRONG_BUY { background: #dc2626; }
+        .signal-type.BUY { background: #ef4444; }
+        .signal-type.POSITIVE { background: #f97316; }
+        .signal-type.HOLD { background: #eab308; }
+        .signal-type.NEUTRAL { background: #6b7280; }
+        .signal-type.CONCERN { background: #8b5cf6; }
+        .signal-type.SELL { background: #3b82f6; }
+        .signal-type.STRONG_SELL { background: #1d4ed8; }
+        
+        .quote { background: #f8f9fa; padding: 12px 16px; border-radius: 8px; margin: 12px 0; font-style: italic; color: #333; border-left: 3px solid #667eea; }
+        .meta { display: flex; gap: 16px; font-size: 13px; color: #666; margin-top: 8px; flex-wrap: wrap; }
+        .meta a { color: #ef4444; text-decoration: none; }
+        .meta a:hover { text-decoration: underline; }
+        .signal-actions { display: flex; gap: 8px; }
+        .btn { padding: 6px 14px; border-radius: 8px; border: 1px solid #ddd; background: white; cursor: pointer; font-size: 13px; }
+        .btn:hover { background: #f5f5f5; }
+        .btn.approve { background: #dcfce7; border-color: #22c55e; color: #15803d; }
+        .btn.reject { background: #fef2f2; border-color: #ef4444; color: #dc2626; }
+        
+        /* Review Status */
+        .review-status { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+        .status-badge { padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .status-badge.pending { background: #fef3c7; color: #d97706; }
+        .status-badge.approved { background: #dcfce7; color: #15803d; }
+        .status-badge.rejected { background: #fef2f2; color: #dc2626; }
+        .video-date { font-size: 12px; color: #666; margin-left: 8px; }
+        
+        /* Opus Diff Styles */
+        .opus-indicator { 
+            background: #e0e7ff; 
+            color: #3730a3; 
+            padding: 2px 6px; 
+            border-radius: 8px; 
+            font-size: 10px; 
+            font-weight: 600; 
+            margin-left: 8px;
+        }
+        .diff-toggle { 
+            background: #f3f4f6; 
+            border: 1px solid #d1d5db; 
+            padding: 4px 8px; 
+            font-size: 11px; 
+            border-radius: 6px; 
+            cursor: pointer;
+        }
+        .diff-toggle:hover { background: #e5e7eb; }
+        .diff-section { 
+            background: #fafafa; 
+            border: 1px solid #e5e7eb; 
+            border-radius: 8px; 
+            margin-top: 12px; 
+            display: none;
+        }
+        .diff-section.show { display: block; }
+        .diff-header { 
+            background: #f3f4f6; 
+            padding: 8px 12px; 
+            border-bottom: 1px solid #e5e7eb; 
+            font-size: 12px; 
+            font-weight: 600; 
+            color: #374151;
+        }
+        .diff-content { padding: 12px; }
+        .diff-item { margin-bottom: 12px; }
+        .diff-field { font-weight: 600; font-size: 11px; color: #6b7280; margin-bottom: 4px; }
+        .diff-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .diff-original, .diff-opus { 
+            padding: 8px; 
+            border-radius: 6px; 
+            font-size: 12px; 
+            position: relative;
+        }
+        .diff-original { 
+            background: #fef2f2; 
+            border: 1px solid #fecaca;
+        }
+        .diff-opus { 
+            background: #dcfce7; 
+            border: 1px solid #bbf7d0;
+        }
+        .diff-original::before { 
+            content: 'Original'; 
+            position: absolute; 
+            top: -6px; 
+            left: 6px; 
+            background: #fef2f2; 
+            font-size: 9px; 
+            color: #991b1b; 
+            font-weight: 600;
+            padding: 0 4px;
+        }
+        .diff-opus::before { 
+            content: 'Opus 수정'; 
+            position: absolute; 
+            top: -6px; 
+            left: 6px; 
+            background: #dcfce7; 
+            font-size: 9px; 
+            color: #166534; 
+            font-weight: 600;
+            padding: 0 4px;
+        }
+        
+        /* Hidden by default */
+        .no-signals { text-align: center; padding: 60px 20px; color: #666; }
+        .loading { text-align: center; padding: 40px; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 유튜버 시그널 검증 리뷰 v4</h1>
+            <p>코린이 아빠 시그널 분석 · 실시간 검토 · Opus 수정사항 표시</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="stat-total">-</div>
+                <div class="stat-label">총 시그널</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="stat-pending">-</div>
+                <div class="stat-label">검토대기</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="stat-approved">-</div>
+                <div class="stat-label">승인완료</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="stat-rejected">-</div>
+                <div class="stat-label">거부됨</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="stat-opus-changes">-</div>
+                <div class="stat-label">Opus 수정</div>
+            </div>
+        </div>
+
+        <div class="filters">
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label class="filter-label">리뷰 상태</label>
+                    <select id="statusFilter" class="filter-select">
+                        <option value="all">전체</option>
+                        <option value="pending">검토대기</option>
+                        <option value="approved">승인완료</option>
+                        <option value="rejected">거부됨</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">시그널 타입</label>
+                    <select id="signalTypeFilter" class="filter-select">
+                        <option value="all">전체</option>
+                        <option value="STRONG_BUY">STRONG_BUY</option>
+                        <option value="BUY">BUY</option>
+                        <option value="POSITIVE">POSITIVE</option>
+                        <option value="HOLD">HOLD</option>
+                        <option value="NEUTRAL">NEUTRAL</option>
+                        <option value="CONCERN">CONCERN</option>
+                        <option value="SELL">SELL</option>
+                        <option value="STRONG_SELL">STRONG_SELL</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">종목 검색</label>
+                    <input type="text" id="stockSearch" class="filter-input" placeholder="종목명 입력...">
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Opus 수정사항</label>
+                    <select id="opusFilter" class="filter-select">
+                        <option value="all">전체</option>
+                        <option value="has-diff">수정사항 있음</option>
+                        <option value="no-diff">수정사항 없음</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="loading" id="loading">
+            데이터를 불러오는 중...
+        </div>
+
+        <div class="signals-grid" id="signalsGrid">
+            <!-- 시그널 카드들이 여기에 동적으로 삽입됩니다 -->
+        </div>
+
+        <div class="no-signals" id="noSignals" style="display: none;">
+            조건에 맞는 시그널이 없습니다.
+        </div>
+    </div>
+
+    <script>
+        // 전역 변수
+        let allSignals = [];
+        let currentSignals = [];
+
+        // 데이터 초기화
+        function initializeData() {
+            if (typeof window.signalData !== 'undefined' && typeof window.signalStats !== 'undefined') {
+                allSignals = window.signalData;
+                currentSignals = [...allSignals];
+                
+                updateStats();
+                renderSignals();
+                setupEventListeners();
+                hideLoading();
+                
+                console.log('✅ 데이터 초기화 완료:', allSignals.length, '개 시그널');
+            } else {
+                console.error('❌ 시그널 데이터를 찾을 수 없습니다');
+                document.getElementById('loading').textContent = '데이터를 불러오지 못했습니다.';
+            }
+        }
+
+        // 통계 업데이트
+        function updateStats() {
+            if (window.signalStats) {
+                document.getElementById('stat-total').textContent = window.signalStats.total;
+                document.getElementById('stat-pending').textContent = window.signalStats.pending;
+                document.getElementById('stat-approved').textContent = window.signalStats.approved;
+                document.getElementById('stat-rejected').textContent = window.signalStats.rejected;
+                document.getElementById('stat-opus-changes').textContent = window.signalStats.withOpusChanges;
+            }
+        }
+
+        // 로딩 숨기기
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        // 시그널 카드 HTML 생성
+        function createSignalCard(signal) {
+            const reviewStatusClass = signal.reviewStatus || 'pending';
+            const videoDateText = signal.videoDate ? new Date(signal.videoDate).toLocaleDateString('ko-KR') : '';
+            const opusIndicator = signal.hasDiff ? '<span class="opus-indicator">OPUS 수정</span>' : '';
+            
+            const diffSection = signal.hasDiff && signal.diffData ? `
+                <div class="diff-section" id="diff-${signal.id}">
+                    <div class="diff-header">
+                        📊 Opus 수정사항 비교
+                    </div>
+                    <div class="diff-content">
+                        ${signal.diffData.map(diff => `
+                            <div class="diff-item">
+                                <div class="diff-field">${diff.field}</div>
+                                <div class="diff-comparison">
+                                    <div class="diff-original">${diff.original}</div>
+                                    <div class="diff-opus">${diff.opus}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            ` : '';
+
+            return `
+                <div class="signal-card" data-signal="${signal.signalType}" data-status="${reviewStatusClass}" data-stock="${signal.stockName.toLowerCase()}" data-has-diff="${signal.hasDiff}">
+                    <div class="signal-header">
+                        <div class="signal-asset">${signal.stockName}</div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span class="signal-type ${signal.signalType}">${signal.signalType}</span>
+                            ${opusIndicator}
+                        </div>
+                    </div>
+                    
+                    <div class="quote">
+                        "${signal.content}"
+                    </div>
+                    
+                    <div class="meta">
+                        <span>🎥 <a href="${signal.youtubeLink}" target="_blank">${signal.timestamp}</a></span>
+                        <span>📅 ${signal.videoTitle}</span>
+                        <span>🔸 신뢰도: ${signal.confidence}</span>
+                        <span>⏱ ${signal.timeframe}</span>
+                    </div>
+                    
+                    <div class="review-status">
+                        <span class="status-badge ${reviewStatusClass}">
+                            ${reviewStatusClass === 'pending' ? '검토대기' : 
+                              reviewStatusClass === 'approved' ? '승인완료' : '거부됨'}
+                        </span>
+                        <span class="video-date">영상: ${videoDateText}</span>
+                        ${signal.hasDiff ? `<button class="diff-toggle" onclick="toggleDiff('${signal.id}')">수정사항 보기</button>` : ''}
+                        ${signal.reviewTime ? `<span style="font-size: 11px; color: #999;">리뷰: ${signal.reviewTime}</span>` : ''}
+                    </div>
+                    
+                    ${diffSection}
+                    
+                    ${signal.reviewReason ? `<div style="margin-top: 8px; padding: 8px; background: #fef2f2; border-radius: 6px; font-size: 12px; color: #dc2626;">거부 사유: ${signal.reviewReason}</div>` : ''}
+                </div>
+            `;
+        }
+
+        // Diff 토글 함수
+        function toggleDiff(signalId) {
+            const diffSection = document.getElementById(`diff-${signalId}`);
+            if (diffSection) {
+                diffSection.classList.toggle('show');
+                const toggle = diffSection.previousElementSibling.querySelector('.diff-toggle');
+                if (toggle) {
+                    toggle.textContent = diffSection.classList.contains('show') ? '수정사항 숨기기' : '수정사항 보기';
+                }
+            }
+        }
+
+        // 시그널 렌더링
+        function renderSignals() {
+            const grid = document.getElementById('signalsGrid');
+            const noSignals = document.getElementById('noSignals');
+            
+            if (currentSignals.length === 0) {
+                grid.innerHTML = '';
+                noSignals.style.display = 'block';
+                return;
+            }
+            
+            noSignals.style.display = 'none';
+            grid.innerHTML = currentSignals.map(createSignalCard).join('');
+        }
+
+        // 필터 적용
+        function applyFilters() {
+            const statusFilter = document.getElementById('statusFilter').value;
+            const signalTypeFilter = document.getElementById('signalTypeFilter').value;
+            const stockSearch = document.getElementById('stockSearch').value.toLowerCase();
+            const opusFilter = document.getElementById('opusFilter').value;
+            
+            currentSignals = allSignals.filter(signal => {
+                // 상태 필터
+                if (statusFilter !== 'all' && signal.reviewStatus !== statusFilter) {
+                    return false;
+                }
+                
+                // 시그널 타입 필터
+                if (signalTypeFilter !== 'all' && signal.signalType !== signalTypeFilter) {
+                    return false;
+                }
+                
+                // 종목 검색
+                if (stockSearch && !signal.stockName.toLowerCase().includes(stockSearch)) {
+                    return false;
+                }
+                
+                // Opus 수정사항 필터
+                if (opusFilter === 'has-diff' && !signal.hasDiff) {
+                    return false;
+                }
+                if (opusFilter === 'no-diff' && signal.hasDiff) {
+                    return false;
+                }
+                
+                return true;
+            });
+            
+            renderSignals();
+        }
+
+        // 이벤트 리스너 설정
+        function setupEventListeners() {
+            document.getElementById('statusFilter').addEventListener('change', applyFilters);
+            document.getElementById('signalTypeFilter').addEventListener('change', applyFilters);
+            document.getElementById('stockSearch').addEventListener('input', applyFilters);
+            document.getElementById('opusFilter').addEventListener('change', applyFilters);
+        }
+
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 리뷰 페이지 v4 시작');
+            initializeData();
+        });
+
+        // 전역 함수로 노출
+        window.toggleDiff = toggleDiff;
+    </script>
+</body>
+</html>
