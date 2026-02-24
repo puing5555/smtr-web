@@ -193,6 +193,251 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
       chart.timeScale().fitContent();
       chartInstanceRef.current = chart;
 
+      // Google Finance 스타일 드래그-투-셀렉트 범위 기능
+      let isDragging = false;
+      let dragStartTime: string | null = null;
+      let dragStartX = 0;
+      let dragStartY = 0;
+      let selectionOverlay: HTMLDivElement | null = null;
+      let rangeBadge: HTMLDivElement | null = null;
+
+      // 선택 오버레이 생성
+      const createSelectionOverlay = () => {
+        if (selectionOverlay) return selectionOverlay;
+        
+        selectionOverlay = document.createElement('div');
+        selectionOverlay.style.cssText = `
+          position: absolute;
+          background: rgba(66, 165, 245, 0.15);
+          border: 1px solid rgba(66, 165, 245, 0.4);
+          border-radius: 4px;
+          pointer-events: none;
+          z-index: 45;
+          display: none;
+        `;
+        container.appendChild(selectionOverlay);
+        return selectionOverlay;
+      };
+
+      // 범위 배지 생성
+      const createRangeBadge = () => {
+        if (rangeBadge) return rangeBadge;
+        
+        rangeBadge = document.createElement('div');
+        rangeBadge.style.cssText = `
+          position: absolute;
+          background: white;
+          border: 1px solid #e5e7eb;
+          border-radius: 8px;
+          padding: 12px 16px;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          white-space: nowrap;
+          z-index: 60;
+          pointer-events: auto;
+          cursor: pointer;
+          display: none;
+        `;
+        container.appendChild(rangeBadge);
+        return rangeBadge;
+      };
+
+      // 날짜를 한국어 형식으로 포맷 (YYYY년 M월 D일)
+      const formatKoreanDate = (dateStr: string) => {
+        const date = new Date(dateStr);
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        return `${year}년 ${month}월 ${day}일`;
+      };
+
+      // 가격 변화 계산 및 배지 표시
+      const showRangeBadge = (startTime: string, endTime: string, x: number, y: number) => {
+        const startCandle = chartData.find(d => d.time === startTime);
+        const endCandle = chartData.find(d => d.time === endTime);
+        
+        if (!startCandle || !endCandle) return;
+
+        const startPrice = startCandle.close;
+        const endPrice = endCandle.close;
+        const priceChange = endPrice - startPrice;
+        const percentChange = (priceChange / startPrice) * 100;
+        
+        const isPositive = priceChange >= 0;
+        const changeColor = isPositive ? '#10b981' : '#ef4444';
+        const arrow = isPositive ? '↑' : '↓';
+        
+        const badge = createRangeBadge();
+        badge.innerHTML = `
+          <div style="color: ${changeColor}; font-size: 16px; font-weight: 700; line-height: 1.2; margin-bottom: 4px;">
+            ${priceChange >= 0 ? '+' : ''}$${Math.abs(priceChange).toFixed(2)} (${percentChange >= 0 ? '+' : ''}${percentChange.toFixed(2)}%) ${arrow}
+          </div>
+          <div style="color: #6b7280; font-size: 13px;">
+            ${formatKoreanDate(startTime)} - ${formatKoreanDate(endTime)}
+          </div>
+        `;
+        
+        // 배지 위치 조정 (화면 경계 고려)
+        const badgeWidth = 300; // 예상 배지 너비
+        const badgeHeight = 60; // 예상 배지 높이
+        const containerRect = container.getBoundingClientRect();
+        
+        let badgeX = x + 10;
+        let badgeY = y - badgeHeight - 10;
+        
+        // 오른쪽 경계 체크
+        if (badgeX + badgeWidth > containerRect.width) {
+          badgeX = x - badgeWidth - 10;
+        }
+        
+        // 상단 경계 체크
+        if (badgeY < 0) {
+          badgeY = y + 20;
+        }
+        
+        badge.style.left = `${Math.max(10, badgeX)}px`;
+        badge.style.top = `${Math.max(10, badgeY)}px`;
+        badge.style.display = 'block';
+        
+        // 배지 클릭으로 닫기
+        badge.onclick = () => {
+          badge.style.display = 'none';
+          if (selectionOverlay) {
+            selectionOverlay.style.display = 'none';
+          }
+        };
+      };
+
+      // 마우스 다운 이벤트 - 드래그 시작
+      const handleMouseDown = (e: MouseEvent) => {
+        // 기존 마커 도트나 툴팁 영역이 아닌 경우만 드래그 시작
+        const target = e.target as HTMLElement;
+        if (target.closest('.marker-dot') || target.closest('.marker-tooltip') || target.closest('.dot-preview')) {
+          return;
+        }
+
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // 차트 영역 내부인지 확인 (대략적인 패딩 고려)
+        if (x < 60 || x > rect.width - 60 || y < 20 || y > rect.height - 40) {
+          return;
+        }
+
+        const timeCoordinate = chart.timeScale().coordinateToTime(x);
+        if (!timeCoordinate) return;
+
+        isDragging = true;
+        dragStartTime = timeCoordinate as string;
+        dragStartX = x;
+        dragStartY = y;
+
+        // 기존 선택 영역 및 배지 제거
+        if (selectionOverlay) selectionOverlay.style.display = 'none';
+        if (rangeBadge) rangeBadge.style.display = 'none';
+
+        e.preventDefault();
+      };
+
+      // 마우스 이동 이벤트 - 드래그 중 선택 영역 업데이트
+      const handleMouseMove = (e: MouseEvent) => {
+        if (!isDragging || !dragStartTime) return;
+
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const overlay = createSelectionOverlay();
+        
+        const startX = Math.min(dragStartX, x);
+        const endX = Math.max(dragStartX, x);
+        const startY = 20; // 차트 상단
+        const endY = rect.height - 40; // 차트 하단 (시간축 제외)
+
+        overlay.style.left = `${startX}px`;
+        overlay.style.top = `${startY}px`;
+        overlay.style.width = `${endX - startX}px`;
+        overlay.style.height = `${endY - startY}px`;
+        overlay.style.display = 'block';
+
+        e.preventDefault();
+      };
+
+      // 마우스 업 이벤트 - 드래그 완료 및 결과 표시
+      const handleMouseUp = (e: MouseEvent) => {
+        if (!isDragging || !dragStartTime) return;
+
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        
+        const endTimeCoordinate = chart.timeScale().coordinateToTime(x);
+        if (!endTimeCoordinate) {
+          isDragging = false;
+          return;
+        }
+
+        const endTime = endTimeCoordinate as string;
+        
+        // 시작점과 끝점이 다른 경우에만 계산
+        if (Math.abs(x - dragStartX) > 10 && dragStartTime !== endTime) {
+          // 시간 순서 정렬 (시작점이 끝점보다 이후일 수 있음)
+          const startTime = dragStartTime <= endTime ? dragStartTime : endTime;
+          const finalEndTime = dragStartTime <= endTime ? endTime : dragStartTime;
+          
+          showRangeBadge(startTime, finalEndTime, (dragStartX + x) / 2, Math.min(dragStartY, e.clientY - rect.top));
+        } else {
+          // 선택 영역이 너무 작으면 제거
+          if (selectionOverlay) {
+            selectionOverlay.style.display = 'none';
+          }
+        }
+
+        isDragging = false;
+        dragStartTime = null;
+        e.preventDefault();
+      };
+
+      // 전역 클릭으로 선택 해제
+      const handleGlobalClick = (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+        
+        // 차트 컨테이너 밖을 클릭하거나, 마커 관련 요소가 아닌 곳을 클릭한 경우
+        if (!container.contains(target) || 
+            (!target.closest('.marker-dot') && 
+             !target.closest('.marker-tooltip') && 
+             !target.closest('.dot-preview') &&
+             target !== rangeBadge &&
+             !rangeBadge?.contains(target))) {
+          
+          if (selectionOverlay) selectionOverlay.style.display = 'none';
+          if (rangeBadge) rangeBadge.style.display = 'none';
+        }
+      };
+
+      // 이벤트 리스너 등록
+      container.addEventListener('mousedown', handleMouseDown);
+      container.addEventListener('mousemove', handleMouseMove);
+      container.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('click', handleGlobalClick);
+
+      // 드래그 선택 정리 함수
+      const cleanupDragSelection = () => {
+        container.removeEventListener('mousedown', handleMouseDown);
+        container.removeEventListener('mousemove', handleMouseMove);
+        container.removeEventListener('mouseup', handleMouseUp);
+        document.removeEventListener('click', handleGlobalClick);
+        
+        if (selectionOverlay) {
+          selectionOverlay.remove();
+          selectionOverlay = null;
+        }
+        if (rangeBadge) {
+          rangeBadge.remove();
+          rangeBadge = null;
+        }
+      };
+
       // 도트 마커 생성 및 위치 업데이트 함수
       const createMarkerDots = () => {
         if (!markerOverlayRef || !svgContainer) return;
@@ -405,6 +650,7 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
 
       return () => {
         document.removeEventListener('click', closeTooltip);
+        cleanupDragSelection();
       };
     })();
 
