@@ -1,13 +1,11 @@
 'use client';
 
-import { useState, useEffect, use, useRef, useMemo } from 'react';
-import { ArrowLeft, TrendingUp, Users, Filter, Info } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { useState, useEffect, useRef, useMemo } from 'react';
+import { ArrowLeft, TrendingUp, Users, Info } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import { useInfluencersStore } from '@/stores/influencers';
 import { getCoinId, COIN_MAPPING } from '@/lib/api/coingecko';
-import type { IChartApi, ISeriesApi, CandlestickData, Time } from 'lightweight-charts';
 
 // CryptoCompare 심볼 (한국에서도 접속 가능)
 const SUPPORTED_SYMBOLS = ['BTC', 'ETH', 'XRP', 'SOL', 'ADA', 'DOT'];
@@ -34,37 +32,21 @@ const SIGNAL_LABELS = {
   STRONG_SELL: '적극매도',
 } as const;
 
-interface ChartData {
-  time: string;
-  open: number;
-  high: number;
-  low: number;
-  close: number;
-}
-
-interface SignalMarker {
-  time: string;
-  position: 'aboveBar' | 'belowBar';
-  color: string;
-  shape: 'circle' | 'square' | 'arrowUp' | 'arrowDown';
-  text: string;
-  size: number;
-  signal: any;
-}
+// TradingView 심볼 매핑
+const TV_SYMBOLS: Record<string, string> = {
+  BTC: 'BINANCE:BTCUSDT',
+  ETH: 'BINANCE:ETHUSDT',
+  XRP: 'BINANCE:XRPUSDT',
+  SOL: 'BINANCE:SOLUSDT',
+  ADA: 'BINANCE:ADAUSDT',
+  DOT: 'BINANCE:DOTUSDT',
+};
 
 export default function StockChartClient({ symbol }: { symbol: string }) {
   const chartContainerRef = useRef<HTMLDivElement>(null);
-  const chartRef = useRef<IChartApi | null>(null);
-  const candlestickSeriesRef = useRef<ISeriesApi<'Candlestick'> | null>(null);
   
-  const [chartData, setChartData] = useState<ChartData[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [selectedInfluencer, setSelectedInfluencer] = useState('ALL');
   const [selectedSignalType, setSelectedSignalType] = useState('ALL');
-  const [tooltip, setTooltip] = useState<{ visible: boolean; x: number; y: number; content: string }>({
-    visible: false, x: 0, y: 0, content: ''
-  });
 
   const { signals, loadSignals } = useInfluencersStore();
 
@@ -98,177 +80,49 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
     return uniqueInfluencers;
   }, [stockSignals]);
 
-  // CoinGecko ID 가져오기
-  const coinId = getCoinId(symbol);
   const stockName = stockSignals[0]?.stockName || symbol;
-
-  // 지원 종목 확인
   const isSupported = SUPPORTED_SYMBOLS.includes(symbol);
+  const tvSymbol = TV_SYMBOLS[symbol] || `BINANCE:${symbol}USDT`;
 
-  // 차트 데이터 로드 (CryptoCompare API - 한국 접속 가능)
+  // TradingView 위젯 삽입
   useEffect(() => {
-    const loadChartData = async () => {
-      if (!isSupported) {
-        setError('지원하지 않는 종목입니다.');
-        setLoading(false);
-        return;
-      }
-
-      try {
-        setLoading(true);
-        setError(null);
-
-        // CryptoCompare histoday API - 무료, 키 불필요, 글로벌
-        const response = await fetch(
-          `https://min-api.cryptocompare.com/data/v2/histoday?fsym=${symbol}&tsym=USD&limit=90`
-        );
-
-        if (!response.ok) {
-          throw new Error('차트 데이터를 가져올 수 없습니다.');
-        }
-
-        const json = await response.json();
-        
-        if (json.Response === 'Error') {
-          throw new Error(json.Message || '차트 데이터를 가져올 수 없습니다.');
-        }
-
-        const ohlcData = json.Data?.Data || [];
-        
-        const formattedData: ChartData[] = ohlcData.map((d: any) => ({
-          time: new Date(d.time * 1000).toISOString().split('T')[0],
-          open: d.open,
-          high: d.high,
-          low: d.low,
-          close: d.close,
-        }));
-
-        setChartData(formattedData);
-      } catch (err) {
-        console.error('차트 데이터 로드 오류:', err);
-        setError(err instanceof Error ? err.message : '차트 데이터를 가져올 수 없습니다.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadChartData();
-  }, [symbol, isSupported]);
-
-  // 차트 초기화 및 업데이트
-  useEffect(() => {
-    if (!chartContainerRef.current || chartData.length === 0) return;
+    if (!chartContainerRef.current || !isSupported) return;
     const container = chartContainerRef.current;
-    let cancelled = false;
-    const initChart = async () => {
+    container.innerHTML = '';
 
-    // 기존 차트 정리
-    if (chartRef.current) {
-      chartRef.current.remove();
-    }
-
-    // 새 차트 생성
-    const { createChart, ColorType } = await import('lightweight-charts');
-    if (cancelled) return;
-    const chart = createChart(container, {
-      width: container.clientWidth,
-      height: 500,
-      layout: {
-        background: { type: ColorType.Solid, color: 'white' },
-        textColor: '#333',
-      },
-      grid: {
-        vertLines: { color: '#f0f0f0' },
-        horzLines: { color: '#f0f0f0' },
-      },
-      rightPriceScale: {
-        borderColor: '#cccccc',
-      },
-      timeScale: {
-        borderColor: '#cccccc',
-        timeVisible: true,
-        secondsVisible: false,
-      },
+    const script = document.createElement('script');
+    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
+    script.type = 'text/javascript';
+    script.async = true;
+    script.innerHTML = JSON.stringify({
+      autosize: true,
+      symbol: tvSymbol,
+      interval: 'D',
+      timezone: 'Asia/Seoul',
+      theme: 'light',
+      style: '1',
+      locale: 'kr',
+      hide_top_toolbar: false,
+      hide_legend: false,
+      allow_symbol_change: false,
+      save_image: false,
+      calendar: false,
+      hide_volume: false,
+      support_host: 'https://www.tradingview.com',
     });
 
-    // 캔들스틱 시리즈 추가
-    const candlestickSeries = chart.addCandlestickSeries({
-      upColor: '#22c55e',
-      downColor: '#ef4444', 
-      borderUpColor: '#16a34a',
-      borderDownColor: '#dc2626',
-      wickUpColor: '#16a34a',
-      wickDownColor: '#dc2626',
-    });
+    const widgetDiv = document.createElement('div');
+    widgetDiv.className = 'tradingview-widget-container__widget';
+    widgetDiv.style.height = '100%';
+    widgetDiv.style.width = '100%';
 
-    // 차트 데이터 설정
-    const chartPoints: CandlestickData[] = chartData.map(item => ({
-      time: item.time as Time,
-      open: item.open,
-      high: item.high,
-      low: item.low,
-      close: item.close,
-    }));
-
-    candlestickSeries.setData(chartPoints);
-
-    // 시그널 마커 추가
-    const markers = filteredSignals.map(signal => {
-      const signalColor = SIGNAL_COLORS[signal.signalType as keyof typeof SIGNAL_COLORS] || '#9ca3af';
-      const isBuySignal = ['STRONG_BUY', 'BUY', 'POSITIVE'].includes(signal.signalType);
-      
-      return {
-        time: signal.videoDate as Time,
-        position: isBuySignal ? 'belowBar' : 'aboveBar' as const,
-        color: signalColor,
-        shape: isBuySignal ? 'arrowUp' : 'arrowDown' as const,
-        text: SIGNAL_LABELS[signal.signalType as keyof typeof SIGNAL_LABELS] || signal.signalType,
-        size: 1,
-        id: signal.id,
-      };
-    });
-
-    candlestickSeries.setMarkers(markers);
-
-    chartRef.current = chart;
-    candlestickSeriesRef.current = candlestickSeries;
-
-    // 차트 클릭 이벤트 (마커 툴팁)
-    chart.subscribeClick((param) => {
-      if (param.point && param.time) {
-        const clickedSignals = filteredSignals.filter(s => s.videoDate === param.time);
-        if (clickedSignals.length > 0) {
-          const signal = clickedSignals[0];
-          setTooltip({
-            visible: true,
-            x: param.point.x,
-            y: param.point.y,
-            content: `${signal.influencer}: ${signal.content.slice(0, 100)}...`
-          });
-          
-          setTimeout(() => setTooltip(prev => ({ ...prev, visible: false })), 3000);
-        }
-      }
-    });
-
-    // 반응형 처리
-    const resizeObserver = new ResizeObserver(entries => {
-      if (entries.length === 0 || !chartRef.current) return;
-      const newRect = entries[0].contentRect;
-      chartRef.current.applyOptions({ width: newRect.width });
-    });
-
-    resizeObserver.observe(container);
-    };
-    initChart();
+    container.appendChild(widgetDiv);
+    container.appendChild(script);
 
     return () => {
-      cancelled = true;
-      if (chartRef.current) {
-        chartRef.current.remove();
-      }
+      container.innerHTML = '';
     };
-  }, [chartData, filteredSignals]);
+  }, [tvSymbol, isSupported]);
 
   if (!isSupported) {
     return (
@@ -388,36 +242,9 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
         </div>
       </div>
 
-      {/* 차트 영역 */}
-      <div className="bg-white rounded-xl border border-gray-200 p-4">
-        {loading ? (
-          <div className="h-[500px] flex items-center justify-center">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-4"></div>
-              <p className="text-gray-500">차트 데이터 로딩중...</p>
-            </div>
-          </div>
-        ) : error ? (
-          <div className="h-[500px] flex items-center justify-center">
-            <div className="text-center">
-              <p className="text-red-500 mb-2">{error}</p>
-              <Button onClick={() => window.location.reload()} variant="outline" size="sm">
-                다시 시도
-              </Button>
-            </div>
-          </div>
-        ) : (
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold">가격 차트</h3>
-              <div className="flex items-center gap-2 text-sm text-gray-500">
-                <Info className="w-4 h-4" />
-                마커를 클릭하면 상세 정보를 확인할 수 있습니다
-              </div>
-            </div>
-            <div ref={chartContainerRef} className="relative h-[500px]" />
-          </div>
-        )}
+      {/* 차트 영역 - TradingView 위젯 */}
+      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+        <div ref={chartContainerRef} className="tradingview-widget-container w-full" style={{ height: 400 }} />
       </div>
 
       {/* 시그널 목록 */}
@@ -457,15 +284,6 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
         </div>
       </div>
 
-      {/* 툴팁 */}
-      {tooltip.visible && (
-        <div 
-          className="fixed bg-black text-white text-sm p-2 rounded shadow-lg z-50 max-w-xs"
-          style={{ left: tooltip.x, top: tooltip.y - 10 }}
-        >
-          {tooltip.content}
-        </div>
-      )}
     </div>
   );
 }
