@@ -1,6 +1,6 @@
 # PROJECT_STATUS.md
 
-_Last updated: 2026-02-23 17:13 (GMT+7)_
+_Last updated: 2026-02-24 16:50 (GMT+7)_
 
 ## 🏗️ SMTR 프로젝트 (투자자의 세컨드 브레인)
 
@@ -201,6 +201,23 @@ _Last updated: 2026-02-23 17:13 (GMT+7)_
 - **PowerShell 다운로드**: `Invoke-WebRequest`로 UI Avatars API에서 직접 다운로드
 - **Git 커밋**: "프로필 아바타 및 차트 이미지 추가" (11개 파일 추가)
 
+### ✅ 완료 - **🎯 guru_tracker_v24 스타일 도트 마커 적용** (2026-02-24)
+- **Next.js 차트 시스템 혁신**: StockChartClient.tsx에 guru_tracker_v24.html의 도트 마커 스타일 완전 이식
+- **주요 변경사항**:
+  - **series.setMarkers() 제거**: 기본 화살표 마커 대신 커스텀 도트 마커 적용
+  - **도트 마커 시스템**: 12px 원형 도트 + 대시 점선 + 호버/클릭 인터랙션
+  - **마커 오버레이 컨테이너**: position:absolute div + SVG line 레이어 구조
+  - **시그널별 색상**: STRONG_BUY(#34d399) ~ STRONG_SELL(#f87171) guru_tracker 색상 시스템 적용
+  - **호버 프리뷰**: 종목명 + 시그널타입 간단 툴팁
+  - **클릭 툴팁**: 인플루언서/날짜/시그널뱃지/내용/YouTube링크 상세 정보 (라이트테마 디자인)
+  - **차트 반응성**: timeScale 이벤트 구독으로 스크롤/줌 시 도트 위치 자동 업데이트
+- **기술 구현**: 
+  - React/Next.js 'use client' 컴포넌트로 DOM 직접 조작
+  - chart.timeScale().timeToCoordinate() + series.priceToCoordinate() 좌표 계산
+  - ResizeObserver로 리사이즈 대응, 메모리 누수 방지 cleanup
+  - 라이트 테마 호환 (white 배경, gray-200 border, dark text)
+- **빌드 및 배포**: 빌드 성공 → smtr-web 복사/커밋/푸시 → invest-sns 커밋 완료
+
 ### ✅ 완료 - **🔧 GitHub Pages basePath 이미지 경로 수정** (2026-02-23)
 - **문제점**: GitHub Pages에서 basePath가 "/smtr-web"인데 피드 페이지 이미지 경로가 "/avatars/doohwan.jpg" 등으로 하드코딩돼서 실제로는 "/smtr-web/avatars/doohwan.jpg"로 가야하는데 루트 "/avatars/" 찾고 있었음
 - **해결책**: `getImagePath` 헬퍼 함수 구현 - `process.env.NEXT_PUBLIC_BASE_PATH || ''`를 이미지 경로에 prefix로 추가
@@ -222,6 +239,7 @@ _Last updated: 2026-02-23 17:13 (GMT+7)_
 - `invest-engine/main.py` — 백엔드 메인
 - `invest-engine/src/models.py` — DB 모델
 - `invest-engine/src/collectors/` — 뉴스 크롤러들
+- `invest-sns/src/app/(main)/stocks/[symbol]/StockChartClient.tsx` — **🎯 guru_tracker 도트 마커 적용 완료**
 - `invest-sns/smtr-v3.html` — **🚀 SMTR v3 완전체 (8.5MB)** - v24 베이스 5탭 SPA
 - `invest-sns/test-timeline-v2-dashboard-v3.html` — 인플루언서 서브탭 완성 버전
 - `invest-sns/test-timeline-v2.html` — v2 통합 프론트 (SNS+v24차트+전체 탭 업그레이드)

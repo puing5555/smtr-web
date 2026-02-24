@@ -9,16 +9,16 @@ import { getCoinId, COIN_MAPPING } from '@/lib/api/coingecko';
 
 const SUPPORTED_SYMBOLS = ['BTC', 'ETH', 'XRP', 'SOL', 'ADA', 'DOT'];
 
-// guru_tracker_v24 스타일 색상 적용
+// guru_tracker_v24 스타일 색상 - 8가지 시그널별 뚜렷한 색상
 const SIGNAL_COLORS = {
-  STRONG_BUY: '#34d399',
-  BUY: '#86efac',
-  POSITIVE: '#60a5fa', 
-  HOLD: '#22d3ee',
-  NEUTRAL: '#94a3b8',
-  CONCERN: '#fdba74',
-  SELL: '#fb923c',
-  STRONG_SELL: '#f87171',
+  STRONG_BUY: '#10b981',  // 진한 에메랄드
+  BUY: '#22c55e',          // 초록
+  POSITIVE: '#3b82f6',     // 파랑
+  HOLD: '#06b6d4',         // 시안
+  NEUTRAL: '#6b7280',      // 회색
+  CONCERN: '#f59e0b',      // 노랑/앰버
+  SELL: '#ef4444',         // 빨강
+  STRONG_SELL: '#dc2626',  // 진한 빨강
 } as const;
 
 const SIGNAL_LABELS = {
@@ -70,7 +70,7 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
     (async () => {
       try {
         setLoading(true);
-        const res = await fetch(`https://min-api.cryptocompare.com/data/v2/histoday?fsym=${symbol}&tsym=USD&limit=180`);
+        const res = await fetch(`https://min-api.cryptocompare.com/data/v2/histoday?fsym=${symbol}&tsym=USD&limit=730`);
         const json = await res.json();
         if (json.Response === 'Error') throw new Error(json.Message);
         const data = (json.Data?.Data || []).map((d: any) => ({
@@ -216,11 +216,11 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
             position: absolute;
             pointer-events: auto;
             cursor: pointer;
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
-            border: 2px solid rgba(255,255,255,0.3);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            border: 2px solid white;
+            box-shadow: 0 0 8px ${SIGNAL_COLORS[signal.signalType as keyof typeof SIGNAL_COLORS] || '#94a3b8'}80, 0 2px 6px rgba(0,0,0,0.2);
             transition: transform 0.15s, box-shadow 0.15s;
             z-index: 51;
             background: ${SIGNAL_COLORS[signal.signalType as keyof typeof SIGNAL_COLORS] || '#94a3b8'};
