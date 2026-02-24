@@ -1,239 +1,95 @@
-// embed_v4.js - 데이터 임베딩 및 Opus diff 기능
 const fs = require('fs');
 const path = require('path');
 
-function loadJSON(filepath) {
-    try {
-        const fullPath = path.resolve(filepath);
-        return JSON.parse(fs.readFileSync(fullPath, 'utf8'));
-    } catch (error) {
-        console.error(`❌ 파일 로드 실패: ${filepath}`, error.message);
-        return null;
+console.log('🚀 signal-review-v4 데이터 임베딩 시작...');
+
+// 1. corinpapa-signals.ts 파싱
+console.log('📖 corinpapa-signals.ts 파싱 중...');
+const signalsPath = path.join(__dirname, 'src', 'data', 'corinpapa-signals.ts');
+const signalsContent = fs.readFileSync(signalsPath, 'utf8');
+
+// TypeScript export를 JSON으로 변환
+const exportMatch = signalsContent.match(/export const corinpapaSignals: CorinpapaSignal\[\] = (\[[\s\S]*\]);/);
+if (!exportMatch) {
+    console.log('첫 번째 패턴 실패, 두 번째 패턴 시도 중...');
+    // 더 간단한 패턴 시도
+    const simpleMatch = signalsContent.match(/= (\[[\s\S]*\]);[\s]*$/m);
+    if (!simpleMatch) {
+        throw new Error('corinpapa-signals.ts에서 데이터를 찾을 수 없습니다.');
     }
+    const signalsData = eval(`(${simpleMatch[1]})`);
+    embedData(signalsData);
+} else {
+    // JavaScript로 실행하여 JSON 배열 생성
+    const signalsData = eval(`(${exportMatch[1]})`);
+    embedData(signalsData);
 }
 
-function generateDiffDisplay(original, opus) {
-    if (!original || !opus || !opus.signal_data) return null;
+function embedData(signalsData) {
+    console.log(`✅ 시그널 데이터 로드 완료: ${signalsData.length}개`);
     
-    const originalData = original;
-    const opusData = opus.signal_data;
+    // 2. _matched_reviews.json 로드
+    console.log('📖 _matched_reviews.json 로드 중...');
+    const reviewsPath = path.join(__dirname, '_matched_reviews.json');
+    const reviewsData = JSON.parse(fs.readFileSync(reviewsPath, 'utf8'));
     
-    const differences = [];
+    console.log(`✅ 리뷰 데이터 로드 완료: ${Object.keys(reviewsData).length}개`);
     
-    // 시그널 타입 비교
-    if (originalData.signal_type !== opusData.signal_type) {
-        differences.push({
-            field: 'Signal Type',
-            original: originalData.signal_type,
-            opus: opusData.signal_type,
-            type: 'change'
-        });
-    }
+    // 3. _opus_review_results.json 로드
+    console.log('📖 _opus_review_results.json 로드 중...');
+    const opusPath = path.join(__dirname, '_opus_review_results.json');
+    const opusData = JSON.parse(fs.readFileSync(opusPath, 'utf8'));
     
-    // Content 비교
-    if (originalData.content !== opusData.content) {
-        differences.push({
-            field: 'Content',
-            original: originalData.content,
-            opus: opusData.content,
-            type: 'change'
-        });
-    }
+    console.log(`✅ Opus 데이터 로드 완료: ${Object.keys(opusData).length}개`);
     
-    // Context 비교
-    if (originalData.context !== opusData.context) {
-        differences.push({
-            field: 'Context',
-            original: originalData.context || '없음',
-            opus: opusData.context || '없음',
-            type: 'change'
-        });
-    }
+    // 4. HTML 템플릿 로드
+    console.log('📖 signal-review-v4.html 템플릿 로드 중...');
+    const templatePath = path.join(__dirname, 'signal-review-v4.html');
+    let htmlTemplate = fs.readFileSync(templatePath, 'utf8');
     
-    // Confidence 비교
-    if (originalData.confidence !== opusData.confidence) {
-        differences.push({
-            field: 'Confidence',
-            original: originalData.confidence,
-            opus: opusData.confidence,
-            type: 'change'
-        });
-    }
+    // 5. 데이터 임베딩
+    console.log('🔧 데이터 임베딩 중...');
     
-    // Timestamp 비교
-    if (originalData.timestamp !== opusData.timestamp) {
-        differences.push({
-            field: 'Timestamp',
-            original: originalData.timestamp,
-            opus: opusData.timestamp,
-            type: 'change'
-        });
-    }
+    // 데이터를 JSON 문자열로 변환하고 HTML에 삽입
+    let embeddedHtml = htmlTemplate
+        .replace('{{SIGNALS_DATA}}', JSON.stringify(signalsData, null, 2))
+        .replace('{{REVIEWS_DATA}}', JSON.stringify(reviewsData, null, 2))
+        .replace('{{OPUS_DATA}}', JSON.stringify(opusData, null, 2));
     
-    return differences.length > 0 ? differences : null;
+    // 6. 최종 HTML 파일 저장
+    const outputPath = path.join(__dirname, 'signal-review-v4-embedded.html');
+    fs.writeFileSync(outputPath, embeddedHtml, 'utf8');
+    
+    console.log('✅ 데이터 임베딩 완료!');
+    console.log(`📁 출력 파일: ${outputPath}`);
+    console.log(`📊 파일 크기: ${Math.round(embeddedHtml.length / 1024)}KB`);
+    
+    // 7. 통계 출력
+    console.log('\n📊 데이터 통계:');
+    console.log(`- 총 시그널: ${signalsData.length}개`);
+    console.log(`- 리뷰 상태: ${Object.keys(reviewsData).length}개`);
+    console.log(`- Opus 검토: ${Object.keys(opusData).length}개`);
+    
+    // Opus 검토 결과 통계
+    const opusStats = Object.values(opusData).reduce((acc, result) => {
+        acc[result.verdict] = (acc[result.verdict] || 0) + 1;
+        return acc;
+    }, {});
+    
+    console.log(`- Opus 승인: ${opusStats.approve || 0}개`);
+    console.log(`- Opus 수정: ${opusStats.modify || 0}개`);
+    console.log(`- Opus 거부: ${opusStats.reject || 0}개`);
+    
+    // 리뷰 상태 통계
+    const reviewStats = Object.values(reviewsData).reduce((acc, review) => {
+        acc[review.status] = (acc[review.status] || 0) + 1;
+        return acc;
+    }, {});
+    
+    console.log(`- 승인된 리뷰: ${reviewStats.approved || 0}개`);
+    console.log(`- 거부된 리뷰: ${reviewStats.rejected || 0}개`);
+    console.log(`- 대기 중인 리뷰: ${Object.keys(reviewsData).length - (reviewStats.approved || 0) - (reviewStats.rejected || 0)}개`);
+    
+    console.log('\n🎉 embed_v4.js 실행 완료!');
+    console.log('👀 브라우저에서 signal-review-v4-embedded.html을 열어보세요.');
 }
-
-function parseCorinpapaSignals() {
-    console.log('📊 데이터 파싱 시작...');
-    
-    // JSON 파일들 로드
-    const matchedReviews = loadJSON('./_matched_reviews.json') || {};
-    const opusResults = loadJSON('./_opus_review_results.json') || {};
-    
-    // 중복제거된 시그널 데이터 로드
-    const dedupedPath = path.join(__dirname, 'smtr_data', 'corinpapa1106', '_deduped_signals_8types_dated.json');
-    const dedupedSignals = loadJSON(dedupedPath) || [];
-    
-    if (!dedupedSignals.length) {
-        console.error('❌ 중복제거된 시그널 데이터를 찾을 수 없습니다');
-        return { signals: [], stats: {} };
-    }
-    
-    console.log(`📊 데이터 로드 완료: ${dedupedSignals.length}개 시그널`);
-    
-    // 8가지 시그널 타입만 허용
-    const allowedSignalTypes = ['STRONG_BUY', 'BUY', 'POSITIVE', 'HOLD', 'NEUTRAL', 'CONCERN', 'SELL', 'STRONG_SELL'];
-    
-    const processedSignals = dedupedSignals
-        .filter(signal => allowedSignalTypes.includes(signal.signal_type))
-        .map((signal, index) => {
-            // 키 생성 (여러 패턴 시도)
-            const possibleKeys = [
-                `${signal.video_id}_${signal.asset}_${index}`,
-                `${signal.video_id}_${signal.asset}`,
-                `${signal.video_id}_${signal.asset.split('(')[0].trim()}_${index}`,
-                `${signal.video_id}_${signal.asset.split('(')[0].trim()}`
-            ];
-            
-            // 매칭되는 리뷰 상태 찾기
-            let reviewStatus = { status: 'pending' };
-            for (const key of possibleKeys) {
-                if (matchedReviews[key]) {
-                    reviewStatus = matchedReviews[key];
-                    break;
-                }
-            }
-            
-            // 매칭되는 Opus 결과 찾기
-            let opusResult = null;
-            for (const key of possibleKeys) {
-                if (opusResults[key]) {
-                    opusResult = opusResults[key];
-                    break;
-                }
-            }
-            
-            // Diff 데이터 생성
-            let diffData = null;
-            if (opusResult && opusResult.verdict === 'approve') {
-                diffData = generateDiffDisplay(signal, opusResult);
-            }
-            
-            // YouTube 링크 생성
-            let youtubeLink = '';
-            if (signal.video_id && signal.timestamp) {
-                const timeMatch = signal.timestamp.match(/\[(\d+):(\d+)\]/);
-                if (timeMatch) {
-                    const minutes = parseInt(timeMatch[1]);
-                    const seconds = parseInt(timeMatch[2]);
-                    const totalSeconds = minutes * 60 + seconds;
-                    youtubeLink = `https://youtube.com/watch?v=${signal.video_id}&t=${totalSeconds}s`;
-                } else {
-                    youtubeLink = `https://youtube.com/watch?v=${signal.video_id}`;
-                }
-            }
-            
-            return {
-                id: `signal_${index}`,
-                influencer: '코린이 아빠',
-                stock: signal.asset.match(/\(([^)]+)\)$/)?.[1] || signal.asset,
-                stockName: signal.asset,
-                signalType: signal.signal_type,
-                content: signal.content,
-                timestamp: signal.timestamp,
-                youtubeLink: youtubeLink,
-                videoDate: signal.upload_date,
-                videoTitle: signal.title,
-                confidence: signal.confidence,
-                timeframe: signal.timeframe,
-                conditional: signal.conditional,
-                skinInGame: signal.skin_in_game,
-                hedged: signal.hedged,
-                context: signal.context,
-                reviewStatus: reviewStatus.status,
-                reviewTime: reviewStatus.time,
-                reviewReason: reviewStatus.reason,
-                opusResult: opusResult,
-                hasDiff: !!diffData,
-                diffData: diffData
-            };
-        })
-        // 최신순 정렬 (영상 날짜 기준)
-        .sort((a, b) => new Date(b.videoDate).getTime() - new Date(a.videoDate).getTime());
-    
-    // 통계 계산
-    const stats = {
-        total: processedSignals.length,
-        pending: processedSignals.filter(s => s.reviewStatus === 'pending').length,
-        approved: processedSignals.filter(s => s.reviewStatus === 'approved').length,
-        rejected: processedSignals.filter(s => s.reviewStatus === 'rejected').length,
-        withOpusChanges: processedSignals.filter(s => s.hasDiff).length
-    };
-    
-    // 시그널 타입별 분포
-    const signalDistribution = {};
-    allowedSignalTypes.forEach(type => {
-        signalDistribution[type] = processedSignals.filter(s => s.signalType === type).length;
-    });
-    stats.signalDistribution = signalDistribution;
-    
-    console.log(`✅ 시그널 처리 완료: ${processedSignals.length}개`);
-    console.log(`📊 통계: 대기 ${stats.pending}개, 승인 ${stats.approved}개, 거부 ${stats.rejected}개`);
-    console.log(`🔄 Opus 수정사항: ${stats.withOpusChanges}개`);
-    
-    return { signals: processedSignals, stats };
-}
-
-function embedIntoHTML() {
-    const { signals, stats } = parseCorinpapaSignals();
-    
-    const htmlTemplatePath = './signal-review-v4.html';
-    const outputPath = './signal-review-v4-embedded.html';
-    
-    try {
-        let htmlContent = fs.readFileSync(htmlTemplatePath, 'utf8');
-        
-        // JavaScript 데이터 삽입
-        const dataScript = `
-        <script>
-        // 임베딩된 시그널 데이터 (v4)
-        window.signalData = ${JSON.stringify(signals, null, 2)};
-        window.signalStats = ${JSON.stringify(stats, null, 2)};
-        
-        console.log('✅ 시그널 데이터 로드 완료:', window.signalData.length, '개');
-        console.log('📊 통계:', window.signalStats);
-        </script>
-        </body>`;
-        
-        htmlContent = htmlContent.replace('</body>', dataScript);
-        
-        fs.writeFileSync(outputPath, htmlContent, 'utf8');
-        
-        console.log(`✅ HTML 임베딩 완료: ${outputPath}`);
-        console.log(`📊 최종 데이터: ${signals.length}개 시그널`);
-        
-        return true;
-    } catch (error) {
-        console.error('❌ HTML 임베딩 실패:', error);
-        return false;
-    }
-}
-
-// CLI 실행
-if (require.main === module) {
-    console.log('🚀 embed_v4.js 실행 시작...');
-    const success = embedIntoHTML();
-    process.exit(success ? 0 : 1);
-}
-
-module.exports = { parseCorinpapaSignals, embedIntoHTML, generateDiffDisplay };

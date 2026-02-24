@@ -21,9 +21,7 @@
         .filter-label { font-size: 12px; font-weight: 600; color: #666; }
         .filter-select, .filter-input { padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; }
         .signals-grid { display: flex; flex-direction: column; gap: 16px; }
-        
-        /* Signal Cards */
-        .signal-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 4px solid #ccc; }
+        .signal-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 4px solid #ccc; position: relative; }
         .signal-card[data-signal="STRONG_BUY"] { border-left-color: #dc2626; }
         .signal-card[data-signal="BUY"] { border-left-color: #ef4444; }
         .signal-card[data-signal="POSITIVE"] { border-left-color: #f97316; }
@@ -33,7 +31,6 @@
         .signal-card[data-signal="SELL"] { border-left-color: #3b82f6; }
         .signal-card[data-signal="STRONG_SELL"] { border-left-color: #1d4ed8; }
         .signal-card.hide { display: none; }
-        
         .signal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
         .signal-asset { font-size: 18px; font-weight: 700; }
         .signal-type { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; color: white; }
@@ -45,151 +42,105 @@
         .signal-type.CONCERN { background: #8b5cf6; }
         .signal-type.SELL { background: #3b82f6; }
         .signal-type.STRONG_SELL { background: #1d4ed8; }
-        
         .quote { background: #f8f9fa; padding: 12px 16px; border-radius: 8px; margin: 12px 0; font-style: italic; color: #333; border-left: 3px solid #667eea; }
-        .meta { display: flex; gap: 16px; font-size: 13px; color: #666; margin-top: 8px; flex-wrap: wrap; }
+        .meta { display: flex; gap: 16px; font-size: 13px; color: #666; margin-top: 8px; flex-wrap: wrap; align-items: center; }
         .meta a { color: #ef4444; text-decoration: none; }
         .meta a:hover { text-decoration: underline; }
-        .signal-actions { display: flex; gap: 8px; }
-        .btn { padding: 6px 14px; border-radius: 8px; border: 1px solid #ddd; background: white; cursor: pointer; font-size: 13px; }
-        .btn:hover { background: #f5f5f5; }
-        .btn.approve { background: #dcfce7; border-color: #22c55e; color: #15803d; }
-        .btn.reject { background: #fef2f2; border-color: #ef4444; color: #dc2626; }
+        .video-date { background: #e5e7eb; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+        .signal-actions { display: flex; gap: 8px; margin-top: 12px; align-items: center; flex-wrap: wrap; }
+        .btn { padding: 8px 16px; border-radius: 8px; border: 1px solid #ddd; background: white; cursor: pointer; font-size: 14px; }
+        .btn:hover { background: #f8f9fa; }
+        .btn.primary { background: #667eea; color: white; border-color: #667eea; }
+        .btn.primary:hover { background: #5a6fd8; }
+        .btn.danger { background: #ef4444; color: white; border-color: #ef4444; }
+        .btn.danger:hover { background: #dc2626; }
+        .btn.success { background: #10b981; color: white; border-color: #10b981; }
+        .btn.success:hover { background: #059669; }
+
+        /* Opus diff styles */
+        .opus-section { margin-top: 16px; padding: 16px; background: #f0f9ff; border-radius: 8px; border: 1px solid #e0f2fe; }
+        .opus-header { font-weight: 600; color: #0369a1; margin-bottom: 12px; }
+        .diff-container { display: flex; gap: 16px; flex-wrap: wrap; }
+        .diff-side { flex: 1; min-width: 300px; }
+        .diff-header { font-size: 12px; font-weight: 600; color: #666; margin-bottom: 8px; padding: 4px 8px; border-radius: 4px; }
+        .diff-original { background: #fef2f2; border: 1px solid #fecaca; }
+        .diff-suggested { background: #f0fdf4; border: 1px solid #bbf7d0; }
+        .diff-content { padding: 12px; background: white; border-radius: 4px; font-size: 13px; line-height: 1.5; }
+
+        /* Review controls */
+        .review-controls { margin-top: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; }
+        .review-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+        .checkbox-container { display: flex; align-items: center; gap: 4px; }
+        .reject-options { margin-left: 20px; display: none; flex-wrap: wrap; gap: 8px; align-items: center; }
+        .reject-options.show { display: flex; }
+        .signal-type-select { padding: 4px 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px; }
+
+        /* Action buttons */
+        .action-buttons { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
         
-        /* Review Status */
-        .review-status { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
-        .status-badge { padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
-        .status-badge.pending { background: #fef3c7; color: #d97706; }
-        .status-badge.approved { background: #dcfce7; color: #15803d; }
-        .status-badge.rejected { background: #fef2f2; color: #dc2626; }
-        .video-date { font-size: 12px; color: #666; margin-left: 8px; }
+        .spinner { display: none; width: 16px; height: 16px; border: 2px solid #f3f3f3; border-top: 2px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Status indicators */
+        .status-indicator { font-size: 11px; padding: 2px 6px; border-radius: 3px; font-weight: 600; }
+        .status-pending { background: #fef3c7; color: #d97706; }
+        .status-approved { background: #dcfce7; color: #16a34a; }
+        .status-rejected { background: #fee2e2; color: #dc2626; }
+        .status-opus-modified { background: #e0e7ff; color: #4338ca; }
         
-        /* Opus Diff Styles */
-        .opus-indicator { 
-            background: #e0e7ff; 
-            color: #3730a3; 
-            padding: 2px 6px; 
-            border-radius: 8px; 
-            font-size: 10px; 
-            font-weight: 600; 
-            margin-left: 8px;
-        }
-        .diff-toggle { 
-            background: #f3f4f6; 
-            border: 1px solid #d1d5db; 
-            padding: 4px 8px; 
-            font-size: 11px; 
-            border-radius: 6px; 
-            cursor: pointer;
-        }
-        .diff-toggle:hover { background: #e5e7eb; }
-        .diff-section { 
-            background: #fafafa; 
-            border: 1px solid #e5e7eb; 
-            border-radius: 8px; 
-            margin-top: 12px; 
-            display: none;
-        }
-        .diff-section.show { display: block; }
-        .diff-header { 
-            background: #f3f4f6; 
-            padding: 8px 12px; 
-            border-bottom: 1px solid #e5e7eb; 
-            font-size: 12px; 
-            font-weight: 600; 
-            color: #374151;
-        }
-        .diff-content { padding: 12px; }
-        .diff-item { margin-bottom: 12px; }
-        .diff-field { font-weight: 600; font-size: 11px; color: #6b7280; margin-bottom: 4px; }
-        .diff-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .diff-original, .diff-opus { 
-            padding: 8px; 
-            border-radius: 6px; 
-            font-size: 12px; 
-            position: relative;
-        }
-        .diff-original { 
-            background: #fef2f2; 
-            border: 1px solid #fecaca;
-        }
-        .diff-opus { 
-            background: #dcfce7; 
-            border: 1px solid #bbf7d0;
-        }
-        .diff-original::before { 
-            content: 'Original'; 
-            position: absolute; 
-            top: -6px; 
-            left: 6px; 
-            background: #fef2f2; 
-            font-size: 9px; 
-            color: #991b1b; 
-            font-weight: 600;
-            padding: 0 4px;
-        }
-        .diff-opus::before { 
-            content: 'Opus 수정'; 
-            position: absolute; 
-            top: -6px; 
-            left: 6px; 
-            background: #dcfce7; 
-            font-size: 9px; 
-            color: #166534; 
-            font-weight: 600;
-            padding: 0 4px;
-        }
-        
-        /* Hidden by default */
-        .no-signals { text-align: center; padding: 60px 20px; color: #666; }
-        .loading { text-align: center; padding: 40px; color: #666; }
+        /* Alert box */
+        .alert { margin-bottom: 16px; padding: 12px 16px; border-radius: 8px; font-size: 14px; }
+        .alert.info { background: #e0f2fe; border: 1px solid #0891b2; color: #0891b2; }
+        .alert.success { background: #dcfce7; border: 1px solid #16a34a; color: #16a34a; }
+        .alert.warning { background: #fef3c7; border: 1px solid #d97706; color: #d97706; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>📊 유튜버 시그널 검증 리뷰 v4</h1>
-            <p>코린이 아빠 시그널 분석 · 실시간 검토 · Opus 수정사항 표시</p>
+            <h1>유튜버 시그널 검증 리뷰 v4</h1>
+            <p>Claude Sonnet이 추출한 시그널을 검토하고 Opus 검증 결과를 확인하여 최종 승인</p>
+        </div>
+
+        <div class="alert info">
+            <strong>🔄 사이트 동기화:</strong> 리뷰 완료 후 "본사이트 동기화" 버튼을 클릭하여 변경사항을 SMTR 웹사이트에 반영하세요.
         </div>
 
         <div class="stats">
             <div class="stat-card">
-                <div class="stat-number" id="stat-total">-</div>
+                <div class="stat-number" id="totalCount">0</div>
                 <div class="stat-label">총 시그널</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" id="stat-pending">-</div>
-                <div class="stat-label">검토대기</div>
+                <div class="stat-number" id="opusModifiedCount">0</div>
+                <div class="stat-label">Opus 수정 제안</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" id="stat-approved">-</div>
-                <div class="stat-label">승인완료</div>
+                <div class="stat-number" id="approvedCount">0</div>
+                <div class="stat-label">승인됨</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" id="stat-rejected">-</div>
+                <div class="stat-number" id="rejectedCount">0</div>
                 <div class="stat-label">거부됨</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" id="stat-opus-changes">-</div>
-                <div class="stat-label">Opus 수정</div>
+                <div class="stat-number" id="pendingCount">0</div>
+                <div class="stat-label">검토대기</div>
             </div>
         </div>
 
         <div class="filters">
             <div class="filter-row">
                 <div class="filter-group">
-                    <label class="filter-label">리뷰 상태</label>
-                    <select id="statusFilter" class="filter-select">
-                        <option value="all">전체</option>
-                        <option value="pending">검토대기</option>
-                        <option value="approved">승인완료</option>
-                        <option value="rejected">거부됨</option>
+                    <label class="filter-label">종목명</label>
+                    <select id="stockFilter" class="filter-select">
+                        <option value="">전체</option>
                     </select>
                 </div>
                 <div class="filter-group">
                     <label class="filter-label">시그널 타입</label>
                     <select id="signalTypeFilter" class="filter-select">
-                        <option value="all">전체</option>
+                        <option value="">전체</option>
                         <option value="STRONG_BUY">STRONG_BUY</option>
                         <option value="BUY">BUY</option>
                         <option value="POSITIVE">POSITIVE</option>
@@ -201,215 +152,520 @@
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label class="filter-label">종목 검색</label>
-                    <input type="text" id="stockSearch" class="filter-input" placeholder="종목명 입력...">
+                    <label class="filter-label">리뷰 상태</label>
+                    <select id="reviewStatusFilter" class="filter-select">
+                        <option value="">전체</option>
+                        <option value="pending">검토대기</option>
+                        <option value="approved">승인됨</option>
+                        <option value="rejected">거부됨</option>
+                        <option value="opus-modified">Opus 수정</option>
+                    </select>
                 </div>
                 <div class="filter-group">
-                    <label class="filter-label">Opus 수정사항</label>
-                    <select id="opusFilter" class="filter-select">
-                        <option value="all">전체</option>
-                        <option value="has-diff">수정사항 있음</option>
-                        <option value="no-diff">수정사항 없음</option>
+                    <label class="filter-label">유튜버</label>
+                    <select id="influencerFilter" class="filter-select">
+                        <option value="">전체</option>
                     </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">검색</label>
+                    <input type="text" id="searchInput" class="filter-input" placeholder="종목명, 내용 검색...">
                 </div>
             </div>
         </div>
 
-        <div class="loading" id="loading">
-            데이터를 불러오는 중...
+        <div class="action-buttons">
+            <button id="syncSiteBtn" class="btn success">🔄 본사이트 동기화</button>
+            <button id="opusReviewBtn" class="btn primary">Opus 수정 실행</button>
+            <button id="exportTsBtn" class="btn primary">TypeScript 파일 내보내기</button>
         </div>
 
-        <div class="signals-grid" id="signalsGrid">
-            <!-- 시그널 카드들이 여기에 동적으로 삽입됩니다 -->
-        </div>
-
-        <div class="no-signals" id="noSignals" style="display: none;">
-            조건에 맞는 시그널이 없습니다.
+        <div class="signals-grid" id="signalsContainer">
+            <!-- Signals will be populated by JavaScript -->
         </div>
     </div>
 
     <script>
-        // 전역 변수
-        let allSignals = [];
-        let currentSignals = [];
+        // 데이터 placeholder - embed_v4.js에서 교체됨
+        let signalsData = {{SIGNALS_DATA}};
+        let reviewsData = {{REVIEWS_DATA}};
+        let opusData = {{OPUS_DATA}};
 
-        // 데이터 초기화
-        function initializeData() {
-            if (typeof window.signalData !== 'undefined' && typeof window.signalStats !== 'undefined') {
-                allSignals = window.signalData;
-                currentSignals = [...allSignals];
-                
-                updateStats();
-                renderSignals();
-                setupEventListeners();
-                hideLoading();
-                
-                console.log('✅ 데이터 초기화 완료:', allSignals.length, '개 시그널');
-            } else {
-                console.error('❌ 시그널 데이터를 찾을 수 없습니다');
-                document.getElementById('loading').textContent = '데이터를 불러오지 못했습니다.';
-            }
-        }
+        // 로컬 스토리지 키
+        const STORAGE_KEY = 'signal-review-v4';
 
-        // 통계 업데이트
-        function updateStats() {
-            if (window.signalStats) {
-                document.getElementById('stat-total').textContent = window.signalStats.total;
-                document.getElementById('stat-pending').textContent = window.signalStats.pending;
-                document.getElementById('stat-approved').textContent = window.signalStats.approved;
-                document.getElementById('stat-rejected').textContent = window.signalStats.rejected;
-                document.getElementById('stat-opus-changes').textContent = window.signalStats.withOpusChanges;
-            }
-        }
+        // 전역 상태
+        let currentReviews = {};
+        let filteredSignals = [];
 
-        // 로딩 숨기기
-        function hideLoading() {
-            document.getElementById('loading').style.display = 'none';
-        }
-
-        // 시그널 카드 HTML 생성
-        function createSignalCard(signal) {
-            const reviewStatusClass = signal.reviewStatus || 'pending';
-            const videoDateText = signal.videoDate ? new Date(signal.videoDate).toLocaleDateString('ko-KR') : '';
-            const opusIndicator = signal.hasDiff ? '<span class="opus-indicator">OPUS 수정</span>' : '';
+        // 초기화
+        function init() {
+            console.log('🚀 리뷰 페이지 v4 초기화 시작');
+            console.log('시그널 데이터:', signalsData?.length || 0);
+            console.log('리뷰 데이터:', Object.keys(reviewsData || {}).length);
+            console.log('Opus 데이터:', Object.keys(opusData || {}).length);
             
-            const diffSection = signal.hasDiff && signal.diffData ? `
-                <div class="diff-section" id="diff-${signal.id}">
-                    <div class="diff-header">
-                        📊 Opus 수정사항 비교
-                    </div>
-                    <div class="diff-content">
-                        ${signal.diffData.map(diff => `
-                            <div class="diff-item">
-                                <div class="diff-field">${diff.field}</div>
-                                <div class="diff-comparison">
-                                    <div class="diff-original">${diff.original}</div>
-                                    <div class="diff-opus">${diff.opus}</div>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            ` : '';
+            loadReviewsFromStorage();
+            mergeExistingReviews();
+            populateFilters();
+            renderSignals();
+            updateStats();
+            bindEvents();
+            
+            console.log('✅ 초기화 완료');
+        }
 
-            return `
-                <div class="signal-card" data-signal="${signal.signalType}" data-status="${reviewStatusClass}" data-stock="${signal.stockName.toLowerCase()}" data-has-diff="${signal.hasDiff}">
-                    <div class="signal-header">
-                        <div class="signal-asset">${signal.stockName}</div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <span class="signal-type ${signal.signalType}">${signal.signalType}</span>
-                            ${opusIndicator}
+        function loadReviewsFromStorage() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                try {
+                    currentReviews = JSON.parse(saved);
+                    console.log('로컬 스토리지에서 리뷰 로드:', Object.keys(currentReviews).length);
+                } catch (e) {
+                    console.error('Failed to parse saved reviews:', e);
+                    currentReviews = {};
+                }
+            }
+        }
+
+        function mergeExistingReviews() {
+            // _matched_reviews.json에서 기존 리뷰 상태 로드
+            Object.keys(reviewsData || {}).forEach(key => {
+                if (!currentReviews[key]) {
+                    currentReviews[key] = {
+                        status: reviewsData[key].status,
+                        time: reviewsData[key].time,
+                        signalType: null,
+                        action: null
+                    };
+                }
+            });
+        }
+
+        function saveReviewsToStorage() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(currentReviews));
+        }
+
+        function populateFilters() {
+            const stocks = [...new Set(signalsData.map(s => s.stockName))].sort();
+            const influencers = [...new Set(signalsData.map(s => s.influencer))].sort();
+
+            const stockFilter = document.getElementById('stockFilter');
+            stocks.forEach(stock => {
+                const option = document.createElement('option');
+                option.value = stock;
+                option.textContent = stock;
+                stockFilter.appendChild(option);
+            });
+
+            const influencerFilter = document.getElementById('influencerFilter');
+            influencers.forEach(influencer => {
+                const option = document.createElement('option');
+                option.value = influencer;
+                option.textContent = influencer;
+                influencerFilter.appendChild(option);
+            });
+        }
+
+        function getSignalKey(signal) {
+            return `${signal.youtubeLink.split('/').pop()}_${signal.stockName}`;
+        }
+
+        function getReviewStatus(signal) {
+            const key = getSignalKey(signal);
+            return currentReviews[key] || { status: 'pending', time: null, signalType: null, action: null };
+        }
+
+        function getOpusResult(signal) {
+            const key = getSignalKey(signal);
+            return opusData[key] || null;
+        }
+
+        function renderSignals() {
+            filteredSignals = filterSignals();
+            const container = document.getElementById('signalsContainer');
+            
+            if (filteredSignals.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 40px; color: #666;">조건에 맞는 시그널이 없습니다.</div>';
+                return;
+            }
+
+            container.innerHTML = filteredSignals.map(signal => {
+                const review = getReviewStatus(signal);
+                const opusResult = getOpusResult(signal);
+                const key = getSignalKey(signal);
+
+                return `
+                    <div class="signal-card" data-signal="${signal.signalType}" data-key="${key}">
+                        <div class="signal-header">
+                            <span class="signal-asset">${signal.stockName} (${signal.stock})</span>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span class="signal-type ${signal.signalType}">${signal.signalType}</span>
+                                <span class="status-indicator status-${review.status}">${getStatusText(review.status)}</span>
+                                <span class="video-date">${signal.videoDate}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="quote">${signal.content}</div>
+                        
+                        <div class="meta">
+                            <span>유튜버: ${signal.influencer}</span>
+                            <span>신뢰도: ${signal.confidence}</span>
+                            <span>타임프레임: ${signal.timeframe}</span>
+                            <a href="${signal.youtubeLink}&t=${Math.floor(parseFloat(signal.timestamp) || 0)}s" target="_blank">영상 보기 (${signal.timestamp})</a>
+                        </div>
+
+                        ${opusResult ? renderOpusSection(signal, opusResult) : ''}
+
+                        <div class="review-controls">
+                            ${renderReviewControls(signal, review)}
                         </div>
                     </div>
-                    
-                    <div class="quote">
-                        "${signal.content}"
+                `;
+            }).join('');
+
+            bindSignalEvents();
+        }
+
+        function renderOpusSection(signal, opusResult) {
+            if (opusResult.verdict === 'approve') {
+                return `
+                    <div class="opus-section">
+                        <div class="opus-header">✅ Opus 검토 결과: 승인</div>
+                        <div style="font-size: 13px; color: #059669;">${opusResult.reasoning || 'Opus가 이 시그널을 승인했습니다.'}</div>
                     </div>
-                    
-                    <div class="meta">
-                        <span>🎥 <a href="${signal.youtubeLink}" target="_blank">${signal.timestamp}</a></span>
-                        <span>📅 ${signal.videoTitle}</span>
-                        <span>🔸 신뢰도: ${signal.confidence}</span>
-                        <span>⏱ ${signal.timeframe}</span>
+                `;
+            } else if (opusResult.verdict === 'modify') {
+                return `
+                    <div class="opus-section">
+                        <div class="opus-header">🔄 Opus 수정 제안</div>
+                        <div style="font-size: 13px; color: #0369a1; margin-bottom: 12px;">${opusResult.reasoning || 'Opus가 수정을 제안했습니다.'}</div>
+                        <div class="diff-container">
+                            <div class="diff-side">
+                                <div class="diff-header diff-original">원본 시그널</div>
+                                <div class="diff-content">
+                                    <div><strong>타입:</strong> ${signal.signalType}</div>
+                                    <div><strong>내용:</strong> ${signal.content}</div>
+                                </div>
+                            </div>
+                            <div class="diff-side">
+                                <div class="diff-header diff-suggested">Opus 제안</div>
+                                <div class="diff-content">
+                                    <div><strong>타입:</strong> ${opusResult.suggested?.signalType || signal.signalType}</div>
+                                    <div><strong>내용:</strong> ${opusResult.suggested?.content || signal.content}</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div class="review-status">
-                        <span class="status-badge ${reviewStatusClass}">
-                            ${reviewStatusClass === 'pending' ? '검토대기' : 
-                              reviewStatusClass === 'approved' ? '승인완료' : '거부됨'}
-                        </span>
-                        <span class="video-date">영상: ${videoDateText}</span>
-                        ${signal.hasDiff ? `<button class="diff-toggle" onclick="toggleDiff('${signal.id}')">수정사항 보기</button>` : ''}
-                        ${signal.reviewTime ? `<span style="font-size: 11px; color: #999;">리뷰: ${signal.reviewTime}</span>` : ''}
+                `;
+            }
+            return '';
+        }
+
+        function renderReviewControls(signal, review) {
+            const key = getSignalKey(signal);
+            
+            return `
+                <div class="review-row">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="approve-${key}" ${review.status === 'approved' ? 'checked' : ''} 
+                               onchange="updateReviewStatus('${key}', 'approved', this.checked)">
+                        <label for="approve-${key}">승인</label>
                     </div>
-                    
-                    ${diffSection}
-                    
-                    ${signal.reviewReason ? `<div style="margin-top: 8px; padding: 8px; background: #fef2f2; border-radius: 6px; font-size: 12px; color: #dc2626;">거부 사유: ${signal.reviewReason}</div>` : ''}
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="reject-${key}" ${review.status === 'rejected' ? 'checked' : ''} 
+                               onchange="toggleReject('${key}', this.checked)">
+                        <label for="reject-${key}">거부</label>
+                    </div>
+                    <div id="reject-options-${key}" class="reject-options ${review.status === 'rejected' ? 'show' : ''}">
+                        <label>
+                            <input type="radio" name="reject-action-${key}" value="delete" 
+                                   ${review.action === 'delete' ? 'checked' : ''} 
+                                   onchange="updateRejectAction('${key}', 'delete')"> 삭제
+                        </label>
+                        <label>
+                            <input type="radio" name="reject-action-${key}" value="modify" 
+                                   ${review.action === 'modify' ? 'checked' : ''} 
+                                   onchange="updateRejectAction('${key}', 'modify')"> 수정
+                        </label>
+                        <select class="signal-type-select" id="modify-type-${key}" 
+                                ${review.action !== 'modify' ? 'style="display:none"' : ''} 
+                                onchange="updateModifiedSignalType('${key}', this.value)">
+                            <option value="STRONG_BUY" ${review.signalType === 'STRONG_BUY' ? 'selected' : ''}>STRONG_BUY</option>
+                            <option value="BUY" ${review.signalType === 'BUY' ? 'selected' : ''}>BUY</option>
+                            <option value="POSITIVE" ${review.signalType === 'POSITIVE' ? 'selected' : ''}>POSITIVE</option>
+                            <option value="HOLD" ${review.signalType === 'HOLD' ? 'selected' : ''}>HOLD</option>
+                            <option value="NEUTRAL" ${review.signalType === 'NEUTRAL' ? 'selected' : ''}>NEUTRAL</option>
+                            <option value="CONCERN" ${review.signalType === 'CONCERN' ? 'selected' : ''}>CONCERN</option>
+                            <option value="SELL" ${review.signalType === 'SELL' ? 'selected' : ''}>SELL</option>
+                            <option value="STRONG_SELL" ${review.signalType === 'STRONG_SELL' ? 'selected' : ''}>STRONG_SELL</option>
+                        </select>
+                    </div>
                 </div>
             `;
         }
 
-        // Diff 토글 함수
-        function toggleDiff(signalId) {
-            const diffSection = document.getElementById(`diff-${signalId}`);
-            if (diffSection) {
-                diffSection.classList.toggle('show');
-                const toggle = diffSection.previousElementSibling.querySelector('.diff-toggle');
-                if (toggle) {
-                    toggle.textContent = diffSection.classList.contains('show') ? '수정사항 숨기기' : '수정사항 보기';
+        function getStatusText(status) {
+            switch (status) {
+                case 'pending': return '검토대기';
+                case 'approved': return '승인됨';
+                case 'rejected': return '거부됨';
+                case 'opus-modified': return 'Opus 수정';
+                default: return '검토대기';
+            }
+        }
+
+        function updateReviewStatus(key, status, checked) {
+            if (!currentReviews[key]) {
+                currentReviews[key] = { status: 'pending', time: null, signalType: null, action: null };
+            }
+
+            if (checked) {
+                currentReviews[key].status = status;
+                currentReviews[key].time = new Date().toLocaleString('ko-KR');
+                
+                // 승인 시 거부 체크박스 해제
+                const rejectCheckbox = document.getElementById(`reject-${key}`);
+                if (rejectCheckbox) {
+                    rejectCheckbox.checked = false;
+                }
+                
+                // 거부 옵션 숨김
+                const rejectOptions = document.getElementById(`reject-options-${key}`);
+                if (rejectOptions) {
+                    rejectOptions.classList.remove('show');
+                }
+            } else {
+                currentReviews[key].status = 'pending';
+                currentReviews[key].time = null;
+            }
+
+            saveReviewsToStorage();
+            updateStats();
+            updateStatusIndicator(key);
+        }
+
+        function toggleReject(key, checked) {
+            if (!currentReviews[key]) {
+                currentReviews[key] = { status: 'pending', time: null, signalType: null, action: null };
+            }
+
+            if (checked) {
+                currentReviews[key].status = 'rejected';
+                currentReviews[key].time = new Date().toLocaleString('ko-KR');
+                
+                // 승인 체크박스 해제
+                const approveCheckbox = document.getElementById(`approve-${key}`);
+                if (approveCheckbox) {
+                    approveCheckbox.checked = false;
+                }
+
+                // 거부 옵션 표시
+                const rejectOptions = document.getElementById(`reject-options-${key}`);
+                if (rejectOptions) {
+                    rejectOptions.classList.add('show');
+                }
+            } else {
+                currentReviews[key].status = 'pending';
+                currentReviews[key].time = null;
+                
+                // 거부 옵션 숨김
+                const rejectOptions = document.getElementById(`reject-options-${key}`);
+                if (rejectOptions) {
+                    rejectOptions.classList.remove('show');
+                }
+            }
+
+            saveReviewsToStorage();
+            updateStats();
+            updateStatusIndicator(key);
+        }
+
+        function updateRejectAction(key, action) {
+            if (!currentReviews[key]) {
+                currentReviews[key] = { status: 'rejected', time: new Date().toLocaleString('ko-KR'), signalType: null, action: null };
+            }
+
+            currentReviews[key].action = action;
+            
+            // 수정 타입 선택 표시/숨김
+            const modifySelect = document.getElementById(`modify-type-${key}`);
+            if (modifySelect) {
+                modifySelect.style.display = action === 'modify' ? 'inline-block' : 'none';
+            }
+
+            saveReviewsToStorage();
+        }
+
+        function updateModifiedSignalType(key, signalType) {
+            if (!currentReviews[key]) {
+                currentReviews[key] = { status: 'rejected', time: new Date().toLocaleString('ko-KR'), signalType: null, action: 'modify' };
+            }
+
+            currentReviews[key].signalType = signalType;
+            saveReviewsToStorage();
+        }
+
+        function updateStatusIndicator(key) {
+            const card = document.querySelector(`[data-key="${key}"]`);
+            if (card) {
+                const indicator = card.querySelector('.status-indicator');
+                const review = currentReviews[key];
+                if (indicator && review) {
+                    indicator.className = `status-indicator status-${review.status}`;
+                    indicator.textContent = getStatusText(review.status);
                 }
             }
         }
 
-        // 시그널 렌더링
-        function renderSignals() {
-            const grid = document.getElementById('signalsGrid');
-            const noSignals = document.getElementById('noSignals');
-            
-            if (currentSignals.length === 0) {
-                grid.innerHTML = '';
-                noSignals.style.display = 'block';
-                return;
-            }
-            
-            noSignals.style.display = 'none';
-            grid.innerHTML = currentSignals.map(createSignalCard).join('');
-        }
-
-        // 필터 적용
-        function applyFilters() {
-            const statusFilter = document.getElementById('statusFilter').value;
+        function filterSignals() {
+            const stockFilter = document.getElementById('stockFilter').value;
             const signalTypeFilter = document.getElementById('signalTypeFilter').value;
-            const stockSearch = document.getElementById('stockSearch').value.toLowerCase();
-            const opusFilter = document.getElementById('opusFilter').value;
-            
-            currentSignals = allSignals.filter(signal => {
-                // 상태 필터
-                if (statusFilter !== 'all' && signal.reviewStatus !== statusFilter) {
-                    return false;
-                }
+            const reviewStatusFilter = document.getElementById('reviewStatusFilter').value;
+            const influencerFilter = document.getElementById('influencerFilter').value;
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+
+            return signalsData.filter(signal => {
+                const review = getReviewStatus(signal);
                 
-                // 시그널 타입 필터
-                if (signalTypeFilter !== 'all' && signal.signalType !== signalTypeFilter) {
-                    return false;
-                }
+                return (!stockFilter || signal.stockName === stockFilter) &&
+                       (!signalTypeFilter || signal.signalType === signalTypeFilter) &&
+                       (!reviewStatusFilter || review.status === reviewStatusFilter) &&
+                       (!influencerFilter || signal.influencer === influencerFilter) &&
+                       (!searchInput || 
+                        signal.stockName.toLowerCase().includes(searchInput) ||
+                        signal.content.toLowerCase().includes(searchInput) ||
+                        signal.stock.toLowerCase().includes(searchInput));
+            }).sort((a, b) => new Date(b.videoDate) - new Date(a.videoDate)); // 최신순 정렬
+        }
+
+        function updateStats() {
+            const total = signalsData.length;
+            let approved = 0, rejected = 0, pending = 0, opusModified = 0;
+
+            signalsData.forEach(signal => {
+                const review = getReviewStatus(signal);
+                const opusResult = getOpusResult(signal);
                 
-                // 종목 검색
-                if (stockSearch && !signal.stockName.toLowerCase().includes(stockSearch)) {
-                    return false;
+                switch (review.status) {
+                    case 'approved': approved++; break;
+                    case 'rejected': rejected++; break;
+                    default: pending++; break;
                 }
-                
-                // Opus 수정사항 필터
-                if (opusFilter === 'has-diff' && !signal.hasDiff) {
-                    return false;
+
+                if (opusResult && opusResult.verdict === 'modify') {
+                    opusModified++;
                 }
-                if (opusFilter === 'no-diff' && signal.hasDiff) {
-                    return false;
-                }
-                
-                return true;
             });
+
+            document.getElementById('totalCount').textContent = total;
+            document.getElementById('approvedCount').textContent = approved;
+            document.getElementById('rejectedCount').textContent = rejected;
+            document.getElementById('pendingCount').textContent = pending;
+            document.getElementById('opusModifiedCount').textContent = opusModified;
+        }
+
+        function bindEvents() {
+            // 필터 이벤트
+            ['stockFilter', 'signalTypeFilter', 'reviewStatusFilter', 'influencerFilter', 'searchInput'].forEach(id => {
+                document.getElementById(id).addEventListener('change', () => {
+                    renderSignals();
+                });
+                document.getElementById(id).addEventListener('input', () => {
+                    renderSignals();
+                });
+            });
+
+            // 버튼 이벤트
+            document.getElementById('syncSiteBtn').addEventListener('click', syncToSite);
+            document.getElementById('opusReviewBtn').addEventListener('click', executeOpusReview);
+            document.getElementById('exportTsBtn').addEventListener('click', exportTypeScriptFile);
+        }
+
+        function bindSignalEvents() {
+            // 이미 renderSignals에서 인라인으로 바인딩됨
+        }
+
+        function executeOpusReview() {
+            alert('Opus 수정은 별도 백엔드에서 처리됩니다. 현재 페이지에는 이미 처리된 결과가 표시되어 있습니다.');
+        }
+
+        function syncToSite() {
+            // 현재 리뷰 상태를 JSON으로 저장
+            const reviewStateData = {
+                reviews: currentReviews,
+                timestamp: new Date().toISOString(),
+                totalSignals: signalsData.length
+            };
+
+            const blob = new Blob([JSON.stringify(reviewStateData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `review-state-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+
+            alert('리뷰 상태를 다운로드했습니다.\\n\\n다음 단계:\\n1. 터미널에서 "node sync_to_site.js" 실행\\n2. npm run build로 본사이트 빌드');
+        }
+
+        function exportTypeScriptFile() {
+            const approvedSignals = signalsData.filter(signal => {
+                const review = getReviewStatus(signal);
+                return review.status === 'approved' || 
+                       (review.status === 'rejected' && review.action === 'modify');
+            }).map(signal => {
+                const review = getReviewStatus(signal);
+                if (review.status === 'rejected' && review.action === 'modify' && review.signalType) {
+                    return { ...signal, signalType: review.signalType };
+                }
+                return signal;
+            });
+
+            // TypeScript 형태로 출력
+            const tsContent = `// 코린이 아빠 실제 시그널 데이터 (${approvedSignals.length}개)
+// 자동 생성됨 - 수정하지 마세요
+
+export interface CorinpapaSignal {
+  id: number;
+  influencer: string;
+  stock: string;
+  stockName: string;
+  signalType: 'STRONG_BUY' | 'BUY' | 'POSITIVE' | 'HOLD' | 'NEUTRAL' | 'CONCERN' | 'SELL' | 'STRONG_SELL';
+  content: string;
+  timestamp: string;
+  youtubeLink: string;
+  analysis: {
+    summary: string;
+    detail: string;
+  };
+  videoDate: string;
+  videoTitle: string;
+  confidence: string;
+  timeframe: string;
+  conditional: boolean;
+  skinInGame: boolean;
+  hedged: boolean;
+  videoSummary?: string;
+}
+
+// 실제 시그널 데이터 (${approvedSignals.length}개, 최신순 정렬)
+export const corinpapaSignals: CorinpapaSignal[] = ${JSON.stringify(approvedSignals, null, 2)};`;
             
-            renderSignals();
+            const blob = new Blob([tsContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `corinpapa-signals-${new Date().toISOString().split('T')[0]}.ts`;
+            a.click();
+            URL.revokeObjectURL(url);
+
+            console.log('승인된 시그널 수:', approvedSignals.length);
+            alert(`승인된 시그널 ${approvedSignals.length}개를 TypeScript 파일로 내보냈습니다.\\n\\n다음 단계:\\n1. 다운로드된 파일을 src/data/corinpapa-signals.ts로 교체\\n2. npm run build로 사이트 빌드`);
         }
 
-        // 이벤트 리스너 설정
-        function setupEventListeners() {
-            document.getElementById('statusFilter').addEventListener('change', applyFilters);
-            document.getElementById('signalTypeFilter').addEventListener('change', applyFilters);
-            document.getElementById('stockSearch').addEventListener('input', applyFilters);
-            document.getElementById('opusFilter').addEventListener('change', applyFilters);
-        }
-
-        // 페이지 로드 시 초기화
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 리뷰 페이지 v4 시작');
-            initializeData();
-        });
-
-        // 전역 함수로 노출
-        window.toggleDiff = toggleDiff;
+        // 초기화 실행
+        document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>

@@ -142,6 +142,18 @@ _Last updated: 2026-02-24 16:50 (GMT+7)_
 - 텔레그램 알림 시스템 (현재 봇 kicked 상태)
 - 자동 수집 스케줄러 (APScheduler)
 
+- **🔧 signal-review-v4 완성** (2026-02-24):
+  - `signal-review-v4-final.html` 템플릿 생성 (29KB)
+  - `embed_v4_new.js` 데이터 임베딩 스크립트 생성
+  - 168개 코린이 아빠 시그널 + 177개 리뷰 상태 + 116개 Opus 검토 결과 임베딩
+  - `signal-review-v4-embedded.html` 완성 (456KB) - standalone HTML
+  - Opus 수정 결과 diff 표시 기능 구현
+  - 8가지 시그널 타입 지원 (STRONG_BUY~STRONG_SELL)
+  - 영상 날짜 표시, 최신순 정렬
+  - 승인/거부 체크박스, 수정 옵션, JSON 내보내기 기능
+  - 통계 대시보드: 총 시그널/Opus 수정 제안/승인됨/거부됨/검토대기
+  - LocalStorage 기반 리뷰 상태 저장
+
 ### 🔄 진행중
 - 코린이 아빠 검증 배치 결과 대기중 (batch_6999165cf3608190b256076bd3cea0a9)
 - **🤖 SMTR 진행상황 자동 보고**: 30분마다 텔레그램 그룹 자동 보고 (크론 작업: 275f92d3-b008-4940-ad05-4f75d93c38b9)

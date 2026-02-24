@@ -44,8 +44,8 @@ function embedData(signalsData) {
     console.log(`✅ Opus 데이터 로드 완료: ${Object.keys(opusData).length}개`);
     
     // 4. HTML 템플릿 로드
-    console.log('📖 signal-review-v4.html 템플릿 로드 중...');
-    const templatePath = path.join(__dirname, 'signal-review-v4.html');
+    console.log('📖 signal-review-v4-final.html 템플릿 로드 중...');
+    const templatePath = path.join(__dirname, 'signal-review-v4-final.html');
     let htmlTemplate = fs.readFileSync(templatePath, 'utf8');
     
     // 5. 데이터 임베딩
