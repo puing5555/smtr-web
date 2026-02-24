@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import { useInfluencersStore } from '@/stores/influencers';
 import { coinGeckoAPI, getCoinId, COIN_MAPPING } from '@/lib/api/coingecko';
-import { createChart, ColorType, IChartApi, ISeriesApi, CandlestickData, Time } from 'lightweight-charts';
+import type { IChartApi, ISeriesApi, CandlestickData, Time } from 'lightweight-charts';
 
 const SIGNAL_COLORS = {
   STRONG_BUY: '#16a34a',
@@ -146,6 +146,7 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
   // 차트 초기화 및 업데이트
   useEffect(() => {
     if (!chartContainerRef.current || chartData.length === 0) return;
+    const initChart = async () => {
 
     // 기존 차트 정리
     if (chartRef.current) {
@@ -153,6 +154,7 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
     }
 
     // 새 차트 생성
+    const { createChart, ColorType } = await import('lightweight-charts');
     const chart = createChart(chartContainerRef.current, {
       width: chartContainerRef.current.clientWidth,
       height: 500,
@@ -242,9 +244,10 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
     });
 
     resizeObserver.observe(chartContainerRef.current);
+    };
+    initChart();
 
     return () => {
-      resizeObserver.disconnect();
       if (chartRef.current) {
         chartRef.current.remove();
       }
