@@ -142,17 +142,21 @@ _Last updated: 2026-02-24 16:50 (GMT+7)_
 - 텔레그램 알림 시스템 (현재 봇 kicked 상태)
 - 자동 수집 스케줄러 (APScheduler)
 
-- **🔧 signal-review-v4 완성** (2026-02-24):
-  - `signal-review-v4-final.html` 템플릿 생성 (29KB)
-  - `embed_v4_new.js` 데이터 임베딩 스크립트 생성
-  - 168개 코린이 아빠 시그널 + 177개 리뷰 상태 + 116개 Opus 검토 결과 임베딩
-  - `signal-review-v4-embedded.html` 완성 (456KB) - standalone HTML
-  - Opus 수정 결과 diff 표시 기능 구현
-  - 8가지 시그널 타입 지원 (STRONG_BUY~STRONG_SELL)
-  - 영상 날짜 표시, 최신순 정렬
-  - 승인/거부 체크박스, 수정 옵션, JSON 내보내기 기능
-  - 통계 대시보드: 총 시그널/Opus 수정 제안/승인됨/거부됨/검토대기
-  - LocalStorage 기반 리뷰 상태 저장
+- **🎯 signal-review-v4 원본 데이터 기반 완전 동기화 달성** (2026-02-24):
+  - **원본 데이터 문제 해결**: 168개 vs 177개 불일치 → 177개 원본 기준 통일 완료
+  - **원본 데이터 변환**: `sync_to_site_v2.js` - 원본 `_deduped_signals_8types_dated.json` 177개 → TypeScript 변환
+    - 필드 매핑: asset→stockName, signal_type→signalType, video_id→youtubeLink 등
+    - 키 변환: 원본 `video_id_asset` → 변환 `watch?v=video_id_stockName` 
+    - 변환 결과: 177개 → 173개 (거부된 4개 제외)
+  - **리뷰 시스템**: `signal-review-v4.html` + `signal-review-v4-embedded.html` (468KB)
+    - 173개 변환된 시그널 + 변환된 리뷰 상태 + 116개 Opus 검토 결과
+    - 원본 데이터 기반 정확한 종목명/시그널 표시
+  - **동기화 시스템**: `sync_to_site.js` - 변환된 키 형식으로 완벽 동기화
+    - 테스트 성공: 173개 → 172개 (XRP 삭제, 캔톤 BUY→HOLD 수정)
+    - `_matched_reviews_converted.json` 자동 생성 및 활용
+  - **완전한 워크플로우**: 원본변환 → 임베딩 → 리뷰 → 동기화 → 빌드 (4단계)
+  - **사용법 가이드**: `SIGNAL_REVIEW_V4_GUIDE.md` 원본 데이터 기반으로 완성
+  - **핵심 성과**: ✅ **원본 데이터와 100% 동기화, 리뷰↔본사이트 완전 연동**
 
 ### 🔄 진행중
 - 코린이 아빠 검증 배치 결과 대기중 (batch_6999165cf3608190b256076bd3cea0a9)
