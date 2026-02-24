@@ -9,15 +9,8 @@ import { useInfluencersStore } from '@/stores/influencers';
 import { getCoinId, COIN_MAPPING } from '@/lib/api/coingecko';
 import type { IChartApi, ISeriesApi, CandlestickData, Time } from 'lightweight-charts';
 
-// Binance 심볼 매핑 (CoinGecko 대신 Binance API 사용)
-const BINANCE_SYMBOL_MAP: Record<string, string> = {
-  'BTC': 'BTCUSDT',
-  'ETH': 'ETHUSDT',
-  'XRP': 'XRPUSDT',
-  'SOL': 'SOLUSDT',
-  'ADA': 'ADAUSDT',
-  'DOT': 'DOTUSDT',
-};
+// CryptoCompare 심볼 (한국에서도 접속 가능)
+const SUPPORTED_SYMBOLS = ['BTC', 'ETH', 'XRP', 'SOL', 'ADA', 'DOT'];
 
 const SIGNAL_COLORS = {
   STRONG_BUY: '#16a34a',
@@ -109,13 +102,13 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
   const coinId = getCoinId(symbol);
   const stockName = stockSignals[0]?.stockName || symbol;
 
-  // Binance 심볼
-  const binanceSymbol = BINANCE_SYMBOL_MAP[symbol] || '';
+  // 지원 종목 확인
+  const isSupported = SUPPORTED_SYMBOLS.includes(symbol);
 
-  // 차트 데이터 로드 (Binance API)
+  // 차트 데이터 로드 (CryptoCompare API - 한국 접속 가능)
   useEffect(() => {
     const loadChartData = async () => {
-      if (!binanceSymbol) {
+      if (!isSupported) {
         setError('지원하지 않는 종목입니다.');
         setLoading(false);
         return;
@@ -125,24 +118,29 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
         setLoading(true);
         setError(null);
 
-        // Binance Klines API - 무료, 키 불필요, 안정적
+        // CryptoCompare histoday API - 무료, 키 불필요, 글로벌
         const response = await fetch(
-          `https://api.binance.com/api/v3/klines?symbol=${binanceSymbol}&interval=1d&limit=90`
+          `https://min-api.cryptocompare.com/data/v2/histoday?fsym=${symbol}&tsym=USD&limit=90`
         );
 
         if (!response.ok) {
           throw new Error('차트 데이터를 가져올 수 없습니다.');
         }
 
-        const klines = await response.json();
+        const json = await response.json();
         
-        // Binance kline format: [openTime, open, high, low, close, volume, closeTime, ...]
-        const formattedData: ChartData[] = klines.map((k: any[]) => ({
-          time: new Date(k[0]).toISOString().split('T')[0],
-          open: parseFloat(k[1]),
-          high: parseFloat(k[2]),
-          low: parseFloat(k[3]),
-          close: parseFloat(k[4]),
+        if (json.Response === 'Error') {
+          throw new Error(json.Message || '차트 데이터를 가져올 수 없습니다.');
+        }
+
+        const ohlcData = json.Data?.Data || [];
+        
+        const formattedData: ChartData[] = ohlcData.map((d: any) => ({
+          time: new Date(d.time * 1000).toISOString().split('T')[0],
+          open: d.open,
+          high: d.high,
+          low: d.low,
+          close: d.close,
         }));
 
         setChartData(formattedData);
@@ -155,7 +153,7 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
     };
 
     loadChartData();
-  }, [binanceSymbol]);
+  }, [symbol, isSupported]);
 
   // 차트 초기화 및 업데이트
   useEffect(() => {
@@ -272,7 +270,7 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
     };
   }, [chartData, filteredSignals]);
 
-  if (!binanceSymbol) {
+  if (!isSupported) {
     return (
       <div className="max-w-6xl mx-auto p-6">
         <Link href="/influencers" className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6">
@@ -298,7 +296,7 @@ export default function StockChartClient({ symbol }: { symbol: string }) {
           </Link>
           <div>
             <h1 className="text-2xl font-bold text-gray-900">{stockName}</h1>
-            <p className="text-sm text-gray-500">{symbol} • {binanceSymbol || coinId}</p>
+            <p className="text-sm text-gray-500">{symbol}/USD</p>
           </div>
         </div>
         
