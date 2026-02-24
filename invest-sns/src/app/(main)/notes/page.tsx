@@ -1,10 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Search, Trash2, Edit3, Heart, StickyNote, X } from 'lucide-react';
+import { Search, Trash2, Edit3, Heart, StickyNote, X, Play, ExternalLink } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { useScrapsStore } from '@/stores/scraps';
+import { useInfluencersStore } from '@/stores/influencers';
 
 const SIGNAL_TYPES: Record<string, { label: string; color: string; textColor: string }> = {
   STRONG_BUY: { label: '적극매수', color: 'bg-green-700', textColor: 'text-white' },
@@ -19,15 +20,18 @@ const SIGNAL_TYPES: Record<string, { label: string; color: string; textColor: st
 
 export default function NotesPage() {
   const { scraps, watchlistStocks, watchlistInfluencers, loadFromStorage, removeScrap, updateScrapMemo } = useScrapsStore();
+  const { signals, loadSignals } = useInfluencersStore();
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState<'all' | 'stock' | 'influencer'>('all');
   const [filterValue, setFilterValue] = useState('');
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editMemo, setEditMemo] = useState('');
+  const [viewSignalScrap, setViewSignalScrap] = useState<typeof scraps[0] | null>(null);
 
   useEffect(() => {
     loadFromStorage();
-  }, [loadFromStorage]);
+    loadSignals();
+  }, [loadFromStorage, loadSignals]);
 
   const filteredScraps = scraps.filter(scrap => {
     if (searchQuery) {
@@ -138,6 +142,13 @@ export default function NotesPage() {
               </div>
               <div className="flex items-center gap-1">
                 <button
+                  onClick={() => setViewSignalScrap(scrap)}
+                  className="p-1.5 hover:bg-blue-50 rounded-lg transition-colors"
+                  title="원본 시그널 보기"
+                >
+                  <Search className="w-4 h-4 text-gray-400 hover:text-blue-500" />
+                </button>
+                <button
                   onClick={() => { setEditingId(scrap.id); setEditMemo(scrap.memo); }}
                   className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
                   title="수정"
@@ -186,6 +197,103 @@ export default function NotesPage() {
           </div>
         ))}
       </div>
+
+      {/* 영상 분석 모달 (돋보기 클릭시) */}
+      {viewSignalScrap && (() => {
+        const originalSignal = signals.find(s => s.id === viewSignalScrap.signalId);
+        return (
+          <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setViewSignalScrap(null)}>
+            <div 
+              className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[85vh] overflow-y-auto relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* 헤더 */}
+              <div className="sticky top-0 bg-white border-b border-gray-200 rounded-t-2xl px-6 py-4 flex items-center justify-between z-10">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                    <Play className="w-4 h-4 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900">영상 분석</h3>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Heart className="w-5 h-5 text-red-500 fill-red-500" />
+                  <button 
+                    onClick={() => setViewSignalScrap(null)}
+                    className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors"
+                  >
+                    <X className="w-5 h-5 text-gray-500" />
+                  </button>
+                </div>
+              </div>
+
+              <div className="p-6 space-y-5">
+                {/* 종목 + 신호 + 날짜 */}
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="text-xl font-bold text-gray-900">{viewSignalScrap.stockName}</span>
+                  <Badge className={`${SIGNAL_TYPES[viewSignalScrap.signalType]?.color || 'bg-gray-500'} ${SIGNAL_TYPES[viewSignalScrap.signalType]?.textColor || 'text-white'} text-sm font-bold`}>
+                    {SIGNAL_TYPES[viewSignalScrap.signalType]?.label || viewSignalScrap.signalType}
+                  </Badge>
+                  {originalSignal?.videoTitle && (
+                    <span className="text-sm text-gray-600">{originalSignal.videoTitle}</span>
+                  )}
+                  <span className="text-sm text-gray-500">{viewSignalScrap.videoDate}</span>
+                </div>
+
+                {/* 발언 내용 */}
+                <div>
+                  <h5 className="text-sm font-semibold text-gray-700 mb-2">💬 발언 내용</h5>
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <p className="text-gray-800 leading-relaxed">{viewSignalScrap.content}</p>
+                    {originalSignal?.timestamp && (
+                      <div className="mt-2 text-xs text-gray-500">타임스탬프: {originalSignal.timestamp}</div>
+                    )}
+                  </div>
+                </div>
+
+                {/* 영상 요약 */}
+                <div>
+                  <h5 className="text-sm font-semibold text-gray-700 mb-2">📋 영상 요약</h5>
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <p className="text-gray-800 leading-relaxed whitespace-pre-line">
+                      {originalSignal?.videoSummary || originalSignal?.analysis?.detail || '영상 요약 정보를 불러올 수 없습니다.'}
+                    </p>
+                  </div>
+                </div>
+
+                {/* 내 메모 */}
+                {viewSignalScrap.memo && (
+                  <div className="bg-pink-50 border border-pink-200 rounded-lg p-4">
+                    <h5 className="text-sm font-semibold text-pink-700 mb-1">📝 내 메모</h5>
+                    <p className="text-sm text-gray-700">{viewSignalScrap.memo}</p>
+                  </div>
+                )}
+
+                {/* 차트보기 + 영상보기 버튼 */}
+                <div className="flex gap-3 pt-4 border-t border-gray-200">
+                  <a
+                    href={`/smtr-web/guru_tracker_v24.html`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium"
+                  >
+                    📊 차트보기
+                  </a>
+                  {originalSignal?.youtubeLink && (
+                    <a
+                      href={originalSignal.youtubeLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm font-medium"
+                    >
+                      ▶ 영상보기
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
     </div>
   );
 }
