@@ -40,7 +40,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "월드리버티파이낸셜이 USD1 스테이블코인으로 XRP의 국경간 송금 영역을 직접 대체하겠다고 선언했고, 화자가 XRP와 헤어질 결심을 표명"
     },
     "videoDate": "2026-02-19",
-    "videoTitle": "\"Decision to Part with XRP (WLFI Mar-a-Lago Forum Impact)\"",
+    "videoTitle": "\"XRP와의 결별 결정 (WLFI 마라라고 포럼 충격)\"",
     "confidence": "HIGH",
     "timeframe": "MID",
     "conditional": false,
@@ -62,7 +62,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "마라라고 포럼 개최 후 WLFI 토큰이 하루 만에 20% 상승했다는 사실 전달과 함께 긍정적 언급"
     },
     "videoDate": "2026-02-19",
-    "videoTitle": "\"Decision to Part with XRP (WLFI Mar-a-Lago Forum Impact)\"",
+    "videoTitle": "XRP와의 이별 결심 (WLFI 마라라고 포럼 충격)",
     "confidence": "MEDIUM",
     "timeframe": "SHORT",
     "conditional": false,
@@ -84,7 +84,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "화자가 예측한 2026년 알트코인 대멸종이 현실화되고 있다며 강력한 부정적 전망 표명"
     },
     "videoDate": "2026-02-19",
-    "videoTitle": "\"Decision to Part with XRP (WLFI Mar-a-Lago Forum Impact)\"",
+    "videoTitle": "XRP와의 이별 결심 (WLFI 마라라고 포럼 충격)",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -106,7 +106,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "화자가 캔톤에 투자하고 있지만, 상황이 나빠지면 본인이 먼저 탈출할 것이라고 명시적으로 언급"
     },
     "videoDate": "2026-02-19",
-    "videoTitle": "\"Decision to Part with XRP (WLFI Mar-a-Lago Forum Impact)\"",
+    "videoTitle": "XRP와의 이별 결심 (WLFI 마라라고 포럼 충격)",
     "confidence": "MEDIUM",
     "timeframe": "MID",
     "conditional": true,
@@ -128,7 +128,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "CNTN의 정확한 발음을 캔톤이라고 설명하면서, 마지막에 '캔톤 사라'는 매수 권유를 함"
     },
     "videoDate": "2026-02-18",
-    "videoTitle": "\"Don't call me CNTN, from now on it's [Canton]!\"",
+    "videoTitle": "CNTN이라 부르지 마, 이제부터 캔톤이야!",
     "confidence": "MEDIUM",
     "timeframe": "MID",
     "conditional": false,
@@ -150,7 +150,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "화자가 M2 증가와 비트코인 상관관계에 대한 가설이 틀렸음을 인정하며 매도를 권유한 상황"
     },
     "videoDate": "2026-02-17",
-    "videoTitle": "Is my investment, which endures even in a bear market, a \"belief\" or a \"delusion\"? (Subtitle: It'...",
+    "videoTitle": "하락장에서도 버티는 내 투자, \"신념\"인가 \"망상\"인가?",
     "confidence": "HIGH",
     "timeframe": "MID",
     "conditional": false,
@@ -172,7 +172,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "화자가 이더리움의 울트라사운드 머니 가설이 틀렸다고 판단하고 매도를 권유한 상황"
     },
     "videoDate": "2026-02-17",
-    "videoTitle": "Is my investment, which endures even in a bear market, a \"belief\" or a \"delusion\"? (Subtitle: It'...",
+    "videoTitle": "하락장에서도 버티는 내 투자, \"신념\"인가 \"망상\"인가?",
     "confidence": "HIGH",
     "timeframe": "MID",
     "conditional": false,
@@ -194,7 +194,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "화자가 XRP의 여러 긍정적 내러티브들을 망상이라고 평가하며 탈출을 권유한 상황"
     },
     "videoDate": "2026-02-17",
-    "videoTitle": "Is my investment, which endures even in a bear market, a \"belief\" or a \"delusion\"? (Subtitle: It'...",
+    "videoTitle": "하락장에서도 버티는 내 투자, \"신념\"인가 \"망상\"인가?",
     "confidence": "HIGH",
     "timeframe": "MID",
     "conditional": false,
@@ -216,7 +216,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "화자가 친구와 함께 기존 투자 종목들을 모두 매도하고 캔톤으로 이동했으며, 그 결과 수익률이 좋다고 언급한 상황"
     },
     "videoDate": "2026-02-17",
-    "videoTitle": "Is my investment, which endures even in a bear market, a \"belief\" or a \"delusion\"? (Subtitle: It'...",
+    "videoTitle": "하락장에서도 버티는 내 투자, \"신념\"인가 \"망상\"인가?",
     "confidence": "HIGH",
     "timeframe": "MID",
     "conditional": false,
@@ -238,7 +238,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "화자가 비트마인을 포함하여 기존 투자 종목들을 모두 매도했다고 언급한 상황"
     },
     "videoDate": "2026-02-17",
-    "videoTitle": "Is my investment, which endures even in a bear market, a \"belief\" or a \"delusion\"? (Subtitle: It'...",
+    "videoTitle": "하락장에서도 버티는 내 투자, \"신념\"인가 \"망상\"인가?",
     "confidence": "HIGH",
     "timeframe": "MID",
     "conditional": false,
@@ -260,7 +260,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "비트코인 6만 달러 선이 무너질 경우 전환사채를 통한 자본 조달로 인한 부채 리스크 우려"
     },
     "videoDate": "2026-02-06",
-    "videoTitle": "\"Why Coin YouTubers Become Heroes Even When Your Coin Crashes\" (The Psychology of John Burr)",
+    "videoTitle": "코인이 폭락해도 코인 유튜버가 영웅이 되는 이유 (존 버의 심리학)",
     "confidence": "MEDIUM",
     "timeframe": "SHORT",
     "conditional": true,
@@ -282,7 +282,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "마이크로스트래티지 대비 상대적으로 안전한 자금 조달 구조를 언급하며 긍정적 평가"
     },
     "videoDate": "2026-02-06",
-    "videoTitle": "\"Why Coin YouTubers Become Heroes Even When Your Coin Crashes\" (The Psychology of John Burr)",
+    "videoTitle": "코인이 폭락해도 코인 유튜버가 영웅이 되는 이유 (존 버의 심리학)",
     "confidence": "LOW",
     "timeframe": "SHORT",
     "conditional": false,
@@ -304,7 +304,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "한 달 전 3대 탈출 시리즈를 통해 XRP 매도를 권유했다고 언급"
     },
     "videoDate": "2026-02-06",
-    "videoTitle": "\"Why Coin YouTubers Become Heroes Even When Your Coin Crashes\" (The Psychology of John Burr)",
+    "videoTitle": "코인이 폭락해도 코인 유튜버가 영웅이 되는 이유 (존 버의 심리학)",
     "confidence": "HIGH",
     "timeframe": "SHORT",
     "conditional": false,
@@ -326,7 +326,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "한 달 전 3대 탈출 시리즈를 통해 비트코인 매도를 권유했다고 언급"
     },
     "videoDate": "2026-02-06",
-    "videoTitle": "\"Why Coin YouTubers Become Heroes Even When Your Coin Crashes\" (The Psychology of John Burr)",
+    "videoTitle": "코인이 폭락해도 코인 유튜버가 영웅이 되는 이유 (존 버의 심리학)",
     "confidence": "HIGH",
     "timeframe": "SHORT",
     "conditional": false,
@@ -348,7 +348,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "한 달 전 3대 탈출 시리즈를 통해 이더리움 매도를 권유했다고 언급"
     },
     "videoDate": "2026-02-06",
-    "videoTitle": "\"Why Coin YouTubers Become Heroes Even When Your Coin Crashes\" (The Psychology of John Burr)",
+    "videoTitle": "코인이 폭락해도 코인 유튜버가 영웅이 되는 이유 (존 버의 심리학)",
     "confidence": "HIGH",
     "timeframe": "SHORT",
     "conditional": false,
@@ -370,7 +370,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "화자가 2026 알트코인 대멸종을 예견하면서도 캔톤만이 실제 실적(하루 300만 달러 매출)을 보여주는 유일한 생존자라고 극찬. RWA 트렌드에서 실제로 금융 기관과 네트워크가 들어와 실적을 증명하고 있다며 강력 추천"
     },
     "videoDate": "2026-02-04",
-    "videoTitle": "\"It's performance that matters, fool\" (The Reason for the Coin Market Crash)",
+    "videoTitle": "중요한 건 실적이야, 바보야 (코인 시장 폭락의 이유)",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -436,7 +436,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "화자는 캔톤이 기관 전용이라는 시각을 강하게 반박하며, 한화증권-크리소스 연결, 삼성월렛 연동 등 리테일 확장을 위한 구체적 준비사항들을 제시하며 긍정적 전망을 표현"
     },
     "videoDate": "2026-01-27",
-    "videoTitle": "\"Canton is an institution-only coin? That's your opinion~\"",
+    "videoTitle": "캔톤은 기관 전용 코인? 그건 니 생각이고~",
     "confidence": "HIGH",
     "timeframe": "MID",
     "conditional": false,
@@ -568,7 +568,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "월가에서 자동화 거래로 전환되는 트렌드에 맞춰 캔톤이 최적화된 시스템이라는 분석"
     },
     "videoDate": "2026-01-20",
-    "videoTitle": "After reading \"Insider Insights\" (The Essence of Finance and Canton)",
+    "videoTitle": "인사이더 인사이트 읽고 나서 (금융의 본질과 캔톤)",
     "confidence": "HIGH",
     "timeframe": "MID",
     "conditional": false,
@@ -590,7 +590,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "과거의 영광에 대한 키워드를 설명하면서 비트코인이 이미 충분한 수익을 제공했다는 사실 언급으로, 현재 시점에서의 투자 의견은 아님"
     },
     "videoDate": "2026-01-20",
-    "videoTitle": "After reading \"Insider Insights\" (The Essence of Finance and Canton)",
+    "videoTitle": "인사이더 인사이트 읽고 나서 (금융의 본질과 캔톤)",
     "confidence": "MEDIUM",
     "timeframe": "LONG",
     "conditional": false,
@@ -612,7 +612,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "과거의 성과에 대한 언급으로, 현재 시점에서의 투자 의견이 아닌 역사적 사실 설명"
     },
     "videoDate": "2026-01-20",
-    "videoTitle": "After reading \"Insider Insights\" (The Essence of Finance and Canton)",
+    "videoTitle": "인사이더 인사이트 읽고 나서 (금융의 본질과 캔톤)",
     "confidence": "MEDIUM",
     "timeframe": "LONG",
     "conditional": false,
@@ -634,7 +634,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "매출 대비 시가총액이 저평가되어 있다는 밸류에이션 분석"
     },
     "videoDate": "2026-01-18",
-    "videoTitle": "\"Canton, Countdown to Upbit Listing\" (Samsung's Choice: Canton, Not Bitcoin)",
+    "videoTitle": "캔톤, 업비트 상장 카운트다운 (삼성의 선택: 비트코인이 아닌 캔톤)",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -656,7 +656,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "클래리티 법안 연기와 관계없이 캔톤의 금융 네트워크 확장이 지속되고 있다는 긍정적 전망을 제시하며, JPM코인, 런던증권거래소 등 글로벌 금융기관들과의 연결 확산 사례를 근거로 제시"
     },
     "videoDate": "2026-01-17",
-    "videoTitle": "\"The Clarity Act's Indefinite Delay Reverberates\" (Coinbase's Rice Bowl Struggle and Canton)",
+    "videoTitle": "명확성법 무기한 연기 파장 (코인베이스의 밥그릇 싸움과 캔톤)",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -678,7 +678,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "스테이블코인 이자 서비스의 리스크를 경고하면서, 거래소 파산 시 예금자 보호가 되지 않는 구조적 문제점을 지적"
     },
     "videoDate": "2026-01-17",
-    "videoTitle": "\"The Clarity Act's Indefinite Delay Reverberates\" (Coinbase's Rice Bowl Struggle and Canton)",
+    "videoTitle": "명확성법 무기한 연기 파장 (코인베이스의 밥그릇 싸움과 캔톤)",
     "confidence": "MEDIUM",
     "timeframe": "MID",
     "conditional": true,
@@ -700,7 +700,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "프라이버시 코인의 특성을 설명하며 시총 14위까지 올라온 점과 현재 잘 나가고 있다고 긍정적으로 평가"
     },
     "videoDate": "2026-01-16",
-    "videoTitle": "\"Canton is Darkcoin? Not at all!\" (Why the US chose a 'permissioned' blockchain)",
+    "videoTitle": "캔톤이 다크코인? 천만에! (미국이 허가형 블록체인을 선택한 이유)",
     "confidence": "MEDIUM",
     "timeframe": "SHORT",
     "conditional": false,
@@ -722,7 +722,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "지캐시가 시총 27위에 있으며 주목받는 이유를 설명하면서 긍정적으로 언급"
     },
     "videoDate": "2026-01-16",
-    "videoTitle": "\"Canton is Darkcoin? Not at all!\" (Why the US chose a 'permissioned' blockchain)",
+    "videoTitle": "캔톤이 다크코인? 천만에! (미국이 허가형 블록체인을 선택한 이유)",
     "confidence": "LOW",
     "timeframe": "SHORT",
     "conditional": false,
@@ -744,7 +744,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "캔톤이 다크코인이라는 오해를 해명하며 허가형 블록체인의 특성을 설명. '소각용 코인에 불과하다'고 하지만 전체적으로는 기술적 설명이 중심이며 명확한 매매 의견은 제시하지 않음"
     },
     "videoDate": "2026-01-16",
-    "videoTitle": "\"Canton is Darkcoin? Not at all!\" (Why the US chose a 'permissioned' blockchain)",
+    "videoTitle": "캔톤이 다크코인? 천만에! (미국이 허가형 블록체인을 선택한 이유)",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -766,7 +766,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "화자는 CC코인을 대한민국의 지정학적 리스크에 대한 헤지 자산으로 보고 장기 보유 계획을 밝힘"
     },
     "videoDate": "2026-01-15",
-    "videoTitle": "\"What happens to my coins if the government blocks overseas coin exchanges?\" (feat. Corin's Dad's...",
+    "videoTitle": "정부가 해외 코인 거래소 막으면 내 코인은?",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -788,7 +788,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "1월 30일 주주총회까지는 아직 공식적으로 바이오 기업이므로 매집 전략이 시작되지 않았다는 분석"
     },
     "videoDate": "2026-01-14",
-    "videoTitle": "\"Unveiling THAR!\" CC Coin purchase price and volume revealed!",
+    "videoTitle": "THAR 공개! CC 코인 매수가와 물량 공개!",
     "confidence": "MEDIUM",
     "timeframe": "SHORT",
     "conditional": false,
@@ -810,7 +810,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "주주총회 통과 이후 THAR이 공식적으로 CC코인 매집 회사가 되어 추가 매집으로 코인 가치 상승 기대"
     },
     "videoDate": "2026-01-14",
-    "videoTitle": "\"Unveiling THAR!\" CC Coin purchase price and volume revealed!",
+    "videoTitle": "THAR 공개! CC 코인 매수가와 물량 공개!",
     "confidence": "HIGH",
     "timeframe": "MID",
     "conditional": true,
@@ -920,7 +920,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "JP모건의 JPM 토큰이 캔톤 네트워크와 연결되는 뉴스를 바탕으로, 캔톤의 기술적 우위와 성장 가능성을 강조하며 극도로 확신에 찬 투자 추천을 표현. 화자가 직접 '마음 편한 투자'라며 개인적 확신을 드러냄"
     },
     "videoDate": "2026-01-11",
-    "videoTitle": "\"JP Morgan's choice is ultimately Canton\" (Feat. JPMorgan's token also launched in Canton)",
+    "videoTitle": "JP모건의 선택은 결국 캔톤 (JP모건 토큰도 캔톤에서 출시)",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -942,7 +942,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "레버리지 거래의 위험성과 청산 위험에 대한 강한 경고"
     },
     "videoDate": "2026-01-10",
-    "videoTitle": "\"Canton's price plunge just before the halving. Is this a ripple effect?\"",
+    "videoTitle": "반감기 직전 캔톤 가격 폭락. 연쇄 반응인가?",
     "confidence": "HIGH",
     "timeframe": "SHORT",
     "conditional": false,
@@ -964,7 +964,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "한 달간 2배 상승 후 하락에 대해 조정으로 보지만 향후 방향성에 대해서는 판단을 유보함"
     },
     "videoDate": "2026-01-06",
-    "videoTitle": "\"Canton Coin (CC): Why is it crashing when everyone else is rising?\" (The reason for the lonely d...",
+    "videoTitle": "캔톤 코인(CC): 다 오르는데 왜 혼자 빠지나?",
     "confidence": "MEDIUM",
     "timeframe": "MID",
     "conditional": false,
@@ -1008,7 +1008,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "RWA 시장에서 이더리움의 구조적 한계를 지적하며 금융기관들이 퍼블릭 블록체인을 기피한다고 설명"
     },
     "videoDate": "2026-01-03",
-    "videoTitle": "\"Hey buddy, throw some Ethereum in too\" (Is Ethereum the king of RWA?)",
+    "videoTitle": "야 형아, 이더리움도 좀 넣어 (이더리움이 RWA의 왕인가?)",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -1030,7 +1030,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "이더리움과 캔톤네트워크의 연결 자산 규모를 비교하며 캔톤이 압도적으로 크다는 점을 강조"
     },
     "videoDate": "2026-01-03",
-    "videoTitle": "\"Hey buddy, throw some Ethereum in too\" (Is Ethereum the king of RWA?)",
+    "videoTitle": "야 형아, 이더리움도 좀 넣어 (이더리움이 RWA의 왕인가?)",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -1052,7 +1052,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "화자가 본인의 XRP 전량 매도 사실을 공개하여 매도 신호를 간접적으로 전달"
     },
     "videoDate": "2026-01-03",
-    "videoTitle": "\"Brother XRP, get out quick!\" (Narrative and Numbers Collapse)",
+    "videoTitle": "형 XRP 빨리 나와! (내러티브와 숫자의 붕괴)",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -1074,7 +1074,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "제목과 영상 첫머리에서 친구에게 비트코인을 던지라고(매도하라고) 직접 권유하는 발언. M2가 다른 곳으로 갔다는 논리로 뒷받침"
     },
     "videoDate": "2026-01-02",
-    "videoTitle": "\"Hey buddy, throw your Bitcoins away now\" (M2 has already been diverted elsewhere)",
+    "videoTitle": "야 형아, 비트코인 이제 버려 (M2는 이미 다른 곳으로 갔다)",
     "confidence": "HIGH",
     "timeframe": "MID",
     "conditional": false,
@@ -1096,7 +1096,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "엔비디아의 실적을 긍정적으로 평가하며 유동성이 빅테크로 향하고 있다는 논리의 근거로 제시"
     },
     "videoDate": "2026-01-02",
-    "videoTitle": "\"Hey buddy, throw your Bitcoins away now\" (M2 has already been diverted elsewhere)",
+    "videoTitle": "야 형아, 비트코인 이제 버려 (M2는 이미 다른 곳으로 갔다)",
     "confidence": "MEDIUM",
     "timeframe": "MID",
     "conditional": false,
@@ -1118,7 +1118,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "러시아-우크라이나 전쟁 이후 안전자산으로서 금의 역할을 강조하며 중국의 금 매입 증가를 근거로 제시"
     },
     "videoDate": "2026-01-02",
-    "videoTitle": "\"Hey buddy, throw your Bitcoins away now\" (M2 has already been diverted elsewhere)",
+    "videoTitle": "야 형아, 비트코인 이제 버려 (M2는 이미 다른 곳으로 갔다)",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -1382,7 +1382,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "전통 금융 효율화 관점에서 CC코인을 긍정적으로 평가하지만, 과거처럼 단기간 급등은 어렵다고 현실적 리스크 언급"
     },
     "videoDate": "2025-12-27",
-    "videoTitle": "\"Is CC Coin and THAR Worth Investing for Individuals?\"",
+    "videoTitle": "CC 코인과 THAR, 개인이 투자할 가치가 있나?",
     "confidence": "MEDIUM",
     "timeframe": "LONG",
     "conditional": false,
@@ -1404,7 +1404,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "장기적으로 비트코인이 100만 달러까지 상승할 것으로 전망하며 매우 긍정적인 전망을 제시"
     },
     "videoDate": "2025-12-27",
-    "videoTitle": "\"Is CC Coin and THAR Worth Investing for Individuals?\"",
+    "videoTitle": "CC 코인과 THAR, 개인이 투자할 가치가 있나?",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -1426,7 +1426,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "이더리움의 장기 목표가를 2만 달러 이상으로 보며, 향후 수익 실현 후 재매수 계획을 밝힘"
     },
     "videoDate": "2025-12-27",
-    "videoTitle": "\"Is CC Coin and THAR Worth Investing for Individuals?\"",
+    "videoTitle": "CC 코인과 THAR, 개인이 투자할 가치가 있나?",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": true,
@@ -1448,7 +1448,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "비트코인, 이더리움과 함께 솔라나의 장기 전망도 긍정적으로 평가"
     },
     "videoDate": "2025-12-27",
-    "videoTitle": "\"Is CC Coin and THAR Worth Investing for Individuals?\"",
+    "videoTitle": "CC 코인과 THAR, 개인이 투자할 가치가 있나?",
     "confidence": "MEDIUM",
     "timeframe": "LONG",
     "conditional": false,
@@ -1514,7 +1514,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "비트코인의 전통적인 4년 사이클 이론이 더 이상 작동하지 않는다는 분석"
     },
     "videoDate": "2025-12-25",
-    "videoTitle": "\"The Collapse of Investment Patterns and Beliefs (CC Coin's Quiet Santa Rally)\"",
+    "videoTitle": "투자 패턴과 신념의 붕괴 (CC 코인의 조용한 산타 랠리)",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -1536,7 +1536,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "알트코인 시장의 구조적 변화와 빅테크 진출로 인한 기존 알트코인들의 멸망 예측"
     },
     "videoDate": "2025-12-25",
-    "videoTitle": "\"The Collapse of Investment Patterns and Beliefs (CC Coin's Quiet Santa Rally)\"",
+    "videoTitle": "투자 패턴과 신념의 붕괴 (CC 코인의 조용한 산타 랠리)",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -1558,7 +1558,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "스테이블코인 활성화가 이더리움에게 예상보다 큰 수혜를 주지 않을 것이라는 분석"
     },
     "videoDate": "2025-12-25",
-    "videoTitle": "\"The Collapse of Investment Patterns and Beliefs (CC Coin's Quiet Santa Rally)\"",
+    "videoTitle": "투자 패턴과 신념의 붕괴 (CC 코인의 조용한 산타 랠리)",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -1580,7 +1580,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "화자가 CC코인에 강한 확신을 보이며 집중 투자하고 있다는 표현"
     },
     "videoDate": "2025-12-25",
-    "videoTitle": "\"The Collapse of Investment Patterns and Beliefs (CC Coin's Quiet Santa Rally)\"",
+    "videoTitle": "투자 패턴과 신념의 붕괴 (CC 코인의 조용한 산타 랠리)",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -2130,7 +2130,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "화자가 CC코인(캔톤네트워크)을 소개하면서 월가 대형 금융기관들이 참여하고 있다는 점을 강조. 하지만 투자 주의를 당부하고 다음 영상에서 허점을 다룰 것이라고 예고하며 hedged 발언"
     },
     "videoDate": "2025-11-28",
-    "videoTitle": "Monopolizing the $2 trillion RWA market. Introducing the Wall Street tycoon's secret \"CC Coin\" pr...",
+    "videoTitle": "2조 달러 RWA 시장 독점. 월가 거물의 비밀 \"CC 코인\" 프로젝트 공개...",
     "confidence": "MEDIUM",
     "timeframe": "LONG",
     "conditional": false,
@@ -2174,7 +2174,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "비트마인이 20% 상승한 상황에서 이더리움이 동반 상승하지 않아 혼자서는 지속적 상승이 어렵다는 분석과 함께 추매 경고"
     },
     "videoDate": "2025-11-26",
-    "videoTitle": "\"Why aren't Ethereum and Bitcoin going? The culprit is Bitcoin.\"",
+    "videoTitle": "이더리움과 비트코인 왜 안 가? 범인은 비트코인이야.",
     "confidence": "MEDIUM",
     "timeframe": "SHORT",
     "conditional": false,
@@ -2196,7 +2196,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "반감기와 무관하게 스테이블코인과 대기업 코인 출시로 인한 시장 파이 확장으로 장기적 슈퍼사이클 전망"
     },
     "videoDate": "2025-11-26",
-    "videoTitle": "\"Why aren't Ethereum and Bitcoin going? The culprit is Bitcoin.\"",
+    "videoTitle": "이더리움과 비트코인 왜 안 가? 범인은 비트코인이야.",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -2218,7 +2218,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "비트코인 장기 홀더들의 매도와 4년 사이클 종료 인식으로 인해 이더리움과 비트마인의 상승을 제약하고 있다는 분석"
     },
     "videoDate": "2025-11-26",
-    "videoTitle": "\"Why aren't Ethereum and Bitcoin going? The culprit is Bitcoin.\"",
+    "videoTitle": "이더리움과 비트코인 왜 안 가? 범인은 비트코인이야.",
     "confidence": "MEDIUM",
     "timeframe": "MID",
     "conditional": false,
@@ -2240,7 +2240,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "이더리움의 폭발론 근거로 비탈릭 부텔린의 리더십, 12월 3일 푸사카 업데이트, 기관의 보유자산화, ETF 도입 등을 제시하며 강한 확신 표현"
     },
     "videoDate": "2025-11-20",
-    "videoTitle": "\"Are Ethereum & Bitcoin (ETH & BMNR) going to explode or crash?\"",
+    "videoTitle": "이더리움 & 비트코인(ETH & BMNR) 폭발할까 폭락할까?",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -2262,7 +2262,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "BMR을 열광하는 월가 세력들, 아크 인베스트먼트, 블랙록, 피델러티 등 기관들의 매입을 근거로 강한 확신 표현"
     },
     "videoDate": "2025-11-20",
-    "videoTitle": "\"Are Ethereum & Bitcoin (ETH & BMNR) going to explode or crash?\"",
+    "videoTitle": "이더리움 & 비트코인(ETH & BMNR) 폭발할까 폭락할까?",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -2284,7 +2284,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "이더리움의 구조적 변화로 인한 희소성 증가를 긍정적으로 평가"
     },
     "videoDate": "2025-11-16",
-    "videoTitle": "\"Ethereum is digital oil? So there's no reason for its price to rise!\" -feat. Andrew Kang",
+    "videoTitle": "이더리움이 디지털 오일? 그럼 가격 오를 이유가 없다! -feat. 앤드류 강",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -2306,7 +2306,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "AI 위험성과 청산 공포로 인한 패닉셀로 롱 포지션 전량 정리"
     },
     "videoDate": "2025-11-15",
-    "videoTitle": "\"After BMNR's severance, Corin's father makes excuses.\"",
+    "videoTitle": "BMNR 손절 후 코린이 아빠의 변명",
     "confidence": "HIGH",
     "timeframe": "SHORT",
     "conditional": false,
@@ -2328,7 +2328,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "위험 관리 차원에서 레버리지 상품인 비트마인 전량 매도"
     },
     "videoDate": "2025-11-15",
-    "videoTitle": "\"After BMNR's severance, Corin's father makes excuses.\"",
+    "videoTitle": "BMNR 손절 후 코린이 아빠의 변명",
     "confidence": "HIGH",
     "timeframe": "SHORT",
     "conditional": false,
@@ -2372,7 +2372,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "중국 AI(키미 K2)의 GPT 능가 성능에 대한 우려와 AI 버블 붕괴 가능성에 따른 패닉 매도 실행"
     },
     "videoDate": "2025-11-14",
-    "videoTitle": "\"What did Son Jeong-ui hear? As a Corin, I panicked about BMNR.\"",
+    "videoTitle": "손정의가 뭘 들었길래? 코린이로서 BMNR에 패닉했다.",
     "confidence": "HIGH",
     "timeframe": "SHORT",
     "conditional": false,
@@ -2394,7 +2394,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "미국 주식은 매각했지만 이더리움은 변동성이 상대적으로 작다고 판단하여 보유 유지"
     },
     "videoDate": "2025-11-14",
-    "videoTitle": "\"What did Son Jeong-ui hear? As a Corin, I panicked about BMNR.\"",
+    "videoTitle": "손정의가 뭘 들었길래? 코린이로서 BMNR에 패닉했다.",
     "confidence": "MEDIUM",
     "timeframe": "MID",
     "conditional": false,
@@ -2416,7 +2416,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "AI 패권 경쟁의 불확실성과 중국 AI 기술 발전에 따른 시장 전망 불투명으로 관망 결정"
     },
     "videoDate": "2025-11-14",
-    "videoTitle": "\"What did Son Jeong-ui hear? As a Corin, I panicked about BMNR.\"",
+    "videoTitle": "손정의가 뭘 들었길래? 코린이로서 BMNR에 패닉했다.",
     "confidence": "MEDIUM",
     "timeframe": "MID",
     "conditional": false,
@@ -2438,7 +2438,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "마이클 버리의 공매도, 손정의의 완전 매각, 그리고 AI 응용 시대로의 전환에 따른 우려 표명"
     },
     "videoDate": "2025-11-12",
-    "videoTitle": "Is the AI ​​bubble really over? Barry's short selling and Son Jeong-ui's escape.",
+    "videoTitle": "AI 버블 정말 끝났나? 배리의 공매도와 손정의의 탈출.",
     "confidence": "MEDIUM",
     "timeframe": "LONG",
     "conditional": false,
@@ -2460,7 +2460,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "마이클 버리가 10억 달러 이상 숏 배팅하며 AI 산업 붕괴를 예측한다는 내용 전달"
     },
     "videoDate": "2025-11-12",
-    "videoTitle": "Is the AI ​​bubble really over? Barry's short selling and Son Jeong-ui's escape.",
+    "videoTitle": "AI 버블 정말 끝났나? 배리의 공매도와 손정의의 탈출.",
     "confidence": "MEDIUM",
     "timeframe": "MID",
     "conditional": false,
@@ -2482,7 +2482,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "데이터센터 과투자와 감가상각 문제로 인한 실적 부풀리기 우려"
     },
     "videoDate": "2025-11-12",
-    "videoTitle": "Is the AI ​​bubble really over? Barry's short selling and Son Jeong-ui's escape.",
+    "videoTitle": "AI 버블 정말 끝났나? 배리의 공매도와 손정의의 탈출.",
     "confidence": "HIGH",
     "timeframe": "MID",
     "conditional": false,
@@ -2504,7 +2504,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "AI 관련 기업들의 실적 부풀리기 우려의 일환으로 메타도 과대평가되었다는 판단"
     },
     "videoDate": "2025-11-12",
-    "videoTitle": "Is the AI ​​bubble really over? Barry's short selling and Son Jeong-ui's escape.",
+    "videoTitle": "AI 버블 정말 끝났나? 배리의 공매도와 손정의의 탈출.",
     "confidence": "MEDIUM",
     "timeframe": "MID",
     "conditional": false,
@@ -2526,7 +2526,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "노동의 종말과 투자 필수 시대에 대한 결론으로 이더리움 매수 권유"
     },
     "videoDate": "2025-11-12",
-    "videoTitle": "Is the AI ​​bubble really over? Barry's short selling and Son Jeong-ui's escape.",
+    "videoTitle": "AI 버블 정말 끝났나? 배리의 공매도와 손정의의 탈출.",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -2548,7 +2548,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "화자가 7월부터 이더리움으로 포트폴리오를 이동하기 시작했고, 비트마인의 이더리움 매집 소식에 바로 반응하여 매수했다고 밝힘"
     },
     "videoDate": "2025-11-08",
-    "videoTitle": "\"Bitmine Accumulates 3.4 Million Ethereum, I'm an ETH & BMNR Fanatic\"",
+    "videoTitle": "비트마인 이더리움 340만 개 매집, 나는 ETH & BMNR 광신자",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -2570,7 +2570,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "화자가 자신을 '광신도'라고 표현하며 고점에서도 매도하지 않았음을 밝힘. 강력한 장기 홀딩 의지와 확신을 보여줌"
     },
     "videoDate": "2025-11-08",
-    "videoTitle": "\"Bitmine Accumulates 3.4 Million Ethereum, I'm an ETH & BMNR Fanatic\"",
+    "videoTitle": "비트마인 이더리움 340만 개 매집, 나는 ETH & BMNR 광신자",
     "confidence": "HIGH",
     "timeframe": "LONG",
     "conditional": false,
@@ -2724,7 +2724,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "화자가 미래 지향적 투자 철학을 설명하며 이더리움이 세상을 바꿀 수 있는 기술이라고 긍정적으로 평가"
     },
     "videoDate": "2025-10-19",
-    "videoTitle": "\"Buffett is addicted to the past, Son Jeong-ui is addicted to the future. What's your investment ...",
+    "videoTitle": "\"버핏은 과거에 중독, 손정의는 미래에 중독. 당신의 투자는...",
     "confidence": "MEDIUM",
     "timeframe": "LONG",
     "conditional": false,
@@ -2746,7 +2746,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "화자가 미래 지향적 투자 철학을 설명하며 비트마인이 세상을 바꿀 수 있는 기술이라고 긍정적으로 평가"
     },
     "videoDate": "2025-10-19",
-    "videoTitle": "\"Buffett is addicted to the past, Son Jeong-ui is addicted to the future. What's your investment ...",
+    "videoTitle": "\"버핏은 과거에 중독, 손정의는 미래에 중독. 당신의 투자는...",
     "confidence": "MEDIUM",
     "timeframe": "LONG",
     "conditional": false,
@@ -3054,7 +3054,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "비트마인의 구조적 문제인 주가 희석 이슈를 언급하며 우려를 표현"
     },
     "videoDate": "2025-08-10",
-    "videoTitle": "비트마인 (BMNR) & 샤프링크 "파도타기" 경고!",
+    "videoTitle": "비트마인 (BMNR) & 샤프링크 \"파도타기\" 경고!",
     "confidence": "HIGH",
     "timeframe": "MID",
     "conditional": false,
@@ -3076,7 +3076,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "파도타기 전략을 인정하면서도 변동성이 클 것이라는 경고를 함께 제시. 본인도 보유 중"
     },
     "videoDate": "2025-08-10",
-    "videoTitle": "비트마인 (BMNR) & 샤프링크 "파도타기" 경고!",
+    "videoTitle": "비트마인 (BMNR) & 샤프링크 \"파도타기\" 경고!",
     "confidence": "HIGH",
     "timeframe": "SHORT",
     "conditional": false,
@@ -3098,7 +3098,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "비트마인의 변동성과 위험성을 경고하며, 리스크를 감당할 수 없다면 투자하지 말라고 조언"
     },
     "videoDate": "2025-08-05",
-    "videoTitle": "“Sharplink is up… but why is Bitmine (BMNR) stock price like this?”",
+    "videoTitle": "샤프링크는 올랐는데... 비트마인(BMNR) 주가는 왜 이래?",
     "confidence": "MEDIUM",
     "timeframe": "MID",
     "conditional": true,
@@ -3120,7 +3120,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "비트마인 대신 안전한 투자처로 엔비디아 추천, 고가지만 지속 상승 전망"
     },
     "videoDate": "2025-08-05",
-    "videoTitle": "“Sharplink is up… but why is Bitmine (BMNR) stock price like this?”",
+    "videoTitle": "샤프링크는 올랐는데... 비트마인(BMNR) 주가는 왜 이래?",
     "confidence": "MEDIUM",
     "timeframe": "LONG",
     "conditional": false,
@@ -3142,7 +3142,7 @@ export const corinpapaSignals: CorinpapaSignal[] = [
       "detail": "비트마인 대신 안전한 투자처로 팔란티어 추천, 고가지만 지속 상승 전망"
     },
     "videoDate": "2025-08-05",
-    "videoTitle": "“Sharplink is up… but why is Bitmine (BMNR) stock price like this?”",
+    "videoTitle": "샤프링크는 올랐는데... 비트마인(BMNR) 주가는 왜 이래?",
     "confidence": "MEDIUM",
     "timeframe": "LONG",
     "conditional": false,

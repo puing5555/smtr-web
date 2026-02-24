@@ -27,7 +27,10 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
   const [showSummary, setShowSummary] = useState(false); // 영상요약 토글에 표시할 시그널
   const { influencers, signals, loadInfluencers, loadSignals } = useInfluencersStore();
 
+  const loadedRef = React.useRef(false);
   useEffect(() => {
+    if (loadedRef.current) return;
+    loadedRef.current = true;
     loadInfluencers();
     loadSignals();
   }, [loadInfluencers, loadSignals]);
@@ -35,8 +38,10 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
   const influencer = influencers.find((inf) => inf.id === Number(id) || (id === 'corinpapa1106' && inf.name === '코린이 아빠'));
   const influencerSignals = useMemo(() => signals.filter((s) => s.influencer === influencer?.name), [signals, influencer?.name]);
   
-  // 수익률 데이터 가져오기
-  const { returns, loading: returnsLoading } = useSignalReturns(influencerSignals as any);
+  // 수익률 데이터 - CoinGecko API 비활성화 (화면 흔들림 방지)
+  // const { returns, loading: returnsLoading } = useSignalReturns(influencerSignals as any);
+  const returns: Record<number, any> = {};
+  const returnsLoading = false;
   
   // 종목별 필터링된 시그널
   const filteredSignals = useMemo(() => {
@@ -274,9 +279,9 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
                   <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">종목</th>
                   <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">신호</th>
                   <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">분석</th>
-                  <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">날짜</th>
-                  <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">수익률</th>
-                  <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">영상</th>
+                  <th className="text-left py-4 px-3 text-sm font-semibold text-gray-700 whitespace-nowrap">날짜</th>
+                  <th className="text-left py-4 px-3 text-sm font-semibold text-gray-700">수익률</th>
+                  <th className="text-left py-4 px-2 text-sm font-semibold text-gray-700">영상</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
@@ -308,11 +313,11 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
                             &quot;{signal.content}&quot;
                           </div>
                         </td>
-                        <td className="py-4 px-6">
+                        <td className="py-4 px-3 whitespace-nowrap">
                           <div className="text-sm text-gray-900">{signal.videoDate}</div>
                           <div className="text-xs text-gray-500">{signal.timestamp}</div>
                         </td>
-                        <td className="py-4 px-6">
+                        <td className="py-4 px-3" style={{ minWidth: '60px' }}>
                           {(() => {
                             const returnData = returns[signal.id];
                             if (returnsLoading || returnData?.loading) {
@@ -331,17 +336,17 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
                             return <span className="text-xs text-gray-400">-</span>;
                           })()}
                         </td>
-                        <td className="py-4 px-6">
+                        <td className="py-4 px-2">
                           {signal.youtubeLink && (
                             <a
                               href={signal.youtubeLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1 text-red-600 hover:text-red-700 text-xs font-medium"
+                              className="inline-flex items-center gap-1 text-red-600 hover:text-red-700 text-xs font-medium whitespace-nowrap"
                               onClick={(e) => e.stopPropagation()}
                             >
                               <ExternalLink className="w-3 h-3" />
-                              YouTube
+                              YT
                             </a>
                           )}
                         </td>

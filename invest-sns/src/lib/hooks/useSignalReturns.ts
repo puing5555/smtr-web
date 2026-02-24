@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { coinGeckoAPI, getCoinId, calculateReturn } from '@/lib/api/coingecko';
 import type { CorinpapaSignal } from '@/data/corinpapa-signals';
 
@@ -38,9 +38,13 @@ export function useSignalReturns(signals: CorinpapaSignal[]) {
     };
   }, [signals]);
 
+  const fetchedRef = useRef(false);
+
   useEffect(() => {
     const fetchReturns = async () => {
       if (signals.length === 0 || uniqueCoins.length === 0) return;
+      if (fetchedRef.current) return; // 이미 fetch했으면 스킵
+      fetchedRef.current = true;
 
       setLoading(true);
       
