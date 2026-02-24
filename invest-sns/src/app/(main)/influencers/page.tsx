@@ -86,60 +86,47 @@ export default function InfluencersPage() {
       {/* Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="overview">개요</TabsTrigger>
+          <TabsTrigger value="overview">최근 강한 시그널</TabsTrigger>
           <TabsTrigger value="influencers">인플루언서</TabsTrigger>
           <TabsTrigger value="stocks">종목</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="mt-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* 최근 시그널 */}
-            <div className="bg-white rounded-lg p-6 border border-gray-200">
-              <h3 className="text-lg font-semibold mb-4">최근 시그널</h3>
-              <div className="space-y-4">
-                {signals.slice(0, 3).map((signal) => (
-                  <div key={signal.id} className="flex items-start space-x-3 p-3 rounded-lg bg-gray-50">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="font-medium text-sm">{signal.influencer}</span>
-                        <Badge 
-                          className={`${SIGNAL_TYPES[signal.signalType].color} ${SIGNAL_TYPES[signal.signalType].textColor} text-xs`}
-                        >
-                          {SIGNAL_TYPES[signal.signalType].label}
-                        </Badge>
-                        <span className="text-xs text-gray-500">{signal.stock}</span>
-                      </div>
-                      <p className="text-sm text-gray-700 line-clamp-2">{signal.content}</p>
-                      <p className="text-xs text-gray-500 mt-1">{signal.timestamp}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* 인기 인플루언서 */}
-            <div className="bg-white rounded-lg p-6 border border-gray-200">
-              <h3 className="text-lg font-semibold mb-4">인기 인플루언서</h3>
-              <div className="space-y-4">
-                {influencers.slice(0, 3).map((influencer) => (
-                  <Link key={influencer.id} href={`/influencers/${influencer.id}`}>
-                    <div className="flex items-center space-x-3 p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer">
-                      <div className="text-2xl">{influencer.avatar}</div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2">
-                          <span className="font-medium">{influencer.name}</span>
-                          {influencer.verified && <span className="text-blue-500">✓</span>}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">🔥 적극매수 · 적극매도 시그널</h3>
+            <div className="space-y-3">
+              {signals
+                .filter((s) => s.signalType === 'STRONG_BUY' || s.signalType === 'STRONG_SELL')
+                .sort((a, b) => new Date(b.videoDate).getTime() - new Date(a.videoDate).getTime())
+                .slice(0, 10)
+                .map((signal) => {
+                  const inf = influencers.find((i) => i.name === signal.influencer);
+                  return (
+                    <Link key={signal.id} href={`/influencers/${inf?.id || 1}`}>
+                      <div className="flex items-start space-x-3 p-4 rounded-lg bg-white border border-gray-200 hover:shadow-md hover:border-gray-300 transition-all cursor-pointer">
+                        <div className="text-2xl">{inf?.avatar || '👤'}</div>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="font-semibold text-sm">{signal.influencer}</span>
+                            {inf?.verified && <span className="text-blue-500 text-xs">✓</span>}
+                            <Badge 
+                              className={`${SIGNAL_TYPES[signal.signalType].color} ${SIGNAL_TYPES[signal.signalType].textColor} text-xs`}
+                            >
+                              {SIGNAL_TYPES[signal.signalType].label}
+                            </Badge>
+                            <span className="text-xs font-medium text-blue-600">{signal.stockName || signal.stock}</span>
+                            <span className="text-xs text-gray-400 ml-auto">{signal.videoDate}</span>
+                          </div>
+                          <p className="text-sm text-gray-700 line-clamp-2">{signal.content}</p>
                         </div>
-                        <div className="flex items-center gap-4 text-sm text-gray-500">
-                          <span>시그널 {influencer.totalSignals}개</span>
-                          <span>정확도 {influencer.accuracy}%</span>
-                        </div>
+                        <ChevronRight className="w-5 h-5 text-gray-300 flex-shrink-0 mt-1" />
                       </div>
-                      <ChevronRight className="w-5 h-5 text-gray-400" />
-                    </div>
-                  </Link>
-                ))}
-              </div>
+                    </Link>
+                  );
+                })}
+              {signals.filter((s) => s.signalType === 'STRONG_BUY' || s.signalType === 'STRONG_SELL').length === 0 && (
+                <p className="text-center text-gray-400 py-8">강한 시그널이 아직 없습니다</p>
+              )}
             </div>
           </div>
         </TabsContent>
