@@ -33,7 +33,7 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
   }, [loadInfluencers, loadSignals]);
 
   const influencer = influencers.find((inf) => inf.id === Number(id) || (id === 'corinpapa1106' && inf.name === '코린이 아빠'));
-  const influencerSignals = signals.filter((s) => s.influencer === influencer?.name);
+  const influencerSignals = useMemo(() => signals.filter((s) => s.influencer === influencer?.name), [signals, influencer?.name]);
   
   // 수익률 데이터 가져오기
   const { returns, loading: returnsLoading } = useSignalReturns(influencerSignals as any);
