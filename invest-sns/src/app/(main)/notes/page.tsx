@@ -227,16 +227,18 @@ export default function NotesPage() {
               </div>
 
               <div className="p-6 space-y-5">
-                {/* 종목 + 신호 + 날짜 */}
+                {/* 종목 + 신호 */}
                 <div className="flex flex-wrap items-center gap-3">
                   <span className="text-xl font-bold text-gray-900">{viewSignalScrap.stockName}</span>
                   <Badge className={`${SIGNAL_TYPES[viewSignalScrap.signalType]?.color || 'bg-gray-500'} ${SIGNAL_TYPES[viewSignalScrap.signalType]?.textColor || 'text-white'} text-sm font-bold`}>
                     {SIGNAL_TYPES[viewSignalScrap.signalType]?.label || viewSignalScrap.signalType}
                   </Badge>
-                  {originalSignal?.videoTitle && (
-                    <span className="text-sm text-gray-600">{originalSignal.videoTitle}</span>
-                  )}
-                  <span className="text-sm text-gray-500">{viewSignalScrap.videoDate}</span>
+                </div>
+                {/* 영상제목 + 날짜 (별도 줄) */}
+                <div className="text-base text-gray-600">
+                  {originalSignal?.videoTitle && <span>{originalSignal.videoTitle}</span>}
+                  {originalSignal?.videoTitle && viewSignalScrap.videoDate && <span className="mx-2 text-gray-400">·</span>}
+                  <span className="text-gray-500">{viewSignalScrap.videoDate}</span>
                 </div>
 
                 {/* 발언 내용 */}

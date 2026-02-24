@@ -431,17 +431,21 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
             </div>
 
             <div className="p-6 space-y-5">
-              {/* 2번째줄: 종목 + 신호 + 영상제목(한글) + 날짜 */}
+              {/* 종목 + 신호 */}
               <div className="flex flex-wrap items-center gap-3">
                 <span className="text-xl font-bold text-gray-900">{modalSignal.stockName}</span>
                 <Badge className={`${SIGNAL_TYPES[modalSignal.signalType].color} ${SIGNAL_TYPES[modalSignal.signalType].textColor} text-sm font-bold`}>
                   {SIGNAL_TYPES[modalSignal.signalType].label}
                 </Badge>
-                {modalSignal.videoTitle && (
-                  <span className="text-sm text-gray-600">{modalSignal.videoTitle}</span>
-                )}
-                <span className="text-sm text-gray-500">{modalSignal.videoDate}</span>
               </div>
+              {/* 영상제목 + 날짜 (별도 줄) */}
+              {(modalSignal.videoTitle || modalSignal.videoDate) && (
+                <div className="text-base text-gray-600">
+                  {modalSignal.videoTitle && <span>{modalSignal.videoTitle}</span>}
+                  {modalSignal.videoTitle && modalSignal.videoDate && <span className="mx-2 text-gray-400">·</span>}
+                  {modalSignal.videoDate && <span className="text-gray-500">{modalSignal.videoDate}</span>}
+                </div>
+              )}
 
               {/* 3~4번째줄: 발언내용 */}
               <div>
