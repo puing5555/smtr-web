@@ -522,14 +522,12 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
 
               {/* 차트보기 + 영상보기 버튼 */}
               <div className="flex gap-3 pt-4 border-t border-gray-200">
-                <a
-                  href={`/smtr-web/guru_tracker_v24.html`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href={`/stocks/${modalSignal.stock}`}
                   className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium"
                 >
                   📊 차트보기
-                </a>
+                </Link>
                 {modalSignal.youtubeLink && (
                   <a
                     href={modalSignal.youtubeLink}
