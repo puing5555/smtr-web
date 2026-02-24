@@ -1,0 +1,25 @@
+﻿Parse error at pos 2522: 'MP癒명떚由ъ뼹利?: {\r\n    "status": "approved",'
+Reviews: 161 total, 147 approved, 14 rejected
+  REJECTED: 7AaksU-R3dg_罹뷀넠?ㅽ듃?뚰겕 (CC) - ?닿쾶 ?ъ떎 留ㅻ룄 ?쒓렇?먯씠?쇨퀬 ?섎뒗寃?留욌굹? ?ъ옄?섍퀬 ?덉?留?留뚯빟 ?섑??ъ?硫??덉텧?쒕떎怨??? ?닿굔 留ㅻ룄 蹂대떎 ?
+  REJECTED: TjKVuAGhC1M_?ㅽ뀒?대툝肄붿씤 (reason has encoding issue)
+  REJECTED: YxekoL6IuvM_罹뷀넠?ㅽ듃?뚰겕 (CC) (reason has encoding issue)
+  REJECTED: arOUCh4C9kM_?붾퉬?붿븘 (NVDA) - ?닿굔 ?붾퉬?붿븘 ?ъ옄瑜?沅뚯쑀?섎뒗寃??꾨땲??鍮꾪듃肄붿씤 ?ъ떊?좊튌?먮뒗 李⑤씪由??붾퉬?붿븘 媛숈? 二쇱떇???쒕떎怨???> 寃곕줎 
+python : Traceback (most recent call last):
+At line:1 char:36
++ ...  C:\Users\Mario\work\invest-sns; python check_reviews.py 2>&1 | Out-F ...
++                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "C:\Users\Mario\work\invest-sns\check_reviews.py", line 40, in <module>
+    print(f'  REJECTED: {k} - {reason}')
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'cp949' codec can't encode character '\x80' in position 25: illegal multibyte sequence
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Mario\work\invest-sns\check_reviews.py", line 42, in <module>
+    print(f'  REJECTED: {k} (reason has encoding issue)')
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'cp949' codec can't encode character '\x80' in position 25: illegal multibyte sequence
