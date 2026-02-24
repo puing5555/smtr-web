@@ -50,6 +50,7 @@ export interface Signal {
   conditional?: boolean;
   skinInGame?: boolean;
   context?: string;
+  videoSummary?: string;
 }
 
 export interface Stock {
@@ -266,6 +267,7 @@ export const useInfluencersStore = create<InfluencersState>((set, get) => ({
         timeframe: signal.timeframe,
         conditional: signal.conditional,
         skinInGame: signal.skinInGame,
+        videoSummary: signal.videoSummary,
       }));
 
       // 다른 인플루언서들의 더미 데이터
