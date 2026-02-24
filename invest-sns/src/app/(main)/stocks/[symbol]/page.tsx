@@ -7,7 +7,8 @@ export async function generateStaticParams(): Promise<{ symbol: string }[]> {
     { symbol: 'ETH' },
     { symbol: 'SOL' },
     { symbol: 'ADA' },
-    { symbol: 'DOT' }
+    { symbol: 'DOT' },
+    { symbol: 'XRP' }
   ];
 }
 
