@@ -15,7 +15,8 @@ import {
   Menu,
   X,
   Search,
-  Users
+  Users,
+  StickyNote
 } from 'lucide-react';
 
 const navigation = [
@@ -25,6 +26,7 @@ const navigation = [
   { name: '알림', href: '/alerts', icon: Bell },
   { name: 'AI봇', href: '/bots', icon: Bot },
   { name: '관심종목', href: '/stocks', icon: Star },
+  { name: '메모', href: '/notes', icon: StickyNote },
   { name: '뉴스', href: '/news', icon: Newspaper },
   { name: '프리미엄', href: '/premium', icon: Crown },
   { name: '프로필', href: '/profile', icon: User },

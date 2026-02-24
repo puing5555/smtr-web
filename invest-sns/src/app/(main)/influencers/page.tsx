@@ -83,54 +83,6 @@ export default function InfluencersPage() {
         </div>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-white rounded-lg p-6 border border-gray-200">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-600">등록 인플루언서</p>
-              <p className="text-2xl font-bold text-gray-900">{influencers.length}</p>
-            </div>
-            <Users className="w-8 h-8 text-blue-500" />
-          </div>
-        </div>
-        <div className="bg-white rounded-lg p-6 border border-gray-200">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-600">총 시그널</p>
-              <p className="text-2xl font-bold text-gray-900">
-                {influencers.reduce((sum, inf) => sum + inf.totalSignals, 0)}
-              </p>
-            </div>
-            <TrendingUp className="w-8 h-8 text-green-500" />
-          </div>
-        </div>
-        <div className="bg-white rounded-lg p-6 border border-gray-200">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-600">평균 정확도</p>
-              <p className="text-2xl font-bold text-gray-900">
-                {influencers.length > 0 ? Math.round(influencers.reduce((sum, inf) => sum + inf.accuracy, 0) / influencers.length) : 0}%
-              </p>
-            </div>
-            <div className="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center">
-              <span className="text-yellow-600 font-bold">%</span>
-            </div>
-          </div>
-        </div>
-        <div className="bg-white rounded-lg p-6 border border-gray-200">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-600">추적 종목</p>
-              <p className="text-2xl font-bold text-gray-900">{stocks.length}</p>
-            </div>
-            <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
-              <span className="text-purple-600 font-bold">📊</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-3">

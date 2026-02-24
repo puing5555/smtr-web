@@ -1,11 +1,12 @@
 'use client';
 
 import React, { useState, useEffect, use, useMemo, useCallback } from 'react';
-import { ArrowLeft, ExternalLink, Filter, Star, Globe, TrendingUp, Activity, ChevronDown, ChevronRight, Play, X } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Filter, Star, Globe, TrendingUp, Activity, ChevronDown, ChevronRight, Play, X, Heart, AlertTriangle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import { useInfluencersStore } from '@/stores/influencers';
+import { useScrapsStore } from '@/stores/scraps';
 import { useSignalReturns } from '@/lib/hooks/useSignalReturns';
 import { formatReturn, getReturnColor } from '@/lib/api/coingecko';
 
@@ -22,10 +23,17 @@ const SIGNAL_TYPES: Record<string, { label: string; color: string; textColor: st
 
 export default function InfluencerDetailClient({ id }: { id: string }) {
   const [stockFilter, setStockFilter] = useState('ALL');
-  const [displayCount, setDisplayCount] = useState(20); // 처음에 20개 표시
-  const [modalSignal, setModalSignal] = useState<typeof influencerSignals[0] | null>(null); // 모달
-  const [showSummary, setShowSummary] = useState(false); // 영상요약 토글에 표시할 시그널
+  const [displayCount, setDisplayCount] = useState(20);
+  const [modalSignal, setModalSignal] = useState<typeof influencerSignals[0] | null>(null);
+  const [showSummary, setShowSummary] = useState(false);
+  const [showMemoInput, setShowMemoInput] = useState(false);
+  const [memoText, setMemoText] = useState('');
+  const [showReportModal, setShowReportModal] = useState(false);
+  const [reportReason, setReportReason] = useState('signal_error');
+  const [reportDetail, setReportDetail] = useState('');
+  const [reportSubmitted, setReportSubmitted] = useState(false);
   const { influencers, signals, loadInfluencers, loadSignals } = useInfluencersStore();
+  const { scraps, loadFromStorage, addScrap, removeScrap, isScraped, getScrapBySignalId, updateScrapMemo, addReport } = useScrapsStore();
 
   const loadedRef = React.useRef(false);
   useEffect(() => {
@@ -33,7 +41,8 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
     loadedRef.current = true;
     loadInfluencers();
     loadSignals();
-  }, [loadInfluencers, loadSignals]);
+    loadFromStorage();
+  }, [loadInfluencers, loadSignals, loadFromStorage]);
 
   const influencer = influencers.find((inf) => inf.id === Number(id) || (id === 'corinpapa1106' && inf.name === '코린이 아빠'));
   const influencerSignals = useMemo(() => signals.filter((s) => s.influencer === influencer?.name), [signals, influencer?.name]);
@@ -386,12 +395,39 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
                 </div>
                 <h3 className="text-lg font-bold text-gray-900">영상 분석</h3>
               </div>
-              <button 
-                onClick={() => setModalSignal(null)}
-                className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors"
-              >
-                <X className="w-5 h-5 text-gray-500" />
-              </button>
+              <div className="flex items-center gap-2">
+                {/* 좋아요(스크랩) 버튼 */}
+                <button
+                  onClick={() => {
+                    if (isScraped(modalSignal.id)) {
+                      const scrap = getScrapBySignalId(modalSignal.id);
+                      if (scrap) removeScrap(scrap.id);
+                      setShowMemoInput(false);
+                    } else {
+                      setShowMemoInput(true);
+                      setMemoText('');
+                    }
+                  }}
+                  className="w-9 h-9 rounded-full hover:bg-red-50 flex items-center justify-center transition-colors"
+                  title="스크랩"
+                >
+                  <Heart className={`w-5 h-5 transition-colors ${isScraped(modalSignal.id) ? 'text-red-500 fill-red-500' : 'text-gray-400'}`} />
+                </button>
+                {/* 수정요청 버튼 */}
+                <button
+                  onClick={() => { setShowReportModal(true); setReportReason('signal_error'); setReportDetail(''); setReportSubmitted(false); }}
+                  className="w-9 h-9 rounded-full hover:bg-orange-50 flex items-center justify-center transition-colors"
+                  title="수정요청"
+                >
+                  <AlertTriangle className="w-5 h-5 text-gray-400 hover:text-orange-500 transition-colors" />
+                </button>
+                <button 
+                  onClick={() => setModalSignal(null)}
+                  className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors"
+                >
+                  <X className="w-5 h-5 text-gray-500" />
+                </button>
+              </div>
             </div>
 
             <div className="p-6 space-y-5">
@@ -428,6 +464,59 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
                 </div>
               </div>
 
+              {/* 메모 입력창 */}
+              {showMemoInput && (
+                <div className="bg-pink-50 border border-pink-200 rounded-lg p-4 space-y-3">
+                  <h5 className="text-sm font-semibold text-pink-700">📝 메모 작성</h5>
+                  <textarea
+                    value={memoText}
+                    onChange={(e) => setMemoText(e.target.value)}
+                    placeholder="이 시그널에 대한 메모를 남겨보세요..."
+                    className="w-full p-3 border border-pink-200 rounded-lg text-sm resize-none focus:outline-none focus:ring-2 focus:ring-pink-300"
+                    rows={3}
+                    autoFocus
+                  />
+                  <div className="flex gap-2 justify-end">
+                    <button
+                      onClick={() => setShowMemoInput(false)}
+                      className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                    >
+                      취소
+                    </button>
+                    <button
+                      onClick={() => {
+                        addScrap({
+                          signalId: modalSignal.id,
+                          stock: modalSignal.stock,
+                          stockName: modalSignal.stockName,
+                          influencer: modalSignal.influencer,
+                          signalType: modalSignal.signalType,
+                          content: modalSignal.content,
+                          memo: memoText,
+                          videoDate: modalSignal.videoDate,
+                        });
+                        setShowMemoInput(false);
+                        setMemoText('');
+                      }}
+                      className="px-4 py-2 text-sm bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors font-medium"
+                    >
+                      💾 저장
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* 이미 스크랩된 메모 표시 */}
+              {isScraped(modalSignal.id) && !showMemoInput && (() => {
+                const scrap = getScrapBySignalId(modalSignal.id);
+                return scrap?.memo ? (
+                  <div className="bg-pink-50 border border-pink-200 rounded-lg p-4">
+                    <h5 className="text-sm font-semibold text-pink-700 mb-1">📝 내 메모</h5>
+                    <p className="text-sm text-gray-700">{scrap.memo}</p>
+                  </div>
+                ) : null;
+              })()}
+
               {/* 차트보기 + 영상보기 버튼 */}
               <div className="flex gap-3 pt-4 border-t border-gray-200">
                 <a
@@ -449,6 +538,88 @@ export default function InfluencerDetailClient({ id }: { id: string }) {
                   </a>
                 )}
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* 수정요청 모달 */}
+      {showReportModal && modalSignal && (
+        <div className="fixed inset-0 bg-black/60 z-[60] flex items-center justify-center p-4" onClick={() => setShowReportModal(false)}>
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md" onClick={(e) => e.stopPropagation()}>
+            <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+              <h3 className="text-lg font-bold text-gray-900">⚠️ 수정요청</h3>
+              <button onClick={() => setShowReportModal(false)} className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center">
+                <X className="w-5 h-5 text-gray-500" />
+              </button>
+            </div>
+            <div className="p-6 space-y-4">
+              {reportSubmitted ? (
+                <div className="text-center py-6">
+                  <div className="text-4xl mb-3">✅</div>
+                  <p className="text-lg font-semibold text-gray-900">신고가 접수되었습니다</p>
+                  <p className="text-sm text-gray-500 mt-1">관리자가 검토 후 처리하겠습니다</p>
+                </div>
+              ) : (
+                <>
+                  <div className="bg-gray-50 rounded-lg p-3 text-sm">
+                    <span className="font-medium">{modalSignal.stockName}</span>
+                    <Badge className={`ml-2 ${SIGNAL_TYPES[modalSignal.signalType].color} ${SIGNAL_TYPES[modalSignal.signalType].textColor} text-xs`}>
+                      {SIGNAL_TYPES[modalSignal.signalType].label}
+                    </Badge>
+                    <span className="text-gray-500 ml-2">{modalSignal.videoDate}</span>
+                  </div>
+                  <div>
+                    <label className="text-sm font-semibold text-gray-700 block mb-2">신고 사유</label>
+                    <div className="space-y-2">
+                      {[
+                        { value: 'signal_error', label: '시그널 표시 오류 (매수/매도 등이 잘못됨)' },
+                        { value: 'content_error', label: '발언 내용 오류 (요약이 잘못됨)' },
+                        { value: 'other', label: '기타' },
+                      ].map(opt => (
+                        <label key={opt.value} className="flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                          <input
+                            type="radio"
+                            name="reportReason"
+                            value={opt.value}
+                            checked={reportReason === opt.value}
+                            onChange={(e) => setReportReason(e.target.value)}
+                            className="text-blue-500"
+                          />
+                          <span className="text-sm text-gray-700">{opt.label}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-sm font-semibold text-gray-700 block mb-2">상세 설명</label>
+                    <textarea
+                      value={reportDetail}
+                      onChange={(e) => setReportDetail(e.target.value)}
+                      placeholder="어떤 부분이 잘못되었는지 알려주세요..."
+                      className="w-full p-3 border border-gray-200 rounded-lg text-sm resize-none focus:outline-none focus:ring-2 focus:ring-orange-300"
+                      rows={3}
+                    />
+                  </div>
+                  <button
+                    onClick={() => {
+                      addReport({
+                        signalId: modalSignal.id,
+                        stock: modalSignal.stock,
+                        stockName: modalSignal.stockName,
+                        influencer: modalSignal.influencer,
+                        signalType: modalSignal.signalType,
+                        reason: reportReason,
+                        detail: reportDetail,
+                      });
+                      setReportSubmitted(true);
+                    }}
+                    disabled={!reportDetail.trim()}
+                    className="w-full py-3 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    🚨 신고 제출
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
