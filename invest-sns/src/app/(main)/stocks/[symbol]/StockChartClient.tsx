@@ -68,7 +68,7 @@ const SYMBOL_MAPPING: Record<string, SymbolMapping> = {
   '암호화폐': { type: 'category', symbol: '', source: 'none' },
   '기술주': { type: 'category', symbol: '', source: 'none' },
   '미국 주식': { type: 'category', symbol: '', source: 'none' },
-  '금': { type: 'category', symbol: '', source: 'none' },
+  '금': { type: 'stock', symbol: 'GC=F', source: 'yahoo' },
   'WLFI': { type: 'crypto', symbol: 'WLFI', source: 'coingecko' },
   '월드리버티파이낸셜': { type: 'crypto', symbol: 'WLFI', source: 'coingecko' },
   '월드리버티파이낸셜 (WLFI)': { type: 'crypto', symbol: 'WLFI', source: 'coingecko' },
@@ -509,9 +509,24 @@ export default function StockChartClient({ symbol: rawSymbol }: { symbol: string
         };
       };
 
+      // coordinateToTime 결과를 문자열 날짜로 변환하는 헬퍼
+      const timeToString = (t: any): string | null => {
+        if (!t) return null;
+        if (typeof t === 'string') return t;
+        // UTCTimestamp (초 단위 숫자) → YYYY-MM-DD
+        if (typeof t === 'number') {
+          const d = new Date(t * 1000);
+          return d.toISOString().split('T')[0];
+        }
+        // BusinessDay 객체 {year, month, day}
+        if (t.year) {
+          return `${t.year}-${String(t.month).padStart(2,'0')}-${String(t.day).padStart(2,'0')}`;
+        }
+        return String(t);
+      };
+
       // 마우스 다운 이벤트 - 드래그 시작
       const handleMouseDown = (e: MouseEvent) => {
-        // 기존 마커 도트나 툴팁 영역이 아닌 경우만 드래그 시작
         const target = e.target as HTMLElement;
         if (target.closest('.marker-dot') || target.closest('.marker-tooltip') || target.closest('.dot-preview')) {
           return;
@@ -521,40 +536,38 @@ export default function StockChartClient({ symbol: rawSymbol }: { symbol: string
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
         
-        // 차트 영역 내부인지 확인 (대략적인 패딩 고려)
         if (x < 60 || x > rect.width - 60 || y < 20 || y > rect.height - 40) {
           return;
         }
 
         const timeCoordinate = chart.timeScale().coordinateToTime(x);
-        if (!timeCoordinate) return;
+        const timeStr = timeToString(timeCoordinate);
+        if (!timeStr) return;
 
         isDragging = true;
-        dragStartTime = timeCoordinate as string;
+        dragStartTime = timeStr;
         dragStartX = x;
         dragStartY = y;
 
-        // 기존 선택 영역 및 배지 제거
         if (selectionOverlay) selectionOverlay.style.display = 'none';
         if (rangeBadge) rangeBadge.style.display = 'none';
 
         e.preventDefault();
       };
 
-      // 마우스 이동 이벤트 - 드래그 중 선택 영역 업데이트
+      // 마우스 이동 이벤트
       const handleMouseMove = (e: MouseEvent) => {
         if (!isDragging || !dragStartTime) return;
 
         const rect = container.getBoundingClientRect();
         const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
 
         const overlay = createSelectionOverlay();
         
         const startX = Math.min(dragStartX, x);
         const endX = Math.max(dragStartX, x);
-        const startY = 20; // 차트 상단
-        const endY = rect.height - 40; // 차트 하단 (시간축 제외)
+        const startY = 20;
+        const endY = rect.height - 40;
 
         overlay.style.left = `${startX}px`;
         overlay.style.top = `${startY}px`;
@@ -565,30 +578,37 @@ export default function StockChartClient({ symbol: rawSymbol }: { symbol: string
         e.preventDefault();
       };
 
-      // 마우스 업 이벤트 - 드래그 완료 및 결과 표시
+      // 마우스 업 이벤트
       const handleMouseUp = (e: MouseEvent) => {
         if (!isDragging || !dragStartTime) return;
 
         const rect = container.getBoundingClientRect();
-        const x = e.clientX - rect.left;
+        const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
         
         const endTimeCoordinate = chart.timeScale().coordinateToTime(x);
-        if (!endTimeCoordinate) {
+        const endTime = timeToString(endTimeCoordinate);
+        
+        if (!endTime) {
+          // coordinateToTime 실패 시 가장 가까운 데이터로 fallback
+          const lastCandle = chartData[chartData.length - 1];
+          const firstCandle = chartData[0];
+          const fallbackTime = x > dragStartX ? lastCandle?.time : firstCandle?.time;
+          if (fallbackTime && Math.abs(x - dragStartX) > 10) {
+            const startTime = dragStartTime <= fallbackTime ? dragStartTime : fallbackTime;
+            const finalEndTime = dragStartTime <= fallbackTime ? fallbackTime : dragStartTime;
+            showRangeBadge(startTime, finalEndTime, (dragStartX + x) / 2, Math.min(dragStartY, e.clientY - rect.top));
+          }
           isDragging = false;
+          dragStartTime = null;
           return;
         }
-
-        const endTime = endTimeCoordinate as string;
         
-        // 시작점과 끝점이 다른 경우에만 계산
         if (Math.abs(x - dragStartX) > 10 && dragStartTime !== endTime) {
-          // 시간 순서 정렬 (시작점이 끝점보다 이후일 수 있음)
           const startTime = dragStartTime <= endTime ? dragStartTime : endTime;
           const finalEndTime = dragStartTime <= endTime ? endTime : dragStartTime;
           
           showRangeBadge(startTime, finalEndTime, (dragStartX + x) / 2, Math.min(dragStartY, e.clientY - rect.top));
         } else {
-          // 선택 영역이 너무 작으면 제거
           if (selectionOverlay) {
             selectionOverlay.style.display = 'none';
           }
@@ -616,17 +636,17 @@ export default function StockChartClient({ symbol: rawSymbol }: { symbol: string
         }
       };
 
-      // 이벤트 리스너 등록
+      // 이벤트 리스너 등록 (mousemove/mouseup은 window에 바인딩해야 드래그 중 차트 밖으로 나가도 작동)
       container.addEventListener('mousedown', handleMouseDown);
-      container.addEventListener('mousemove', handleMouseMove);
-      container.addEventListener('mouseup', handleMouseUp);
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
       document.addEventListener('click', handleGlobalClick);
 
       // 드래그 선택 정리 함수
       const cleanupDragSelection = () => {
         container.removeEventListener('mousedown', handleMouseDown);
-        container.removeEventListener('mousemove', handleMouseMove);
-        container.removeEventListener('mouseup', handleMouseUp);
+        window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('mouseup', handleMouseUp);
         document.removeEventListener('click', handleGlobalClick);
         
         if (selectionOverlay) {
