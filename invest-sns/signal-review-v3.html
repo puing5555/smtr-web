@@ -436,6 +436,23 @@
             });
         };
         
+
+        // Auto-fix: ensure 5 rejected signals are correctly set
+        (function() {
+            var forced = {"oC-mHWKj8m8_비트마인 (BMNR)": {"status": "rejected", "time": "Opus review", "reason": "Opus 자동 검토에서 거부"}, "hr5v-QUws9c_캐톤네트워크 (CC)": {"status": "rejected", "time": "Opus review", "reason": "Opus 자동 검토에서 거부"}, "axurZUkC5Dc_이더리움": {"status": "rejected", "time": "Opus review", "reason": "Opus 자동 검토에서 거부"}, "2wdlIAF0OrA_엔비디아 (NVDA)": {"status": "rejected", "time": "Opus review", "reason": "Opus 자동 검토에서 거부"}, "2wdlIAF0OrA_팔란티어 (PLTR)": {"status": "rejected", "time": "Opus review", "reason": "Opus 자동 검토에서 거부"}};
+            var r = JSON.parse(localStorage.getItem('signal-reviews-v2') || '{}');
+            var changed = false;
+            Object.keys(forced).forEach(function(k) {
+                if (!r[k] || r[k].status !== 'rejected') {
+                    r[k] = forced[k];
+                    changed = true;
+                }
+            });
+            if (changed) {
+                localStorage.setItem('signal-reviews-v2', JSON.stringify(r));
+                console.log('Fixed rejected signals in localStorage');
+            }
+        })();
         document.addEventListener('DOMContentLoaded', function() {
             initFilters();
             render();
