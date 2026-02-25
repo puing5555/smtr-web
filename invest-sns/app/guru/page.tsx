@@ -74,7 +74,7 @@ export default function GuruPage() {
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Results Summary */}
         <div className="mb-6">
-          <p className="text-gray-400">
+          <p className="text-[#6b7280]">
             {filteredGurus.length}명의 구루 
             {selectedFilter === 'changes' && ' (최근 변동 있음)'}
             {selectedFilter === 'newBuys' && ' (신규 매수 있음)'}
@@ -95,8 +95,8 @@ export default function GuruPage() {
         ) : (
           <div className="text-center py-16">
             <div className="text-6xl mb-4">🔍</div>
-            <h3 className="text-xl font-semibold text-white mb-2">구루를 찾을 수 없습니다</h3>
-            <p className="text-gray-400">선택한 필터에 맞는 구루가 없습니다. 다른 필터를 시도해보세요.</p>
+            <h3 className="text-xl font-semibold text-[#111827] mb-2">구루를 찾을 수 없습니다</h3>
+            <p className="text-[#6b7280]">선택한 필터에 맞는 구루가 없습니다. 다른 필터를 시도해보세요.</p>
           </div>
         )}
       </div>
