@@ -67,7 +67,7 @@ export default function GuruCard({ guru, onClick }: GuruCardProps) {
       <div className="flex items-center gap-2 mb-4">
         <span className="text-[#6b7280] text-sm">{guru.lastUpdate}</span>
         {guru.isRealtime && (
-          <span className="bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-xs font-medium">
+          <span className="bg-blue-500/20 text-blue-600 px-2 py-1 rounded text-xs font-medium">
             실시간
           </span>
         )}
@@ -75,7 +75,7 @@ export default function GuruCard({ guru, onClick }: GuruCardProps) {
 
       {/* Realtime Note */}
       {guru.realtimeNote && (
-        <div className="text-sm text-blue-300 mb-3 italic">
+        <div className="text-sm text-blue-600 mb-3 italic">
           {guru.realtimeNote}
         </div>
       )}
@@ -87,7 +87,7 @@ export default function GuruCard({ guru, onClick }: GuruCardProps) {
 
       {/* Warning */}
       {guru.hasWarning && guru.warningText && (
-        <div className="bg-yellow-500/20 text-yellow-400 px-3 py-2 rounded text-sm mb-4 flex items-center gap-2">
+        <div className="bg-yellow-500/20 text-yellow-600 px-3 py-2 rounded text-sm mb-4 flex items-center gap-2">
           <span>⚠️</span>
           <span>{guru.warningText}</span>
         </div>
@@ -95,7 +95,7 @@ export default function GuruCard({ guru, onClick }: GuruCardProps) {
 
       {/* TOP3 Holdings */}
       <div className="mb-4">
-        <h4 className="text-white font-semibold text-sm mb-3">TOP 3 보유종목</h4>
+        <h4 className="text-[#111827] font-semibold text-sm mb-3">TOP 3 보유종목</h4>
         <div className="space-y-2">
           {guru.topHoldings.map((holding, index) => (
             <div key={index} className="flex items-center justify-between">
