@@ -42,9 +42,9 @@ export default function GuruPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#1a1a2e]">
+    <div className="min-h-screen bg-white">
       {/* Header Section */}
-      <div className="border-b border-[#2a2a2a] bg-[#1a1a2e] sticky top-0 z-30">
+      <div className="border-b border-[#e5e7eb] bg-white sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="mb-6">
             <h1 className="text-3xl font-bold text-white mb-2">🐋 투자 구루</h1>
