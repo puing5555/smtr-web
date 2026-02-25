@@ -7,35 +7,92 @@ import Link from 'next/link';
 import { useInfluencersStore } from '@/stores/influencers';
 import { getCoinId, COIN_MAPPING } from '@/lib/api/coingecko';
 
-// 한글 종목명 → CryptoCompare 심볼 매핑
-const SYMBOL_TO_CRYPTO: Record<string, string> = {
-  '비트코인': 'BTC', 'BTC': 'BTC',
-  '이더리움': 'ETH', 'ETH': 'ETH',
-  'XRP': 'XRP', '리플': 'XRP',
-  '솔라나': 'SOL', 'SOL': 'SOL',
-  'BNB': 'BNB',
-  '체인링크': 'LINK', 'LINK': 'LINK',
-  '모네로': 'XMR', 'XMR': 'XMR',
-  '월드코인': 'WLD', 'WLD': 'WLD',
-  'CC': 'CC', '캔톤네트워크': 'CC', '캐톤네트워크': 'CC',
-  '알트코인': '', '스테이블코인': '', '암호화폐': '',
-  '기술주': '', '미국 주식': '', '금': '',
-};
-
-function getCryptoSymbol(sym: string): string | null {
-  // 직접 매핑
-  if (SYMBOL_TO_CRYPTO[sym] !== undefined) return SYMBOL_TO_CRYPTO[sym] || null;
-  // 괄호 안 티커 추출: "캔톤네트워크 (CC)" → CC
-  const m = sym.match(/\(([^)]+)\)/);
-  if (m) {
-    const ticker = m[1];
-    if (SYMBOL_TO_CRYPTO[ticker] !== undefined) return SYMBOL_TO_CRYPTO[ticker] || null;
-    return ticker; // 매핑에 없어도 티커 그대로 시도
-  }
-  return sym; // 그대로 시도
+// 종목별 데이터 소스 매핑 (확장된 버전)
+interface SymbolMapping {
+  type: 'crypto' | 'stock' | 'category';
+  symbol: string;
+  source: 'cryptocompare' | 'yahoo' | 'none';
 }
 
-const SUPPORTED_SYMBOLS = Object.values(SYMBOL_TO_CRYPTO).filter(Boolean);
+const SYMBOL_MAPPING: Record<string, SymbolMapping> = {
+  // 암호화폐 (CryptoCompare)
+  '비트코인': { type: 'crypto', symbol: 'BTC', source: 'cryptocompare' },
+  'BTC': { type: 'crypto', symbol: 'BTC', source: 'cryptocompare' },
+  '이더리움': { type: 'crypto', symbol: 'ETH', source: 'cryptocompare' },
+  'ETH': { type: 'crypto', symbol: 'ETH', source: 'cryptocompare' },
+  'XRP': { type: 'crypto', symbol: 'XRP', source: 'cryptocompare' },
+  '리플': { type: 'crypto', symbol: 'XRP', source: 'cryptocompare' },
+  '솔라나': { type: 'crypto', symbol: 'SOL', source: 'cryptocompare' },
+  'SOL': { type: 'crypto', symbol: 'SOL', source: 'cryptocompare' },
+  'BNB': { type: 'crypto', symbol: 'BNB', source: 'cryptocompare' },
+  '체인링크': { type: 'crypto', symbol: 'LINK', source: 'cryptocompare' },
+  'LINK': { type: 'crypto', symbol: 'LINK', source: 'cryptocompare' },
+  '모네로': { type: 'crypto', symbol: 'XMR', source: 'cryptocompare' },
+  'XMR': { type: 'crypto', symbol: 'XMR', source: 'cryptocompare' },
+  '월드코인': { type: 'crypto', symbol: 'WLD', source: 'cryptocompare' },
+  'WLD': { type: 'crypto', symbol: 'WLD', source: 'cryptocompare' },
+  'CC': { type: 'crypto', symbol: 'CC', source: 'cryptocompare' },
+  '캔톤네트워크': { type: 'crypto', symbol: 'CC', source: 'cryptocompare' },
+  '캐톤네트워크': { type: 'crypto', symbol: 'CC', source: 'cryptocompare' },
+  'PENGU': { type: 'crypto', symbol: 'PENGU', source: 'cryptocompare' },
+
+  // 미국 주식 (Yahoo Finance)
+  'MSTR': { type: 'stock', symbol: 'MSTR', source: 'yahoo' },
+  'NVDA': { type: 'stock', symbol: 'NVDA', source: 'yahoo' },
+  'PLTR': { type: 'stock', symbol: 'PLTR', source: 'yahoo' },
+  'GOOGL': { type: 'stock', symbol: 'GOOGL', source: 'yahoo' },
+  'ATNF': { type: 'stock', symbol: 'ATNF', source: 'yahoo' },
+  'BMNR': { type: 'stock', symbol: 'BMNR', source: 'yahoo' },
+  'CNTN': { type: 'stock', symbol: 'CNTN', source: 'yahoo' },
+  'THAR': { type: 'stock', symbol: 'THAR', source: 'yahoo' },
+  '알파벳': { type: 'stock', symbol: 'GOOGL', source: 'yahoo' },
+  '엔비디아': { type: 'stock', symbol: 'NVDA', source: 'yahoo' },
+  '마이크로스트래티지': { type: 'stock', symbol: 'MSTR', source: 'yahoo' },
+  
+  // 일본/기타 주식 (Yahoo Finance)
+  'SBI': { type: 'stock', symbol: '8473.T', source: 'yahoo' },
+  'SBI 홀딩스': { type: 'stock', symbol: '8473.T', source: 'yahoo' },
+
+  // 한국 주식 (Yahoo Finance .KS/.KQ)
+  '오뚜기': { type: 'stock', symbol: '007310.KS', source: 'yahoo' },
+  '율촌화학': { type: 'stock', symbol: '008730.KS', source: 'yahoo' },
+  'SK': { type: 'stock', symbol: '034730.KS', source: 'yahoo' },
+  '코스피': { type: 'stock', symbol: '^KS11', source: 'yahoo' },
+  
+  // 기타 (상장 안됨/매핑 가능한 것들)
+  '라이나스 희토류': { type: 'stock', symbol: 'LYC.AX', source: 'yahoo' }, // 호주
+
+  // 카테고리/차트 불가
+  '알트코인': { type: 'category', symbol: '', source: 'none' },
+  '스테이블코인': { type: 'category', symbol: '', source: 'none' },
+  '암호화폐': { type: 'category', symbol: '', source: 'none' },
+  '기술주': { type: 'category', symbol: '', source: 'none' },
+  '미국 주식': { type: 'category', symbol: '', source: 'none' },
+  '금': { type: 'category', symbol: '', source: 'none' },
+  'WLFI': { type: 'category', symbol: '', source: 'none' },
+  '블리시': { type: 'category', symbol: '', source: 'none' },
+  '샤프링크': { type: 'category', symbol: '', source: 'none' },
+  'ChatGPT': { type: 'category', symbol: '', source: 'none' },
+  'Circle': { type: 'category', symbol: '', source: 'none' }, // CRCL 아직 상장 안됨
+  '삼성ENA': { type: 'category', symbol: '', source: 'none' }, // 정확한 티커 불명
+};
+
+function getSymbolMapping(sym: string): SymbolMapping | null {
+  // 직접 매핑
+  if (SYMBOL_MAPPING[sym]) return SYMBOL_MAPPING[sym];
+  
+  // 괄호 안 티커 추출: "캔톤네트워크 (CC)" → CC
+  const match = sym.match(/\(([^)]+)\)/);
+  if (match) {
+    const ticker = match[1];
+    if (SYMBOL_MAPPING[ticker]) return SYMBOL_MAPPING[ticker];
+    // 매핑에 없는 티커는 주식으로 가정하고 시도
+    return { type: 'stock', symbol: ticker, source: 'yahoo' };
+  }
+  
+  // 매핑에 없는 경우 주식으로 가정
+  return { type: 'stock', symbol: sym, source: 'yahoo' };
+}
 
 // guru_tracker_v24 스타일 색상 - 8가지 시그널별 뚜렷한 색상
 const SIGNAL_COLORS = {
@@ -90,30 +147,92 @@ export default function StockChartClient({ symbol: rawSymbol }: { symbol: string
   }, [stockSignals]);
 
   const stockName = stockSignals[0]?.stockName || symbol;
-  const cryptoSymbol = getCryptoSymbol(symbol);
-  const isSupported = !!cryptoSymbol && SUPPORTED_SYMBOLS.includes(cryptoSymbol);
+  const symbolMapping = getSymbolMapping(symbol);
+  const isSupported = symbolMapping && symbolMapping.source !== 'none';
 
-  // 차트 데이터 로드
+  // Yahoo Finance API 호출 함수 (allorigins 프록시 사용)
+  const fetchYahooFinanceData = async (ticker: string) => {
+    const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?range=2y&interval=1d`;
+    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(yahooUrl)}`;
+    
+    const response = await fetch(proxyUrl);
+    if (!response.ok) throw new Error(`Yahoo Finance API 오류: ${response.status}`);
+    
+    const data = await response.json();
+    if (data.chart?.error) throw new Error(data.chart.error.description || 'Yahoo Finance 데이터 오류');
+    
+    const result = data.chart?.result?.[0];
+    if (!result) throw new Error('차트 데이터 없음');
+    
+    const { timestamp, indicators } = result;
+    const quote = indicators?.quote?.[0];
+    if (!timestamp || !quote) throw new Error('가격 데이터 없음');
+    
+    // 데이터 변환
+    const chartData = timestamp.map((time: number, index: number) => {
+      const date = new Date(time * 1000);
+      return {
+        time: date.toISOString().split('T')[0],
+        open: quote.open[index] || 0,
+        high: quote.high[index] || 0,
+        low: quote.low[index] || 0,
+        close: quote.close[index] || 0,
+      };
+    }).filter((candle: any) => candle.open > 0 && candle.close > 0); // 유효한 데이터만 필터링
+    
+    return chartData;
+  };
+
+  // CryptoCompare API 호출 함수
+  const fetchCryptoCompareData = async (symbol: string) => {
+    const response = await fetch(`https://min-api.cryptocompare.com/data/v2/histoday?fsym=${symbol}&tsym=USD&limit=730`);
+    const data = await response.json();
+    
+    if (data.Response === 'Error') throw new Error(data.Message || 'CryptoCompare API 오류');
+    
+    const priceData = data.Data?.Data || [];
+    return priceData.map((d: any) => ({
+      time: new Date(d.time * 1000).toISOString().split('T')[0],
+      open: d.open,
+      high: d.high,
+      low: d.low,
+      close: d.close,
+    }));
+  };
+
+  // 차트 데이터 로드 (다중 데이터 소스 지원)
   useEffect(() => {
-    if (!isSupported || !cryptoSymbol) { setLoading(false); return; }
+    if (!symbolMapping || symbolMapping.source === 'none') { 
+      setLoading(false); 
+      return; 
+    }
+
     (async () => {
       try {
         setLoading(true);
-        const res = await fetch(`https://min-api.cryptocompare.com/data/v2/histoday?fsym=${cryptoSymbol}&tsym=USD&limit=730`);
-        const json = await res.json();
-        if (json.Response === 'Error') throw new Error(json.Message);
-        const data = (json.Data?.Data || []).map((d: any) => ({
-          time: new Date(d.time * 1000).toISOString().split('T')[0],
-          open: d.open, high: d.high, low: d.low, close: d.close,
-        }));
+        setError(null);
+        
+        let data: any[] = [];
+        
+        if (symbolMapping.source === 'cryptocompare') {
+          data = await fetchCryptoCompareData(symbolMapping.symbol);
+        } else if (symbolMapping.source === 'yahoo') {
+          data = await fetchYahooFinanceData(symbolMapping.symbol);
+        }
+        
+        if (data.length === 0) {
+          throw new Error('차트 데이터가 없습니다');
+        }
+        
         setChartData(data);
       } catch (err: any) {
+        console.error('차트 데이터 로드 오류:', err);
         setError(err.message || '차트 데이터 로드 실패');
       } finally {
         setLoading(false);
       }
     })();
-  }, [symbol, isSupported]);
+  }, [symbol, symbolMapping]);
 
   // lightweight-charts 렌더링 (guru_tracker 도트 마커 스타일 적용)
   useEffect(() => {
@@ -706,7 +825,7 @@ export default function StockChartClient({ symbol: rawSymbol }: { symbol: string
     };
   }, [chartData, filteredSignals]);
 
-  if (!isSupported && stockSignals.length === 0) {
+  if (!symbolMapping && stockSignals.length === 0) {
     return (
       <div className="max-w-6xl mx-auto p-6">
         <Link href="/influencers" className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6">
