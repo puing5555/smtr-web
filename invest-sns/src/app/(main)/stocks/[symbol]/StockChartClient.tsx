@@ -153,7 +153,7 @@ export default function StockChartClient({ symbol: rawSymbol }: { symbol: string
   // Yahoo Finance API 호출 함수 (allorigins 프록시 사용)
   const fetchYahooFinanceData = async (ticker: string) => {
     const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?range=2y&interval=1d`;
-    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(yahooUrl)}`;
+    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(yahooUrl)}`;
     
     const response = await fetch(proxyUrl);
     if (!response.ok) throw new Error(`Yahoo Finance API 오류: ${response.status}`);
