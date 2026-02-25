@@ -24,7 +24,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="hidden md:flex flex-col w-[240px] xl:w-[240px] lg:w-[70px] h-screen bg-[#1a1a2e] border-r border-[#2a2a2a] sticky top-0">
+    <div className="hidden md:flex flex-col w-[240px] xl:w-[240px] lg:w-[70px] h-screen bg-[#f7f9fa] border-r border-[#e5e7eb] sticky top-0">
       {/* Logo and Title */}
       <div className="p-6 border-b border-[#2a2a2a]">
         <div className="flex items-center space-x-3">
