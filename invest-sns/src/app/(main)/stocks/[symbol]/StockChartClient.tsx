@@ -75,7 +75,7 @@ const SYMBOL_MAPPING: Record<string, SymbolMapping> = {
   '블리시': { type: 'category', symbol: '', source: 'none' },
   '샤프링크': { type: 'category', symbol: '', source: 'none' },
   'ChatGPT': { type: 'category', symbol: '', source: 'none' },
-  'Circle': { type: 'category', symbol: '', source: 'none' }, // CRCL 아직 상장 안됨
+  'Circle': { type: 'stock', symbol: 'CRCL', source: 'yahoo' }, // NYSE 상장완료
   '삼성ENA': { type: 'category', symbol: '', source: 'none' }, // 정확한 티커 불명
 };
 
