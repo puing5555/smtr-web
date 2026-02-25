@@ -155,6 +155,8 @@ export default function StockChartClient({ symbol: rawSymbol }: { symbol: string
         },
         rightPriceScale: { borderColor: '#ddd' },
         timeScale: { borderColor: '#ddd', timeVisible: false },
+        handleScroll: { mouseWheel: true, pressedMouseMove: false, horzTouchDrag: true, vertTouchDrag: false },
+        handleScale: { mouseWheel: true, pinch: true, axisPressedMouseMove: false },
       });
 
       const series = chart.addCandlestickSeries({
