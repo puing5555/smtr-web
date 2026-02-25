@@ -11,7 +11,7 @@ import { getCoinId, COIN_MAPPING } from '@/lib/api/coingecko';
 interface SymbolMapping {
   type: 'crypto' | 'stock' | 'category';
   symbol: string;
-  source: 'cryptocompare' | 'yahoo' | 'none';
+  source: 'cryptocompare' | 'yahoo' | 'coingecko' | 'none';
 }
 
 const SYMBOL_MAPPING: Record<string, SymbolMapping> = {
@@ -69,7 +69,9 @@ const SYMBOL_MAPPING: Record<string, SymbolMapping> = {
   '기술주': { type: 'category', symbol: '', source: 'none' },
   '미국 주식': { type: 'category', symbol: '', source: 'none' },
   '금': { type: 'category', symbol: '', source: 'none' },
-  'WLFI': { type: 'category', symbol: '', source: 'none' },
+  'WLFI': { type: 'crypto', symbol: 'WLFI', source: 'coingecko' },
+  '월드리버티파이낸셜': { type: 'crypto', symbol: 'WLFI', source: 'coingecko' },
+  '월드리버티파이낸셜 (WLFI)': { type: 'crypto', symbol: 'WLFI', source: 'coingecko' },
   '블리시': { type: 'category', symbol: '', source: 'none' },
   '샤프링크': { type: 'category', symbol: '', source: 'none' },
   'ChatGPT': { type: 'category', symbol: '', source: 'none' },
@@ -183,6 +185,36 @@ export default function StockChartClient({ symbol: rawSymbol }: { symbol: string
     return chartData;
   };
 
+  // CoinGecko OHLC API 호출 함수
+  const fetchCoinGeckoData = async (symbol: string) => {
+    const coinId = getCoinId(symbol) || getCoinId(stockName);
+    if (!coinId) throw new Error('CoinGecko ID를 찾을 수 없습니다');
+    
+    // 최대 365일 OHLC 데이터
+    const response = await fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/ohlc?vs_currency=usd&days=365`);
+    if (!response.ok) throw new Error(`CoinGecko API 오류: ${response.status}`);
+    
+    const data = await response.json();
+    if (!Array.isArray(data) || data.length === 0) throw new Error('CoinGecko OHLC 데이터 없음');
+    
+    // CoinGecko OHLC: [timestamp, open, high, low, close]
+    // 같은 날짜 데이터를 일봉으로 합치기
+    const dailyMap = new Map<string, any>();
+    for (const [ts, open, high, low, close] of data) {
+      const date = new Date(ts).toISOString().split('T')[0];
+      const existing = dailyMap.get(date);
+      if (!existing) {
+        dailyMap.set(date, { time: date, open, high, low, close });
+      } else {
+        existing.high = Math.max(existing.high, high);
+        existing.low = Math.min(existing.low, low);
+        existing.close = close; // 마지막 close
+      }
+    }
+    
+    return Array.from(dailyMap.values()).sort((a, b) => a.time.localeCompare(b.time));
+  };
+
   // CryptoCompare API 호출 함수
   const fetchCryptoCompareData = async (symbol: string) => {
     const response = await fetch(`https://min-api.cryptocompare.com/data/v2/histoday?fsym=${symbol}&tsym=USD&limit=730`);
@@ -214,7 +246,9 @@ export default function StockChartClient({ symbol: rawSymbol }: { symbol: string
         
         let data: any[] = [];
         
-        if (symbolMapping.source === 'cryptocompare') {
+        if (symbolMapping.source === 'coingecko') {
+          data = await fetchCoinGeckoData(symbolMapping.symbol);
+        } else if (symbolMapping.source === 'cryptocompare') {
           data = await fetchCryptoCompareData(symbolMapping.symbol);
         } else if (symbolMapping.source === 'yahoo') {
           data = await fetchYahooFinanceData(symbolMapping.symbol);

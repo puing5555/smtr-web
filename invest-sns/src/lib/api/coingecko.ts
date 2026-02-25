@@ -72,8 +72,8 @@ export const COIN_MAPPING: Record<string, string> = {
   '미국 주식': '',
   '금': '',
   '서클 (Circle)': '',
-  '월드리버티파이낸셜 (WLFI)': '',
-  'WLFI': '',
+  '월드리버티파이낸셜 (WLFI)': 'world-liberty-financial',
+  'WLFI': 'world-liberty-financial',
   '오픈AI (ChatGPT)': '',
 };
 
