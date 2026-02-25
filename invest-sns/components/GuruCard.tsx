@@ -57,15 +57,15 @@ export default function GuruCard({ guru, onClick }: GuruCardProps) {
           <span className="text-black font-bold text-lg">{guru.initials}</span>
         </div>
         <div className="flex-1">
-          <h3 className="font-bold text-white text-lg">{guru.name}</h3>
-          <p className="text-gray-300 text-sm">{guru.fund}</p>
-          <p className="text-gray-400 text-sm">{guru.aum}</p>
+          <h3 className="font-bold text-[#111827] text-lg">{guru.name}</h3>
+          <p className="text-[#374151] text-sm">{guru.fund}</p>
+          <p className="text-[#6b7280] text-sm">{guru.aum}</p>
         </div>
       </div>
 
       {/* Update Status */}
       <div className="flex items-center gap-2 mb-4">
-        <span className="text-gray-400 text-sm">{guru.lastUpdate}</span>
+        <span className="text-[#6b7280] text-sm">{guru.lastUpdate}</span>
         {guru.isRealtime && (
           <span className="bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-xs font-medium">
             실시간
