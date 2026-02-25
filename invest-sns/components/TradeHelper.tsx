@@ -26,7 +26,7 @@ export default function TradeHelper({
         </div>
         <button
           onClick={() => onSetupClick(stockName)}
-          className="mt-2 px-3 py-1 text-xs bg-[#00d4aa] text-white rounded-lg hover:bg-[#00c499] transition-colors"
+          className="mt-2 px-3 py-1 text-xs bg-[#3182f6] text-white rounded-lg hover:bg-[#00c499] transition-colors"
         >
           매수가 입력
         </button>

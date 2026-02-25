@@ -35,7 +35,7 @@ export default function MemoCard({ memo, onClick }: MemoCardProps) {
       onClick={() => onClick(memo)}
       className={`border-l-4 ${getColorBar(memo.tag)} ${
         memo.isAI ? 'bg-[#f0f4ff]' : 'bg-white'
-      } rounded-xl shadow-sm border border-[#eff3f4] p-4 cursor-pointer hover:shadow-md transition-shadow`}
+      } rounded-xl shadow-sm border border-[#f0f0f0] p-4 cursor-pointer hover:shadow-md transition-shadow`}
     >
       <div className="flex justify-between items-start mb-3">
         <div className="flex items-center gap-2">

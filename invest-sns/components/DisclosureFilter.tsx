@@ -32,13 +32,13 @@ export default function DisclosureFilter({
   const getButtonClasses = (isSelected: boolean) => {
     return `px-3 py-1 text-sm rounded-md transition-colors ${
       isSelected
-        ? 'bg-[#00d4aa] text-white'
+        ? 'bg-[#3182f6] text-white'
         : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
     }`;
   };
 
   return (
-    <div className="bg-white border-b border-[#eff3f4] p-4 sticky top-0 z-10">
+    <div className="bg-white border-b border-[#f0f0f0] p-4 sticky top-0 z-10">
       {/* Search Bar */}
       <div className="mb-4">
         <input
@@ -46,7 +46,7 @@ export default function DisclosureFilter({
           placeholder="종목명 검색..."
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00d4aa] focus:border-transparent"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3182f6] focus:border-transparent"
         />
       </div>
 

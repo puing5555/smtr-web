@@ -152,7 +152,7 @@ export default function TradeSetupModal({ isOpen, onClose, onSave, stock }: Trad
               value={buyPrice}
               onChange={handleNumberChange(setBuyPrice)}
               placeholder={formatNumber(stock.currentPrice.toString())}
-              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00d4aa]"
+              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
             />
           </div>
 
@@ -166,7 +166,7 @@ export default function TradeSetupModal({ isOpen, onClose, onSave, stock }: Trad
               value={quantity}
               onChange={handleNumberChange(setQuantity)}
               placeholder="100"
-              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00d4aa]"
+              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
             />
           </div>
 
@@ -181,11 +181,11 @@ export default function TradeSetupModal({ isOpen, onClose, onSave, stock }: Trad
                 value={stopLoss}
                 onChange={handleNumberChange(setStopLoss)}
                 placeholder="0"
-                className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00d4aa]"
+                className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
               />
               <button
                 onClick={() => applySuggestion('stopLoss')}
-                className="px-3 py-2 text-xs border border-[#00d4aa] text-[#00d4aa] rounded-lg hover:bg-[#00d4aa] hover:text-white transition-colors whitespace-nowrap"
+                className="px-3 py-2 text-xs border border-[#3182f6] text-[#3182f6] rounded-lg hover:bg-[#3182f6] hover:text-white transition-colors whitespace-nowrap"
               >
                 AI 제안: -7% ({formatNumber(getAISuggestion('stopLoss', basePrice).toString())}원)
               </button>
@@ -203,11 +203,11 @@ export default function TradeSetupModal({ isOpen, onClose, onSave, stock }: Trad
                 value={takeProfit1}
                 onChange={handleNumberChange(setTakeProfit1)}
                 placeholder="0"
-                className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00d4aa]"
+                className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
               />
               <button
                 onClick={() => applySuggestion('tp1')}
-                className="px-3 py-2 text-xs border border-[#00d4aa] text-[#00d4aa] rounded-lg hover:bg-[#00d4aa] hover:text-white transition-colors whitespace-nowrap"
+                className="px-3 py-2 text-xs border border-[#3182f6] text-[#3182f6] rounded-lg hover:bg-[#3182f6] hover:text-white transition-colors whitespace-nowrap"
               >
                 AI 제안: +15% ({formatNumber(getAISuggestion('tp1', basePrice).toString())}원)
               </button>
@@ -225,11 +225,11 @@ export default function TradeSetupModal({ isOpen, onClose, onSave, stock }: Trad
                 value={takeProfit2}
                 onChange={handleNumberChange(setTakeProfit2)}
                 placeholder="0"
-                className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00d4aa]"
+                className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
               />
               <button
                 onClick={() => applySuggestion('tp2')}
-                className="px-3 py-2 text-xs border border-[#00d4aa] text-[#00d4aa] rounded-lg hover:bg-[#00d4aa] hover:text-white transition-colors whitespace-nowrap"
+                className="px-3 py-2 text-xs border border-[#3182f6] text-[#3182f6] rounded-lg hover:bg-[#3182f6] hover:text-white transition-colors whitespace-nowrap"
               >
                 AI 제안: +25% ({formatNumber(getAISuggestion('tp2', basePrice).toString())}원)
               </button>
@@ -239,7 +239,7 @@ export default function TradeSetupModal({ isOpen, onClose, onSave, stock }: Trad
           {/* AI Auto Setup */}
           <button
             onClick={handleAIAutoSetup}
-            className="w-full px-4 py-2 bg-[#00d4aa] text-white rounded-lg hover:bg-[#00c499] transition-colors font-medium"
+            className="w-full px-4 py-2 bg-[#3182f6] text-white rounded-lg hover:bg-[#00c499] transition-colors font-medium"
           >
             🤖 AI 자동 설정
           </button>
@@ -255,7 +255,7 @@ export default function TradeSetupModal({ isOpen, onClose, onSave, stock }: Trad
           </button>
           <button
             onClick={handleSave}
-            className="flex-1 px-4 py-2 bg-[#00d4aa] text-white rounded-lg hover:bg-[#00c499] transition-colors"
+            className="flex-1 px-4 py-2 bg-[#3182f6] text-white rounded-lg hover:bg-[#00c499] transition-colors"
           >
             저장
           </button>

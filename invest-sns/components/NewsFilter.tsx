@@ -20,7 +20,7 @@ export default function NewsFilter({ activeFilter, onFilterChange }: NewsFilterP
           onClick={() => onFilterChange(filter.id)}
           className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
             activeFilter === filter.id
-              ? 'bg-[#00d4aa] text-white shadow-sm'
+              ? 'bg-[#3182f6] text-white shadow-sm'
               : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
           }`}
         >

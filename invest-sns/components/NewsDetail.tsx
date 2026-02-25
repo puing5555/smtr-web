@@ -81,7 +81,7 @@ export default function NewsDetail({ news, isOpen, onClose }: NewsDetailProps) {
               <ul className="space-y-2">
                 {get3LineSummary(news.id).map((point, index) => (
                   <li key={index} className="text-sm text-gray-700 flex items-start">
-                    <span className="mr-2 text-[#00d4aa] font-bold">•</span>
+                    <span className="mr-2 text-[#3182f6] font-bold">•</span>
                     {point}
                   </li>
                 ))}
@@ -147,7 +147,7 @@ export default function NewsDetail({ news, isOpen, onClose }: NewsDetailProps) {
             <div className="space-y-4">
               <div className="bg-gray-50 rounded-lg p-4">
                 <div className="flex items-center mb-2">
-                  <div className="w-8 h-8 bg-[#00d4aa] rounded-full flex items-center justify-center text-white text-sm font-medium">
+                  <div className="w-8 h-8 bg-[#3182f6] rounded-full flex items-center justify-center text-white text-sm font-medium">
                     투
                   </div>
                   <div className="ml-3">

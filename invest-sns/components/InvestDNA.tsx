@@ -10,7 +10,7 @@ export default function InvestDNA() {
           <h3 className="text-lg font-semibold">투자 스타일</h3>
         </div>
         <div className="text-gray-700">
-          <span className="font-medium text-[#00d4aa]">스윙 트레이더</span> (평균 보유 2~4주)
+          <span className="font-medium text-[#3182f6]">스윙 트레이더</span> (평균 보유 2~4주)
         </div>
       </div>
 
@@ -24,21 +24,21 @@ export default function InvestDNA() {
           <div className="flex items-center">
             <span className="w-16 text-sm text-gray-600">2차전지</span>
             <div className="flex-1 bg-gray-200 rounded-full h-2 mx-3">
-              <div className="bg-[#00d4aa] h-2 rounded-full" style={{ width: '90%' }}></div>
+              <div className="bg-[#3182f6] h-2 rounded-full" style={{ width: '90%' }}></div>
             </div>
             <span className="text-sm font-medium">90%</span>
           </div>
           <div className="flex items-center">
             <span className="w-16 text-sm text-gray-600">반도체</span>
             <div className="flex-1 bg-gray-200 rounded-full h-2 mx-3">
-              <div className="bg-[#00d4aa] h-2 rounded-full" style={{ width: '75%' }}></div>
+              <div className="bg-[#3182f6] h-2 rounded-full" style={{ width: '75%' }}></div>
             </div>
             <span className="text-sm font-medium">75%</span>
           </div>
           <div className="flex items-center">
             <span className="w-16 text-sm text-gray-600">방산</span>
             <div className="flex-1 bg-gray-200 rounded-full h-2 mx-3">
-              <div className="bg-[#00d4aa] h-2 rounded-full" style={{ width: '60%' }}></div>
+              <div className="bg-[#3182f6] h-2 rounded-full" style={{ width: '60%' }}></div>
             </div>
             <span className="text-sm font-medium">60%</span>
           </div>

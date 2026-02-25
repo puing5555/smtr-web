@@ -1,132 +1,273 @@
 'use client';
 
-import Link from 'next/link';
-import SignalSummaryCards from '../components/SignalSummaryCards';
-import SignalScoreList from '../components/SignalScoreList';
-import InsiderTradeCard from '../components/InsiderTradeCard';
-import AnalystTargetItem, { AnalystTargetData } from '../components/AnalystTargetItem';
+import { useState } from 'react';
+import FeedCompose from '../components/FeedCompose';
+import FeedPost, { PostData } from '../components/FeedPost';
 
-const analystTargets: AnalystTargetData[] = [
-  { stock: 'SK하이닉스', firm: '한국투자', analyst: '김OO', prev: '180,000', next: '210,000', direction: 'up', accuracy: 62 },
-  { stock: '삼성전자', firm: '미래에셋', analyst: '박OO', prev: '78,000', next: '85,000', direction: 'up', accuracy: 58 },
-  { stock: 'HD한국조선', firm: 'NH투자', analyst: '이OO', prev: '170,000', next: '195,000', direction: 'up', accuracy: 71 },
+const POSTS: PostData[] = [
+  {
+    id: 1,
+    name: 'A등급 공시 속보',
+    handle: 'system',
+    avatar: 'system',
+    time: '3분전',
+    text: '아이빔테크놀로지 — 공급계약 체결 161억원 (매출대비 14.77%)\n\n🤖 AI 분석: 소형주 대형 공급계약. 과거 유사 패턴 47건 D+3 평균 +8.2%\n시그널 스코어 65점 🔥',
+    isSystem: true,
+    comments_count: 187,
+    reposts: 234,
+    likes: 1800,
+    views: 123000,
+    poll: {
+      options: [
+        { label: '호재', emoji: '🟢', percent: 82, color: '#00c853' },
+        { label: '악재', emoji: '🔴', percent: 3, color: '#f44336' },
+        { label: '모르겠다', emoji: '🟡', percent: 15, color: '#eab308' },
+      ],
+      totalVotes: 2847,
+    },
+  },
+  {
+    id: 2,
+    name: '코린이아빠',
+    handle: 'korini_papa',
+    avatar: 'https://i.pravatar.cc/150?img=11',
+    verified: true,
+    accuracy: 68,
+    time: '12분전',
+    text: '에코프로 25만 깨졌습니다.\n\n제가 계속 말씀드린 분할매수 구간이에요.\n1차: 248,000 (지금)\n2차: 230,000\n3차: 210,000\n\n외국인 순매수 전환 + 인플루언서 3명 동시 콜 구간.\n2차전지 바닥은 가깝다고 봅니다.\n\n⚠️ 투자 판단은 본인 책임입니다.',
+    comments_count: 342,
+    reposts: 567,
+    likes: 2300,
+    views: 89000,
+    popularComments: [
+      { emoji: '😎', name: '스윙장인', handle: 'swing_pro', likes: 234, text: '1차 248k 따라갔습니다. 형님 믿습니다 🙏' },
+      { emoji: '🤔', name: '신중파', handle: 'careful_investor', likes: 187, text: '외국인 아직 순매도인데 너무 이른 거 아닌가요? 시그널 스코어는 높지만 수급이 걸려요' }
+    ],
+    totalComments: 342,
+  },
+  {
+    id: 3,
+    name: '주식초보 김대리',
+    handle: 'rookie_kim',
+    avatar: 'https://i.pravatar.cc/150?img=32',
+    time: '45분전',
+    text: '삼성전자 임원이 3일 연속 매수했다는 알림 받고 깜짝 놀랐네요 😮\n35억어치나 사면 뭔가 알고 있는 거 아닌가...\n\n근데 이 플랫폼 임원매매 알림 진짜 개좋다\nDART에서 직접 찾을 생각하면 끔찍 ㅋㅋ',
+    comments_count: 56,
+    reposts: 23,
+    likes: 892,
+    views: 32000,
+  },
+  {
+    id: 4,
+    name: '주식하는의사',
+    handle: 'doctor_stock',
+    avatar: 'https://i.pravatar.cc/150?img=15',
+    verified: true,
+    accuracy: 72,
+    time: '1시간전',
+    text: 'SK하이닉스 실적 분석 끝냈습니다.\n\nHBM3E 매출 비중 처음으로 30% 돌파.\n영업이익률 35% → 이건 거의 NVIDIA급입니다.\n\n한투 김OO 애널리스트(적중률 62%)도 목표가 21만으로 상향.\n이 분 반도체 적중률 71%니까 신뢰도 높아요.\n\n목표: 200,000\n손절: 168,000\n\n#SK하이닉스 #HBM #반도체',
+    comments_count: 234,
+    reposts: 456,
+    likes: 3100,
+    views: 152000,
+    popularComments: [
+      { emoji: '🎯', name: '반도체매니아', handle: 'semi_mania', likes: 312, text: 'HBM3E 30% 비중 처음 알았네요. 이 플랫폼 아니었으면 리포트 원문 읽을 엄두도 못 냈을 듯' },
+      { emoji: '📊', name: '데이터분석가', handle: 'data_lover', likes: 198, text: '김OO 애널 적중률 62%면 상위 20%인데 이분이 71% 맞추는 반도체 섹터에서 상향이면 꽤 신뢰할 만하네요' }
+    ],
+    totalComments: 234,
+  },
+  {
+    id: 5,
+    name: '🔥 시그널 스코어 급등',
+    handle: 'system',
+    avatar: 'system',
+    time: '2시간전',
+    text: '에코프로 시그널 스코어 87점 돌파!\n\n📊 시그널 구성:\n· 인플루언서 3명 동시 콜 +45점\n· 기관 순매수 3일 연속 +20점\n· 거래량 전일대비 +180% +12점\n· 뉴스 센티먼트 긍정 +10점\n\n오늘의 시그널 스코어 TOP 1위 종목입니다.',
+    isSystem: true,
+    comments_count: 89,
+    reposts: 178,
+    likes: 1200,
+    views: 98000,
+  },
+  {
+    id: 6,
+    name: '스윙매매 전문가',
+    handle: 'swing_master',
+    avatar: 'https://i.pravatar.cc/150?img=22',
+    time: '3시간전',
+    text: '매매 복기 공유합니다 📋\n\nHD한국조선해양\n매수: 175,000 (02/15) → 매도: 192,000 (02/24)\n수익: +9.7% ✅\n\nAI 복기 결과: \'좋은 매매. 최적 매도 시점 대비 -1.2%p\'\n\n애널 목표가 상향 시그널 보고 진입했는데\n적중률 71% 이OO 애널리스트 신뢰한 게 맞았네요 👍\n\n손절/익절 AI가 1차 익절 +10% 제안했을 때 딱 맞춰서 팔았습니다.\n이 기능 진짜 사기 ㅋㅋ',
+    comments_count: 145,
+    reposts: 89,
+    likes: 1500,
+    views: 56000,
+    popularComments: [
+      { emoji: '🔥', name: '따라쟁이', handle: 'follow_master', likes: 156, text: '손절/익절 AI 1차 익절 제안 그대로 따라했더니 저도 +8.3% 먹었습니다 ㅋㅋ 이 기능 미쳤음' },
+      { emoji: '💡', name: '가치투자자', handle: 'value_only', likes: 134, text: '복기 기능 진짜 좋다. 내가 왜 손절 늦는지 데이터로 보여주니까 부정할 수가 없네 ㅠ' }
+    ],
+    totalComments: 145,
+  },
+  {
+    id: 7,
+    name: '밸류업연구소',
+    handle: 'valueup_lab',
+    avatar: 'https://i.pravatar.cc/150?img=52',
+    verified: true,
+    time: '5시간전',
+    text: '버핏 13F 업데이트 분석 🐋\n\n이번 분기 포인트:\n1. 애플 비중 또 줄임 (-8%)\n2. 옥시덴탈 추가 매수 (+12%)\n3. 컨스텔레이션브랜드 신규 진입 ($1.2B)\n\n에너지 → 소비재로 이동 중.\n현금 포지션 역대 최고. 관망 모드인 듯.\n\n구루 추적 페이지에서 상세 포트 비교 가능해요 👀',
+    comments_count: 178,
+    reposts: 234,
+    likes: 2100,
+    views: 112000,
+  },
+  {
+    id: 8,
+    name: '배당쟁이',
+    handle: 'dividend_lover',
+    avatar: 'https://i.pravatar.cc/150?img=44',
+    time: '6시간전',
+    text: '토비스 배당 350원 확정 ✨\n전년대비 +16.7% 증가!\n\n일반적으로 \'배당 2.2%면 별거 아니네\' 하고 넘기겠지만\n공시 AI 분석 보니까:\n- 3년 연속 배당 증가 기업\n- 동종업계 평균 1.8% 상회\n- 배당성향 35%로 아직 여력 있음\n\n이런 맥락을 자동으로 붙여주니까 진짜 다르다 👏\n\n#토비스 #배당주 #배당투자',
+    comments_count: 67,
+    reposts: 34,
+    likes: 678,
+    views: 28000,
+  },
+  {
+    id: 9,
+    name: '직장인투자자',
+    handle: 'office_trader',
+    avatar: 'https://i.pravatar.cc/150?img=33',
+    time: '20분전',
+    text: '점심시간에 에코프로 공시 확인했는데 시그널 스코어 87점이라고?\n이거 퇴근하고 자세히 봐야겠다...\n회사에서 매매하면 안되는데 손이 근질근질 ㅋㅋㅋ',
+    comments_count: 23,
+    reposts: 5,
+    likes: 156,
+    views: 8420,
+  },
+  {
+    id: 10,
+    name: '부산사나이',
+    handle: 'busan_bull',
+    avatar: 'https://i.pravatar.cc/150?img=28',
+    time: '35분전',
+    text: '아이빔테크 공급계약 161억 공시 보자마자 들어갔습니다\n\n매수가 31,200원\n손절 29,000 / 목표 36,000\n\n손절/익절 AI가 제안해준 그대로 설정함 ㅋㅋ\n편하다 진짜',
+    comments_count: 45,
+    reposts: 12,
+    likes: 234,
+    views: 4120,
+  },
+  {
+    id: 11,
+    name: '차트쟁이 소연',
+    handle: 'soyeon_chart',
+    avatar: 'https://i.pravatar.cc/150?img=47',
+    time: '1시간전',
+    text: 'SK하이닉스 볼린저밴드 상단 돌파 + MACD 골든크로스\n여기에 애널 목표가 상향까지 겹치니까\n시그널 스코어가 78점이네요\n\n기술적 분석 + 펀더멘털 동시에 보여주는 게\n이 플랫폼의 장점인 듯 👍',
+    comments_count: 67,
+    reposts: 23,
+    likes: 445,
+    views: 6780,
+  },
+  {
+    id: 12,
+    name: '배당초보',
+    handle: 'dividend_newbie',
+    avatar: 'https://i.pravatar.cc/150?img=19',
+    time: '1시간전',
+    text: '토비스 배당 350원이라는데 이게 많은 건가요 적은 건가요?\n주린이라 잘 모르겠어요 😅\n선배님들 의견 부탁드립니다!',
+    comments_count: 89,
+    reposts: 3,
+    likes: 67,
+    views: 3210,
+  },
+  {
+    id: 13,
+    name: '10년차 개미',
+    handle: 'ant_veteran',
+    avatar: 'https://i.pravatar.cc/150?img=36',
+    time: '2시간전',
+    text: '코린이아빠 에코프로 콜 적중률 68%인데\n2차전지 종목만 보면 82%더라\n\n섹터별 적중률 이렇게 나눠서 보여주는 데가 여기밖에 없음\n\n예전에 그냥 믿고 따라갔다가 바이오에서 크게 물렸는데\n그때 이거 있었으면... 😭',
+    comments_count: 112,
+    reposts: 45,
+    likes: 890,
+    views: 7650,
+  },
+  {
+    id: 14,
+    name: '퀀트개발자 민수',
+    handle: 'quant_minsu',
+    avatar: 'https://i.pravatar.cc/150?img=55',
+    time: '3시간전',
+    text: '전략연구실에서 백테스트 돌려봤는데\n\n\'A등급 공시 + 시총 1000억 이하 + 거래량 200%+\'\n이 조건으로 5년 돌리니까\n\n승률 64.6%, 누적 +189%\n\n와... 이걸 무료로 쓸 수 있다고?\n에픽AI 월 15만원 내던 게 바보같네 ㅋㅋ',
+    comments_count: 78,
+    reposts: 56,
+    likes: 1200,
+    views: 9340,
+  },
+  {
+    id: 15,
+    name: '워킹맘 투자',
+    handle: 'working_mom',
+    avatar: 'https://i.pravatar.cc/150?img=24',
+    time: '4시간전',
+    text: '아이 재우고 매일 밤 30분씩 투자 공부하는데\nAI봇한테 \'오늘 뭐 봐야 해?\' 물어보면\n내 관심종목 기준으로 딱 정리해줘서 너무 좋아요\n\n예전에는 뉴스 찾고 공시 읽고 유튜브 보고...\n2시간은 걸렸는데 지금은 30분이면 끝 ✨',
+    comments_count: 34,
+    reposts: 12,
+    likes: 567,
+    views: 4560,
+  },
+  {
+    id: 16,
+    name: '해외주식도전기',
+    handle: 'us_stock_newbie',
+    avatar: 'https://i.pravatar.cc/150?img=41',
+    time: '5시간전',
+    text: '버핏이 애플 또 줄이고 옥시덴탈 더 샀다고?\n구루 추적 페이지에서 확인했는데\n한글로 종목명 나오니까 너무 편하다\n\nWhaleWisdom에서 영어로 보다가 포기했었는데 ㅋㅋ\nAAPL이 애플인 건 알겠는데 OXY가 뭔지 누가 알아',
+    comments_count: 56,
+    reposts: 18,
+    likes: 345,
+    views: 5120,
+  },
 ];
 
-const influencerCalls = [
-  { name: '코린이아빠', initial: '코', stock: '에코프로', hitRate: 68, comment: '25만 밑에서 분할매수 추천' },
-  { name: '주식하는의사', initial: '주', stock: 'SK하이닉스', hitRate: 72, comment: 'HBM 수혜 본격화, 목표 20만' },
-  { name: '텔레그램큰손', initial: '텔', stock: '아이빔테크', hitRate: 58, comment: '공급계약 공시 나왔다, 단기 급등 예상' },
-];
+const TABS = ['추천', '팔로잉', '구독중'] as const;
 
-const disclosures = [
-  { company: '아이빔테크놀로지', marketCap: '983억', title: '공급계약 체결 (계약금액 161억원)', ai: '매출대비 14.77%, 유사 47건 D+3 +8.2%', time: '09:32' },
-  { company: '씨케이솔루션', marketCap: '1,520억', title: '자사주 300,000주 소각 결정', ai: '시총대비 2.8%, 소형주 소각 D+5 +5.1%', time: '10:15' },
-];
+export default function FeedPage() {
+  const [activeTab, setActiveTab] = useState<string>('추천');
 
-function SectionTitle({ title, subtitle, href }: { title: string; subtitle?: string; href?: string }) {
   return (
-    <div className="flex items-center justify-between mb-3">
-      <div>
-        <h2 className="font-bold text-[15px] text-gray-900">{title}</h2>
-        {subtitle && <p className="text-xs text-gray-400 mt-0.5">{subtitle}</p>}
+    <div className="bg-[#f4f4f4] min-h-screen">
+      {/* Tabs */}
+      <div className="flex border-b border-[#f0f0f0] sticky top-0 bg-white/80 backdrop-blur-md z-10">
+        {TABS.map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className="flex-1 py-3.5 text-[15px] font-medium text-[#8b95a1] hover:bg-[#f2f4f6] transition-colors relative"
+          >
+            <span className={activeTab === tab ? 'font-bold text-[#191f28]' : ''}>
+              {tab}
+            </span>
+            {activeTab === tab && (
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-14 h-1 rounded-full bg-[#3182f6]" />
+            )}
+          </button>
+        ))}
       </div>
-      {href && (
-        <Link href={href} className="text-xs text-[#00d4aa] hover:underline">전체보기 &gt;</Link>
-      )}
-    </div>
-  );
-}
 
-export default function SignalHomePage() {
-  const today = new Date();
-  const days = ['일', '월', '화', '수', '목', '금', '토'];
-  const dateStr = `${today.getFullYear()}.${String(today.getMonth() + 1).padStart(2, '0')}.${String(today.getDate()).padStart(2, '0')} ${days[today.getDay()]}`;
-
-  return (
-    <div className="bg-white min-h-screen">
-      {/* Sticky header */}
-      <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md border-b border-[#eff3f4] px-4 py-3 flex items-center justify-between">
-        <div>
-          <h1 className="font-bold text-[15px] text-gray-900">📡 오늘의 시그널</h1>
-          <p className="text-xs text-gray-400">{dateStr}</p>
+      {activeTab === '추천' ? (
+        <>
+          <FeedCompose />
+          <div>
+            {POSTS.map((post) => (
+              <FeedPost key={post.id} post={post} />
+            ))}
+          </div>
+        </>
+      ) : (
+        <div className="flex items-center justify-center h-60 text-[#8b95a1] text-sm">
+          준비중
         </div>
-        <button className="text-gray-400 hover:text-gray-600 text-lg transition-colors">🔄</button>
-      </div>
-
-      <div className="p-4 space-y-6">
-        {/* 섹션1: 요약 카드 */}
-        <section>
-          <SignalSummaryCards />
-        </section>
-
-        {/* 섹션2: 시그널 스코어 TOP */}
-        <section>
-          <SectionTitle
-            title="🔥 오늘의 시그널 스코어 TOP"
-            subtitle="여러 시그널이 겹치는 종목일수록 점수가 높아요"
-          />
-          <SignalScoreList />
-        </section>
-
-        {/* 섹션3: A등급 공시 */}
-        <section>
-          <SectionTitle title="📋 오늘의 A등급 공시" href="/disclosure" />
-          <div className="space-y-2">
-            {disclosures.map((d, i) => (
-              <div key={i} className="bg-white border border-[#eff3f4] rounded-xl p-4 hover:bg-gray-50 transition-colors cursor-pointer">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-[10px] font-bold bg-[#ff4444] text-white px-2 py-0.5 rounded-full">A등급</span>
-                  <span className="font-bold text-sm text-gray-900">{d.company}</span>
-                  <span className="text-xs text-gray-400">{d.marketCap}</span>
-                  <span className="text-xs text-gray-400 ml-auto">{d.time}</span>
-                </div>
-                <p className="text-sm text-gray-700 mb-1">{d.title}</p>
-                <p className="text-xs text-[#00d4aa]">🤖 {d.ai}</p>
-                <Link href="/disclosure" className="text-xs text-[#00d4aa] hover:underline mt-2 inline-block">상세보기 →</Link>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* 섹션4: 인플루언서 핫콜 */}
-        <section>
-          <SectionTitle title="👤 인플루언서 오늘의 콜" href="/influencer" />
-          <div className="flex gap-3 overflow-x-auto pb-2">
-            {influencerCalls.map((c, i) => (
-              <div key={i} className="bg-white border border-[#eff3f4] rounded-xl p-4 min-w-[220px] flex-shrink-0 hover:bg-gray-50 transition-colors cursor-pointer">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-8 h-8 rounded-full bg-[#1a1a2e] flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
-                    {c.initial}
-                  </div>
-                  <span className="font-bold text-sm text-gray-900">{c.name}</span>
-                  <span className="text-[10px] bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded-full font-medium ml-auto">적중 {c.hitRate}%</span>
-                </div>
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="font-bold text-sm text-gray-900">{c.stock}</span>
-                  <span className="text-[10px] font-bold bg-[#dcfce7] text-[#16a34a] px-2 py-0.5 rounded-full">매수</span>
-                </div>
-                <p className="text-xs text-gray-500">&ldquo;{c.comment}&rdquo;</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* 섹션5: 임원 매매 */}
-        <section>
-          <SectionTitle title="👔 임원 매매 감지" />
-          <InsiderTradeCard />
-        </section>
-
-        {/* 섹션6: 애널리스트 목표가 */}
-        <section>
-          <SectionTitle title="🎯 목표가 변동" />
-          <div className="bg-white border border-[#eff3f4] rounded-xl px-3">
-            {analystTargets.map((d, i) => (
-              <AnalystTargetItem key={i} d={d} />
-            ))}
-          </div>
-        </section>
-      </div>
+      )}
     </div>
   );
 }

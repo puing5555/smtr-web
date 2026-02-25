@@ -20,7 +20,7 @@ export default function InfluencerCard({ influencer, onDetailClick }: Influencer
   };
 
   return (
-    <div className="bg-white rounded-xl border border-[#eff3f4] shadow-sm p-6 hover:shadow-md transition-shadow">
+    <div className="bg-white rounded-xl border border-[#f0f0f0] shadow-sm p-6 hover:shadow-md transition-shadow">
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
@@ -79,7 +79,7 @@ export default function InfluencerCard({ influencer, onDetailClick }: Influencer
         </button>
         <button
           onClick={onDetailClick}
-          className="flex-1 px-4 py-2 bg-[#00d4aa] text-white rounded-lg hover:bg-[#00c299] transition-colors"
+          className="flex-1 px-4 py-2 bg-[#3182f6] text-white rounded-lg hover:bg-[#00c299] transition-colors"
         >
           상세보기
         </button>

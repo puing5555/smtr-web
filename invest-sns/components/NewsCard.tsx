@@ -22,7 +22,7 @@ export default function NewsCard({ news, onClick }: NewsCardProps) {
 
   const urgentStyle = news.urgent 
     ? 'border-red-400 ring-1 ring-red-200' 
-    : 'border-[#eff3f4]';
+    : 'border-[#f0f0f0]';
 
   return (
     <div
@@ -67,7 +67,7 @@ export default function NewsCard({ news, onClick }: NewsCardProps) {
           {news.relatedStocks.map((stock, index) => (
             <span
               key={index}
-              className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium text-[#00d4aa] bg-[#f0fdf4] border border-green-200"
+              className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium text-[#3182f6] bg-[#f0fdf4] border border-green-200"
             >
               {stock}
             </span>

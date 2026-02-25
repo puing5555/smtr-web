@@ -61,7 +61,7 @@ export default function GuruDetail({ guru, isOpen, onClose }: GuruDetailProps) {
             
             {/* Large Profile Section */}
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#00d4aa] to-[#00a087] flex items-center justify-center">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#3182f6] to-[#00a087] flex items-center justify-center">
                 <span className="text-black font-bold text-2xl">{guru.initials}</span>
               </div>
               <div>

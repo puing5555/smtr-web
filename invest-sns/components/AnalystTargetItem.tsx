@@ -13,7 +13,7 @@ export interface AnalystTargetData {
 export default function AnalystTargetItem({ d }: { d: AnalystTargetData }) {
   const isUp = d.direction === 'up';
   return (
-    <div className="flex items-center justify-between py-2.5 border-b border-[#eff3f4] last:border-b-0 hover:bg-gray-50 px-1 transition-colors cursor-pointer">
+    <div className="flex items-center justify-between py-2.5 border-b border-[#f0f0f0] last:border-b-0 hover:bg-gray-50 px-1 transition-colors cursor-pointer">
       <div className="min-w-0">
         <div className="flex items-center gap-2">
           <span className="font-bold text-sm text-gray-900">{d.stock}</span>

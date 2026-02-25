@@ -100,7 +100,7 @@ export default function MemoEditor({ isOpen, memo, onSave, onClose }: MemoEditor
               <select
                 value={formData.stock}
                 onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#00d4aa] focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3182f6] focus:border-transparent"
               >
                 {stockOptions.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -120,7 +120,7 @@ export default function MemoEditor({ isOpen, memo, onSave, onClose }: MemoEditor
                 required
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#00d4aa] focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3182f6] focus:border-transparent"
                 placeholder="메모 제목을 입력하세요"
               />
             </div>
@@ -134,7 +134,7 @@ export default function MemoEditor({ isOpen, memo, onSave, onClose }: MemoEditor
                 required
                 value={formData.content}
                 onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 min-h-[120px] resize-none focus:outline-none focus:ring-2 focus:ring-[#00d4aa] focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 min-h-[120px] resize-none focus:outline-none focus:ring-2 focus:ring-[#3182f6] focus:border-transparent"
                 placeholder="메모 내용을 입력하세요"
               />
             </div>
@@ -152,7 +152,7 @@ export default function MemoEditor({ isOpen, memo, onSave, onClose }: MemoEditor
                     onClick={() => setFormData({ ...formData, tag: tag.id as '매수근거' | '매도근거' | '관찰' | 'AI일지' })}
                     className={`px-4 py-2 rounded-lg font-medium flex items-center gap-2 ${
                       formData.tag === tag.id
-                        ? 'bg-[#00d4aa] text-white'
+                        ? 'bg-[#3182f6] text-white'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
@@ -200,7 +200,7 @@ export default function MemoEditor({ isOpen, memo, onSave, onClose }: MemoEditor
               </button>
               <button
                 type="submit"
-                className="px-6 py-2 bg-[#00d4aa] text-white rounded-lg hover:bg-[#00c299] transition-colors"
+                className="px-6 py-2 bg-[#3182f6] text-white rounded-lg hover:bg-[#00c299] transition-colors"
               >
                 저장
               </button>

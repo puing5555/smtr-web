@@ -88,7 +88,7 @@ export default function MemoEditModal({ isOpen, onClose, onSave, stock }: MemoEd
               onChange={(e) => setMemo(e.target.value)}
               placeholder="투자 메모를 입력하세요..."
               rows={3}
-              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00d4aa] resize-none"
+              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3182f6] resize-none"
             />
           </div>
 
@@ -102,7 +102,7 @@ export default function MemoEditModal({ isOpen, onClose, onSave, stock }: MemoEd
               value={buyPrice}
               onChange={handleBuyPriceChange}
               placeholder="0"
-              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00d4aa]"
+              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
             />
           </div>
 
@@ -116,7 +116,7 @@ export default function MemoEditModal({ isOpen, onClose, onSave, stock }: MemoEd
               value={quantity}
               onChange={handleQuantityChange}
               placeholder="0"
-              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00d4aa]"
+              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
             />
           </div>
         </div>
@@ -131,7 +131,7 @@ export default function MemoEditModal({ isOpen, onClose, onSave, stock }: MemoEd
           </button>
           <button
             onClick={handleSave}
-            className="flex-1 px-4 py-2 bg-[#00d4aa] text-white rounded-lg hover:bg-[#00c499] transition-colors"
+            className="flex-1 px-4 py-2 bg-[#3182f6] text-white rounded-lg hover:bg-[#00c499] transition-colors"
           >
             저장
           </button>

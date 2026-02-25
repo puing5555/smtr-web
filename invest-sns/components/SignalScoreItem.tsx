@@ -16,12 +16,12 @@ export interface SignalScoreData {
 export default function SignalScoreItem({ d }: { d: SignalScoreData }) {
   const isPositive = d.change.startsWith('+');
   const barWidth = Math.min(d.score, 100);
-  const barColor = d.score >= 80 ? '#22c55e' : d.score >= 60 ? '#00d4aa' : '#eab308';
+  const barColor = d.score >= 80 ? '#22c55e' : d.score >= 60 ? '#3182f6' : '#eab308';
 
   return (
-    <div className="flex items-center gap-3 py-3 border-b border-[#eff3f4] last:border-b-0 hover:bg-gray-50 px-2 transition-colors cursor-pointer">
+    <div className="flex items-center gap-3 py-3 border-b border-[#f0f0f0] last:border-b-0 hover:bg-gray-50 px-2 transition-colors cursor-pointer">
       {/* Rank */}
-      <span className={`text-lg font-bold w-6 text-center flex-shrink-0 ${d.rank <= 3 ? 'text-[#00d4aa]' : 'text-gray-400'}`}>
+      <span className={`text-lg font-bold w-6 text-center flex-shrink-0 ${d.rank <= 3 ? 'text-[#3182f6]' : 'text-gray-400'}`}>
         {d.rank}
       </span>
 
@@ -29,7 +29,7 @@ export default function SignalScoreItem({ d }: { d: SignalScoreData }) {
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-1">
           <span className="font-bold text-sm text-gray-900">{d.stock}</span>
-          <span className="text-xs font-bold text-[#00d4aa]">{d.score}점</span>
+          <span className="text-xs font-bold text-[#3182f6]">{d.score}점</span>
           <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
             <div className="h-full rounded-full" style={{ width: `${barWidth}%`, backgroundColor: barColor }} />
           </div>

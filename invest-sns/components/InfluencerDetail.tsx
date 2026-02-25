@@ -111,7 +111,7 @@ export default function InfluencerDetail({ isOpen, onClose }: InfluencerDetailPr
                   <div className="w-8 text-sm text-gray-600">{month.month}</div>
                   <div className="flex-1 bg-gray-200 rounded-full h-2 relative">
                     <div
-                      className="bg-[#00d4aa] h-2 rounded-full"
+                      className="bg-[#3182f6] h-2 rounded-full"
                       style={{ width: `${month.rate}%` }}
                     />
                   </div>
@@ -152,10 +152,10 @@ export default function InfluencerDetail({ isOpen, onClose }: InfluencerDetailPr
 
           {/* Action Buttons */}
           <div className="space-y-3 pt-4 border-t border-gray-200">
-            <button className="w-full px-4 py-3 bg-[#00d4aa] text-white rounded-lg hover:bg-[#00c299] transition-colors font-medium">
+            <button className="w-full px-4 py-3 bg-[#3182f6] text-white rounded-lg hover:bg-[#00c299] transition-colors font-medium">
               팔로우
             </button>
-            <button className="w-full px-4 py-3 border border-[#00d4aa] text-[#00d4aa] rounded-lg hover:bg-[#00d4aa] hover:text-white transition-colors font-medium">
+            <button className="w-full px-4 py-3 border border-[#3182f6] text-[#3182f6] rounded-lg hover:bg-[#3182f6] hover:text-white transition-colors font-medium">
               알림설정
             </button>
             <button className="w-full px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium">

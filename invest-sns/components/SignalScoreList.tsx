@@ -32,7 +32,7 @@ const scores: SignalScoreData[] = [
 
 export default function SignalScoreList() {
   return (
-    <div className="bg-white border border-[#eff3f4] rounded-xl overflow-hidden">
+    <div className="bg-white border border-[#f0f0f0] rounded-xl overflow-hidden">
       {scores.map((d) => (
         <SignalScoreItem key={d.rank} d={d} />
       ))}

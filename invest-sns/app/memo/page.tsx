@@ -98,7 +98,7 @@ export default function MemoPage() {
             </div>
             <button
               onClick={handleNewMemo}
-              className="bg-[#00d4aa] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#00c299] transition-colors flex items-center gap-2"
+              className="bg-[#3182f6] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#00c299] transition-colors flex items-center gap-2"
             >
               + 새 메모
             </button>
@@ -129,7 +129,7 @@ export default function MemoPage() {
               <p className="text-gray-500 text-lg mb-4">메모가 없습니다</p>
               <button
                 onClick={handleNewMemo}
-                className="text-[#00d4aa] hover:text-[#00c299] font-medium"
+                className="text-[#3182f6] hover:text-[#00c299] font-medium"
               >
                 첫 번째 메모를 작성해보세요
               </button>

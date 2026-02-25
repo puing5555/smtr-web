@@ -44,7 +44,7 @@ export default function TradeReviewCard({ trade }: TradeReviewCardProps) {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-[#eff3f4] overflow-hidden hover:shadow-md transition-shadow">
+    <div className="bg-white rounded-xl shadow-sm border border-[#f0f0f0] overflow-hidden hover:shadow-md transition-shadow">
       {/* Left color bar */}
       <div className="flex">
         <div className={`w-1 ${getVerdictColor(trade.verdict)}`} />

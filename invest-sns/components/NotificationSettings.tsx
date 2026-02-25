@@ -70,8 +70,8 @@ export default function NotificationSettings({
               <span className="text-sm font-medium text-gray-900">{label}</span>
               <button
                 onClick={() => handleToggle(key)}
-                className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#00d4aa] focus:ring-offset-2 ${
-                  settings[key] ? 'bg-[#00d4aa]' : 'bg-gray-200'
+                className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#3182f6] focus:ring-offset-2 ${
+                  settings[key] ? 'bg-[#3182f6]' : 'bg-gray-200'
                 }`}
               >
                 <span
@@ -88,7 +88,7 @@ export default function NotificationSettings({
         <div className="px-6 py-4 border-t border-gray-200">
           <button
             onClick={handleSave}
-            className="w-full bg-[#00d4aa] text-white py-3 px-4 rounded-lg font-medium hover:bg-[#00c49a] transition-colors"
+            className="w-full bg-[#3182f6] text-white py-3 px-4 rounded-lg font-medium hover:bg-[#00c49a] transition-colors"
           >
             저장
           </button>

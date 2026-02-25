@@ -30,7 +30,7 @@ export default function NotificationItem({ notification, onMarkAsRead }: Notific
 
   return (
     <Link href={notification.link} onClick={handleClick}>
-      <div className={`p-4 border-b border-[#eff3f4] hover:bg-gray-50 transition-colors ${
+      <div className={`p-4 border-b border-[#f0f0f0] hover:bg-gray-50 transition-colors ${
         notification.read ? 'bg-white' : 'bg-[#f0faf5]'
       }`}>
         <div className="flex items-start space-x-3">

@@ -17,7 +17,7 @@ export default function ChatMessage({ message, isUser, timestamp }: ChatMessageP
         const stockPattern = /(에코프로|아이빔테크놀로지|삼성전자)/;
         if (stockPattern.test(boldText)) {
           return (
-            <strong key={index} className="font-bold text-[#00d4aa] cursor-pointer hover:underline">
+            <strong key={index} className="font-bold text-[#3182f6] cursor-pointer hover:underline">
               {boldText}
             </strong>
           );
@@ -33,7 +33,7 @@ export default function ChatMessage({ message, isUser, timestamp }: ChatMessageP
       <div className={`flex ${isUser ? 'flex-row-reverse' : 'flex-row'} items-start max-w-[80%]`}>
         {/* Avatar */}
         {!isUser && (
-          <div className="w-8 h-8 bg-[#00d4aa] rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+          <div className="w-8 h-8 bg-[#3182f6] rounded-full flex items-center justify-center mr-3 flex-shrink-0">
             <span className="text-white text-sm font-bold">🤖</span>
           </div>
         )}
@@ -42,7 +42,7 @@ export default function ChatMessage({ message, isUser, timestamp }: ChatMessageP
         <div
           className={`px-4 py-3 ${
             isUser 
-              ? 'bg-[#00d4aa] text-white rounded-2xl rounded-tr-sm' 
+              ? 'bg-[#3182f6] text-white rounded-2xl rounded-tr-sm' 
               : 'bg-[#f0f2f5] text-gray-900 rounded-2xl rounded-tl-sm'
           } max-w-full word-break`}
         >

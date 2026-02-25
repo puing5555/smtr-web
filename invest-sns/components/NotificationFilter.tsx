@@ -16,7 +16,7 @@ const filterOptions = [
 
 export default function NotificationFilter({ activeFilter, onChange }: NotificationFilterProps) {
   return (
-    <div className="bg-white border-b border-[#eff3f4] p-4">
+    <div className="bg-white border-b border-[#f0f0f0] p-4">
       <div className="flex space-x-2 overflow-x-auto scrollbar-hide">
         {filterOptions.map((filter) => (
           <button
@@ -24,7 +24,7 @@ export default function NotificationFilter({ activeFilter, onChange }: Notificat
             onClick={() => onChange(filter)}
             className={`px-4 py-2 rounded-full whitespace-nowrap text-sm font-medium transition-colors ${
               activeFilter === filter
-                ? 'bg-[#00d4aa] text-white'
+                ? 'bg-[#3182f6] text-white'
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
             }`}
           >

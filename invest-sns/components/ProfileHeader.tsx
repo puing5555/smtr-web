@@ -8,7 +8,7 @@ const ProfileHeader = () => {
       <div 
         className="h-32 w-full"
         style={{
-          background: 'linear-gradient(135deg, #00d4aa, #00b4d8)',
+          background: 'linear-gradient(135deg, #3182f6, #00b4d8)',
         }}
       />
       

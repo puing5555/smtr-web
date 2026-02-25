@@ -95,7 +95,7 @@ export default function AIBotPage() {
             onClick={() => setActiveTab('chat')}
             className={`flex-1 py-3 px-4 text-center font-medium transition-colors ${
               activeTab === 'chat'
-                ? 'text-[#00d4aa] border-b-2 border-[#00d4aa] bg-green-50'
+                ? 'text-[#3182f6] border-b-2 border-[#3182f6] bg-green-50'
                 : 'text-gray-600 hover:text-gray-900'
             }`}
           >
@@ -105,7 +105,7 @@ export default function AIBotPage() {
             onClick={() => setActiveTab('dna')}
             className={`flex-1 py-3 px-4 text-center font-medium transition-colors ${
               activeTab === 'dna'
-                ? 'text-[#00d4aa] border-b-2 border-[#00d4aa] bg-green-50'
+                ? 'text-[#3182f6] border-b-2 border-[#3182f6] bg-green-50'
                 : 'text-gray-600 hover:text-gray-900'
             }`}
           >

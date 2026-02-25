@@ -119,7 +119,7 @@ export default function MemoDetail({ memo, isOpen, onClose, onEdit, onDelete }: 
             <div className="flex gap-2">
               <button
                 onClick={() => onEdit(memo)}
-                className="flex-1 bg-[#00d4aa] text-white py-2 px-4 rounded-lg font-medium hover:bg-[#00c299] transition-colors"
+                className="flex-1 bg-[#3182f6] text-white py-2 px-4 rounded-lg font-medium hover:bg-[#00c299] transition-colors"
               >
                 수정
               </button>

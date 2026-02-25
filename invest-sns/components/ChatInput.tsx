@@ -39,12 +39,12 @@ export default function ChatInput({ onSend }: ChatInputProps) {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="종목명, 질문, 뭐든 물어보세요..."
-          className="flex-1 p-3 border border-gray-300 rounded-full focus:outline-none focus:border-[#00d4aa] focus:ring-1 focus:ring-[#00d4aa]"
+          className="flex-1 p-3 border border-gray-300 rounded-full focus:outline-none focus:border-[#3182f6] focus:ring-1 focus:ring-[#3182f6]"
         />
         <button
           type="submit"
           disabled={!message.trim()}
-          className="w-12 h-12 bg-[#00d4aa] text-white rounded-full flex items-center justify-center hover:bg-[#00b88f] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-12 h-12 bg-[#3182f6] text-white rounded-full flex items-center justify-center hover:bg-[#00b88f] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <svg
             className="w-5 h-5"

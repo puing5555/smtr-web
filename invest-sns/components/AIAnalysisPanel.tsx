@@ -43,15 +43,15 @@ export default function AIAnalysisPanel({ isOpen, onClose }: AIAnalysisPanelProp
             <h4 className="font-medium text-gray-900 mb-3">🤖 AI 3줄 요약</h4>
             <div className="space-y-2">
               <div className="flex items-start gap-2">
-                <span className="text-[#00d4aa] font-medium">1.</span>
+                <span className="text-[#3182f6] font-medium">1.</span>
                 <span className="text-gray-700">매출대비 14.77%로 A등급 기준 충족</span>
               </div>
               <div className="flex items-start gap-2">
-                <span className="text-[#00d4aa] font-medium">2.</span>
+                <span className="text-[#3182f6] font-medium">2.</span>
                 <span className="text-gray-700">과거 유사 공급계약 47건 중 D+3 평균 +8.2%</span>
               </div>
               <div className="flex items-start gap-2">
-                <span className="text-[#00d4aa] font-medium">3.</span>
+                <span className="text-[#3182f6] font-medium">3.</span>
                 <span className="text-gray-700">외국인 순매수 전환과 동시 발생, 시너지 기대</span>
               </div>
             </div>

@@ -20,7 +20,7 @@ export default function MemoFilter({ activeFilter, onFilterChange }: MemoFilterP
           onClick={() => onFilterChange(filter.id)}
           className={`px-4 py-2 rounded-full whitespace-nowrap transition-colors ${
             activeFilter === filter.id
-              ? 'bg-[#00d4aa] text-white'
+              ? 'bg-[#3182f6] text-white'
               : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
           }`}
         >

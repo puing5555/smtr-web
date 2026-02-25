@@ -12,7 +12,7 @@ export interface DisclosureData {
 export default function DisclosureCard({ d }: { d: DisclosureData }) {
   const bearPercent = 100 - d.bullPercent;
   return (
-    <div className="bg-white border border-[#eff3f4] rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer">
+    <div className="bg-white border border-[#f0f0f0] rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer">
       <div className="flex items-center justify-between mb-1">
         <div className="flex items-center gap-2">
           <span className="font-bold text-sm text-gray-900">{d.company}</span>
@@ -21,7 +21,7 @@ export default function DisclosureCard({ d }: { d: DisclosureData }) {
         <span className="text-xs text-gray-400">{d.time}</span>
       </div>
       <p className="text-sm text-gray-700 mb-1">{d.title}</p>
-      <p className="text-xs text-[#00d4aa] mb-2">🤖 {d.ai}</p>
+      <p className="text-xs text-[#3182f6] mb-2">🤖 {d.ai}</p>
       <div className="flex items-center gap-2">
         <div className="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden flex">
           <div className="h-full bg-[#22c55e]" style={{ width: `${d.bullPercent}%` }} />

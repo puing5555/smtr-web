@@ -67,7 +67,7 @@ export default function DisclosureDetailCard({ data, onAnalysisClick }: Disclosu
   ];
 
   return (
-    <div className="bg-white border border-[#eff3f4] rounded-lg p-4 mb-4">
+    <div className="bg-white border border-[#f0f0f0] rounded-lg p-4 mb-4">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
@@ -94,7 +94,7 @@ export default function DisclosureDetailCard({ data, onAnalysisClick }: Disclosu
       {/* AI Comment */}
       <div className="mb-4">
         <h4 className="text-gray-700 mb-2">🤖 AI 한줄평:</h4>
-        <p className="text-[#00d4aa] font-medium">&quot;{data.aiComment}&quot;</p>
+        <p className="text-[#3182f6] font-medium">&quot;{data.aiComment}&quot;</p>
       </div>
 
       {/* Past Pattern */}
@@ -126,7 +126,7 @@ export default function DisclosureDetailCard({ data, onAnalysisClick }: Disclosu
       <div className="flex gap-3 flex-wrap">
         <button
           onClick={onAnalysisClick}
-          className="px-4 py-2 bg-[#00d4aa] text-white rounded-md hover:bg-[#00b89a] transition-colors"
+          className="px-4 py-2 bg-[#3182f6] text-white rounded-md hover:bg-[#00b89a] transition-colors"
         >
           AI 상세분석 보기
         </button>

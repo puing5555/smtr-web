@@ -27,10 +27,10 @@ export default function WatchlistCard({ stock, onMemoClick, onRemove, onAnalysis
       } else if (isNearTakeProfit) {
         borderClass = 'border-green-400';
       } else {
-        borderClass = 'border-[#eff3f4]';
+        borderClass = 'border-[#f0f0f0]';
       }
     } else {
-      borderClass = 'border-[#eff3f4]';
+      borderClass = 'border-[#f0f0f0]';
     }
     
     return borderClass;

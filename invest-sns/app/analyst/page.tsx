@@ -91,7 +91,7 @@ export default function AnalystPage() {
                   placeholder="종목명 또는 리포트 제목으로 검색"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00d4aa] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3182f6] focus:border-transparent"
                 />
                 <div className="absolute right-3 top-2.5">
                   <span className="text-gray-400">🔍</span>
@@ -104,7 +104,7 @@ export default function AnalystPage() {
                   onClick={() => setReportFilters(prev => ({ ...prev, upOnly: !prev.upOnly }))}
                   className={`px-3 py-1.5 text-sm rounded-full border transition-colors ${
                     reportFilters.upOnly
-                      ? 'bg-[#00d4aa] text-white border-[#00d4aa]'
+                      ? 'bg-[#3182f6] text-white border-[#3182f6]'
                       : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
                   }`}
                 >
@@ -114,7 +114,7 @@ export default function AnalystPage() {
                   onClick={() => setReportFilters(prev => ({ ...prev, newOnly: !prev.newOnly }))}
                   className={`px-3 py-1.5 text-sm rounded-full border transition-colors ${
                     reportFilters.newOnly
-                      ? 'bg-[#00d4aa] text-white border-[#00d4aa]'
+                      ? 'bg-[#3182f6] text-white border-[#3182f6]'
                       : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
                   }`}
                 >
@@ -124,7 +124,7 @@ export default function AnalystPage() {
                   onClick={() => setReportFilters(prev => ({ ...prev, recentWeek: !prev.recentWeek }))}
                   className={`px-3 py-1.5 text-sm rounded-full border transition-colors ${
                     reportFilters.recentWeek
-                      ? 'bg-[#00d4aa] text-white border-[#00d4aa]'
+                      ? 'bg-[#3182f6] text-white border-[#3182f6]'
                       : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
                   }`}
                 >
@@ -134,7 +134,7 @@ export default function AnalystPage() {
                   onClick={() => setReportFilters(prev => ({ ...prev, watchlistOnly: !prev.watchlistOnly }))}
                   className={`px-3 py-1.5 text-sm rounded-full border transition-colors ${
                     reportFilters.watchlistOnly
-                      ? 'bg-[#00d4aa] text-white border-[#00d4aa]'
+                      ? 'bg-[#3182f6] text-white border-[#3182f6]'
                       : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
                   }`}
                 >
@@ -164,7 +164,7 @@ export default function AnalystPage() {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as SortOption)}
-                  className="px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-[#00d4aa] focus:border-transparent"
+                  className="px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-[#3182f6] focus:border-transparent"
                 >
                   <option value="accuracy">적중률순</option>
                   <option value="return">수익률순</option>
@@ -181,7 +181,7 @@ export default function AnalystPage() {
                     onClick={() => setSectorFilter(sector)}
                     className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
                       sectorFilter === sector
-                        ? 'bg-[#00d4aa] text-white'
+                        ? 'bg-[#3182f6] text-white'
                         : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
                     }`}
                   >

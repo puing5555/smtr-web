@@ -2,12 +2,14 @@
 
 export default function FeedCompose() {
   return (
-    <div className="px-4 py-3 border-b border-[#eff3f4]">
+    <div className="px-4 py-3 border-b border-[#f0f0f0]">
       <div className="flex gap-3">
         {/* Avatar */}
-        <div className="w-10 h-10 rounded-full bg-[#00d4aa] flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-          Y
-        </div>
+        <img 
+          src="https://i.pravatar.cc/150?img=68" 
+          alt="내 프로필"
+          className="w-10 h-10 rounded-full flex-shrink-0"
+        />
         {/* Input area */}
         <div className="flex-1 min-w-0">
           <textarea
@@ -15,25 +17,16 @@ export default function FeedCompose() {
             className="w-full resize-none border-none outline-none text-[15px] text-gray-800 placeholder-gray-500 bg-transparent py-2 min-h-[52px]"
             rows={2}
           />
-          <div className="flex items-center justify-between pt-2 border-t border-[#eff3f4]">
+          <div className="flex items-center justify-between pt-2 border-t border-[#f0f0f0]">
             <div className="flex items-center gap-1">
-              {['🖼', 'GIF', '📊', '😊', '📅', '📍'].map((icon, i) => (
-                <button
-                  key={i}
-                  className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#e8f5e9] text-[#00d4aa] text-sm transition-colors"
-                >
-                  {icon}
+              {['🖼️', 'GIF', '📊', '😀', '📅', '📍'].map((icon, i) => (
+                <button key={i} className="p-2 hover:bg-[#f2f4f6] rounded-full transition-colors text-[#3182f6]">
+                  <span className="text-lg">{icon}</span>
                 </button>
               ))}
-              <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#e8f5e9] text-[#00d4aa] text-sm font-bold transition-colors">
-                B
-              </button>
-              <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#e8f5e9] text-[#00d4aa] text-sm italic font-serif transition-colors">
-                I
-              </button>
             </div>
-            <button className="bg-[#00d4aa] text-white font-bold text-sm px-5 py-1.5 rounded-full hover:bg-[#00b894] transition-colors">
-              게시하기
+            <button className="bg-[#3182f6] text-white px-5 py-1.5 rounded-2xl text-[14px] font-semibold hover:bg-[#1b64da] transition-colors">
+              게시
             </button>
           </div>
         </div>

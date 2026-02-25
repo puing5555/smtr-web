@@ -38,7 +38,7 @@ export default function NotificationsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="sticky top-0 z-10 bg-white border-b border-[#eff3f4] px-6 py-4">
+      <div className="sticky top-0 z-10 bg-white border-b border-[#f0f0f0] px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <h1 className="text-xl font-bold text-gray-900">🔔 알림</h1>
@@ -54,7 +54,7 @@ export default function NotificationsPage() {
               disabled={unreadCount === 0}
               className={`text-sm font-medium px-3 py-1 rounded ${
                 unreadCount > 0
-                  ? 'text-[#00d4aa] hover:bg-gray-50'
+                  ? 'text-[#3182f6] hover:bg-gray-50'
                   : 'text-gray-400 cursor-not-allowed'
               }`}
             >

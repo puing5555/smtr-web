@@ -155,7 +155,7 @@ export default function WatchlistPage() {
           <h1 className="text-2xl font-bold">⭐️ 관심종목</h1>
           <button
             onClick={() => setIsAddModalOpen(true)}
-            className="px-4 py-2 bg-[#00d4aa] text-white rounded-lg hover:bg-[#00c499] transition-colors font-medium"
+            className="px-4 py-2 bg-[#3182f6] text-white rounded-lg hover:bg-[#00c499] transition-colors font-medium"
           >
             + 종목 추가
           </button>

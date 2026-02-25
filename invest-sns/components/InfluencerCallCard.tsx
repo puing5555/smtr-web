@@ -12,7 +12,7 @@ export interface InfluencerCallData {
 export default function InfluencerCallCard({ d }: { d: InfluencerCallData }) {
   const isPositive = d.returnRate.startsWith('+');
   return (
-    <div className="bg-white border border-[#eff3f4] rounded-lg p-3 min-w-[200px] w-[200px] flex-shrink-0 hover:bg-gray-50 transition-colors cursor-pointer">
+    <div className="bg-white border border-[#f0f0f0] rounded-lg p-3 min-w-[200px] w-[200px] flex-shrink-0 hover:bg-gray-50 transition-colors cursor-pointer">
       <div className="flex items-center gap-2 mb-2">
         <div className="w-8 h-8 rounded-full bg-[#1a1a2e] flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
           {d.initial}

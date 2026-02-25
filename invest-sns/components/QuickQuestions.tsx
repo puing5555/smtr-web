@@ -18,7 +18,7 @@ export default function QuickQuestions({ onQuestionClick }: QuickQuestionsProps)
         <button
           key={index}
           onClick={() => onQuestionClick(question)}
-          className="p-3 text-sm bg-white border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-[#00d4aa] transition-all duration-200 text-left"
+          className="p-3 text-sm bg-white border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-[#3182f6] transition-all duration-200 text-left"
         >
           {question}
         </button>
