@@ -100,12 +100,12 @@ export default function GuruCard({ guru, onClick }: GuruCardProps) {
           {guru.topHoldings.map((holding, index) => (
             <div key={index} className="flex items-center justify-between">
               <div className="text-sm">
-                <span className="text-white font-medium">{holding.name}</span>
-                <span className="text-gray-400 ml-1">({holding.ticker})</span>
+                <span className="text-[#111827] font-medium">{holding.name}</span>
+                <span className="text-[#6b7280] ml-1">({holding.ticker})</span>
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-gray-300 text-sm font-medium">{holding.percentage}%</span>
-                <div className="w-16 bg-gray-600 rounded-full h-1.5">
+                <span className="text-[#374151] text-sm font-medium">{holding.percentage}%</span>
+                <div className="w-16 bg-[#e5e7eb] rounded-full h-1.5">
                   <div 
                     className="bg-[#00d4aa] h-1.5 rounded-full"
                     style={{ width: `${Math.min(holding.percentage * 2, 100)}%` }}
@@ -118,7 +118,7 @@ export default function GuruCard({ guru, onClick }: GuruCardProps) {
       </div>
 
       {/* Action Button */}
-      <button className="w-full bg-[#2a2a4e] hover:bg-[#30305a] text-[#00d4aa] py-2 px-4 rounded font-medium text-sm transition-colors group-hover:bg-[#30305a]">
+      <button className="w-full bg-[#f7f9fa] hover:bg-[#e5e7eb] text-[#00d4aa] py-2 px-4 rounded font-medium text-sm transition-colors group-hover:bg-[#e5e7eb] border border-[#e5e7eb]">
         상세보기
       </button>
     </div>
