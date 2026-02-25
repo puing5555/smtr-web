@@ -48,7 +48,7 @@ export default function GuruCard({ guru, onClick }: GuruCardProps) {
 
   return (
     <div 
-      className="bg-[#25253e] rounded-lg p-6 cursor-pointer transition-all duration-200 hover:shadow-lg hover:shadow-[#00d4aa]/20 hover:border hover:border-[#00d4aa]/50 group"
+      className="bg-white border border-[#e5e7eb] rounded-lg p-6 cursor-pointer transition-all duration-200 hover:shadow-lg hover:shadow-[#00d4aa]/20 hover:border hover:border-[#00d4aa]/50 group"
       onClick={onClick}
     >
       {/* Header - Avatar and Basic Info */}
