@@ -1,6 +1,6 @@
 # PROJECT_STATUS.md
 
-_Last updated: 2026-02-25 05:03 (GMT+7)_
+_Last updated: 2026-02-25 08:12 (GMT+7)_
 
 ## 🏗️ SMTR 프로젝트 (투자자의 세컨드 브레인)
 
@@ -246,7 +246,23 @@ _Last updated: 2026-02-25 05:03 (GMT+7)_
   - `npm run build` 성공
   - `out` 폴더 → `smtr-web` 레포에 복사 (기존 avatars/, charts/, HTML 파일들 보존)
   - git commit "이미지 경로 basePath 수정" + push 완료
-- **결과**: GitHub Pages에서 이미지들이 올바른 경로로 로드됨
+- **결과**: GitHub Pages에서 이미지들이 올바른 경우로 로드됨
+
+### ✅ 완료 - **📊 차트 데이터 소스 확장 - Yahoo Finance 주식 지원** (2026-02-25)
+- **문제점**: CryptoCompare API만 사용해서 암호화폐 몇 개만 차트가 뜨고, 미국 주식(MSTR, NVDA, PLTR, GOOGL 등), 추가 코인(PENGU, WLFI 등), 한국 주식은 차트가 안 뜨는 상황
+- **솔루션 구현**:
+  - **종목별 데이터 소스 매핑 시스템**: 42개 종목을 crypto/stock/category 타입으로 분류하고 각각 cryptocompare/yahoo/none 소스 매핑
+  - **Yahoo Finance API 추가**: allorigins.win 프록시를 사용해 CORS 문제 해결 (`https://api.allorigins.win/raw?url=`)
+  - **다중 데이터 소스 로딩**: CryptoCompare(암호화폐) + Yahoo Finance(주식) 지원
+- **매핑된 종목들**:
+  - **암호화폐** (CryptoCompare): 비트코인→BTC, 이더리움→ETH, XRP, 솔라나→SOL, BNB, 체인링크→LINK, 모네로→XMR, 월드코인→WLD, CC(캔톤네트워크), PENGU
+  - **미국 주식** (Yahoo Finance): MSTR, NVDA, PLTR, GOOGL, ATNF, BMNR, CNTN, THAR, 알파벳→GOOGL, 엔비디아→NVDA
+  - **일본 주식**: SBI→8473.T, SBI 홀딩스→8473.T
+  - **한국 주식**: 오뚜기→007310.KS, 율촌화학→008730.KS, SK→034730.KS, 코스피→^KS11
+  - **기타**: 라이나스 희토류→LYC.AX (호주)
+  - **카테고리/차트불가**: 알트코인, 스테이블코인, 암호화폐, 기술주, 미국 주식, 금, WLFI, 블리시, ChatGPT 등
+- **기존 코드 구조 100% 유지**: createChart, 마커 오버레이, 드래그 수익률, guru_tracker 도트 마커 시스템 등 모든 기능 보존
+- **배포 완료**: 빌드 성공 → GitHub Pages 배포 → invest-sns 커밋 완료
 
 ### 프로필 요구사항
 - **투자성향**: 디폴트 필수 (가치투자자, 모멘텀, 단타, 스윙, 배당, 인덱스, 비트코이너 등)
