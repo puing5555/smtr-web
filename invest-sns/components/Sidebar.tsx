@@ -57,14 +57,14 @@ export default function Sidebar() {
       </nav>
 
       {/* User Profile */}
-      <div className="p-4 border-t border-[#2a2a2a]">
+      <div className="p-4 border-t border-[#e5e7eb]">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center">
-            <span className="text-white font-medium">사</span>
+          <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
+            <span className="text-[#111827] font-medium">사</span>
           </div>
           <div className="xl:block lg:hidden">
-            <p className="font-medium">사용자</p>
-            <p className="text-sm text-[#888]">@username</p>
+            <p className="font-medium text-[#111827]">사용자</p>
+            <p className="text-sm text-[#6b7280]">@username</p>
           </div>
         </div>
       </div>

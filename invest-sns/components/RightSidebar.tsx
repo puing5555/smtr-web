@@ -22,7 +22,7 @@ export default function RightSidebar() {
             <input
               type="text"
               placeholder="검색"
-              className="w-full bg-[#1a1a2e] border border-[#2a2a2a] rounded-full px-6 py-3 text-white placeholder-[#888] focus:outline-none focus:border-[#00d4aa]"
+              className="w-full bg-[#f7f9fa] border border-[#e5e7eb] rounded-full px-6 py-3 text-[#111827] placeholder-[#6b7280] focus:outline-none focus:border-[#00d4aa]"
             />
             <svg
               className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#888]"
