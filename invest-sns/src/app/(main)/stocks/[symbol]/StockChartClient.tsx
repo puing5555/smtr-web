@@ -404,10 +404,24 @@ export default function StockChartClient({ symbol: rawSymbol }: { symbol: string
         return `${year}년 ${month}월 ${day}일`;
       };
 
+      // 가장 가까운 캔들 찾기 (정확한 날짜가 없을 때 대비)
+      const findClosestCandle = (targetTime: string) => {
+        let exact = chartData.find(d => d.time === targetTime);
+        if (exact) return exact;
+        // 가장 가까운 날짜 찾기
+        let closest = chartData[0];
+        let minDiff = Math.abs(new Date(chartData[0].time).getTime() - new Date(targetTime).getTime());
+        for (const d of chartData) {
+          const diff = Math.abs(new Date(d.time).getTime() - new Date(targetTime).getTime());
+          if (diff < minDiff) { minDiff = diff; closest = d; }
+        }
+        return closest;
+      };
+
       // 가격 변화 계산 및 배지 표시
       const showRangeBadge = (startTime: string, endTime: string, x: number, y: number) => {
-        const startCandle = chartData.find(d => d.time === startTime);
-        const endCandle = chartData.find(d => d.time === endTime);
+        const startCandle = findClosestCandle(startTime);
+        const endCandle = findClosestCandle(endTime);
         
         if (!startCandle || !endCandle) return;
 
