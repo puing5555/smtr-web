@@ -25,7 +25,7 @@ export default function RightSidebar() {
               className="w-full bg-[#f7f9fa] border border-[#e5e7eb] rounded-full px-6 py-3 text-[#111827] placeholder-[#6b7280] focus:outline-none focus:border-[#00d4aa]"
             />
             <svg
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#888]"
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#6b7280]"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -41,8 +41,8 @@ export default function RightSidebar() {
         </div>
 
         {/* Trends Box */}
-        <div className="bg-[#1a1a2e] border border-[#2a2a2a] rounded-xl p-4">
-          <h3 className="font-bold text-xl mb-4">무슨 일이 일어나고 있나요?</h3>
+        <div className="bg-[#f7f9fa] border border-[#e5e7eb] rounded-xl p-4">
+          <h3 className="font-bold text-xl mb-4 text-[#111827]">무슨 일이 일어나고 있나요?</h3>
           <div className="space-y-3">
             {trends.map((trend, index) => (
               <div
