@@ -2,12 +2,14 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function InfluencerPage() {
   const [activeTab, setActiveTab] = useState('latest');
   const [categoryFilter, setCategoryFilter] = useState('전체');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedComment, setSelectedComment] = useState<any>(null);
+  const router = useRouter();
 
   const tabs = [
     { id: 'latest', label: '최신 발언' },
@@ -648,15 +650,23 @@ export default function InfluencerPage() {
                 <p className="text-[#4e5968] text-sm leading-relaxed">{selectedComment.summary}</p>
               </div>
 
-              {/* 영상보기 버튼 */}
-              <a
-                href={selectedComment.videoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full py-3.5 bg-[#3182f6] text-white rounded-xl text-center font-medium hover:bg-[#2171e5] transition-colors"
-              >
-                ▶ 영상보기
-              </a>
+              {/* 버튼 2개 */}
+              <div className="flex gap-3">
+                <button
+                  onClick={() => { setSelectedComment(null); router.push(`/stock/${selectedComment.stockCode}?tab=influencer`); }}
+                  className="flex-1 py-3.5 bg-[#e8f4fd] text-[#3182f6] rounded-xl text-center font-medium hover:bg-[#d0e8fc] transition-colors border border-blue-200"
+                >
+                  📊 차트보기
+                </button>
+                <a
+                  href={selectedComment.videoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-3.5 bg-[#3182f6] text-white rounded-xl text-center font-medium hover:bg-[#2171e5] transition-colors"
+                >
+                  ▶ 영상보기
+                </a>
+              </div>
             </div>
           </div>
         </div>

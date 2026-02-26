@@ -181,27 +181,6 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
           </div>
         </div>
 
-        {/* 최근 주요 발언 */}
-        <div className="bg-white rounded-lg border border-[#e8e8e8] p-5">
-          <div className="text-xs font-medium text-[#8b95a1] mb-3">📌 최근 주요 발언</div>
-          <div className="space-y-3">
-            {influencer.signalHistory.slice(0, 3).map((sig, i) => (
-              <div key={i} onClick={() => setSelectedSignal(sig)} className="border border-[#e8e8e8] rounded-lg p-4 hover:bg-[#f8f9fa] cursor-pointer transition-colors">
-                <div className="flex items-center gap-2 mb-2 flex-wrap">
-                  <span className={`px-2 py-0.5 rounded-full text-xs font-medium border ${getSignalColor(sig.signal)}`}>
-                    {getSignalLabel(sig.signal)}
-                  </span>
-                  <Link href={`/stock/${sig.stockCode}?tab=influencer`} onClick={(e) => e.stopPropagation()} className="font-medium text-[#191f28] hover:text-[#3182f6]">{sig.stock}</Link>
-                  <span className="text-sm text-[#22c55e] font-medium">{sig.returnPct}</span>
-                  <span className="text-xs text-[#8b95a1] ml-auto">{sig.date} · {sig.source}</span>
-                </div>
-                <p className="text-sm text-[#191f28] leading-relaxed">{sig.content}</p>
-                <div className="mt-2 text-xs text-[#3182f6]">▶ 영상보기 · ♡ 메모저장</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* 종목별 신호 차트 */}
         <div className="bg-white rounded-lg border border-[#e8e8e8] p-5">
           <div className="text-xs font-medium text-[#8b95a1] mb-3">📊 종목별 신호 차트</div>
@@ -248,7 +227,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
               </thead>
               <tbody>
                 {influencer.signalHistory.map((item, i) => (
-                  <tr key={i} className="border-b border-[#f0f0f0] hover:bg-[#f8f9fa]">
+                  <tr key={i} className="border-b border-[#f0f0f0] hover:bg-[#f8f9fa] cursor-pointer" onClick={() => setSelectedSignal(item)}>
                     <td className="py-3 px-2 text-[#191f28] whitespace-nowrap">{item.date}</td>
                     <td className="py-3 px-2">
                       <Link href={`/stock/${item.stockCode}?tab=influencer`} className="text-[#191f28] font-medium hover:text-[#3182f6]">
@@ -305,9 +284,17 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                 <div className="text-xs font-medium text-[#8b95a1] mb-2">📎 영상 요약</div>
                 <p className="text-[#4e5968] text-sm leading-relaxed">{selectedSignal.summary}</p>
               </div>
-              <a href={selectedSignal.videoUrl} target="_blank" rel="noopener noreferrer" className="block w-full py-3.5 bg-[#3182f6] text-white rounded-xl text-center font-medium hover:bg-[#2171e5] transition-colors">
-                ▶ 영상보기
-              </a>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => { setSelectedSignal(null); router.push(`/stock/${selectedSignal.stockCode}?tab=influencer`); }}
+                  className="flex-1 py-3.5 bg-[#e8f4fd] text-[#3182f6] rounded-xl text-center font-medium hover:bg-[#d0e8fc] transition-colors border border-blue-200"
+                >
+                  📊 차트보기
+                </button>
+                <a href={selectedSignal.videoUrl} target="_blank" rel="noopener noreferrer" className="flex-1 py-3.5 bg-[#3182f6] text-white rounded-xl text-center font-medium hover:bg-[#2171e5] transition-colors">
+                  ▶ 영상보기
+                </a>
+              </div>
             </div>
           </div>
         </div>
