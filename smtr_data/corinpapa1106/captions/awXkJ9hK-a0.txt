@@ -1,0 +1,1 @@
+FAILED: 자막 추출 실패 - youtubetranscript.com 접근 불가, 브라우저 Chrome 확장프로그램 연결 필요

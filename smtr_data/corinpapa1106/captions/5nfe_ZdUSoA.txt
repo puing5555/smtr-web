@@ -1,0 +1,1 @@
+FAILED: 자막 추출 실패 - YouTube web_fetch 불가, youtubetranscript.com 접근 불가, 브라우저 Chrome 확장프로그램 연결 필요
