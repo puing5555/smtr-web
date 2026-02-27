@@ -159,9 +159,23 @@ _Last updated: 2026-02-25 08:12 (GMT+7)_
   - **사용법 가이드**: `SIGNAL_REVIEW_V4_GUIDE.md` 새 플로우 반영
   - **핵심 성과**: ✅ **효율적 2단계 검증 + 원본 데이터 100% 동기화**
 
+### ✅ 완료 - **🗄️ Supabase 인플루언서 DB 테이블 생성 + 데이터 변환** (2026-02-27)
+- **테이블 설계 완료**: influencer_channels, influencer_videos, influencer_signals (3개 테이블)
+- **DDL 작성**: `invest-sns/supabase/influencer-migration.sql` (인덱스, RLS 정책, 트리거 포함)
+- **데이터 변환 완료**: 
+  - 3protv 시그널 42개 → SQL INSERT 문 생성
+  - 삼프로TV V7 최종 20개 시그널 분석 반영
+  - UUID, TIMESTAMPTZ, 8가지 시그널 타입 매핑
+- **변환 스크립트**: `convert_signals_to_supabase.py` (Python)
+- **실행 준비**: Supabase 대시보드 SQL Editor에서 실행 대기
+- **anon key 제한**: 읽기 전용 확인, INSERT는 대시보드에서 실행 필요
+- **마이그레이션 가이드**: `README_MIGRATION.md` 작성 완료
+
 ### 🔄 진행중
 - 코린이 아빠 검증 배치 결과 대기중 (batch_6999165cf3608190b256076bd3cea0a9)
 - **🤖 SMTR 진행상황 자동 보고**: 30분마다 텔레그램 그룹 자동 보고 (크론 작업: 6adce127-2d5c-47ad-a779-0ed092f07d3b) ✅ 활성화됨
+- **🗄️ Supabase 테이블 생성**: SQL Editor에서 DDL 실행 필요
+- **📊 코린이 아빠 177개 시그널 추가**: 데이터 파일 경로 확인 후 변환 예정
 
 ### ⏳ TODO
 - 텔레그램 봇 그룹 재등록
