@@ -1,6 +1,6 @@
 # PROJECT_STATUS.md
 
-_Last updated: 2026-02-25 08:12 (GMT+7)_
+_Last updated: 2026-02-27 16:55 (GMT+7)_
 
 ## 🏗️ SMTR 프로젝트 (투자자의 세컨드 브레인)
 
@@ -176,6 +176,7 @@ _Last updated: 2026-02-25 08:12 (GMT+7)_
 - **🤖 SMTR 진행상황 자동 보고**: 30분마다 텔레그램 그룹 자동 보고 (크론 작업: 6adce127-2d5c-47ad-a779-0ed092f07d3b) ✅ 활성화됨
 - **🗄️ Supabase 테이블 생성**: SQL Editor에서 DDL 실행 필요
 - **📊 코린이 아빠 177개 시그널 추가**: 데이터 파일 경로 확인 후 변환 예정
+- **🔄 YouTube 자막 다운로드 재시도**: ksA4IT452_4 자막 HTTP 429 rate limiting 실패, 30분 후 (17:25) 자동 재시도 크론 설정됨 (cron ID: 2479d04a)
 
 ### ⏳ TODO
 - 텔레그램 봇 그룹 재등록
