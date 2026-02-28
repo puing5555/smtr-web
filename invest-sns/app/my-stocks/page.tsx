@@ -115,6 +115,101 @@ const dummyNews = [
   }
 ];
 
+// Fallback 더미 시그널 데이터 (Supabase 연결 실패시 사용)
+const getDummySignals = () => [
+  {
+    id: 1,
+    stock: '삼성전자',
+    ticker: '005930',
+    signal: '매수',
+    key_quote: '3분기 실적이 시장 기대치를 상회했습니다',
+    reasoning: 'HBM 수요 증가와 메모리 반도체 회복세',
+    created_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+    timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+    speakers: { name: '코린이아빠' },
+    influencer_videos: {
+      influencer_channels: {
+        channel_name: '코린이아빠',
+        channel_handle: '@korini_papa'
+      },
+      published_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString()
+    }
+  },
+  {
+    id: 2,
+    stock: '현대차',
+    ticker: '005380',
+    signal: '긍정',
+    key_quote: '전기차 판매량이 전년대비 50% 증가',
+    reasoning: '인도 법인 호조와 전기차 라인업 확대',
+    created_at: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
+    timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
+    speakers: { name: '삼프로TV' },
+    influencer_videos: {
+      influencer_channels: {
+        channel_name: '삼프로TV',
+        channel_handle: '@3protv'
+      },
+      published_at: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString()
+    }
+  },
+  {
+    id: 3,
+    stock: 'SK하이닉스',
+    ticker: '000660',
+    signal: '매수',
+    key_quote: 'AI 반도체 수요가 계속 증가하고 있어요',
+    reasoning: 'D램 가격 회복과 HBM 시장 확대',
+    created_at: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString(),
+    timestamp: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString(),
+    speakers: { name: '슈카월드' },
+    influencer_videos: {
+      influencer_channels: {
+        channel_name: '슈카월드',
+        channel_handle: '@syuka'
+      },
+      published_at: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString()
+    }
+  },
+  // 더 많은 더미 데이터 추가
+  {
+    id: 4,
+    stock: '카카오',
+    ticker: '035720',
+    signal: '중립',
+    key_quote: '단기적으로는 관망하는 것이 좋겠습니다',
+    reasoning: '규제 불확실성과 AI 투자 부담',
+    created_at: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
+    timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
+    speakers: { name: '코린이아빠' },
+    influencer_videos: {
+      influencer_channels: {
+        channel_name: '코린이아빠',
+        channel_handle: '@korini_papa'
+      },
+      published_at: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString()
+    }
+  },
+  {
+    id: 5,
+    stock: 'LG에너지솔루션',
+    ticker: '373220',
+    signal: '긍정',
+    key_quote: 'GM과의 계약 연장이 긍정적입니다',
+    reasoning: '북미 전기차 시장 확대와 배터리 수요 증가',
+    created_at: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
+    timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
+    speakers: { name: '삼프로TV' },
+    influencer_videos: {
+      influencer_channels: {
+        channel_name: '삼프로TV',
+        channel_handle: '@3protv'
+      },
+      published_at: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString()
+    }
+  }
+];
+
 export default function MyStocksPage() {
   const [selectedChip, setSelectedChip] = useState('전체');
   const router = useRouter();
@@ -129,12 +224,19 @@ export default function MyStocksPage() {
         console.log('Loading integrated feed...');
         
         // 1. 인플루언서 시그널 가져오기 (31개 모두)
-        const influencerSignals = await getLatestInfluencerSignals(50);
+        let influencerSignals = [];
+        try {
+          influencerSignals = await getLatestInfluencerSignals(50);
+          console.log('✅ Supabase connection successful! Loaded signals:', influencerSignals.length);
+        } catch (supabaseError) {
+          console.error('❌ Supabase connection failed:', supabaseError);
+          // Fallback: 더미 데이터 사용
+          influencerSignals = getDummySignals();
+          console.log('🔄 Using fallback dummy signals:', influencerSignals.length);
+        }
         
         // 2. 모든 데이터 소스를 통합 피드 아이템으로 변환
         const allItems: FeedItem[] = [];
-        
-        console.log('Loaded influencer signals:', influencerSignals.length);
         
         // 인플루언서 시그널 변환
         influencerSignals.forEach((signal, index) => {
@@ -239,8 +341,35 @@ export default function MyStocksPage() {
         console.log('Integrated feed loaded:', allItems.length, 'items');
         setFeedItems(allItems);
       } catch (error) {
-        console.error('Error loading integrated feed:', error);
-        setFeedItems([]);
+        console.error('❌ Critical error loading integrated feed:', error);
+        // 완전한 fallback: 더미 데이터만 사용
+        const fallbackItems: FeedItem[] = [];
+        
+        // 더미 시그널을 피드 아이템으로 변환
+        getDummySignals().forEach((signal, index) => {
+          fallbackItems.push({
+            id: `fallback_${signal.id}`,
+            type: 'influencer',
+            icon: getSignalIcon(signal.signal),
+            categoryName: '인플루언서',
+            stockName: signal.stock,
+            stockCode: signal.ticker,
+            title: `${signal.speakers?.name} → ${signal.stock} ${signal.signal}`,
+            subtitle: signal.key_quote,
+            time: getTimeAgo(signal.created_at),
+            date: formatDate(signal.created_at),
+            timestamp: new Date(signal.created_at).getTime(),
+            source: signal.speakers?.name || '알 수 없음',
+            signal: signal.signal,
+            keyQuote: signal.key_quote,
+            reasoning: signal.reasoning,
+            profileLink: `/profile/korini_papa`,
+            detailLink: `/stock/${signal.ticker}`
+          });
+        });
+        
+        console.log('🔄 Using complete fallback data:', fallbackItems.length, 'items');
+        setFeedItems(fallbackItems);
       } finally {
         setLoading(false);
       }

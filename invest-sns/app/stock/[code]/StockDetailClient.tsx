@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { getStockSignals, getSignalColor } from '@/lib/supabase';
+import { getStockSignals as getSupabaseStockSignals, getSignalColor } from '@/lib/supabase';
 import StockChart from '@/components/StockChart';
 import StockDisclosureTab from '@/components/stock/StockDisclosureTab';
 import { influencers } from '@/data/influencerData';
@@ -74,10 +74,30 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
   const [isWatched, setIsWatched] = useState(false);
   const [showComments, setShowComments] = useState<{ [key: number]: boolean }>({});
   const [commentInputs, setCommentInputs] = useState<{ [key: number]: string }>({});
+  const [hasError, setHasError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const searchParams = useSearchParams();
   const router = useRouter();
-  const stockData = getStockData(code);
-  const timeline = getStockTimeline(code);
+  
+  // 안전하게 데이터 로드
+  let stockData, timeline;
+  try {
+    stockData = getStockData(code);
+    timeline = getStockTimeline(code);
+    console.log('✅ Stock data loaded successfully for code:', code);
+  } catch (error) {
+    console.error('❌ Error loading stock data:', error);
+    setHasError(true);
+    setErrorMessage('종목 정보를 불러오는 중 오류가 발생했습니다.');
+    stockData = { 
+      name: '알 수 없는 종목', 
+      price: '---', 
+      change: '0.00', 
+      changePercent: '0.00%', 
+      isPositive: true 
+    };
+    timeline = [];
+  }
 
   // URL 쿼리 파라미터에서 탭 설정
   useEffect(() => {
@@ -340,6 +360,40 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
     }
   };
 
+  // 에러 상태일 때 fallback UI 표시
+  if (hasError) {
+    return (
+      <div className="min-h-screen bg-[#f4f4f4] flex items-center justify-center">
+        <div className="text-center p-8">
+          <div className="text-4xl mb-4">⚠️</div>
+          <div className="text-lg font-medium text-[#191f28] mb-2">
+            오류가 발생했습니다
+          </div>
+          <div className="text-sm text-[#8b95a1] mb-4">
+            {errorMessage}
+          </div>
+          <button
+            onClick={() => {
+              setHasError(false);
+              window.location.reload();
+            }}
+            className="px-4 py-2 bg-[#3182f6] text-white rounded-lg hover:bg-[#2171e5] transition-colors"
+          >
+            다시 시도
+          </button>
+          <div className="mt-4">
+            <button
+              onClick={() => router.push('/my-stocks')}
+              className="text-[#3182f6] hover:underline text-sm"
+            >
+              내 종목으로 돌아가기
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#f4f4f4]">
       {/* Stock Header */}
@@ -452,9 +506,19 @@ function InfluencerTab({ code }: { code: string }) {
     const loadData = async () => {
       try {
         setLoading(true);
+        console.log('🔄 Loading influencer signals for code:', code);
         
-        const { getStockSignals } = await import('@/lib/supabase');
-        const signals = await getStockSignals(code);
+        let signals = [];
+        try {
+          const { getStockSignals } = await import('@/lib/supabase');
+          signals = await getStockSignals(code);
+          console.log('✅ Successfully loaded', signals.length, 'signals');
+        } catch (supabaseError) {
+          console.error('❌ Supabase connection failed in InfluencerTab:', supabaseError);
+          // Fallback: 더미 데이터 사용
+          signals = [];
+          console.log('🔄 Using empty signals array as fallback');
+        }
         
         // 데이터를 UI용 형태로 변환
         const transformedSignals = signals.map((signal: any) => {
