@@ -1,0 +1,37 @@
+﻿CH: 4867e157-2126-4c67-aa5e-638372de8f03 삼프로TV
+CH: c9c4dc38-c108-4988-b1d2-b177c3b324fc 코린이 아빠
+CH: 12facb47-407d-4fd3-a310-12dd5a802d1f 부읽남TV
+SP: 7fef30a4-a248-44d6-99b9-02bda6f47eb2 배재원
+SP: 3508abce-70e0-4eaa-a0d4-686b61071dd9 고연수
+SP: 03baa455-178d-4a82-bf47-6a12ccc2b694 김장년
+SP: 5783838f-af5f-4e74-bcbf-bbc20141b199 김동훈
+SP: e59ed6f5-7a8d-4111-af1c-502ad3344e79 박지훈
+SP: 2720d0ee-b7e2-4006-80df-90bc9de07797 박병창
+SP: 8234cd75-1d0d-458c-b01c-62080c7d91e3 김장열
+SP: 5d03d08f-abb4-453b-bf86-40e57a0ddfdb 박명성
+SP: aa25b0e6-aadf-4bae-a2fa-afc0a067e315 장우진
+SP: 731fe32d-f47a-432f-9899-305915138983 이건희
+SP: 2e9a8a44-3eb8-4009-8318-5e8d23a62840 코린이 아빠
+SP: 6b2696ff-f6a6-424b-a6de-0cd837f7bbb0 조진표
+VID: R6w3T3eUVIs 배재원 - 삼성전자/코스피
+VID: hxpOT8n_ICw 고연수 - 증권 섹터
+VID: -US4r1E1kOQ 김장년 - 메모리반도체/엔비디아
+VID: XFHD_1M3Mxg 김동훈 - 신세계/삼성전자
+VID: ldT75QwBB6g 박지훈 - 효성중공업 외 5종목
+VID: x0TKvrIdIwI 박병창 - 반도체/비반도체
+VID: irK0YCnox78 김장열 - 삼성전자
+VID: qYAiv0Kljas 이건희/김장열 - 현대차/현대건설/SK하이닉스
+VID: I4Tt3tevuTU 박명성 - 삼성전자
+VID: 8-hYd-8eojE 장우진 - 현대차
+VID: 82TEaq8GIfc 캔톤, 업비트 상장 초읽기
+VID: PGQW7nyoRRI 캔톤이 기관 전용 코인?
+VID: XxlsTMRDR_o 비트코인 에너지 흡수하는 캔톤
+VID: pRTYEzspqyU 이더 에너지 흡수하는 캔톤
+VID: IiPJSJ42H4o 리플 에너지 흡수하는 캔톤
+VID: awXkJ9hK-a0 캔톤이 다크코인?
+VID: TjKVuAGhC1M 명료법 무기한 연기의 여파
+VID: Vy2jrX-uCbY AI 버블 붕괴에도 캔톤이 살아남는 이유
+VID: 3eeUC7UBaG4 트럼프 가문과 캔톤 네트워크
+VID: A7qHwvcGh9A 실적이 중요한 거야 바보야
+VID: 7AaksU-R3dg XRP 헤어질 결심
+VID: Xv-wNA91EPE 삼성전자 절대 팔지 마세요, 상상 못했던 일 벌어집니다

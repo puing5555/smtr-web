@@ -6,6 +6,7 @@ import { getStockSignals, getSignalColor } from '@/lib/supabase';
 import StockChart from '@/components/StockChart';
 import StockDisclosureTab from '@/components/stock/StockDisclosureTab';
 import FeedCard from '@/components/FeedCard';
+import StockSignalChart from '@/components/StockSignalChart';
 import { influencers } from '@/data/influencerData';
 interface StockDetailClientProps {
   code: string;
@@ -57,17 +58,27 @@ const tabs = [
   { id: 'memo', label: '메모', icon: '📝' },
 ];
 
-// 더미 종목 데이터
+import stockPricesData from '@/data/stockPrices.json';
+
+// 종목 데이터 - 실제 Yahoo Finance 데이터 사용
 const getStockData = (code: string) => {
-  const stockMap: { [key: string]: any } = {
-    '005930': { name: '삼성전자', price: 68500, change: 1200, changePercent: 1.78 },
-    '000660': { name: 'SK하이닉스', price: 178000, change: -2100, changePercent: -1.16 },
-    '035420': { name: 'NAVER', price: 185500, change: 3200, changePercent: 1.76 },
-    '051910': { name: 'LG화학', price: 412000, change: -5500, changePercent: -1.32 },
-    '005380': { name: '현대차', price: 221000, change: 4500, changePercent: 2.08 },
+  const nameMap: { [key: string]: string } = {
+    '005930': '삼성전자', '000660': 'SK하이닉스', '035420': 'NAVER',
+    '051910': 'LG화학', '005380': '현대차', '086520': '에코프로',
+    '009540': '한국가스공사', '399720': '퓨처켐',
   };
 
-  return stockMap[code] || { name: `종목 ${code}`, price: 50000, change: 0, changePercent: 0 };
+  const realData = (stockPricesData as any)[code];
+  if (realData) {
+    return {
+      name: nameMap[code] || `종목 ${code}`,
+      price: realData.currentPrice,
+      change: realData.change,
+      changePercent: realData.changePercent,
+    };
+  }
+
+  return { name: nameMap[code] || `종목 ${code}`, price: 0, change: 0, changePercent: 0 };
 };
 
 export default function StockDetailClient({ code }: StockDetailClientProps) {
@@ -728,87 +739,16 @@ function InfluencerTab({ code }: { code: string }) {
         </div>
       </div>
 
-      {/* 차트 영역 */}
-      <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
-        <h4 className="font-medium text-[#191f28] mb-4">주가 차트 & 신호</h4>
-        <div className="relative h-72 bg-[#f8f9fa] rounded-lg overflow-hidden">
-          <svg className="w-full h-full" viewBox="0 0 460 240">
-            <defs>
-              <linearGradient id="priceGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#3182f6" stopOpacity="0.15"/>
-                <stop offset="100%" stopColor="#3182f6" stopOpacity="0.02"/>
-              </linearGradient>
-            </defs>
-            
-            {/* Y축 가격 라벨 */}
-            {code === '005930' ? (
-              <>
-                <text x="48" y="35" textAnchor="end" className="text-[10px]" fill="#8b95a1">200,000</text>
-                <line x1="52" y1="32" x2="420" y2="32" stroke="#e8e8e8" strokeWidth="0.5" strokeDasharray="3,3"/>
-                <text x="48" y="75" textAnchor="end" className="text-[10px]" fill="#8b95a1">180,000</text>
-                <line x1="52" y1="72" x2="420" y2="72" stroke="#e8e8e8" strokeWidth="0.5" strokeDasharray="3,3"/>
-                <text x="48" y="115" textAnchor="end" className="text-[10px]" fill="#8b95a1">160,000</text>
-                <line x1="52" y1="112" x2="420" y2="112" stroke="#e8e8e8" strokeWidth="0.5" strokeDasharray="3,3"/>
-                <text x="48" y="155" textAnchor="end" className="text-[10px]" fill="#8b95a1">140,000</text>
-                <line x1="52" y1="152" x2="420" y2="152" stroke="#e8e8e8" strokeWidth="0.5" strokeDasharray="3,3"/>
-                <text x="48" y="195" textAnchor="end" className="text-[10px]" fill="#8b95a1">120,000</text>
-                <line x1="52" y1="192" x2="420" y2="192" stroke="#e8e8e8" strokeWidth="0.5" strokeDasharray="3,3"/>
-                
-                {/* 주가 라인 (삼성전자 1월~2월: 120,000→197,000) */}
-                <path d="M 60 192 L 100 180 L 140 175 L 180 160 L 220 150 L 260 148 L 300 110 L 340 72 L 380 55 L 420 40" fill="none" stroke="#3182f6" strokeWidth="2.5"/>
-                <path d="M 60 192 L 100 180 L 140 175 L 180 160 L 220 150 L 260 148 L 300 110 L 340 72 L 380 55 L 420 40 L 420 210 L 60 210 Z" fill="url(#priceGrad)"/>
-                
-                {/* 시그널 점: 부읽남TV 조진표 매수 (2/23, ~197,000원) */}
-                <circle cx="380" cy="55" r="7" fill="#3182f6" stroke="white" strokeWidth="2"/>
-                <text x="380" y="48" textAnchor="middle" className="text-[9px]" fill="#3182f6" fontWeight="bold">매수</text>
-              </>
-            ) : code === '000660' ? (
-              <>
-                <text x="48" y="35" textAnchor="end" className="text-[10px]" fill="#8b95a1">950,000</text>
-                <line x1="52" y1="32" x2="420" y2="32" stroke="#e8e8e8" strokeWidth="0.5" strokeDasharray="3,3"/>
-                <text x="48" y="115" textAnchor="end" className="text-[10px]" fill="#8b95a1">700,000</text>
-                <line x1="52" y1="112" x2="420" y2="112" stroke="#e8e8e8" strokeWidth="0.5" strokeDasharray="3,3"/>
-                <text x="48" y="195" textAnchor="end" className="text-[10px]" fill="#8b95a1">450,000</text>
-                <line x1="52" y1="192" x2="420" y2="192" stroke="#e8e8e8" strokeWidth="0.5" strokeDasharray="3,3"/>
-                
-                <path d="M 60 170 L 100 155 L 140 140 L 180 120 L 220 100 L 260 90 L 300 70 L 340 55 L 380 50 L 420 45" fill="none" stroke="#3182f6" strokeWidth="2.5"/>
-                <path d="M 60 170 L 100 155 L 140 140 L 180 120 L 220 100 L 260 90 L 300 70 L 340 55 L 380 50 L 420 45 L 420 210 L 60 210 Z" fill="url(#priceGrad)"/>
-                
-                <circle cx="380" cy="50" r="7" fill="#3182f6" stroke="white" strokeWidth="2"/>
-                <text x="380" y="43" textAnchor="middle" className="text-[9px]" fill="#3182f6" fontWeight="bold">매수</text>
-              </>
-            ) : (
-              <>
-                <text x="48" y="55" textAnchor="end" className="text-[10px]" fill="#8b95a1">고가</text>
-                <text x="48" y="175" textAnchor="end" className="text-[10px]" fill="#8b95a1">저가</text>
-                <path d="M 60 150 L 100 130 L 140 120 L 180 140 L 220 100 L 260 90 L 300 105 L 340 80 L 380 90 L 420 70" fill="none" stroke="#3182f6" strokeWidth="2.5"/>
-                <path d="M 60 150 L 100 130 L 140 120 L 180 140 L 220 100 L 260 90 L 300 105 L 340 80 L 380 90 L 420 70 L 420 210 L 60 210 Z" fill="url(#priceGrad)"/>
-              </>
-            )}
-            
-            {/* X축 날짜 라벨 */}
-            <text x="60" y="225" textAnchor="middle" className="text-[10px]" fill="#8b95a1">1/6</text>
-            <text x="140" y="225" textAnchor="middle" className="text-[10px]" fill="#8b95a1">1/13</text>
-            <text x="220" y="225" textAnchor="middle" className="text-[10px]" fill="#8b95a1">1/20</text>
-            <text x="300" y="225" textAnchor="middle" className="text-[10px]" fill="#8b95a1">2/3</text>
-            <text x="380" y="225" textAnchor="middle" className="text-[10px]" fill="#8b95a1">2/23</text>
-            <text x="420" y="225" textAnchor="middle" className="text-[10px]" fill="#8b95a1">2/28</text>
-          </svg>
-          
-          {/* 범례 */}
-          <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg p-3 text-xs">
-            <div className="flex items-center gap-2 mb-1">
-              <span>🔵 매수</span>
-              <span>🟢 긍정</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span>🟡 중립</span>
-              <span>🟠 경계</span>
-              <span>🔴 매도</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* 차트 영역 - 실제 Yahoo Finance 데이터 */}
+      <StockSignalChart
+        code={code}
+        signals={filteredSignals}
+        onSignalClick={(sig) => {
+          if (sig.videoUrl && sig.videoUrl !== '#') {
+            window.open(sig.videoUrl, '_blank');
+          }
+        }}
+      />
 
       {/* 신호 테이블 */}
       <div className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
@@ -829,7 +769,15 @@ function InfluencerTab({ code }: { code: string }) {
             </thead>
             <tbody className="divide-y divide-[#f0f0f0]">
               {filteredSignals.map((signal, index) => (
-                <tr key={index} className="hover:bg-[#f8f9fa]">
+                <tr
+                  key={index}
+                  className="hover:bg-[#f8f9fa] cursor-pointer transition-colors"
+                  onClick={() => {
+                    if (signal.videoUrl && signal.videoUrl !== '#') {
+                      window.open(signal.videoUrl, '_blank');
+                    }
+                  }}
+                >
                   <td className="px-4 py-4 text-sm text-[#191f28]">
                     {new Date(signal.date).toLocaleDateString('ko-KR', { 
                       month: 'short', 
@@ -848,7 +796,7 @@ function InfluencerTab({ code }: { code: string }) {
                     </div>
                   </td>
                   <td className="px-4 py-4 text-sm text-[#191f28] max-w-xs">
-                    <div className="truncate">{signal.quote}</div>
+                    <div className="truncate" title={signal.quote}>{signal.quote}</div>
                   </td>
                   <td className="px-4 py-4 text-sm font-medium">
                     <span className={signal.return.startsWith('+') ? 'text-red-600' : 'text-blue-600'}>
@@ -861,6 +809,7 @@ function InfluencerTab({ code }: { code: string }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[#3182f6] hover:text-[#2171e5] text-sm font-medium"
+                      onClick={(e) => e.stopPropagation()}
                     >
                       영상보기 →
                     </a>
