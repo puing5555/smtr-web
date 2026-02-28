@@ -7,6 +7,7 @@ import StockChart from '@/components/StockChart';
 import StockDisclosureTab from '@/components/stock/StockDisclosureTab';
 import FeedCard from '@/components/FeedCard';
 import StockSignalChart from '@/components/StockSignalChart';
+import SignalDetailModal from '@/components/SignalDetailModal';
 import { influencers } from '@/data/influencerData';
 interface StockDetailClientProps {
   code: string;
@@ -546,6 +547,7 @@ function InfluencerTab({ code }: { code: string }) {
     { name: '전체', count: null }
   ]);
   const [loading, setLoading] = useState(true);
+  const [selectedSignal, setSelectedSignal] = useState<any>(null);
 
   const periodOptions = ['1개월', '6개월', '1년', '3년', '전체'];
 
@@ -573,9 +575,15 @@ function InfluencerTab({ code }: { code: string }) {
             influencer: signal.speakers?.name || signal.influencer_videos?.influencer_channels?.channel_name || 'Unknown',
             signal: signal.signal,
             quote: signal.key_quote || '키 인용문이 없습니다.',
-            return: 'N/A', // TODO: 수익률 계산
+            return: 'N/A',
             videoUrl,
-            price: 0 // TODO: 발언 시점 주가
+            price: 0,
+            confidence: signal.confidence,
+            analysis_reasoning: signal.analysis_reasoning,
+            mention_type: signal.mention_type,
+            timestamp: signal.timestamp,
+            videoTitle: signal.influencer_videos?.title,
+            channelName: signal.influencer_videos?.influencer_channels?.channel_name,
           };
         });
         
@@ -743,11 +751,8 @@ function InfluencerTab({ code }: { code: string }) {
       <StockSignalChart
         code={code}
         signals={filteredSignals}
-        onSignalClick={(sig) => {
-          if (sig.videoUrl && sig.videoUrl !== '#') {
-            window.open(sig.videoUrl, '_blank');
-          }
-        }}
+        periodFilter={periodFilter}
+        onSignalClick={(sig) => setSelectedSignal(sig)}
       />
 
       {/* 신호 테이블 */}
@@ -772,11 +777,7 @@ function InfluencerTab({ code }: { code: string }) {
                 <tr
                   key={index}
                   className="hover:bg-[#f8f9fa] cursor-pointer transition-colors"
-                  onClick={() => {
-                    if (signal.videoUrl && signal.videoUrl !== '#') {
-                      window.open(signal.videoUrl, '_blank');
-                    }
-                  }}
+                  onClick={() => setSelectedSignal(signal)}
                 >
                   <td className="px-4 py-4 text-sm text-[#191f28]">
                     {new Date(signal.date).toLocaleDateString('ko-KR', { 
@@ -820,6 +821,12 @@ function InfluencerTab({ code }: { code: string }) {
           </table>
         </div>
       </div>
+
+      {/* 시그널 상세 모달 */}
+      <SignalDetailModal
+        signal={selectedSignal}
+        onClose={() => setSelectedSignal(null)}
+      />
     </div>
   );
 }

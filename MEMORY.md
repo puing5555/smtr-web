@@ -15,8 +15,8 @@ _Last updated: 2026-02-28 16:14 (GMT+7)_
 - **라이브 URL:** https://puing5555.github.io/invest-sns/
 - **GitHub:** puing5555/invest-sns
 - **프론트엔드:** Next.js (55페이지, GitHub Pages 배포)
-- **DB:** Supabase (31개 시그널 - 삼프로TV 20 + 코린이아빠 11)
-- **프롬프트:** prompts/pipeline_v9.md
+- **DB:** Supabase (45개 시그널 - 삼프로TV 20 + 코린이아빠 11 + 부읽남TV 7 + 이효석 7)
+- **프롬프트:** prompts/pipeline_v9.md (V9.1 고도화 완료, 규칙 31개)
 - **시그널 타입:** 매수/긍정/중립/경계/매도 (한글 5단계만)
 - **최신 태그:** v1.3-rollback-fixed
 
@@ -32,9 +32,15 @@ _Last updated: 2026-02-28 16:14 (GMT+7)_
 - GitHub Pages 배포 완료 (55페이지)
 - v1.2-deploy-fix, v1.3-rollback-fixed 태그
 
-### 현재 작업 (2026-02-28)
-1. 자막 추출된 거 V9 분석 → Supabase INSERT → 사이트 반영
-2. 프롬프트 고도화 (V9.1)
+### 완료된 추가 작업 (2026-02-28)
+- V9.1 고도화 완료 (5회 연속 문제 0개, 규칙 31개: V9 28개 + V9.1 3개)
+- 부읽남TV 7시그널 + 이효석 7시그널 추출/INSERT
+- 인플루언서 탭: 기간필터→차트연동, SignalDetailModal 모달, 호버 툴팁
+- 내 종목 전체탭: limit 50으로 확대, 45개 시그널 전부 표시
+- 삼성전자 주가: yfinance 실데이터 확인 (216,500원 = 실제)
+
+### 현재 작업
+- UI 피드백 반영 중
 
 ## 🔧 환경 설정
 - **OpenClaw 모델:** anthropic/claude-opus-4-6 (2026-02-28 변경)

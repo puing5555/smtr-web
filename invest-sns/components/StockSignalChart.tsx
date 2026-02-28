@@ -14,10 +14,11 @@ interface Signal {
 interface StockSignalChartProps {
   code: string;
   signals: Signal[];
+  periodFilter?: string;
   onSignalClick?: (signal: Signal) => void;
 }
 
-export default function StockSignalChart({ code, signals, onSignalClick }: StockSignalChartProps) {
+export default function StockSignalChart({ code, signals, periodFilter, onSignalClick }: StockSignalChartProps) {
   const [hoveredSignal, setHoveredSignal] = useState<Signal | null>(null);
   const [hoverPos, setHoverPos] = useState({ x: 0, y: 0 });
 
@@ -26,7 +27,20 @@ export default function StockSignalChart({ code, signals, onSignalClick }: Stock
   const chartConfig = useMemo(() => {
     if (!stockData?.prices?.length) return null;
 
-    const prices = stockData.prices;
+    // Filter prices by period
+    let prices = stockData.prices;
+    if (periodFilter && periodFilter !== '전체') {
+      const now = new Date();
+      let cutoff = new Date();
+      switch (periodFilter) {
+        case '1개월': cutoff.setMonth(now.getMonth() - 1); break;
+        case '6개월': cutoff.setMonth(now.getMonth() - 6); break;
+        case '1년': cutoff.setFullYear(now.getFullYear() - 1); break;
+        case '3년': cutoff.setFullYear(now.getFullYear() - 3); break;
+      }
+      const filtered = prices.filter((p: any) => new Date(p.date) >= cutoff);
+      if (filtered.length >= 2) prices = filtered;
+    }
     const closes = prices.map((p: any) => p.close);
     const minPrice = Math.min(...closes);
     const maxPrice = Math.max(...closes);
@@ -100,7 +114,7 @@ export default function StockSignalChart({ code, signals, onSignalClick }: Stock
     };
 
     return { W, H, padL, padT, padB, chartH, pathPoints, areaPath, yLabels, xLabels, signalMarkers, formatPrice, currentPrice: stockData.currentPrice };
-  }, [stockData, signals]);
+  }, [stockData, signals, periodFilter]);
 
   if (!chartConfig) {
     return (
@@ -179,10 +193,7 @@ export default function StockSignalChart({ code, signals, onSignalClick }: Stock
               onMouseLeave={() => setHoveredSignal(null)}
               onClick={() => onSignalClick?.(marker)}
             >
-              <circle cx={marker.x} cy={marker.y} r="8" fill={getSignalColor(marker.signal)} stroke="white" strokeWidth="2.5" opacity="0.9"/>
-              <text x={marker.x} y={marker.y - 12} textAnchor="middle" fontSize="9" fill={getSignalColor(marker.signal)} fontWeight="bold">
-                {marker.signal}
-              </text>
+              <circle cx={marker.x} cy={marker.y} r="4" fill={getSignalColor(marker.signal)} stroke="white" strokeWidth="1.5" opacity="0.9"/>
             </g>
           ))}
         </svg>
@@ -210,15 +221,10 @@ export default function StockSignalChart({ code, signals, onSignalClick }: Stock
           </div>
         )}
 
-        {/* Legend */}
-        <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg p-2 text-xs">
-          <div className="flex items-center gap-2 mb-1">
-            <span>🔵 매수</span><span>🟢 긍정</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span>🟡 중립</span><span>🟠 경계</span><span>🔴 매도</span>
-          </div>
-        </div>
+      </div>
+      {/* Legend - bottom center */}
+      <div className="flex justify-center gap-4 mt-2 text-xs text-[#8b95a1]">
+        <span>🔵 매수</span><span>🟢 긍정</span><span>🟡 중립</span><span>🟠 경계</span><span>🔴 매도</span>
       </div>
     </div>
   );
