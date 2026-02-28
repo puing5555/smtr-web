@@ -72,8 +72,6 @@ const getStockData = (code: string) => {
 export default function StockDetailClient({ code }: StockDetailClientProps) {
   const [activeTab, setActiveTab] = useState('feed');
   const [isWatched, setIsWatched] = useState(false);
-  const [showComments, setShowComments] = useState<{ [key: number]: boolean }>({});
-  const [commentInputs, setCommentInputs] = useState<{ [key: number]: string }>({});
   const searchParams = useSearchParams();
   const router = useRouter();
   const stockData = getStockData(code);
@@ -163,85 +161,17 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
                   </div>
                 </div>
                 
-                {/* Comment Section */}
+                {/* Comment Stats (댓글 입력창 제거, 통계만 표시) */}
                 <div className="border-t border-[#f0f0f0] px-4 py-3">
-                  <div className="flex items-center gap-2 mb-2">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setShowComments(prev => ({
-                          ...prev,
-                          [event.id]: !prev[event.id]
-                        }));
-                      }}
-                      className="text-xs text-[#8b95a1] hover:text-[#191f28] transition-colors"
-                    >
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-[#8b95a1]">
                       💬 댓글 {Math.floor(Math.random() * 10) + 1}개
-                    </button>
+                    </span>
                     <span className="text-xs text-[#8b95a1]">•</span>
-                    <button className="text-xs text-[#8b95a1] hover:text-[#191f28] transition-colors">
+                    <span className="text-xs text-[#8b95a1]">
                       ❤️ 좋아요 {Math.floor(Math.random() * 50) + 5}개
-                    </button>
+                    </span>
                   </div>
-                  
-                  {/* Comment Input */}
-                  <div className="flex gap-2">
-                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-xs flex-shrink-0">
-                      👤
-                    </div>
-                    <input
-                      type="text"
-                      placeholder="댓글을 입력하세요..."
-                      value={commentInputs[event.id] || ''}
-                      onChange={(e) => {
-                        setCommentInputs(prev => ({
-                          ...prev,
-                          [event.id]: e.target.value
-                        }));
-                      }}
-                      onClick={(e) => e.stopPropagation()}
-                      className="flex-1 text-sm border border-[#e8e8e8] rounded-full px-3 py-1 focus:outline-none focus:ring-1 focus:ring-[#3182f6] focus:border-transparent"
-                    />
-                    <button 
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (commentInputs[event.id]?.trim()) {
-                          // Here you would handle comment submission
-                          setCommentInputs(prev => ({
-                            ...prev,
-                            [event.id]: ''
-                          }));
-                        }
-                      }}
-                      className="text-xs px-3 py-1 bg-[#3182f6] text-white rounded-full hover:bg-[#2171e5] transition-colors"
-                    >
-                      등록
-                    </button>
-                  </div>
-                  
-                  {/* Comments List */}
-                  {showComments[event.id] && (
-                    <div className="mt-3 space-y-2 pl-8">
-                      <div className="flex gap-2 text-sm">
-                        <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center text-xs flex-shrink-0">
-                          🐶
-                        </div>
-                        <div>
-                          <span className="font-medium text-[#191f28]">투자왕</span>
-                          <span className="text-[#8b95a1] ml-2">좋은 정보네요!</span>
-                        </div>
-                      </div>
-                      <div className="flex gap-2 text-sm">
-                        <div className="w-5 h-5 bg-yellow-100 rounded-full flex items-center justify-center text-xs flex-shrink-0">
-                          🎯
-                        </div>
-                        <div>
-                          <span className="font-medium text-[#191f28]">주식초보</span>
-                          <span className="text-[#8b95a1] ml-2">매수 타이밍 맞나요?</span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
             ))}

@@ -2,6 +2,11 @@
 
 This folder is home. Treat it that way.
 
+## 컨텍스트 관리 (필수)
+- 파일은 절대 전체를 읽지 마라. head -100으로 필요한 부분만 읽어라
+- 한번에 파일 3개 이상 동시에 열지 마라
+- 컨텍스트 150K 넘으면 즉시 새 세션 시작하고 MEMORY.md에 상태 저장해라
+
 ## First Run
 
 If `BOOTSTRAP.md` exists, that's your birth certificate. Follow it, figure out who you are, then delete it. You won't need it again.
