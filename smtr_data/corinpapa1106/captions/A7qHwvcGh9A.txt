@@ -1,1 +1,0 @@
-FAILED: 자막을 추출할 수 없습니다. YouTube 직접 접근과 youtubetranscript.com 모두 자막 데이터를 제공하지 않음
