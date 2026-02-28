@@ -23,8 +23,8 @@ _Last updated: 2026-02-28 11:10 (GMT+7)_
 - 옛날 분석/크롤링/번역 스크립트 전체 삭제 ✅
 - **남은 폴더**: `invest-sns/`, `prompts/`, `memory/`, `invest-engine/` + 워크스페이스 기본 파일들만
 
-### 🚀 2단계 진행중 (전속력)
-1. **invest-sns 빌드 & GitHub Pages 푸시**
+### ✅ 2단계 진행중 (GitHub Pages 배포 완료!)
+1. **✅ invest-sns 빌드 & GitHub Pages 푸시** - https://puing5555.github.io/invest-sns/
 2. **Selenium 자막 추출** (슈카월드/이효석/부읽남/달란트)
 3. **V9 분석 → Supabase INSERT** (60초 간격)
 4. **프롬프트 고도화** (V9.1/V9.2 버전업)
