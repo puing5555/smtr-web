@@ -1,0 +1,18 @@
+{
+  "timestamp": "2026-02-28T11:08:36.262789",
+  "total_signals": 2,
+  "signals": [
+    {
+      "speaker": "슈카",
+      "stock": "삼성전자",
+      "signal": "매수",
+      "confidence": "high"
+    },
+    {
+      "speaker": "달란트",
+      "stock": "비트코인",
+      "signal": "매수",
+      "confidence": "medium"
+    }
+  ]
+}
