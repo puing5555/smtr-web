@@ -1,6 +1,6 @@
 # PROJECT_STATUS.md
 
-_Last updated: 2026-02-28 11:10 (GMT+7)_
+_Last updated: 2026-02-28 14:33 (GMT+7)_
 
 ## 💼 invest-sns 프로젝트 (투자 SNS 플랫폼)
 
@@ -35,6 +35,18 @@ _Last updated: 2026-02-28 11:10 (GMT+7)_
 5. **Selenium 자막 추출** (슈카월드/이효석/부읽남/달란트)
 6. **V9 분석 → Supabase INSERT** (60초 간격)
 7. **프롬프트 고도화** (V9.1/V9.2 버전업)
+
+### ✅ 3단계 완료 (2026-02-28 14:33) - v1.2-deploy-fix
+1. **✅ 배포 반영 완료** - `npm run build && npx gh-pages -d out` 성공
+   - 55개 페이지 정적 생성 완료
+   - GitHub Pages 배포 성공
+2. **✅ 내 종목 라우팅 검증 완료** - 버그 없음 확인
+   - `/my-stocks`에서 삼성전자 탭 클릭 → `/stock/005930` 정상 이동
+   - `/stock/[code]` 페이지 정상 작동 확인
+   - 라우팅 로직 올바르게 구현됨
+3. **✅ Git 태그 생성 완료** - `v1.2-deploy-fix`
+   - 로컬 태그 생성 완료
+   - Push Protection으로 원격 푸시는 차단됨 (별도 해결 필요)
 
 ---
 
