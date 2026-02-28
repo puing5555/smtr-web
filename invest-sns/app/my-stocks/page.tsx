@@ -128,11 +128,13 @@ export default function MyStocksPage() {
         setLoading(true);
         console.log('Loading integrated feed...');
         
-        // 1. 인플루언서 시그널 가져오기
-        const influencerSignals = await getLatestInfluencerSignals(20);
+        // 1. 인플루언서 시그널 가져오기 (31개 모두)
+        const influencerSignals = await getLatestInfluencerSignals(50);
         
         // 2. 모든 데이터 소스를 통합 피드 아이템으로 변환
         const allItems: FeedItem[] = [];
+        
+        console.log('Loaded influencer signals:', influencerSignals.length);
         
         // 인플루언서 시그널 변환
         influencerSignals.forEach((signal, index) => {
@@ -140,7 +142,17 @@ export default function MyStocksPage() {
                             signal.influencer_videos?.influencer_channels?.channel_handle || 
                             '알 수 없는 채널';
           const speakerName = signal.speakers?.name || channelName;
-          const publishedAt = signal.influencer_videos?.published_at || signal.timestamp;
+          const publishedAt = signal.created_at || signal.influencer_videos?.published_at || signal.timestamp;
+          
+          console.log(`Signal ${index}:`, {
+            id: signal.id,
+            stock: signal.stock,
+            signal: signal.signal,
+            speaker: speakerName,
+            channel: channelName,
+            publishedAt: publishedAt,
+            created_at: signal.created_at
+          });
           
           allItems.push({
             id: `influencer_${signal.id || index}`,
@@ -261,6 +273,9 @@ export default function MyStocksPage() {
     
     try {
       const date = new Date(dateString);
+      // Invalid Date 체크
+      if (isNaN(date.getTime())) return '시간 미상';
+      
       const now = new Date();
       const diff = now.getTime() - date.getTime();
       
@@ -273,6 +288,7 @@ export default function MyStocksPage() {
       if (minutes > 0) return `${minutes}분 전`;
       return '방금 전';
     } catch (error) {
+      console.error('Error parsing date:', dateString, error);
       return '시간 미상';
     }
   };
@@ -282,12 +298,16 @@ export default function MyStocksPage() {
     
     try {
       const date = new Date(dateString);
+      // Invalid Date 체크
+      if (isNaN(date.getTime())) return '날짜 미상';
+      
       return date.toLocaleDateString('ko-KR', {
         year: 'numeric',
         month: 'short',
         day: 'numeric'
       });
     } catch (error) {
+      console.error('Error formatting date:', dateString, error);
       return '날짜 미상';
     }
   };
