@@ -55,6 +55,14 @@ _Last updated: 2026-02-28 14:33 (GMT+7)_
 4. **✅ 재배포 완료**: `npx gh-pages -d out` 성공
 5. **✅ 검증 완료**: `/stock/005930` 경로 정상 접근 가능
 
+### ✅ 내 종목 전체 탭 수정 완료 (2026-02-28 14:42)
+1. **🚨 문제 발견**: 전체 탭에서 코린파파 CC 시그널만 반복 표시, 삼프로TV 시그널 20개 안 보임
+2. **✅ 데이터 로드 수정**: `getLatestInfluencerSignals(20)` → `(50)` - 31개 모두 가져오기
+3. **✅ 날짜 처리 개선**: `signal.created_at` 우선 사용, Invalid Date 체크 추가
+4. **✅ 디버깅 로그**: 콘솔에 로드된 시그널 정보 출력
+5. **✅ 빌드+배포 완료**: `npm run build && npx gh-pages -d out` 성공
+6. **📋 라이브 URL**: https://puing5555.github.io/invest-sns/my-stocks
+
 ---
 
 **❌ 절대 참조 금지**: smtr-web, guru_tracker v24, STRONG_BUY, 177개 코린이아빠 시그널 (망한 프로젝트)
