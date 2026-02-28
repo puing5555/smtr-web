@@ -109,8 +109,7 @@ export async function getInfluencerChannels() {
               .select('id')
               .eq('channel_id', channel.id)
               .then(({ data: videos }) => videos?.map(v => v.id) || [])
-          )
-          .eq('review_status', 'approved');
+          );
 
         return {
           ...channel,
@@ -138,8 +137,7 @@ export async function getStockSignalGroups() {
         speakers (
           name
         )
-      `)
-      .eq('review_status', 'approved');
+      `);
 
     if (error) {
       console.error('Error fetching stock signals:', error);
@@ -214,8 +212,7 @@ export async function getInfluencerProfile(channelHandle: string) {
           .eq('channel_id', channelData.id)
           .then(({ data: videos }) => videos?.map(v => v.id) || [])
       )
-      .eq('review_status', 'approved')
-      .order('timestamp', { ascending: false });
+      .order('created_at', { ascending: false });
 
     if (signalsError) {
       console.error('Error fetching signals:', signalsError);

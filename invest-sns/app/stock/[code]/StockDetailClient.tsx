@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { getStockSignals, getSignalColor } from '@/lib/supabase';
 import StockChart from '@/components/StockChart';
 import StockDisclosureTab from '@/components/stock/StockDisclosureTab';
+import FeedCard from '@/components/FeedCard';
 import { influencers } from '@/data/influencerData';
 interface StockDetailClientProps {
   code: string;
@@ -133,49 +134,17 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
     switch (activeTab) {
       case 'feed':
         return (
-          <div className="space-y-6">
-            {/* 타임라인 이벤트 (차트 제거) */}
-            <div className="space-y-4">
+          <div className="space-y-4">
             {timeline.map((event) => (
-              <div key={event.id} className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
-                <div
-                  onClick={() => setActiveTab(event.tab)}
-                  className="px-4 py-4 hover:bg-[#f8f9fa] cursor-pointer transition-colors"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#f8f9fa] flex items-center justify-center text-lg flex-shrink-0">
-                      {event.icon}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-sm font-medium text-[#8b95a1] bg-[#f2f4f6] px-2 py-0.5 rounded">
-                          {event.categoryName}
-                        </span>
-                      </div>
-                      <h3 className="text-[15px] font-medium text-[#191f28] leading-[1.4] mb-1">
-                        {event.title}
-                      </h3>
-                      <span className="text-sm text-[#8b95a1]">{event.time}</span>
-                    </div>
-                    <div className="text-[#8b95a1] text-sm">→</div>
-                  </div>
-                </div>
-                
-                {/* Comment Stats (댓글 입력창 제거, 통계만 표시) */}
-                <div className="border-t border-[#f0f0f0] px-4 py-3">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-[#8b95a1]">
-                      💬 댓글 {Math.floor(Math.random() * 10) + 1}개
-                    </span>
-                    <span className="text-xs text-[#8b95a1]">•</span>
-                    <span className="text-xs text-[#8b95a1]">
-                      ❤️ 좋아요 {Math.floor(Math.random() * 50) + 5}개
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <FeedCard
+                key={event.id}
+                icon={event.icon}
+                categoryName={event.categoryName}
+                title={event.title}
+                date={event.time}
+                onClick={() => setActiveTab(event.tab)}
+              />
             ))}
-            </div>
           </div>
         );
 

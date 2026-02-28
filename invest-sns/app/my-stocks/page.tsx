@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getLatestInfluencerSignals } from '@/lib/supabase';
+import FeedCard from '@/components/FeedCard';
 
 // 관심종목 칩 데이터
 const stockChips = [
@@ -140,7 +141,7 @@ export default function MyStocksPage() {
                             signal.influencer_videos?.influencer_channels?.channel_handle || 
                             '알 수 없는 채널';
           const speakerName = signal.speakers?.name || channelName;
-          const publishedAt = signal.influencer_videos?.published_at || signal.timestamp;
+          const publishedAt = signal.influencer_videos?.published_at || signal.created_at;
           
           allItems.push({
             id: `influencer_${signal.id || index}`,
@@ -379,56 +380,15 @@ export default function MyStocksPage() {
           ) : feedItems.length > 0 ? (
             <div className="space-y-4">
               {feedItems.map((item) => (
-                <div
+                <FeedCard
                   key={item.id}
-                  className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden"
-                >
-                  <div
-                    onClick={() => handleFeedItemClick(item)}
-                    className="px-4 py-4 hover:bg-[#f8f9fa] cursor-pointer transition-colors"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-[#f8f9fa] flex items-center justify-center text-lg flex-shrink-0">
-                        {item.icon}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-sm font-medium text-[#8b95a1] bg-[#f2f4f6] px-2 py-0.5 rounded">
-                            {item.categoryName}
-                          </span>
-                          {item.signal && (
-                            <span className={`text-xs font-medium px-2 py-0.5 rounded ${
-                              item.signal === '매수' || item.signal === 'BUY' ? 'text-blue-600 bg-blue-50' :
-                              item.signal === '긍정' ? 'text-green-600 bg-green-50' :
-                              item.signal === '중립' ? 'text-yellow-600 bg-yellow-50' :
-                              item.signal === '경계' ? 'text-orange-600 bg-orange-50' :
-                              item.signal === '매도' ? 'text-red-600 bg-red-50' :
-                              'text-gray-600 bg-gray-50'
-                            }`}>
-                              {item.signal}
-                            </span>
-                          )}
-                        </div>
-                        <h3 className="text-[15px] font-medium text-[#191f28] leading-[1.4] mb-1">
-                          {item.title}
-                        </h3>
-                        <span className="text-sm text-[#8b95a1]">{item.time}</span>
-                      </div>
-                      <div className="text-[#8b95a1] text-sm">→</div>
-                    </div>
-                  </div>
-                  <div className="border-t border-[#f0f0f0] px-4 py-3">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs text-[#8b95a1]">
-                        💬 댓글 {Math.floor(Math.random() * 10) + 1}개
-                      </span>
-                      <span className="text-xs text-[#8b95a1]">•</span>
-                      <span className="text-xs text-[#8b95a1]">
-                        ❤️ 좋아요 {Math.floor(Math.random() * 50) + 5}개
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                  icon={item.icon}
+                  categoryName={item.categoryName}
+                  title={item.title}
+                  date={item.date}
+                  signal={item.signal}
+                  onClick={() => handleFeedItemClick(item)}
+                />
               ))}
             </div>
           ) : (
