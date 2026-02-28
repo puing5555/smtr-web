@@ -63,6 +63,14 @@ _Last updated: 2026-02-28 14:33 (GMT+7)_
 5. **✅ 빌드+배포 완료**: `npm run build && npx gh-pages -d out` 성공
 6. **📋 라이브 URL**: https://puing5555.github.io/invest-sns/my-stocks
 
+### ✅ 종목 페이지 에러 핸들링 강화 완료 (2026-02-28 14:45)
+1. **🚨 문제 발견**: 종목 클릭시 계속 "Application error: a client-side exception" 발생
+2. **✅ import 충돌 해결**: `getStockSignals` 함수 이름 충돌 수정 → `getSupabaseStockSignals`로 변경
+3. **✅ 에러 바운더리 추가**: 종목 페이지에 fallback UI와 "다시 시도" 버튼 구현
+4. **✅ Supabase 연결 실패 처리**: InfluencerTab에서 연결 실패시 빈 배열로 fallback
+5. **✅ 상세한 로깅**: 콘솔에 에러 상태별 명확한 메시지 출력
+6. **✅ 빌드+배포 완료**: `/stock/[code]` 페이지 크래시 방지
+
 ---
 
 **❌ 절대 참조 금지**: smtr-web, guru_tracker v24, STRONG_BUY, 177개 코린이아빠 시그널 (망한 프로젝트)
