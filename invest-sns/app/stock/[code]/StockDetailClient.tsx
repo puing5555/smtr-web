@@ -762,31 +762,68 @@ function InfluencerTab({ code }: { code: string }) {
       {/* 차트 영역 */}
       <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
         <h4 className="font-medium text-[#191f28] mb-4">주가 차트 & 신호</h4>
-        <div className="relative h-64 bg-[#f8f9fa] rounded-lg overflow-hidden">
-          {/* 간단한 주가 차트 (SVG) */}
-          <svg className="w-full h-full" viewBox="0 0 400 200">
-            {/* 배경 격자 */}
+        <div className="relative h-72 bg-[#f8f9fa] rounded-lg overflow-hidden">
+          <svg className="w-full h-full" viewBox="0 0 460 240">
             <defs>
-              <pattern id="grid" width="40" height="20" patternUnits="userSpaceOnUse">
-                <path d="M 40 0 L 0 0 0 20" fill="none" stroke="#e8e8e8" strokeWidth="1"/>
-              </pattern>
+              <linearGradient id="priceGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#3182f6" stopOpacity="0.15"/>
+                <stop offset="100%" stopColor="#3182f6" stopOpacity="0.02"/>
+              </linearGradient>
             </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" />
             
-            {/* 주가 라인 */}
-            <path
-              d="M 20 120 L 60 100 L 100 90 L 140 110 L 180 80 L 220 70 L 260 85 L 300 65 L 340 75 L 380 60"
-              fill="none"
-              stroke="#3182f6"
-              strokeWidth="2"
-            />
+            {/* Y축 가격 라벨 */}
+            {code === '005930' ? (
+              <>
+                <text x="48" y="35" textAnchor="end" className="text-[10px]" fill="#8b95a1">200,000</text>
+                <line x1="52" y1="32" x2="420" y2="32" stroke="#e8e8e8" strokeWidth="0.5" strokeDasharray="3,3"/>
+                <text x="48" y="75" textAnchor="end" className="text-[10px]" fill="#8b95a1">180,000</text>
+                <line x1="52" y1="72" x2="420" y2="72" stroke="#e8e8e8" strokeWidth="0.5" strokeDasharray="3,3"/>
+                <text x="48" y="115" textAnchor="end" className="text-[10px]" fill="#8b95a1">160,000</text>
+                <line x1="52" y1="112" x2="420" y2="112" stroke="#e8e8e8" strokeWidth="0.5" strokeDasharray="3,3"/>
+                <text x="48" y="155" textAnchor="end" className="text-[10px]" fill="#8b95a1">140,000</text>
+                <line x1="52" y1="152" x2="420" y2="152" stroke="#e8e8e8" strokeWidth="0.5" strokeDasharray="3,3"/>
+                <text x="48" y="195" textAnchor="end" className="text-[10px]" fill="#8b95a1">120,000</text>
+                <line x1="52" y1="192" x2="420" y2="192" stroke="#e8e8e8" strokeWidth="0.5" strokeDasharray="3,3"/>
+                
+                {/* 주가 라인 (삼성전자 1월~2월: 120,000→197,000) */}
+                <path d="M 60 192 L 100 180 L 140 175 L 180 160 L 220 150 L 260 148 L 300 110 L 340 72 L 380 55 L 420 40" fill="none" stroke="#3182f6" strokeWidth="2.5"/>
+                <path d="M 60 192 L 100 180 L 140 175 L 180 160 L 220 150 L 260 148 L 300 110 L 340 72 L 380 55 L 420 40 L 420 210 L 60 210 Z" fill="url(#priceGrad)"/>
+                
+                {/* 시그널 점: 부읽남TV 조진표 매수 (2/23, ~197,000원) */}
+                <circle cx="380" cy="55" r="7" fill="#3182f6" stroke="white" strokeWidth="2"/>
+                <text x="380" y="48" textAnchor="middle" className="text-[9px]" fill="#3182f6" fontWeight="bold">매수</text>
+              </>
+            ) : code === '000660' ? (
+              <>
+                <text x="48" y="35" textAnchor="end" className="text-[10px]" fill="#8b95a1">950,000</text>
+                <line x1="52" y1="32" x2="420" y2="32" stroke="#e8e8e8" strokeWidth="0.5" strokeDasharray="3,3"/>
+                <text x="48" y="115" textAnchor="end" className="text-[10px]" fill="#8b95a1">700,000</text>
+                <line x1="52" y1="112" x2="420" y2="112" stroke="#e8e8e8" strokeWidth="0.5" strokeDasharray="3,3"/>
+                <text x="48" y="195" textAnchor="end" className="text-[10px]" fill="#8b95a1">450,000</text>
+                <line x1="52" y1="192" x2="420" y2="192" stroke="#e8e8e8" strokeWidth="0.5" strokeDasharray="3,3"/>
+                
+                <path d="M 60 170 L 100 155 L 140 140 L 180 120 L 220 100 L 260 90 L 300 70 L 340 55 L 380 50 L 420 45" fill="none" stroke="#3182f6" strokeWidth="2.5"/>
+                <path d="M 60 170 L 100 155 L 140 140 L 180 120 L 220 100 L 260 90 L 300 70 L 340 55 L 380 50 L 420 45 L 420 210 L 60 210 Z" fill="url(#priceGrad)"/>
+                
+                <circle cx="380" cy="50" r="7" fill="#3182f6" stroke="white" strokeWidth="2"/>
+                <text x="380" y="43" textAnchor="middle" className="text-[9px]" fill="#3182f6" fontWeight="bold">매수</text>
+              </>
+            ) : (
+              <>
+                <text x="48" y="55" textAnchor="end" className="text-[10px]" fill="#8b95a1">고가</text>
+                <text x="48" y="175" textAnchor="end" className="text-[10px]" fill="#8b95a1">저가</text>
+                <path d="M 60 150 L 100 130 L 140 120 L 180 140 L 220 100 L 260 90 L 300 105 L 340 80 L 380 90 L 420 70" fill="none" stroke="#3182f6" strokeWidth="2.5"/>
+                <path d="M 60 150 L 100 130 L 140 120 L 180 140 L 220 100 L 260 90 L 300 105 L 340 80 L 380 90 L 420 70 L 420 210 L 60 210 Z" fill="url(#priceGrad)"/>
+              </>
+            )}
             
-            {/* 신호 점들 */}
-            <circle cx="60" cy="100" r="6" fill="#dc3545" stroke="white" strokeWidth="2" />
-            <circle cx="140" cy="110" r="6" fill="#17a2b8" stroke="white" strokeWidth="2" />
-            <circle cx="220" cy="70" r="6" fill="#28a745" stroke="white" strokeWidth="2" />
-            <circle cx="300" cy="65" r="6" fill="#ffc107" stroke="white" strokeWidth="2" />
-            <circle cx="380" cy="60" r="6" fill="#007bff" stroke="white" strokeWidth="2" />
+            {/* X축 날짜 라벨 */}
+            <text x="60" y="225" textAnchor="middle" className="text-[10px]" fill="#8b95a1">1/6</text>
+            <text x="140" y="225" textAnchor="middle" className="text-[10px]" fill="#8b95a1">1/13</text>
+            <text x="220" y="225" textAnchor="middle" className="text-[10px]" fill="#8b95a1">1/20</text>
+            <text x="300" y="225" textAnchor="middle" className="text-[10px]" fill="#8b95a1">2/3</text>
+            <text x="380" y="225" textAnchor="middle" className="text-[10px]" fill="#8b95a1">2/23</text>
+            <text x="420" y="225" textAnchor="middle" className="text-[10px]" fill="#8b95a1">2/28</text>
           </svg>
           
           {/* 범례 */}

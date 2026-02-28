@@ -371,83 +371,61 @@ export default function MyStocksPage() {
 
       {/* 통합 피드 리스트 */}
       <div className="px-4 py-4">
-        <div className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
+        <div>
           {loading ? (
             <div className="p-8 text-center">
               <div className="text-lg text-[#8b95a1]">통합 피드를 불러오는 중...</div>
             </div>
           ) : feedItems.length > 0 ? (
-            <div className="divide-y divide-[#f0f0f0]">
+            <div className="space-y-4">
               {feedItems.map((item) => (
                 <div
                   key={item.id}
-                  onClick={() => handleFeedItemClick(item)}
-                  className="px-4 py-4 hover:bg-[#f8f9fa] cursor-pointer transition-colors"
+                  className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden"
                 >
-                  <div className="flex items-start gap-3">
-                    {/* 타입별 아이콘 */}
-                    <div className="w-10 h-10 rounded-full bg-[#f8f9fa] flex items-center justify-center text-lg flex-shrink-0">
-                      {item.icon}
+                  <div
+                    onClick={() => handleFeedItemClick(item)}
+                    className="px-4 py-4 hover:bg-[#f8f9fa] cursor-pointer transition-colors"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-[#f8f9fa] flex items-center justify-center text-lg flex-shrink-0">
+                        {item.icon}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-sm font-medium text-[#8b95a1] bg-[#f2f4f6] px-2 py-0.5 rounded">
+                            {item.categoryName}
+                          </span>
+                          {item.signal && (
+                            <span className={`text-xs font-medium px-2 py-0.5 rounded ${
+                              item.signal === '매수' || item.signal === 'BUY' ? 'text-blue-600 bg-blue-50' :
+                              item.signal === '긍정' ? 'text-green-600 bg-green-50' :
+                              item.signal === '중립' ? 'text-yellow-600 bg-yellow-50' :
+                              item.signal === '경계' ? 'text-orange-600 bg-orange-50' :
+                              item.signal === '매도' ? 'text-red-600 bg-red-50' :
+                              'text-gray-600 bg-gray-50'
+                            }`}>
+                              {item.signal}
+                            </span>
+                          )}
+                        </div>
+                        <h3 className="text-[15px] font-medium text-[#191f28] leading-[1.4] mb-1">
+                          {item.title}
+                        </h3>
+                        <span className="text-sm text-[#8b95a1]">{item.time}</span>
+                      </div>
+                      <div className="text-[#8b95a1] text-sm">→</div>
                     </div>
-                    
-                    {/* 피드 내용 */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className={`text-sm font-medium px-2 py-0.5 rounded ${
-                          item.type === 'influencer' ? 'text-[#8b95a1] bg-[#f2f4f6]' :
-                          item.type === 'analyst' ? 'text-blue-700 bg-blue-50' :
-                          item.type === 'disclosure' ? 'text-green-700 bg-green-50' :
-                          'text-purple-700 bg-purple-50'
-                        }`}>
-                          {item.categoryName}
-                        </span>
-                        <span className="text-sm font-bold text-[#191f28]">
-                          {item.stockName}
-                        </span>
-                        {item.signal && (
-                          <span className={`text-xs font-medium px-2 py-0.5 rounded ${
-                            item.signal === '매수' || item.signal === 'BUY' ? 'text-blue-600 bg-blue-50' :
-                            item.signal === '긍정' ? 'text-green-600 bg-green-50' :
-                            item.signal === '중립' ? 'text-yellow-600 bg-yellow-50' :
-                            item.signal === '경계' ? 'text-orange-600 bg-orange-50' :
-                            item.signal === '매도' ? 'text-red-600 bg-red-50' :
-                            'text-gray-600 bg-gray-50'
-                          }`}>
-                            {item.signal}
-                          </span>
-                        )}
-                      </div>
-
-                      <h3 className="text-[15px] font-medium text-[#191f28] leading-[1.4] mb-2">
-                        {item.title}
-                      </h3>
-
-                      {/* 부제목/요약 */}
-                      {item.subtitle && (
-                        <div className="mb-2">
-                          <div className="text-sm text-[#191f28] bg-[#f8f9fa] px-2 py-1 rounded line-clamp-2">
-                            {item.subtitle}
-                          </div>
-                        </div>
-                      )}
-
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm text-[#8b95a1]">
-                            {item.time}
-                          </span>
-                          <span className="text-xs text-[#8b95a1]">•</span>
-                          <button
-                            onClick={(e) => handleSourceClick(item, e)}
-                            className="text-sm text-[#3182f6] hover:underline"
-                          >
-                            {item.source}
-                          </button>
-                        </div>
-                        <div className="text-[#8b95a1] text-sm">
-                          →
-                        </div>
-                      </div>
+                  </div>
+                  <div className="border-t border-[#f0f0f0] px-4 py-3">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-[#8b95a1]">
+                        💬 댓글 {Math.floor(Math.random() * 10) + 1}개
+                      </span>
+                      <span className="text-xs text-[#8b95a1]">•</span>
+                      <span className="text-xs text-[#8b95a1]">
+                        ❤️ 좋아요 {Math.floor(Math.random() * 50) + 5}개
+                      </span>
                     </div>
                   </div>
                 </div>

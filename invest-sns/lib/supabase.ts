@@ -65,8 +65,7 @@ export async function getLatestInfluencerSignals(limit = 20) {
           name
         )
       `)
-      .eq('review_status', 'approved')
-      .order('timestamp', { ascending: false })
+      .order('created_at', { ascending: false })
       .limit(limit);
 
     if (error) {
@@ -255,8 +254,7 @@ export async function getStockSignals(ticker: string) {
         )
       `)
       .eq('ticker', ticker)
-      .eq('review_status', 'approved')
-      .order('timestamp', { ascending: false });
+      .order('created_at', { ascending: false });
 
     if (error) {
       console.error('Error fetching stock signals:', error);
