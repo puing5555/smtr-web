@@ -275,6 +275,16 @@ The goal: Be helpful without being annoying. Check in a few times a day, do usef
 - 터널 링크가 바뀌면 이전 링크는 **"죽은 링크"**라고 명확히 말하고 새 링크만 보내라
 - **터널 링크를 3번 이상 보내지 마라.** 한 번만 보내고 기다려라
 
+## 📏 컨텍스트 관리 규칙
+
+- **컨텍스트가 150K 토큰을 넘으면 자동으로 새 세션을 시작**한다
+- 새 세션 시작 전에:
+  1. **현재 작업 상태를 MEMORY.md에 상세히 저장**
+  2. **오늘 날짜의 메모리 파일** (`memory/YYYY-MM-DD.md`)에도 기록
+  3. **PROJECT_STATUS.md 최신 상태로 업데이트**
+- 새 세션에서 **즉시 MEMORY.md와 PROJECT_STATUS.md를 읽고 작업을 이어서** 진행
+- **절대로 작업 맥락을 잃지 마라** - 연속성이 핵심이다
+
 ## Make It Yours
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.
