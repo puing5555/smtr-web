@@ -29,7 +29,21 @@ When a task is completed, always update `PROJECT_STATUS.md` with the latest proj
 - 커밋 메시지는 **한글로**, 뭘 했는지 명확하게 (예: "노트 탭 통합 완료", "코린이 아빠 검증 파이프라인 실행")
 - 하루 끝날 때 반드시 `git status` + `git log --oneline -5` 보고하라
 - **절대 커밋 없이 다음 작업으로 넘어가지 마라**
-- 중요한 마일스톤에는 **`git tag`** 붙여라 (예: `v24-stable`, `sns-prototype-done`)
+
+## 🏷️ Git 태그 체크포인트 시스템
+
+- **큰 기능 추가 전**: `git tag v1.x-before-기능명 -m "설명"` 
+- **큰 기능 완료 후**: `git tag v1.x-기능명-done -m "설명"`
+- **안정 버전**: `git tag v1.x-stable -m "설명"`
+- **태그 푸시**: `git push origin 태그명`
+- **롤백**: `git checkout 태그명` (망가졌을 때)
+
+### 태그 명명 규칙:
+- `v1.0-stable` (현재: GitHub Pages 배포 완료, 공시 대시보드 v2, 55페이지)
+- `v1.1-before-자막추출` (자막 추출 작업 시작 전)
+- `v1.1-selenium-done` (Selenium 자막 추출 완료)
+- `v1.2-before-pipeline` (분석 파이프라인 작업 전)
+- `v1.2-pipeline-done` (V9 분석 파이프라인 완료)
 
 ## Memory
 

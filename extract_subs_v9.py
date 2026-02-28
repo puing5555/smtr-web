@@ -250,7 +250,7 @@ async def process_channel(channel_key, channel_info):
 
 async def main():
     """메인 실행 함수 - 4개 채널 병렬 처리"""
-    print("🔥 V9 자막 추출 & 분석 시작!")
+    print("V9 자막 추출 & 분석 시작!")
     print("대상 채널: 슈카월드, 이효석, 부읽남, 달란트")
     
     # 필요한 폴더 생성
