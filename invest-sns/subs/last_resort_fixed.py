@@ -3,7 +3,7 @@ import subprocess, sys, os, time, io
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', line_buffering=True)
 
-VID = 'B5owNUs_DFw'
+VID = 'ksA4IT452_4'
 SUBS_DIR = 'C:/Users/Mario/work/invest-sns/subs'
 
 print("=== Method 4: Last Resort Attempts ===")
