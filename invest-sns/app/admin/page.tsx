@@ -429,13 +429,166 @@ export default function AdminPage() {
     </div>
   );
 
-  const renderPlaceholderTab = (title: string, icon: string) => (
-    <div className="text-center py-12">
-      <div className="text-6xl mb-4">{icon}</div>
-      <h3 className="text-xl font-bold text-[#191f28] mb-2">{title}</h3>
-      <p className="text-[#8b95a1]">2단계에서 구현 예정입니다</p>
-    </div>
-  );
+  // AI 제안 탭 상태
+  const [qualityIssues, setQualityIssues] = useState<any[]>([]);
+  const [loadingIssues, setLoadingIssues] = useState(false);
+  const [aiImprovements, setAiImprovements] = useState<Record<string, any>>({});
+  const [improvingSignals, setImprovingSignals] = useState<Set<string>>(new Set());
+
+  // 프롬프트 관리 탭 상태
+  const [reportPatterns, setReportPatterns] = useState<any>(null);
+  const [loadingPatterns, setLoadingPatterns] = useState(false);
+  const [promptImprovements, setPromptImprovements] = useState<string>('');
+  const [generatingPrompt, setGeneratingPrompt] = useState(false);
+
+  // 품질 이슈 로딩
+  const loadQualityIssues = async () => {
+    try {
+      setLoadingIssues(true);
+      const response = await fetch('/api/quality-issues');
+      const data = await response.json();
+      
+      if (data.success) {
+        setQualityIssues(data.issues);
+      }
+    } catch (error) {
+      console.error('품질 이슈 로딩 실패:', error);
+    } finally {
+      setLoadingIssues(false);
+    }
+  };
+
+  // 신고 패턴 로딩
+  const loadReportPatterns = async () => {
+    try {
+      setLoadingPatterns(true);
+      const response = await fetch('/api/report-patterns');
+      const data = await response.json();
+      
+      if (data.success) {
+        setReportPatterns(data.patterns);
+      }
+    } catch (error) {
+      console.error('신고 패턴 로딩 실패:', error);
+    } finally {
+      setLoadingPatterns(false);
+    }
+  };
+
+  // AI 개선 요청
+  const handleAiImprovement = async (signalId: string, issueTypes: string[]) => {
+    try {
+      setImprovingSignals(prev => new Set(prev).add(signalId));
+      
+      const response = await fetch('/api/improve-signal', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ signalId, issueTypes })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        setAiImprovements(prev => ({ ...prev, [signalId]: data }));
+        alert('AI 개선안이 생성되었습니다.');
+      } else {
+        alert('개선안 생성에 실패했습니다: ' + data.error);
+      }
+    } catch (error) {
+      console.error('AI 개선 요청 실패:', error);
+      alert('개선안 생성 중 오류가 발생했습니다.');
+    } finally {
+      setImprovingSignals(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(signalId);
+        return newSet;
+      });
+    }
+  };
+
+  // 개선안 승인
+  const handleApproveImprovement = async (signalId: string) => {
+    try {
+      const improvement = aiImprovements[signalId];
+      if (!improvement) return;
+
+      const suggestion = JSON.parse(improvement.improvement);
+      
+      const { error } = await supabase
+        .from('influencer_signals')
+        .update({
+          stock: suggestion.stock,
+          ticker: suggestion.ticker,
+          signal: suggestion.signal,
+          quote: suggestion.quote,
+          timestamp: suggestion.timestamp,
+          analysis_reasoning: suggestion.analysis_reasoning,
+          confidence: suggestion.confidence,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', signalId);
+
+      if (error) throw error;
+
+      alert('개선안이 승인되어 시그널이 업데이트되었습니다.');
+      
+      // AI 개선안 제거하고 이슈 목록 새로고침
+      setAiImprovements(prev => {
+        const newImprovements = { ...prev };
+        delete newImprovements[signalId];
+        return newImprovements;
+      });
+      
+      await loadQualityIssues();
+    } catch (error) {
+      console.error('개선안 승인 실패:', error);
+      alert('개선안 승인에 실패했습니다.');
+    }
+  };
+
+  // 개선안 거절
+  const handleRejectImprovement = (signalId: string) => {
+    setAiImprovements(prev => {
+      const newImprovements = { ...prev };
+      delete newImprovements[signalId];
+      return newImprovements;
+    });
+  };
+
+  // 프롬프트 개선안 생성
+  const generatePromptImprovements = async () => {
+    try {
+      setGeneratingPrompt(true);
+      
+      const response = await fetch('/api/prompt-improvements', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ patterns: reportPatterns })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        setPromptImprovements(data.improvements);
+      } else {
+        alert('프롬프트 개선안 생성에 실패했습니다: ' + data.error);
+      }
+    } catch (error) {
+      console.error('프롬프트 개선안 생성 실패:', error);
+      alert('프롬프트 개선안 생성 중 오류가 발생했습니다.');
+    } finally {
+      setGeneratingPrompt(false);
+    }
+  };
+
+  // 탭 변경 시 데이터 로딩
+  useEffect(() => {
+    if (activeTab === 'ai-suggestions' && qualityIssues.length === 0) {
+      loadQualityIssues();
+    } else if (activeTab === 'prompts' && !reportPatterns) {
+      loadReportPatterns();
+    }
+  }, [activeTab]);
 
   const renderTabContent = () => {
     switch (activeTab) {
