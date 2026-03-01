@@ -31,8 +31,8 @@ async function main() {
     console.log(`[${i+1}/${videos.length}] ${v.video_id} - current: ${v.title?.substring(0, 50)}...`);
     
     try {
-      const ytTitle = execSync(`yt-dlp --get-title "https://youtube.com/watch?v=${v.video_id}"`, 
-        { encoding: 'utf-8', timeout: 30000 }).trim();
+      const ytTitle = execSync(`chcp 65001 >nul & python -m yt_dlp --get-title "https://youtube.com/watch?v=${v.video_id}"`, 
+        { encoding: 'utf-8', timeout: 30000, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } }).trim();
       
       if (ytTitle && ytTitle !== v.title) {
         changes.push({ id: v.id, video_id: v.video_id, oldTitle: v.title, newTitle: ytTitle });
