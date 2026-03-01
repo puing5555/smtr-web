@@ -224,10 +224,15 @@ ${aiReview}
   "stock": "종목명",
   "ticker": "티커 또는 null",
   "signal": "매수|긍정|중립|경계|매도",
-  "key_quote": "정확한 인용문",
-  "timestamp": "MM:SS",
-  "reasoning": "수정된 분석근거"
+  "key_quote": "원본 자막에서 추출한 실제 발언 (15자 이상, 반드시 자막 원문 그대로)",
+  "timestamp": "MM:SS (자막에서 해당 발언이 시작되는 시점)",
+  "reasoning": "자막 내용 기반 구체적 분석근거 (20자 이상, 왜 이 시그널인지 설명)"
 }
+
+**절대 금지:**
+- key_quote를 빈 문자열("")이나 "N/A"로 채우지 마세요. 반드시 원본 자막에서 실제 발언을 정확히 복사하세요.
+- reasoning을 "N/A"나 빈 값으로 채우지 마세요. 자막의 맥락을 분석하여 구체적으로 작성하세요.
+- 원본 자막에 없는 내용을 창작하지 마세요.
 
 반드시 순수 JSON만 반환. markdown 코드블록(\`\`\`)으로 감싸지 마세요.
 `;
@@ -509,7 +514,10 @@ ${aiReview}
                           } else if (review === 'test') {
                             return <span className="text-gray-400">테스트</span>;
                           } else {
-                            // 기본: 첫 줄 요약
+                            // "수정필요"가 없고 ai_suggestion도 없으면 → 문제없음으로 추정
+                            if (!report.ai_suggestion) {
+                              return <span className="text-green-600">✅ 문제없음</span>;
+                            }
                             const firstLine = review.split('\n').find((l: string) => l.trim() && !l.startsWith('#'))?.replace(/\*+/g, '').trim() || '검토완료';
                             return <span className="text-blue-600">📋 {firstLine.slice(0, 30)}{firstLine.length > 30 ? '...' : ''}</span>;
                           }
@@ -855,11 +863,13 @@ ${issueDescription}
   "stock": "종목명",
   "ticker": "티커 또는 null",
   "signal": "매수|긍정|중립|경계|매도",
-  "key_quote": "정확한 인용문 (15자 이상)",
-  "timestamp": "MM:SS",
-  "reasoning": "구체적인 분석근거 (20자 이상)",
+  "key_quote": "원본 자막에서 추출한 실제 발언 (15자 이상, 반드시 자막 원문 그대로)",
+  "timestamp": "MM:SS (자막에서 해당 발언이 시작되는 시점)",
+  "reasoning": "자막 내용 기반 구체적 분석근거 (20자 이상)",
   "confidence": 85
 }
+
+**절대 금지:** key_quote를 빈 문자열("")이나 "N/A"로 채우지 마세요. reasoning도 마찬가지. 반드시 원본 자막에서 실제 내용을 추출하세요.
 
 반드시 순수 JSON만 반환. markdown 코드블록(\`\`\`)으로 감싸지 마세요.
 `;
