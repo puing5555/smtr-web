@@ -46,7 +46,9 @@ _Last updated: 2026-02-28 16:14 (GMT+7)_
 - 2단계 4→5 미착수 (AI제안 탭, 프롬프트관리 탭)
 - V10.3 프롬프트 완성 (prompts/pipeline_v10.md, 3라운드 자율개선, 7단계 검증)
 - 자동화 파이프라인 scripts/ 완성 (6모듈)
-- admin 신고관리 AI검토 기능 수정 (analysis_reasoning→reasoning 컬럼명)
+- ✅ 종목 페이지 일괄 생성 (5개→28개, Supabase 동적 조회)
+- ✅ Edge Function 전환 (corsproxy.io→Supabase Edge Function, API키 입력 불필요)
+- ✅ Supabase access token: openclaw-deploy (만료 없음)
 - speakers 테이블 "김장년" orphan 레코드 정리 필요
 
 ### 완료된 추가 작업 (2026-03-01)

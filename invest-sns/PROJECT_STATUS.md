@@ -21,12 +21,17 @@
    - `lib/anthropicClient.ts` 완전 수정: corsproxy.io 제거, API 키 프롬프트 제거
    - Supabase Edge Function URL과 anon key로 직접 호출하도록 변경
 
-**⚠️ 남은 작업: Supabase CLI 로그인 필요**
-- Edge Function 배포: `npx supabase functions deploy anthropic-proxy --project-ref arypzhotxflimroprmdk`
-- 환경변수 설정: `npx supabase secrets set ANTHROPIC_API_KEY=<키> --project-ref arypzhotxflimroprmdk`
+**✅ Supabase Edge Function 배포 완료!**
+- ✅ Supabase CLI 로그인 성공 (access token 사용)
+- ✅ Edge Function 배포: `anthropic-proxy` 함수 배포 완료
+- ✅ 환경변수 설정: `ANTHROPIC_API_KEY` 환경변수 설정 완료
+- ✅ Dashboard URL: https://supabase.com/dashboard/project/arypzhotxflimroprmdk/functions
 
-**빌드 상태:** ✅ `npm run build` 성공 (28개 종목 페이지 정적 생성)
+**최종 빌드 상태:** ✅ `npm run build` 성공 (28개 종목 페이지 정적 생성)
 **Git 상태:** ✅ 커밋 완료 (886c315), master 브랜치 push 완료
+**Edge Function URL:** `https://arypzhotxflimroprmdk.supabase.co/functions/v1/anthropic-proxy`
+
+🎉 **모든 작업 100% 완료! 프론트엔드에서 이제 API 키 입력 없이 바로 Anthropic API 사용 가능합니다.**
 
 ## 이전 완료 내역 (2026-03-01)
 
