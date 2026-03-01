@@ -15,7 +15,7 @@ _Last updated: 2026-02-28 16:14 (GMT+7)_
 - **라이브 URL:** https://puing5555.github.io/invest-sns/
 - **GitHub:** puing5555/invest-sns
 - **프론트엔드:** Next.js (55페이지, GitHub Pages 배포)
-- **DB:** Supabase (45개 시그널 - 삼프로TV 20 + 코린이아빠 11 + 부읽남TV 7 + 이효석 7)
+- **DB:** Supabase (78개 시그널 - 삼프로TV 20 + 코린이아빠 11 + 부읽남TV 7 + 이효석 9 + 슈카 17 + 달란트 4 + 기타)
 - **프롬프트:** prompts/pipeline_v9.md (V9.1 고도화 완료, 규칙 31개)
 - **시그널 타입:** 매수/긍정/중립/경계/매도 (한글 5단계만)
 - **최신 태그:** v1.3-rollback-fixed
@@ -41,6 +41,12 @@ _Last updated: 2026-02-28 16:14 (GMT+7)_
 
 ### 현재 작업
 - UI 피드백 반영 중
+
+### 완료된 추가 작업 (2026-03-01)
+- Selenium 16배속 CC 캡처로 YouTube IP 차단 우회 (마지막 2개 자막 추출)
+- 달란트투자 채널/스피커 신규 추가, 4시그널 DB INSERT (총 78개)
+- published_at 날짜 수정 (42개 중 38개 업데이트, yt-dlp 사용)
+- 프론트엔드 published_at 우선 표시 + 최신순 정렬 + 배포
 
 ## 🔧 환경 설정
 - **OpenClaw 모델:** anthropic/claude-opus-4-6 (2026-02-28 변경)

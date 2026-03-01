@@ -80,6 +80,16 @@ _Last updated: 2026-02-28 14:33 (GMT+7)_
 6. **✅ 시그널 없는 경우 처리**: "아직 시그널이 없습니다" 명확한 안내
 7. **✅ 빌드+배포 완료**: `npm run build && npx gh-pages -d out` 성공
 
+### ✅ 날짜 표시 published_at 우선으로 수정 (2026-03-01 09:38)
+1. **✅ 프론트엔드 날짜 표시**: `published_at ?? created_at` (영상 업로드 날짜 우선, DB 입력 날짜 fallback)
+2. **✅ 클라이언트 정렬**: 4개 페이지에서 published_at 기준 최신순 정렬 추가
+   - `app/explore/influencer/page.tsx` - filteredSignals 정렬
+   - `app/profile/influencer/[id]/InfluencerProfileClient.tsx` - filteredSignals 정렬
+   - `app/stock/[code]/StockDetailClient.tsx` - transformedSignals 정렬
+   - `app/stock/[code]/StockDetailClientV2.tsx` - transformedSignals 정렬
+3. **✅ Supabase 쿼리**: `lib/supabase.ts`에서 이미 `published_at` select 확인 완료
+4. **✅ 커밋**: `24fc61b` - "날짜 표시 published_at 우선으로 수정"
+
 ---
 
 **❌ 절대 참조 금지**: smtr-web, guru_tracker v24, STRONG_BUY, 177개 코린이아빠 시그널 (망한 프로젝트)
