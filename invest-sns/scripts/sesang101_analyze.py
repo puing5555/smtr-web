@@ -279,8 +279,7 @@ class Sesang101Analyzer:
             print(f"[ERROR] 자막 파일을 찾을 수 없습니다: {self.subs_dir}")
             return
         
-        # 테스트용: 처음 10개만
-        subtitle_files = subtitle_files[:10]
+        # 전체 파일 처리
         self.results['stats']['total_videos'] = len(subtitle_files)
         
         # 2. 영상 제목 로드

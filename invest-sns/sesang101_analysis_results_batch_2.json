@@ -81,6 +81,31 @@
       "video_id": "1bcmmTZRX5Q",
       "reason": "분석 결과 없음",
       "title": "Memecoins and Meme Stocks, Are They Really Just a Game of Fate?"
+    },
+    {
+      "video_id": "3NUs0JElPvs",
+      "reason": "시그널 없음",
+      "title": "I will answer the question of why you should not invest in Ripple."
+    },
+    {
+      "video_id": "4Bay6eXJH1Q",
+      "reason": "시그널 없음",
+      "title": "Let's take a look at Palantir, a big data company with a nationalistic founder from PayPal."
+    },
+    {
+      "video_id": "4UvO-6eecv8",
+      "reason": "시그널 없음",
+      "title": "How to overcome investment failure and ride the wave of change | Introduction to World Studies Q&A"
+    },
+    {
+      "video_id": "4cCGQFHrbK4",
+      "reason": "시그널 없음",
+      "title": "The Second Palantir: Why You Can't Get 10x the Price Even If You Know It"
+    },
+    {
+      "video_id": "4h-fPWoA2W4",
+      "reason": "시그널 없음",
+      "title": "Is it a bubble if prices are skyrocketing? | Investment Theory 11"
     }
   ],
   "stats": {
@@ -88,6 +113,6 @@
     "processed": 1,
     "signals_found": 4,
     "errors": 0,
-    "skipped": 4
+    "skipped": 9
   }
 }
