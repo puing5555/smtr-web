@@ -326,7 +326,12 @@ def main():
             print(f"  SKIP {f}: too few segments ({len(subs)})")
             continue
         
-        vid = d.get('video_id')
+        # Extract video_id
+        if isinstance(d, dict) and 'video_id' in d:
+            vid = d['video_id']
+        else:
+            # Extract from filename
+            vid = f.replace('.json', '').split('_', 1)[-1] if '_' in f else f.replace('.json', '')
         # Check if already analyzed with V9
         already_v9 = False
         for ev in existing_videos:
