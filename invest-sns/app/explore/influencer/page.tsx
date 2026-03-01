@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { influencers } from '@/data/influencerData';
-import { getLatestInfluencerSignals } from '@/lib/supabase';
+import { getLatestInfluencerSignals, getSignalVoteCounts } from '@/lib/supabase';
 import { speakerToSlug } from '@/lib/speakerSlugs';
 import SignalCard from '@/components/SignalCard';
 import SignalDetailModal from '@/components/SignalDetailModal';
@@ -45,6 +45,7 @@ export default function InfluencerPage() {
   const [loading, setLoading] = useState(true);
   const [selectedSignal, setSelectedSignal] = useState<any>(null);
   const [categoryFilter, setCategoryFilter] = useState<Set<string>>(new Set(['kr', 'us', 'crypto']));
+  const [likeCounts, setLikeCounts] = useState<Record<string, number>>({});
 
   // DB에서 시그널 로드
   useEffect(() => {
@@ -68,6 +69,19 @@ export default function InfluencerPage() {
           ticker: s.ticker || null,
         }));
         setDbSignals(transformed);
+
+        // 좋아요 카운트 가져오기
+        if (transformed.length > 0) {
+          const signalIds = transformed.map((s: any) => s.id).filter(Boolean);
+          if (signalIds.length > 0) {
+            try {
+              const counts = await getSignalVoteCounts(signalIds);
+              setLikeCounts(counts);
+            } catch (e) {
+              console.error('Failed to load like counts:', e);
+            }
+          }
+        }
       } catch (e) {
         console.error('Failed to load signals:', e);
       } finally {
@@ -179,9 +193,9 @@ export default function InfluencerPage() {
           {/* Tabs */}
           <div className="flex space-x-8 -mb-px">
             {[
-              { id: 'latest', label: '🔥 최신 시그널', count: allSignals.length },
-              { id: 'influencers', label: '👥 인플루언서', count: influencers.length },
-              { id: 'stocks', label: '📊 종목별', count: stockGroups.length }
+              { id: 'latest', label: '🔥 최신 시그널', count: filteredSignals.length },
+              { id: 'influencers', label: '👥 인플루언서', count: null },
+              { id: 'stocks', label: '📊 종목별', count: null }
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -192,7 +206,7 @@ export default function InfluencerPage() {
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
-                {tab.label} <span className="text-xs bg-gray-100 px-2 py-1 rounded-full ml-1">{tab.count}</span>
+                {tab.label} {tab.count !== null && <span className="text-xs bg-gray-100 px-2 py-1 rounded-full ml-1">{tab.count}</span>}
               </button>
             ))}
           </div>
@@ -201,25 +215,27 @@ export default function InfluencerPage() {
 
       {/* Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* 카테고리 필터 - 전체 탭 공통 */}
+        <div className="flex gap-2 mb-4">
+          {([['kr', '🇰🇷 한국주식'], ['us', '🇺🇸 미국주식'], ['crypto', '₿ 크립토']] as const).map(([key, label]) => (
+            <button
+              key={key}
+              onClick={() => toggleCategory(key)}
+              className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+                categoryFilter.has(key)
+                  ? 'bg-[#3182f6] text-white border-[#3182f6]'
+                  : 'bg-white text-gray-500 border-gray-300 hover:border-gray-400'
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+
         {activeTab === 'latest' && (
           <div className="space-y-4">
             <div className="text-sm text-gray-600 mb-3">
               총 {filteredSignals.length}개 시그널 {loading && '(로딩 중...)'}
-            </div>
-            <div className="flex gap-2 mb-4">
-              {([['kr', '🇰🇷 한국주식'], ['us', '🇺🇸 미국주식'], ['crypto', '₿ 크립토']] as const).map(([key, label]) => (
-                <button
-                  key={key}
-                  onClick={() => toggleCategory(key)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
-                    categoryFilter.has(key)
-                      ? 'bg-[#3182f6] text-white border-[#3182f6]'
-                      : 'bg-white text-gray-500 border-gray-300 hover:border-gray-400'
-                  }`}
-                >
-                  {label}
-                </button>
-              ))}
             </div>
             {filteredSignals.map((signal) => (
               <SignalCard
@@ -254,9 +270,10 @@ export default function InfluencerPage() {
         {activeTab === 'influencers' && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {(() => {
-              // DB 시그널에서 발언자별 카운트 + 최신 시그널 + 채널 추출
+              // 카테고리 필터 적용된 시그널로 발언자별 카운트
+              const categoryFilteredSignals = allSignals.filter(s => categoryFilter.size === 0 || categoryFilter.has(classifySignal(s)));
               const speakerMap = new Map<string, { count: number; channels: Set<string>; latestSignal: string; latestDate: string; stockCounts: Map<string, number> }>();
-              allSignals.forEach(s => {
+              categoryFilteredSignals.forEach(s => {
                 const existing = speakerMap.get(s.speaker);
                 if (existing) {
                   existing.count++;
@@ -327,10 +344,21 @@ export default function InfluencerPage() {
 
         {activeTab === 'stocks' && (
           <div className="space-y-4">
+            {(() => {
+              // 카테고리 필터 적용된 종목 그룹
+              const categoryFilteredStocks = stockGroups.filter(group =>
+                group.signals.some((s: any) => categoryFilter.size === 0 || categoryFilter.has(classifySignal(s)))
+              ).map(group => ({
+                ...group,
+                signals: group.signals.filter((s: any) => categoryFilter.size === 0 || categoryFilter.has(classifySignal(s))),
+                signal_count: group.signals.filter((s: any) => categoryFilter.size === 0 || categoryFilter.has(classifySignal(s))).length,
+              })).filter((g: any) => searchQuery === '' || g.stock.toLowerCase().includes(searchQuery.toLowerCase()));
+
+              return (<>
             <div className="text-sm text-gray-600 mb-4">
-              총 {filteredStockGroups.length}개 종목
+              총 {categoryFilteredStocks.length}개 종목
             </div>
-            {filteredStockGroups.map((group) => {
+            {categoryFilteredStocks.map((group) => {
               const speakers = [...new Set(group.signals.map((s: any) => s.speaker))];
               const speakerText = speakers.length <= 2
                 ? speakers.join(', ')
@@ -369,6 +397,8 @@ export default function InfluencerPage() {
                 <div key={group.stock}>{cardContent}</div>
               );
             })}
+              </>);
+            })()}
           </div>
         )}
       </div>
