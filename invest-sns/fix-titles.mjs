@@ -66,10 +66,10 @@ async function main() {
   // 4. Summary
   console.log(`\n=== SUMMARY ===`);
   console.log(`Total: ${videos.length}, Changed: ${changes.length}, Errors: ${errors.length}`);
-  if (errors.length) console.log(`Errors:`, errors.map(e => e.youtube_id).join(', '));
+  if (errors.length) console.log(`Errors:`, errors.map(e => e.video_id).join(', '));
   if (changes.length) {
     console.log(`\nChanged videos:`);
-    changes.forEach(c => console.log(`  ${c.youtube_id}: "${c.oldTitle}" → "${c.newTitle}"`));
+    changes.forEach(c => console.log(`  ${c.video_id}: "${c.oldTitle}" → "${c.newTitle}"`));
   }
 }
 
