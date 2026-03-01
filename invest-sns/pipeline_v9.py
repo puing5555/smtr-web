@@ -109,6 +109,7 @@ def build_analysis_prompt(transcript, channel_name, video_id):
 - 교육/설명형 = 시그널 제외
 - 조건부 발언 = confidence medium 이하
 - 유료 티저 = 시그널 생성 금지
+- 멤버십/회원전용 영상 = 분석 제외 (자막 추출 불가)
 - 스코프: 한국주식 + 미국주식 + 크립토만 (부동산/원자재/해외주식 제외)
 - 발언자 이름 정규화 필수
 
@@ -313,7 +314,14 @@ def main():
         filepath = os.path.join(SUBS_DIR, f)
         with open(filepath, 'r', encoding='utf-8') as fh:
             d = json.load(fh)
-        subs = d.get('subtitles', d.get('segments', []))
+        
+        # Handle different JSON formats
+        if isinstance(d, list):
+            subs = d
+        elif isinstance(d, dict):
+            subs = d.get('subtitles', d.get('segments', []))
+        else:
+            subs = []
         if len(subs) < 50:
             print(f"  SKIP {f}: too few segments ({len(subs)})")
             continue
@@ -322,7 +330,8 @@ def main():
         # Check if already analyzed with V9
         already_v9 = False
         for ev in existing_videos:
-            if ev["video_id"] == vid and ev.get("pipeline_version","").startswith("V9"):
+            pipeline_version = ev.get("pipeline_version") or ""
+            if ev["video_id"] == vid and pipeline_version.startswith("V9"):
                 already_v9 = True
                 break
         
