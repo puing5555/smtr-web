@@ -391,12 +391,10 @@ export default function InfluencerPage() {
                           )}
                         </div>
                       </div>
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="flex items-center gap-2">
-                          <div className="text-2xl font-bold text-[#3182f6]">{speaker.count}</div>
-                          <span className="text-lg">{speaker.trendIcon}</span>
-                        </div>
-                        <div className="text-xs text-gray-500">시그널 수</div>
+                      <div className="mb-3">
+                        <span className="text-sm text-gray-500">언급 </span>
+                        <span className="text-2xl font-bold text-[#3182f6]">{speaker.count}</span>
+                        <span className="text-sm text-gray-500">회</span>
                       </div>
                       {speaker.topStocks.length > 0 && (
                         <div className="text-xs text-gray-400 truncate">
