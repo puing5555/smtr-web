@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { getSignalReports, updateReportStatus, getAdminStats } from '@/lib/supabase';
+import { getSignalReports, updateReportStatus, getAdminStats, supabase } from '@/lib/supabase';
 
 interface SignalReport {
   id: string;
@@ -49,6 +49,8 @@ export default function AdminPage() {
   const [reports, setReports] = useState<SignalReport[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedReport, setSelectedReport] = useState<SignalReport | null>(null);
+  const [isAiProcessing, setIsAiProcessing] = useState(false);
+  const [aiProcessingId, setAiProcessingId] = useState<string | null>(null);
   const [stats, setStats] = useState<AdminStats>({
     totalSignals: 0,
     totalVotes: 0,
@@ -95,6 +97,88 @@ export default function AdminPage() {
     } catch (error) {
       console.error('상태 업데이트 실패:', error);
       alert('상태 업데이트에 실패했습니다.');
+    }
+  };
+
+  // AI 검토 요청
+  const handleAiReview = async (reportId: string) => {
+    try {
+      setIsAiProcessing(true);
+      setAiProcessingId(reportId);
+
+      const response = await fetch('/api/review-signal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ reportId }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'AI 검토 요청에 실패했습니다.');
+      }
+
+      alert('AI 검토가 완료되었습니다!');
+      await loadData(); // 데이터 새로고침
+    } catch (error) {
+      console.error('AI 검토 실패:', error);
+      alert(error instanceof Error ? error.message : 'AI 검토에 실패했습니다.');
+    } finally {
+      setIsAiProcessing(false);
+      setAiProcessingId(null);
+    }
+  };
+
+  // AI 수정안 승인 (실제 시그널 업데이트)
+  const handleApproveAiSuggestion = async (report: SignalReport) => {
+    if (!report.ai_suggestion || !report.influencer_signals) {
+      alert('AI 수정안이 없습니다.');
+      return;
+    }
+
+    try {
+      const suggestion = JSON.parse(report.ai_suggestion);
+      
+      // influencer_signals 테이블 업데이트
+      const { error } = await supabase
+        .from('influencer_signals')
+        .update({
+          stock: suggestion.stock,
+          ticker: suggestion.ticker,
+          signal: suggestion.signal,
+          quote: suggestion.quote,
+          timestamp: suggestion.timestamp,
+          analysis_reasoning: suggestion.analysis_reasoning,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', report.influencer_signals.id);
+
+      if (error) throw error;
+
+      // 신고 상태를 resolved로 변경
+      await updateReportStatus(report.id, 'resolved');
+      
+      alert('AI 수정안이 승인되어 시그널이 업데이트되었습니다.');
+      await loadData();
+      setSelectedReport(null);
+    } catch (error) {
+      console.error('승인 처리 실패:', error);
+      alert('승인 처리에 실패했습니다.');
+    }
+  };
+
+  // 신고 거절 (상태만 변경)
+  const handleRejectReport = async (reportId: string) => {
+    try {
+      await updateReportStatus(reportId, 'resolved');
+      alert('신고가 거절되었습니다.');
+      await loadData();
+      setSelectedReport(null);
+    } catch (error) {
+      console.error('거절 처리 실패:', error);
+      alert('거절 처리에 실패했습니다.');
     }
   };
 
@@ -499,6 +583,68 @@ export default function AdminPage() {
                   </div>
                 )}
 
+                {/* AI 검토 결과 */}
+                {selectedReport.ai_review && (
+                  <div>
+                    <h4 className="text-lg font-semibold text-gray-900 mb-2">🤖 AI 검토 결과</h4>
+                    <div className="bg-blue-50 rounded-lg p-4">
+                      <div className="text-sm whitespace-pre-wrap">{selectedReport.ai_review}</div>
+                    </div>
+                  </div>
+                )}
+
+                {/* AI 수정안 및 비교 */}
+                {selectedReport.ai_suggestion && selectedReport.influencer_signals && (
+                  <div>
+                    <h4 className="text-lg font-semibold text-gray-900 mb-2">🔧 AI 수정안</h4>
+                    <div className="space-y-4">
+                      {(() => {
+                        try {
+                          const suggestion = JSON.parse(selectedReport.ai_suggestion);
+                          const original = selectedReport.influencer_signals;
+                          
+                          return (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              {/* 원본 */}
+                              <div className="bg-red-50 rounded-lg p-4">
+                                <h5 className="font-medium text-red-800 mb-2">📋 원본 시그널</h5>
+                                <div className="space-y-2 text-sm">
+                                  <div><span className="font-medium">종목:</span> {original.stock}</div>
+                                  <div><span className="font-medium">티커:</span> {original.ticker || 'N/A'}</div>
+                                  <div><span className="font-medium">신호:</span> {original.signal}</div>
+                                  <div><span className="font-medium">인용문:</span> "{original.quote}"</div>
+                                  <div><span className="font-medium">타임스탬프:</span> {original.timestamp}</div>
+                                  <div><span className="font-medium">분석근거:</span> {original.analysis_reasoning || 'N/A'}</div>
+                                </div>
+                              </div>
+                              
+                              {/* 수정안 */}
+                              <div className="bg-green-50 rounded-lg p-4">
+                                <h5 className="font-medium text-green-800 mb-2">✅ AI 수정안</h5>
+                                <div className="space-y-2 text-sm">
+                                  <div><span className="font-medium">종목:</span> {suggestion.stock}</div>
+                                  <div><span className="font-medium">티커:</span> {suggestion.ticker || 'N/A'}</div>
+                                  <div><span className="font-medium">신호:</span> {suggestion.signal}</div>
+                                  <div><span className="font-medium">인용문:</span> "{suggestion.quote}"</div>
+                                  <div><span className="font-medium">타임스탬프:</span> {suggestion.timestamp}</div>
+                                  <div><span className="font-medium">분석근거:</span> {suggestion.analysis_reasoning || 'N/A'}</div>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        } catch (e) {
+                          return (
+                            <div className="bg-yellow-50 rounded-lg p-4">
+                              <p className="text-yellow-800 text-sm">AI 수정안 파싱 오류</p>
+                              <pre className="text-xs mt-2 overflow-x-auto">{selectedReport.ai_suggestion}</pre>
+                            </div>
+                          );
+                        }
+                      })()}
+                    </div>
+                  </div>
+                )}
+
                 {/* 처리 버튼 */}
                 <div className="flex justify-end space-x-3">
                   <button
@@ -507,32 +653,41 @@ export default function AdminPage() {
                   >
                     닫기
                   </button>
+                  
+                  {/* AI 검토 요청 버튼 - ai_review가 없는 경우에만 표시 */}
+                  {!selectedReport.ai_review && (
+                    <button
+                      onClick={() => handleAiReview(selectedReport.id)}
+                      disabled={isAiProcessing && aiProcessingId === selectedReport.id}
+                      className="px-4 py-2 text-sm text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors flex items-center gap-2 disabled:opacity-50"
+                    >
+                      {isAiProcessing && aiProcessingId === selectedReport.id ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                          AI 검토 중...
+                        </>
+                      ) : (
+                        <>🤖 AI 검토 요청</>
+                      )}
+                    </button>
+                  )}
+
+                  {/* AI 수정안이 있는 경우 승인 버튼 */}
+                  {selectedReport.ai_suggestion && (
+                    <button
+                      onClick={() => handleApproveAiSuggestion(selectedReport)}
+                      className="px-4 py-2 text-sm text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2"
+                    >
+                      ✅ 수정안 승인
+                    </button>
+                  )}
+
+                  {/* 거절 버튼 */}
                   <button
-                    onClick={() => {
-                      handleStatusUpdate(selectedReport.id, 'reviewed');
-                      setSelectedReport(null);
-                    }}
-                    className="px-4 py-2 text-sm text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
-                  >
-                    🔄 재검토
-                  </button>
-                  <button
-                    onClick={() => {
-                      handleStatusUpdate(selectedReport.id, 'resolved');
-                      setSelectedReport(null);
-                    }}
+                    onClick={() => handleRejectReport(selectedReport.id)}
                     className="px-4 py-2 text-sm text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors flex items-center gap-2"
                   >
-                    ❌ 거절
-                  </button>
-                  <button
-                    onClick={() => {
-                      handleStatusUpdate(selectedReport.id, 'resolved');
-                      setSelectedReport(null);
-                    }}
-                    className="px-4 py-2 text-sm text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2"
-                  >
-                    ✅ 승인
+                    ❌ 신고 거절
                   </button>
                 </div>
               </div>
