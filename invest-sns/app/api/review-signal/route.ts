@@ -103,7 +103,7 @@ ${subtitleText}
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-3-opus-20240229',
+        model: 'claude-opus-4-6',
         max_tokens: 1000,
         messages: [
           {
@@ -158,7 +158,7 @@ ${aiReview}
 {
   "stock": "종목명",
   "ticker": "티커 또는 null",
-  "signal": "STRONG_BUY|BUY|POSITIVE|HOLD|NEUTRAL|CONCERN|SELL|STRONG_SELL",
+  "signal": "매수|긍정|중립|경계|매도",
   "quote": "정확한 인용문",
   "timestamp": "MM:SS",
   "analysis_reasoning": "수정된 분석근거"
@@ -175,7 +175,7 @@ JSON만 출력하고 다른 설명은 하지 마세요.
           'anthropic-version': '2023-06-01'
         },
         body: JSON.stringify({
-          model: 'claude-3-opus-20240229',
+          model: 'claude-opus-4-6',
           max_tokens: 500,
           messages: [
             {
