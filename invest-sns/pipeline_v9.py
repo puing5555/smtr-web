@@ -431,7 +431,7 @@ def main():
         
         # Print signals
         for sig in signals:
-            print(f"  📊 {sig['stock']} | {sig['signal']} | {sig['confidence']} | {sig['speaker']} | {sig.get('mention_type','?')}")
+            print(f"  [SIGNAL] {sig['stock']} | {sig['signal']} | {sig['confidence']} | {sig['speaker']} | {sig.get('mention_type','?')}")
         
         time.sleep(1)  # Rate limit
     
