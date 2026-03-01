@@ -176,69 +176,75 @@ URL: {video_data['url']}
     
     def convert_to_database_format(self, analysis_result: Dict[str, Any], 
                                  video_uuid: str, analysis_version: str = "V10.3") -> List[Dict[str, Any]]:
-        """
-        분석 결과를 데이터베이스 삽입 형식으로 변환
-        
-        Args:
-            analysis_result: Claude 분석 결과
-            video_uuid: 영상 UUID
-            analysis_version: 분석 버전
-        
-        Returns:
-            데이터베이스 삽입용 시그널 리스트
-        """
+        """분석 결과를 데이터베이스 삽입 형식으로 변환"""
         signals = []
         
+        # 시그널 타입 매핑 (한글/영문 -> DB 영문)
+        signal_type_mapping = {
+            '매수': 'BUY', '긍정': 'POSITIVE', '중립': 'NEUTRAL',
+            '경계': 'CONCERN', '매도': 'SELL',
+            'STRONG_BUY': 'STRONG_BUY', 'BUY': 'BUY', 'POSITIVE': 'POSITIVE',
+            'HOLD': 'NEUTRAL', 'NEUTRAL': 'NEUTRAL', 'CONCERN': 'CONCERN',
+            'SELL': 'SELL', 'STRONG_SELL': 'STRONG_SELL'
+        }
+        allowed_types = ['STRONG_BUY', 'BUY', 'POSITIVE', 'NEUTRAL', 'CONCERN', 'SELL', 'STRONG_SELL']
+        
+        # confidence 문자열 -> 숫자 매핑
+        confidence_mapping = {
+            'very_high': 0.95, 'high': 0.85, 'medium': 0.65, 'low': 0.45, 'very_low': 0.25
+        }
+        
         try:
-            # 분석 결과에서 시그널 추출
-            if 'signals' in analysis_result:
-                for signal in analysis_result['signals']:
-                    # 필수 필드 확인
-                    required_fields = ['stock_symbol', 'signal_type', 'confidence', 'reasoning', 'timestamp']
-                    if not all(field in signal for field in required_fields):
-                        print(f"[WARNING] 필수 필드 누락된 시그널 스킵: {signal}")
+            signal_list = analysis_result.get('signals', [])
+            
+            for signal in signal_list:
+                try:
+                    # 종목 심볼
+                    stock_symbol = (signal.get('ticker') or signal.get('stock_symbol') 
+                                   or signal.get('stock', '')).upper()
+                    if not stock_symbol:
                         continue
                     
-                    # 시그널 타입 매핑 (한글 → 영문)
-                    signal_type_mapping = {
-                        '매수': 'BUY',
-                        '긍정': 'POSITIVE', 
-                        '중립': 'NEUTRAL',
-                        '경계': 'CONCERN',
-                        '매도': 'SELL',
-                        'STRONG_BUY': 'STRONG_BUY',
-                        'BUY': 'BUY',
-                        'POSITIVE': 'POSITIVE',
-                        'HOLD': 'NEUTRAL',
-                        'NEUTRAL': 'NEUTRAL',
-                        'CONCERN': 'CONCERN',
-                        'SELL': 'SELL',
-                        'STRONG_SELL': 'STRONG_SELL'
-                    }
-                    
-                    signal_type = signal_type_mapping.get(signal['signal_type'], signal['signal_type'])
-                    
-                    # 8가지 허용 타입 확인
-                    allowed_types = ['STRONG_BUY', 'BUY', 'POSITIVE', 'NEUTRAL', 'CONCERN', 'SELL', 'STRONG_SELL']
+                    # 시그널 타입
+                    raw_signal = signal.get('signal') or signal.get('signal_type') or signal.get('mention_type', '')
+                    signal_type = signal_type_mapping.get(raw_signal, raw_signal.upper() if raw_signal else 'NEUTRAL')
                     if signal_type not in allowed_types:
-                        print(f"[WARNING] 허용되지 않은 시그널 타입: {signal['signal_type']} -> {signal_type}")
-                        signal_type = 'NEUTRAL'  # 기본값
+                        signal_type = 'NEUTRAL'
                     
-                    # 데이터베이스 형식으로 변환
+                    # confidence
+                    conf = signal.get('confidence', 0.5)
+                    if isinstance(conf, str):
+                        conf = confidence_mapping.get(conf.lower(), 0.5)
+                    
+                    # 타임스탬프 (MM:SS -> 초)
+                    ts_raw = signal.get('timestamp', signal.get('timestamp_start', 0))
+                    if isinstance(ts_raw, str) and ':' in ts_raw:
+                        parts = ts_raw.split(':')
+                        ts = int(parts[0]) * 60 + int(parts[1])
+                    else:
+                        ts = int(ts_raw) if ts_raw else 0
+                    
+                    # reasoning
+                    reasoning = signal.get('reasoning', signal.get('key_quote', ''))
+                    context = signal.get('context', signal.get('key_quote', ''))
+                    speaker = signal.get('speaker_name', signal.get('speaker', ''))
+                    
                     db_signal = {
                         'video_uuid': video_uuid,
-                        'stock_symbol': signal['stock_symbol'].upper(),
+                        'stock_symbol': stock_symbol,
                         'signal_type': signal_type,
-                        'confidence': float(signal['confidence']),
-                        'reasoning': signal['reasoning'],
-                        'timestamp_start': int(signal['timestamp']),
-                        'timestamp_end': int(signal.get('timestamp_end', signal['timestamp'])),
-                        'context': signal.get('context', ''),
-                        'speaker_name': signal.get('speaker_name', ''),
+                        'confidence': float(conf),
+                        'reasoning': reasoning,
+                        'timestamp_start': ts,
+                        'timestamp_end': ts,
+                        'context': context,
+                        'speaker_name': speaker,
                         'analysis_version': analysis_version
                     }
-                    
                     signals.append(db_signal)
+                except Exception as e:
+                    print(f"[WARNING] 시그널 변환 오류 (스킵): {e}")
+                    continue
             
             print(f"[SUCCESS] {len(signals)}개 시그널 변환 완료")
             return signals
