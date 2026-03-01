@@ -170,12 +170,23 @@ class Sesang101Analyzer:
             
             # 4. 시그널 분석
             print(f"[ANALYZE] V10.7 분석 시작...")
-            signals = self.analyzer.analyze_video(
+            result = self.analyzer.analyze_video_subtitle(
                 channel_url=self.channel_info['url'],
                 video_data=video_info,
                 subtitle=subtitle_text
             )
             
+            if not result:
+                print(f"[SKIP] 분석 결과 없음: {video_id}")
+                self.results['skipped'].append({
+                    'video_id': video_id,
+                    'reason': '분석 결과 없음',
+                    'title': title
+                })
+                return False
+            
+            # 시그널 추출
+            signals = result.get('signals', [])
             if not signals:
                 print(f"[SKIP] 시그널 없음: {video_id}")
                 self.results['skipped'].append({
@@ -261,8 +272,8 @@ class Sesang101Analyzer:
         video_titles = self.load_video_titles()
         print(f"[INFO] 영상 제목 {len(video_titles)}개 로드")
         
-        # 3. 배치별 처리 (20개씩)
-        batch_size = self.config.RATE_LIMIT_BATCH_SIZE
+        # 3. 배치별 처리 (5개씩으로 줄임)
+        batch_size = 5
         total_batches = (len(subtitle_files) + batch_size - 1) // batch_size
         
         for batch_idx in range(total_batches):

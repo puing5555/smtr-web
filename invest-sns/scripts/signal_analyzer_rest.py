@@ -111,7 +111,7 @@ URL: {video_data['url']}
                 
                 # Anthropic API 호출
                 payload = {
-                    'model': 'claude-3-5-sonnet-20241022',
+                    'model': 'claude-3-haiku-20240307',
                     'max_tokens': 4000,
                     'messages': [
                         {
