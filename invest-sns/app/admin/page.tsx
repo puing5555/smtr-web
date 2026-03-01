@@ -590,6 +590,386 @@ export default function AdminPage() {
     }
   }, [activeTab]);
 
+  // AI 제안 탭 렌더링
+  const renderAiSuggestionsTab = () => (
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900">🤖 AI 품질 제안</h2>
+          <p className="text-gray-600 mt-1">품질 이슈가 감지된 시그널의 개선안을 확인합니다.</p>
+        </div>
+        <button
+          onClick={loadQualityIssues}
+          disabled={loadingIssues}
+          className="px-4 py-2 bg-[#3182f6] text-white rounded-lg hover:bg-[#1b64da] transition-colors flex items-center gap-2"
+        >
+          {loadingIssues ? (
+            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+          ) : (
+            '🔄'
+          )}
+          품질 검사 실행
+        </button>
+      </div>
+
+      {loadingIssues ? (
+        <div className="text-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3182f6] mx-auto mb-4"></div>
+          <p className="text-gray-600">품질 이슈를 분석하는 중...</p>
+        </div>
+      ) : qualityIssues.length === 0 ? (
+        <div className="text-center py-12">
+          <div className="text-6xl mb-4">✅</div>
+          <h3 className="text-xl font-bold text-gray-900 mb-2">품질 이슈 없음</h3>
+          <p className="text-gray-600">현재 품질 기준을 만족하지 않는 시그널이 없습니다.</p>
+        </div>
+      ) : (
+        <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-200">
+            <h3 className="text-lg font-semibold text-gray-900">
+              품질 이슈 발견: {qualityIssues.length}건
+            </h3>
+          </div>
+          
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">시그널 정보</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">이슈 유형</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">현재값</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">작업</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {qualityIssues.map((issue) => (
+                  <tr key={issue.id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4">
+                      <div className="flex flex-col space-y-1">
+                        <div className="flex items-center space-x-2">
+                          <span className="font-medium text-sm">{issue.stock}</span>
+                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getSignalColor(issue.signal)}`}>
+                            {issue.signal}
+                          </span>
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          {issue.speakers?.name || issue.influencer_videos?.influencer_channels?.channel_name || 'Unknown'}
+                        </div>
+                        <div className="text-xs text-gray-400">
+                          {formatDate(issue.created_at)}
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="space-y-1">
+                        {issue.issueTypes.map((issueType: string) => (
+                          <span key={issueType} className="inline-block px-2 py-1 bg-red-100 text-red-800 text-xs rounded mr-1">
+                            {issueType}
+                          </span>
+                        ))}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="text-xs text-gray-600 space-y-1">
+                        {Object.entries(issue.currentValues).map(([key, value]) => (
+                          <div key={key}>
+                            <span className="font-medium">{key}:</span>
+                            <span className="ml-1 text-gray-500 truncate max-w-32 inline-block">
+                              {String(value)}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      {aiImprovements[issue.id] ? (
+                        <div className="space-y-2">
+                          <div className="text-xs text-green-600 font-medium">✅ 개선안 생성됨</div>
+                          <div className="flex space-x-2">
+                            <button
+                              onClick={() => handleApproveImprovement(issue.id)}
+                              className="px-3 py-1 bg-green-600 text-white text-xs rounded hover:bg-green-700"
+                            >
+                              승인
+                            </button>
+                            <button
+                              onClick={() => handleRejectImprovement(issue.id)}
+                              className="px-3 py-1 bg-gray-300 text-gray-700 text-xs rounded hover:bg-gray-400"
+                            >
+                              거절
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => handleAiImprovement(issue.id, issue.issueTypes)}
+                          disabled={improvingSignals.has(issue.id)}
+                          className="px-3 py-1 bg-purple-600 text-white text-xs rounded hover:bg-purple-700 disabled:opacity-50 flex items-center gap-1"
+                        >
+                          {improvingSignals.has(issue.id) ? (
+                            <>
+                              <div className="w-3 h-3 border border-white border-t-transparent rounded-full animate-spin"></div>
+                              처리중...
+                            </>
+                          ) : (
+                            <>🤖 AI 개선 요청</>
+                          )}
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* 개선안 상세 보기 */}
+          {Object.entries(aiImprovements).length > 0 && (
+            <div className="px-6 py-4 border-t border-gray-200">
+              <h4 className="text-lg font-semibold text-gray-900 mb-4">🔧 AI 개선안 상세</h4>
+              <div className="space-y-6">
+                {Object.entries(aiImprovements).map(([signalId, improvement]: [string, any]) => {
+                  try {
+                    const suggestion = JSON.parse(improvement.improvement);
+                    const original = improvement.originalSignal;
+                    const issue = qualityIssues.find(i => i.id === signalId);
+                    
+                    return (
+                      <div key={signalId} className="border rounded-lg p-4">
+                        <div className="flex justify-between items-start mb-4">
+                          <h5 className="font-medium text-gray-900">
+                            {issue?.stock} - {issue?.signal}
+                          </h5>
+                          <div className="flex space-x-2">
+                            <button
+                              onClick={() => handleApproveImprovement(signalId)}
+                              className="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700"
+                            >
+                              ✅ 승인
+                            </button>
+                            <button
+                              onClick={() => handleRejectImprovement(signalId)}
+                              className="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700"
+                            >
+                              ❌ 거절
+                            </button>
+                          </div>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="bg-red-50 rounded-lg p-3">
+                            <h6 className="font-medium text-red-800 mb-2">📋 원본</h6>
+                            <div className="space-y-1 text-sm">
+                              <div><span className="font-medium">종목:</span> {original.stock}</div>
+                              <div><span className="font-medium">신호:</span> {original.signal}</div>
+                              <div><span className="font-medium">인용문:</span> {original.quote || 'N/A'}</div>
+                              <div><span className="font-medium">분석근거:</span> {original.analysis_reasoning || 'N/A'}</div>
+                              <div><span className="font-medium">신뢰도:</span> {original.confidence || 'N/A'}</div>
+                            </div>
+                          </div>
+                          
+                          <div className="bg-green-50 rounded-lg p-3">
+                            <h6 className="font-medium text-green-800 mb-2">✅ 개선안</h6>
+                            <div className="space-y-1 text-sm">
+                              <div><span className="font-medium">종목:</span> {suggestion.stock}</div>
+                              <div><span className="font-medium">신호:</span> {suggestion.signal}</div>
+                              <div><span className="font-medium">인용문:</span> {suggestion.quote}</div>
+                              <div><span className="font-medium">분석근거:</span> {suggestion.analysis_reasoning}</div>
+                              <div><span className="font-medium">신뢰도:</span> {suggestion.confidence}</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  } catch (e) {
+                    return (
+                      <div key={signalId} className="border rounded-lg p-4 bg-yellow-50">
+                        <p className="text-yellow-800">개선안 파싱 오류</p>
+                      </div>
+                    );
+                  }
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+
+  // 프롬프트 관리 탭 렌더링
+  const renderPromptsTab = () => (
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900">⚙️ 프롬프트 관리</h2>
+          <p className="text-gray-600 mt-1">신고 패턴을 분석하여 프롬프트 개선안을 제안합니다.</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full font-medium">
+            현재 버전: V10
+          </span>
+          <button
+            onClick={loadReportPatterns}
+            disabled={loadingPatterns}
+            className="px-4 py-2 bg-[#3182f6] text-white rounded-lg hover:bg-[#1b64da] transition-colors flex items-center gap-2"
+          >
+            {loadingPatterns ? (
+              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            ) : (
+              '📊'
+            )}
+            패턴 분석
+          </button>
+        </div>
+      </div>
+
+      {loadingPatterns ? (
+        <div className="text-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3182f6] mx-auto mb-4"></div>
+          <p className="text-gray-600">신고 패턴을 분석하는 중...</p>
+        </div>
+      ) : reportPatterns ? (
+        <div className="space-y-6">
+          {/* 패턴 요약 카드들 */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-white rounded-lg p-4 shadow-sm border">
+              <h3 className="font-semibold text-gray-900 mb-2">총 신고 건수</h3>
+              <p className="text-3xl font-bold text-[#3182f6]">{reportPatterns.totalReports}</p>
+            </div>
+            
+            <div className="bg-white rounded-lg p-4 shadow-sm border">
+              <h3 className="font-semibold text-gray-900 mb-2">주요 신고 사유</h3>
+              <p className="text-lg font-bold text-red-600">
+                {reportPatterns.reasonStats[0]?.reason || 'N/A'}
+              </p>
+              <p className="text-sm text-gray-500">
+                {reportPatterns.reasonStats[0]?.count || 0}건
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-lg p-4 shadow-sm border">
+              <h3 className="font-semibold text-gray-900 mb-2">문제 신호 유형</h3>
+              <p className="text-lg font-bold text-orange-600">
+                {reportPatterns.signalTypeStats[0]?.signal || 'N/A'}
+              </p>
+              <p className="text-sm text-gray-500">
+                {reportPatterns.signalTypeStats[0]?.count || 0}건
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-lg p-4 shadow-sm border">
+              <h3 className="font-semibold text-gray-900 mb-2">문제 종목</h3>
+              <p className="text-lg font-bold text-purple-600">
+                {reportPatterns.stockStats[0]?.stock || 'N/A'}
+              </p>
+              <p className="text-sm text-gray-500">
+                {reportPatterns.stockStats[0]?.count || 0}건
+              </p>
+            </div>
+          </div>
+
+          {/* 상세 패턴 분석 */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* 사유별 통계 */}
+            <div className="bg-white rounded-lg p-6 shadow-sm border">
+              <h3 className="font-semibold text-gray-900 mb-4">📋 사유별 신고 현황</h3>
+              <div className="space-y-3">
+                {reportPatterns.reasonStats.slice(0, 5).map((item: any) => (
+                  <div key={item.reason} className="flex justify-between items-center">
+                    <span className="text-sm text-gray-700">{item.reason}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-bold">{item.count}건</span>
+                      <div className="w-20 h-2 bg-gray-200 rounded-full">
+                        <div 
+                          className="h-2 bg-red-500 rounded-full"
+                          style={{ width: `${(item.count / reportPatterns.totalReports) * 100}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 시그널 타입별 통계 */}
+            <div className="bg-white rounded-lg p-6 shadow-sm border">
+              <h3 className="font-semibold text-gray-900 mb-4">🎯 시그널 타입별 신고</h3>
+              <div className="space-y-3">
+                {reportPatterns.signalTypeStats.slice(0, 5).map((item: any) => (
+                  <div key={item.signal} className="flex justify-between items-center">
+                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getSignalColor(item.signal)}`}>
+                      {item.signal}
+                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-bold">{item.count}건</span>
+                      <div className="w-20 h-2 bg-gray-200 rounded-full">
+                        <div 
+                          className="h-2 bg-orange-500 rounded-full"
+                          style={{ width: `${(item.count / reportPatterns.totalReports) * 100}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* 프롬프트 개선안 생성 */}
+          <div className="bg-white rounded-lg p-6 shadow-sm border">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="font-semibold text-gray-900">🚀 프롬프트 개선안 생성</h3>
+              <button
+                onClick={generatePromptImprovements}
+                disabled={generatingPrompt}
+                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2"
+              >
+                {generatingPrompt ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    AI 분석 중...
+                  </>
+                ) : (
+                  <>🤖 개선안 생성</>
+                )}
+              </button>
+            </div>
+            
+            {promptImprovements ? (
+              <div className="space-y-4">
+                <div className="bg-green-50 rounded-lg p-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <h4 className="font-medium text-green-800">AI 생성 프롬프트 개선 규칙</h4>
+                    <button
+                      onClick={() => navigator.clipboard.writeText(promptImprovements)}
+                      className="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700"
+                    >
+                      📋 복사
+                    </button>
+                  </div>
+                  <div className="text-sm text-green-700 whitespace-pre-wrap bg-white rounded border p-3">
+                    {promptImprovements}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <p className="text-gray-500 text-sm">
+                신고 패턴 분석 결과를 바탕으로 파이프라인 프롬프트의 개선 규칙을 AI가 생성합니다.
+              </p>
+            )}
+          </div>
+        </div>
+      ) : (
+        <div className="text-center py-12">
+          <div className="text-6xl mb-4">📊</div>
+          <h3 className="text-xl font-bold text-gray-900 mb-2">패턴 분석 대기</h3>
+          <p className="text-gray-600">신고 패턴 분석 버튼을 클릭하여 시작하세요.</p>
+        </div>
+      )}
+    </div>
+  );
+
   const renderTabContent = () => {
     switch (activeTab) {
       case 'dashboard':
@@ -597,9 +977,9 @@ export default function AdminPage() {
       case 'reports':
         return renderReportsTab();
       case 'ai-suggestions':
-        return renderPlaceholderTab('AI 제안', '🤖');
+        return renderAiSuggestionsTab();
       case 'prompts':
-        return renderPlaceholderTab('프롬프트 관리', '⚙️');
+        return renderPromptsTab();
       default:
         return renderDashboard();
     }
