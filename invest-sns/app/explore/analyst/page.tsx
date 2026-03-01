@@ -20,6 +20,7 @@ interface Report {
   opinion: string;
   published_at: string;
   pdf_url: string;
+  summary?: string;
 }
 
 const data = reportsData as Record<string, Report[]>;
@@ -45,10 +46,122 @@ function formatPrice(n: number | null) {
   return `${Math.floor(n / 10000)}만원`;
 }
 
+function formatDate(dateStr: string) {
+  try {
+    const date = new Date(dateStr);
+    const year = date.getFullYear().toString().slice(-2); // 2026 -> 26
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}.${month}.${day}`;
+  } catch (e) {
+    return dateStr;
+  }
+}
+
+// 리포트 상세 모달 컴포넌트
+interface ReportModalProps {
+  report: Report | null;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+function ReportModal({ report, isOpen, onClose }: ReportModalProps) {
+  if (!isOpen || !report) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto">
+        <div className="p-6">
+          {/* 헤더 */}
+          <div className="flex items-start justify-between mb-4">
+            <h2 className="text-lg font-bold text-gray-900">리포트 상세</h2>
+            <button 
+              onClick={onClose}
+              className="text-gray-400 hover:text-gray-600 text-xl"
+            >
+              ✕
+            </button>
+          </div>
+
+          {/* 리포트 정보 */}
+          <div className="space-y-4">
+            <div>
+              <h3 className="font-medium text-gray-900 mb-2">{report.title}</h3>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-sm font-medium text-blue-600">
+                  {TICKER_NAMES[report.ticker] || report.ticker}
+                </span>
+                <OpinionBadge opinion={report.opinion} />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <span className="text-gray-500">증권사</span>
+                <p className="font-medium">{report.firm}</p>
+              </div>
+              <div>
+                <span className="text-gray-500">애널리스트</span>
+                <p className="font-medium">{report.analyst || '-'}</p>
+              </div>
+              <div>
+                <span className="text-gray-500">목표가</span>
+                <p className="font-medium">{formatPrice(report.target_price)}</p>
+              </div>
+              <div>
+                <span className="text-gray-500">투자의견</span>
+                <p className="font-medium">{report.opinion}</p>
+              </div>
+              <div className="col-span-2">
+                <span className="text-gray-500">발행일</span>
+                <p className="font-medium">{formatDate(report.published_at)}</p>
+              </div>
+            </div>
+
+            {/* AI 요약 (나중에 추가) */}
+            {report.summary && (
+              <div>
+                <span className="text-gray-500 text-sm">AI 한줄요약</span>
+                <p className="text-sm text-gray-700 mt-1 p-3 bg-gray-50 rounded-lg">
+                  {report.summary}
+                </p>
+              </div>
+            )}
+
+            {/* PDF 링크 */}
+            <div className="pt-4 border-t">
+              <a 
+                href={report.pdf_url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors"
+              >
+                📄 PDF 보고서 보기
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function AnalystPage() {
   const [activeTab, setActiveTab] = useState('latest');
   const [search, setSearch] = useState('');
+  const [selectedReport, setSelectedReport] = useState<Report | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const q = search.toLowerCase();
+
+  const openReportModal = (report: Report) => {
+    setSelectedReport(report);
+    setIsModalOpen(true);
+  };
+
+  const closeReportModal = () => {
+    setIsModalOpen(false);
+    setSelectedReport(null);
+  };
 
   // 최신순 정렬된 전체 리포트
   const sortedReports = useMemo(() =>
