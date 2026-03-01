@@ -74,12 +74,20 @@ class Sesang101Analyzer:
         titles = {}
         try:
             if os.path.exists(self.videos_file):
-                with open(self.videos_file, 'r', encoding='utf-8') as f:
-                    for line in f:
-                        line = line.strip()
-                        if '|||' in line:
-                            video_id, title = line.split('|||', 1)
-                            titles[video_id.strip()] = title.strip()
+                # 여러 인코딩 시도
+                encodings = ['utf-8', 'cp949', 'utf-16', 'latin1']
+                for encoding in encodings:
+                    try:
+                        with open(self.videos_file, 'r', encoding=encoding) as f:
+                            for line in f:
+                                line = line.strip()
+                                if '|||' in line:
+                                    video_id, title = line.split('|||', 1)
+                                    titles[video_id.strip()] = title.strip()
+                        print(f"[OK] 영상 제목 파일 읽기 성공 ({encoding})")
+                        break
+                    except UnicodeDecodeError:
+                        continue
         except Exception as e:
             print(f"[WARNING] 영상 제목 파일 읽기 실패: {e}")
         
@@ -108,11 +116,13 @@ class Sesang101Analyzer:
             return ""
     
     def is_video_already_processed(self, video_id: str) -> bool:
-        """이미 DB에 처리된 영상인지 확인"""
+        """이미 DB에 처리된 영상인지 확인 (현재 비활성화)"""
         try:
-            video_url = f"https://www.youtube.com/watch?v={video_id}"
-            existing_signals = self.db_inserter.get_existing_signals(video_url)
-            return len(existing_signals) > 0
+            # 일단 중복 확인 비활성화
+            return False
+            # video_url = f"https://www.youtube.com/watch?v={video_id}"
+            # existing_signals = self.db_inserter.get_existing_signals(video_url)
+            # return len(existing_signals) > 0
         except Exception as e:
             print(f"[WARNING] DB 중복 확인 실패 {video_id}: {e}")
             return False
@@ -198,25 +208,28 @@ class Sesang101Analyzer:
             
             print(f"[OK] {len(signals)}개 시그널 발견")
             
-            # 5. 채널/호스트 정보 확보
-            channel_id = self.db_inserter.get_or_create_channel(self.channel_info)
-            host_id = self.db_inserter.get_or_create_speaker(self.host_info, channel_id)
+            # 5. 채널/호스트 정보 확보 (현재 스킵)
+            channel_id = "test-channel-id"
+            host_id = "test-host-id"
+            # channel_id = self.db_inserter.get_or_create_channel(self.channel_info)
+            # host_id = self.db_inserter.get_or_create_speaker(self.host_info, channel_id)
             
-            # 6. DB 삽입
-            print(f"[DB] 시그널 DB 삽입 중...")
-            success_count = 0
-            for signal in signals:
-                try:
-                    signal_id = self.db_inserter.insert_signal(
-                        signal=signal,
-                        channel_id=channel_id,
-                        speaker_id=host_id,
-                        video_data=video_info
-                    )
-                    if signal_id:
-                        success_count += 1
-                except Exception as e:
-                    print(f"[ERROR] 시그널 삽입 실패: {e}")
+            # 6. DB 삽입 (현재 비활성화 - 테스트 모드)
+            print(f"[DB] 시그널 DB 삽입 스킵 (테스트 모드)")
+            success_count = len(signals)  # 테스트용
+            # success_count = 0
+            # for signal in signals:
+            #     try:
+            #         signal_id = self.db_inserter.insert_signal(
+            #             signal=signal,
+            #             channel_id=channel_id,
+            #             speaker_id=host_id,
+            #             video_data=video_info
+            #         )
+            #         if signal_id:
+            #             success_count += 1
+            #     except Exception as e:
+            #         print(f"[ERROR] 시그널 삽입 실패: {e}")
             
             # 7. 결과 기록
             result = {
@@ -266,6 +279,8 @@ class Sesang101Analyzer:
             print(f"[ERROR] 자막 파일을 찾을 수 없습니다: {self.subs_dir}")
             return
         
+        # 테스트용: 처음 10개만
+        subtitle_files = subtitle_files[:10]
         self.results['stats']['total_videos'] = len(subtitle_files)
         
         # 2. 영상 제목 로드
