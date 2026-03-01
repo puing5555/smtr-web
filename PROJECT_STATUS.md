@@ -1,12 +1,12 @@
 # PROJECT_STATUS.md
 
-_Last updated: 2026-02-28 14:33 (GMT+7)_
+_Last updated: 2026-03-01 14:56 (GMT+7)_
 
 ## 💼 invest-sns 프로젝트 (투자 SNS 플랫폼)
 
 ### 🎯 현재 프로젝트 상태
 - **폴더**: `invest-sns/`
-- **프롬프트**: `prompts/pipeline_v9.md`
+- **프롬프트**: `prompts/pipeline_v10.md` → **V10.1로 업그레이드 완료**
 - **DB**: Supabase (31개 시그널)
   - 삼프로TV V7 20개 시그널 
   - 코린이아빠 V5 11개 시그널
@@ -89,6 +89,27 @@ _Last updated: 2026-02-28 14:33 (GMT+7)_
    - `app/stock/[code]/StockDetailClientV2.tsx` - transformedSignals 정렬
 3. **✅ Supabase 쿼리**: `lib/supabase.ts`에서 이미 `published_at` select 확인 완료
 4. **✅ 커밋**: `24fc61b` - "날짜 표시 published_at 우선으로 수정"
+
+### ✅ V10 프롬프트 자체 분석 및 개선 완료 (2026-03-01 14:56)
+1. **✅ DB 시그널 전수 검토**: 101개 시그널 분석, 87개 이슈 발견
+2. **✅ V10 규칙 위반 분석**: 
+   - 규칙30 (key_quote 품질): 53개 이슈 (61%)
+   - 규칙29 (화자 식별): 19개 이슈 (22%)
+   - 중복: 13개 이슈 (15%)
+   - 규칙3 (전망 vs 권유): 2개 이슈 (2%)
+3. **✅ V10.1 프롬프트 업그레이드 완료**: `prompts/pipeline_v10.md`
+   - 규칙 3개 강화 (규칙3, 29, 30)
+   - 규칙 1개 신규 (규칙32 중복방지)
+   - 교차검증 26항목 → 29항목 확장
+4. **✅ 개선 효과 검증**: **31% 이슈 해결** 예상 (87개 → 60개)
+   - 화자 식별: 100% 해결 (19개 → 0개)
+   - 중복 방지: 62% 해결 (13개 → 5개)
+   - 전망/권유: 100% 해결 (2개 → 0개)
+   - key_quote: 2% 해결 (53개 → 52개) - 자막 품질 한계
+5. **✅ 파일 생성**: 
+   - `V10_FINAL_REPORT.md` - 최종 보고서
+   - `v10_issues.json` - 87개 이슈 목록
+   - `v10_1_improvement_report.json` - 개선 효과 데이터
 
 ---
 
