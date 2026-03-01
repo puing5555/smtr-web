@@ -16,7 +16,7 @@ export async function GET() {
         stock,
         ticker,
         signal,
-        quote,
+        key_quote,
         analysis_reasoning,
         confidence,
         created_at,
@@ -53,10 +53,10 @@ export async function GET() {
         currentValues['분석근거 부족'] = signal.analysis_reasoning || 'null';
       }
 
-      // 2. quote가 15자 미만
-      if (!signal.quote || signal.quote.length < 15) {
+      // 2. key_quote가 15자 미만
+      if (!signal.key_quote || signal.key_quote.length < 15) {
         issueTypes.push('인용문 부족');
-        currentValues['인용문 부족'] = signal.quote || 'null';
+        currentValues['인용문 부족'] = signal.key_quote || 'null';
       }
 
       // 3. confidence가 없는 경우
@@ -72,7 +72,7 @@ export async function GET() {
           stock: signal.stock,
           ticker: signal.ticker,
           signal: signal.signal,
-          quote: signal.quote,
+          quote: signal.key_quote,
           analysis_reasoning: signal.analysis_reasoning,
           confidence: signal.confidence,
           created_at: signal.created_at,

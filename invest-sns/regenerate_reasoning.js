@@ -32,7 +32,7 @@ async function callAnthropicAPI(prompt) {
       'anthropic-version': '2023-06-01'
     },
     body: JSON.stringify({
-      model: 'claude-3-sonnet-20240229',
+      model: 'claude-3-haiku-20240307',
       max_tokens: 200,
       messages: [
         {

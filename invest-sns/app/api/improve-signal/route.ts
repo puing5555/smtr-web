@@ -67,7 +67,7 @@ ${subtitleText}
 **기존 시그널:**
 - 종목: ${signalData.stock} (${signalData.ticker || 'N/A'})
 - 신호: ${signalData.signal}
-- 인용문: ${signalData.quote || 'null'}
+- 인용문: ${signalData.key_quote || 'null'}
 - 타임스탬프: ${signalData.timestamp || 'N/A'}
 - 분석근거: ${signalData.analysis_reasoning || 'null'}
 - 신뢰도: ${signalData.confidence || 'null'}
@@ -128,7 +128,7 @@ JSON만 출력하고 다른 설명은 하지 마세요.
         stock: signalData.stock,
         ticker: signalData.ticker,
         signal: signalData.signal,
-        quote: signalData.quote,
+        quote: signalData.key_quote,
         timestamp: signalData.timestamp,
         analysis_reasoning: signalData.analysis_reasoning,
         confidence: signalData.confidence
