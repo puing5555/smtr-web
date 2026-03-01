@@ -15,7 +15,7 @@ _Last updated: 2026-02-28 16:14 (GMT+7)_
 - **라이브 URL:** https://puing5555.github.io/invest-sns/
 - **GitHub:** puing5555/invest-sns
 - **프론트엔드:** Next.js (55페이지, GitHub Pages 배포)
-- **DB:** Supabase (78개 시그널 - 삼프로TV 20 + 코린이아빠 11 + 부읽남TV 7 + 이효석 9 + 슈카 17 + 달란트 4 + 기타)
+- **DB:** Supabase (90개 시그널)
 - **프롬프트:** prompts/pipeline_v9.md (V9.1 고도화 완료, 규칙 31개)
 - **시그널 타입:** 매수/긍정/중립/경계/매도 (한글 5단계만)
 - **최신 태그:** v1.3-rollback-fixed
@@ -49,7 +49,12 @@ _Last updated: 2026-02-28 16:14 (GMT+7)_
 - ✅ 종목 페이지 일괄 생성 (5개→28개, Supabase 동적 조회)
 - ✅ Edge Function 전환 (corsproxy.io→Supabase Edge Function, API키 입력 불필요)
 - ✅ Supabase access token: openclaw-deploy (만료 없음)
+- ✅ signal_prices.json 112개 (섹터→대표종목 매핑 포함, HM파마/HCM파마 2개 불가)
+- ✅ 애널리스트 탭 "섹터별"→"종목별" 변경 완료
+- ✅ V10.7 프롬프트 완성 (prompts/pipeline_v10.md)
+- ✅ 애널리스트 데이터소스 조사 완료 (네이버증권 리서치 1순위)
 - speakers 테이블 "김장년" orphan 레코드 정리 필요
+- Supabase anon key 변경됨 (.env.local이 최신, MEMORY.md 구버전 키 사용 금지)
 
 ### 완료된 추가 작업 (2026-03-01)
 - Selenium 16배속 CC 캡처로 YouTube IP 차단 우회 (마지막 2개 자막 추출)
