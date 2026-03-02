@@ -145,11 +145,11 @@ class ContinueSesang101Analyzer:
             print(f"시그널 분석 시작: {video_data['video_id']}")
             print(f"자막 길이: {len(subtitle_text)} 문자")
             
-            # 시그널 분석 실행 (timeout 300초 설정)
-            analysis_result = self.analyzer.analyze_signals(
-                subtitle_text, 
-                video_data,
-                timeout=300  # 5분 timeout
+            # 시그널 분석 실행
+            analysis_result = self.analyzer.analyze_video_subtitle(
+                video_data['channel_info']['url'],  # channel_url
+                video_data,  # video_data 
+                subtitle_text  # subtitle
             )
             
             if analysis_result and analysis_result.get('signals'):
@@ -223,8 +223,8 @@ class ContinueSesang101Analyzer:
             print("모든 영상이 이미 처리되었습니다!")
             return
         
-        # 4. 배치 단위로 처리 (20개씩)
-        batch_size = 20
+        # 4. 배치 단위로 처리 (5개씩)
+        batch_size = 5
         current_batch = 6  # batch 1-5는 이미 완료
         
         total_analyzed = 0
