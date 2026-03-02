@@ -1,109 +1,99 @@
 {
-  "start_time": "2026-03-02T08:30:48.340253",
+  "start_time": "2026-03-02T08:34:59.876128",
   "batch_number": 6,
-  "total_files": 20,
-  "analyzed": 0,
-  "total_signals": 0,
+  "total_files": 5,
+  "analyzed": 1,
+  "total_signals": 4,
   "results": [
     {
-      "video_id": "-3odSn4Wi2E",
-      "status": "skipped",
-      "reason": "no_subtitle_text"
+      "video_id": "aW0cZ-rmzz8",
+      "status": "no_signals",
+      "analysis_result": {
+        "signals": [],
+        "video_summary": "코로나 이후 빠른 증시 상승과 투자 열풍에 대한 우려를 제기하며, 현금이 풀려나와 금융시장에만 유입되는 문제점을 지적했습니다. 버블 징조가 있지만 정확한 시기를 예측하기 어려운 만큼, 현금 일부 보유와 대폭락 시 기회 포착을 제안했습니다. 미래를 예측할 수 없으므로 상황 변화에 유연하게 대응하는 자세가 중요하다고 강조했습니다."
+      },
+      "db_saved": true
     },
     {
-      "video_id": "-JsPLE90h1Q",
-      "status": "skipped",
-      "reason": "no_subtitle_text"
+      "video_id": "awxGkVGfQ_w",
+      "status": "no_signals",
+      "analysis_result": {
+        "video_summary": "발언자는 비트코인 가격 상승으로 인한 수익 실현을 경험했지만, 주변에 과도하게 추천하는 것을 경계한다. 비트코인 시장의 특성상 급등락이 심하므로 무리한 레버리지 투자보다는 장기적인 관점에서 꾸준히 비트코인을 보유하는 것이 좋다고 조언한다. 또한 가격만을 보고 투자하는 것보다는 충분한 시장 이해와 철학을 가지고 있어야 한다고 강조한다."
+      },
+      "db_saved": true
     },
     {
-      "video_id": "0z8e_heKtKk",
-      "status": "skipped",
-      "reason": "no_subtitle_text"
+      "video_id": "BdNikaqw238",
+      "status": "no_signals",
+      "analysis_result": {
+        "video_summary": "이 영상은 이더리움의 기술적 특징과 시장 환경에 대한 설명이 주를 이룹니다. 발언자는 이더리움의 가치 저장 기능, 스테이블코인/DeFi 등 활용도, 낮은 인플레이션, AI 에이전트의 등장 등에 대해 설명합니다. 그러나 구체적인 투자 추천이나 의견은 제시되지 않아 시그널은 생성되지 않았습니다."
+      },
+      "db_saved": true
     },
     {
-      "video_id": "1bcmmTZRX5Q",
-      "status": "skipped",
-      "reason": "no_subtitle_text"
+      "video_id": "BeEHwOe-J98",
+      "status": "no_signals",
+      "analysis_result": null,
+      "db_saved": true
     },
     {
-      "video_id": "3NUs0JElPvs",
-      "status": "skipped",
-      "reason": "no_subtitle_text"
-    },
-    {
-      "video_id": "4Bay6eXJH1Q",
-      "status": "skipped",
-      "reason": "no_subtitle_text"
-    },
-    {
-      "video_id": "4cCGQFHrbK4",
-      "status": "skipped",
-      "reason": "no_subtitle_text"
-    },
-    {
-      "video_id": "4h-fPWoA2W4",
-      "status": "skipped",
-      "reason": "no_subtitle_text"
-    },
-    {
-      "video_id": "4UvO-6eecv8",
-      "status": "skipped",
-      "reason": "no_subtitle_text"
-    },
-    {
-      "video_id": "4wCO1fdl9iU",
-      "status": "skipped",
-      "reason": "no_subtitle_text"
-    },
-    {
-      "video_id": "4yZDpfDT7K8",
-      "status": "skipped",
-      "reason": "no_subtitle_text"
-    },
-    {
-      "video_id": "5aGn5CqbQls",
-      "status": "skipped",
-      "reason": "no_subtitle_text"
-    },
-    {
-      "video_id": "5I9wb6NKNUs",
-      "status": "skipped",
-      "reason": "no_subtitle_text"
-    },
-    {
-      "video_id": "5Py7WIb8iYw",
-      "status": "skipped",
-      "reason": "no_subtitle_text"
-    },
-    {
-      "video_id": "6Bk_eG77-5g",
-      "status": "skipped",
-      "reason": "no_subtitle_text"
-    },
-    {
-      "video_id": "7mzsY68IhhI",
-      "status": "skipped",
-      "reason": "no_subtitle_text"
-    },
-    {
-      "video_id": "7UoMvJPj0gw",
-      "status": "skipped",
-      "reason": "no_subtitle_text"
-    },
-    {
-      "video_id": "9cg-iVIkg20",
-      "status": "skipped",
-      "reason": "no_subtitle_text"
-    },
-    {
-      "video_id": "A2l1-lyzq4Q",
-      "status": "skipped",
-      "reason": "no_subtitle_text"
-    },
-    {
-      "video_id": "AaJTT_GTkKY",
-      "status": "skipped",
-      "reason": "no_subtitle_text"
+      "video_id": "bk-2Y0tjnZQ",
+      "status": "analyzed",
+      "signals_count": 4,
+      "analysis_result": {
+        "video_summary": "이 영상은 중국의 비트코인 채굴 규제, 비트코인의 전력 사용량 문제, 이더리움 클래식의 가격 상승 배경 등을 다루고 있습니다. 발언자는 중국의 규제가 비트코인 채굴 시장의 지리적 이동을 이끌 것으로 전망하며, 비트코인의 높은 전력 사용량에 대해서는 네트워크 보안을 위해 필요한 부분이라고 설명합니다. 또한 이더리움 클래식의 가격 상승 요인으로 이더리움의 전환 시도에 대한 반작용 등을 제시하고 있습니다. 최근 유튜브 정책 변경으로 인한 광고 부착 문제 등도 언급하고 있습니다.",
+        "signals": [
+          {
+            "speaker": "세상학개론",
+            "stock": "비트코인",
+            "ticker": null,
+            "market": "CRYPTO",
+            "mention_type": "논거",
+            "signal": "중립",
+            "confidence": "medium",
+            "timestamp": "N/A",
+            "key_quote": "중국에서 이제 더 이상 싼 전기를 구할 수 없다면 채굴자들은 다른지 없다는 나라로 이동을 하게 될겁니다",
+            "reasoning": "비트코인 채굴의 지리적 이동 전망"
+          },
+          {
+            "speaker": "세상학개론",
+            "stock": "이더리움 클래식",
+            "ticker": null,
+            "market": "CRYPTO",
+            "mention_type": "논거",
+            "signal": "긍정",
+            "confidence": "medium",
+            "timestamp": "N/A",
+            "key_quote": "이더리움 2.0으로의 전환 시도에 대한 반작용으로 이더리움 클래식 가격이 상승했다고 생각을",
+            "reasoning": "이더리움 클래식 가격 상승 배경"
+          },
+          {
+            "speaker": "세상학개론",
+            "stock": null,
+            "ticker": null,
+            "market": "INDEX",
+            "mention_type": "논거",
+            "signal": "중립",
+            "confidence": "high",
+            "timestamp": "N/A",
+            "key_quote": "비트코인의 높은 전력 사용량이 오히려 네트워크 보안을 위해 필요한 부분이라고 생각",
+            "reasoning": "비트코인의 높은 전력 사용량에 대한 발언자의 해석"
+          },
+          {
+            "speaker": "세상학개론",
+            "stock": null,
+            "ticker": null,
+            "market": "MACRO",
+            "mention_type": "뉴스",
+            "signal": "중립",
+            "confidence": "high",
+            "timestamp": "N/A",
+            "key_quote": "유튜브가 6월 1일부터 모든 채널에 광고를 부착하기로 했다는 소식",
+            "reasoning": "유튜브 광고 정책 변경에 대한 언급"
+          }
+        ]
+      },
+      "db_saved": false
     }
   ]
 }

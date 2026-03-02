@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import reportsData from '@/data/analyst_reports.json';
 import stockPricesData from '@/data/stockPrices.json';
-import StockChart from '@/components/StockChart';
+import StockAnalystChart from '@/components/StockAnalystChart';
 
 const TICKER_NAMES: Record<string, string> = {
   '240810': '원익QnC', '284620': '카이', '298040': '효성중공업', '352820': '하이브', '403870': 'HPSP',
@@ -206,13 +206,16 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
   return (
     <div className="space-y-6">
       {/* 주가 차트 & 애널리스트 시그널 */}
-      {analystSignals.length > 0 && (
-        <StockChart 
-          stockCode={code}
-          stockName={TICKER_NAMES[code] || code}
-          signals={analystSignals}
-        />
-      )}
+      <StockAnalystChart
+        code={code}
+        signals={reports.map(r => ({
+          date: r.published_at,
+          signal: r.opinion,
+          target_price: r.target_price,
+          firm: r.firm
+        }))}
+        currentPrice={currentPrice}
+      />
 
       {/* 증권사별 목표가 요약 */}
       {firmTargets.length > 0 && (
