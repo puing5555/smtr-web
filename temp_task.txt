@@ -1,0 +1,39 @@
+세상학개론 DB 데이터 수정 — 4가지 문제 해결
+
+### 경로
+- 프로젝트: C:\Users\Mario\work\invest-sns
+- PowerShell 환경 (;로 연결)
+- Python + requests
+
+### Supabase
+- URL: https://arypzhotxflimroprmdk.supabase.co
+- Service Role Key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyeXB6aG90eGZsaW1yb3BybWRrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MjAwNjExMCwiZXhwIjoyMDg3NTgyMTEwfQ.Q4ycJvyDqh-3ns3yk6JE4hB2gKAC39tgHE9ofSn0li8
+
+### 문제 1: 영상 제목 영어 → 한국어
+- influencer_videos 테이블에서 channel_id=d68f8efd-64c8-4c07-9d34-e98c2954f4e1 영상들
+- 제목이 영어로 되어있음 (예: "Palantir's Future Amidst...")
+- yt-dlp로 실제 한국어 제목 가져와서 UPDATE
+- 명령어: yt-dlp --get-title "https://youtube.com/watch?v=VIDEO_ID"
+- 모든 세상학개론 영상 제목 한국어로 업데이트
+
+### 문제 2: published_at 날짜 전부 틀림
+- 모든 세상학개론 영상이 2026-03-02로 되어있음
+- yt-dlp로 실제 업로드 날짜 가져오기: yt-dlp --get-filename -o "%(upload_date)s" URL
+- published_at 필드 실제 날짜로 UPDATE
+- 레이트리밋: 요청 간 2초
+
+### 문제 3: 중복 채널 정리
+- influencer_channels에 세상학개론이 2개:
+  - d68f8efd (channel_handle: sesang101) — 영상이 여기 연결됨
+  - 076505ae (channel_handle: @sesang101) — 빈 채널
+- 076505ae 삭제하고 d68f8efd의 handle을 @sesang101로 수정
+
+### 문제 4: 스피커 표시
+- 프론트엔드에서 "이효석"으로 표시되는 문제
+- speakers 테이블에서 이효석(b07d8758)의 표시를 확인
+- 프론트엔드 인플루언서 프로필 페이지에서 speaker_name이 아니라 channel_name을 표시하도록 해야 할 수 있음
+- 또는 별도 스피커 "세상학개론 이효석"으로 등록
+
+### 완료 후
+- git add -A; git commit -m "세상학개론 제목/날짜/채널 수정"
+- npm run build; npx gh-pages -d out
