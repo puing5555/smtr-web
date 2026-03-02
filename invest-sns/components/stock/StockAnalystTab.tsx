@@ -190,58 +190,53 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
     [reports]
   );
 
+  // 애널리스트 리포트를 시그널 형태로 변환
+  const analystSignals = useMemo(() => {
+    return reports.map((report) => ({
+      id: `analyst-${report.ticker}-${report.published_at}`,
+      signal_type: report.opinion === 'BUY' ? '매수' : 
+                   report.opinion === 'HOLD' ? '중립' : 
+                   report.opinion === 'SELL' ? '매도' : '중립',
+      date: report.published_at,
+      speaker: report.firm,
+      timestamp: report.published_at
+    }));
+  }, [reports]);
+
   return (
     <div className="space-y-6">
-      {/* 증권사별 목표가 비교 차트 */}
+      {/* 주가 차트 & 애널리스트 시그널 */}
+      {analystSignals.length > 0 && (
+        <StockChart 
+          stockCode={code}
+          stockName={TICKER_NAMES[code] || code}
+          signals={analystSignals}
+        />
+      )}
+
+      {/* 증권사별 목표가 요약 */}
       {firmTargets.length > 0 && (
         <div className="bg-white rounded-xl shadow-sm border border-[#e8e8e8] p-6">
-          <h3 className="font-bold text-[#191f28] mb-1">증권사별 목표가 비교</h3>
+          <h3 className="font-bold text-[#191f28] mb-1">증권사별 목표가 요약</h3>
           {currentPrice > 0 && (
             <p className="text-sm text-[#8b95a1] mb-4">현재가 {currentPrice.toLocaleString()}원</p>
           )}
-          <div className="space-y-3">
-            {firmTargets.map((ft, i) => {
-              const maxTarget = firmTargets[0]?.target_price || 1;
-              const pct = (ft.target_price / maxTarget) * 100;
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {firmTargets.slice(0, 6).map((ft, i) => {
               const upside = currentPrice > 0 ? ((ft.target_price - currentPrice) / currentPrice * 100).toFixed(1) : null;
               return (
-                <div key={i}>
-                  <div className="flex justify-between text-sm mb-1">
-                    <span className="text-[#333d4b] font-medium">{ft.firm}</span>
-                    <span className="text-[#191f28] font-bold">
-                      {formatTargetPrice(ft.target_price)}
-                      {upside && <span className={`ml-2 text-xs ${Number(upside) >= 0 ? 'text-[#22c55e]' : 'text-[#ef4444]'}`}>({upside}%)</span>}
-                    </span>
-                  </div>
-                  <div className="w-full bg-[#f0f0f0] rounded-full h-2.5 relative">
-                    <div
-                      className="h-2.5 rounded-full bg-[#3182f6]"
-                      style={{ width: `${pct}%` }}
-                    />
-                    {currentPrice > 0 && (
-                      <div
-                        className="absolute top-0 h-2.5 w-0.5 bg-[#ef4444]"
-                        style={{ left: `${(currentPrice / maxTarget) * 100}%` }}
-                        title={`현재가 ${currentPrice.toLocaleString()}원`}
-                      />
-                    )}
-                  </div>
+                <div key={i} className="border border-[#e8e8e8] rounded-lg p-3">
+                  <div className="text-sm font-medium text-[#333d4b] mb-1">{ft.firm}</div>
+                  <div className="text-lg font-bold text-[#191f28]">{formatTargetPrice(ft.target_price)}</div>
+                  {upside && (
+                    <div className={`text-xs ${Number(upside) >= 0 ? 'text-[#22c55e]' : 'text-[#ef4444]'}`}>
+                      {Number(upside) >= 0 ? '+' : ''}{upside}%
+                    </div>
+                  )}
                 </div>
               );
             })}
           </div>
-          {currentPrice > 0 && (
-            <div className="flex items-center gap-4 mt-4 text-xs text-[#8b95a1]">
-              <div className="flex items-center gap-1">
-                <div className="w-3 h-2 rounded bg-[#3182f6]"></div>
-                <span>목표가</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <div className="w-0.5 h-3 bg-[#ef4444]"></div>
-                <span>현재가</span>
-              </div>
-            </div>
-          )}
         </div>
       )}
 

@@ -12,7 +12,15 @@ import json
 import time
 import glob
 import requests
+import signal
 from datetime import datetime
+
+# 타임아웃 핸들러
+class TimeoutError(Exception):
+    pass
+
+def timeout_handler(signum, frame):
+    raise TimeoutError("Operation timed out")
 
 sys.path.append(os.path.dirname(__file__))
 from pipeline_config import PipelineConfig
@@ -82,7 +90,7 @@ def extract_subtitle(filepath):
         return ""
 
 def analyze_video(title, url, subtitle, max_retries=3):
-    """직접 Claude API 호출"""
+    """직접 Claude API 호출 (signal 타임아웃 적용)"""
     prompt = PROMPT_TEMPLATE.replace('{CHANNEL_URL}', CHANNEL_URL)
     prompt += f"""
 
@@ -106,12 +114,20 @@ URL: {url}
     for attempt in range(max_retries):
         try:
             print(f"  [API] 시도 {attempt+1}/{max_retries}...")
-            resp = requests.post(
-                'https://api.anthropic.com/v1/messages',
-                headers=HEADERS,
-                json=payload,
-                timeout=(10, 120)
-            )
+            
+            # Signal 타임아웃 설정 (150초)
+            signal.signal(signal.SIGALRM, timeout_handler)
+            signal.alarm(150)
+            
+            try:
+                resp = requests.post(
+                    'https://api.anthropic.com/v1/messages',
+                    headers=HEADERS,
+                    json=payload,
+                    timeout=(10, 120)
+                )
+            finally:
+                signal.alarm(0)  # 타임아웃 해제
             
             if resp.status_code == 429:
                 print(f"  [RATE] 429 - 60초 대기...")
