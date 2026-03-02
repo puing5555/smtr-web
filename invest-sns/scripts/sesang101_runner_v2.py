@@ -91,7 +91,7 @@ def make_api_request(payload):
         timeout=(5, 30)  # 매우 짧은 타임아웃
     )
 
-def analyze_video(title, url, subtitle, max_retries=3):
+def analyze_video(title, url, subtitle, max_retries=5):
     """직접 Claude API 호출 (ThreadPoolExecutor 타임아웃)"""
     prompt = PROMPT_TEMPLATE.replace('{CHANNEL_URL}', CHANNEL_URL)
     prompt += f"""
@@ -117,13 +117,14 @@ URL: {url}
         try:
             print(f"  [API] 시도 {attempt+1}/{max_retries}...")
             
-            # ThreadPoolExecutor로 강제 타임아웃 (120초)
+            # ThreadPoolExecutor로 강제 타임아웃 (45초)
             with ThreadPoolExecutor(max_workers=1) as executor:
                 future = executor.submit(make_api_request, payload)
                 try:
-                    resp = future.result(timeout=120)
+                    resp = future.result(timeout=45)
                 except FutureTimeoutError:
-                    print(f"  [FORCE_TIMEOUT] 120초 강제 종료")
+                    print(f"  [FORCE_TIMEOUT] 45초 강제 종료")
+                    time.sleep(5)  # 잠깐 대기 후 재시도
                     continue
             
             if resp.status_code == 429:
