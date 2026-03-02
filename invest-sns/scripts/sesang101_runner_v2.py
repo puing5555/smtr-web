@@ -82,8 +82,17 @@ def extract_subtitle(filepath):
     except:
         return ""
 
+def make_api_request(payload):
+    """API 요청 함수 (ThreadPoolExecutor용)"""
+    return requests.post(
+        'https://api.anthropic.com/v1/messages',
+        headers=HEADERS,
+        json=payload,
+        timeout=(15, 90)  # 더 짧은 타임아웃
+    )
+
 def analyze_video(title, url, subtitle, max_retries=3):
-    """직접 Claude API 호출 (signal 타임아웃 적용)"""
+    """직접 Claude API 호출 (ThreadPoolExecutor 타임아웃)"""
     prompt = PROMPT_TEMPLATE.replace('{CHANNEL_URL}', CHANNEL_URL)
     prompt += f"""
 
@@ -108,19 +117,14 @@ URL: {url}
         try:
             print(f"  [API] 시도 {attempt+1}/{max_retries}...")
             
-            # Signal 타임아웃 설정 (150초)
-            signal.signal(signal.SIGALRM, timeout_handler)
-            signal.alarm(150)
-            
-            try:
-                resp = requests.post(
-                    'https://api.anthropic.com/v1/messages',
-                    headers=HEADERS,
-                    json=payload,
-                    timeout=(10, 120)
-                )
-            finally:
-                signal.alarm(0)  # 타임아웃 해제
+            # ThreadPoolExecutor로 강제 타임아웃 (120초)
+            with ThreadPoolExecutor(max_workers=1) as executor:
+                future = executor.submit(make_api_request, payload)
+                try:
+                    resp = future.result(timeout=120)
+                except FutureTimeoutError:
+                    print(f"  [FORCE_TIMEOUT] 120초 강제 종료")
+                    continue
             
             if resp.status_code == 429:
                 print(f"  [RATE] 429 - 60초 대기...")
@@ -159,9 +163,6 @@ URL: {url}
             
         except json.JSONDecodeError as e:
             print(f"  [ERR] JSON 파싱: {e}")
-            continue
-        except TimeoutError:
-            print(f"  [FORCE_TIMEOUT] 150초 강제 종료")
             continue
         except requests.exceptions.Timeout:
             print(f"  [TIMEOUT] requests 타임아웃")
