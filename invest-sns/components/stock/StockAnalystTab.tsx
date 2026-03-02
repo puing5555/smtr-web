@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import reportsData from '@/data/analyst_reports.json';
 import stockPricesData from '@/data/stockPrices.json';
+import StockChart from '@/components/StockChart';
 
 const TICKER_NAMES: Record<string, string> = {
   '240810': '원익QnC', '284620': '카이', '298040': '효성중공업', '352820': '하이브', '403870': 'HPSP',
