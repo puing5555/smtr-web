@@ -108,8 +108,24 @@ class ContinueSesang101Analyzer:
         
         return ""
 
-    def create_video_data(self, video_id: str, subtitle_data: Dict[str, Any]) -> Dict[str, Any]:
+    def create_video_data(self, video_id: str, subtitle_data) -> Dict[str, Any]:
         """영상 데이터 구성"""
+        # subtitle_data가 리스트인 경우 (메타데이터 없음)
+        if isinstance(subtitle_data, list):
+            return {
+                'video_id': video_id,
+                'title': f'세상학개론 영상 {video_id}',  # 기본 제목
+                'url': f"https://youtube.com/watch?v={video_id}",
+                'published_at': '',
+                'description': '',
+                'duration': 0,
+                'view_count': 0,
+                'like_count': 0,
+                'channel_info': self.channel_info,
+                'host_info': self.host_info
+            }
+        
+        # subtitle_data가 dict인 경우
         return {
             'video_id': video_id,
             'title': subtitle_data.get('title', '제목 없음'),

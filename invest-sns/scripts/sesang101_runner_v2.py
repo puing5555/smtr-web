@@ -83,12 +83,12 @@ def extract_subtitle(filepath):
         return ""
 
 def make_api_request(payload):
-    """API 요청 함수 (ThreadPoolExecutor용)"""
+    """API 요청 함수 (매우 짧은 타임아웃)"""
     return requests.post(
         'https://api.anthropic.com/v1/messages',
         headers=HEADERS,
         json=payload,
-        timeout=(15, 90)  # 더 짧은 타임아웃
+        timeout=(5, 30)  # 매우 짧은 타임아웃
     )
 
 def analyze_video(title, url, subtitle, max_retries=3):
