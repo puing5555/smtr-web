@@ -1,0 +1,109 @@
+{
+  "start_time": "2026-03-02T08:30:48.340253",
+  "batch_number": 6,
+  "total_files": 20,
+  "analyzed": 0,
+  "total_signals": 0,
+  "results": [
+    {
+      "video_id": "-3odSn4Wi2E",
+      "status": "skipped",
+      "reason": "no_subtitle_text"
+    },
+    {
+      "video_id": "-JsPLE90h1Q",
+      "status": "skipped",
+      "reason": "no_subtitle_text"
+    },
+    {
+      "video_id": "0z8e_heKtKk",
+      "status": "skipped",
+      "reason": "no_subtitle_text"
+    },
+    {
+      "video_id": "1bcmmTZRX5Q",
+      "status": "skipped",
+      "reason": "no_subtitle_text"
+    },
+    {
+      "video_id": "3NUs0JElPvs",
+      "status": "skipped",
+      "reason": "no_subtitle_text"
+    },
+    {
+      "video_id": "4Bay6eXJH1Q",
+      "status": "skipped",
+      "reason": "no_subtitle_text"
+    },
+    {
+      "video_id": "4cCGQFHrbK4",
+      "status": "skipped",
+      "reason": "no_subtitle_text"
+    },
+    {
+      "video_id": "4h-fPWoA2W4",
+      "status": "skipped",
+      "reason": "no_subtitle_text"
+    },
+    {
+      "video_id": "4UvO-6eecv8",
+      "status": "skipped",
+      "reason": "no_subtitle_text"
+    },
+    {
+      "video_id": "4wCO1fdl9iU",
+      "status": "skipped",
+      "reason": "no_subtitle_text"
+    },
+    {
+      "video_id": "4yZDpfDT7K8",
+      "status": "skipped",
+      "reason": "no_subtitle_text"
+    },
+    {
+      "video_id": "5aGn5CqbQls",
+      "status": "skipped",
+      "reason": "no_subtitle_text"
+    },
+    {
+      "video_id": "5I9wb6NKNUs",
+      "status": "skipped",
+      "reason": "no_subtitle_text"
+    },
+    {
+      "video_id": "5Py7WIb8iYw",
+      "status": "skipped",
+      "reason": "no_subtitle_text"
+    },
+    {
+      "video_id": "6Bk_eG77-5g",
+      "status": "skipped",
+      "reason": "no_subtitle_text"
+    },
+    {
+      "video_id": "7mzsY68IhhI",
+      "status": "skipped",
+      "reason": "no_subtitle_text"
+    },
+    {
+      "video_id": "7UoMvJPj0gw",
+      "status": "skipped",
+      "reason": "no_subtitle_text"
+    },
+    {
+      "video_id": "9cg-iVIkg20",
+      "status": "skipped",
+      "reason": "no_subtitle_text"
+    },
+    {
+      "video_id": "A2l1-lyzq4Q",
+      "status": "skipped",
+      "reason": "no_subtitle_text"
+    },
+    {
+      "video_id": "AaJTT_GTkKY",
+      "status": "skipped",
+      "reason": "no_subtitle_text"
+    }
+  ]
+}
