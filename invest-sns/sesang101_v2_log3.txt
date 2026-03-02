@@ -10,3 +10,14 @@
   제목: A video to watch when you still don't know much ab
   자막: 5408자
   [API] 시도 1/3...
+  [OK] 10개 시그널
+    - 이더리움 | 긍정 | high
+    - 스테이블코인 | 중립 | very_high
+    - 이더리움 | 중립 | very_high
+    - 이더리움 | None | None
+    - 이더리움 | 긍정 | high
+    - AI | 중립 | high
+    - 이더리움 | 긍정 | high
+    - 코인홀딩회사 | 경계 | medium
+    - 이더리움 | 긍정 | high
+    - altcoin | 경계 | medium
