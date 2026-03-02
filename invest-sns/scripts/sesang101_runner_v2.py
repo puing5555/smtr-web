@@ -167,8 +167,11 @@ URL: {url}
         except json.JSONDecodeError as e:
             print(f"  [ERR] JSON 파싱: {e}")
             continue
+        except TimeoutError:
+            print(f"  [FORCE_TIMEOUT] 150초 강제 종료")
+            continue
         except requests.exceptions.Timeout:
-            print(f"  [TIMEOUT] 120초 초과")
+            print(f"  [TIMEOUT] requests 타임아웃")
             continue
         except Exception as e:
             print(f"  [ERR] {e}")
