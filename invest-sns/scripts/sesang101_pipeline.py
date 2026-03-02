@@ -119,10 +119,11 @@ def step2_metadata():
             result = subprocess.run(
                 [sys.executable, "-m", "yt_dlp", "--dump-json", "--no-download",
                  f"https://www.youtube.com/watch?v={vid}"],
-                capture_output=True, text=True, timeout=30, encoding='utf-8'
+                capture_output=True, timeout=60
             )
             if result.returncode == 0:
-                data = json.loads(result.stdout)
+                stdout_text = result.stdout.decode('utf-8', errors='replace')
+                data = json.loads(stdout_text)
                 upload_date = data.get('upload_date', '')
                 if upload_date and len(upload_date) == 8:
                     published = f"{upload_date[:4]}-{upload_date[4:6]}-{upload_date[6:8]}T00:00:00Z"
@@ -135,7 +136,8 @@ def step2_metadata():
                 }
                 print(f"OK: {meta[vid]['title'][:40]}")
             else:
-                print(f"FAIL: {result.stderr[:80]}")
+                stderr_text = result.stderr.decode('utf-8', errors='replace')[:80] if result.stderr else 'unknown'
+                print(f"FAIL: {stderr_text}")
                 errors.append(vid)
         except Exception as e:
             print(f"ERROR: {e}")
@@ -438,8 +440,9 @@ def main():
     print(f"대상: {len(INVEST_IDS)}개 투자 영상")
     print("=" * 60)
     
-    # Step 1
-    no_subs = step1_subtitles()
+    # Step 1 - SKIP (already done, 55 have subs, 12 have no transcripts)
+    no_subs = []
+    print("\n=== STEP 1: 자막 추출 (스킵 - 이미 완료) ===")
     
     # Step 2
     meta, meta_errors = step2_metadata()
