@@ -36,8 +36,16 @@ const Scatter = dynamic(
   () => import('recharts').then((mod) => mod.Scatter),
   { ssr: false }
 );
+const ScatterChart = dynamic(
+  () => import('recharts').then((mod) => mod.ScatterChart),
+  { ssr: false }
+);
 const ResponsiveContainer = dynamic(
   () => import('recharts').then((mod) => mod.ResponsiveContainer),
+  { ssr: false }
+);
+const ComposedChart = dynamic(
+  () => import('recharts').then((mod) => mod.ComposedChart),
   { ssr: false }
 );
 
@@ -103,33 +111,46 @@ const getSignalColor = (signal: string) => {
   }
 };
 
+// 한글 시그널명으로 변환
+const getSignalName = (signal: string) => {
+  switch (signal.toLowerCase()) {
+    case 'buy': return '매수';
+    case 'hold': return '중립';
+    case 'sell': return '매도';
+    default: return signal;
+  }
+};
+
 export default function StockAnalystChart({ code, signals, currentPrice }: StockAnalystChartProps) {
   const chartData = useMemo(() => {
     const priceData = generatePriceData(signals, currentPrice || 50000);
     const avgTargetPrice = calculateAverageTargetPrice(signals);
     
-    // 시그널 점들을 차트 데이터에 통합
-    const signalPoints = signals.map(signal => {
-      const signalDate = new Date(signal.date).getTime();
-      const nearestDataPoint = priceData.find(d => 
-        Math.abs(d.timestamp - signalDate) < 24 * 60 * 60 * 1000 // 1일 이내
-      );
+    // 날짜별 데이터 맵 생성
+    const dateMap = new Map(priceData.map(d => [d.date, d]));
+    
+    // 시그널 점들을 주가 데이터와 통합
+    const enrichedData = priceData.map(pricePoint => {
+      // 해당 날짜의 시그널 찾기
+      const signalOnDate = signals.find(s => s.date === pricePoint.date);
       
-      return {
-        date: signal.date,
-        price: nearestDataPoint?.price || currentPrice,
-        signal: signal.signal,
-        firm: signal.firm,
-        target_price: signal.target_price,
-        timestamp: signalDate,
-        isSignal: true
-      };
+      if (signalOnDate) {
+        return {
+          ...pricePoint,
+          signalPrice: pricePoint.price, // 실제 주가 위치에 시그널 표시
+          signalType: signalOnDate.signal,
+          signalFirm: signalOnDate.firm,
+          hasSignal: true
+        };
+      }
+      
+      return pricePoint;
     });
     
-    return { priceData, signalPoints, avgTargetPrice };
+    return { enrichedData, avgTargetPrice };
   }, [signals, currentPrice]);
 
-  if (!chartData.priceData.length) {
+  if (!chartData.enrichedData.length) {
     return (
       <div className="w-full h-64 bg-[#f8f9fa] rounded-lg flex items-center justify-center">
         <div className="text-center">
@@ -139,6 +160,24 @@ export default function StockAnalystChart({ code, signals, currentPrice }: Stock
       </div>
     );
   }
+
+  // 커스텀 Dot 컴포넌트 
+  const CustomSignalDot = (props: any) => {
+    const { payload, cx, cy } = props;
+    if (!payload?.hasSignal) return null;
+    
+    return (
+      <circle
+        cx={cx}
+        cy={cy}
+        r={4}
+        fill={getSignalColor(payload.signalType)}
+        stroke="white"
+        strokeWidth={2}
+        style={{ cursor: 'pointer' }}
+      />
+    );
+  };
 
   return (
     <div className="bg-white rounded-lg border border-[#e8e8e8] p-4">
@@ -172,7 +211,7 @@ export default function StockAnalystChart({ code, signals, currentPrice }: Stock
       
       <div className="h-64">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chartData.priceData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+          <ComposedChart data={chartData.enrichedData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
             <XAxis
               dataKey="date"
@@ -186,10 +225,18 @@ export default function StockAnalystChart({ code, signals, currentPrice }: Stock
               fontSize={12}
             />
             <Tooltip
-              formatter={(value: any, name: string) => [
-                `${value.toLocaleString()}원`,
-                name === 'price' ? '주가' : name
-              ]}
+              formatter={(value: any, name: string, props: any) => {
+                if (name === 'price') {
+                  return [`${value.toLocaleString()}원`, '주가'];
+                }
+                if (name === 'signalPrice' && props.payload?.hasSignal) {
+                  return [
+                    `${getSignalName(props.payload.signalType)} (${props.payload.signalFirm})`,
+                    '시그널'
+                  ];
+                }
+                return [value, name];
+              }}
               labelFormatter={(date) => new Date(date).toLocaleDateString('ko-KR')}
               contentStyle={{
                 backgroundColor: 'white',
@@ -209,6 +256,17 @@ export default function StockAnalystChart({ code, signals, currentPrice }: Stock
               activeDot={{ r: 4, fill: '#3182f6' }}
             />
             
+            {/* 시그널 점들 - 주가와 같은 위치에 */}
+            <Line
+              type="monotone"
+              dataKey="signalPrice"
+              stroke="transparent"
+              strokeWidth={0}
+              dot={<CustomSignalDot />}
+              activeDot={false}
+              connectNulls={false}
+            />
+            
             {/* 평균 목표주가 점선 */}
             {chartData.avgTargetPrice && (
               <ReferenceLine
@@ -222,34 +280,8 @@ export default function StockAnalystChart({ code, signals, currentPrice }: Stock
                 }}
               />
             )}
-          </LineChart>
+          </ComposedChart>
         </ResponsiveContainer>
-        
-        {/* 시그널 점들을 별도로 렌더링 */}
-        <div className="relative -mt-64 h-64 pointer-events-none">
-          {chartData.signalPoints.map((point, index) => {
-            const dateIndex = chartData.priceData.findIndex(d => d.date === point.date);
-            if (dateIndex === -1) return null;
-            
-            const xPercent = (dateIndex / (chartData.priceData.length - 1)) * 85 + 7.5; // 차트 마진 고려
-            const priceRange = Math.max(...chartData.priceData.map(d => d.price)) - Math.min(...chartData.priceData.map(d => d.price));
-            const yPercent = 85 - ((point.price - Math.min(...chartData.priceData.map(d => d.price))) / priceRange) * 70; // 차트 마진 고려
-            
-            return (
-              <div
-                key={index}
-                className="absolute w-2 h-2 rounded-full pointer-events-auto cursor-pointer"
-                style={{
-                  left: `${xPercent}%`,
-                  top: `${yPercent}%`,
-                  backgroundColor: getSignalColor(point.signal),
-                  transform: 'translate(-50%, -50%)'
-                }}
-                title={`${point.firm} - ${point.signal} (${point.date})`}
-              />
-            );
-          })}
-        </div>
       </div>
     </div>
   );

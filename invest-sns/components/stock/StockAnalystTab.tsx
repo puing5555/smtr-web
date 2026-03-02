@@ -217,32 +217,6 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
         currentPrice={currentPrice}
       />
 
-      {/* 증권사별 목표가 요약 */}
-      {firmTargets.length > 0 && (
-        <div className="bg-white rounded-xl shadow-sm border border-[#e8e8e8] p-6">
-          <h3 className="font-bold text-[#191f28] mb-1">증권사별 목표가 요약</h3>
-          {currentPrice > 0 && (
-            <p className="text-sm text-[#8b95a1] mb-4">현재가 {currentPrice.toLocaleString()}원</p>
-          )}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {firmTargets.slice(0, 6).map((ft, i) => {
-              const upside = currentPrice > 0 ? ((ft.target_price - currentPrice) / currentPrice * 100).toFixed(1) : null;
-              return (
-                <div key={i} className="border border-[#e8e8e8] rounded-lg p-3">
-                  <div className="text-sm font-medium text-[#333d4b] mb-1">{ft.firm}</div>
-                  <div className="text-lg font-bold text-[#191f28]">{formatTargetPrice(ft.target_price)}</div>
-                  {upside && (
-                    <div className={`text-xs ${Number(upside) >= 0 ? 'text-[#22c55e]' : 'text-[#ef4444]'}`}>
-                      {Number(upside) >= 0 ? '+' : ''}{upside}%
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
-
       {/* 리포트 테이블 */}
       <div className="bg-white rounded-xl shadow-sm border border-[#e8e8e8] overflow-hidden">
         <div className="p-6 border-b border-[#e8e8e8]">
