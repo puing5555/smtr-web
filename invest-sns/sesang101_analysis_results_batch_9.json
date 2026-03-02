@@ -1,0 +1,136 @@
+{
+  "start_time": "2026-03-02T08:46:06.934217",
+  "batch_number": 9,
+  "total_files": 5,
+  "analyzed": 1,
+  "total_signals": 6,
+  "results": [
+    {
+      "video_id": "FrOAHoV0pH4",
+      "status": "no_signals",
+      "analysis_result": {
+        "speaker": "세상이",
+        "stock": null,
+        "ticker": null,
+        "market": null,
+        "mention_type": null,
+        "signal": null,
+        "confidence": null,
+        "timestamp": null,
+        "key_quote": null,
+        "reasoning": "영상 내 투자 의견 또는 시그널 없음"
+      },
+      "db_saved": true
+    },
+    {
+      "video_id": "HK9jUm9lcEA",
+      "status": "no_signals",
+      "analysis_result": {
+        "video_summary": "이 영상은 주식 투자 시 마음가짐과 태도에 대해 설명하고 있습니다. 장기 투자의 중요성, 단기 투자와의 차이, 폭락장에서의 대응 등을 다루고 있습니다. 단, 구체적인 종목 추천이나 매매 타이밍 등의 투자 조언은 제공하지 않습니다.",
+        "signals": []
+      },
+      "db_saved": true
+    },
+    {
+      "video_id": "iLUIU1sU1Ug",
+      "status": "analyzed",
+      "signals_count": 6,
+      "analysis_result": {
+        "signals": [
+          {
+            "speaker": "이상기",
+            "stock": "아이",
+            "ticker": null,
+            "market": "US",
+            "mention_type": "결론",
+            "signal": "긍정",
+            "confidence": "high",
+            "timestamp": "초반",
+            "key_quote": "아이는 데이터 센터로 운영할 수 있도록 확보한 전력량이 2,900MW 정도 돼서 유망한 분야에서 주요 플레이어로 올라설 수 있는 잠재력이 있다",
+            "reasoning": "아이의 인프라 확장에 대한 긍정적 평가"
+          },
+          {
+            "speaker": "이상기",
+            "stock": "코어 위브",
+            "ticker": null,
+            "market": "US",
+            "mention_type": "논거",
+            "signal": "긍정",
+            "confidence": "high",
+            "timestamp": "초반",
+            "key_quote": "코어 위브가 마이크로소프트, 오픈 AI 같은 기업에 직접 인터페이스를 제공하는 프런트엔드이고, 아이는 전기, 데이터센터 등 백엔드 인프라를 제공하는 회사",
+            "reasoning": "코어 위브와 아이의 사업 관계 설명"
+          },
+          {
+            "speaker": "이상기",
+            "stock": "코어 사이언티",
+            "ticker": null,
+            "market": "US",
+            "mention_type": "논거",
+            "signal": "긍정",
+            "confidence": "medium",
+            "timestamp": "초반",
+            "key_quote": "코어 위브가 코어 사이언티를 인수하면 임대하던 인프라를 자체 자산으로 만들 수 있어서 운영비를 절감하고 핵심 인프라를 더 잘 통제할 수 있다",
+            "reasoning": "코어 사이언티 인수가 코어 위브에게 긍정적인 이유 설명"
+          },
+          {
+            "speaker": "이상기",
+            "stock": "크루소 AI",
+            "ticker": null,
+            "market": "US",
+            "mention_type": "논거",
+            "signal": "긍정",
+            "confidence": "medium",
+            "timestamp": "중반",
+            "key_quote": "크루소 AI도 피터 티주도로 성장한 기업이고 상장 전이어서 한번 트라이해 볼 만한 회사라고 생각한다",
+            "reasoning": "크루소 AI에 대한 긍정적 전망"
+          },
+          {
+            "speaker": "이상기",
+            "stock": "로켓랩",
+            "ticker": null,
+            "market": "US",
+            "mention_type": "결론",
+            "signal": "긍정",
+            "confidence": "high",
+            "timestamp": "중반",
+            "key_quote": "로켓랩이 트럼프가 밀고 있는 방위산업의 주요 플레이어가 될 것이라는 CEO의 말이 실현되고 있고, 앞으로 더욱 기대되는 기업이다",
+            "reasoning": "로켓랩의 방위산업 진출에 대한 긍정적 평가"
+          },
+          {
+            "speaker": "이상기",
+            "stock": "스페이스 X",
+            "ticker": null,
+            "market": "US",
+            "mention_type": "뉴스",
+            "signal": "중립",
+            "confidence": "medium",
+            "timestamp": "중반",
+            "key_quote": "트럼프가 스페이스 X에 일감을 몰아주면서도 일부러 거리를 두는 것은 스페이스 X에 대한 의존도를 분산시키기 위한 것 같다",
+            "reasoning": "트럼프와 스페이스 X의 관계에 대한 분석"
+          }
+        ],
+        "video_summary": "이 영상에서는 2달 전 소개했던 미국 주식 아이와 로켓랩에 대한 추가 정보를 제공하고 있습니다. 아이는 데이터센터 운영에 필요한 인프라를 확보하며 성장 잠재력이 있고, 로켓랩은 방위산업 분야에서 성과를 내고 있다고 평가합니다. 또한 코어 위브와 코어 사이언티의 인수 합병 계획, 크루소 AI에 대한 관심도 언급하였습니다. 아울러 트럼프와 스페이스 X의 관계에 대해서도 언급하였습니다. 전반적으로 미국 기술 기업들의 성장 동력을 긍정적으로 평가하고 있습니다."
+      },
+      "db_saved": false
+    },
+    {
+      "video_id": "iNAlXUEw9tc",
+      "status": "no_signals",
+      "analysis_result": {
+        "video_summary": "이 영상에서는 트럼프 행정부의 정책이 미국 국채 관리와 어떤 연관이 있는지를 분석하고 있습니다. 트럼프가 국채 금리를 낮추기 위해 관세 전쟁과 연준 압박 등의 전략을 쓰고 있으며, 경우에 따라서는 디폴트 카드를 던질 수도 있다는 내용입니다. 디폴트가 발생하면 금융시장에 큰 혼란이 초래될 것으로 예상되며, 이때 현금을 보유한 투자자들에게 기회가 될 수 있다고 합니다. 다만 이 영상은 교양 콘텐츠로, 실제 투자 의견이나 종목 추천은 포함되어 있지 않습니다.",
+        "signals": []
+      },
+      "db_saved": true
+    },
+    {
+      "video_id": "IOVmGeSwAMM",
+      "status": "no_signals",
+      "analysis_result": {
+        "video_summary": "이 영상은 유튜브 채널 소개와 개인적인 이야기, 독서 추천 등의 내용으로 구성되어 있습니다. 특별한 투자 시그널은 발견되지 않았습니다. 발언자는 자신의 투자 경험과 철학을 설명하고, 구독자들에게 직접 투자할 것을 권장하지는 않습니다.",
+        "signals": []
+      },
+      "db_saved": true
+    }
+  ]
+}
