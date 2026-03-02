@@ -46,6 +46,16 @@ _Last updated: 2026-02-28 16:14 (GMT+7)_
 - signal_validator.py 15번째 항목: 채널-화자 일치 검증 추가
 - DB 총 시그널: ~248개, 채널 7개
 
+### 완료된 추가 작업 (2026-03-03)
+- 서클(CRCL) ticker null→CRCL 수정, NYSE 상장 확인 ($93.58)
+- 전종목 가격 일괄 추가: stockPrices 29→54개, 종목 페이지 37→52개
+- 중복 시그널 4건 삭제 (Rocket Lab, SMR/원전, 반도체, 빅테크)
+- key_quote 200자 초과 13개 AI 요약 완료
+- pre_deploy_check.py에 key_quote 20~200자 검증 추가
+- QA 리포트 17항목 점검 (QA_REPORT.md)
+- 세상학개론 크롤링 확인: 2025-12~2026-01 빠진 영상 없음
+- DB 시그널 142개, review_status 전부 pending
+
 ### 현재 작업
 - ✅ 시그널 155개 (248→155, 비종목 33+중복 60 삭제)
 - 자동 품질 검증 시스템 구축 중 (pre_deploy_check.py + deploy.py)
