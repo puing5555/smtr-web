@@ -12,15 +12,8 @@ import json
 import time
 import glob
 import requests
-import signal
 from datetime import datetime
-
-# 타임아웃 핸들러
-class TimeoutError(Exception):
-    pass
-
-def timeout_handler(signum, frame):
-    raise TimeoutError("Operation timed out")
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeoutError
 
 sys.path.append(os.path.dirname(__file__))
 from pipeline_config import PipelineConfig
