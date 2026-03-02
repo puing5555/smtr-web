@@ -74,20 +74,18 @@ _Last updated: 2026-02-28 16:14 (GMT+7)_
 - ✅ 애널리스트 데이터소스 조사 완료 (네이버증권 리서치 1순위)
 - speakers 테이블 "김장년" orphan 레코드 정리 필요
 - Supabase anon key 변경됨 (.env.local이 최신, MEMORY.md 구버전 키 사용 금지)
-- 서브에이전트 Sonnet 전환 완료 (메인만 Opus)
-- 유저 참여 시스템 1단계 100% 완료, 2단계 1→2→3 완료 (AI 자동검토+수정안+승인UI)
-- 2단계 4→5 미착수 (AI제안 탭, 프롬프트관리 탭)
-- V10.3 프롬프트 완성 (prompts/pipeline_v10.md, 3라운드 자율개선, 7단계 검증)
-- 자동화 파이프라인 scripts/ 완성 (6모듈)
-- ✅ 종목 페이지 일괄 생성 (5개→28개, Supabase 동적 조회)
-- ✅ Edge Function 전환 (corsproxy.io→Supabase Edge Function, API키 입력 불필요)
-- ✅ Supabase access token: openclaw-deploy (만료 없음)
-- ✅ signal_prices.json 112개 (섹터→대표종목 매핑 포함, HM파마/HCM파마 2개 불가)
-- ✅ 애널리스트 탭 "섹터별"→"종목별" 변경 완료
-- ✅ V10.7 프롬프트 완성 (prompts/pipeline_v10.md, 종목추출규칙 추가)
-- ✅ 애널리스트 데이터소스 조사 완료 (네이버증권 리서치 1순위)
-- speakers 테이블 "김장년" orphan 레코드 정리 필요
-- Supabase anon key 변경됨 (.env.local이 최신, MEMORY.md 구버전 키 사용 금지)
+
+### 완료된 추가 작업 (2026-03-03 새벽)
+- ✅ 해외종목 통화표시: lib/currency.ts + 7개 파일 수정 (원→$), 커밋 f6ee12e
+- ✅ 채널 리서치 50개 조사 (data/youtube_channels_research.md), 추천 35개
+- ✅ 추천 채널 영상 수 확인: 염승환 1809, 삼성증권 3335, 미주은 1987, 소수몽키 1276, 미부 869, 주코노미 541, 뉴욕주민 236
+- ✅ 세상학개론 새 영상 조사: 12개 중 투자관련 1개만 (비투자 콘텐츠 전환 추세)
+
+### DB 스키마 (중요)
+- 테이블: `influencer_channels`, `influencer_videos`, `influencer_signals`
+- videos의 YouTube ID 컬럼: `video_id` (NOT youtube_id)
+- 세상학개론 channel_id: `d68f8efd-64c8-4c07-9d34-e98c2954f4e1`
+- 세상학개론 YT channel: `UCPQsfyVJ0T7-qJcGcaue5Ng`
 
 ### 완료된 추가 작업 (2026-03-01)
 - Selenium 16배속 CC 캡처로 YouTube IP 차단 우회 (마지막 2개 자막 추출)
