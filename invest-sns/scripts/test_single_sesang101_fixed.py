@@ -82,11 +82,11 @@ def test_single_video():
         print("시그널 분석 시작...")
         analyzer = SignalAnalyzer()
         
-        # timeout 300초로 분석 시도
-        analysis_result = analyzer.analyze_signals(
-            subtitle_text, 
-            video_data,
-            timeout=300
+        # analyze_video_subtitle 메소드 사용
+        analysis_result = analyzer.analyze_video_subtitle(
+            video_data['channel_info']['url'],  # channel_url
+            video_data,  # video_data
+            subtitle_text  # subtitle
         )
         
         print(f"분석 완료!")
