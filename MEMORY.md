@@ -47,7 +47,23 @@ _Last updated: 2026-02-28 16:14 (GMT+7)_
 - DB 총 시그널: ~248개, 채널 7개
 
 ### 현재 작업
-- ✅ 시그널 90개 (99→90, 중복 9건 삭제: video+speaker+stock+signal 기준)
+- ✅ 시그널 155개 (248→155, 비종목 33+중복 60 삭제)
+- 자동 품질 검증 시스템 구축 중 (pre_deploy_check.py + deploy.py)
+- PDF 517건 AI 요약 배치 진행 중 (~10시간, data/ai_summary_progress.json)
+- ✅ 서브에이전트 Sonnet 전환 완료 (메인만 Opus)
+- 유저 참여 시스템 1단계 100% 완료, 2단계 1→2→3 완료 (AI 자동검토+수정안+승인UI)
+- 2단계 4→5 미착수 (AI제안 탭, 프롬프트관리 탭)
+- V10.3 프롬프트 완성 (prompts/pipeline_v10.md, 3라운드 자율개선, 7단계 검증)
+- 자동화 파이프라인 scripts/ 완성 (6모듈)
+- ✅ 종목 페이지 일괄 생성 (5개→28개, Supabase 동적 조회)
+- ✅ Edge Function 전환 (corsproxy.io→Supabase Edge Function, API키 입력 불필요)
+- ✅ Supabase access token: openclaw-deploy (만료 없음)
+- ✅ signal_prices.json 112개 (섹터→대표종목 매핑 포함, HM파마/HCM파마 2개 불가)
+- ✅ 애널리스트 탭 "섹터별"→"종목별" 변경 완료
+- ✅ V10.7 프롬프트 완성 (prompts/pipeline_v10.md, 종목추출규칙 추가)
+- ✅ 애널리스트 데이터소스 조사 완료 (네이버증권 리서치 1순위)
+- speakers 테이블 "김장년" orphan 레코드 정리 필요
+- Supabase anon key 변경됨 (.env.local이 최신, MEMORY.md 구버전 키 사용 금지)
 - 서브에이전트 Sonnet 전환 완료 (메인만 Opus)
 - 유저 참여 시스템 1단계 100% 완료, 2단계 1→2→3 완료 (AI 자동검토+수정안+승인UI)
 - 2단계 4→5 미착수 (AI제안 탭, 프롬프트관리 탭)
@@ -58,7 +74,7 @@ _Last updated: 2026-02-28 16:14 (GMT+7)_
 - ✅ Supabase access token: openclaw-deploy (만료 없음)
 - ✅ signal_prices.json 112개 (섹터→대표종목 매핑 포함, HM파마/HCM파마 2개 불가)
 - ✅ 애널리스트 탭 "섹터별"→"종목별" 변경 완료
-- ✅ V10.7 프롬프트 완성 (prompts/pipeline_v10.md)
+- ✅ V10.7 프롬프트 완성 (prompts/pipeline_v10.md, 종목추출규칙 추가)
 - ✅ 애널리스트 데이터소스 조사 완료 (네이버증권 리서치 1순위)
 - speakers 테이블 "김장년" orphan 레코드 정리 필요
 - Supabase anon key 변경됨 (.env.local이 최신, MEMORY.md 구버전 키 사용 금지)

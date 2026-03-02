@@ -18,6 +18,10 @@ from pathlib import Path
 from typing import Dict, List, Optional
 import anthropic
 from dotenv import load_dotenv
+import functools
+
+# stdout 즉시 출력
+print = functools.partial(print, flush=True)
 
 # .env.local 로드
 load_dotenv(dotenv_path=Path(__file__).parent.parent / ".env.local")
@@ -30,8 +34,8 @@ ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
 PDF_DIR = Path(__file__).parent.parent / "data" / "analyst_pdfs"
 PROGRESS_FILE = Path(__file__).parent.parent / "data" / "ai_summary_progress.json"
 BATCH_SIZE = 50
-API_DELAY = 2  # 요청 간 2초
-BATCH_DELAY = 60  # 50개마다 1분 휴식
+API_DELAY = 1  # 요청 간 1초 (1회 호출로 줄였으므로)
+BATCH_DELAY = 30  # 50개마다 30초 휴식
 
 
 def supabase_request(method, endpoint, data=None, params=None):
@@ -53,7 +57,7 @@ def supabase_request(method, endpoint, data=None, params=None):
 def get_pending_reports() -> List[Dict]:
     """ai_summary가 없는 리포트만 조회"""
     reports = supabase_request("GET", "analyst_reports", params={
-        "select": "id,title,firm,ticker,pdf_url",
+        "select": "id,title,firm,ticker,pdf_url,published_at",
         "ai_summary": "is.null",
         "pdf_url": "not.is.null",
         "order": "id.asc",
@@ -77,25 +81,20 @@ def save_progress(done_ids: set):
 
 
 def find_pdf_for_report(report: Dict) -> Optional[Path]:
-    """리포트에 해당하는 PDF 파일 찾기"""
-    # pdf_url에서 파일명 추출 시도
-    pdf_url = report.get("pdf_url", "")
+    """리포트에 해당하는 PDF 파일 찾기 - {ticker}_{firm}_{published_at}.pdf"""
+    ticker = report.get("ticker", "")
+    firm = report.get("firm", "")
+    pub_date = report.get("published_at", "")
     
-    # URL에서 파일명 추출
-    if pdf_url:
-        import urllib.parse
-        parsed = urllib.parse.urlparse(pdf_url)
-        url_filename = os.path.basename(parsed.path)
-        if url_filename:
-            candidate = PDF_DIR / url_filename
-            if candidate.exists():
-                return candidate
+    if ticker and firm and pub_date:
+        candidate = PDF_DIR / f"{ticker}_{firm}_{pub_date}.pdf"
+        if candidate.exists():
+            return candidate
     
-    # ID 기반으로 찾기
-    report_id = report["id"]
-    # 모든 PDF 파일에서 매칭 시도
+    # fallback: ticker+firm 부분매칭
+    prefix = f"{ticker}_{firm}_"
     for pdf_file in PDF_DIR.glob("*.pdf"):
-        if str(report_id) in pdf_file.name:
+        if pdf_file.name.startswith(prefix):
             return pdf_file
     
     return None
@@ -137,38 +136,32 @@ def extract_analyst_name(text: str) -> Optional[str]:
 
 
 def generate_summary(client, text: str, firm: str, ticker: str) -> Dict[str, str]:
-    """Claude로 한줄요약 + 상세요약"""
+    """Claude로 한줄요약 + 상세요약 (1회 호출)"""
     try:
-        # 한줄요약
-        resp1 = client.messages.create(
+        resp = client.messages.create(
             model="claude-sonnet-4-20250514",
-            max_tokens=150,
-            messages=[{"role": "user", "content": f"""다음 애널리스트 리포트를 한줄로 요약해주세요. 50자 이내, 구체적인 투자포인트나 전망 포함.
+            max_tokens=1200,
+            messages=[{"role": "user", "content": f"""다음 애널리스트 리포트를 분석해주세요.
 
 증권사: {firm} | 종목: {ticker}
 
-{text[:4000]}"""}]
+{text[:6000]}
+
+다음 JSON 형식으로만 답변:
+{{"ai_summary": "한줄요약 50자이내, 구체적 투자포인트", "ai_detail": "상세요약 500자이상. 투자포인트/실적전망/밸류에이션/리스크/결론 구조. 구체적 수치 포함"}}"""}]
         )
-        ai_summary = resp1.content[0].text.strip()
-
-        time.sleep(1)  # API 간 간격
-
-        # 상세요약
-        resp2 = client.messages.create(
-            model="claude-sonnet-4-20250514",
-            max_tokens=1000,
-            messages=[{"role": "user", "content": f"""다음 애널리스트 리포트를 상세 요약해주세요.
-
-구조: 투자포인트 / 실적전망 / 밸류에이션 / 리스크 / 결론
-500자 이상, 구체적 수치와 근거 포함.
-
-증권사: {firm} | 종목: {ticker}
-
-{text[:8000]}"""}]
-        )
-        ai_detail = resp2.content[0].text.strip()
-
-        return {"ai_summary": ai_summary, "ai_detail": ai_detail}
+        raw = resp.content[0].text.strip()
+        # JSON 파싱
+        if raw.startswith("```"):
+            raw = raw.split("```")[1]
+            if raw.startswith("json"):
+                raw = raw[4:]
+        result = json.loads(raw)
+        return {"ai_summary": result.get("ai_summary", ""), "ai_detail": result.get("ai_detail", "")}
+    except json.JSONDecodeError:
+        # JSON 파싱 실패시 전체를 summary로
+        print(f"  JSON 파싱 실패, raw 저장")
+        return {"ai_summary": raw[:100] if raw else "", "ai_detail": raw if raw else ""}
     except Exception as e:
         print(f"  AI 요약 실패: {e}")
         return {}
@@ -247,15 +240,19 @@ def main():
             fail += 1
             continue
 
-        # Supabase 업데이트
-        updates = {**result}
+        # Supabase 업데이트 (ai_detail -> summary 컬럼에 저장)
+        updates = {}
+        if result.get("ai_summary"):
+            updates["ai_summary"] = result["ai_summary"]
+        if result.get("ai_detail"):
+            updates["summary"] = result["ai_detail"]
         if analyst:
             updates["analyst_name"] = analyst
 
         if update_supabase(rid, updates):
             success += 1
             done_ids.add(rid)
-            print(f"  ✓ 완료 | {result.get('ai_summary', '')[:40]}...")
+            print(f"  OK | {result.get('ai_summary', '')[:40]}...")
         else:
             fail += 1
 
