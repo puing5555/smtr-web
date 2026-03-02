@@ -91,14 +91,21 @@ class ContinueSesang101Analyzer:
             print(f"자막 파일 로드 에러 {file_path}: {e}")
             return None
 
-    def extract_subtitle_text(self, subtitle_data: Dict[str, Any]) -> str:
+    def extract_subtitle_text(self, subtitle_data) -> str:
         """자막 데이터에서 텍스트 추출"""
-        if 'text' in subtitle_data:
-            return subtitle_data['text']
-        elif 'captions' in subtitle_data:
-            return " ".join([cap.get('text', '') for cap in subtitle_data['captions']])
-        elif 'entries' in subtitle_data:
-            return " ".join([entry.get('text', '') for entry in subtitle_data['entries']])
+        # subtitle_data가 리스트인 경우 (세상학개론 형태)
+        if isinstance(subtitle_data, list):
+            return " ".join([item.get('text', '') for item in subtitle_data if 'text' in item])
+        
+        # subtitle_data가 dict인 경우
+        if isinstance(subtitle_data, dict):
+            if 'text' in subtitle_data:
+                return subtitle_data['text']
+            elif 'captions' in subtitle_data:
+                return " ".join([cap.get('text', '') for cap in subtitle_data['captions']])
+            elif 'entries' in subtitle_data:
+                return " ".join([entry.get('text', '') for entry in subtitle_data['entries']])
+        
         return ""
 
     def create_video_data(self, video_id: str, subtitle_data: Dict[str, Any]) -> Dict[str, Any]:
