@@ -34,8 +34,11 @@ ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
 PDF_DIR = Path(__file__).parent.parent / "data" / "analyst_pdfs"
 PROGRESS_FILE = Path(__file__).parent.parent / "data" / "ai_summary_progress.json"
 BATCH_SIZE = 50
-API_DELAY = 1  # 요청 간 1초 (1회 호출로 줄였으므로)
+API_DELAY = 3  # 요청 간 기본 3초
 BATCH_DELAY = 30  # 50개마다 30초 휴식
+MAX_RETRIES = 5  # 최대 재시도 횟수
+MIN_DELAY = 2  # 최소 딜레이
+MAX_DELAY = 30  # 최대 딜레이 (감속 시)
 
 
 def supabase_request(method, endpoint, data=None, params=None):
@@ -135,13 +138,15 @@ def extract_analyst_name(text: str) -> Optional[str]:
     return None
 
 
-def generate_summary(client, text: str, firm: str, ticker: str) -> Dict[str, str]:
-    """Claude로 한줄요약 + 상세요약 (1회 호출)"""
-    try:
-        resp = client.messages.create(
-            model="claude-sonnet-4-20250514",
-            max_tokens=1200,
-            messages=[{"role": "user", "content": f"""다음 애널리스트 리포트를 분석해주세요.
+def generate_summary(client, text: str, firm: str, ticker: str, delay_state: dict) -> Dict[str, str]:
+    """Claude로 한줄요약 + 상세요약 (1회 호출, 자동 재시도 + 감속/증속)"""
+    for attempt in range(MAX_RETRIES):
+        try:
+            resp = client.messages.create(
+                model="claude-sonnet-4-20250514",
+                max_tokens=1200,
+                timeout=60,
+                messages=[{"role": "user", "content": f"""다음 애널리스트 리포트를 분석해주세요.
 
 증권사: {firm} | 종목: {ticker}
 
@@ -149,22 +154,49 @@ def generate_summary(client, text: str, firm: str, ticker: str) -> Dict[str, str
 
 다음 JSON 형식으로만 답변:
 {{"ai_summary": "한줄요약 50자이내, 구체적 투자포인트", "ai_detail": "상세요약 500자이상. 투자포인트/실적전망/밸류에이션/리스크/결론 구조. 구체적 수치 포함"}}"""}]
-        )
-        raw = resp.content[0].text.strip()
-        # JSON 파싱
-        if raw.startswith("```"):
-            raw = raw.split("```")[1]
-            if raw.startswith("json"):
-                raw = raw[4:]
-        result = json.loads(raw)
-        return {"ai_summary": result.get("ai_summary", ""), "ai_detail": result.get("ai_detail", "")}
-    except json.JSONDecodeError:
-        # JSON 파싱 실패시 전체를 summary로
-        print(f"  JSON 파싱 실패, raw 저장")
-        return {"ai_summary": raw[:100] if raw else "", "ai_detail": raw if raw else ""}
-    except Exception as e:
-        print(f"  AI 요약 실패: {e}")
-        return {}
+            )
+            raw = resp.content[0].text.strip()
+            # 성공 → 증속 (딜레이 줄이기)
+            delay_state["current"] = max(MIN_DELAY, delay_state["current"] - 0.5)
+            delay_state["consecutive_ok"] = delay_state.get("consecutive_ok", 0) + 1
+            # JSON 파싱
+            if raw.startswith("```"):
+                raw = raw.split("```")[1]
+                if raw.startswith("json"):
+                    raw = raw[4:]
+            result = json.loads(raw)
+            return {"ai_summary": result.get("ai_summary", ""), "ai_detail": result.get("ai_detail", "")}
+        except json.JSONDecodeError:
+            print(f"  JSON 파싱 실패, raw 저장")
+            return {"ai_summary": raw[:100] if raw else "", "ai_detail": raw if raw else ""}
+        except anthropic.RateLimitError as e:
+            # 429 → 감속
+            delay_state["current"] = min(MAX_DELAY, delay_state["current"] * 2)
+            delay_state["consecutive_ok"] = 0
+            wait = delay_state["current"] * (attempt + 1)
+            print(f"  ⚠️ Rate limit (429), {wait:.0f}초 대기 후 재시도 ({attempt+1}/{MAX_RETRIES})...")
+            time.sleep(wait)
+        except anthropic.APITimeoutError as e:
+            wait = 10 * (attempt + 1)
+            print(f"  ⚠️ Timeout, {wait}초 대기 후 재시도 ({attempt+1}/{MAX_RETRIES})...")
+            time.sleep(wait)
+        except anthropic.APIStatusError as e:
+            if e.status_code == 529:  # Overloaded
+                delay_state["current"] = min(MAX_DELAY, delay_state["current"] * 2)
+                wait = delay_state["current"] * (attempt + 1)
+                print(f"  ⚠️ API Overloaded (529), {wait:.0f}초 대기 후 재시도 ({attempt+1}/{MAX_RETRIES})...")
+                time.sleep(wait)
+            else:
+                print(f"  ❌ API 에러 {e.status_code}: {e}")
+                return {}
+        except Exception as e:
+            print(f"  ❌ AI 요약 실패: {e}")
+            if attempt < MAX_RETRIES - 1:
+                time.sleep(5 * (attempt + 1))
+            else:
+                return {}
+    print(f"  ❌ {MAX_RETRIES}회 재시도 모두 실패")
+    return {}
 
 
 def update_supabase(report_id: int, updates: Dict) -> bool:
@@ -208,6 +240,7 @@ def main():
     success = 0
     skip = 0
     fail = 0
+    delay_state = {"current": API_DELAY, "consecutive_ok": 0}
 
     for i, report in enumerate(reports):
         rid = report["id"]
@@ -235,7 +268,7 @@ def main():
         analyst = extract_analyst_name(text)
 
         # AI 요약
-        result = generate_summary(client, text, report.get("firm", ""), report.get("ticker", ""))
+        result = generate_summary(client, text, report.get("firm", ""), report.get("ticker", ""), delay_state)
         if not result:
             fail += 1
             continue
@@ -256,10 +289,13 @@ def main():
         else:
             fail += 1
 
-        # 레이트리밋
-        time.sleep(API_DELAY)
+        # 동적 딜레이
+        time.sleep(delay_state["current"])
 
-        # 50개마다 휴식 + 중간저장
+        # 10개마다 중간저장, 50개마다 휴식
+        if success > 0 and success % 10 == 0:
+            save_progress(done_ids)
+            print(f"  💾 중간 저장 ({len(done_ids)}건, 딜레이: {delay_state['current']:.1f}s)")
         if success > 0 and success % BATCH_SIZE == 0:
             save_progress(done_ids)
             print(f"\n{'='*40}")
