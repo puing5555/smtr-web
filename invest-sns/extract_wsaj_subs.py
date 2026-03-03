@@ -27,7 +27,7 @@ video_list = [
 
 def extract_subtitle(video_id, title, delay=3):
     """단일 영상 자막 추출"""
-    print(f"\n🎬 추출 중: {title} ({video_id})")
+    print(f"\n[EXTRACT] Processing: {title} ({video_id})")
     
     url = f"https://www.youtube.com/watch?v={video_id}"
     cmd = [
@@ -43,35 +43,35 @@ def extract_subtitle(video_id, title, delay=3):
     try:
         result = subprocess.run(cmd, capture_output=True, text=True, cwd=Path.cwd())
         if result.returncode == 0:
-            print(f"✅ 성공: {title}")
+            print(f"[SUCCESS] {title}")
         else:
-            print(f"❌ 실패: {title}")
-            print(f"에러: {result.stderr}")
+            print(f"[ERROR] {title}")
+            print(f"Error details: {result.stderr}")
         
         # 레이트 리밋 준수
         if delay > 0:
-            print(f"⏳ {delay}초 대기 중...")
+            print(f"[WAIT] Sleeping {delay} seconds...")
             time.sleep(delay)
             
     except Exception as e:
-        print(f"❌ 예외 발생: {title} - {str(e)}")
+        print(f"[EXCEPTION] {title} - {str(e)}")
 
 def main():
     """메인 실행 함수"""
-    print("🚀 월가아재 기업해부학 시리즈 자막 추출 시작")
-    print(f"📊 대상 영상: {len(video_list)}개")
+    print("WSAJ Corporate Analysis Series Subtitle Extraction Started")
+    print(f"Target videos: {len(video_list)}")
     
     for i, (video_id, title) in enumerate(video_list, 1):
-        print(f"\n📈 진행률: {i}/{len(video_list)}")
+        print(f"\nProgress: {i}/{len(video_list)}")
         
         # 20개마다 5분 휴식 (요구사항에 따라)
         if i > 0 and i % 20 == 0:
-            print(f"\n🛌 20개 처리 완료! 5분 휴식...")
+            print(f"\n20 videos processed! Taking 5 minute break...")
             time.sleep(300)  # 5분
         
         extract_subtitle(video_id, title, delay=3)
     
-    print(f"\n🎉 모든 자막 추출 완료!")
+    print(f"\nAll subtitle extraction completed!")
 
 if __name__ == "__main__":
     main()
