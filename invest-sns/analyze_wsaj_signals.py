@@ -148,7 +148,7 @@ def main():
             continue
             
         vtt_file = vtt_files[0]
-        print(f"[LOAD] Reading subtitle: {vtt_file.name}")
+        print(f"[LOAD] Reading subtitle file for {video_id}")
         
         # 자막 텍스트 추출
         subtitle_text = parse_vtt_file(vtt_file)
