@@ -130,6 +130,28 @@ _Last updated: 2026-03-01 14:56 (GMT+7)_
 6. **✅ 빌드 + 배포 완료**: `npx next build && npx gh-pages -d out` 성공
 7. **✅ Git 커밋**: `b18a988` - "애널리스트 탭 5가지 수정"
 
+### ✅ ai_detail 모달 UI 개선 완료 (2026-03-03 19:30) - GitHub Pages 배포
+1. **✅ 프론트엔드 모달 수정 완료**
+   - `AiDetailRenderer` 컴포넌트 신규 생성
+   - ## 마크다운 헤더를 섹션 카드로 렌더링
+   - 아이콘 매핑: 📌 투자포인트 / 📊 실적전망 / 💰 밸류에이션 / ⚠️ 리스크 / ✅ 결론
+   - 각 섹션을 개별 카드로 구분, 왼쪽 파란색 보더
+2. **✅ 테스트 데이터 적용**
+   - 첫 번째 리포트(원익QnC - SK증권)를 ## 헤더 형식으로 변경
+   - 기존 **굵은글씨** 형식 → ## 마크다운 헤더 형식으로 전환
+3. **✅ Batch API 스크립트 준비**
+   - `scripts/ai_detail_batch_regenerate.py` - Anthropic Message Batches API 용
+   - `scripts/ai_detail_simple_regenerate.py` - 순차 처리용 (안전한 방식)
+   - `scripts/test_ai_detail.py` - 5개 테스트용
+4. **✅ 빌드 + 배포 완료**: 135개 정적 페이지 생성 성공, GitHub Pages 배포
+5. **✅ Git 커밋**: `0ce57e4` - "애널리스트 ai_detail 모달 UI 개선 - ## 헤더 섹션 카드 렌더링"
+
+### 🔄 다음 단계: ai_detail 519건 재생성
+- **Anthropic Claude API 사용** 준비 완료
+- **진행상황 추적** 시스템 구현됨 (`data/ai_detail_progress.json`)
+- **단순 순차처리 vs Batch API** 옵션 준비됨
+- 재생성 완료 후 `analyst_reports.json` 전체 교체 예정
+
 ---
 
 **❌ 절대 참조 금지**: smtr-web, guru_tracker v24, STRONG_BUY, 177개 코린이아빠 시그널 (망한 프로젝트)
