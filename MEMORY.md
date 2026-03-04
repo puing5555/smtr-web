@@ -56,6 +56,18 @@ _Last updated: 2026-02-28 16:14 (GMT+7)_
 - 세상학개론 크롤링 확인: 2025-12~2026-01 빠진 영상 없음
 - DB 시그널 142개, review_status 전부 pending
 
+### CTO 시스템 v3 (2026-03-04)
+- Main Agent = CTO (Opus), 서브에이전트 = Dev/QA/Patrol (Sonnet)
+- sessions_spawn 체이닝으로 자동 워크플로우
+- Cron: Watchdog 30분, Patrol 6시간, 일일요약 자정
+- CTO_WORKFLOW.md에 전체 규칙 정의
+
+### 이효석 아카데미 시그널 (2026-03-04)
+- 원본 793개 → 정제 692개 (비종목90+비상장8+중복3 제거)
+- QA 통과율 98.4% ✅
+- JAY 승인 대기 중 → DB INSERT 예정
+- 파일: hs_analysis_cleaned.jsonl
+
 ### 현재 작업
 - ✅ 시그널 155개 (248→155, 비종목 33+중복 60 삭제)
 - 자동 품질 검증 시스템 구축 중 (pre_deploy_check.py + deploy.py)

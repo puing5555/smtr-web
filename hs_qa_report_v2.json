@@ -1,0 +1,101 @@
+{
+  "totalVideos": 396,
+  "totalSignals": 692,
+  "issues": {
+    "signal_type_invalid": {
+      "count": 0,
+      "items": []
+    },
+    "empty_ticker": {
+      "count": 0,
+      "items": []
+    },
+    "short_quote": {
+      "count": 11,
+      "items": [
+        {
+          "vid": "2tdy1s9xvXM",
+          "stock": "테슬라",
+          "len": 19
+        },
+        {
+          "vid": "4wHpURdosQI",
+          "stock": "삼성전자",
+          "len": 18
+        },
+        {
+          "vid": "6pRtfGjdwQM",
+          "stock": "테슬라",
+          "len": 19
+        },
+        {
+          "vid": "MRTuNz2_YAA",
+          "stock": "테슬라",
+          "len": 17
+        },
+        {
+          "vid": "aiSvvQRHkEo",
+          "stock": "SK하이닉스",
+          "len": 17
+        },
+        {
+          "vid": "i5p-cZ80eoo",
+          "stock": "마이크론",
+          "len": 17
+        },
+        {
+          "vid": "iYqJjHaJr40",
+          "stock": "오라클",
+          "len": 17
+        },
+        {
+          "vid": "oMn_OzGfVK4",
+          "stock": "구글",
+          "len": 12
+        },
+        {
+          "vid": "oZDbaRK9tN8",
+          "stock": "마이크로소프트",
+          "len": 19
+        },
+        {
+          "vid": "xGIPAhDXYtI",
+          "stock": "루멘텀",
+          "len": 19
+        },
+        {
+          "vid": "xjxO5QzbXGg",
+          "stock": "삼성전자",
+          "len": 17
+        }
+      ]
+    },
+    "long_quote": {
+      "count": 0,
+      "items": []
+    },
+    "zero_timestamp": {
+      "count": 0,
+      "items": []
+    },
+    "bad_confidence": {
+      "count": 0,
+      "items": []
+    },
+    "duplicates": {
+      "count": 0,
+      "items": []
+    },
+    "crypto_commodity": {
+      "count": 0,
+      "items": []
+    },
+    "private_company": {
+      "count": 0,
+      "items": []
+    }
+  },
+  "totalIssues": 11,
+  "passRate": 98.4,
+  "verdict": "통과"
+}

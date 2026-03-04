@@ -1,0 +1,69 @@
+{
+  "patrol_date": "2026-03-04T13:38:00+07:00",
+  "summary": {
+    "total_issues": 4,
+    "critical": 1,
+    "warning": 2,
+    "info": 2
+  },
+  "areas": {
+    "supabase_db": {
+      "total_signals": 141,
+      "findings": [
+        {
+          "severity": "🔴긴급",
+          "issue": "전체 141개 시그널이 한글 시그널명 사용 (긍정/매수/중립/경계 등)",
+          "detail": "규칙상 영문 enum만 허용: STRONG_BUY/BUY/POSITIVE/HOLD/NEUTRAL/CONCERN/SELL/STRONG_SELL. 현재 DB에 영문 시그널 0건.",
+          "sample_values": ["긍정", "매수", "중립", "경계", "강력매수", "매도"]
+        },
+        {
+          "severity": "🟢참고",
+          "issue": "빈 필드 없음",
+          "detail": "stock/ticker/signal/key_quote 모두 채워짐"
+        },
+        {
+          "severity": "🟢참고",
+          "issue": "중복 없음 (video_id+stock 기준)"
+        },
+        {
+          "severity": "🟢참고",
+          "issue": "날짜 오류 없음"
+        }
+      ]
+    },
+    "live_site": {
+      "findings": [
+        {
+          "severity": "🟢참고",
+          "issue": "모든 페이지 정상 (HTTP 200)",
+          "pages": {
+            "/": 200,
+            "/explore/influencer": 200,
+            "/my-stocks": 200
+          },
+          "note": "SPA이므로 서버사이드 렌더링 없이 클라이언트에서 로딩. fetch로는 '로딩 중...'만 확인됨."
+        }
+      ]
+    },
+    "signal_prices": {
+      "total_tickers": 50,
+      "db_unique_tickers": 51,
+      "findings": [
+        {
+          "severity": "🟡주의",
+          "issue": "SQ 티커 가격 데이터 누락",
+          "detail": "DB에 SQ 티커 시그널 존재하나 signal_prices.json에 가격 없음"
+        },
+        {
+          "severity": "🟡주의",
+          "issue": "NVO 스키마 불일치",
+          "detail": "NVO 항목은 'price'/'updated' 필드 사용. 다른 종목은 'current_price'/'last_updated' 사용."
+        },
+        {
+          "severity": "🟢참고",
+          "issue": "이상치(0원/음수) 없음. 모든 가격 양수."
+        }
+      ]
+    }
+  }
+}

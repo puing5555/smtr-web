@@ -1,0 +1,833 @@
+{
+  "summary": {
+    "total_videos": 396,
+    "empty_signal_videos": 40,
+    "total_signals": 793,
+    "issue_signals": 111,
+    "pass_rate": 86,
+    "verdict": "⚠️ 부분수정"
+  },
+  "by_category": {
+    "signal_type": {
+      "issues": 0
+    },
+    "ticker": {
+      "issues": 14
+    },
+    "key_quote길이": {
+      "issues": 13
+    },
+    "timestamp": {
+      "issues": 0
+    },
+    "confidence": {
+      "issues": 0
+    },
+    "중복": {
+      "issues": 3
+    },
+    "비종목": {
+      "issues": 86
+    }
+  },
+  "top_issues": [
+    {
+      "vid_id": "0FSeR-Jm_0Y",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인"
+    },
+    {
+      "vid_id": "0kty5LC_K_Y",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인"
+    },
+    {
+      "vid_id": "0nfDYLy_6a4",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인"
+    },
+    {
+      "vid_id": "2ZvtYm7OwtY",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인"
+    },
+    {
+      "vid_id": "2hwIvuYeuw0",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인"
+    },
+    {
+      "vid_id": "2tdy1s9xvXM",
+      "stock": "테슬라",
+      "issue": "key_quote 19자"
+    },
+    {
+      "vid_id": "3MEue4qqc6w",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인"
+    },
+    {
+      "vid_id": "3eHLRnTVAIk",
+      "stock": "이더리움",
+      "issue": "비종목: 이더리움"
+    },
+    {
+      "vid_id": "3eHLRnTVAIk",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인"
+    },
+    {
+      "vid_id": "4wHpURdosQI",
+      "stock": "삼성전자",
+      "issue": "key_quote 18자"
+    },
+    {
+      "vid_id": "4wHpURdosQI",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인"
+    },
+    {
+      "vid_id": "4wvzA40ZllA",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인"
+    },
+    {
+      "vid_id": "5QTBiPX5ECM",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인"
+    },
+    {
+      "vid_id": "6GKd4b-rJwk",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인"
+    },
+    {
+      "vid_id": "6pRtfGjdwQM",
+      "stock": "테슬라",
+      "issue": "key_quote 19자"
+    },
+    {
+      "vid_id": "6pRtfGjdwQM",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인"
+    },
+    {
+      "vid_id": "78jpzwd7Rzo",
+      "stock": "천연가스",
+      "issue": "ticker 비어있음"
+    },
+    {
+      "vid_id": "78jpzwd7Rzo",
+      "stock": "천연가스",
+      "issue": "비종목: 천연가스"
+    },
+    {
+      "vid_id": "7L7IuyLTJOA",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인"
+    },
+    {
+      "vid_id": "90RvoCWxJBU",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인"
+    }
+  ],
+  "all_issues": [
+    {
+      "vid_id": "0FSeR-Jm_0Y",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "0kty5LC_K_Y",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "0nfDYLy_6a4",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "2ZvtYm7OwtY",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "2hwIvuYeuw0",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "2tdy1s9xvXM",
+      "stock": "테슬라",
+      "issue": "key_quote 19자",
+      "category": "key_quote길이"
+    },
+    {
+      "vid_id": "3MEue4qqc6w",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "3eHLRnTVAIk",
+      "stock": "이더리움",
+      "issue": "비종목: 이더리움",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "3eHLRnTVAIk",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "4wHpURdosQI",
+      "stock": "삼성전자",
+      "issue": "key_quote 18자",
+      "category": "key_quote길이"
+    },
+    {
+      "vid_id": "4wHpURdosQI",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "4wvzA40ZllA",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "5QTBiPX5ECM",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "6GKd4b-rJwk",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "6pRtfGjdwQM",
+      "stock": "테슬라",
+      "issue": "key_quote 19자",
+      "category": "key_quote길이"
+    },
+    {
+      "vid_id": "6pRtfGjdwQM",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "78jpzwd7Rzo",
+      "stock": "천연가스",
+      "issue": "ticker 비어있음",
+      "category": "ticker"
+    },
+    {
+      "vid_id": "78jpzwd7Rzo",
+      "stock": "천연가스",
+      "issue": "비종목: 천연가스",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "7L7IuyLTJOA",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "90RvoCWxJBU",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "9THSHpl-7d0",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "9VCVeQb3VQk",
+      "stock": "구리 관련 광산기업",
+      "issue": "ticker 비어있음",
+      "category": "ticker"
+    },
+    {
+      "vid_id": "A130a1L81ek",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "BSTVF2VRh2A",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "BrE_mAVUucs",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "C87YX4hxiBA",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "CYG3o30y0I4",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "DRfZ_dkPCLM",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "Dy6z5NROlWw",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "E2RFjJWffq4",
+      "stock": "이더리움",
+      "issue": "비종목: 이더리움",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "G6MVTqhqPCs",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "GBNXbRdaH0E",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "HEwdT_U4h5k",
+      "stock": "이더리움",
+      "issue": "비종목: 이더리움",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "HV8sG-r-Jmw",
+      "stock": "오픈AI",
+      "issue": "ticker 비어있음",
+      "category": "ticker"
+    },
+    {
+      "vid_id": "IZmL2dfvD1Q",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "LOXH9Exqazw",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "MBDQXXT3iuY",
+      "stock": "웨이모",
+      "issue": "ticker 비어있음",
+      "category": "ticker"
+    },
+    {
+      "vid_id": "MPdG4wlsQZQ",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "MRTuNz2_YAA",
+      "stock": "테슬라",
+      "issue": "key_quote 17자",
+      "category": "key_quote길이"
+    },
+    {
+      "vid_id": "Me-o-i7j9r0",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "MgLnsYFH-Ro",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "NlU1jkgXRw8",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "NwgoE2HN_x8",
+      "stock": "이더리움",
+      "issue": "비종목: 이더리움",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "NwgoE2HN_x8",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "PmX8o2bMtt0",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "PvME18WYoaA",
+      "stock": "스페이스X",
+      "issue": "ticker 비어있음",
+      "category": "ticker"
+    },
+    {
+      "vid_id": "Q171YmpqEA4",
+      "stock": "이더리움",
+      "issue": "비종목: 이더리움",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "RHNf6N6Z7UQ",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "SFeqfiTddtw",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "SI9E-FUkg40",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "SQJsJ0PWopY",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "SvdxoYbbmM4",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "TyyXkMdeQJE",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "UN4BGxMrOdc",
+      "stock": "화웨이",
+      "issue": "ticker 비어있음",
+      "category": "ticker"
+    },
+    {
+      "vid_id": "VLUYF8PrND0",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "V_WQDUD1rzI",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "X1RuyiJIcN4",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "YEypF4tCrxk",
+      "stock": "스페이스X",
+      "issue": "ticker 비어있음",
+      "category": "ticker"
+    },
+    {
+      "vid_id": "Z7uDMMHT32I",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "_Hb6_gGgiPY",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "_Hb6_gGgiPY",
+      "stock": "금",
+      "issue": "비종목: 금",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "_NzBICvN3Wc",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "__lgjp0cMB8",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "aiSvvQRHkEo",
+      "stock": "SK하이닉스",
+      "issue": "key_quote 17자",
+      "category": "key_quote길이"
+    },
+    {
+      "vid_id": "bRsPNBLTLVg",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "dz-LEgSPmgQ",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "ewiTkouk3FA",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "fVJGO723vzo",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "f_y7E4COXwY",
+      "stock": "비트코인",
+      "issue": "key_quote 16자",
+      "category": "key_quote길이"
+    },
+    {
+      "vid_id": "f_y7E4COXwY",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "f_y7E4COXwY",
+      "stock": "이더리움",
+      "issue": "비종목: 이더리움",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "h6orjQVleVM",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "i5p-cZ80eoo",
+      "stock": "마이크론",
+      "issue": "key_quote 17자",
+      "category": "key_quote길이"
+    },
+    {
+      "vid_id": "iYqJjHaJr40",
+      "stock": "오라클",
+      "issue": "key_quote 17자",
+      "category": "key_quote길이"
+    },
+    {
+      "vid_id": "ijhzsWA5Afo",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "jmcU1s_k0Y4",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "kC5XDjQXzcs",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "kgeZ9MT7GfI",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "lfMO6YrTQ_Q",
+      "stock": "이더리움",
+      "issue": "비종목: 이더리움",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "mPWmZzc9dCc",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "mcUTGnHcO0A",
+      "stock": "야놀자",
+      "issue": "ticker 비어있음",
+      "category": "ticker"
+    },
+    {
+      "vid_id": "miXZUQOau6w",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "nAYpInLkvng",
+      "stock": "삼성파운드리",
+      "issue": "ticker 비어있음",
+      "category": "ticker"
+    },
+    {
+      "vid_id": "nqN5R1vGwm0",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "oMn_OzGfVK4",
+      "stock": "구글",
+      "issue": "key_quote 12자",
+      "category": "key_quote길이"
+    },
+    {
+      "vid_id": "oWanL5zRR8M",
+      "stock": "폭스바겐",
+      "issue": "ticker 비어있음",
+      "category": "ticker"
+    },
+    {
+      "vid_id": "oZDbaRK9tN8",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "oZDbaRK9tN8",
+      "stock": "이더리움",
+      "issue": "비종목: 이더리움",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "oZDbaRK9tN8",
+      "stock": "마이크로소프트",
+      "issue": "key_quote 19자",
+      "category": "key_quote길이"
+    },
+    {
+      "vid_id": "oubGRSUJdFU",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "oubGRSUJdFU",
+      "stock": "금",
+      "issue": "ticker 비어있음",
+      "category": "ticker"
+    },
+    {
+      "vid_id": "oubGRSUJdFU",
+      "stock": "금",
+      "issue": "비종목: 금",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "qBjN-Mh2-pc",
+      "stock": "삼성디스플레이",
+      "issue": "ticker 비어있음",
+      "category": "ticker"
+    },
+    {
+      "vid_id": "qb6uV2uCsjs",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "qlzanFwNknc",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "qlzanFwNknc",
+      "stock": "금",
+      "issue": "비종목: 금",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "sKH0bDxeqB8",
+      "stock": "이더리움",
+      "issue": "key_quote 19자",
+      "category": "key_quote길이"
+    },
+    {
+      "vid_id": "sKH0bDxeqB8",
+      "stock": "이더리움",
+      "issue": "비종목: 이더리움",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "sKH0bDxeqB8",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "sgpdhKE9JnQ",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "tNcjIW1gAnc",
+      "stock": "BYD",
+      "issue": "ticker 비어있음",
+      "category": "ticker"
+    },
+    {
+      "vid_id": "uOMnuKlmQJM",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "uYT_xm-HyvM",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "ufYcznqbflg",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "v-NccXrDzHM",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "v2kQIaa9dxs",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "xGCanQLEC3s",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "xGIPAhDXYtI",
+      "stock": "루멘텀",
+      "issue": "ticker 비어있음",
+      "category": "ticker"
+    },
+    {
+      "vid_id": "xGIPAhDXYtI",
+      "stock": "루멘텀",
+      "issue": "key_quote 19자",
+      "category": "key_quote길이"
+    },
+    {
+      "vid_id": "xMhVqMA0xF0",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "xjxO5QzbXGg",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "xjxO5QzbXGg",
+      "stock": "삼성전자",
+      "issue": "key_quote 17자",
+      "category": "key_quote길이"
+    },
+    {
+      "vid_id": "yRvwSM53_pE",
+      "stock": "비트코인",
+      "issue": "비종목: 비트코인",
+      "category": "비종목"
+    },
+    {
+      "vid_id": "SFeqfiTddtw",
+      "stock": "엔비디아",
+      "issue": "중복 2회",
+      "category": "중복"
+    },
+    {
+      "vid_id": "fQ_NyHyQsbg",
+      "stock": "테슬라",
+      "issue": "중복 2회",
+      "category": "중복"
+    },
+    {
+      "vid_id": "m0k_JoPot_U",
+      "stock": "IonQ",
+      "issue": "중복 2회",
+      "category": "중복"
+    }
+  ]
+}
