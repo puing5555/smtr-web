@@ -1,4 +1,4 @@
-import json, subprocess, re, sys
+import json, subprocess, sys
 
 channels = {
     "한국주식": {
@@ -6,7 +6,7 @@ channels = {
         "부읽남TV": "@buridnam",
         "주코노미": "@jooconomy",
         "염승환 투자노트": "@yeominvest",
-        "한국경제TV": "@wolowtv",
+        "한국경제TV": "@WOWTV",
         "이효석아카데미": "@hyoseokacademy",
         "소수몽키": "@sosumonkey",
         "삼성증권": "@SamsungSecurities",
@@ -52,39 +52,40 @@ for category, ch_dict in channels.items():
         print(f"Fetching {name} ({handle})...", flush=True)
         try:
             r = subprocess.run(
-                ["python", "-m", "yt_dlp", "--flat-playlist", "--dump-json", "--playlist-end", "1", url],
-                capture_output=True, text=True, timeout=30
+                ["python", "-m", "yt_dlp", "--dump-single-json", "--flat-playlist", url],
+                capture_output=True, text=True, timeout=60
             )
-            # Try to get channel metadata from the playlist info
-            # Use playlist-items 0 approach instead
-            r2 = subprocess.run(
-                ["python", "-m", "yt_dlp", "--dump-single-json", "--flat-playlist", "--playlist-end", "0", url],
-                capture_output=True, text=True, timeout=30
-            )
-            if r2.returncode == 0 and r2.stdout.strip():
-                data = json.loads(r2.stdout.strip())
-                video_count = data.get("playlist_count") or len(data.get("entries", []))
-                # Try to find subscriber count in channel metadata
-                uploader = data.get("uploader", name)
-                channel_url = data.get("channel_url", f"https://www.youtube.com/{handle}")
-                actual_handle = data.get("channel_id", handle)
-                
-                # Get the webpage URL to find the actual handle
-                webpage = data.get("webpage_url", "")
+            if r.returncode == 0 and r.stdout.strip():
+                data = json.loads(r.stdout.strip())
+                video_count = data.get("playlist_count", 0) or len(data.get("entries", []))
                 real_handle = handle
-                if "uploader_id" in data and data["uploader_id"]:
-                    real_handle = data["uploader_id"] if data["uploader_id"].startswith("@") else f"@{data['uploader_id']}"
+                if data.get("uploader_id"):
+                    uid = data["uploader_id"]
+                    real_handle = uid if uid.startswith("@") else f"@{uid}"
+                
+                # Try to get subscriber count from channel metadata
+                sub = data.get("channel_follower_count", "N/A")
+                if isinstance(sub, int):
+                    if sub >= 10000:
+                        sub_str = f"{sub//10000}만"
+                    elif sub >= 1000:
+                        sub_str = f"{sub/1000:.1f}천"
+                    else:
+                        sub_str = str(sub)
+                else:
+                    sub_str = "N/A"
                 
                 results.append({
                     "name": name,
                     "category": category,
                     "youtube_handle": real_handle,
                     "video_count": video_count,
-                    "subscriber_estimate": "N/A"
+                    "subscriber_estimate": sub_str
                 })
-                print(f"  -> {video_count} videos", flush=True)
+                print(f"  -> {video_count} videos, {sub_str} subs", flush=True)
             else:
-                print(f"  -> FAILED: {r2.stderr[:200]}", flush=True)
+                err = r.stderr[:300] if r.stderr else "no output"
+                print(f"  -> FAILED: {err}", flush=True)
                 results.append({
                     "name": name,
                     "category": category,
@@ -106,7 +107,6 @@ with open(r"C:\Users\Mario\work\data\channel_video_counts.json", "w", encoding="
     json.dump(results, f, ensure_ascii=False, indent=2)
 
 print(f"\nDone! {len(results)} channels saved.")
-# Summary
 for r in results:
     status = f"{r['video_count']} videos" if r['video_count'] > 0 else "FAILED"
     print(f"  {r['name']}: {status}")
