@@ -68,7 +68,7 @@ async function main() {
   
   console.log(`Processing ${picked.length} signals with ${videoIds.length} unique videos...`);
   
-  const HAIKU = "claude-3-5-haiku-20241022";
+  const HAIKU = "claude-3-haiku-20240307";
   const SONNET = "claude-sonnet-4-20250514";
   
   let totalHaikuIn = 0, totalHaikuOut = 0, totalSonnetIn = 0, totalSonnetOut = 0;
