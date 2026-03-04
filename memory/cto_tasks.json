@@ -1,23 +1,19 @@
 {
-  "active_tasks": [
-    {
-      "id": "hs-academy-db-upload",
-      "description": "이효석아카데미 793개 시그널 분석완료 + DB 업로드",
-      "phase": "QA-검증",
-      "started_at": "2026-03-04T13:36:00+07:00",
-      "subagent_label": "QA-이효석-검증",
-      "subagent_session": "agent:main:subagent:cbe7c1b1-b41b-471a-a5fd-3d325cb8d8e5",
-      "status": "running"
-    }
+  "lastWatchdog": "2026-03-04T14:00:39+07:00",
+  "activeSubagents": 0,
+  "completedSubagents": 9,
+  "status": "idle",
+  "lastCompleted": [
+    {"label": "QA-사이트검증", "result": "13/13 통과"},
+    {"label": "DEV-빌드배포", "result": "137페이지 배포 완료"},
+    {"label": "DEV-종목페이지-가격", "result": "101개 신규 종목"},
+    {"label": "DEV-이효석-INSERT", "result": "692/692 성공"},
+    {"label": "DEV-이효석-정제", "result": "793→692 정제"},
+    {"label": "QA-이효석-재검증", "result": "98.4% 통과"},
+    {"label": "QA-이효석-검증", "result": "86%→정제후 98.4%"},
+    {"label": "PATROL-DB순찰", "result": "정상"},
+    {"label": "DEV-빌드배포", "result": "완료"}
   ],
-  "completed_tasks": [
-    {
-      "id": "system-setup-v3",
-      "description": "CTO 시스템 v3 구축 - 4역할 체계",
-      "completed_at": "2026-03-04T13:34:00+07:00"
-    }
-  ],
-  "failed_tasks": [],
-  "patrol_findings": [],
-  "last_updated": "2026-03-04T13:37:00+07:00"
+  "pendingTasks": [],
+  "notes": "이효석아카데미 692개 INSERT 완료. DB 847개. JAY 다음 지시 대기."
 }
