@@ -68,6 +68,15 @@ _Last updated: 2026-02-28 16:14 (GMT+7)_
 - JAY 승인 대기 중 → DB INSERT 예정
 - 파일: hs_analysis_cleaned.jsonl
 
+### 완료된 추가 작업 (2026-03-04 오후)
+- V10.9 A/B 테스트 완료 (V10.8 정밀도 30% vs V10.9 100%) → V10.9 승인+적용
+- V10.10: stock_name 한글 필수 + key_quote 50자+ + reasoning 100자+ 3~5문장
+- 종목명 한글 통일: 7건 수정, QA 게이트 추가
+- 가격 데이터: UUID 784개 가비지 제거, 152개 종목 최신가격, 차트 55→155개
+- 공시 스펙 v2: AWAKE→DART OpenAPI, 1층 PC cron, disclosure_tech_spec_v2.md
+- 채널 리서치 2차: 총 300개 조사, 142개 적합 선별
+- DB 컬럼 주의: stock (NOT stock_name), supabase 패키지 깨짐→REST API 직접 사용
+
 ### 현재 작업
 - ✅ 시그널 155개 (248→155, 비종목 33+중복 60 삭제)
 - 자동 품질 검증 시스템 구축 중 (pre_deploy_check.py + deploy.py)
