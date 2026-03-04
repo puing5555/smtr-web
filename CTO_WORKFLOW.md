@@ -11,8 +11,17 @@ CTO (Main/Opus) — 작업 분해 & 관리
   ├── Dev (Sonnet, label: DEV-*) — 코딩/분석/구현
   ├── QA (Sonnet, label: QA-*) — 검증/품질관리
   ├── Patrol (Sonnet, label: PATROL-*) — 상시 순찰/점검
-  └── Prompt (Sonnet, label: PROMPT-*) — 프롬프트 고도화
+  ├── Prompt (Sonnet, label: PROMPT-*) — 프롬프트 고도화
+  ├── Planner (Sonnet, label: PLAN-*) — 기획/설계
+  └── Research (Sonnet, label: RES-*) — 리서치/조사
 ```
+
+### Planner 역할
+- JAY 기획 문서 → 기술 스펙으로 변환
+- 프론트엔드 컴포넌트 설계 (페이지/컴포넌트 구조)
+- DB 스키마 설계, API 연동 설계
+- **직접 코딩 안 함** — 설계 문서 작성 후 CTO 승인 → Dev 위임
+- 기획→구현 사이의 갭을 채우는 역할
 
 ---
 
