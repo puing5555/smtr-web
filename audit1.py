@@ -27,7 +27,7 @@ for c in channels:
 # Figure out which speaker is host of which channel
 # Approach: for each channel, find the most common speaker_id in its videos' signals
 print("\n=== 채널별 호스트 추정 ===")
-video_map = {v['video_id']: v for v in videos}
+video_map = {v['id']: v for v in videos}
 channel_speaker_counts = {}
 for sig in signals:
     vid = video_map.get(sig['video_id'])
