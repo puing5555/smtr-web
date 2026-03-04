@@ -87,7 +87,7 @@ def get_info_from_url(channel_url):
     
     return video_count, sub
 
-results = []
+results = list(already_found)
 for name, category in failed_channels:
     print(f"Searching: {name}...", end=" ", flush=True)
     ch_url, ch_id, uploader, uploader_id = search_yt(name)
