@@ -18,7 +18,7 @@ function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 function getUploadDate(videoId) {
   return new Promise((resolve) => {
     const proc = exec(
-      `python -m yt_dlp --skip-download --print upload_date "https://youtube.com/watch?v=${videoId}"`,
+      `python -m yt_dlp --skip-download --no-warnings --socket-timeout 15 --print upload_date "https://youtube.com/watch?v=${videoId}"`,
       { timeout: 45000 },
       (err, stdout, stderr) => {
         if (err) {

@@ -1,19 +1,18 @@
 {
-  "lastWatchdog": "2026-03-04T14:00:39+07:00",
-  "activeSubagents": 0,
-  "completedSubagents": 9,
-  "status": "idle",
-  "lastCompleted": [
-    {"label": "QA-사이트검증", "result": "13/13 통과"},
-    {"label": "DEV-빌드배포", "result": "137페이지 배포 완료"},
-    {"label": "DEV-종목페이지-가격", "result": "101개 신규 종목"},
-    {"label": "DEV-이효석-INSERT", "result": "692/692 성공"},
-    {"label": "DEV-이효석-정제", "result": "793→692 정제"},
-    {"label": "QA-이효석-재검증", "result": "98.4% 통과"},
-    {"label": "QA-이효석-검증", "result": "86%→정제후 98.4%"},
-    {"label": "PATROL-DB순찰", "result": "정상"},
-    {"label": "DEV-빌드배포", "result": "완료"}
+  "lastWatchdog": "2026-03-04T14:28:54+07:00",
+  "activeSubagents": 1,
+  "completedSubagents": 3,
+  "status": "building",
+  "activeTasks": [
+    {"label": "DEV-최종빌드배포", "status": "진행중", "started": "14:29"}
   ],
-  "pendingTasks": [],
-  "notes": "이효석아카데미 692개 INSERT 완료. DB 847개. JAY 다음 지시 대기."
+  "completedToday": [
+    {"label": "DEV-버그수정-배포", "result": "137페이지 배포"},
+    {"label": "DEV-타임스탬프-샘플링", "result": "코드 수정 완료"},
+    {"label": "DEV-날짜수집", "result": "406개 수집 (CTO가 직접 DB UPDATE)"},
+    {"label": "DEV-이효석-INSERT", "result": "692/692 성공"},
+    {"label": "QA-사이트검증", "result": "13/13 통과"}
+  ],
+  "pendingTasks": ["QA-최종검증 (빌드 완료 후)"],
+  "notes": "날짜 406개 UPDATE 완료. 최종 빌드+배포 중. 완료 후 QA 검증 예정."
 }
