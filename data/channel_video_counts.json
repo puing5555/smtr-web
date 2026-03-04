@@ -1,0 +1,290 @@
+[
+  {
+    "name": "삼프로TV",
+    "category": "한국주식",
+    "youtube_handle": "@3protv",
+    "video_count": 20000,
+    "subscriber_estimate": "287만명",
+    "youtube_name": "삼프로TV 3PROTV"
+  },
+  {
+    "name": "부읽남TV",
+    "category": "한국주식",
+    "youtube_handle": "@buridnam",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "주코노미",
+    "category": "한국주식",
+    "youtube_handle": "@jooconomy",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "염승환 투자노트",
+    "category": "한국주식",
+    "youtube_handle": "@yeominvest",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "한국경제TV",
+    "category": "한국주식",
+    "youtube_handle": "@WOWTV",
+    "video_count": 2,
+    "subscriber_estimate": "19명",
+    "youtube_name": "Wowtv"
+  },
+  {
+    "name": "이효석아카데미",
+    "category": "한국주식",
+    "youtube_handle": "@hyoseokacademy",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "소수몽키",
+    "category": "한국주식",
+    "youtube_handle": "@sosumonkey",
+    "video_count": 1200,
+    "subscriber_estimate": "110만명",
+    "youtube_name": "소수몽키"
+  },
+  {
+    "name": "삼성증권",
+    "category": "한국주식",
+    "youtube_handle": "@SamsungSecurities",
+    "video_count": 6000,
+    "subscriber_estimate": "288만명",
+    "youtube_name": "삼성증권"
+  },
+  {
+    "name": "미래에셋증권",
+    "category": "한국주식",
+    "youtube_handle": "@MiraeAssetSecurities",
+    "video_count": -1,
+    "subscriber_estimate": "5.44천명",
+    "youtube_name": "Mirae Asset Securities [미래에셋증권]"
+  },
+  {
+    "name": "달란트투자",
+    "category": "한국주식",
+    "youtube_handle": "@dalranttuja",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "KB증권",
+    "category": "한국주식",
+    "youtube_handle": "@kbsec",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "세상학개론",
+    "category": "한국주식",
+    "youtube_handle": "@sesanghak",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "이베스트스탁",
+    "category": "한국주식",
+    "youtube_handle": "@ebesttv",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "코린이아빠",
+    "category": "한국주식",
+    "youtube_handle": "@coriniappa",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "미주은",
+    "category": "미국주식",
+    "youtube_handle": "@mijueun",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "미부",
+    "category": "미국주식",
+    "youtube_handle": "@mibustocks",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "뉴욕주민",
+    "category": "미국주식",
+    "youtube_handle": "@newyorkjumin",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "재테크하는 공대누나",
+    "category": "미국주식",
+    "youtube_handle": "@gongdaenuna",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "한그루",
+    "category": "미국주식",
+    "youtube_handle": "@hangru",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": "한그루"
+  },
+  {
+    "name": "수페TV",
+    "category": "미국주식",
+    "youtube_handle": "@supetv",
+    "video_count": 31,
+    "subscriber_estimate": "63명",
+    "youtube_name": "SupeTV"
+  },
+  {
+    "name": "머스야",
+    "category": "미국주식",
+    "youtube_handle": "@meosya",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "래퍼투자",
+    "category": "미국주식",
+    "youtube_handle": "@rappertuja",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "미국주식 주주총회",
+    "category": "미국주식",
+    "youtube_handle": "@jujuchonghoe",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "배당쟁이",
+    "category": "미국주식",
+    "youtube_handle": "@baedangjaengi",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "정신과의사 투자클럽",
+    "category": "미국주식",
+    "youtube_handle": "@psychiatrist_invest",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "미래에셋 글로벌",
+    "category": "미국주식",
+    "youtube_handle": "@MiraeAssetGlobal",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "나스닥매니아",
+    "category": "미국주식",
+    "youtube_handle": "@nasdaqmania",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "테크형",
+    "category": "미국주식",
+    "youtube_handle": "@techhyung",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "노미의 글로벌 투자",
+    "category": "미국주식",
+    "youtube_handle": "@nomi_global",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "미국주식 사관학교",
+    "category": "미국주식",
+    "youtube_handle": "@usstock_academy",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": ""
+  },
+  {
+    "name": "김치코인",
+    "category": "크립토",
+    "youtube_handle": "@kimchicoin",
+    "video_count": -1,
+    "subscriber_estimate": "1명",
+    "youtube_name": "제보자"
+  },
+  {
+    "name": "크립토지니",
+    "category": "크립토",
+    "youtube_handle": "@cryptogenie",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": "Technocracy"
+  },
+  {
+    "name": "비트코인갤러리",
+    "category": "크립토",
+    "youtube_handle": "@bitcoingallery",
+    "video_count": 2,
+    "subscriber_estimate": "5명",
+    "youtube_name": "비트코인갤러리"
+  },
+  {
+    "name": "코인읽어주는남자",
+    "category": "크립토",
+    "youtube_handle": "@coinman",
+    "video_count": 122,
+    "subscriber_estimate": "31.8만명",
+    "youtube_name": "CoinMan"
+  },
+  {
+    "name": "크립토퀀트",
+    "category": "크립토",
+    "youtube_handle": "@CryptoQuant",
+    "video_count": 32,
+    "subscriber_estimate": "2.29천명",
+    "youtube_name": "CryptoQuant"
+  },
+  {
+    "name": "땡글아카데미",
+    "category": "크립토",
+    "youtube_handle": "@ddangle",
+    "video_count": -1,
+    "subscriber_estimate": "N/A",
+    "youtube_name": "땡글로드"
+  }
+]
