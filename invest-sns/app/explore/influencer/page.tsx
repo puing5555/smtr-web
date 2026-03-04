@@ -64,7 +64,7 @@ export default function InfluencerPage() {
   useEffect(() => {
     const loadSignals = async () => {
       try {
-        const signals = await getInfluencerSignalsSampled(50); // 채널별 균등 샘플링
+        const signals = await getLatestInfluencerSignals(1000); // 전체 시그널 최신순
         const transformed = signals.map((s: any) => ({
           id: s.id,
           stock: s.stock,

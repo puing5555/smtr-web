@@ -1,18 +1,22 @@
 {
-  "lastWatchdog": "2026-03-04T14:28:54+07:00",
-  "activeSubagents": 1,
-  "completedSubagents": 3,
-  "status": "building",
-  "activeTasks": [
-    {"label": "DEV-최종빌드배포", "status": "진행중", "started": "14:29"}
-  ],
+  "lastWatchdog": "2026-03-04T14:58:54+07:00",
+  "activeSubagents": 0,
+  "status": "idle",
   "completedToday": [
-    {"label": "DEV-버그수정-배포", "result": "137페이지 배포"},
-    {"label": "DEV-타임스탬프-샘플링", "result": "코드 수정 완료"},
-    {"label": "DEV-날짜수집", "result": "406개 수집 (CTO가 직접 DB UPDATE)"},
     {"label": "DEV-이효석-INSERT", "result": "692/692 성공"},
-    {"label": "QA-사이트검증", "result": "13/13 통과"}
+    {"label": "DEV-이효석-정제", "result": "793→692 정제"},
+    {"label": "QA-이효석-검증", "result": "98.4% 통과"},
+    {"label": "DEV-버그수정-배포", "result": "limit 1000 + 가격 + 배포"},
+    {"label": "DEV-타임스탬프-샘플링", "result": "코드 수정 완료"},
+    {"label": "DEV-날짜수집", "result": "406개 수집 (CTO 직접 UPDATE)"},
+    {"label": "DEV-최종빌드배포", "result": "137→151 종목페이지"},
+    {"label": "DEV-재빌드-151페이지", "result": "151개 종목페이지 확인"},
+    {"label": "QA-최종검증", "result": "21/24 통과"},
+    {"label": "DEV-핫픽스", "result": "published_at 18/29 + 재빌드 234페이지"}
   ],
-  "pendingTasks": ["QA-최종검증 (빌드 완료 후)"],
-  "notes": "날짜 406개 UPDATE 완료. 최종 빌드+배포 중. 완료 후 QA 검증 예정."
+  "pendingTasks": [],
+  "openIssues": [
+    "published_at NULL 11건 (멤버십 영상, JAY 판단 대기)"
+  ],
+  "notes": "오늘 서브에이전트 10개 완료. DB 833개 시그널, 151종목. QA_CHECKLIST.md 생성."
 }
