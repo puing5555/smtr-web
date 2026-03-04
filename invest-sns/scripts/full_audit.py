@@ -95,7 +95,7 @@ def main():
             verdicts = [r['haiku_verdict'] for r in results]
             print(f"  {i+1}/{len(signals)} | 정상:{verdicts.count('정상')} 의심:{verdicts.count('의심')} 불량:{verdicts.count('불량')} 에러:{verdicts.count('error')}")
         
-        time.sleep(0.3)
+        time.sleep(2)
     
     # Phase 1 stats
     verdicts = [r['haiku_verdict'] for r in results]
