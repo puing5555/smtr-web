@@ -2,7 +2,7 @@ import requests, json, time, os, sys
 
 SUPABASE_URL = "https://arypzhotxflimroprmdk.supabase.co"
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyeXB6aG90eGZsaW1yb3BybWRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwMDYxMTAsImV4cCI6MjA4NzU4MjExMH0.qcqFIvYRiixwu609Wjj9H3HxscU8vNpo9nS_KQ3f00A"
-ANTHROPIC_KEY = "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"
+ANTHROPIC_KEY = "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"
 
 HEADERS_SB = {"apikey": SUPABASE_KEY, "Authorization": f"Bearer {SUPABASE_KEY}"}
 
