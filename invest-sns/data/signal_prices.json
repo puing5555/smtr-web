@@ -338,17 +338,17 @@
   "1211": {
     "name": "BYD",
     "ticker": "1211",
-    "market": "US",
-    "current_price": 0,
-    "currency": "USD",
+    "market": "HK",
+    "current_price": 93.85,
+    "currency": "HKD",
     "last_updated": "2026-03-04"
   },
   "1211.HK": {
     "name": "BYD",
     "ticker": "1211.HK",
-    "market": "US",
-    "current_price": 94.2,
-    "currency": "USD",
+    "market": "HK",
+    "current_price": 93.85,
+    "currency": "HKD",
     "last_updated": "2026-03-04"
   },
   "131970": {
@@ -632,10 +632,10 @@
     "last_updated": "2026-03-04"
   },
   "BRK.A": {
-    "name": "버크셀 해서웨이",
+    "name": "버크셔 해서웨이",
     "ticker": "BRK.A",
     "market": "US",
-    "current_price": 0,
+    "current_price": 721045,
     "currency": "USD",
     "last_updated": "2026-03-04"
   },
@@ -844,14 +844,6 @@
     "ticker": "IREN",
     "market": "US",
     "current_price": 38.85,
-    "currency": "USD",
-    "last_updated": "2026-03-04"
-  },
-  "IXIC": {
-    "name": "나스닥",
-    "ticker": "IXIC",
-    "market": "US",
-    "current_price": 0,
     "currency": "USD",
     "last_updated": "2026-03-04"
   },
@@ -1143,11 +1135,11 @@
     "currency": "USD",
     "last_updated": "2026-03-04"
   },
-  "SQ": {
-    "name": "스퀘어",
-    "ticker": "SQ",
+  "XYZ": {
+    "name": "블록 (Block)",
+    "ticker": "XYZ",
     "market": "US",
-    "current_price": 0,
+    "current_price": 62.9,
     "currency": "USD",
     "last_updated": "2026-03-04"
   },
