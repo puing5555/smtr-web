@@ -4,8 +4,11 @@ OpenClaw sessions_spawn 대신 직접 Anthropic API 사용 (배치 효율)
 """
 import os, json, time, sys, glob, re, random
 
-# Get API key from environment (set by OpenClaw)
-api_key = os.environ.get('ANTHROPIC_API_KEY', '')
+# Force use new API key (override environment)
+api_key = "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"
+
+# Debug: print first/last 10 chars of key
+print(f"Using API key: {api_key[:10]}...{api_key[-10:]}")
 
 # Flush stdout for progress visibility
 import functools
