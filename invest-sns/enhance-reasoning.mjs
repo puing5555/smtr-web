@@ -50,6 +50,7 @@ async function main() {
 
   for (let i = 0; i < short.length; i++) {
     const s = short[i];
+    console.log(`[${i}] Starting ${s.id} ${s.stock} (r:${s.reasoning?.length})`);
     const prompt = `다음 투자 시그널의 reasoning을 보강해주세요. 3~5문장, 100자 이상으로 확장합니다.
 
 종목: ${s.stock}
