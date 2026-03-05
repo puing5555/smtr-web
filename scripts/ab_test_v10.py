@@ -97,6 +97,7 @@ class Cost:
 client = httpx.Client(timeout=180)
 
 def claude(prompt, cost, max_tokens=2000):
+    print(f"    [claude] calling, prompt_len={len(prompt)}...", flush=True)
     for attempt in range(3):
         try:
             r = client.post("https://api.anthropic.com/v1/messages",
