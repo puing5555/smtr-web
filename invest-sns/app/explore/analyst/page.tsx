@@ -322,21 +322,7 @@ export default function AnalystPage() {
     ), [sortedReports, q]
   );
 
-  // 증권사별 그룹
-  const firmGroups = useMemo(() => {
-    const map: Record<string, Report[]> = {};
-    for (const r of allReports) {
-      (map[r.firm] ??= []).push(r);
-    }
-    return Object.entries(map)
-      .map(([firm, reports]) => ({
-        firm,
-        reports,
-        tickers: new Set(reports.map(r => r.ticker)).size,
-      }))
-      .filter(g => !q || g.firm.toLowerCase().includes(q))
-      .sort((a, b) => b.reports.length - a.reports.length);
-  }, [q]);
+  // 증권사별 그룹 (제거됨)
 
   // 종목별 그룹 (최근 2주 리포트 수 많은 순 정렬)
   const tickerGroups = useMemo(() => {
@@ -391,7 +377,6 @@ export default function AnalystPage() {
     { id: 'analyst', label: '👤 애널리스트별' },
   ];
 
-  const [expandedFirm, setExpandedFirm] = useState<string | null>(null);
   const [expandedTicker, setExpandedTicker] = useState<string | null>(null);
 
   return (
@@ -701,42 +686,7 @@ export default function AnalystPage() {
           </div>
         )}
 
-        {/* 🏢 증권사별 */}
-        {activeTab === 'firm' && (
-          <div className="space-y-2">
-            {firmGroups.map(g => (
-              <div key={g.firm} className="bg-white rounded-xl shadow-sm overflow-hidden">
-                <button
-                  onClick={() => setExpandedFirm(expandedFirm === g.firm ? null : g.firm)}
-                  className="w-full px-4 py-3 flex items-center justify-between"
-                >
-                  <div>
-                    <p className="font-medium text-gray-900 text-sm">{g.firm}</p>
-                    <p className="text-xs text-gray-500 mt-0.5">{g.reports.length}개 리포트 · {g.tickers}종목 커버</p>
-                  </div>
-                  <span className="text-gray-400 text-sm">{expandedFirm === g.firm ? '▲' : '▼'}</span>
-                </button>
-                {expandedFirm === g.firm && (
-                  <div className="border-t border-gray-100 px-4 pb-3">
-                    {[...g.reports].sort((a, b) => b.published_at.localeCompare(a.published_at)).slice(0, 20).map((r, i) => (
-                      <div key={i} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm text-gray-800 truncate">{r.title}</p>
-                          <div className="flex items-center gap-2 mt-0.5">
-                            <span className="text-xs text-blue-600">{TICKER_NAMES[r.ticker] || r.ticker}</span>
-                            <span className="text-xs text-gray-400">{r.published_at}</span>
-                            <OpinionBadge opinion={r.opinion} />
-                          </div>
-                        </div>
-                        <a href={r.pdf_url} target="_blank" rel="noopener noreferrer" className="ml-2">📄</a>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
+        {/* 증권사별 탭 제거됨 */}
 
         {/* 📈 종목별 */}
         {activeTab === 'stock' && (
