@@ -56,11 +56,22 @@ _Last updated: 2026-03-05 06:30 (GMT+7)_
 - **채널 우선순위 20개** 선정 (data/channel_priority_top20.md)
   - 1위 김현석 월스트리트나우(95점) ~ 20위 한화투자증권(65점)
 
+### 완료된 작업 (2026-03-05)
+- **8역할 체계 확정** — Opus(CTO) + Sonnet(Dev/Research/Planner/Prompt) + Haiku(QA1차/Patrol/Copywriter텍스트QA)
+- **Research 에이전트** — cron 3회/일 (08:00/14:00/17:00) + Copywriter 21:00
+- **리서치봇 운영 가이드 v1** — 3축(경쟁사/아이디어/투자자현장), docs/research_bot_guide_v1.md
+- **Day 1 리서치** — TipRanks ⭐5 + 알파스퀘어 ⭐4 완료
+- **문체 가이드라인** — docs/style_guide.md
+- **자율 운영 규칙** — 대기 30분 금지, 6단계 우선순위
+- **비용 보고 규칙** — $1↓자동, $1~10 CTO, $10↑ JAY승인
+
 ### 현재 작업 / 다음 단계
 - ai_detail 519건 재생성 (Claude API 스크립트 준비됨, 미실행)
 - 공시 DART OpenAPI 연동 (1층 PC cron)
 - 채널 확장: 상위 20개 채널 크롤링 시작 필요
 - Supabase anon key 변경됨 (.env.local이 최신)
+- Supabase research_invest_platforms 테이블 생성 필요 (SQL 준비됨)
+- Brave Search API 키 세팅 필요
 
 ### DB 스키마 (중요)
 - 테이블: `influencer_channels`, `influencer_videos`, `influencer_signals`
