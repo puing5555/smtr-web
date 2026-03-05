@@ -1,0 +1,32 @@
+{
+  "total_videos": 10,
+  "v10": {
+    "total": 7,
+    "by_type": {
+      "긍정": 5,
+      "중립": 1,
+      "매수": 1
+    }
+  },
+  "v11": {
+    "total": 8,
+    "by_type": {
+      "���정": 1,
+      "긍정": 4,
+      "���립": 1,
+      "부정": 1,
+      "매수": 1
+    }
+  },
+  "db": {
+    "total": 10,
+    "by_type": {
+      "undefined": 10
+    }
+  },
+  "cost": {
+    "input_tokens": 104730,
+    "output_tokens": 3469,
+    "estimated_cost_usd": "0.3662"
+  }
+}
