@@ -1,0 +1,20 @@
+{
+  "progress": 83,
+  "total": 83,
+  "dist": {
+    "v10": {
+      "중립": 2,
+      "긍정": 23,
+      "매수": 23
+    },
+    "v11": {
+      "긍정": 33,
+      "부정": 1,
+      "매수": 14
+    }
+  },
+  "buyToPositiveCount": 7,
+  "truncatedVideos": 14,
+  "cost": "4.05",
+  "elapsed": "28.7"
+}

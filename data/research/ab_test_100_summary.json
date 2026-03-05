@@ -1,0 +1,1546 @@
+{
+  "executionTime": "28.7min",
+  "totalCost": "$4.06",
+  "model": "claude-sonnet-4-20250514",
+  "videoCount": 83,
+  "hyoseokCount": 15,
+  "otherCount": 68,
+  "truncation": {
+    "truncatedCount": 14,
+    "over90k": 5,
+    "over50k": 7,
+    "avgLength": 15365,
+    "missedDueToTruncation": 4
+  },
+  "v10Distribution": {
+    "중립": 2,
+    "긍정": 23,
+    "매수": 23
+  },
+  "v11Distribution": {
+    "긍정": 33,
+    "부정": 1,
+    "매수": 14
+  },
+  "buyToPositiveReclassifications": 7,
+  "dbExistingSignals": 93,
+  "v10Total": 48,
+  "v11Total": 48,
+  "details": [
+    {
+      "title": "[속보효] 드디어 오늘 밤 AI의 운명이 결정될 것 같습니다",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "엔비디아",
+          "signal": "중립"
+        },
+        {
+          "stock": "SK하이닉스",
+          "signal": "긍정"
+        },
+        {
+          "stock": "삼성전자",
+          "signal": "긍정"
+        }
+      ],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "국장 뜨겁다 뜨거워! 고공행진 코스피 ETF는 그냥 이거 사세요",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "[속보효] 코스피 6000 돌파… 7,900 논리까지 바로 공개합니다",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [],
+      "v11": [
+        {
+          "stock": "삼성전자",
+          "signal": "긍정"
+        },
+        {
+          "stock": "SK하이닉스",
+          "signal": "긍정"
+        }
+      ],
+      "db": [
+        {
+          "stock": "SK하이닉스",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "반도체 다음 무섭게 치고나갈 충격적 4종목 바로 찍어드립니다",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "효성",
+          "signal": "긍정"
+        }
+      ],
+      "v11": [],
+      "db": [
+        {
+          "stock": "효성중공업",
+          "signal": "긍정"
+        },
+        {
+          "stock": "HD현대일렉트릭",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "하이닉스 없거나 추가 매수 고민하는 분들 제가 시원하게 바로 말씀드립니다 [Z1뉴스]",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "SK하이닉스",
+          "signal": "매수"
+        },
+        {
+          "stock": "삼성전자",
+          "signal": "매수"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "SK하이닉스",
+          "signal": "긍정"
+        },
+        {
+          "stock": "삼성전자",
+          "signal": "긍정"
+        }
+      ],
+      "db": [
+        {
+          "stock": "삼성전자",
+          "signal": "긍정"
+        },
+        {
+          "stock": "SK하이닉스",
+          "signal": "매수"
+        }
+      ]
+    },
+    {
+      "title": "지금 소프트웨어 주식 사면 망합니다, 헤지펀드들이 몰래 사들인 한국 ETF의 정체ㅣ쇼미더 연수르",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "마이크론",
+          "signal": "매수"
+        },
+        {
+          "stock": "구글",
+          "signal": "긍정"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "마이크론",
+          "signal": "긍정"
+        },
+        {
+          "stock": "구글",
+          "signal": "긍정"
+        }
+      ],
+      "db": [
+        {
+          "stock": "마이크론",
+          "signal": "중립"
+        },
+        {
+          "stock": "구글",
+          "signal": "중립"
+        }
+      ]
+    },
+    {
+      "title": "왕초보를 위한 주식 기초용어 총정리",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "30분만 집중해보세요 ETF 전문가로 만들어 드립니다!",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "주린이 탈출시켜 드립니다! 100분으로 끝내는 주식 기초! 총정리",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "투자로 돈을 버는 게 아니라 사람을 살리려는 이유",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "\"생각을 바꾸니 돈이 들어오기 시작했다\" 주식 전문가 이효석의 주식에서 살아남는 비법｜클래스e｜알고e즘",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "AI는 아직 시작도 안 했습니다. 진짜 승부는 2026년부터입니다",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "엔비디아 독주 이제 끝, 2026년 AI 왕좌 이 주식으로 바뀝니다 | 이효석 HS아카데미 대표 [머니명강]",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "구글",
+          "signal": "매수"
+        },
+        {
+          "stock": "엔비디아",
+          "signal": "긍정"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "구글",
+          "signal": "긍정"
+        },
+        {
+          "stock": "엔비디아",
+          "signal": "부정"
+        }
+      ],
+      "db": []
+    },
+    {
+      "title": "행복해지고 싶다면 딱 두 가지만 기억하세요ㅣ이효석아카데미 오리지날",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "[그냥효] 정말 큰 돈을 버는 사람들의 공통된 방식은 바로 '이것'",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "트럼프의 선택에 시장이 패닉하는 이유, 우리도 패닉해야 하나요?",
+      "subtitleLength": 17827,
+      "truncated": true,
+      "v10": [],
+      "v11": [],
+      "db": [
+        {
+          "stock": "금 (GLD)",
+          "signal": "부정"
+        },
+        {
+          "stock": "비트코인 (BTC)",
+          "signal": "부정"
+        }
+      ]
+    },
+    {
+      "title": "언제 터질지 모르는 버블에 올라타는 심리",
+      "subtitleLength": 12948,
+      "truncated": true,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "제2의 팔란티어, 알고도 10배 못 먹는 이유",
+      "subtitleLength": 3893,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "팔란티어",
+          "signal": "긍정"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "팔란티어",
+          "signal": "긍정"
+        }
+      ],
+      "db": [
+        {
+          "stock": "팔란티어 (PLTR)",
+          "signal": "긍정"
+        },
+        {
+          "stock": "아이렌 (IREN)",
+          "signal": "매수"
+        },
+        {
+          "stock": "비트코인 (BTC)",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "아직도 이더리움 잘 모르겠을 때 보는 영상",
+      "subtitleLength": 0,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": [
+        {
+          "stock": "이더리움",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "아이렌(IREN)을 사게 된 3가지 이유",
+      "subtitleLength": 0,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": [
+        {
+          "stock": "IREN",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "투자로 돈벌었는데 유튜브 왜 함? 구독자 10만 질문 모음집",
+      "subtitleLength": 0,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": [
+        {
+          "stock": "팔란티어",
+          "signal": "중립"
+        }
+      ]
+    },
+    {
+      "title": "5년전 비트코인에 영끌한 사람의 코인 시장 전망",
+      "subtitleLength": 0,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": [
+        {
+          "stock": "비트코인",
+          "signal": "긍정"
+        },
+        {
+          "stock": "이더리움",
+          "signal": "긍정"
+        },
+        {
+          "stock": "금",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "안 터질 버블을 구별하는 1가지 투자 지표 (ft. 비트코인, AI, 팔란티어)",
+      "subtitleLength": 0,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": [
+        {
+          "stock": "비트코인",
+          "signal": "매수"
+        },
+        {
+          "stock": "팔란티어",
+          "signal": "긍정"
+        },
+        {
+          "stock": "엔비디아",
+          "signal": "긍정"
+        },
+        {
+          "stock": "로켓랩",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "3달 동안 3배 오른 아이렌, 2배 오른 로켓랩. 진짜 10배까지 안 파시나요?",
+      "subtitleLength": 0,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": [
+        {
+          "stock": "로켓랩",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "폭등하는 써클, 내 코인은 언제 오를까? 트럼프가 준 두번째 기회",
+      "subtitleLength": 0,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": [
+        {
+          "stock": "비트코인",
+          "signal": "중립"
+        },
+        {
+          "stock": "이더리움",
+          "signal": "긍정"
+        },
+        {
+          "stock": "서클",
+          "signal": "매수"
+        }
+      ]
+    },
+    {
+      "title": "미장보다 국장? 대선 이후 현실이 될 3가지 변화들",
+      "subtitleLength": 6070,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "트럼프가 만들 새로운 버블, 제2의 팔란티어는?",
+      "subtitleLength": 0,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": [
+        {
+          "stock": "라이엇 플랫폼스",
+          "signal": "긍정"
+        },
+        {
+          "stock": "로켓랩",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "트럼프가 꿈꾸는 제2의 플라자 합의? 대변혁을 맞이하는 투자자의 자세",
+      "subtitleLength": 4746,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "트럼프의 변덕을 이해하려는 개미의 발버둥",
+      "subtitleLength": 3843,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "경제적 자유 이후의 현실... 그리고 특별한 이벤트",
+      "subtitleLength": 4159,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "'무제한 요금제'가 영화관을 살릴 수 있을까?",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": [
+        {
+          "stock": "CGV",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "'너도 나도 핵무장', 고삐 풀린 핵무기의 시대",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "기록을 위해 확대 주사를 맞았다는 루머는 어디서 왔나",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "스트래티지는 어떻게 비트코인을 계속 살 수 있을까?",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": [
+        {
+          "stock": "비트코인",
+          "signal": "중립"
+        }
+      ]
+    },
+    {
+      "title": "연초 이후 +24%, 코스피는 왜 강한가",
+      "subtitleLength": 64936,
+      "truncated": true,
+      "v10": [],
+      "v11": [],
+      "db": [
+        {
+          "stock": "코스피",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "삼성전자 시총 1,000조 돌파, 코스피 불꽃 상승",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "삼성전자",
+          "signal": "긍정"
+        },
+        {
+          "stock": "SK하이닉스",
+          "signal": "긍정"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "삼성전자",
+          "signal": "긍정"
+        },
+        {
+          "stock": "에스케이하이닉스",
+          "signal": "긍정"
+        }
+      ],
+      "db": [
+        {
+          "stock": "삼성전자",
+          "signal": "중립"
+        }
+      ]
+    },
+    {
+      "title": "코스피 더 올라갈 겁니다, 다만 현금 이만큼은 꼭 갖고 계세요 [조진표 대표 1부]",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "삼성전자",
+          "signal": "매수"
+        },
+        {
+          "stock": "SK하이닉스",
+          "signal": "매수"
+        }
+      ],
+      "v11": [],
+      "db": [
+        {
+          "stock": "SK하이닉스",
+          "signal": "긍정"
+        },
+        {
+          "stock": "삼성전자",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "\"지금 투자 안 하면 바보인가요?\" 인생역전 기회를 놓치는 이유 [재테크 모음집]",
+      "subtitleLength": 138490,
+      "truncated": true,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "삼성전자 절대 팔지 마세요, 상상 못했던 일 벌어집니다 [조진표 대표 2부]",
+      "subtitleLength": 48727,
+      "truncated": true,
+      "v10": [
+        {
+          "stock": "삼성전자",
+          "signal": "매수"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "삼성전자",
+          "signal": "긍정"
+        }
+      ],
+      "db": [
+        {
+          "stock": "삼성전자",
+          "signal": "매수"
+        },
+        {
+          "stock": "SK하이닉스",
+          "signal": "매수"
+        },
+        {
+          "stock": "원익IPS",
+          "signal": "긍정"
+        },
+        {
+          "stock": "HPSP",
+          "signal": "긍정"
+        },
+        {
+          "stock": "SOXX",
+          "signal": "긍정"
+        },
+        {
+          "stock": "주성엔지니어링",
+          "signal": "긍정"
+        },
+        {
+          "stock": "한미반도체",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "평생 미국주식만 하고 싶어요 월세 살면서 주식 하면 안되나요",
+      "subtitleLength": 47744,
+      "truncated": true,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "앞으로 정말 많이 오를 겁니다, '이 주식' 돈을 쓸어담는다 [김학주 교수 3부]",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "에이치엠파마",
+          "signal": "매수"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "에이치앤파마",
+          "signal": "긍정"
+        }
+      ],
+      "db": []
+    },
+    {
+      "title": "\"전세계 돈 다 빨아들일 겁니다\" 현금 있다면 이 4개 주식 사세요 [배재규 대표 풀버전]",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "엔비디아",
+          "signal": "매수"
+        },
+        {
+          "stock": "SK하이닉스",
+          "signal": "매수"
+        },
+        {
+          "stock": "TSMC",
+          "signal": "매수"
+        },
+        {
+          "stock": "ASML",
+          "signal": "매수"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "엔비디아",
+          "signal": "매수"
+        },
+        {
+          "stock": "SK하이닉스",
+          "signal": "매수"
+        },
+        {
+          "stock": "TSMC",
+          "signal": "매수"
+        },
+        {
+          "stock": "ASML",
+          "signal": "매수"
+        }
+      ],
+      "db": [
+        {
+          "stock": "ASML",
+          "signal": "매수"
+        },
+        {
+          "stock": "엔비디아",
+          "signal": "매수"
+        },
+        {
+          "stock": "TSMC",
+          "signal": "매수"
+        },
+        {
+          "stock": "SK하이닉스",
+          "signal": "매수"
+        }
+      ]
+    },
+    {
+      "title": "현금 대부분 '이 주식' 샀어요, 앞으로도 팔 생각 없습니다 [한정수 작가 풀버전]",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "아이덴",
+          "signal": "매수"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "SK하이닉스",
+          "signal": "긍정"
+        },
+        {
+          "stock": "삼성전자",
+          "signal": "긍정"
+        }
+      ],
+      "db": [
+        {
+          "stock": "아이덴",
+          "signal": "중립"
+        },
+        {
+          "stock": "SK하이닉스",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "현금 있다면 '이 3가지' 사세요, 앞으로 무섭게 많이 오를 겁니다 [배재규 대표 1부]",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "반도체",
+          "signal": "매수"
+        },
+        {
+          "stock": "나스닥",
+          "signal": "매수"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "반도체",
+          "signal": "매수"
+        },
+        {
+          "stock": "빅테크",
+          "signal": "매수"
+        }
+      ],
+      "db": []
+    },
+    {
+      "title": "현금 있다면 '이 5개 주식' 사세요, 27년까지 무섭게 오를 겁니다 [이정윤 세무사 풀버전]",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "현대차",
+          "signal": "긍정"
+        },
+        {
+          "stock": "삼성전자",
+          "signal": "중립"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "현대차",
+          "signal": "긍정"
+        }
+      ],
+      "db": [
+        {
+          "stock": "현대차",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "현금으로 딱 5개 주식 사세요, 27년까지 무섭게 오를 겁니다 [이정윤 세무사 4부]",
+      "subtitleLength": 48883,
+      "truncated": true,
+      "v10": [
+        {
+          "stock": "현대차",
+          "signal": "매수"
+        },
+        {
+          "stock": "현대로템",
+          "signal": "긍정"
+        },
+        {
+          "stock": "한화에어로스페이스",
+          "signal": "긍정"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "현대차",
+          "signal": "긍정"
+        },
+        {
+          "stock": "현대로템",
+          "signal": "긍정"
+        },
+        {
+          "stock": "넥슨지티",
+          "signal": "긍정"
+        },
+        {
+          "stock": "한화에어로스페이스",
+          "signal": "긍정"
+        }
+      ],
+      "db": [
+        {
+          "stock": "아모레퍼시픽",
+          "signal": "긍정"
+        },
+        {
+          "stock": "현대차",
+          "signal": "매수"
+        },
+        {
+          "stock": "하이브",
+          "signal": "매수"
+        },
+        {
+          "stock": "삼성SDI",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "현금으로 '이 11개 주식' 사세요, 26년 미친듯이 오를 겁니다 [이형수 대표 4부]",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "삼성전자",
+          "signal": "매수"
+        },
+        {
+          "stock": "SK하이닉스",
+          "signal": "매수"
+        },
+        {
+          "stock": "마이크론",
+          "signal": "매수"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "삼성전자",
+          "signal": "매수"
+        },
+        {
+          "stock": "SK하이닉스",
+          "signal": "매수"
+        },
+        {
+          "stock": "마이크론",
+          "signal": "매수"
+        }
+      ],
+      "db": [
+        {
+          "stock": "테슬라",
+          "signal": "긍정"
+        },
+        {
+          "stock": "원익IPS",
+          "signal": "긍정"
+        },
+        {
+          "stock": "삼성전자",
+          "signal": "매수"
+        },
+        {
+          "stock": "테스",
+          "signal": "긍정"
+        },
+        {
+          "stock": "유진테크",
+          "signal": "긍정"
+        },
+        {
+          "stock": "마이크론",
+          "signal": "매수"
+        },
+        {
+          "stock": "엔비디아",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "주식투자 '이 방법'으로 2억에서 500억 모았습니다 [박두환 대표 4부]",
+      "subtitleLength": 45314,
+      "truncated": true,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "ISA부터 '이 순서로' 담으세요, 나중에 큰 부가 됩니다 [김범곤 대표 풀버전]",
+      "subtitleLength": 176847,
+      "truncated": true,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "\"제 월급으로는 미래가 안 보입니다\" 미국 주식으로 인생 역전 가능할까요? [상남자들]",
+      "subtitleLength": 44241,
+      "truncated": true,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "\"주식 수익률 -99%까지..\" 앞으로 어떻게 살아야 할까요? [상남자들]",
+      "subtitleLength": 56794,
+      "truncated": true,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "칠천피, 공포 vs 기대감? 엔비디아 실적 후 따라오는 반도체 쇼크, 미국 흔들렸다…우리 반도체 투톱은? | 박병창 교보증권 이사 [마켓 인사이드]",
+      "subtitleLength": 92884,
+      "truncated": true,
+      "v10": [
+        {
+          "stock": "삼성전자",
+          "signal": "긍정"
+        },
+        {
+          "stock": "SK하이닉스",
+          "signal": "긍정"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "삼성전자",
+          "signal": "긍정"
+        },
+        {
+          "stock": "SK하이닉스",
+          "signal": "긍정"
+        }
+      ],
+      "db": [
+        {
+          "stock": "SK하이닉스",
+          "signal": "긍정"
+        },
+        {
+          "stock": "엔비디아",
+          "signal": "중립"
+        },
+        {
+          "stock": "삼성전자",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "[2월 26일 마감시황] 반도체, 숨 고르기 오나? 이제는 전략을 바꿔볼 타이밍 | 홍선애, 박명석, 이재규 [클로징벨 라이브]",
+      "subtitleLength": 144900,
+      "truncated": true,
+      "v10": [],
+      "v11": [],
+      "db": [
+        {
+          "stock": "삼성전자",
+          "signal": "매수"
+        }
+      ]
+    },
+    {
+      "title": "삼성·하이닉스 부담 구간? 장비주가 대안일까? ㅣ 김장열 유니스토리자산운용 본부장 [집중, 오늘의 주식]",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "삼성전자",
+          "signal": "긍정"
+        },
+        {
+          "stock": "엔비디아",
+          "signal": "긍정"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "삼성전자",
+          "signal": "긍정"
+        },
+        {
+          "stock": "엔비디아",
+          "signal": "긍정"
+        }
+      ],
+      "db": [
+        {
+          "stock": "엔비디아",
+          "signal": "중립"
+        },
+        {
+          "stock": "삼성전자",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "떨어질 거 걱정하지 말고 제발 사세요 |  배재원 하나증권 인천지점 PB [더블 크루]",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "삼성전자",
+          "signal": "매수"
+        },
+        {
+          "stock": "에스케이하이닉스",
+          "signal": "매수"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "삼성전자",
+          "signal": "매수"
+        },
+        {
+          "stock": "SK하이닉스",
+          "signal": "매수"
+        }
+      ],
+      "db": [
+        {
+          "stock": "삼성전자",
+          "signal": "매수"
+        }
+      ]
+    },
+    {
+      "title": "'불장엔 증권사 주식!' 뭐가 베스트일까 | 고연수 하나증권 리서치센터 연구원 [더블 업]",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "NH투자증권",
+          "signal": "긍정"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "NH투자증권",
+          "signal": "매수"
+        }
+      ],
+      "db": [
+        {
+          "stock": "삼성증권",
+          "signal": "긍정"
+        },
+        {
+          "stock": "NH투자증권",
+          "signal": "긍정"
+        },
+        {
+          "stock": "한국금융지주",
+          "signal": "매수"
+        },
+        {
+          "stock": "키움증권",
+          "signal": "매수"
+        }
+      ]
+    },
+    {
+      "title": "엔비디아 실적발표, 서프라이즈는 아닌데...삼성전자, SK하이닉스 매수 기회주나? | 김장열 유니스토리자산운용 본부장 [글로벌 인터뷰]",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [],
+      "v11": [
+        {
+          "stock": "엔비디아",
+          "signal": "긍정"
+        }
+      ],
+      "db": [
+        {
+          "stock": "마이크론",
+          "signal": "긍정"
+        },
+        {
+          "stock": "엔비디아",
+          "signal": "긍정"
+        },
+        {
+          "stock": "SK하이닉스",
+          "signal": "긍정"
+        },
+        {
+          "stock": "삼성전자",
+          "signal": "매수"
+        }
+      ]
+    },
+    {
+      "title": "드디어 6천피 시대! 뭘 사야 지금부터 돈 벌까? 반도체 다음 주자는 화학? | 박지훈, 여도은, 허재무 [아침N투자]",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": [
+        {
+          "stock": "LG화학",
+          "signal": "매수"
+        },
+        {
+          "stock": "NC소프트",
+          "signal": "긍정"
+        },
+        {
+          "stock": "효성중공업",
+          "signal": "매수"
+        },
+        {
+          "stock": "솔브레인",
+          "signal": "긍정"
+        },
+        {
+          "stock": "하이브",
+          "signal": "긍정"
+        },
+        {
+          "stock": "HD현대일렉트릭",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "자금 흐름이 바뀌고 있다. 상승 싸이클 준비하는 코스닥 | 장우진 작가 [여의도 인사이트]",
+      "subtitleLength": 124099,
+      "truncated": true,
+      "v10": [],
+      "v11": [],
+      "db": [
+        {
+          "stock": "엔비디아",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "외국인 관광객 더 들어온다! 일본 이세탄 백화점 주가급등, 신세계도 따라갑니다 | 김동훈, 여도은, 허재무 [아침N투자]",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "신세계",
+          "signal": "매수"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "신세계",
+          "signal": "긍정"
+        }
+      ],
+      "db": [
+        {
+          "stock": "신세계",
+          "signal": "매수"
+        },
+        {
+          "stock": "삼성전자",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "[2월 25일 마감시황] 쌓여있던 재료가 많았던 현대그룹주…잠자던 외국인이 쐈다 | 홍선애, 김장열, 이권희 [클로징벨 라이브]",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "현대차",
+          "signal": "긍정"
+        },
+        {
+          "stock": "기아",
+          "signal": "긍정"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "현대차",
+          "signal": "긍정"
+        },
+        {
+          "stock": "기아",
+          "signal": "긍정"
+        }
+      ],
+      "db": [
+        {
+          "stock": "SK하이닉스",
+          "signal": "긍정"
+        },
+        {
+          "stock": "현대차",
+          "signal": "매수"
+        },
+        {
+          "stock": "삼성전자",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "\"폭발하는 원전주에 올라타라\" 두산보다 이 주식 미친듯 오른다 | 민재기 팀장 2부",
+      "subtitleLength": 328,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "[긴급속보]🚨현대가 2조에 인수한다 세계최초 SMR 착공 '이 기업'  다음달 안으로 5배는 더 터질겁니다 두산에너빌리티 두산중공업 한전기술 대한전선 오르비텍 급등주",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [],
+      "v11": [
+        {
+          "stock": "두산에너빌리티",
+          "signal": "긍정"
+        }
+      ],
+      "db": [
+        {
+          "stock": "현대건설",
+          "signal": "매수"
+        }
+      ]
+    },
+    {
+      "title": "\"모건스탠리 충격 발표\" 대한민국 곧 전세계 1위 된다. 일본 대만은 배아파 미칠 지경",
+      "subtitleLength": 8,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "원전 하늘이 내린 기회 왔다. 두산과 딱 '이 주식'만 사모아라 | 존리 대표 2부",
+      "subtitleLength": 216,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "두산에너빌리티",
+          "signal": "긍정"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "두산에너빌리티",
+          "signal": "긍정"
+        }
+      ],
+      "db": []
+    },
+    {
+      "title": "\"하늘이 내린 기회\" 두산에너 하락한 진짜 이유. 곧 상상못할 일 터진다｜민재기 팀장 3부",
+      "subtitleLength": 270,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "두산에너빌리티",
+          "signal": "매수"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "두산에너빌리티",
+          "signal": "매수"
+        }
+      ],
+      "db": []
+    },
+    {
+      "title": "올해부터 미친 상승률 시작이다 곧 세계 1위 될 '이 주식' 주목해라 | 이권희 대표 3부",
+      "subtitleLength": 335,
+      "truncated": false,
+      "v10": [],
+      "v11": [
+        {
+          "stock": "현대차",
+          "signal": "매수"
+        }
+      ],
+      "db": []
+    },
+    {
+      "title": "현금으로 이 주식 사라. 27년까지 미친듯이 오른다 | 전인구 대표 3부",
+      "subtitleLength": 376,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "\"지금도 너무 싸다\" 아무도 관심 없는 '이 주식'. 곧 미친듯 오를 겁니다 | 김동석 운용역 3부",
+      "subtitleLength": 405,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "삼성바이오로직스",
+          "signal": "긍정"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "삼성바이오로직스",
+          "signal": "긍정"
+        }
+      ],
+      "db": []
+    },
+    {
+      "title": "폭락 오든 말든 지금부터 '이 주식 1개' 무식하게 모아라. ｜존리 대표 2부",
+      "subtitleLength": 338,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "\"원화가 녹아내린다\" 진짜 부자들이 지금 당장 조용히 사모으는 '이것' | 손진석 기자 2부",
+      "subtitleLength": 492,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "\"싸도 너무 싸다\" 지금 안 사면 늦는다. 당장 이 주식 사모아라 | 홍춘욱 박사 3부",
+      "subtitleLength": 168,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "코스피 4천 돌파에 외국인이 작정하고 쓸어담은 주식 3개",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [
+        {
+          "stock": "삼성전자",
+          "signal": "긍정"
+        },
+        {
+          "stock": "알테오젠",
+          "signal": "긍정"
+        },
+        {
+          "stock": "올릭스",
+          "signal": "긍정"
+        }
+      ],
+      "v11": [
+        {
+          "stock": "삼성전자",
+          "signal": "긍정"
+        },
+        {
+          "stock": "알테오젠",
+          "signal": "긍정"
+        },
+        {
+          "stock": "올릭스",
+          "signal": "긍정"
+        }
+      ],
+      "db": []
+    },
+    {
+      "title": "실전투자대회 1위 투자자의 승률 90% 매수 비법  | 하승훈 대표 4부",
+      "subtitleLength": 5000,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "테슬라 = AI 대장주?",
+      "subtitleLength": 0,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": [
+        {
+          "stock": "테슬라",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "노보 노디스크 & 일라이 릴리",
+      "subtitleLength": 0,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": [
+        {
+          "stock": "노보 노디스크",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "엔비디아 실적 서프라이즈",
+      "subtitleLength": 0,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": [
+        {
+          "stock": "엔비디아",
+          "signal": "매수"
+        }
+      ]
+    },
+    {
+      "title": "AI 수혜주 파헤치기",
+      "subtitleLength": 0,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": [
+        {
+          "stock": "엔비디아",
+          "signal": "중립"
+        }
+      ]
+    },
+    {
+      "title": "가치평가 대가가 엔비디아 주식 안 판 이유",
+      "subtitleLength": 0,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "엔비디아 고점 논란, 가치평가 대가가 판 이유",
+      "subtitleLength": 0,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    },
+    {
+      "title": "테슬라 목표가",
+      "subtitleLength": 0,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": [
+        {
+          "stock": "테슬라",
+          "signal": "부정"
+        }
+      ]
+    },
+    {
+      "title": "Nvidia 밸류에이션",
+      "subtitleLength": 0,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": [
+        {
+          "stock": "엔비디아",
+          "signal": "긍정"
+        }
+      ]
+    },
+    {
+      "title": "Nvidia AI/메타버스/자율주행",
+      "subtitleLength": 0,
+      "truncated": false,
+      "v10": [],
+      "v11": [],
+      "db": []
+    }
+  ]
+}
