@@ -111,7 +111,7 @@ def regenerate_single_report(ticker: str, report_index: int, report: dict) -> st
     
     try:
         message = client.messages.create(
-            model="claude-3-5-sonnet-20241022",
+            model="claude-3-sonnet-20240229",
             max_tokens=1000,
             messages=[
                 {
