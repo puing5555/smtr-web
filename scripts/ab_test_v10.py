@@ -19,6 +19,17 @@ from pathlib import Path
 SUPABASE_URL = "https://arypzhotxflimroprmdk.supabase.co"
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyeXB6aG90eGZsaW1yb3BybWRrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MjAwNjExMCwiZXhwIjoyMDg3NTgyMTEwfQ.Q4ycJvyDqh-3ns3yk6JE4hB2gKAC39tgHE9ofSn0li8"
 ANTHROPIC_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
+
+# Try loading from .env.local if env var doesn't work
+def load_api_key():
+    env_file = Path("C:/Users/Mario/work/invest-sns/.env.local")
+    if env_file.exists():
+        for line in env_file.read_text().splitlines():
+            if line.startswith("ANTHROPIC_API_KEY="):
+                return line.split("=", 1)[1].strip()
+    return ANTHROPIC_KEY
+
+ANTHROPIC_KEY = load_api_key() or ANTHROPIC_KEY
 MODEL = "claude-sonnet-4-20250514"
 MAX_COST = 10.0
 SAMPLE_SIZE = 30  # Start with 30, scale up if budget allows
