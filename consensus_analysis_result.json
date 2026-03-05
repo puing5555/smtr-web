@@ -1,0 +1,2875 @@
+{
+  "삼성전자": {
+    "stock_name": "삼성전자",
+    "total_signals": 80,
+    "unique_influencers": 19,
+    "avg_score": 0.6875,
+    "signal_distribution": {
+      "긍정": 48,
+      "매수": 10,
+      "중립": 9,
+      "경계": 13
+    },
+    "buy_ratio": 0.725,
+    "sell_ratio": 0.1625,
+    "consensus_strength": "강한",
+    "consensus_direction": "매수",
+    "influencer_details": {
+      "b07d8758-493a-4a51-9bc5-7ef75f0be67c": [
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-02",
+          "quote": "삼성전자 정말 좋아 보입니다. 메모리 사이클이 지속되고 있고, 앞으로 3년간은 수요가 공급...",
+          "video_id": "1a47ae36-c840-4831-9ece-ec88ba5fc7ec",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성전자가 시장 예상을 뛰어넘는 실적을 발표하면서 메모리 반도체 부문의 수익성이 크게 개선...",
+          "video_id": "b5f2db59-bff9-4534-8ba1-ab285ab72b9b",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "삼성전자와 하이닉스는 반도체 업황 자체에 대한 불확실성이 본격적으로 부각되고 있는 상황입니...",
+          "video_id": "454ff52c-c5af-455c-9726-bd34831e135b",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "애플과의 계약을 아주 의미 있게 보고 있는데요. 아이폰의 눈이라는 거는 이미지 센서를 삼성...",
+          "video_id": "f92eece3-444f-4661-8116-4bcae7aa6091",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성 파운드리가 좋아진다는게 삼성 전자가 다 좋아지는 건 아니어서 투자하실 때는 파운드리가...",
+          "video_id": "bb3b14a5-6506-4e7b-9ee6-6e626c8a84c2",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "메모리 반도체는 삼성전자와 하이닉스가 정말 잘한다고 소문난 그 DRAM인데, 특히 삼성전자...",
+          "video_id": "64ce4bcc-8d4f-4563-8798-4d2bafff6360",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "삼성전자가 SK하이닉스를 따라가고 있는 상황에서, HBM 기술 격차 해소와 NCF 방식의 ...",
+          "video_id": "21ef25b1-44fd-469a-9361-328513c59b30",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성은 VCS 방식으로 LLW를 개발하고 있는데, 공정은 복잡하지만 성능이나 안정성은 더 ...",
+          "video_id": "d1f52ddf-01aa-4dc9-bd7d-096fca78b745",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-04",
+          "quote": "삼성전자하고 마이크론 같은 경우는 신규 라인 투자하는 애들인데 2세대 3세대 전 버전을 투...",
+          "video_id": "912a3808-8336-45f8-8201-9ba2ffae95e5",
+          "score": 0
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "SK 하이닉스는 커스텀 메모리 HBM 같은 매출 비중이 절반 넘고 삼성전자는 그쪽 비중이 ...",
+          "video_id": "403e0eae-931a-452f-998f-433f91803b7a",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성전자의 불확실성이 좀 사라졌어요, 연말 인사가 났고 전영현 부회장이 메모리 사업부장을 ...",
+          "video_id": "a1ca7979-3639-4148-9b71-f94c65238fb6",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "2분기 중에는 바닥을 찍고 올라갈 것 같아요. 유통 쪽에 재고가 많이 줄었더라고요. 메모리...",
+          "video_id": "d96e7b47-0771-4401-bf34-02d5d50639a1",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아 CEO 젠슨황이 삼성전자의 HBM에 대해 \"현재 테스트를 진행하고 있으며 매우 큰...",
+          "video_id": "fed2e151-add8-4e03-8d30-b6667d0042da",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성전자가 예상했던 EPS가 빠르게 이제 상향 조정되기 시작한 거고요. 워낙 또 덩어리가 ...",
+          "video_id": "b86ea04e-7a5e-4d11-b3bc-483cddc54c28",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성전자는 정말 도운 회사죠 우리 나라의 정말 어 보배 같은 존재입니다 이 삼성전자가 정말...",
+          "video_id": "d042e3c1-e141-4c73-8c19-543ee3a096a3",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성전자가 워낙 많이 올랐고 외국인들이 계속 팔고 있어서 걱정스러웠는데, 최근 들어서 외국...",
+          "video_id": "c3c20a33-8415-49cb-9f82-48590d561514",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "삼성전자 HBM4 개발에서도 뭔가 주도권이 완전히 SK하이닉스 쪽으로 넘어간 거 아니냐는 ...",
+          "video_id": "fa63d50b-3610-49d0-aa78-c33c9420789b",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성전자가 HBM을 엔비디아에 납품하지 못할 거라고 생각하지 않습니다. 최근 수장 교체로 ...",
+          "video_id": "d3bb96ba-c657-4b02-84e7-b985c24d2476",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "삼성전자에게는 생각보다 기회가 많지 않은 상황입니다. HBM4에서도 결국 12단 적층이 메...",
+          "video_id": "eca59256-08a2-4a17-8427-004785a370d5",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-04",
+          "quote": "개인적으로는 그냥 하이닉스가 더 낫지 않나라고 생각합니다. 삼성전자가 실적 부진에도 주가가...",
+          "video_id": "abb68ca1-0a7f-4524-a7aa-3b2d16eff61f",
+          "score": 0
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "삼성전자가 원시 디램 개발 및 양산 일정을 지연시키고 1년 양산하던 칩을 재설계한다는 건 ...",
+          "video_id": "3eea0456-b77c-4cc5-a2a5-00ea51346adc",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-04",
+          "quote": "샘 알트만이 삼성전자 하이닉스 만나고 갔다는 얘기가 있고 여의도에서는 그냥 소문들이 좀 있...",
+          "video_id": "9ab66934-af1f-4e7d-8ee8-540aecc3060e",
+          "score": 0
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "만약에 랜드의 가동률을 90%까지 올렸다는 것은 저는 그렇게 긍정적이라고 보기 힘들어요. ...",
+          "video_id": "b07eac46-9f6a-424b-9e82-0af118e440c6",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "오라클을 중심으로 해서 데이터센터가 많이 투자가 되게 되면 하이닉스뿐만 아니라 삼성전자 마...",
+          "video_id": "8f49bbf2-a07d-4cf4-9ed6-80b09f3adb3b",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성전자는 메모리 반도체 업황 회복과 AI 시대 성장 동력 확보로 긍정적 전환점에 도달했다...",
+          "video_id": "8d9ed587-6a49-45bb-b363-2c33a01522d1",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라 구매 팀장의 직접 방문과 단가 협상은 양사 간 본격적인 사업 논의가 진행되고 있음을...",
+          "video_id": "06e7857c-c729-4ab1-9dc0-f140f7e4d262",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "삼성의 미국 공장 기술력을 우리가 보증한다고 테슬라가 꽝 도장을 찍어줬는데, 이게 단순한 ...",
+          "video_id": "aa42c49b-5266-432f-9857-6c1a623431a5",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "어제부터 해가지고 지난 금요일 그리고 오늘까지 삼성전자가 좀 오르거든요. 특히 자사주 매입...",
+          "video_id": "85652a07-1ab7-4bd2-a122-90df083ca101",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "현재 삼성전자의 차트 흐름을 보면 상승 모멘텀이 꽤 견고해 보이고, 반도체 업황 회복세와 ...",
+          "video_id": "5f9776de-6056-4b8e-9179-1e34fc5ba534",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "개인투자자들이 삼성전자 한테 요구를 할 수 있습니다. 자사주 매입이라도 하던지, 자본 정책...",
+          "video_id": "6588b57b-3aeb-4564-8a47-7b463041b55a",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-04",
+          "quote": "삼성전자는 마블의 타노스와 같은 존재였지만, 지금은 인피니티 스톤 없는 타노스가 되어버렸습...",
+          "video_id": "eeadcb2b-4523-4ec0-b5bc-1f7e46e3deee",
+          "score": 0
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성전자는 충분히 지금 매력적인 가격대라고 생각합니다. 장기 투자하시는 분들은 지금 그렇게...",
+          "video_id": "e5375198-0257-4641-a600-d2ee3e6cb114",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성전자의 3.6% 상승은 시장 전체가 부진한 상황에서도 강한 상승세를 보이는 긍정적 흐름...",
+          "video_id": "d2962ed5-415f-43ee-bb4e-cd685e9d92e4",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "마이크론의 가이던스 상향으로 글로벌 메모리 반도체 업황 회복이 본격화되면서, 국내 메모리 ...",
+          "video_id": "ce08c817-a311-4001-8eff-ea26a43c20ed",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "AI 아이폰이 잘되면 잘될수록 고성능 메모리 수요가 급증하면서 램을 만드는 삼성전자와 하이...",
+          "video_id": "2f816718-f897-439b-9313-5445b418879c",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성전자가 이제 더 이상 빠지지 않을 것이고 오히려 상승 전환점에 도달했다고 봅니다. 자사...",
+          "video_id": "5e3a5af0-546d-46b5-8814-0416ad2b76ca",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "삼성전자가 힘들어지고 있는데 중국의 CXMT가 무한 렙에서 싸우고 있다 삼성전자는 헤매고 ...",
+          "video_id": "cfb461f4-0116-41a0-9cbc-2f06999571c9",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "오늘 이례적으로 제가 삼성전자 바이 콜을 할 겁니다. 바이코리아 라는것은 사자라는 거구요....",
+          "video_id": "122d86f3-4e64-4293-9dc7-7341f4e57dfd",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성전자는 반도체 업황이 회복 국면에 접어들면서 메모리 사이클 저점을 통과했다고 판단되어 ...",
+          "video_id": "519561b5-2a66-4b51-9b44-c4b857058f6d",
+          "score": 1
+        }
+      ],
+      "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0": [
+        {
+          "name": "유튜버_6b2696ff",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-02-28",
+          "quote": "삼성전자 20만 원은 새로운 출발점에 불과하다고 봅니다. HBM4 세계 최초 양산으로 메모...",
+          "video_id": "ffc64461-4859-4f38-898e-519b6ecaf2b2",
+          "score": 2
+        },
+        {
+          "name": "유튜버_6b2696ff",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-02",
+          "quote": "노무라 증권의 삼성전자 목표주가 29만원 상향 조정은 매우 주목할 만한 신호입니다. 특히 ...",
+          "video_id": "d68ab7a3-4772-49fe-86f2-eead4f4d1887",
+          "score": 1
+        }
+      ],
+      "a849fd03-6efa-4761-b176-175f1944bd5b": [
+        {
+          "name": "유튜버_a849fd03",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-02-28",
+          "quote": "삼성은 계속 올라갑니다 SK는 계속 떨어지고 그러면서 제가 보기에는 - 정도 그때 되면 역...",
+          "video_id": "a09e4db9-6810-4fa8-a9e6-2240ba0ccff5",
+          "score": 0
+        }
+      ],
+      "7fef30a4-a248-44d6-99b9-02bda6f47eb2": [
+        {
+          "name": "유튜버_7fef30a4",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-01",
+          "quote": "비중이 없는 분은 지금이라도 물리더라도 들어가야 된다... 바라보지만 말고 일단 포지션을 ...",
+          "video_id": "2f1794a4-01f6-4ece-a5f7-01882e107aa9",
+          "score": 2
+        }
+      ],
+      "d65055b9-1345-4baa-8104-b3d8c7f28d4c": [
+        {
+          "name": "유튜버_d65055b9",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-01",
+          "quote": "모건 스탠리 2027년 삼성전자 영업이익 전세계 1등. 340조원. 2027 포워드 PE ...",
+          "video_id": "d210f06a-ff68-458f-8d8c-d34724d63458",
+          "score": 2
+        },
+        {
+          "name": "유튜버_d65055b9",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-01",
+          "quote": "삼성전자가 6,000포인트를 돌파한 것은 단순한 리레이팅이 아니라 펀더멘털한 이익 개선 전...",
+          "video_id": "235ea3ae-5b54-4f6b-9a12-0f57da76d919",
+          "score": 1
+        }
+      ],
+      "88892b60-9e6b-4390-ba3b-c6d1453b3cef": [
+        {
+          "name": "유튜버_88892b60",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-02",
+          "quote": "메모리 3사인 삼성전자, SK하이닉스, 마이크론이 굉장히 제일 높은 확률로 업사이드가 남아...",
+          "video_id": "cef2c937-db77-4bf6-9173-2e3fd8533334",
+          "score": 2
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성전자 3분기 매출 67조원, 영업이익 2조 4천억원으로 완전한 서프라이즈 실적을 기록했...",
+          "video_id": "51de7607-c392-4e71-995e-671f206b86fb",
+          "score": 1
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "삼성전자의 HBM 사업에서 발열 문제와 전력 효율성 이슈가 심각한 발목을 잡고 있는 상황입...",
+          "video_id": "77dc943b-c4a4-42b2-b3b1-38171772f2a9",
+          "score": -1
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성은 기존에 빅스비라는 AI 에이전트가 있었는데 이제 LLM을 본격적으로 탑재해서 온디바...",
+          "video_id": "1ca614cf-4d18-4cdf-b795-b746eeb209b5",
+          "score": 1
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "점점 좋은 이야기들이 막 쏟아지고 있네요. 삼성이 4나노 mpw라는 걸 했거든요. 거의 4...",
+          "video_id": "a1d4e814-e6a7-4960-9817-6f3d57019fde",
+          "score": 1
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성 파운드리가 조금만 잘하면 엄청난 기회인 거예요. 지금 TSMC 공급 부족으로 대안 수...",
+          "video_id": "86a754a2-abf2-4f40-9c61-9297a89380b1",
+          "score": 1
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "삼성전자 HBM 발열하고 전성비 문제가 발목을 잡았다고 볼 수 있고, 반도체에서 제일 중요...",
+          "video_id": "ecdadb37-6dd0-4348-82b4-bd21f6c7dad3",
+          "score": -1
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "삼성전자는 그냥 안 보는게 낫습니다. 당장 한두 달 동안 괴로워서 못 견디겠다 이런 분들은",
+          "video_id": "163a2cb1-4a6b-4032-950a-04ff6be71f13",
+          "score": -1
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "10월 쯤부터는 국내 특히나 삼성전자 SK 하이닉스는 매수해서 들어가도 되지 않을까 생각을...",
+          "video_id": "75a3e88b-0b4b-4d8b-861b-51d86ce7c258",
+          "score": 2
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성전자가 HBM3와 코어스 어드벤스드 패키징을 모두 통합 제공하는 턴키 솔루션으로 나서고...",
+          "video_id": "91d82818-b993-4130-908c-d8bb3e3ce97b",
+          "score": 1
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "AMD가 OpenAI와의 대규모 계약을 통해 AI 칩 시장에서 본격적으로 성장하면, 삼성전...",
+          "video_id": "bf88d77c-8a1d-486e-8758-149599efa210",
+          "score": 1
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성이 우리는 하이브리드 본딩으로 써서 HBM을 더 좋게 만들어볼 거야라고 지는 건데, 이...",
+          "video_id": "2eafa800-31e3-47dc-8d21-7bf353f380da",
+          "score": 1
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "삼성전자가 파운드리 시장에서 핵심 고객인 애플과 구글을 모두 잃으면서 TSMC 대비 경쟁력...",
+          "video_id": "33d1cb70-7e31-4b3d-baf3-d499deb0ebd9",
+          "score": -1
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성 파운드리의 지정학적인 중요성이 다시 한번 부각이 될 수 있는 거고 여기서는 삼성이 뭔...",
+          "video_id": "79e8893c-c1c0-4adc-b846-017c1998d81f",
+          "score": 1
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성이 3나노 gaa 가지고 양산했을 때 전성비나 발열이나 이런 것들이 좋아지면 삼성이 올...",
+          "video_id": "f7c18429-44e0-4c76-bb80-3df8b59ffa44",
+          "score": 1
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "그런 것들이 이제는 어떻게 보면 삼성 파운드 입장에서 기회죠 우리 쪽으로 와 20% 30%...",
+          "video_id": "93ea8a5a-d66e-42b2-b051-190612abb170",
+          "score": 1
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "저는 이제 삼성이 오히려 더 무서워지고 있다고 생각합니다. 기존의 1등 자만심을 완전히 버...",
+          "video_id": "2c9c23e3-3d32-466f-b25c-2f0250d8de0b",
+          "score": 1
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "짧게 뭐 한 두세 달 투자한다고 보면 삼성 밸류 체인도 괜찮을 것 같습니다. 특히 반도체 ...",
+          "video_id": "a9960100-c406-41aa-8491-fb7031d13b0d",
+          "score": 1
+        }
+      ],
+      "fcc56b05-159e-44a8-bc55-027a5904dadd": [
+        {
+          "name": "유튜버_fcc56b05",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-01",
+          "quote": "KB증권 20만원, 키움증권 20만원, 미래에셋 18만7천원. 영업이익 전망 최고 170조",
+          "video_id": "9286ef9e-12ac-44d0-8e85-2e32b44e7fc1",
+          "score": 0
+        }
+      ],
+      "8234cd75-1d0d-458c-b01c-62080c7d91e3": [
+        {
+          "name": "유튜버_8234cd75",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-01",
+          "quote": "삼성전자 밸류업 공시가 주총 직후 나오지 않겠냐. 최소한 배당이 전년보다 10% 이상 증가...",
+          "video_id": "e9012cde-ddbc-4819-8745-ef93fff6327f",
+          "score": 1
+        },
+        {
+          "name": "유튜버_8234cd75",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-01",
+          "quote": "현재 투자 우선순위는 메모리 반도체 섹터입니다. 하이닉스, 삼성전자, 샌디스크, 마이크론 ...",
+          "video_id": "9236a7e9-8a4b-4291-b6ef-19cc83991e5e",
+          "score": 2
+        }
+      ],
+      "d2970543-52a6-4688-bc04-eea99615a53e": [
+        {
+          "name": "유튜버_d2970543",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-04",
+          "quote": "삼성전자 같은 경우에는 이미 전략을 그렇게 짰어요 그러니까 이제 뭐 1등 전략보다는 약간은...",
+          "video_id": "5b0fc074-0a47-46fe-a046-638e72056f6b",
+          "score": 0
+        },
+        {
+          "name": "유튜버_d2970543",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성전자가 일론 머스크의 선택을 받은 것 같은데, 이게 정말 큰 의미가 있어 보여요. 테슬...",
+          "video_id": "1b0508ad-3e15-4433-8757-78f9364af252",
+          "score": 1
+        },
+        {
+          "name": "유튜버_d2970543",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "일론머스크가 삼성전자를 선택한 건 확실한 고객이 생긴 거죠. 훗날 애플과 TSMC 계약처럼...",
+          "video_id": "3d82af68-09bf-4e97-a184-8e8fb8e45c8b",
+          "score": 1
+        }
+      ],
+      "fd3d7c1c-606f-4e70-8401-3ba037985649": [
+        {
+          "name": "유튜버_fd3d7c1c",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-04",
+          "quote": "지금 이짓을 삼성전자랑도 하고 있다 이거. 엄청나게 우리는 미래 우리나라 반도체 산업에 그...",
+          "video_id": "2e2c07ef-1403-42ba-b89c-13c586886381",
+          "score": 0
+        }
+      ],
+      "f8d42e96-065f-486d-8cdf-a7b9e15e64da": [
+        {
+          "name": "유튜버_f8d42e96",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "미국이 반도체 패권 확보를 위해 TSMC와 삼성전자를 미국에 두겠다는 전략적 결정을 내렸습...",
+          "video_id": "e464764f-f769-4539-a78f-82a48a540f3b",
+          "score": 1
+        },
+        {
+          "name": "유튜버_f8d42e96",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "현재 미국이 TSMC하고 삼성전자를 미국에 두겠다는 전략이 너무 명확하게 드러나고 있어요....",
+          "video_id": "a27675fa-0d3e-4ea3-b89c-b4df924cce2f",
+          "score": 1
+        }
+      ],
+      "1978ae5f-dc38-4d6a-8b8f-d5adc46309e1": [
+        {
+          "name": "유튜버_1978ae5f",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성전자는 새로운 HBM 방식으로 생산하는 것이 굉장히 중요하고 하반기 HBM 3e 12단...",
+          "video_id": "3ae2512d-23f5-4c95-97bf-42e1cf6679bf",
+          "score": 1
+        }
+      ],
+      "a4d59e2f-71ae-4c7c-be98-0ba091d762ef": [
+        {
+          "name": "유튜버_a4d59e2f",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "삼성전자가 HBM3 양산 성공 발표만 나와도 주가는 크게 오를 수 있다고 봅니다. 마이크론...",
+          "video_id": "faf1d517-a64f-4067-aba8-272a4edb5b43",
+          "score": 2
+        }
+      ],
+      "6faedc0f-47c1-4645-b623-934b4d180a19": [
+        {
+          "name": "유튜버_6faedc0f",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "삼성전자는 주가의 하락 경직성이 상당히 단단해져 있을 뿐만 아니라, 반도체 업황 회복세와 ...",
+          "video_id": "375da29f-6a13-49aa-959e-70999fda3078",
+          "score": 1
+        }
+      ],
+      "2039a387-9ce8-4c76-9cbf-d359cf3d3fc8": [
+        {
+          "name": "유튜버_2039a387",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "더 사지는 마십시오. 삼성전자에 대한 응원을 지금은 마음으로 해야지 매수로 하는 단계가 아...",
+          "video_id": "283d58d0-063d-47ea-8872-c021f49e64c0",
+          "score": -1
+        }
+      ],
+      "29e87555-c1fe-46dc-9e1b-1be5b8b9aa5d": [
+        {
+          "name": "유튜버_29e87555",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-04",
+          "quote": "삼성전자를 지금 굳이 사야 될 이유가 없습니다. 반도체 업황이 좋아진다고 해도 다른 반도체...",
+          "video_id": "93a387e4-a21e-44b6-adcc-310948c12cb5",
+          "score": 0
+        }
+      ],
+      "0b96cbb2-0d82-4d70-90d3-f7e79c7e09be": [
+        {
+          "name": "유튜버_0b96cbb2",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "SK 하이닉스하고 삼성전자가 저는 얼마나 크게 될지는 상상을 못 하겠어요. AI 혁명이 본...",
+          "video_id": "44933662-1a45-44d2-ad61-512e2ab61b99",
+          "score": 2
+        }
+      ],
+      "5783838f-af5f-4e74-bcbf-bbc20141b199": [
+        {
+          "name": "유튜버_5783838f",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-01",
+          "quote": "삼성전자는 여전히 너무 저렴한 거 같습니다. 이익 전망치가 개선되고 있는 상황에서 현재 주...",
+          "video_id": "900806f6-434f-4913-82c7-2b69a80284d0",
+          "score": 1
+        }
+      ],
+      "2720d0ee-b7e2-4006-80df-90bc9de07797": [
+        {
+          "name": "유튜버_2720d0ee",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-01",
+          "quote": "삼성전자 목표주가가 34만원으로 상향 조정되면서 밸류업 프로그램 발표에 대한 기대감이 높아...",
+          "video_id": "c7bf5e71-50d1-4ffa-94a7-e3bce9ec49a5",
+          "score": 1
+        }
+      ]
+    }
+  },
+  "테슬라": {
+    "stock_name": "테슬라",
+    "total_signals": 125,
+    "unique_influencers": 16,
+    "avg_score": 0.864,
+    "signal_distribution": {
+      "매도": 3,
+      "긍정": 75,
+      "경계": 15,
+      "매수": 27,
+      "중립": 5
+    },
+    "buy_ratio": 0.816,
+    "sell_ratio": 0.144,
+    "consensus_strength": "강한",
+    "consensus_direction": "매수",
+    "influencer_details": {
+      "b07d8758-493a-4a51-9bc5-7ef75f0be67c": [
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매도",
+          "english_signal": "SELL",
+          "date": "2026-03-04",
+          "quote": "한 10년 이상 들고 있던 테슬라도 많이 팔고 있는데, 이는 단순한 차익실현이 아닙니다. ...",
+          "video_id": "fae693ec-1ac2-4516-abf2-f78ae3928a21",
+          "score": -2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "저는 팔지 않고 기다려 볼 생각입니다. 일론 머스크가 도지 일을 끝내고 나면 분명히 우리가...",
+          "video_id": "b8416319-d4c8-4990-a777-3ad066d4201a",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슛라가 어제 3% 상승하며 전 부문에 걸쳐서 강력한 상승 모멘텀을 보여줬는데, 특히 중국...",
+          "video_id": "0a17553c-5674-4a60-9d4f-a9df93168aaf",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "중국은 그냥 AI 로봇 택시 해 봐 자율주행 그냥 해 그렇게 해버릴 수 있는 국가라고 생각...",
+          "video_id": "21c1ef48-7450-42c5-b75c-762474b4b176",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "트럼프 당선 이후 테슬라가 이렇게까지 주목을 받는 것은 단순한 우연이 아닙니다. 머스크의 ...",
+          "video_id": "76442f8c-d249-4209-8237-b97c34aa1b1b",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라가 1조에서 5조 자본 조달하고 그걸로 상해 공장 오스틴 공장 베를린 공장 막 증설해...",
+          "video_id": "c05da560-be64-4b16-a388-e3f13742fd49",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라의 매수 의견이 2015년 이후로 최고 수준까지 올라간 상황에서, 주가가 55% 급락...",
+          "video_id": "499e7ca7-e7ba-48d6-97a2-aad155e1a5af",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "내년에 20에서 30% 성장한다고 이야기해 줬다는 점이 주가에는 상당히 긍정적으로 영향을 ...",
+          "video_id": "bc44bc89-40f2-4d88-89b2-46f8e99f65f8",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라의 주가가 지금 사상 최고치를 가고 있는데 테슬라의 자율주행이 된다면 도대체 무슨 일...",
+          "video_id": "187ba9c8-4fad-4ca2-86d6-21bbee01e128",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라는 고마운 존재다. 자동차 산업을 성장하는 기업, 앞으로 10년이 기대되는 분야로 바...",
+          "video_id": "98d76d9b-a7c8-4de0-8435-1a885a9bab28",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "현실적인 어려움이 있는 것도 사실이기 때문에 주가가 당분간 어려울 수 있을 거라는 생각은 ...",
+          "video_id": "67a78357-8dfe-4f87-beff-869b8679759d",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라라는 기업이 정말 사업이 정말 잘 될 거라는 내부 판단이 있다면 가급적이면 부채로 조...",
+          "video_id": "19e61366-222b-4a08-86d1-0a8febfcf395",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "아 이거 게임 끝났구나 이런 생각이 좀 들었어요... FSD도 OS예요. 자동차를 효율적으...",
+          "video_id": "0d494926-53db-4458-a73f-dce7e0ba56c1",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라의 이번 분기 실적은 시장 기대치를 상회하는 양호한 성과를 보여줬으며, 특히 차량 생...",
+          "video_id": "afb35426-f388-4564-8232-0bf94add2ea6",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "로보택시에 대해서는 굉정히 좀 긍정적으로 보면서 계속 기다려야 되지 않나라는 생각을 합니다",
+          "video_id": "9dd63145-3f18-4f89-9c00-052ca7b82733",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "테슬라에 대해서는 밸류에이션에 대한 논란이 있다는건 다 잘 알고 있지만 시간이 갈수록 누구...",
+          "video_id": "f9b4c67d-ca3e-40e5-a697-97f102aa9fc6",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "미국이 중국의 기술적 부상에 맞서 경쟁력을 유지할 수 있는 핵심 전략자산이 바로 테슬라입니...",
+          "video_id": "060f3f2f-1d91-4eab-9846-87c66a058da5",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "테슬라만큼 진심으로 기후변화 대처에 노력하고 있는 회사는 없는 것 같습니다. 전기차 시장을...",
+          "video_id": "fe0e0575-d7ab-4f71-b2df-2d6b3b63712c",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "최근에 계속 강조하고 있는 이 테슬라 쪽으로 분위기가 여러가지 이유들이 있지만 분위기가 좀...",
+          "video_id": "c3c20a33-8415-49cb-9f82-48590d561514",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라가 3% 상승을 했는데... 다음 달 1일입니다 마스터플랜3을 공개하겠다라는 이야기가...",
+          "video_id": "325387e0-213a-4470-b68a-dcba611c6f3a",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "이렇게 어려운 환경에서 이 실적을 내는 회사라면 누구랑 같이 하지 않으면 누구를 같이 하냐",
+          "video_id": "9b072d52-53f5-43b7-9e70-26ecc111b0fa",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라가 과연 가만히 있을까 전부터 시장 일인데 이런 노다지 시장을 놔둘까 라는 생각이 들...",
+          "video_id": "7bcdc128-70bc-479c-9d6e-01c99a789a7a",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "언제나 테슬라의 주가는 가지고 있어야 된다라고 늘 생각하지만 특히나 요즘에는 어 좀 더 그...",
+          "video_id": "75ded159-122f-45d0-b790-eb6b44a878fb",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "테슬라가 생산량보다 인도량이 많아지고 있지만, 4분기 인도량이 예상치를 크게 밑돌며 판매 ...",
+          "video_id": "be358c4a-119a-4053-a433-84ce92ec4306",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라는 23억 8천만 마일의 FSD 데이터와 연간 500억 마일의 차량 데이터를 모으고 ...",
+          "video_id": "e9c2888e-a2ea-4ef3-a86f-3418b95f6ad9",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "저는 이번 행사를 통해서 테슬라에 대해서 테슬라가 가고 있는 방향에 대해서 또 다시 한번 ...",
+          "video_id": "3f467ce0-9a6c-42a2-9007-f6d2a3f852da",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "테슬라 실적이 발표되었습니다 순이익은 예상을 상회했지만 달러 강세에 영향으로 매출이 컨센서...",
+          "video_id": "9a92f069-9689-4d18-90aa-f7b1c5ddfacf",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라의 가치를 지탱해 줄 여러 가지 요인들은 확인이 된 거고 앞으로 모델 2도 그렇고 자...",
+          "video_id": "a36a34b1-8a30-4d95-b754-36d45c51db46",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라가 정말 꿈꾸고 있는 미래라고 하는 것이 종합 에너지 회사야 우리는 자동차 만드는 회...",
+          "video_id": "78e7047d-ac04-4687-b16e-3292be6db9e9",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라 같은 경우는 테슬라 주행 데이터를 체계적으로 많이 가지고 있는 곳이 없잖아요. 테슬...",
+          "video_id": "fe2d2023-5d8e-4b79-ba48-f270c83072b7",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "로봇공학자 입장에서는 너무 감사한 이벤트고 만약에 내가 로봇 공학의 꿈이 있는 사람이라면 ...",
+          "video_id": "711df523-f21b-4195-90ce-c772817c0029",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "테슬라는 밸류에이션을 설명하기가 더 어려워졌다는 거예요 밸류에이션 부담이 좀 있는 상황이었...",
+          "video_id": "3c07fe5b-5a82-448c-8c49-5b33a996dedf",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "장기적으로 우리가 한해를 놓고 보면 테슬라에 대해서는 여전히 긍정적으로 볼 수 있는 부분들...",
+          "video_id": "8b9ecbcc-982f-4491-8c6c-54f120e11e0e",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "테슬라는 일단 하나는 조금 안 갖고 있으면 방송을 봤는데 테슬라 주식을 한 줄도 안 갖고 ...",
+          "video_id": "10043dbd-213e-488b-8bfe-a06743558456",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "일런 머스크도 인정해야 되는 것이 야 중국에서 전기차 만드는 애들 야 이거는 좀 인정해 줘...",
+          "video_id": "0106ae6a-575f-4df9-939e-c33cd12bdad5",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "테슬라는 이번 로봇택시 발표를 통해 단순한 전기차 제조사에서 모빌리티 플랫폼 기업으로 완전...",
+          "video_id": "fa5c63bd-606c-4fff-bc6b-4746f64fdcbb",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "테슬라는 지금이 절대적인 매수 타이밍이다. 현재 주가는 2021년 수준에 머물러 있지만 생...",
+          "video_id": "a1e49e80-41ae-4449-bd08-83e62c838a92",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "테슬라 같은 고변동성 종목은 확실한 투자 신념과 리스크 관리 능력이 뒷받침되어야만 접근할 ...",
+          "video_id": "38ce0ce0-ef71-46ec-85ab-1ded45c6aad1",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "일론머스크가 테슬라에게 더 집중해서 더 열심히 일을 해가지고 테슬라가 잘되게 만들어 줄 수...",
+          "video_id": "ae577a9a-c92d-4933-934a-8316e852ec52",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "모건 스탠리의 전망에 보면 500불 논리가 하나 있거든요. 테슬라가 500불까지도 갈 수 ...",
+          "video_id": "185ab649-856b-4f45-ada1-0104476368a3",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "\"지금 테슬라 팔면 안 됩니다. 로보택시는 이제 막 시작 단계에 불과해요. 부산에서 실제 ...",
+          "video_id": "9daa3302-c6f4-45f5-a398-01a9f65f14aa",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "그동안 부진했던 테슬라와 애플의 주가도 올라갈 수 있는 이유들이 충분히 생길 수 있겠다. ...",
+          "video_id": "59ae252a-ff97-4672-9616-259bbbf02b16",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라가 배터리 내재화에 투자를 이제는 줄이고 AI 로보틱스 자율주행에 조금 더 집중을 해...",
+          "video_id": "579b6333-2b1d-4a0b-b53a-e711704e09d6",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라, 구글, 팔란티어 같은 혁신 기술 기업들은 장기 보유하면 확실히 수익을 낼 수 있는...",
+          "video_id": "13ca5e8f-2309-4e99-a77b-2ecbe2e8aa4b",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라 abcdefg를 조금 이렇게 공부하다 보면 아 이건 망한다고 보는 건 너무 지금 선...",
+          "video_id": "547976d2-2c8a-40c8-a452-82d311af26fe",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-04",
+          "quote": "내일 테슬라 실적 발표를 앞두고 투자자들의 시선이 집중되고 있습니다. 최근 전기차 시장 성...",
+          "video_id": "fbe83739-2794-4b02-9646-c2013ee4899a",
+          "score": 0
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라도 무려 10%나 급등하며 오늘 기술주 랠리를 이끌고 있네요. 전기차 업계 리더답게 ...",
+          "video_id": "59db2d82-10df-4384-b2cc-7a6631cd962c",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라가 보여주고 있는 혁신은 누가 봐도 전세계에서 가장 빠르고 잘 하고 있으며, 특히 A...",
+          "video_id": "3c17b562-8aac-459f-95f5-4d7fdecf4917",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라가 자신들의 기대치보다는 더 잘했다라는 건 뭐냐면 아 너무 잘했다가 아니라 이렇게라도...",
+          "video_id": "68df47c6-0ebb-4a50-a405-3574a631d3a9",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "테슬라의 목표가는 500불 정도 되는데 우리는 지금부터 테슬라가 500불 이상 갈 수 있는...",
+          "video_id": "db64408f-4eb7-4edc-804c-4cb07f2baec4",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라의 주주로서 서스테이너블 한 에너지로 전환하는 그런 미션을 가진 테슬라를 계속해서 응...",
+          "video_id": "340306ed-f514-4e28-9b29-24733e04dae1",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "일론 머스크는 이 시대의 최고의 경영자이자 엔지니어로서, 테슬라를 단순한 전기차 회사에서 ...",
+          "video_id": "de114ec2-8c0a-4a74-99dd-52059ca2976f",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "테슬라도 어제 200명을 잘랐다는 소식이 나오는데, 전기차 업계 선두주자마저 대규모 구조조...",
+          "video_id": "2c3f895e-7c8b-4639-8e0e-d90ab53dd255",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "개인적으로는 테슬라를 계속해서 긍정적으로 보고 있는데, 특히 최근 나스닥이 하락하는 상황에...",
+          "video_id": "99110f2c-9f6a-4e55-9af9-4ac84a405ed3",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매도",
+          "english_signal": "SELL",
+          "date": "2026-03-04",
+          "quote": "테슬라 주가가 14% 급락하는 상황을 보면서 매도 타이밍이라고 판단됩니다. 정치적 리스크와...",
+          "video_id": "d8eb5b50-db78-446d-acfb-b14420eedc0a",
+          "score": -2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매도",
+          "english_signal": "SELL",
+          "date": "2026-03-04",
+          "quote": "테슬라가 11.4% 급락하며 52주 신저가를 기록한 상황에서 추가 하락 리스크가 상당해 보...",
+          "video_id": "091eaf41-e6b1-469e-b57f-b1cc47b68ae8",
+          "score": -2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "테슬라 주가가 상당히 좋을 것 같아서 매수하는 건데, 특히 로봇택시 서비스가 본격 운행되면...",
+          "video_id": "e71361c7-671c-46fd-82c5-3f597dceea09",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "론바론 할아버지에 따르면 이제 고생 끝났다 아 지금이 테슬라 바닥이다라고 이렇게 선언을 아...",
+          "video_id": "35533180-508a-4eb3-8529-dfea48924aef",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "반면 이제 테슬라 같은 경우는 어쨌든 경쟁자가 어 우 유의미한 경쟁자 애플이 한다는데, 애...",
+          "video_id": "02cc2933-297d-403f-9338-b01d3680500f",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "일론 머스크가 한국의 제일 큰 두 회사인 삼성전자와 LG에너지솔루션을 살리겠다는 발언은 테...",
+          "video_id": "aa42c49b-5266-432f-9857-6c1a623431a5",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라는 시간이 테슬라의 편이고 테슬라에 상당히 유리한 뉴스라고 볼 수 있을 것 같아요. ...",
+          "video_id": "0922fe0c-9d55-4ace-9ae2-92c39b44d6bd",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라가 aid 를 통해서 아 저희가 다 풀었습니다 라고 얘기한 건 똑같아 라는 얘기는 말...",
+          "video_id": "d042e3c1-e141-4c73-8c19-543ee3a096a3",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "자율주행을 시작도 하기 전에 그냥 테슬라가 압도적이에요. 앞으로 시간이 되면 테슬라 계속 ...",
+          "video_id": "fa0e6020-8485-43e1-81c4-aacd1891d534",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "만약에 정말로 이런 일들이 일론 머스크의 발언이나 혹은 테슬라의 주주들이 생각처럼 현실화된...",
+          "video_id": "32fa5e6a-1fd7-4148-aa41-d21becef0e28",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "저는 머스크가 1조 달러 보상 목표를 달성할 것이라고 확신하기 때문에 테슬라 주주가 되겠습...",
+          "video_id": "23e1a804-66ad-461d-bb24-c1ada506b1cf",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라의 인도량이 30.8만대를 했습니다. 정말로 내년이면 테슬라는 100만대를 넘게 팔 ...",
+          "video_id": "4e59b163-d1e1-41c0-ba3f-5953e2384096",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라는 저는 여전히 펀더멘털이 계속 우상향한다고 생각합니다. 전기차 시장 확대와 함께 자...",
+          "video_id": "b192af4d-8f46-444b-9863-44ce55225b1a",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라가 AI 기술 발전 측면에서 제일 먼저 앞서가고 있는 건 맞는 거 같아요. 수백만 대...",
+          "video_id": "4b595d39-7b89-450b-8f0e-4e7e2b4a0f50",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "테슬라가 앞으로 10년 동안 네배 이상 오를 수 있다고 보는데, 이는 단순히 전기차 판매 ...",
+          "video_id": "69606752-f7b7-469b-aee8-ba73acefdc91",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-04",
+          "quote": "테슬라 같은 경우에도 장중 4%까지 상승했다가 상승폭을 대부분 반납하며 일시적 상승에 그쳤...",
+          "video_id": "d0564837-db2b-4fc9-98b0-da5e9bebcfaa",
+          "score": 0
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라가 2분기 실적에서 시장 예상치를 뛰어넘는 성과를 거두며 투자 매력이 크게 부각되고 ...",
+          "video_id": "e4cc1a66-eb31-4408-a690-f8eb690c22fd",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "1월 달에 전기차의 주문량이 생산하는 것에 두 배다, 180만대 정도 수준까지 갈 수 있다...",
+          "video_id": "6d5142c3-18ee-4bb7-98b5-83a23352713e",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "론바론 할아버지에 따르면 이제 고생 끝났다 아 지금이 테슬라 바닥이다라고 이렇게 선언을 아...",
+          "video_id": "a625542e-66de-4327-bbea-6f5c098f72ad",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-04",
+          "quote": "테슬라가 하고 있는게 바로 그거다. 엔비디아도 99%까지 쉽게 도달할 수 있는데 그 이후에...",
+          "video_id": "03253ca4-afeb-47f4-a1bd-680f1d887e7f",
+          "score": 0
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "로봇 택시의 가격 가치가 저는 테슬라의 주가에 다 반영이 안 돼 있다라고 저는 생각합니다....",
+          "video_id": "047df037-15e8-45ed-95a1-52202d8d15b9",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "테슬라는 자동차 회사가 아니라 소프트웨어 회사로 봐야 하며, FSD는 구독 경제로 안착하면...",
+          "video_id": "8b7ba14c-c532-4058-9264-df0b2013ddaf",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라는 2만5천불 전기차, 자율주행, 화성 프로젝트 등 다양한 옵션가치가 주렁주렁 달려있...",
+          "video_id": "b5dba2de-6886-41bf-92c0-3df833c5e437",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라 주가가 400달러 근처까지 급등한 것은 단순한 상승이 아닙니다. 시장이 테슬라의 장...",
+          "video_id": "8f49bbf2-a07d-4cf4-9ed6-80b09f3adb3b",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "중장기적으로 계속해서 긍정적으로 보고 있는 편입니다. 특히 2만 5천불대 저가형 전기차 출...",
+          "video_id": "c4a4864e-4f89-42fb-b83f-8d8ce813faa2",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "지금도 여전히 테슬라에 대해서는 긍정적인 의견을 말씀드린다고 할 수 있습니다. 전기차 시장...",
+          "video_id": "0df8006c-fa61-4491-a7b5-fd8949e69f57",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-04",
+          "quote": "테슬라 AI 데이가 9시에 시작됩니다. AI를 통해서 무엇을 할 수 있는지 자율주행과 관련...",
+          "video_id": "bffc79a4-4fc7-47cb-b07d-1580e369d121",
+          "score": 0
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라가 정말 좋은 회사라는 점에 대해서는 이견이 없으며, 전기차 시장의 선두주자로서 탄탄...",
+          "video_id": "e3ca6898-49ed-4887-95b1-8bb131579897",
+          "score": 1
+        }
+      ],
+      "88892b60-9e6b-4390-ba3b-c6d1453b3cef": [
+        {
+          "name": "유튜버_88892b60",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-02-28",
+          "quote": "지금 피지컬 AI 분야를 사실 최전선에서 드라이브를 걸고 있는 회사는 테슬라입니다. 자율주...",
+          "video_id": "cef2c937-db77-4bf6-9173-2e3fd8533334",
+          "score": 1
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "테슬라는 계속 좋게 받고 더 좋아질 것 같습니다. 전기차 브랜드에서 AI 업체로 굉정히 잘...",
+          "video_id": "163a2cb1-4a6b-4032-950a-04ff6be71f13",
+          "score": 2
+        }
+      ],
+      "0bc78d35-69d5-44d1-87c4-62cdeef0dfdf": [
+        {
+          "name": "유튜버_0bc78d35",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "한 명에게 휘둘리는 회사 잡스 때보다 더하죠 특히나 또 되게 안 좋은 것 중에 하나는 일론...",
+          "video_id": "554b9bca-c0a3-4d0c-8076-d4c229fc0a6d",
+          "score": -1
+        },
+        {
+          "name": "유튜버_0bc78d35",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-04",
+          "quote": "원론적으로 어떤 주식이든 못 살 이유는 없다고 생각하는데, 테슬라 같은 경우에는 전기차 시...",
+          "video_id": "d4970cc6-b705-43a2-aebd-064a8cd6d62e",
+          "score": 0
+        }
+      ],
+      "0b96cbb2-0d82-4d70-90d3-f7e79c7e09be": [
+        {
+          "name": "유튜버_0b96cbb2",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "많은 사람들이 기대하셨던 테슬라의 주가 상승의 시작은 바로 여기서부터 이제 시작될 거라고 ...",
+          "video_id": "43abb187-6ff0-4405-b15b-4663de89746b",
+          "score": 2
+        },
+        {
+          "name": "유튜버_0b96cbb2",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "세이프 드라이버가 내리는 순간 전 이건 시장에 대한 명확한 신호라고 봐요. 자율주행 시장과...",
+          "video_id": "44933662-1a45-44d2-ad61-512e2ab61b99",
+          "score": 2
+        },
+        {
+          "name": "유튜버_0b96cbb2",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "테슬라의 공장에서 AI 로봇들이 들어오기 시작하면 테슬라는 대책 없이 상승할 거라고 보기 ...",
+          "video_id": "c5e09aff-28cc-4eec-bd3f-95ed099d77fd",
+          "score": 2
+        },
+        {
+          "name": "유튜버_0b96cbb2",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라가 5,000대의 옵티머스 휴머노이드 로봇을 본격 배치하면서 AI 기술의 기하급수적 ...",
+          "video_id": "15848bb5-15a5-4c8b-9fb2-64540c7fd695",
+          "score": 1
+        },
+        {
+          "name": "유튜버_0b96cbb2",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "6월 달에 중가형 차량을 내놓는다는 것도 중요한 가이던스였고 이것도 주가에서 긍정적인 영향...",
+          "video_id": "9ad72303-3fe7-421b-bcca-16579a4b5d7c",
+          "score": 1
+        },
+        {
+          "name": "유튜버_0b96cbb2",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "AI 매출이 재무제표에 확인되는 순간 테슬라의 주가에는 상한선이 없다고 봅니다. 전기차 제...",
+          "video_id": "c614e75b-ec09-4c08-a038-8d5304e0e918",
+          "score": 2
+        },
+        {
+          "name": "유튜버_0b96cbb2",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "결국은 될 일이라고 생각하고 있고요. 테슬라 주식을 조금씩 조금씩 사고 있습니다. FSD ...",
+          "video_id": "9275a6dc-2dbb-4cfa-81c8-386dbd0084bc",
+          "score": 2
+        },
+        {
+          "name": "유튜버_0b96cbb2",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라를 긍정적으로 보는 것은 로봇 택시가 실현되면 이것 자체가 엄청난 마케팅 효과를 가져...",
+          "video_id": "ce165137-728a-4f14-a24e-aec378a88cb0",
+          "score": 1
+        },
+        {
+          "name": "유튜버_0b96cbb2",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라는 리콜을 당하면 약 80% 정비소를 안 가도 돼요 소프트웨어 업데이트 하면서 그냥 ...",
+          "video_id": "ab923d87-60b4-40bb-b5d7-8a8ee5db4ba9",
+          "score": 1
+        },
+        {
+          "name": "유튜버_0b96cbb2",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "6월 달에 작동하는 건 제가 보기에는 이건 기정 사실인 거 같아요. 테슬라의 로보택시 서비...",
+          "video_id": "ead07983-5226-4736-aea6-fc50be63e380",
+          "score": 2
+        },
+        {
+          "name": "유튜버_0b96cbb2",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라를 긍정적으로 보는 것은 로보택시가 되면 저는 이것 자체가 마케팅 효과라는 거예요. ...",
+          "video_id": "22f73ebc-dcb1-4800-bb95-0af07f6082e2",
+          "score": 1
+        },
+        {
+          "name": "유튜버_0b96cbb2",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "테슬라는 이제 단순한 자동차 회사가 아니라 AI 기술력을 바탕으로 한 미래 모빌리티 기업으...",
+          "video_id": "b0cdbc85-b566-4db1-9745-b736a8c83c68",
+          "score": 2
+        }
+      ],
+      "b9496a5f-06fa-47eb-bc2d-47060b095534": [
+        {
+          "name": "유튜버_b9496a5f",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-02",
+          "quote": "테슬라는 자동차 회사를 넘어선 모빌리티 회사로, 애플처럼 강력한 브랜드 파워를 바탕으로 다...",
+          "video_id": "38cae4f3-38f6-4d59-86f4-a647ebed7de3",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b9496a5f",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-02",
+          "quote": "테슬라를 최근까지 보유하다가 다 팔았는데, 전기차 시장에서의 경쟁력과 성장 잠재력을 고려할...",
+          "video_id": "0f17e179-0f77-49b4-a692-dd8f6ed0d44c",
+          "score": 1
+        }
+      ],
+      "fd3d7c1c-606f-4e70-8401-3ba037985649": [
+        {
+          "name": "유튜버_fd3d7c1c",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "테슬라는 모든 데이터를 쥐고 공공하고 아주 투명한 소통하고 있지 않아요. 테슬라의 약점을 ...",
+          "video_id": "a83a633b-27e6-42b0-a252-001c9ee2b252",
+          "score": -1
+        },
+        {
+          "name": "유튜버_fd3d7c1c",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "그 데이터를 지배하는 어 팔란티어 같은 회사, 테슬라 같은 회사, 엔비디아 같은 회사가 더...",
+          "video_id": "2e2c07ef-1403-42ba-b89c-13c586886381",
+          "score": 1
+        }
+      ],
+      "d2970543-52a6-4688-bc04-eea99615a53e": [
+        {
+          "name": "유튜버_d2970543",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "AI 시대 탑픽 두 개 꽂으라 그러면 애플하고 테슬라죠. 테슬라는 이제 단순한 전기차 회사...",
+          "video_id": "f6b446a0-7981-4ce8-a167-0800ad573c91",
+          "score": 2
+        },
+        {
+          "name": "유튜버_d2970543",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "일론머스크가 장기적인 배팅을 한 거 같아요. TSMC에 매달려 가는 것보다는 위험이 덜하다...",
+          "video_id": "3d82af68-09bf-4e97-a184-8e8fb8e45c8b",
+          "score": 1
+        },
+        {
+          "name": "유튜버_d2970543",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라의 옵티머스가 손을 엄청 잘 만들었거든요. 이게 단순히 로봇 팔다리 움직이는 수준이 ...",
+          "video_id": "5b0fc074-0a47-46fe-a046-638e72056f6b",
+          "score": 1
+        },
+        {
+          "name": "유튜버_d2970543",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라와 삼성전자 간의 파운드리 협력이 성사된다면, 훗날 애플과 TSMC의 전설적인 파트너...",
+          "video_id": "1b0508ad-3e15-4433-8757-78f9364af252",
+          "score": 1
+        }
+      ],
+      "da62e009-777c-4329-ab0d-372cca51bee9": [
+        {
+          "name": "유튜버_da62e009",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라가 이야기하는 AI가 결국엔 미래다라는 얘기는 저는 굉장히 리너블한 생각이라는 생각이...",
+          "video_id": "17cfbd09-7f0a-4608-b26c-f1b45442e557",
+          "score": 1
+        },
+        {
+          "name": "유튜버_da62e009",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라는 어떻게 보면 그런 리쇼링이라든지 지금 많은 문제가 되고 있는 그런 공급만 이슈를 ...",
+          "video_id": "bbb001a4-4a64-4b30-b81f-568f990e97ee",
+          "score": 1
+        },
+        {
+          "name": "유튜버_da62e009",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라 주가가 전고점을 뚫어낸 타이밍이 FSD 한국 출시와 겹친 건 우연이 아닐 거야. 규...",
+          "video_id": "3a17ad46-d367-423e-8029-3260e401c0ca",
+          "score": 1
+        },
+        {
+          "name": "유튜버_da62e009",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라의 비전에는 저는 개인적으로 굉장히 좋은 방향으로 가고 있다라고 믿고 있습니다. 특히...",
+          "video_id": "bf3ea9fa-bbc9-49b4-b72c-e4ba0791da4b",
+          "score": 1
+        }
+      ],
+      "40c61fd2-fb78-41d2-9ae5-fb9bad0e594e": [
+        {
+          "name": "유튜버_40c61fd2",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "테슬라도 마켓 쉐어에 대한 압박이 상당히 지금 이미 연초부터 시작되고 있는데, 특히 중국의...",
+          "video_id": "5218b749-302f-4163-98d4-a0eda953369d",
+          "score": -1
+        },
+        {
+          "name": "유튜버_40c61fd2",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "최근 테슬라를 보면 정말 미래 성장을 이끌 핵심 기술들을 모두 갖춘 완벽한 포트폴리오를 구...",
+          "video_id": "7f24db03-1c50-4191-80cc-6ca95702d6de",
+          "score": 1
+        },
+        {
+          "name": "유튜버_40c61fd2",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "테슬라가 쫓기고 있는 상황이 되었죠. BYD의 역전과 중국 전기차 업체들의 맹추격으로 테슬...",
+          "video_id": "9970ad31-cd10-4db9-a2af-141fd45dd422",
+          "score": -1
+        },
+        {
+          "name": "유튜버_40c61fd2",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라가 최근에 너무 이제 전망이 밝은 아이템들은 다 갖고 있는 거 같아요. AI 하고 있...",
+          "video_id": "c551bfde-1370-4b24-94d7-60d0f69a2f5b",
+          "score": 1
+        }
+      ],
+      "26f4d54e-bf07-47ba-8ca0-30aab19d221f": [
+        {
+          "name": "유튜버_26f4d54e",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "테슬라 모델 Y보다 샤오미 U7으로 고객들이 대거 이탈하면서 거의 25만 명 가까운 24만...",
+          "video_id": "d8f8940c-9ccb-44d6-92b7-0182db493d38",
+          "score": -1
+        }
+      ],
+      "e6bb7f03-146d-4538-adbf-bccbec47a43d": [
+        {
+          "name": "유튜버_e6bb7f03",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "내년 정도부터는 테슬라의 AI 사업이 테슬라의 기업 가치를 판단하는데 있어서 되게 중요한 ...",
+          "video_id": "51767b89-2066-40e6-97dd-9d3eef2b59c2",
+          "score": 1
+        },
+        {
+          "name": "유튜버_e6bb7f03",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라가 연말까지 AI 학습 캐파시티를 현재 대비 두 배 이상인 85,000개까지 대폭 확...",
+          "video_id": "d1bdb604-1a77-400c-903f-c8274f0c722f",
+          "score": 1
+        }
+      ],
+      "43daf88d-1b45-43e6-bcac-69b5d7650ef7": [
+        {
+          "name": "유튜버_43daf88d",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라는 단순한 전기차 회사를 넘어 AI 로봇 컴퍼니로 완전히 탈바꿈하며 제2의 창업을 선...",
+          "video_id": "03a2af36-934f-43ac-847e-d98d9400d57a",
+          "score": 1
+        },
+        {
+          "name": "유튜버_43daf88d",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "과거를 돌이켜 봤을 때 우량 자산은 장기 투자자를 결코 배신하지 않아요. 테슬라는 단순한 ...",
+          "video_id": "f2064035-6d7d-4890-9588-82eb39a1f7c4",
+          "score": 1
+        },
+        {
+          "name": "유튜버_43daf88d",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라는 꿈이 주가를 이끄는 기업이에요. 과거를 돌이켜 봤을 때 우량 자산은 장기 투자자를...",
+          "video_id": "d2aeab79-ae1c-40ee-bef0-ffd47dea705e",
+          "score": 1
+        }
+      ],
+      "6faedc0f-47c1-4645-b623-934b4d180a19": [
+        {
+          "name": "유튜버_6faedc0f",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라는 진짜 천재적인 기업인 것 같아요. 단순히 전기차만 만드는 게 아니라 자율주행 기술...",
+          "video_id": "375da29f-6a13-49aa-959e-70999fda3078",
+          "score": 1
+        }
+      ],
+      "a80f6cdf-e53a-42a9-95ea-1c5ba9c7a986": [
+        {
+          "name": "유튜버_a80f6cdf",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-03",
+          "quote": "모건 스탠리가 테슬라의 목표 주가를 250달러에서 400달러로 무려 60% 대폭 상향 조정...",
+          "video_id": "2a47f7de-ce1a-4189-9132-52caff2e1ab2",
+          "score": 1
+        },
+        {
+          "name": "유튜버_a80f6cdf",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-03",
+          "quote": "연말까지 자율주행 될거다 이렇게 말씀을 하시고 계시죠 이런 규제적 배리어는 차치한다고 하더...",
+          "video_id": "e21a5c2e-eaf6-4716-85ba-54002f440af1",
+          "score": -1
+        }
+      ],
+      "9b2bdbf7-391f-4c31-bc26-6240e4d76baf": [
+        {
+          "name": "유튜버_9b2bdbf7",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라 종목이 변동성이 좀 있을 것 같다라고 판단되시는 분들에게 전략적으로 활용하실 수단으...",
+          "video_id": "7d7a8aad-a54a-43f3-820e-d51bc0965fee",
+          "score": 1
+        }
+      ],
+      "46454972-4f2c-49cf-8e69-34ad1ff84cbf": [
+        {
+          "name": "유튜버_46454972",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "테슬라는 더 이상 단순한 전기차 회사가 아닙니다. 에너지 저장장치(ES) 사업부의 수익성이...",
+          "video_id": "e76edfab-ce52-45d8-bd94-67eb783ed8b0",
+          "score": 1
+        }
+      ]
+    }
+  },
+  "엔비디아": {
+    "stock_name": "엔비디아",
+    "total_signals": 96,
+    "unique_influencers": 19,
+    "avg_score": 0.9270833333333334,
+    "signal_distribution": {
+      "매수": 19,
+      "매도": 1,
+      "중립": 11,
+      "긍정": 59,
+      "경계": 6
+    },
+    "buy_ratio": 0.8125,
+    "sell_ratio": 0.07291666666666667,
+    "consensus_strength": "강한",
+    "consensus_direction": "매수",
+    "influencer_details": {
+      "b07d8758-493a-4a51-9bc5-7ef75f0be67c": [
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "엔비디아가 그록을 인수함으로써 학습에 더해서 추론까지 완벽하게 보완해서 내년도에 완전히 달...",
+          "video_id": "d95bb376-4f17-4e5d-bcbd-4d6eaac6207d",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매도",
+          "english_signal": "SELL",
+          "date": "2026-03-04",
+          "quote": "거의 10년 가까이 들고 있던 엔비디아를 매도하고 있습니다. AI 붐으로 급등하면서 현재 ...",
+          "video_id": "fae693ec-1ac2-4516-abf2-f78ae3928a21",
+          "score": -2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아 실적은 매우 긍정적으로 평가하고 있으며, 특히 AI 반도체 시장에서의 독보적 지위...",
+          "video_id": "12b9dc31-c8fe-45b6-9243-25320d1f095e",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-04",
+          "quote": "엔비디아가 현재 AI 반도체 시장을 이끌고 있는 상황에서, 블랙웰 칩의 생산 문제와 양산 ...",
+          "video_id": "519561b5-2a66-4b51-9b44-c4b857058f6d",
+          "score": 0
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아의 주가는 AI 반도체 시장의 독보적 지위와 데이터센터 부문의 폭발적 성장세를 바탕...",
+          "video_id": "5e3a5af0-546d-46b5-8814-0416ad2b76ca",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아는 AI 반도체 시장에서 압도적인 기술력과 독점적 지위를 바탕으로 당분간 1등 자리...",
+          "video_id": "2a8be397-eca5-40be-957a-4a64a1e1a5da",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "빅테크 기업들의 3분기 실적 발표 시즌에서 실적이 가장 잘 나온 회사이자 컨센서스 대비해서...",
+          "video_id": "76442f8c-d249-4209-8237-b97c34aa1b1b",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "엔비디아를 중심으로 한 차세대 산업 혁명이 본격적으로 시작됐습니다. 이는 단순한 기술 발전...",
+          "video_id": "41516750-f657-49ca-8b6c-57a8229ded27",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "장기적으로는 엔비디아가 AI로 갈 수 있습니다. AI로 가야 됩니다라는 그런 큰 목소리를 ...",
+          "video_id": "80afbd55-348b-4d1a-8448-d101db1902fb",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아가 온디바이스 AI에 대한 힌트와 키를 줬고, 자체 메모리 표준을 만들어서 주도권을...",
+          "video_id": "d1f52ddf-01aa-4dc9-bd7d-096fca78b745",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "이 청사진이 다 되면은이 로드맵이 다 결성되면 시총 1위가 진짜 될 수 있겠다라는 그런 느...",
+          "video_id": "f11267ec-0836-4002-a90b-3afe602a58df",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "드루킨 밀러가 그런 약간 좀 졸림이 좀 있었고 솔직히 그래서 이걸 어떻게 해야 되나라는 이...",
+          "video_id": "2007adf3-b27a-4823-bdea-8181fa6575c6",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아가 B300을 조기 양산해서 다른 지역 시장에 공급한다면 올해 실적을 충분히 디펜스...",
+          "video_id": "403e0eae-931a-452f-998f-433f91803b7a",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "저는 여전히 AI 버블은 아직 시작하지 않았고 결국은 버블이 올 가능성이 높다라고 판단하고...",
+          "video_id": "6327cd19-9ee4-4483-b3d3-1cccbbf23073",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아가 연일 사상 최고치를 경신하며 AI 혁명의 중심에서 독보적인 위치를 확고히 하고 ...",
+          "video_id": "30bf6b0a-5ee6-4e0a-8f38-c1de7cebe44b",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "솔직히 진짜 선방했다고 생각합니다. 놀라운 실적을 발표했고 충분히 가능하다라고 생각을 합니...",
+          "video_id": "3c0df69d-fb4e-47e4-87a9-df37cb7935ee",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "더 이상은 쿠팡이 아니다, 엔비디아 맨이다! 전설적 트레이더 드러켄밀러도 인정한 AI 혁명...",
+          "video_id": "80cea929-9c36-4c46-bd98-38f9db2a553f",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "투자의 관점에서 AI 시대의 엔비디아 지배력은 더욱더 강화되겠습니다. GTC 행사에서 발표...",
+          "video_id": "fed2e151-add8-4e03-8d30-b6667d0042da",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아 어제도 5% 정도 빠졌다가 오늘은 2% 상승하고 있는데 이것도 역시 마찬가지로 아...",
+          "video_id": "060f3f2f-1d91-4eab-9846-87c66a058da5",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-04",
+          "quote": "엔비디아가 여기서 예상보다 더 좋은 상황이 계속 이어진다면 주가가 급락하는 상황을 가정할 ...",
+          "video_id": "06ae3bdc-d42b-463c-997a-75fba57e042e",
+          "score": 0
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아가 GPU 만드는 거고 이게 이제 하드웨어라고 한다면은 그거 만드는 이유는 결국은 ...",
+          "video_id": "39af56aa-81ac-4227-9235-d6387844bf48",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아는 확실히 오를 것 같아요. AI 반도체 시장에서 90% 이상 점유율을 차지하고 있...",
+          "video_id": "138acc80-a52e-4ee5-aeba-9c49d8361818",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "엔비디아가 사상 최고치를 갱신했다라는 겁니다. 시가총액 기준으로 보면은 와 이제 애플이랑은...",
+          "video_id": "6fe3ac0c-b14a-4139-9a8f-394a7128665e",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "레이 달리오 이제 엔비디아가 버블인 아닌지 평가를 했었습니다 결론만 말씀드리면 버블은 자기...",
+          "video_id": "c389315b-ef3e-48ab-9799-3057f2dd8122",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아 칩 못 가지고 간다고 그러면 어떻게 하려고 그러는 거지? 중국 수출 규제가 있어도...",
+          "video_id": "1b69ce70-0e8c-4c21-b2f9-707cdc43ed0b",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "장기적인 방향성을 보시는게 중요하다 근데 그 과정에서 매크로의 변화는 작은 사이클을 만드는...",
+          "video_id": "abb68ca1-0a7f-4524-a7aa-3b2d16eff61f",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "엔비디아가 소프트웨어 회사야고 이야기하기 위해서는 GPU 만들어서 파는 거 아니고 우리 G...",
+          "video_id": "776b38b9-9e05-474d-9bf9-6cdd24f55b98",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아가 시가총액 3조 달러를 달성하면서 시장이 들썩였는데, 이는 단순한 숫자가 아니라 ...",
+          "video_id": "db64408f-4eb7-4edc-804c-4cb07f2baec4",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아의 실적이 여전히 탄탄하고 기술력이나 이런 부분들을 해당 머니 가지고 있는데, 특히...",
+          "video_id": "a5512f24-53c5-48c4-b1cc-86b8e87ad469",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아는 AI 반도체 시장에서 압도적인 기술력과 GPU 독점적 지위를 바탕으로 당분간 1...",
+          "video_id": "12a782a1-c77d-4ec7-bc8c-138651a2ff3f",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아가 지금 하고 있는 행태를 봐야 되는데 계속 연합군을 만들고 있잖아요. 아마존이랑 ...",
+          "video_id": "fa0e6020-8485-43e1-81c4-aacd1891d534",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아는 지금 AI 팩토리를 만들기 위한 그 생태계를 구성하려고 진짜 막 이렇게 가고 있...",
+          "video_id": "4354bec2-c0b7-42bc-b4a7-7e9012181db0",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "엔비디아가 꼭 올라야 되는 상황에 있는 분들은 그냥 그 상황을 바꾸셨으면 좋겠습니다. AI...",
+          "video_id": "01c3b3f8-ad50-498a-8ef1-e8aac9cdff47",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "중장기적으로 봤을 때 지금보다 15배에서 20배 이상 시장을 보니까 지금 90% 60% 돼...",
+          "video_id": "c85f46e3-202a-4152-83c9-8bb0bbb61ee1",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "이번에 좀 조정을 받고 있지만 이건 과도한 상승 후 나타나는 자연스러운 현상이고, AI 반...",
+          "video_id": "b07eac46-9f6a-424b-9e82-0af118e440c6",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "젠슨왕이 사는 회사들 있잖아요. 주목해서 보여야 된다고 생각합니다. 엔비디아에서 투자한 회...",
+          "video_id": "15c39830-aff7-4f2c-a00a-4f663385af9f",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아가 계속 이제 쿠다 시스템으로 구축을 해서 AI 바로바로 활용할 수 있을 만한 생태...",
+          "video_id": "74221daa-9c50-48f2-ba95-63c5ad6b03b6",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-04",
+          "quote": "엔비디아 이번 실적에서는 차세대 블랙웰 칩의 출하 계획과 매출 기여도 전망이 가장 중요한 ...",
+          "video_id": "8d9ed587-6a49-45bb-b363-2c33a01522d1",
+          "score": 0
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "장기적으로 봤을 때는 AI 전체 시장을 키우는 역할을 할 것이고 그렇다면 그 AI 시장을 ...",
+          "video_id": "64ce4bcc-8d4f-4563-8798-4d2bafff6360",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "4분기를 약간 좀 쿨다운 한 거 같아요. 실제로 이제 실적은 저는 서프라이즈는 나올 거라고...",
+          "video_id": "fa63d50b-3610-49d0-aa78-c33c9420789b",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아가 7.2% 급등하며 기술주 전반이 강력한 상승세를 보이고 있습니다. 생성형 AI ...",
+          "video_id": "59db2d82-10df-4384-b2cc-7a6631cd962c",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "엔비디아 실적이 나오고 만약에 떨어진다라고 하면은 개인적으로 엔비디아를 갖고 있지 않은 주...",
+          "video_id": "377499d3-cf20-4a7e-be09-cc11547c0e9f",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "GPT4는 최소한 한 2조개 정도의 파라미터는 될 것 같아요. 그러면 엔비디아 GPU가 1...",
+          "video_id": "d96e7b47-0771-4401-bf34-02d5d50639a1",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아가 클라우드 시장 진입하고 바이오 쪽에 상당히 공을 많이 들이고 있어서 넥스트는 바...",
+          "video_id": "9ab66934-af1f-4e7d-8ee8-540aecc3060e",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "캐시 우드는 \"엔비디아가 현재 AI 대장주 역할을 하고 있지만, 1990년대 시스코처럼 독...",
+          "video_id": "f9bab264-c0fd-4225-89e0-71845fce9d4b",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "엔비디아 역시도 현재 상황에서 주저할 수밖에 없는 구조적 문제를 안고 있는데, 특히 엔비디...",
+          "video_id": "fe2d2023-5d8e-4b79-ba48-f270c83072b7",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "AI 시대에서 엔비디아가 주도권을 가지고 있다라는 점 그리고이 엔비디아가 생각하는 AI 미...",
+          "video_id": "1c5a88bd-8cd6-4559-9857-46e079a446b4",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "주가가 전고점을 다시 돌파하는 데까지는 시간은 좀 걸릴 수 있겠다라고 생각하시는 것이 맞지...",
+          "video_id": "d72b985f-5a13-45de-9c61-139bfcc6bda4",
+          "score": -1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아 주가가 저는 상반기 중에 안 꺾일 것 같거든요. AI 데이터센터 구축 열풍이 전 ...",
+          "video_id": "eeadcb2b-4523-4ec0-b5bc-1f7e46e3deee",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아 주도의 AI 서버칩 쪽 밸류 체인들이 더 세게 갈 수 있는 구조입니다. H100,...",
+          "video_id": "3e3a4ffc-db30-48f7-8919-e114098945d2",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아 주가는 단기 변동성이 있더라도 장기적 관점에서 접근하는 것이 좋겠습니다. AI 반...",
+          "video_id": "ce4fbb6d-426e-4f8d-b885-7441fadd0627",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "엔비디아가 올라갈지 내려갈지 묻는다면 저는 확실히 올라간다고 봅니다. 월가 투자은행들이 줄...",
+          "video_id": "e84f3989-f9bb-443c-b809-ff08a161e9e7",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "엔비디아가 피지컬 AI로 판을 다시 한번 뒤집으려고 하고 있다고 생각하고, 언제나 그랬던 ...",
+          "video_id": "e9c2888e-a2ea-4ef3-a86f-3418b95f6ad9",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "오픈AI가 부족한 부분을 누가 채워줄 수 있냐? 저는 엔비디아라고 생각합니다. 엔비디아는 ...",
+          "video_id": "912a3808-8336-45f8-8201-9ba2ffae95e5",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "추가적으로 밸류에이션이 높아지면서 주가가 오를 수도 있다라고 저는 생각을 하고 있기 때문에",
+          "video_id": "f561d76c-25c9-47a8-b5af-700732d3f8a7",
+          "score": 1
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "AI 혁명이 일어나는 과정에서는 여러분들이 계속 가지고 계셔도 전혀 문제가 없다라는 생각이...",
+          "video_id": "656a4c2e-08b5-461d-9046-a0521e334ce0",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "가장 주목해야 될 당연히 엔비디아입니다. AI 시대에서도 엔비디아는 리바이스 포지션을 공고...",
+          "video_id": "03253ca4-afeb-47f4-a1bd-680f1d887e7f",
+          "score": 2
+        },
+        {
+          "name": "유튜버_b07d8758",
+          "signal": "경계",
+          "english_signal": "CONCERN",
+          "date": "2026-03-04",
+          "quote": "만약에 그냥 엔비디아 혼자 하드 캐리해서 오는 거면 올 여름 쯤이 이제 이번 사이클은 막바...",
+          "video_id": "21ef25b1-44fd-469a-9361-328513c59b30",
+          "score": -1
+        }
+      ],
+      "d5ea4443-d1cb-4927-aabc-68061f59a3e0": [
+        {
+          "name": "유튜버_d5ea4443",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-02",
+          "quote": "GPU 설계 분야에서 독보적 지위를 확보한 엔비디아에 20% 투자를 권합니다. AI 반도체...",
+          "video_id": "8bc8b1e0-aea1-4a66-8e7f-4efc9a3f9a34",
+          "score": 2
+        }
+      ],
+      "b9496a5f-06fa-47eb-bc2d-47060b095534": [
+        {
+          "name": "유튜버_b9496a5f",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-02",
+          "quote": "엔비디아 마이크로소프트 큰 재미는 보지 못했지만 이제 팔란티어 같은 AI 관련 뭐 미국 성...",
+          "video_id": "8b8ddea2-1548-4db9-976f-da0b6e877a31",
+          "score": 0
+        },
+        {
+          "name": "유튜버_b9496a5f",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-02",
+          "quote": "AI 같은 중요한 기술은 공장처럼 가격이 싸다고 해서 해외에 짓거나 할 수가 없습니다. 그...",
+          "video_id": "dd2d399a-532b-43b8-bd78-42953ccfea73",
+          "score": 1
+        }
+      ],
+      "8234cd75-1d0d-458c-b01c-62080c7d91e3": [
+        {
+          "name": "유튜버_8234cd75",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-01",
+          "quote": "갖고 계신 분면 그냥 갖고 계시면 되고요. 안 갖고 계신 분이라면 2%면 들어가도 괜찮을 ...",
+          "video_id": "9236a7e9-8a4b-4291-b6ef-19cc83991e5e",
+          "score": 1
+        },
+        {
+          "name": "유튜버_8234cd75",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-01",
+          "quote": "이 정도는 잘 나올 것으로 예상한 그거에 부합했다는 겁니다. 나쁜게 아니에요. 2, 3% ...",
+          "video_id": "e9012cde-ddbc-4819-8745-ef93fff6327f",
+          "score": 0
+        }
+      ],
+      "2720d0ee-b7e2-4006-80df-90bc9de07797": [
+        {
+          "name": "유튜버_2720d0ee",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-01",
+          "quote": "주가는 70% 이상 반영을 하고서 움직였을 가능성이 있다. 새로운게 나와야 된다. 실적이 ...",
+          "video_id": "c7bf5e71-50d1-4ffa-94a7-e3bce9ec49a5",
+          "score": 0
+        }
+      ],
+      "aa25b0e6-aadf-4bae-a2fa-afc0a067e315": [
+        {
+          "name": "유튜버_aa25b0e6",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-01",
+          "quote": "성장률이 66.7%가 나오고 있기 때문에 엔비디아 주가가 버틴 이유... 27년까지 60%...",
+          "video_id": "d66104b7-0b88-463e-b2a9-34b6797404da",
+          "score": 1
+        }
+      ],
+      "88892b60-9e6b-4390-ba3b-c6d1453b3cef": [
+        {
+          "name": "유튜버_88892b60",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "제가 완전히 잘못 봤습니다. 엔비디아가 예상보다 훨씬 더 강하게 올라가고 있어요. 아직 밸...",
+          "video_id": "e284ee64-d2f0-471f-a5cb-6a5cd16e57c0",
+          "score": 2
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아의 데이터센터 성장률이 427%라는 놀라운 수치를 기록했고, 매출 총 이익률도 거의...",
+          "video_id": "77dc943b-c4a4-42b2-b3b1-38171772f2a9",
+          "score": 1
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-04",
+          "quote": "젠슨 황은 AMD의 OpenAI 진출 소식에 대해 \"나는 별로 신경 안 써, 한번 해봐\"라...",
+          "video_id": "bf88d77c-8a1d-486e-8758-149599efa210",
+          "score": 0
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "지금 엔비디아가 너무 잘 나가고 있죠네 사실 지금 백하고 HB이 뭐 없어서 못 파는 상황이...",
+          "video_id": "93ea8a5a-d66e-42b2-b051-190612abb170",
+          "score": 1
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아 실적이 너무 잘 나왔는데 이번 서프라이즈가 그냥 단기간에 끝날 것 같지는 않아요....",
+          "video_id": "91d82818-b993-4130-908c-d8bb3e3ce97b",
+          "score": 1
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-04",
+          "quote": "엔비디아 칩 주문 대기시간이 올 초 40주에서 현재 8-12주로 대폭 단축된 것은 분명히 ...",
+          "video_id": "1ca614cf-4d18-4cdf-b795-b746eeb209b5",
+          "score": 0
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아 주가가 다시 반등하고 뭔가 또 상승 추세를 다시 그린다 그러면 거기 친한 업체들은...",
+          "video_id": "86a754a2-abf2-4f40-9c61-9297a89380b1",
+          "score": 1
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "모바일 혁명시대 애플 같은 주가를 그릴 거라고 생각해요. 엔비디아의 주도권이 약해질 수는 ...",
+          "video_id": "db3fc81e-dee7-49c9-b7b1-d34884a0365e",
+          "score": 2
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-04",
+          "quote": "엔비디아 최근에 차세대 블랙웰 아키텍처에서 기술적 결함이 발견되면서 출시 일정에 차질이 생...",
+          "video_id": "79e8893c-c1c0-4adc-b846-017c1998d81f",
+          "score": 0
+        },
+        {
+          "name": "유튜버_88892b60",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-02-28",
+          "quote": "저는 엔비디아라는 회사가 AI 혁명 시대의 절대 강자로서, 마치 모바일 혁명 당시 애플이 ...",
+          "video_id": "cef2c937-db77-4bf6-9173-2e3fd8533334",
+          "score": 1
+        }
+      ],
+      "0b96cbb2-0d82-4d70-90d3-f7e79c7e09be": [
+        {
+          "name": "유튜버_0b96cbb2",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아의 주가는 저는 계속적으로 긍정적으로 봅니다. AI 반도체 시장에서 독보적인 위치를...",
+          "video_id": "b0cdbc85-b566-4db1-9745-b736a8c83c68",
+          "score": 1
+        },
+        {
+          "name": "유튜버_0b96cbb2",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아의 주가는 저는 계속적으로 긍정적으로 봅니다. AI 반도체 시장에서의 압도적 점유율...",
+          "video_id": "a7d9c2c1-5a8c-4058-b9c7-7130d3bd3aff",
+          "score": 1
+        },
+        {
+          "name": "유튜버_0b96cbb2",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아가 얘기하는 피지컬 AI 또는 이제 스탠포드의 페이리가 얘기했던 월드 파운데이션 모...",
+          "video_id": "ead07983-5226-4736-aea6-fc50be63e380",
+          "score": 1
+        }
+      ],
+      "40c61fd2-fb78-41d2-9ae5-fb9bad0e594e": [
+        {
+          "name": "유튜버_40c61fd2",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아 오늘 실적 나왔는데 엔비디아에 뭐 서버 쪽으로 들어가는게 뭐 400% yy 성장한...",
+          "video_id": "c551bfde-1370-4b24-94d7-60d0f69a2f5b",
+          "score": 1
+        }
+      ],
+      "a80f6cdf-e53a-42a9-95ea-1c5ba9c7a986": [
+        {
+          "name": "유튜버_a80f6cdf",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-03",
+          "quote": "엔비디아가 2분기 실적 발표에서 매출 500억 달러를 돌파하며 시장의 모든 예상치를 완전히...",
+          "video_id": "cdbf9add-e577-4efa-91d0-4b411fecff2a",
+          "score": 2
+        },
+        {
+          "name": "유튜버_a80f6cdf",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-03",
+          "quote": "AI 수혜주로 가장 관심을 많이 받는 건 엔비디아, 숫자로 따져보면 현재 밸류에이션이 싸지...",
+          "video_id": "de326e07-a757-454a-8083-2b4a23730ee2",
+          "score": 0
+        },
+        {
+          "name": "유튜버_a80f6cdf",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-03",
+          "quote": "엔비디아 측에서 재고자산 조정이 현재 시점에서는 거의 끝난 상태라고 공식적으로 소통했습니다...",
+          "video_id": "2bacfb7b-a6fe-4b4e-af81-c87cbe8a231b",
+          "score": 1
+        }
+      ],
+      "d2970543-52a6-4688-bc04-eea99615a53e": [
+        {
+          "name": "유튜버_d2970543",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "애플보다 한 20에서 30% 아래로 떨어지면 엔비디아를 적극 매수할 계획입니다. 엔비디아는...",
+          "video_id": "416b9fbf-448a-49bc-8249-6254e3bdde99",
+          "score": 1
+        },
+        {
+          "name": "유튜버_d2970543",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "AI 반도체 시장이 10년 뒤 최소 10배 될 것으로 예상하고 엔비디아가 50% 점유율이라...",
+          "video_id": "22b42ef8-b20b-4b90-ac91-2791b74eeed9",
+          "score": 1
+        },
+        {
+          "name": "유튜버_d2970543",
+          "signal": "중립",
+          "english_signal": "NEUTRAL",
+          "date": "2026-03-04",
+          "quote": "하이퍼 스케일러이나 이런 것들이 점점 더 엔비디아에 의존하기보다는 자체 반도체도 많이 만들...",
+          "video_id": "5b0fc074-0a47-46fe-a046-638e72056f6b",
+          "score": 0
+        }
+      ],
+      "fd3d7c1c-606f-4e70-8401-3ba037985649": [
+        {
+          "name": "유튜버_fd3d7c1c",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "저는 팔란티어와 엔비디아가 피지컬 AI 시대를 이끌어갈 핵심 동반자로서 완전히 같은 성장 ...",
+          "video_id": "2e2c07ef-1403-42ba-b89c-13c586886381",
+          "score": 1
+        }
+      ],
+      "da62e009-777c-4329-ab0d-372cca51bee9": [
+        {
+          "name": "유튜버_da62e009",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아의 최고 그 이제 그래픽 카드 이제 H100라든지 아니면 그 블랙월 같은 블랙월은 ...",
+          "video_id": "17cfbd09-7f0a-4608-b26c-f1b45442e557",
+          "score": 1
+        },
+        {
+          "name": "유튜버_da62e009",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "동일한 날에 엔비디아에 DGX 스파크가 이제 일반인한테 판매가 되기 시작했어요. 그게 어떻...",
+          "video_id": "bbb001a4-4a64-4b30-b81f-568f990e97ee",
+          "score": 1
+        }
+      ],
+      "e6bb7f03-146d-4538-adbf-bccbec47a43d": [
+        {
+          "name": "유튜버_e6bb7f03",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "이번 분기 실적은 매우 긍정적으로 나올 것으로 예상되며, AI 반도체 시장에서의 독보적 지...",
+          "video_id": "d1bdb604-1a77-400c-903f-c8274f0c722f",
+          "score": 1
+        },
+        {
+          "name": "유튜버_e6bb7f03",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아가 AI 반도체 시장에서 구축한 압도적 경쟁력과 80% 이상의 시장 점유율, 그리고...",
+          "video_id": "51767b89-2066-40e6-97dd-9d3eef2b59c2",
+          "score": 1
+        }
+      ],
+      "1978ae5f-dc38-4d6a-8b8f-d5adc46309e1": [
+        {
+          "name": "유튜버_1978ae5f",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아를 바라보는 시각이 계속적으로 달라졌고 전체적인 슈퍼컴퓨팅 인프라를 제공하는 회사로...",
+          "video_id": "3ae2512d-23f5-4c95-97bf-42e1cf6679bf",
+          "score": 1
+        }
+      ],
+      "6faedc0f-47c1-4645-b623-934b4d180a19": [
+        {
+          "name": "유튜버_6faedc0f",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아는 단기 변동성보다는 장기적 관점에서 접근해야 할 종목입니다. 단순한 하드웨어 회사...",
+          "video_id": "375da29f-6a13-49aa-959e-70999fda3078",
+          "score": 1
+        }
+      ],
+      "6628ab1f-d214-4c5c-89e3-21ced59c0d57": [
+        {
+          "name": "유튜버_6628ab1f",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "엔비디아를 빼놓고 AI 혁명을 얘기할 수 없을 만큼 AI 반도체 시장에서 압도적 독점 지위...",
+          "video_id": "33bed8cc-0c81-4eb1-a335-533411a2bff2",
+          "score": 2
+        },
+        {
+          "name": "유튜버_6628ab1f",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "AI 혁명을 얘기했을 때 엔비디아를 빼놓고 얘기할 수 없기 때문에 성장세가 꺾이긴 쉽지 않...",
+          "video_id": "326af6e2-45f6-45de-a0a3-db094f41ffde",
+          "score": 2
+        }
+      ],
+      "c607122d-0acf-4576-aa1d-c572d2c744ec": [
+        {
+          "name": "유튜버_c607122d",
+          "signal": "매수",
+          "english_signal": "BUY",
+          "date": "2026-03-04",
+          "quote": "AI 시대에 제대로 돈 버는 갭이 두 개밖에 없다고 생각해요. 엔비디아하고 팔란티어예요. ...",
+          "video_id": "29af6860-6687-4ee4-b66f-6a7a98869679",
+          "score": 2
+        }
+      ],
+      "2039a387-9ce8-4c76-9cbf-d359cf3d3fc8": [
+        {
+          "name": "유튜버_2039a387",
+          "signal": "긍정",
+          "english_signal": "POSITIVE",
+          "date": "2026-03-04",
+          "quote": "엔비디아를 대체할 수 있는 건 엔비디아 스스로밖에 없다. AI 반도체 시장에서 80%가 넘...",
+          "video_id": "283d58d0-063d-47ea-8872-c021f49e64c0",
+          "score": 1
+        }
+      ]
+    }
+  }
+}

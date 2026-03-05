@@ -1,0 +1,764 @@
+{
+  "total_buy_signals": 168,
+  "sample_size": 50,
+  "analysis": {
+    "진짜_매수": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "단순_긍정": {
+      "count": 5,
+      "percentage": 10.0
+    },
+    "애매": {
+      "count": 45,
+      "percentage": 90.0
+    }
+  },
+  "speaker_accuracy": {
+    "이효석": {
+      "real": 0,
+      "total": 21
+    },
+    "배경율": {
+      "real": 0,
+      "total": 1
+    },
+    "윤수목": {
+      "real": 0,
+      "total": 1
+    },
+    "정주용": {
+      "real": 0,
+      "total": 1
+    },
+    "배재원": {
+      "real": 0,
+      "total": 1
+    },
+    "엄민용": {
+      "real": 0,
+      "total": 1
+    },
+    "양희창": {
+      "real": 0,
+      "total": 1
+    },
+    "조진표": {
+      "real": 0,
+      "total": 1
+    },
+    "이정윤": {
+      "real": 0,
+      "total": 1
+    },
+    "강정수": {
+      "real": 0,
+      "total": 2
+    },
+    "배재규": {
+      "real": 0,
+      "total": 1
+    },
+    "송종호": {
+      "real": 0,
+      "total": 1
+    },
+    "세상학개론": {
+      "real": 0,
+      "total": 2
+    },
+    "변우철": {
+      "real": 0,
+      "total": 1
+    },
+    "이형수": {
+      "real": 0,
+      "total": 4
+    },
+    "고연수": {
+      "real": 0,
+      "total": 1
+    },
+    "김동훈": {
+      "real": 0,
+      "total": 1
+    },
+    "홍선애": {
+      "real": 0,
+      "total": 1
+    },
+    "박세익": {
+      "real": 0,
+      "total": 1
+    },
+    "장민환": {
+      "real": 0,
+      "total": 1
+    },
+    "박지훈": {
+      "real": 0,
+      "total": 1
+    },
+    "김장열": {
+      "real": 0,
+      "total": 1
+    },
+    "달란트투자": {
+      "real": 0,
+      "total": 1
+    },
+    "강하나": {
+      "real": 0,
+      "total": 1
+    },
+    "월가아재": {
+      "real": 0,
+      "total": 1
+    }
+  },
+  "misclassified_examples": [
+    {
+      "id": "0a0091eb-da28-4c90-9a7a-6fc245cee650",
+      "speaker": "이효석",
+      "stock": "SK하이닉스",
+      "key_quote": "SK하이닉스는 내년에 기대를 해봐도 되지 않을까, 우리나라 증시에서 마지막 남은 희망이라 할까 최후의 보루",
+      "video_title": "Unknown",
+      "published_at": "Unknown",
+      "confidence": "very_high"
+    },
+    {
+      "id": "c409442b-6d6b-4e0c-98c7-712196d75ef3",
+      "speaker": "배경율",
+      "stock": "팔란티어",
+      "key_quote": "저는 팔란티어 지금이 정말 시작이라고 봅니다. 룰포4 지표가 84나 되는 걸 보면 성장성과 수익성이 동시에 확보된 거거든요. 특히 한번 도입한 기업들이 데이터 종속성 때문에 빠져나가기 어려워서 경제적 해자가 엄청 강력해요. AI랑 빅데이터 시장이 폭발적으로 커지고 있는데, 정부기관이랑 대기업들 상대로 사업하는 팔란티어는 앞으로가 더 기대됩니다. 그래서 돈 있으면 계속 사는 거예요.",
+      "video_title": "Unknown",
+      "published_at": "Unknown",
+      "confidence": "very_high"
+    },
+    {
+      "id": "138b6ac5-aa4c-443d-a802-4c52260c691e",
+      "speaker": "이효석",
+      "stock": "ARM",
+      "key_quote": "지난 주말 실적 발표 이후 폭등세를 기록한 ARM이 현재 가장 주목받는 대표 종목입니다. 데이터센터 시장에서 저전력 고효율 프로세서 아키텍처로 기존 x86 대비 확실한 경쟁우위를 구축하고 있고, AI 워크로드 급증에 따른 클라우드 업체들의 ARM 기반 칩 전환이 본격화되면서 성장 모멘텀이 더욱 강화되고 있는 상황입니다.",
+      "video_title": "Unknown",
+      "published_at": "Unknown",
+      "confidence": "very_high"
+    },
+    {
+      "id": "b80074bb-2d64-4a02-80a5-b6e120ac0b3b",
+      "speaker": "이효석",
+      "stock": "테슬라",
+      "key_quote": "트럼프 당선 이후 테슬라가 이렇게까지 주목을 받는 것은 단순한 우연이 아닙니다. 머스크의 정치적 영향력 확대와 자율주행 규제 완화 기대감이 맞물리면서 테슈라의 FSD 상용화가 현실로 다가오고 있기 때문입니다.",
+      "video_title": "Unknown",
+      "published_at": "Unknown",
+      "confidence": "very_high"
+    },
+    {
+      "id": "7024c0ff-56ec-48b3-9bd0-a2be435e8a1c",
+      "speaker": "윤수목",
+      "stock": "마이크로스트래티지",
+      "key_quote": "개인적으로는 아주 잘했다고 생각합니다. 중장기적으로 좋게 본다고 하면 좀 괜찮은 거 같아요",
+      "video_title": "Unknown",
+      "published_at": "Unknown",
+      "confidence": "very_high"
+    },
+    {
+      "id": "a344310e-4cee-4431-a4d1-2af8ef2c1910",
+      "speaker": "이효석",
+      "stock": "SK하이닉스",
+      "key_quote": "AI 혁명에 메모리 반도체가 하는 역할이 굉장히 중요한 역할로 급부상했고 이것이 당분간 유지된다라고 생각하시고 투자하시는게 맞지 않을까",
+      "video_title": "Unknown",
+      "published_at": "Unknown",
+      "confidence": "very_high"
+    },
+    {
+      "id": "6549868d-23ce-4378-9258-9d276855783e",
+      "speaker": "정주용",
+      "stock": "팔란티어",
+      "key_quote": "놓칠 수 없다. 이 팔란티어 모먼트, 팔란티어가 가져온 이 제조업의 어떤 변환기적인 모멘텀을 한국의 스몰 스타트업도 이것들을 잡아야 된다",
+      "video_title": "Unknown",
+      "published_at": "Unknown",
+      "confidence": "very_high"
+    },
+    {
+      "id": "f13c9ca0-d899-4bb3-9c61-849503831329",
+      "speaker": "배재원",
+      "stock": "삼성전자",
+      "key_quote": "비중이 없는 분은 지금이라도 물리더라도 들어가야 된다... 바라보지만 말고 일단 포지션을 넣고 거기서 대응을 해야 된다",
+      "video_title": "Unknown",
+      "published_at": "Unknown",
+      "confidence": "high"
+    },
+    {
+      "id": "9d1d7ec0-65e6-4f2f-ac62-056bce27ed8d",
+      "speaker": "이효석",
+      "stock": "아마존",
+      "key_quote": "아마존이라는 회사가 클라우드 시장 선도와 AI 혁신 기술 수혜, 그리고 광고 사업의 폭발적 성장세까지 더해지면서 어쩌면 미국의 시가총액 1위로 다시 도약할 수도 있을 거 같다",
+      "video_title": "Unknown",
+      "published_at": "Unknown",
+      "confidence": "very_high"
+    },
+    {
+      "id": "08751e43-ce2b-4e8a-9d87-373033cbc71b",
+      "speaker": "이효석",
+      "stock": "페이팔",
+      "key_quote": "페이팔의 멀티플이 점점 더 비싸지기 시작할 거라고 생각을 해요. AI 활용해서 광고 비즈니스를 새로 시작하고 놀던 데이터들을 본격적으로 활용을 하면서 그 플라이휠이 이제부터 본격적으로 돌아가기 시작할 거기 때문에",
+      "video_title": "Unknown",
+      "published_at": "Unknown",
+      "confidence": "very_high"
+    }
+  ],
+  "all_samples": [
+    {
+      "id": "a344310e-4cee-4431-a4d1-2af8ef2c1910",
+      "speaker_id": "b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+      "video_id": "fef2edc1-0515-4e46-839a-8b6644131303",
+      "stock": "SK하이닉스",
+      "signal": "매수",
+      "key_quote": "AI 혁명에 메모리 반도체가 하는 역할이 굉장히 중요한 역할로 급부상했고 이것이 당분간 유지된다라고 생각하시고 투자하시는게 맞지 않을까",
+      "timestamp": "06:30",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.32015+00:00"
+    },
+    {
+      "id": "6549868d-23ce-4378-9258-9d276855783e",
+      "speaker_id": "fd3d7c1c-606f-4e70-8401-3ba037985649",
+      "video_id": "2e2c07ef-1403-42ba-b89c-13c586886381",
+      "stock": "팔란티어",
+      "signal": "매수",
+      "key_quote": "놓칠 수 없다. 이 팔란티어 모먼트, 팔란티어가 가져온 이 제조업의 어떤 변환기적인 모멘텀을 한국의 스몰 스타트업도 이것들을 잡아야 된다",
+      "timestamp": "08:45",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.32015+00:00"
+    },
+    {
+      "id": "0a0091eb-da28-4c90-9a7a-6fc245cee650",
+      "speaker_id": "b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+      "video_id": "a1ca7979-3639-4148-9b71-f94c65238fb6",
+      "stock": "SK하이닉스",
+      "signal": "매수",
+      "key_quote": "SK하이닉스는 내년에 기대를 해봐도 되지 않을까, 우리나라 증시에서 마지막 남은 희망이라 할까 최후의 보루",
+      "timestamp": "25:30",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.717018+00:00"
+    },
+    {
+      "id": "f13c9ca0-d899-4bb3-9c61-849503831329",
+      "speaker_id": "7fef30a4-a248-44d6-99b9-02bda6f47eb2",
+      "video_id": "2f1794a4-01f6-4ece-a5f7-01882e107aa9",
+      "stock": "삼성전자",
+      "signal": "매수",
+      "key_quote": "비중이 없는 분은 지금이라도 물리더라도 들어가야 된다... 바라보지만 말고 일단 포지션을 넣고 거기서 대응을 해야 된다",
+      "timestamp": "7:00",
+      "confidence": "high",
+      "created_at": "2026-03-01T06:05:29.880221+00:00"
+    },
+    {
+      "id": "9d1d7ec0-65e6-4f2f-ac62-056bce27ed8d",
+      "speaker_id": "b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+      "video_id": "e337b24a-c025-4e70-990b-c43cf925ec2c",
+      "stock": "아마존",
+      "signal": "매수",
+      "key_quote": "아마존이라는 회사가 클라우드 시장 선도와 AI 혁신 기술 수혜, 그리고 광고 사업의 폭발적 성장세까지 더해지면서 어쩌면 미국의 시가총액 1위로 다시 도약할 수도 있을 거 같다",
+      "timestamp": "01:15",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.86294+00:00"
+    },
+    {
+      "id": "08751e43-ce2b-4e8a-9d87-373033cbc71b",
+      "speaker_id": "b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+      "video_id": "7737dbab-6647-44db-aaa7-324df56eccf8",
+      "stock": "페이팔",
+      "signal": "매수",
+      "key_quote": "페이팔의 멀티플이 점점 더 비싸지기 시작할 거라고 생각을 해요. AI 활용해서 광고 비즈니스를 새로 시작하고 놀던 데이터들을 본격적으로 활용을 하면서 그 플라이휠이 이제부터 본격적으로 돌아가기 시작할 거기 때문에",
+      "timestamp": "34:45",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.636647+00:00"
+    },
+    {
+      "id": "126503f4-cfde-432e-94ac-c38d459adbeb",
+      "speaker_id": "6fc4eef6-606f-4715-8179-c8a51cf7a2b9",
+      "video_id": "4327d538-c998-4367-b39a-aaabeb9029cf",
+      "stock": "알테오젠",
+      "signal": "매수",
+      "key_quote": "알테오젠의 경우 키트루다 피하주사 제형 개발 성공 확률이 매우 높고, 핵심 기술력과 글로벌 파트너십을 바탕으로 1조원 이상의 현금 창출 가능성을 고려할 때 숫자적인 부분에서는 리스크가 거의 없다고 보고 있어요",
+      "timestamp": "05:45",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.717018+00:00"
+    },
+    {
+      "id": "c409442b-6d6b-4e0c-98c7-712196d75ef3",
+      "speaker_id": "a11d09f1-b160-489c-b7c6-2625b471a82d",
+      "video_id": "4527d27f-ef23-41ec-8306-17d433e2df43",
+      "stock": "팔란티어",
+      "signal": "매수",
+      "key_quote": "저는 팔란티어 지금이 정말 시작이라고 봅니다. 룰포4 지표가 84나 되는 걸 보면 성장성과 수익성이 동시에 확보된 거거든요. 특히 한번 도입한 기업들이 데이터 종속성 때문에 빠져나가기 어려워서 경제적 해자가 엄청 강력해요. AI랑 빅데이터 시장이 폭발적으로 커지고 있는데, 정부기관이랑 대기업들 상대로 사업하는 팔란티어는 앞으로가 더 기대됩니다. 그래서 돈 있으면 계속 사는 거예요.",
+      "timestamp": "32:15",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.404078+00:00"
+    },
+    {
+      "id": "76fbc42a-2b78-4a2f-9bc4-d3cb988d9095",
+      "speaker_id": "e6bb7f03-146d-4538-adbf-bccbec47a43d",
+      "video_id": "d1bdb604-1a77-400c-903f-c8274f0c722f",
+      "stock": "버티브",
+      "signal": "매수",
+      "key_quote": "AI 서버는 기존 공냉식으론 한계가 있어서 액체 냉각 시스템을 반드시 적용해야 하는데, 이게 버티브에게는 기존 대비 훨씬 더 비싸고 마진이 높은 프리미엄 제품을 판매할 수 있는 절호의 기회가 되고 있습니다.",
+      "timestamp": "28:45",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.476778+00:00"
+    },
+    {
+      "id": "c9d04f21-5570-4d15-b01f-0d8d06412b7b",
+      "speaker_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "video_id": "ffc64461-4859-4f38-898e-519b6ecaf2b2",
+      "stock": "삼성전자",
+      "signal": "매수",
+      "key_quote": "삼성전자 20만 원은 새로운 출발점에 불과하다고 봅니다. HBM4 세계 최초 양산으로 메모리 시장을 선도하고, 파운드리 사업의 흑자전환이 앞당겨지면서 실적 개선이 가시화되고 있습니다. 여기에 자사주 소각까지 더해져 주주가치 제고 노력도 돋보입니다. 이런 다양한 긍정 요인들을 고려할 때, 삼성전자는 투자자 포트폴리오에 당연히 포함되어야 할 필수 종목이라고 확신합니다.",
+      "timestamp": "3:52",
+      "confidence": "high",
+      "created_at": "2026-02-28T09:22:07.214558+00:00"
+    },
+    {
+      "id": "60723ec6-b22a-4668-aa90-687540a23830",
+      "speaker_id": "b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+      "video_id": "1b69ce70-0e8c-4c21-b2f9-707cdc43ed0b",
+      "stock": "마이크로소프트",
+      "signal": "매수",
+      "key_quote": "포춘 500대 기업 중 60%가 마이크로소프트 365 코파일럿을 도입했다고 하는데, 이는 단순한 기술 시연을 넘어서 실제 기업 현장에서 AI가 생산성 향상과 비용 절감 효과를 입증했다는 의미입니다. 특히 대기업들이 이렇게 빠른 속도로 채택하고 있다는 것은 마이크로소프트의 AI 기술력과 기업용 솔루션으로서의 완성도가 검증되었음을 보여주는 강력한 지표라고 봅니다.",
+      "timestamp": "82:15",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.562041+00:00"
+    },
+    {
+      "id": "f5a73453-15dc-4cb5-bd0e-1da5eea7fb23",
+      "speaker_id": "fcc6738d-49b6-48f0-9ec7-b20ec5594536",
+      "video_id": "98a76d69-6bb2-4d93-8168-4b063da57812",
+      "stock": "현대차",
+      "signal": "매수",
+      "key_quote": "올해는 저는 피지컬 AI 해라고 보고 있기 때문에 로봇과 자율주행이 두 가지 축이 가장 크다고 보고요. 그 두 가지 축에서 현대차 그룹주가 1순위",
+      "timestamp": "0:06",
+      "confidence": "high",
+      "created_at": "2026-02-28T13:45:17.071477+00:00"
+    },
+    {
+      "id": "8fc51f20-fc5d-40de-8571-25500daeae1e",
+      "speaker_id": "b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+      "video_id": "d96e7b47-0771-4401-bf34-02d5d50639a1",
+      "stock": "엔비디아",
+      "signal": "매수",
+      "key_quote": "GPT4는 최소한 한 2조개 정도의 파라미터는 될 것 같아요. 그러면 엔비디아 GPU가 10만 개는 필요하겠다",
+      "timestamp": "12:30",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:47.119997+00:00"
+    },
+    {
+      "id": "9409a281-b484-4952-945d-588b5fca8b08",
+      "speaker_id": "b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+      "video_id": "fa0e6020-8485-43e1-81c4-aacd1891d534",
+      "stock": "아마존",
+      "signal": "매수",
+      "key_quote": "아마존은 해자가 있거든요. 아마존이 지금 하고 있는 거를 다른 어떤 회사가 할 수가 없어요",
+      "timestamp": "09:30",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.562041+00:00"
+    },
+    {
+      "id": "f8f16e7d-c3b9-42f8-8752-f3d44ee49a34",
+      "speaker_id": "0b96cbb2-0d82-4d70-90d3-f7e79c7e09be",
+      "video_id": "44933662-1a45-44d2-ad61-512e2ab61b99",
+      "stock": "테슬라",
+      "signal": "매수",
+      "key_quote": "세이프 드라이버가 내리는 순간 전 이건 시장에 대한 명확한 신호라고 봐요. 자율주행 시장과 로봇 택시 시장을 이제는 거침없이 확대할 수 있다",
+      "timestamp": "25:30",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.86294+00:00"
+    },
+    {
+      "id": "70a3fff6-e899-4c28-bb98-4396ce48f0a9",
+      "speaker_id": "b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+      "video_id": "7bcdc128-70bc-479c-9d6e-01c99a789a7a",
+      "stock": "엔페이즈 에너지",
+      "signal": "매수",
+      "key_quote": "인페이지 에너지가 그런 측면에서 굉장히 잘하고 있어요. 지금 구간에서는 충분히 더 업사이드를 노려볼 수 있다고 생각이 들어요",
+      "timestamp": "26:30",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.789125+00:00"
+    },
+    {
+      "id": "ea49a319-181d-4fec-ac91-063be14c73ab",
+      "speaker_id": "d5ea4443-d1cb-4927-aabc-68061f59a3e0",
+      "video_id": "8bc8b1e0-aea1-4a66-8e7f-4efc9a3f9a34",
+      "stock": "엔비디아",
+      "signal": "매수",
+      "key_quote": "GPU 설계 분야에서 독보적 지위를 확보한 엔비디아에 20% 투자를 권합니다. AI 반도체 생태계에서 SK하이닉스의 HBM 메모리, TSMC의 파운드리 생산, ASML의 극자외선 노광장비와 함께 각각 핵심 영역을 독점하고 있는 4대 필수 기업 중 하나로, 대체 불가능한 기술력과 시장 지배력을 바탕으로 AI 혁신의 중심축 역할을 지속할 것으로 예상됩니다.",
+      "timestamp": "0:05",
+      "confidence": "high",
+      "created_at": "2026-03-02T07:07:38.808341+00:00"
+    },
+    {
+      "id": "829d66f4-8f8e-4428-a188-8d7c807638b5",
+      "speaker_id": "b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+      "video_id": "21ef25b1-44fd-469a-9361-328513c59b30",
+      "stock": "ARM홀딩스",
+      "signal": "매수",
+      "key_quote": "자체 설계 칩이 살아 있는 한 계속해서 확대되는 한 암은 다시 저는 전고점 충분히 넘어설 수 있다고 생각하고",
+      "timestamp": "62:30",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:45.986399+00:00"
+    },
+    {
+      "id": "2abcb97c-c137-44cf-8fd7-227f97eab056",
+      "speaker_id": "b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+      "video_id": "c3c20a33-8415-49cb-9f82-48590d561514",
+      "stock": "테슬라",
+      "signal": "매수",
+      "key_quote": "최근에 계속 강조하고 있는 이 테슬라 쪽으로 분위기가 여러가지 이유들이 있지만 분위기가 좀 길고 있다",
+      "timestamp": "16:45",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.636647+00:00"
+    },
+    {
+      "id": "9a3e7a35-9d30-48ec-92e8-217d2e9eac59",
+      "speaker_id": "b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+      "video_id": "e71361c7-671c-46fd-82c5-3f597dceea09",
+      "stock": "테슬라",
+      "signal": "매수",
+      "key_quote": "테슬라 주가가 상당히 좋을 것 같아서 매수하는 건데, 특히 로봇택시 서비스가 본격 운행되면서 단순한 자동차 회사에서 모빌리티 플랫폼 기업으로 변신하고 있거든요. 이게 기존 자동차 업체들과는 완전히 다른 수익 구조를 만들어낼 거라고 봅니다.",
+      "timestamp": "02:30",
+      "confidence": "high",
+      "created_at": "2026-03-04T06:48:46.86294+00:00"
+    },
+    {
+      "id": "21a5d973-5c5c-44cf-ace2-cbe594b36180",
+      "speaker_id": "1978ae5f-dc38-4d6a-8b8f-d5adc46309e1",
+      "video_id": "3ae2512d-23f5-4c95-97bf-42e1cf6679bf",
+      "stock": "한미반도체",
+      "signal": "매수",
+      "key_quote": "K반도체 장비 2.0 시대에 진입했고 글로벌 서플라이 체인에 들어가 마진 30% 40% 나옵니다",
+      "timestamp": "01:15",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:47.019148+00:00"
+    },
+    {
+      "id": "138b6ac5-aa4c-443d-a802-4c52260c691e",
+      "speaker_id": "b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+      "video_id": "cdaa5197-b823-49b8-b945-ddd385c73e4b",
+      "stock": "ARM",
+      "signal": "매수",
+      "key_quote": "지난 주말 실적 발표 이후 폭등세를 기록한 ARM이 현재 가장 주목받는 대표 종목입니다. 데이터센터 시장에서 저전력 고효율 프로세서 아키텍처로 기존 x86 대비 확실한 경쟁우위를 구축하고 있고, AI 워크로드 급증에 따른 클라우드 업체들의 ARM 기반 칩 전환이 본격화되면서 성장 모멘텀이 더욱 강화되고 있는 상황입니다.",
+      "timestamp": "17:30",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.86294+00:00"
+    },
+    {
+      "id": "e8502c90-9459-43c0-8b61-80ec6ca59ce9",
+      "speaker_id": "b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+      "video_id": "8b7ba14c-c532-4058-9264-df0b2013ddaf",
+      "stock": "테슬라",
+      "signal": "매수",
+      "key_quote": "테슬라는 자동차 회사가 아니라 소프트웨어 회사로 봐야 하며, FSD는 구독 경제로 안착하면 월 20만원씩 계속 받을 수 있는 안정적 수익모델이다",
+      "timestamp": "47:15",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.32015+00:00"
+    },
+    {
+      "id": "0459e8ad-a5cd-4b43-b886-8166bbc5c99c",
+      "speaker_id": "b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+      "video_id": "fe0e0575-d7ab-4f71-b2df-2d6b3b63712c",
+      "stock": "테슬라",
+      "signal": "매수",
+      "key_quote": "테슬라만큼 진심으로 기후변화 대처에 노력하고 있는 회사는 없는 것 같습니다. 전기차 시장을 개척하며 실제로 내연기관 자동차 시대를 끝내가고 있고, 배터리 기술 혁신과 태양광 에너지 사업까지 통합적으로 추진하면서 지구 환경을 위한 실질적 변화를 만들어내고 있어요.",
+      "timestamp": "25:30",
+      "confidence": "high",
+      "created_at": "2026-03-04T06:48:46.86294+00:00"
+    },
+    {
+      "id": "b80074bb-2d64-4a02-80a5-b6e120ac0b3b",
+      "speaker_id": "b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+      "video_id": "76442f8c-d249-4209-8237-b97c34aa1b1b",
+      "stock": "테슬라",
+      "signal": "매수",
+      "key_quote": "트럼프 당선 이후 테슬라가 이렇게까지 주목을 받는 것은 단순한 우연이 아닙니다. 머스크의 정치적 영향력 확대와 자율주행 규제 완화 기대감이 맞물리면서 테슈라의 FSD 상용화가 현실로 다가오고 있기 때문입니다.",
+      "timestamp": "25:30",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.233682+00:00"
+    },
+    {
+      "id": "b93bfbe9-9179-472e-8a0e-64a99f648672",
+      "speaker_id": "b9496a5f-06fa-47eb-bc2d-47060b095534",
+      "video_id": "b1408bd1-07fc-4bd0-bc0e-fa6626b08998",
+      "stock": "서클",
+      "signal": "매수",
+      "key_quote": "서클의 상승세가 어마어마합니다. 스테이블 코인 시장 규모가 3년 동안 10배 이상 성장한다면 스테이블 코인이 미국 국채의 가장 큰 수요처로 떠오르는 것도 뭐지 않은 거 같아요.",
+      "timestamp": "N/A",
+      "confidence": "high",
+      "created_at": "2026-03-02T09:39:20.476656+00:00"
+    },
+    {
+      "id": "0f0c831a-625c-49fe-aa93-04a32c4fd1ac",
+      "speaker_id": "0b96cbb2-0d82-4d70-90d3-f7e79c7e09be",
+      "video_id": "c614e75b-ec09-4c08-a038-8d5304e0e918",
+      "stock": "테슬라",
+      "signal": "매수",
+      "key_quote": "AI 매출이 재무제표에 확인되는 순간 테슬라의 주가에는 상한선이 없다고 봅니다. 전기차 제조업체에서 AI 기술 기업으로의 완전한 변신이 이뤄지면, 기존의 밸류에이션 모델로는 측정할 수 없는 새로운 차원의 성장이 시작될 것입니다.",
+      "timestamp": "09:45",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.562041+00:00"
+    },
+    {
+      "id": "661f7a53-6b9d-4845-aee3-57647454e4c8",
+      "speaker_id": "c607122d-0acf-4576-aa1d-c572d2c744ec",
+      "video_id": "29af6860-6687-4ee4-b66f-6a7a98869679",
+      "stock": "엔비디아",
+      "signal": "매수",
+      "key_quote": "AI 시대에 제대로 돈 버는 갭이 두 개밖에 없다고 생각해요. 엔비디아하고 팔란티어예요. 특히 엔비디아는 AI용 GPU 시장에서 80% 넘는 압도적 점유율을 가지고 있고, H100 같은 고성능 칩은 거의 독점 수준이죠. 최근 실적 보면 데이터센터 매출이 폭발적으로 늘고 있고, 앞으로도 AI 인프라 확산으로 수요가 계속 늘어날 것 같아요.",
+      "timestamp": "01:30",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:47.019148+00:00"
+    },
+    {
+      "id": "88a34cff-ae74-4375-8393-f81ca6552b62",
+      "speaker_id": "88892b60-9e6b-4390-ba3b-c6d1453b3cef",
+      "video_id": "79e8893c-c1c0-4adc-b846-017c1998d81f",
+      "stock": "SK하이닉스",
+      "signal": "매수",
+      "key_quote": "빅테크 매그니피센트 7 전체가 SK하이닉스에 HBM 커스텀 제품을 요청했다고 부사장이 공식 발표했습니다. 이는 글로벌 AI 반도체 시장에서 우리 회사의 독보적 기술력과 시장 지배력을 확실히 입증하는 결정적 순간입니다.",
+      "timestamp": "58:15",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:47.119997+00:00"
+    },
+    {
+      "id": "7024c0ff-56ec-48b3-9bd0-a2be435e8a1c",
+      "speaker_id": "feba5f7c-1985-420c-8ba8-ea2127b6cd55",
+      "video_id": "8c76f6eb-4255-47e0-8c49-0525da3c117a",
+      "stock": "마이크로스트래티지",
+      "signal": "매수",
+      "key_quote": "개인적으로는 아주 잘했다고 생각합니다. 중장기적으로 좋게 본다고 하면 좀 괜찮은 거 같아요",
+      "timestamp": "25:30",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:47.119997+00:00"
+    },
+    {
+      "id": "bb6deb68-005b-489c-9302-1ac7cd050453",
+      "speaker_id": "3508abce-70e0-4eaa-a0d4-686b61071dd9",
+      "video_id": "c2952626-8842-4561-b297-468f6733d8f7",
+      "stock": "한국금융지주",
+      "signal": "매수",
+      "key_quote": "한국 금융 지주와 키움 증권을 강력히 추천드리고 있는데요. 한국금융지주는 지난해 연간 2조원 순익 달성으로 견고한 실적을 보여주고 있고, 금융 섹터가 올해 연초 대비 93% 상승하며 반도체를 뛰어넘는 수익률을 기록하고 있어 매우 매력적인 투자 기회라고 판단됩니다.",
+      "timestamp": "7:58",
+      "confidence": "high",
+      "created_at": "2026-03-01T06:05:29.967624+00:00"
+    },
+    {
+      "id": "a12ab318-7173-4365-8d4d-140ab5b54506",
+      "speaker_id": "5783838f-af5f-4e74-bcbf-bbc20141b199",
+      "video_id": "900806f6-434f-4913-82c7-2b69a80284d0",
+      "stock": "신세계",
+      "signal": "매수",
+      "key_quote": "신세계가 여전히 저렴한 상황에서 추가 상승 여력이 충분하다고 판단됩니다. 외국인 관광객이 코로나 이전 수준을 회복하고 중국인 관광객 비중이 40% 이상으로 늘어나면서 면세점 및 백화점 매출이 크게 개선되고 있습니다. 특히 중국인 무비자 입국 정책과 중일 외교갈등으로 인한 한국 관광 선호도 증가가 실적 개선을 뒷받침하고 있어 매수 관점을 유지합니다.",
+      "timestamp": "1:00",
+      "confidence": "high",
+      "created_at": "2026-03-01T06:05:30.108373+00:00"
+    },
+    {
+      "id": "5a8d8634-625b-4e6a-b93b-47380dbe329c",
+      "speaker_id": "d65055b9-1345-4baa-8104-b3d8c7f28d4c",
+      "video_id": "235ea3ae-5b54-4f6b-9a12-0f57da76d919",
+      "stock": "현대차",
+      "signal": "매수",
+      "key_quote": "현대차 지금이라도 사야 돼요라고 물어보면 저는 예스. 의미 있는 거래량을 터트렸다는 거는 한 2, 3일이 쉬더라도 다시 고점을 뚫겠다",
+      "timestamp": "14:00",
+      "confidence": "high",
+      "created_at": "2026-03-01T06:05:30.370185+00:00"
+    },
+    {
+      "id": "6b52051b-376d-462c-be2d-ff48e7f90b48",
+      "speaker_id": "88892b60-9e6b-4390-ba3b-c6d1453b3cef",
+      "video_id": "75a3e88b-0b4b-4d8b-861b-51d86ce7c258",
+      "stock": "SK하이닉스",
+      "signal": "매수",
+      "key_quote": "10월 쯤부터는 국내 특히나 삼성전자 SK 하이닉스는 매수해서 들어가도 되지 않을까 생각을 하고 있고요",
+      "timestamp": "26:45",
+      "confidence": "high",
+      "created_at": "2026-03-04T06:48:47.119997+00:00"
+    },
+    {
+      "id": "190d3e8f-a0f3-4f40-a4c9-d6f710d699d5",
+      "speaker_id": "a4d59e2f-71ae-4c7c-be98-0ba091d762ef",
+      "video_id": "faf1d517-a64f-4067-aba8-272a4edb5b43",
+      "stock": "삼성전자",
+      "signal": "매수",
+      "key_quote": "삼성전자가 HBM3 양산 성공 발표만 나와도 주가는 크게 오를 수 있다고 봅니다. 마이크론이 HBM 성과로 전고점을 회복한 것처럼, 삼성도 엔비디아 퀄테스트 통과와 함께 파운더리 점유율까지 확대되면 상당한 상승 여력이 있어 보입니다.",
+      "timestamp": "15:30",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.562041+00:00"
+    },
+    {
+      "id": "f7d94844-34fd-4ce2-81e5-0c230d3f4534",
+      "speaker_id": "775df8a1-41c3-4ca3-87b6-35b6e7a1c612",
+      "video_id": "24869c45-f547-41f8-9f38-44bc133a0977",
+      "stock": "삼성바이오로직스",
+      "signal": "매수",
+      "key_quote": "저는 목표 주가로 115만 원 정도까지 충분히 올라갈 수 있지 않을까 이제 요런 생각을 가지고 있습니다",
+      "timestamp": "42:15",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:47.119997+00:00"
+    },
+    {
+      "id": "bf01a4e0-e1c3-48c4-a4ba-a0184475e451",
+      "speaker_id": "b9496a5f-06fa-47eb-bc2d-47060b095534",
+      "video_id": "38cae4f3-38f6-4d59-86f4-a647ebed7de3",
+      "stock": "테슬라",
+      "signal": "매수",
+      "key_quote": "테슬라는 자동차 회사를 넘어선 모빌리티 회사로, 애플처럼 강력한 브랜드 파워를 바탕으로 다양한 이동수단 시장에서 1위를 차지할 수 있어 현재보다 5~10배 성장 가능하다고 판단해 투자했습니다.",
+      "timestamp": "미상",
+      "confidence": "high",
+      "created_at": "2026-03-02T07:11:29.628972+00:00"
+    },
+    {
+      "id": "a18c1cad-82bd-4604-b2a7-ac17680e1841",
+      "speaker_id": "b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+      "video_id": "61b3aba6-71d1-4426-be30-66d29cf14bd5",
+      "stock": "이스트 웨스트 뱅크",
+      "signal": "매수",
+      "key_quote": "이스턴트 뱅크라고 주로 이제 아시아계인 쪽 대상으로 해서 영업을 하는 은행이 있는데이 은행은 또 신규로 매수를 했습니다",
+      "timestamp": "19:10",
+      "confidence": "high",
+      "created_at": "2026-03-04T06:48:46.86294+00:00"
+    },
+    {
+      "id": "b2fc3fdd-422e-4611-ad17-2a8be169d68d",
+      "speaker_id": "e59ed6f5-7a8d-4111-af1c-502ad3344e79",
+      "video_id": "bee43acd-68d6-4247-98bd-1c1365c8815d",
+      "stock": "LG화학",
+      "signal": "매수",
+      "key_quote": "LG화학 강력 추천드리는 바입니다. 행동주의 펀드들이 열받아 있어서 주가 상승 모멘텀이 형성되고 있고, 기업 가치 개선 압력이 지속적으로 가해지고 있는 상황입니다.",
+      "timestamp": "36:26",
+      "confidence": "high",
+      "created_at": "2026-03-01T06:05:30.177407+00:00"
+    },
+    {
+      "id": "b33e9c79-8585-4ec4-97cf-103ed14059d1",
+      "speaker_id": "88892b60-9e6b-4390-ba3b-c6d1453b3cef",
+      "video_id": "33d1cb70-7e31-4b3d-baf3-d499deb0ebd9",
+      "stock": "TSMC",
+      "signal": "매수",
+      "key_quote": "TSMC는 3나노 이하 초미세공정에서 완전히 독보적인 위치에 올라섰습니다. 삼성이나 인텔 같은 경쟁사들이 따라오기 힘든 수준의 기술적 해자를 구축했고, AI 반도체 폭증 수요와 맞물려 엔비디아, 애플 같은 빅테크들이 줄 서서 기다리는 상황이죠. 내년 50조원 설비투자로 3나노 양산능력까지 대폭 확장하니 이 독점 지위는 더욱 공고해질 것 같습니다.",
+      "timestamp": "35:20",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.947655+00:00"
+    },
+    {
+      "id": "cfdbcdb6-3827-47f7-8b57-7bc1896b0b81",
+      "speaker_id": "b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+      "video_id": "912a3808-8336-45f8-8201-9ba2ffae95e5",
+      "stock": "구글",
+      "signal": "매수",
+      "key_quote": "재미나이 3.0 사실 너무 뛰어납니다. 너무 뛰어나고 실제로 지금 그 채치 비싼 요금제보다 낫다라는 평도 있습니다",
+      "timestamp": "25:30",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.789125+00:00"
+    },
+    {
+      "id": "178b8120-5228-4f13-839b-4550484a2148",
+      "speaker_id": "b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+      "video_id": "c3b18194-38bc-4b25-98ab-d95d1e8dfbfe",
+      "stock": "마이크로스트래티지",
+      "signal": "매수",
+      "key_quote": "올해 이게 두배 갈 때 비트코인 두 배 갈 때 얘는 세 배 이상을 할 거라고 전 생각하고요",
+      "timestamp": "08:45",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.636647+00:00"
+    },
+    {
+      "id": "7ed86fea-e0bb-4604-b0c1-3ba7788966c1",
+      "speaker_id": "8234cd75-1d0d-458c-b01c-62080c7d91e3",
+      "video_id": "9236a7e9-8a4b-4291-b6ef-19cc83991e5e",
+      "stock": "삼성전자",
+      "signal": "매수",
+      "key_quote": "현재 투자 우선순위는 메모리 반도체 섹터입니다. 하이닉스, 삼성전자, 샌디스크, 마이크론 이 네 종목 중에서는 반드시 하나는 포트폴리오에 편입해야 할 시점이라고 판단됩니다. 특히 AI와 데이터센터 수요 증가로 인한 메모리 반도체의 구조적 성장 모멘텀이 지속될 것으로 예상되며, 이 중에서도 삼성전자는 기술력과 시장 점유율 측면에서 가장 안정적인 투자처라고 봅니다.",
+      "timestamp": "13:28",
+      "confidence": "high",
+      "created_at": "2026-03-01T06:05:30.037417+00:00"
+    },
+    {
+      "id": "72495faf-f399-42ca-a2db-870ca2a2bbb0",
+      "speaker_id": "b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+      "video_id": "3eea0456-b77c-4cc5-a2a5-00ea51346adc",
+      "stock": "SK하이닉스",
+      "signal": "매수",
+      "key_quote": "SK 하이닉스는 작년 10월에 개발 완료했고 지금 2월부터 양산하고 원시 수율이 거의 70% 가까이 나오는 걸로 알고 있습니다",
+      "timestamp": "08:30",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.947655+00:00"
+    },
+    {
+      "id": "5115e97d-ffbf-4725-8c7f-e2b51717bff5",
+      "speaker_id": "b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+      "video_id": "b0a020e9-e657-4556-bdb0-b40686ef88ea",
+      "stock": "팔란티어",
+      "signal": "매수",
+      "key_quote": "팔란티어 주주분들 모두 축하드리고요. 매출 증가율 자체가 가속화되고 있는데, 특히 미국 상업 부문이 64% 성장하면서 정부 의존도를 벗어나 민간 시장 확장에 성공했습니다. 3분기 실적이 시장 예상을 크게 웃돌며 AI 데이터 분석 솔루션의 진가를 보여주고 있어 매수 시그널로 판단됩니다.",
+      "timestamp": "19:20",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.717018+00:00"
+    },
+    {
+      "id": "62aff156-9006-4a74-a5bb-93e3006d695e",
+      "speaker_id": "b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+      "video_id": "75ded159-122f-45d0-b790-eb6b44a878fb",
+      "stock": "테슬라",
+      "signal": "매수",
+      "key_quote": "언제나 테슬라의 주가는 가지고 있어야 된다라고 늘 생각하지만 특히나 요즘에는 어 좀 더 그런 생각을 합니다",
+      "timestamp": "15:45",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.476778+00:00"
+    },
+    {
+      "id": "44c80f18-b78e-483f-ab33-8ad79832931b",
+      "speaker_id": "88892b60-9e6b-4390-ba3b-c6d1453b3cef",
+      "video_id": "163a2cb1-4a6b-4032-950a-04ff6be71f13",
+      "stock": "SK하이닉스",
+      "signal": "매수",
+      "key_quote": "SK 하이닉스는 미국 테크하고 같이 움직일 것 같아요. 당분간 SK 하이닉스가 제일 좋은 국내에서는 제일 좋은 투자처가 될 가능성이 높고요",
+      "timestamp": "35:20",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.32015+00:00"
+    },
+    {
+      "id": "b97347cb-f51c-4180-9717-e11ebc8cccef",
+      "speaker_id": "4c58cef4-0c79-4db1-8b8a-6a8b5ce1be10",
+      "video_id": "93c60878-e2d3-4bc2-bcd2-4d32d0a3bd2c",
+      "stock": "현대건설",
+      "signal": "매수",
+      "key_quote": "SMR이 올해 가장 강력한 섹터가 될 것입니다. AI 데이터센터의 폭발적인 전력 수요 증가와 함께 구글, 아마존 등 빅테크 기업들이 SMR에 대규모 투자를 단행하고 있으며, 트럼프 행정부의 원전 용량 3배 확대 정책까지 더해져 현대건설과 같은 원전 건설 전문기업들에게는 절호의 기회가 열리고 있습니다.",
+      "timestamp": "00:33",
+      "confidence": "high",
+      "created_at": "2026-03-02T07:07:38.808305+00:00"
+    },
+    {
+      "id": "0418488a-7cb6-4630-af30-16d706b923fc",
+      "speaker_id": "6628ab1f-d214-4c5c-89e3-21ced59c0d57",
+      "video_id": "326af6e2-45f6-45de-a0a3-db094f41ffde",
+      "stock": "리커전",
+      "signal": "매수",
+      "key_quote": "리커전은 엔비디아가 640억원을 투자한 기업으로 AI 신약개발에서 선두가 되어 버린 기업이다",
+      "timestamp": "19:45",
+      "confidence": "very_high",
+      "created_at": "2026-03-04T06:48:46.947655+00:00"
+    },
+    {
+      "id": "cd54423a-c0bf-469d-951c-4a6e476a363c",
+      "speaker_id": "a80f6cdf-e53a-42a9-95ea-1c5ba9c7a986",
+      "video_id": "cdbf9add-e577-4efa-91d0-4b411fecff2a",
+      "stock": "엔비디아",
+      "signal": "매수",
+      "key_quote": "엔비디아가 2분기 실적 발표에서 매출 500억 달러를 돌파하며 시장의 모든 예상치를 완전히 뛰어넘었습니다. 데이터센터 부문이 전년 대비 88% 폭증하고 전체 매출이 101% 성장하는 등 AI 반도체 슈퍼사이클의 핵심 수혜주로서 압도적인 실적을 보여줬어요.",
+      "timestamp": "04:45",
+      "confidence": "very_high",
+      "created_at": "2026-03-03T12:41:14.702107+00:00"
+    }
+  ]
+}
