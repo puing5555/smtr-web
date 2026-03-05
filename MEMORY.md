@@ -1,6 +1,6 @@
 # MEMORY.md - 장기 기억
 
-_Last updated: 2026-02-28 16:14 (GMT+7)_
+_Last updated: 2026-03-05 06:30 (GMT+7)_
 
 ## 👤 유저 정보
 - **이름:** Jay Jay (Mario)
@@ -14,123 +14,69 @@ _Last updated: 2026-02-28 16:14 (GMT+7)_
 - **코드 경로:** C:\Users\Mario\work\invest-sns
 - **라이브 URL:** https://puing5555.github.io/invest-sns/
 - **GitHub:** puing5555/invest-sns
-- **프론트엔드:** Next.js (55페이지, GitHub Pages 배포)
-- **DB:** Supabase (90개 시그널)
-- **프롬프트:** prompts/pipeline_v9.md (V9.1 고도화 완료, 규칙 31개)
+- **프론트엔드:** Next.js (135+ 페이지, GitHub Pages 배포)
+- **DB:** Supabase — **804개 시그널** (2026-03-05 확인)
+- **Supabase URL:** arypzhotxflimroprmdk.supabase.co (⚠️ 이전 lfymoyaoeq... 사용 금지)
+- **프롬프트:** prompts/pipeline_v10.md (V10.10)
 - **시그널 타입:** 매수/긍정/중립/경계/매도 (한글 5단계만)
-- **최신 태그:** v1.3-rollback-fixed
+- **시그널 분포:** 매수 491, 매도 168, 중립 87, 경계 48, 긍정 10
 
 ### ⚠️ 절대 금지
 - **177개/SMTR/guru_tracker 참조 금지** — 이미 삭제된 레거시 데이터
 - STRONG_BUY 8단계 시그널 사용 금지
 - GPT-4o-mini 추출 + 별도 검증 파이프라인 사용 금지
+- **이효석 692개 INSERT 다시 묻지 마라** — 이미 승인+완료됨
 
-### 완료된 작업
+### DB 시그널 히스토리
+- 155개 → 248개 → 833개 (이효석 692개 INSERT) → **804개** (불량 29개 삭제, 커밋 ecbb4f5)
+
+### 완료된 작업 (~2026-03-03)
 - 프로젝트 정리 (smtr-web, guru_tracker, 177개 JSON 삭제)
 - 공시 대시보드 v2 출시 (4탭 구조 + 토스 스타일 UI)
 - Supabase 테이블 설계 (11개 테이블 + RLS + API 뷰)
-- GitHub Pages 배포 완료 (55페이지)
-- v1.2-deploy-fix, v1.3-rollback-fixed 태그
+- GitHub Pages 배포
+- 해외종목 통화표시 (원→$)
+- 세상학개론 81개, 달란트투자 4개 시그널 INSERT
+- QA 리포트 17항목 점검
+- 채널 리서치 1차 50개 + 2차 250개 = 300개 조사, 142개 적합 선별
 
-### 완료된 추가 작업 (2026-02-28)
-- V9.1 고도화 완료 (5회 연속 문제 0개, 규칙 31개: V9 28개 + V9.1 3개)
-- 부읽남TV 7시그널 + 이효석 7시그널 추출/INSERT
-- 인플루언서 탭: 기간필터→차트연동, SignalDetailModal 모달, 호버 툴팁
-- 내 종목 전체탭: limit 50으로 확대, 45개 시그널 전부 표시
-- 삼성전자 주가: yfinance 실데이터 확인 (216,500원 = 실제)
+### 완료된 작업 (2026-03-04)
+- **CTO 시스템 v3** — Opus(CTO) + Sonnet(Dev/QA/Patrol) 체계
+- **이효석 아카데미 692개** — 원본793→정제692 (QA 98.4%) → **INSERT 완료** → 불량29개 삭제
+- **V10.9→V10.10 프롬프트** — A/B 테스트 V10.9 100% 승리, V10.10 적용
+- **가격 데이터** — UUID 784개 가비지 제거, 152개 종목 최신가격, 차트 155개
+- **수익률 데이터** — signal ID 키로 750개 return_pct 추가
+- **공시 스펙 v2** — DART OpenAPI 전환 계획 (disclosure_tech_spec_v2.md)
+- **공시 탭 배포** — 시드 20건 + 토스 스타일 UI + SQL
+- **올랜도 킴 채널** — 345→189개 영상 필터링, VIDEO_FILTER_RULES.md
+- **스피커 slug 매핑** — 70명 전수 커버
+- **게스트 스피커 42명** 등록, 242개 시그널 speaker 수정
+- **SPA 404 fallback** 추가 (커밋 ab7f929)
+- **벤치마킹 리서치** — 16개 해외 사이트 조사 (docs/benchmarking_report.md)
+- **채널 우선순위 20개** 선정 (data/channel_priority_top20.md)
+  - 1위 김현석 월스트리트나우(95점) ~ 20위 한화투자증권(65점)
 
-### 완료된 추가 작업 (2026-03-02 오후)
-- 해외종목 74개 가격 업데이트 (SQ 티커변경으로 2개 실패)
-- 세상학개론 81개 시그널 Supabase 업로드 (총 95개)
-- Speaker 오염 수정: sesang101 81개가 이효석 speaker_id로 잘못 들어간 것 복구
-- signal_validator.py 15번째 항목: 채널-화자 일치 검증 추가
-- DB 총 시그널: ~248개, 채널 7개
-
-### 완료된 추가 작업 (2026-03-03)
-- 서클(CRCL) ticker null→CRCL 수정, NYSE 상장 확인 ($93.58)
-- 전종목 가격 일괄 추가: stockPrices 29→54개, 종목 페이지 37→52개
-- 중복 시그널 4건 삭제 (Rocket Lab, SMR/원전, 반도체, 빅테크)
-- key_quote 200자 초과 13개 AI 요약 완료
-- pre_deploy_check.py에 key_quote 20~200자 검증 추가
-- QA 리포트 17항목 점검 (QA_REPORT.md)
-- 세상학개론 크롤링 확인: 2025-12~2026-01 빠진 영상 없음
-- DB 시그널 142개, review_status 전부 pending
-
-### CTO 시스템 v3 (2026-03-04)
-- Main Agent = CTO (Opus), 서브에이전트 = Dev/QA/Patrol (Sonnet)
-- sessions_spawn 체이닝으로 자동 워크플로우
-- Cron: Watchdog 30분, Patrol 6시간, 일일요약 자정
-- CTO_WORKFLOW.md에 전체 규칙 정의
-
-### 이효석 아카데미 시그널 (2026-03-04)
-- 원본 793개 → 정제 692개 (비종목90+비상장8+중복3 제거)
-- QA 통과율 98.4% ✅
-- JAY 승인 대기 중 → DB INSERT 예정
-- 파일: hs_analysis_cleaned.jsonl
-
-### 완료된 추가 작업 (2026-03-04 오후)
-- V10.9 A/B 테스트 완료 (V10.8 정밀도 30% vs V10.9 100%) → V10.9 승인+적용
-- V10.10: stock_name 한글 필수 + key_quote 50자+ + reasoning 100자+ 3~5문장
-- 종목명 한글 통일: 7건 수정, QA 게이트 추가
-- 가격 데이터: UUID 784개 가비지 제거, 152개 종목 최신가격, 차트 55→155개
-- 공시 스펙 v2: AWAKE→DART OpenAPI, 1층 PC cron, disclosure_tech_spec_v2.md
-- 채널 리서치 2차: 총 300개 조사, 142개 적합 선별
-- DB 컬럼 주의: stock (NOT stock_name), supabase 패키지 깨짐→REST API 직접 사용
-
-### 현재 작업
-- ✅ 시그널 155개 (248→155, 비종목 33+중복 60 삭제)
-- 자동 품질 검증 시스템 구축 중 (pre_deploy_check.py + deploy.py)
-- PDF 517건 AI 요약 배치 진행 중 (~10시간, data/ai_summary_progress.json)
-- ✅ 서브에이전트 Sonnet 전환 완료 (메인만 Opus)
-- 유저 참여 시스템 1단계 100% 완료, 2단계 1→2→3 완료 (AI 자동검토+수정안+승인UI)
-- ✅ 2단계 4~5 이미 구현 완료 확인 (AI제안 탭, 프롬프트관리 탭)
-- V10.3 프롬프트 완성 (prompts/pipeline_v10.md, 3라운드 자율개선, 7단계 검증)
-- 자동화 파이프라인 scripts/ 완성 (6모듈)
-- ✅ 종목 페이지 일괄 생성 (5개→28개, Supabase 동적 조회)
-- ✅ Edge Function 전환 (corsproxy.io→Supabase Edge Function, API키 입력 불필요)
-- ✅ Supabase access token: openclaw-deploy (만료 없음)
-- ✅ signal_prices.json 112개 (섹터→대표종목 매핑 포함, HM파마/HCM파마 2개 불가)
-- ✅ 애널리스트 탭 "섹터별"→"종목별" 변경 완료
-- ✅ V10.7 프롬프트 완성 (prompts/pipeline_v10.md, 종목추출규칙 추가)
-- ✅ 애널리스트 데이터소스 조사 완료 (네이버증권 리서치 1순위)
-- speakers 테이블 "김장년" orphan 레코드 정리 필요
-- Supabase anon key 변경됨 (.env.local이 최신, MEMORY.md 구버전 키 사용 금지)
-
-### 완료된 추가 작업 (2026-03-03 새벽)
-- ✅ 해외종목 통화표시: lib/currency.ts + 7개 파일 수정 (원→$), 커밋 f6ee12e
-- ✅ 채널 리서치 50개 조사 (data/youtube_channels_research.md), 추천 35개
-- ✅ 추천 채널 영상 수 확인: 염승환 1809, 삼성증권 3335, 미주은 1987, 소수몽키 1276, 미부 869, 주코노미 541, 뉴욕주민 236
-- ✅ 세상학개론 새 영상 조사: 12개 중 투자관련 1개만 (비투자 콘텐츠 전환 추세)
+### 현재 작업 / 다음 단계
+- ai_detail 519건 재생성 (Claude API 스크립트 준비됨, 미실행)
+- 공시 DART OpenAPI 연동 (1층 PC cron)
+- 채널 확장: 상위 20개 채널 크롤링 시작 필요
+- Supabase anon key 변경됨 (.env.local이 최신)
 
 ### DB 스키마 (중요)
 - 테이블: `influencer_channels`, `influencer_videos`, `influencer_signals`
 - videos의 YouTube ID 컬럼: `video_id` (NOT youtube_id)
-- 세상학개론 channel_id: `d68f8efd-64c8-4c07-9d34-e98c2954f4e1`
-- 세상학개론 YT channel: `UCPQsfyVJ0T7-qJcGcaue5Ng`
-
-### 완료된 추가 작업 (2026-03-01)
-- Selenium 16배속 CC 캡처로 YouTube IP 차단 우회 (마지막 2개 자막 추출)
-- 달란트투자 채널/스피커 신규 추가, 4시그널 DB INSERT (총 78개)
-- published_at 날짜 수정 (42개 중 38개 업데이트, yt-dlp 사용)
-- 프론트엔드 published_at 우선 표시 + 최신순 정렬 + 배포
-- 게스트 프로필 이니셜 수정 (호스트만 유튜브 썸네일)
-- 코린이아빠 멤버십 영상 11개 + 시그널 11개 삭제 (84→73→74개)
-- 리포트 탭 삭제 (애널리스트와 중복)
-- 좋아요 하트 중복 버그 수정
-- Supabase signal_memos 테이블 + signal_reports AI 컬럼 추가
-- 파이프라인 멤버십 제외 규칙 추가
+- 컬럼명: `stock` (NOT stock_name)
+- supabase 패키지 깨짐 → REST API 직접 사용
 
 ## 🔧 환경 설정
-- **OpenClaw 모델:** anthropic/claude-opus-4-6 (2026-02-28 변경)
+- **OpenClaw 모델:** anthropic/claude-opus-4-6
 - **OpenClaw 포트:** 18789
 - **채널:** Telegram
 
 ## 🧹 세션 자동 정리 (필수)
-- 작업 완료 후 불필요한 파일 즉시 삭제 (임시 파일, 로그, 캐시)
-- .next/cache/ 폴더는 배포 후 삭제
-- 자막 추출 완료 후 원본 자막 파일은 분석 끝나면 삭제, 결과만 DB에 저장
+- 작업 완료 후 불필요한 파일 즉시 삭제
+- .next/cache/, out/ 폴더는 배포 후 삭제
 - node_modules 안의 파일 절대 읽지 마라
-- out/ 폴더는 배포 후 삭제
 - 워크스페이스에 50MB 이상 파일 생기면 알려줘
 
 ## 🚦 자막 추출 레이트리밋 규칙 (필수)
