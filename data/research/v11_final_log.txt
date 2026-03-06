@@ -1,0 +1,371 @@
+[2026-03-06T04:50:30.140Z] Fetching all signals from DB...
+[2026-03-06T04:50:31.470Z] Total signals in DB: 804
+[2026-03-06T04:50:31.470Z] Grouping signals by video_id...
+[2026-03-06T04:50:31.471Z] Videos with 200+ chars: 182
+[2026-03-06T04:50:31.471Z] [1/182] Processing video 98a76d69... (4 signals, 301 chars)
+[2026-03-06T04:50:47.183Z]   Tokens: 3361 in / 1061 out
+[2026-03-06T04:50:47.183Z]   Results: 4 old signals → 3 new signals
+[2026-03-06T04:50:50.185Z] [2/182] Processing video 2e2c07ef... (4 signals, 375 chars)
+[2026-03-06T04:51:03.006Z]   Tokens: 3454 in / 997 out
+[2026-03-06T04:51:03.007Z]   Results: 4 old signals → 3 new signals
+[2026-03-06T04:51:06.010Z] [3/182] Processing video 1a47ae36... (2 signals, 203 chars)
+[2026-03-06T04:51:11.284Z]   Tokens: 3269 in / 329 out
+[2026-03-06T04:51:11.285Z]   Results: 2 old signals → 1 new signals
+[2026-03-06T04:51:14.285Z] [4/182] Processing video ffc64461... (7 signals, 1127 chars)
+[2026-03-06T04:51:34.862Z]   Tokens: 4205 in / 1633 out
+[2026-03-06T04:51:34.863Z]   Results: 7 old signals → 5 new signals
+[2026-03-06T04:51:37.869Z] [5/182] Processing video fae693ec... (3 signals, 487 chars)
+[2026-03-06T04:51:47.563Z]   Tokens: 3553 in / 738 out
+[2026-03-06T04:51:47.563Z]   Results: 3 old signals → 2 new signals
+[2026-03-06T04:51:50.574Z] [6/182] Processing video b63cdda1... (3 signals, 443 chars)
+[2026-03-06T04:51:57.150Z]   Tokens: 3503 in / 306 out
+[2026-03-06T04:51:57.150Z]   Results: 3 old signals → 0 new signals
+[2026-03-06T04:52:00.154Z] [7/182] Processing video cfc9e60f... (2 signals, 286 chars)
+[2026-03-06T04:52:09.953Z]   Tokens: 3343 in / 782 out
+[2026-03-06T04:52:09.953Z]   Results: 2 old signals → 2 new signals
+[2026-03-06T04:52:12.956Z] [8/182] Processing video 8bc8b1e0... (4 signals, 526 chars)
+[2026-03-06T04:52:24.145Z]   Tokens: 3559 in / 842 out
+[2026-03-06T04:52:24.146Z]   Results: 4 old signals → 3 new signals
+[2026-03-06T04:52:27.160Z] [9/182] Processing video a09e4db9... (2 signals, 224 chars)
+[2026-03-06T04:52:36.711Z]   Tokens: 3281 in / 687 out
+[2026-03-06T04:52:36.712Z]   Results: 2 old signals → 2 new signals
+[2026-03-06T04:52:39.712Z] [10/182] Processing video d68ab7a3... (2 signals, 414 chars)
+[2026-03-06T04:52:48.833Z]   Tokens: 3472 in / 669 out
+[2026-03-06T04:52:48.834Z]   Results: 2 old signals → 2 new signals
+[2026-03-06T04:52:51.839Z] [11/182] Processing video 51767b89... (3 signals, 238 chars)
+[2026-03-06T04:53:01.346Z]   Tokens: 3289 in / 677 out
+[2026-03-06T04:53:01.346Z]   Results: 3 old signals → 2 new signals
+[2026-03-06T04:53:04.347Z] [12/182] Processing video cef2c937... (7 signals, 600 chars)
+[2026-03-06T04:53:22.119Z]   Tokens: 3685 in / 1588 out
+[2026-03-06T04:53:22.120Z]   Results: 7 old signals → 5 new signals
+[2026-03-06T04:53:25.134Z] [13/182] Processing video c2952626... (4 signals, 541 chars)
+[2026-03-06T04:53:38.302Z]   Tokens: 3600 in / 1156 out
+[2026-03-06T04:53:38.302Z]   Results: 4 old signals → 4 new signals
+[2026-03-06T04:53:41.311Z] [14/182] Processing video bee43acd... (6 signals, 743 chars)
+[2026-03-06T04:54:02.577Z]   Tokens: 3829 in / 1806 out
+[2026-03-06T04:54:02.578Z]   Results: 6 old signals → 5 new signals
+[2026-03-06T04:54:05.590Z] [15/182] Processing video c7bf5e71... (3 signals, 287 chars)
+[2026-03-06T04:54:16.520Z]   Tokens: 3340 in / 686 out
+[2026-03-06T04:54:16.520Z]   Results: 3 old signals → 2 new signals
+[2026-03-06T04:54:19.533Z] [16/182] Processing video 5e3e10c2... (2 signals, 216 chars)
+[2026-03-06T04:54:29.843Z]   Tokens: 3271 in / 673 out
+[2026-03-06T04:54:29.843Z]   Results: 2 old signals → 2 new signals
+[2026-03-06T04:54:32.856Z] [17/182] Processing video 3394ea3c... (2 signals, 285 chars)
+[2026-03-06T04:54:37.811Z]   Tokens: 3349 in / 232 out
+[2026-03-06T04:54:37.811Z]   Results: 2 old signals → 0 new signals
+[2026-03-06T04:54:40.824Z] [18/182] Processing video 235ea3ae... (3 signals, 272 chars)
+[2026-03-06T04:54:51.099Z]   Tokens: 3337 in / 720 out
+[2026-03-06T04:54:51.100Z]   Results: 3 old signals → 2 new signals
+[2026-03-06T04:54:54.108Z] [19/182] Processing video 33bed8cc... (6 signals, 577 chars)
+[2026-03-06T04:55:18.398Z]   Tokens: 3652 in / 1951 out
+[2026-03-06T04:55:18.398Z]   Results: 6 old signals → 6 new signals
+[2026-03-06T04:55:21.401Z] [20/182] Processing video 8b8ddea2... (5 signals, 624 chars)
+[2026-03-06T04:55:28.059Z]   Tokens: 3689 in / 320 out
+[2026-03-06T04:55:28.060Z]   Results: 5 old signals → 0 new signals
+[2026-03-06T04:55:31.068Z]   Extra 5s pause after 20 requests...
+[2026-03-06T04:55:36.074Z] [21/182] Processing video f2ca296c... (3 signals, 398 chars)
+[2026-03-06T04:55:43.172Z]   Tokens: 3478 in / 431 out
+[2026-03-06T04:55:43.172Z]   Results: 3 old signals → 1 new signals
+[2026-03-06T04:55:46.174Z] [22/182] Processing video 2f0aa05d... (2 signals, 290 chars)
+[2026-03-06T04:55:56.147Z]   Tokens: 3360 in / 790 out
+[2026-03-06T04:55:56.147Z]   Results: 2 old signals → 2 new signals
+[2026-03-06T04:55:59.156Z] [23/182] Processing video 9236a7e9... (4 signals, 571 chars)
+[2026-03-06T04:56:14.144Z]   Tokens: 3639 in / 1291 out
+[2026-03-06T04:56:14.144Z]   Results: 4 old signals → 4 new signals
+[2026-03-06T04:56:17.147Z] [24/182] Processing video b1408bd1... (3 signals, 298 chars)
+[2026-03-06T04:56:22.482Z]   Tokens: 3356 in / 242 out
+[2026-03-06T04:56:22.482Z]   Results: 3 old signals → 0 new signals
+[2026-03-06T04:56:25.491Z] [25/182] Processing video 8b4186f2... (3 signals, 477 chars)
+[2026-03-06T04:56:35.359Z]   Tokens: 3539 in / 796 out
+[2026-03-06T04:56:35.359Z]   Results: 3 old signals → 2 new signals
+[2026-03-06T04:56:38.370Z] [26/182] Processing video 0f17e179... (4 signals, 354 chars)
+[2026-03-06T04:56:44.363Z]   Tokens: 3422 in / 324 out
+[2026-03-06T04:56:44.363Z]   Results: 4 old signals → 1 new signals
+[2026-03-06T04:56:47.373Z] [27/182] Processing video d3bb96ba... (2 signals, 248 chars)
+[2026-03-06T04:56:53.372Z]   Tokens: 3313 in / 410 out
+[2026-03-06T04:56:53.372Z]   Results: 2 old signals → 1 new signals
+[2026-03-06T04:56:56.377Z] [28/182] Processing video 811fb5ef... (2 signals, 287 chars)
+[2026-03-06T04:57:02.044Z]   Tokens: 3347 in / 301 out
+[2026-03-06T04:57:02.044Z]   Results: 2 old signals → 0 new signals
+[2026-03-06T04:57:05.052Z] [29/182] Processing video 33d1cb70... (4 signals, 687 chars)
+[2026-03-06T04:57:24.241Z]   Tokens: 3753 in / 1498 out
+[2026-03-06T04:57:24.241Z]   Results: 4 old signals → 4 new signals
+[2026-03-06T04:57:27.243Z] [30/182] Processing video 75a3e88b... (3 signals, 299 chars)
+[2026-03-06T04:57:39.219Z]   Tokens: 3360 in / 873 out
+[2026-03-06T04:57:39.220Z]   Results: 3 old signals → 3 new signals
+[2026-03-06T04:57:42.221Z] [31/182] Processing video 5f9776de... (4 signals, 559 chars)
+[2026-03-06T04:58:00.586Z]   Tokens: 3636 in / 1580 out
+[2026-03-06T04:58:00.586Z]   Results: 4 old signals → 4 new signals
+[2026-03-06T04:58:03.601Z] [32/182] Processing video 0a17553c... (3 signals, 434 chars)
+[2026-03-06T04:58:16.408Z]   Tokens: 3501 in / 1071 out
+[2026-03-06T04:58:16.408Z]   Results: 3 old signals → 3 new signals
+[2026-03-06T04:58:19.419Z] [33/182] Processing video df3a6ba3... (2 signals, 283 chars)
+[2026-03-06T04:58:25.490Z]   Tokens: 3347 in / 297 out
+[2026-03-06T04:58:25.490Z]   Results: 2 old signals → 0 new signals
+[2026-03-06T04:58:28.499Z] [34/182] Processing video 02165a4c... (2 signals, 247 chars)
+[2026-03-06T04:58:35.115Z]   Tokens: 3308 in / 275 out
+[2026-03-06T04:58:35.115Z]   Results: 2 old signals → 0 new signals
+[2026-03-06T04:58:38.120Z] [35/182] Processing video b5f2db59... (2 signals, 361 chars)
+[2026-03-06T04:58:47.992Z]   Tokens: 3426 in / 785 out
+[2026-03-06T04:58:47.992Z]   Results: 2 old signals → 2 new signals
+[2026-03-06T04:58:50.996Z] [36/182] Processing video dd2d399a... (4 signals, 293 chars)
+[2026-03-06T04:58:57.975Z]   Tokens: 3359 in / 284 out
+[2026-03-06T04:58:57.975Z]   Results: 4 old signals → 0 new signals
+[2026-03-06T04:59:00.977Z] [37/182] Processing video 50aea750... (4 signals, 372 chars)
+[2026-03-06T04:59:07.086Z]   Tokens: 3425 in / 321 out
+[2026-03-06T04:59:07.087Z]   Results: 4 old signals → 1 new signals
+[2026-03-06T04:59:10.087Z] [38/182] Processing video 76442f8c... (5 signals, 819 chars)
+[2026-03-06T04:59:31.496Z]   Tokens: 3899 in / 2021 out
+[2026-03-06T04:59:31.497Z]   Results: 5 old signals → 5 new signals
+[2026-03-06T04:59:34.501Z] [39/182] Processing video db471d9e... (7 signals, 851 chars)
+[2026-03-06T04:59:55.610Z]   Tokens: 3953 in / 1787 out
+[2026-03-06T04:59:55.610Z]   Results: 7 old signals → 5 new signals
+[2026-03-06T04:59:58.618Z] [40/182] Processing video dde613a8... (3 signals, 235 chars)
+[2026-03-06T05:00:03.303Z]   Tokens: 3294 in / 221 out
+[2026-03-06T05:00:03.304Z]   Results: 3 old signals → 0 new signals
+[2026-03-06T05:00:06.315Z]   Extra 5s pause after 20 requests...
+[2026-03-06T05:00:11.330Z] [41/182] Processing video e76edfab... (5 signals, 397 chars)
+[2026-03-06T05:00:33.837Z]   Tokens: 3464 in / 1812 out
+[2026-03-06T05:00:33.837Z]   Results: 5 old signals → 5 new signals
+[2026-03-06T05:00:36.840Z] [42/182] Processing video 519561b5... (2 signals, 326 chars)
+[2026-03-06T05:00:47.962Z]   Tokens: 3390 in / 761 out
+[2026-03-06T05:00:47.963Z]   Results: 2 old signals → 2 new signals
+[2026-03-06T05:00:50.974Z] [43/182] Processing video 80cea929... (3 signals, 315 chars)
+[2026-03-06T05:01:01.602Z]   Tokens: 3399 in / 797 out
+[2026-03-06T05:01:01.603Z]   Results: 3 old signals → 2 new signals
+[2026-03-06T05:01:04.616Z] [44/182] Processing video 96218d6d... (2 signals, 280 chars)
+[2026-03-06T05:01:11.017Z]   Tokens: 3350 in / 445 out
+[2026-03-06T05:01:11.018Z]   Results: 2 old signals → 1 new signals
+[2026-03-06T05:01:14.023Z] [45/182] Processing video e284ee64... (3 signals, 218 chars)
+[2026-03-06T05:01:24.094Z]   Tokens: 3285 in / 594 out
+[2026-03-06T05:01:24.095Z]   Results: 3 old signals → 2 new signals
+[2026-03-06T05:01:27.095Z] [46/182] Processing video 454ff52c... (4 signals, 486 chars)
+[2026-03-06T05:01:45.253Z]   Tokens: 3549 in / 1439 out
+[2026-03-06T05:01:45.254Z]   Results: 4 old signals → 4 new signals
+[2026-03-06T05:01:48.264Z] [47/182] Processing video 047df037... (3 signals, 382 chars)
+[2026-03-06T05:02:02.468Z]   Tokens: 3458 in / 1025 out
+[2026-03-06T05:02:02.468Z]   Results: 3 old signals → 3 new signals
+[2026-03-06T05:02:05.473Z] [48/182] Processing video fef2edc1... (3 signals, 256 chars)
+[2026-03-06T05:02:11.579Z]   Tokens: 3319 in / 378 out
+[2026-03-06T05:02:11.580Z]   Results: 3 old signals → 1 new signals
+[2026-03-06T05:02:14.581Z] [49/182] Processing video 38cae4f3... (2 signals, 232 chars)
+[2026-03-06T05:02:20.897Z]   Tokens: 3289 in / 391 out
+[2026-03-06T05:02:20.897Z]   Results: 2 old signals → 1 new signals
+[2026-03-06T05:02:23.904Z] [50/182] Processing video fca136d0... (1 signals, 206 chars)
+[2026-03-06T05:02:32.435Z]   Tokens: 3269 in / 423 out
+[2026-03-06T05:02:32.435Z]   Results: 1 old signals → 0 new signals
+[2026-03-06T05:02:35.442Z] 
+=== CHECKPOINT 50/182 ===
+[2026-03-06T05:02:35.444Z] Progress saved: 50 results → v11_progress_50.json
+[2026-03-06T05:02:35.444Z] 
+[2026-03-06T05:02:35.444Z] [51/182] Processing video 5b0fc074... (8 signals, 812 chars)
+[2026-03-06T05:02:57.842Z]   Tokens: 3903 in / 1911 out
+[2026-03-06T05:02:57.842Z]   Results: 8 old signals → 5 new signals
+[2026-03-06T05:03:00.845Z] [52/182] Processing video 67a78357... (3 signals, 332 chars)
+[2026-03-06T05:03:06.599Z]   Tokens: 3393 in / 387 out
+[2026-03-06T05:03:06.600Z]   Results: 3 old signals → 1 new signals
+[2026-03-06T05:03:09.610Z] [53/182] Processing video d881c2dd... (2 signals, 247 chars)
+[2026-03-06T05:03:18.722Z]   Tokens: 3303 in / 606 out
+[2026-03-06T05:03:18.723Z]   Results: 2 old signals → 2 new signals
+[2026-03-06T05:03:21.733Z] [54/182] Processing video eeadcb2b... (5 signals, 945 chars)
+[2026-03-06T05:03:41.979Z]   Tokens: 4008 in / 1826 out
+[2026-03-06T05:03:41.979Z]   Results: 5 old signals → 4 new signals
+[2026-03-06T05:03:44.992Z] [55/182] Processing video 59ae252a... (2 signals, 393 chars)
+[2026-03-06T05:03:56.602Z]   Tokens: 3452 in / 847 out
+[2026-03-06T05:03:56.603Z]   Results: 2 old signals → 2 new signals
+[2026-03-06T05:03:59.606Z] [56/182] Processing video 0d494926... (5 signals, 471 chars)
+[2026-03-06T05:04:09.823Z]   Tokens: 3547 in / 680 out
+[2026-03-06T05:04:09.824Z]   Results: 5 old signals → 2 new signals
+[2026-03-06T05:04:12.838Z] [57/182] Processing video bb3b14a5... (5 signals, 394 chars)
+[2026-03-06T05:04:29.280Z]   Tokens: 3480 in / 1251 out
+[2026-03-06T05:04:29.280Z]   Results: 5 old signals → 4 new signals
+[2026-03-06T05:04:32.286Z] [58/182] Processing video 2a8be397... (3 signals, 388 chars)
+[2026-03-06T05:04:44.858Z]   Tokens: 3442 in / 918 out
+[2026-03-06T05:04:44.858Z]   Results: 3 old signals → 3 new signals
+[2026-03-06T05:04:47.860Z] [59/182] Processing video 06e7857c... (4 signals, 516 chars)
+[2026-03-06T05:05:04.973Z]   Tokens: 3588 in / 1333 out
+[2026-03-06T05:05:04.974Z]   Results: 4 old signals → 4 new signals
+[2026-03-06T05:05:07.982Z] [60/182] Processing video 39af56aa... (2 signals, 247 chars)
+[2026-03-06T05:05:14.659Z]   Tokens: 3304 in / 300 out
+[2026-03-06T05:05:14.659Z]   Results: 2 old signals → 0 new signals
+[2026-03-06T05:05:17.672Z]   Extra 5s pause after 20 requests...
+[2026-03-06T05:05:22.686Z] [61/182] Processing video 64ce4bcc... (4 signals, 515 chars)
+[2026-03-06T05:05:37.399Z]   Tokens: 3594 in / 1201 out
+[2026-03-06T05:05:37.399Z]   Results: 4 old signals → 3 new signals
+[2026-03-06T05:05:40.406Z] [62/182] Processing video b0cdbc85... (2 signals, 264 chars)
+[2026-03-06T05:05:48.333Z]   Tokens: 3322 in / 654 out
+[2026-03-06T05:05:48.333Z]   Results: 2 old signals → 2 new signals
+[2026-03-06T05:05:51.345Z] [63/182] Processing video ecdadb37... (3 signals, 211 chars)
+[2026-03-06T05:06:06.418Z]   Tokens: 3279 in / 1042 out
+[2026-03-06T05:06:06.418Z]   Results: 3 old signals → 3 new signals
+[2026-03-06T05:06:09.429Z] [64/182] Processing video 1b69ce70... (5 signals, 916 chars)
+[2026-03-06T05:06:33.145Z]   Tokens: 3981 in / 1948 out
+[2026-03-06T05:06:33.145Z]   Results: 5 old signals → 5 new signals
+[2026-03-06T05:06:36.158Z] [65/182] Processing video 060f3f2f... (3 signals, 276 chars)
+[2026-03-06T05:06:48.709Z]   Tokens: 3344 in / 970 out
+[2026-03-06T05:06:48.710Z]   Results: 3 old signals → 3 new signals
+[2026-03-06T05:06:51.721Z] [66/182] Processing video 822b101a... (3 signals, 486 chars)
+[2026-03-06T05:07:06.365Z]   Tokens: 3554 in / 1234 out
+[2026-03-06T05:07:06.366Z]   Results: 3 old signals → 3 new signals
+[2026-03-06T05:07:09.369Z] [67/182] Processing video fa63d50b... (4 signals, 320 chars)
+[2026-03-06T05:07:22.679Z]   Tokens: 3394 in / 1001 out
+[2026-03-06T05:07:22.679Z]   Results: 4 old signals → 3 new signals
+[2026-03-06T05:07:25.681Z] [68/182] Processing video f6b446a0... (3 signals, 476 chars)
+[2026-03-06T05:07:40.812Z]   Tokens: 3543 in / 1092 out
+[2026-03-06T05:07:40.812Z]   Results: 3 old signals → 3 new signals
+[2026-03-06T05:07:43.824Z] [69/182] Processing video 0106ae6a... (3 signals, 232 chars)
+[2026-03-06T05:07:48.680Z]   Tokens: 3294 in / 193 out
+[2026-03-06T05:07:48.681Z]   Results: 3 old signals → 0 new signals
+[2026-03-06T05:07:51.689Z] [70/182] Processing video c3b18194... (4 signals, 260 chars)
+[2026-03-06T05:07:59.403Z]   Tokens: 3321 in / 252 out
+[2026-03-06T05:07:59.403Z]   Results: 4 old signals → 0 new signals
+[2026-03-06T05:08:02.404Z] [71/182] Processing video c3c20a33... (5 signals, 748 chars)
+[2026-03-06T05:08:19.029Z]   Tokens: 3840 in / 1282 out
+[2026-03-06T05:08:19.029Z]   Results: 5 old signals → 4 new signals
+[2026-03-06T05:08:22.038Z] [72/182] Processing video 21ef25b1... (6 signals, 630 chars)
+[2026-03-06T05:08:47.785Z]   Tokens: 3705 in / 2184 out
+[2026-03-06T05:08:47.785Z]   Results: 6 old signals → 6 new signals
+[2026-03-06T05:08:50.794Z] [73/182] Processing video 41516750... (3 signals, 355 chars)
+[2026-03-06T05:09:05.950Z]   Tokens: 3422 in / 999 out
+[2026-03-06T05:09:05.951Z]   Results: 3 old signals → 3 new signals
+[2026-03-06T05:09:08.951Z] [74/182] Processing video 2eafa800... (4 signals, 324 chars)
+[2026-03-06T05:09:15.023Z]   Tokens: 3390 in / 349 out
+[2026-03-06T05:09:15.023Z]   Results: 4 old signals → 1 new signals
+[2026-03-06T05:09:18.031Z] [75/182] Processing video 0d3971b7... (4 signals, 345 chars)
+[2026-03-06T05:09:32.811Z]   Tokens: 3428 in / 1037 out
+[2026-03-06T05:09:32.811Z]   Results: 4 old signals → 3 new signals
+[2026-03-06T05:09:35.812Z] [76/182] Processing video 9daa3302... (3 signals, 348 chars)
+[2026-03-06T05:09:50.717Z]   Tokens: 3419 in / 1110 out
+[2026-03-06T05:09:50.717Z]   Results: 3 old signals → 3 new signals
+[2026-03-06T05:09:53.728Z] [77/182] Processing video aa42c49b... (3 signals, 461 chars)
+[2026-03-06T05:10:03.807Z]   Tokens: 3534 in / 737 out
+[2026-03-06T05:10:03.807Z]   Results: 3 old signals → 2 new signals
+[2026-03-06T05:10:06.812Z] [78/182] Processing video eca59256... (3 signals, 322 chars)
+[2026-03-06T05:10:17.422Z]   Tokens: 3379 in / 745 out
+[2026-03-06T05:10:17.423Z]   Results: 3 old signals → 2 new signals
+[2026-03-06T05:10:20.437Z] [79/182] Processing video 554b9bca... (2 signals, 220 chars)
+[2026-03-06T05:10:26.576Z]   Tokens: 3286 in / 380 out
+[2026-03-06T05:10:26.577Z]   Results: 2 old signals → 1 new signals
+[2026-03-06T05:10:29.580Z] [80/182] Processing video 44933662... (3 signals, 530 chars)
+[2026-03-06T05:10:38.571Z]   Tokens: 3600 in / 736 out
+[2026-03-06T05:10:38.572Z]   Results: 3 old signals → 2 new signals
+[2026-03-06T05:10:41.585Z]   Extra 5s pause after 20 requests...
+[2026-03-06T05:10:46.595Z] [81/182] Processing video 69606752... (4 signals, 307 chars)
+[2026-03-06T05:11:04.010Z]   Tokens: 3369 in / 1208 out
+[2026-03-06T05:11:04.010Z]   Results: 4 old signals → 4 new signals
+[2026-03-06T05:11:07.012Z] [82/182] Processing video 8f49bbf2... (4 signals, 458 chars)
+[2026-03-06T05:11:20.414Z]   Tokens: 3533 in / 1034 out
+[2026-03-06T05:11:20.414Z]   Results: 4 old signals → 3 new signals
+[2026-03-06T05:11:23.416Z] [83/182] Processing video e9c2888e... (3 signals, 220 chars)
+[2026-03-06T05:11:38.513Z]   Tokens: 3278 in / 1062 out
+[2026-03-06T05:11:38.513Z]   Results: 3 old signals → 3 new signals
+[2026-03-06T05:11:41.515Z] [84/182] Processing video 912a3808... (5 signals, 723 chars)
+[2026-03-06T05:11:57.351Z]   Tokens: 3802 in / 1295 out
+[2026-03-06T05:11:57.351Z]   Results: 5 old signals → 3 new signals
+[2026-03-06T05:12:00.352Z] [85/182] Processing video 13ca5e8f... (3 signals, 385 chars)
+[2026-03-06T05:12:12.692Z]   Tokens: 3458 in / 1015 out
+[2026-03-06T05:12:12.692Z]   Results: 3 old signals → 3 new signals
+[2026-03-06T05:12:15.706Z] [86/182] Processing video 9a92f069... (2 signals, 218 chars)
+[2026-03-06T05:12:20.507Z]   Tokens: 3274 in / 200 out
+[2026-03-06T05:12:20.507Z]   Results: 2 old signals → 0 new signals
+[2026-03-06T05:12:23.509Z] [87/182] Processing video cdaa5197... (3 signals, 327 chars)
+[2026-03-06T05:12:32.376Z]   Tokens: 3382 in / 728 out
+[2026-03-06T05:12:32.376Z]   Results: 3 old signals → 2 new signals
+[2026-03-06T05:12:35.378Z] [88/182] Processing video 138acc80... (3 signals, 392 chars)
+[2026-03-06T05:12:44.420Z]   Tokens: 3435 in / 653 out
+[2026-03-06T05:12:44.420Z]   Results: 3 old signals → 2 new signals
+[2026-03-06T05:12:47.429Z] [89/182] Processing video 17cfbd09... (3 signals, 202 chars)
+[2026-03-06T05:12:53.601Z]   Tokens: 3267 in / 316 out
+[2026-03-06T05:12:53.602Z]   Results: 3 old signals → 1 new signals
+[2026-03-06T05:12:56.613Z] [90/182] Processing video 7737dbab... (2 signals, 202 chars)
+[2026-03-06T05:13:05.504Z]   Tokens: 3260 in / 675 out
+[2026-03-06T05:13:05.504Z]   Results: 2 old signals → 2 new signals
+[2026-03-06T05:13:08.512Z] [91/182] Processing video 61b3aba6... (3 signals, 554 chars)
+[2026-03-06T05:13:18.532Z]   Tokens: 3627 in / 820 out
+[2026-03-06T05:13:18.532Z]   Results: 3 old signals → 2 new signals
+[2026-03-06T05:13:21.537Z] [92/182] Processing video 5de08e26... (4 signals, 461 chars)
+[2026-03-06T05:13:34.787Z]   Tokens: 3527 in / 996 out
+[2026-03-06T05:13:34.787Z]   Results: 4 old signals → 3 new signals
+[2026-03-06T05:13:37.790Z] [93/182] Processing video 77dc943b... (6 signals, 812 chars)
+[2026-03-06T05:14:02.743Z]   Tokens: 3880 in / 2220 out
+[2026-03-06T05:14:02.743Z]   Results: 6 old signals → 5 new signals
+[2026-03-06T05:14:05.746Z] [94/182] Processing video 416b9fbf... (3 signals, 454 chars)
+[2026-03-06T05:14:20.674Z]   Tokens: 3520 in / 1215 out
+[2026-03-06T05:14:20.674Z]   Results: 3 old signals → 3 new signals
+[2026-03-06T05:14:23.681Z] [95/182] Processing video 326af6e2... (8 signals, 920 chars)
+[2026-03-06T05:14:54.587Z]   Tokens: 4012 in / 2633 out
+[2026-03-06T05:14:54.588Z]   Results: 8 old signals → 8 new signals
+[2026-03-06T05:14:57.596Z] [96/182] Processing video 403e0eae... (3 signals, 274 chars)
+[2026-03-06T05:15:06.260Z]   Tokens: 3332 in / 630 out
+[2026-03-06T05:15:06.260Z]   Results: 3 old signals → 2 new signals
+[2026-03-06T05:15:09.268Z] [97/182] Processing video fe2d2023... (2 signals, 287 chars)
+[2026-03-06T05:15:20.190Z]   Tokens: 3348 in / 680 out
+[2026-03-06T05:15:20.190Z]   Results: 2 old signals → 2 new signals
+[2026-03-06T05:15:23.196Z] [98/182] Processing video 283d58d0... (3 signals, 396 chars)
+[2026-03-06T05:15:31.971Z]   Tokens: 3459 in / 606 out
+[2026-03-06T05:15:31.972Z]   Results: 3 old signals → 2 new signals
+[2026-03-06T05:15:34.976Z] [99/182] Processing video 6327cd19... (2 signals, 239 chars)
+[2026-03-06T05:15:40.358Z]   Tokens: 3299 in / 354 out
+[2026-03-06T05:15:40.358Z]   Results: 2 old signals → 1 new signals
+[2026-03-06T05:15:43.366Z] [100/182] Processing video d96e7b47... (5 signals, 396 chars)
+[2026-03-06T05:15:52.645Z]   Tokens: 3450 in / 601 out
+[2026-03-06T05:15:52.646Z]   Results: 5 old signals → 2 new signals
+[2026-03-06T05:15:55.655Z]   Extra 5s pause after 20 requests...
+[2026-03-06T05:16:00.666Z] 
+=== CHECKPOINT 100/182 ===
+[2026-03-06T05:16:00.668Z] Progress saved: 100 results → v11_progress_100.json
+[2026-03-06T05:16:00.668Z] 
+[2026-03-06T05:16:00.668Z] [101/182] Processing video f23d11b2... (2 signals, 263 chars)
+[2026-03-06T05:16:06.506Z]   Tokens: 3326 in / 403 out
+[2026-03-06T05:16:06.507Z]   Results: 2 old signals → 1 new signals
+[2026-03-06T05:16:09.520Z] [102/182] Processing video 30bf6b0a... (2 signals, 365 chars)
+[2026-03-06T05:16:18.873Z]   Tokens: 3403 in / 799 out
+[2026-03-06T05:16:18.873Z]   Results: 2 old signals → 2 new signals
+[2026-03-06T05:16:21.885Z] [103/182] Processing video 29af6860... (2 signals, 261 chars)
+[2026-03-06T05:16:31.484Z]   Tokens: 3318 in / 656 out
+[2026-03-06T05:16:31.484Z]   Results: 2 old signals → 2 new signals
+[2026-03-06T05:16:34.491Z] [104/182] Processing video 93a387e4... (6 signals, 745 chars)
+[2026-03-06T05:16:51.673Z]   Tokens: 3824 in / 1528 out
+[2026-03-06T05:16:51.673Z]   Results: 6 old signals → 4 new signals
+[2026-03-06T05:16:54.687Z] [105/182] Processing video bbb001a4... (5 signals, 364 chars)
+[2026-03-06T05:17:07.239Z]   Tokens: 3445 in / 973 out
+[2026-03-06T05:17:07.239Z]   Results: 5 old signals → 3 new signals
+[2026-03-06T05:17:10.247Z] [106/182] Processing video fbe83739... (5 signals, 589 chars)
+[2026-03-06T05:17:32.950Z]   Tokens: 3665 in / 1826 out
+[2026-03-06T05:17:32.951Z]   Results: 5 old signals → 5 new signals
+[2026-03-06T05:17:35.964Z] [107/182] Processing video 8b9ecbcc... (2 signals, 281 chars)
+[2026-03-06T05:17:46.116Z]   Tokens: 3338 in / 659 out
+[2026-03-06T05:17:46.116Z]   Results: 2 old signals → 2 new signals
+[2026-03-06T05:17:49.124Z] [108/182] Processing video 79e8893c... (4 signals, 431 chars)
+[2026-03-06T05:18:02.245Z]   Tokens: 3499 in / 993 out
+[2026-03-06T05:18:02.245Z]   Results: 4 old signals → 3 new signals
+[2026-03-06T05:18:05.257Z] [109/182] Processing video fed2e151... (3 signals, 377 chars)
+[2026-03-06T05:18:15.454Z]   Tokens: 3440 in / 799 out
+[2026-03-06T05:18:15.454Z]   Results: 3 old signals → 2 new signals
+[2026-03-06T05:18:18.464Z] [110/182] Processing video 51de7607... (2 signals, 273 chars)
+[2026-03-06T05:18:29.130Z]   Tokens: 3329 in / 836 out
+[2026-03-06T05:18:29.131Z]   Results: 2 old signals → 2 new signals
+[2026-03-06T05:18:32.131Z] [111/182] Processing video 3e3a4ffc... (4 signals, 441 chars)
+[2026-03-06T05:18:45.427Z]   Tokens: 3509 in / 1042 out
+[2026-03-06T05:18:45.427Z]   Results: 4 old signals → 3 new signals
+[2026-03-06T05:18:48.434Z] [112/182] Processing video a9960100... (4 signals, 546 chars)
+[2026-03-06T05:18:57.869Z]   Tokens: 3618 in / 657 out
+[2026-03-06T05:18:57.869Z]   Results: 4 old signals → 2 new signals
+[2026-03-06T05:19:00.872Z] [113/182] Processing video bf88d77c... (3 signals, 573 chars)
+[2026-03-06T05:19:12.544Z]   Tokens: 3616 in / 809 out
+[2026-03-06T05:19:12.545Z]   Results: 3 old signals → 2 new signals
+[2026-03-06T05:19:15.549Z] [114/182] Processing video 1ca614cf... (3 signals, 515 chars)
+[2026-03-06T05:19:32.081Z]   Tokens: 3583 in / 1147 out
+[2026-03-06T05:19:32.081Z]   Results: 3 old signals → 3 new signals
+[2026-03-06T05:19:35.089Z] [115/182] Processing video 15848bb5... (1 signals, 246 chars)
+[2026-03-06T05:19:42.172Z]   Tokens: 3304 in / 334 out
+[2026-03-06T05:19:42.173Z]   Results: 1 old signals → 0 new signals
+[2026-03-06T05:19:45.175Z] [116/182] Processing video 86a754a2... (4 signals, 345 chars)
+[2026-03-06T05:19:57.936Z]   Tokens: 3406 in / 950 out
+[2026-03-06T05:19:57.936Z]   Results: 4 old signals → 3 new signals
+[2026-03-06T05:20:00.947Z] [117/182] Processing video db3fc81e... (3 signals, 258 chars)
+[2026-03-06T05:20:13.639Z]   Tokens: 3320 in / 968 out
+[2026-03-06T05:20:13.639Z]   Results: 3 old signals → 3 new signals
+[2026-03-06T05:20:16.649Z] [118/182] Processing video 1b0508ad... (2 signals, 277 chars)
+[2026-03-06T05:20:27.130Z]   Tokens: 3342 in / 809 out
+[2026-03-06T05:20:27.131Z]   Results: 2 old signals → 2 new signals

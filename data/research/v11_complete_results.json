@@ -1,0 +1,3956 @@
+[
+  {
+    "video_id": "98a76d69-6bb2-4d93-8168-4b063da57812",
+    "old_signals": [
+      {
+        "id": "8e42adce-5630-4b8a-9e38-1137df6b4173",
+        "stock": "아모레퍼시픽",
+        "signal": "긍정"
+      },
+      {
+        "id": "f5a73453-15dc-4cb5-bd0e-1da5eea7fb23",
+        "stock": "현대차",
+        "signal": "매수"
+      },
+      {
+        "id": "146207b1-702e-44a5-8d7f-026bf6181cbb",
+        "stock": "하이브",
+        "signal": "매수"
+      },
+      {
+        "id": "86996087-c16e-4dfd-9f7a-9be7501ef024",
+        "stock": "삼성SDI",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "현대차",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "하이브",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "삼성SDI",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:50:47.183Z"
+  },
+  {
+    "video_id": "2e2c07ef-1403-42ba-b89c-13c586886381",
+    "old_signals": [
+      {
+        "id": "6549868d-23ce-4378-9258-9d276855783e",
+        "stock": "팔란티어",
+        "signal": "매수"
+      },
+      {
+        "id": "97ee7fe6-94f5-4702-8427-bbb2e5ed38de",
+        "stock": "삼성전자",
+        "signal": "중립"
+      },
+      {
+        "id": "6ddd523f-9bb7-4c9c-90b0-97a4b4a7d563",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      },
+      {
+        "id": "e9014acc-37ef-4a81-b772-e6a0fcb4700b",
+        "stock": "테슬라",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "팔란티어",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "엔비디아",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "테슬라",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:51:03.008Z"
+  },
+  {
+    "video_id": "1a47ae36-c840-4831-9ece-ec88ba5fc7ec",
+    "old_signals": [
+      {
+        "id": "0f3c3f27-ddb4-4dec-a16d-7f28163db5f1",
+        "stock": "삼성전자",
+        "signal": "긍정"
+      },
+      {
+        "id": "163d4529-4871-4f34-ac74-271407952cd6",
+        "stock": "SK하이닉스",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "삼성전자",
+        "signal_type": "매수"
+      }
+    ],
+    "processed_at": "2026-03-06T04:51:11.285Z"
+  },
+  {
+    "video_id": "ffc64461-4859-4f38-898e-519b6ecaf2b2",
+    "old_signals": [
+      {
+        "id": "414a3173-afac-46b8-af46-48615d2293e6",
+        "stock": "SK하이닉스",
+        "signal": "매수"
+      },
+      {
+        "id": "c9d04f21-5570-4d15-b01f-0d8d06412b7b",
+        "stock": "삼성전자",
+        "signal": "매수"
+      },
+      {
+        "id": "4ed7b3c7-e152-4011-85f9-88d7eb331dd6",
+        "stock": "HPSP",
+        "signal": "긍정"
+      },
+      {
+        "id": "e1d58ec7-3ca7-4db9-9a77-d63cf1c06e89",
+        "stock": "SOXX",
+        "signal": "긍정"
+      },
+      {
+        "id": "85e74359-3b1f-4694-b9f5-09b8d303659d",
+        "stock": "원익IPS",
+        "signal": "긍정"
+      },
+      {
+        "id": "11e95a7f-a408-4a9a-9072-f1b238db28e5",
+        "stock": "주성엔지니어링",
+        "signal": "긍정"
+      },
+      {
+        "id": "2bb7d896-a03c-4413-ac3e-9717c59b9090",
+        "stock": "한미반도체",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "삼성전자",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "원익IPS",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "주성엔지니어링",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "한미반도체",
+        "signal_type": "매수"
+      }
+    ],
+    "processed_at": "2026-03-06T04:51:34.863Z"
+  },
+  {
+    "video_id": "fae693ec-1ac2-4516-abf2-f78ae3928a21",
+    "old_signals": [
+      {
+        "id": "6584b77e-4ae8-4f41-bc77-0010108f1dc8",
+        "stock": "테슬라",
+        "signal": "매도"
+      },
+      {
+        "id": "665b423c-d048-4b53-ad5f-15c1b4bb5e17",
+        "stock": "엔비디아",
+        "signal": "매도"
+      },
+      {
+        "id": "3c517d5a-170e-424a-8b44-e092b791e45b",
+        "stock": "애플로빈",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "테슬라",
+        "signal_type": "부정"
+      },
+      {
+        "stock": "엔비디아",
+        "signal_type": "부정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:51:47.563Z"
+  },
+  {
+    "video_id": "b63cdda1-1ae5-41cb-9cc9-09aa7391e187",
+    "old_signals": [
+      {
+        "id": "4ed63794-8f63-41dd-9ff4-747003964b4e",
+        "stock": "비트코인",
+        "signal": "매수"
+      },
+      {
+        "id": "ebe987df-f9d5-473e-b7d3-442aa20da398",
+        "stock": "스퀘어",
+        "signal": "매수"
+      },
+      {
+        "id": "4072c4b1-6f9d-4bd2-b0c0-3e869150ef04",
+        "stock": "마이크로스트래티지",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [],
+    "processed_at": "2026-03-06T04:51:57.150Z"
+  },
+  {
+    "video_id": "cfc9e60f-5bae-45c5-8e57-8f624f79298c",
+    "old_signals": [
+      {
+        "id": "2244a98d-2de6-40a7-bd0a-8f0104126e5e",
+        "stock": "효성중공업",
+        "signal": "긍정"
+      },
+      {
+        "id": "20fe5054-8bda-4b78-8285-bd5270fb57f7",
+        "stock": "HD현대일렉트릭",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "HD현대일렉트릭",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "효성중공업",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:52:09.953Z"
+  },
+  {
+    "video_id": "8bc8b1e0-aea1-4a66-8e7f-4efc9a3f9a34",
+    "old_signals": [
+      {
+        "id": "ff39bd30-09b5-40cc-b8d2-413ff2b32138",
+        "stock": "ASML",
+        "signal": "매수"
+      },
+      {
+        "id": "ea49a319-181d-4fec-ac91-063be14c73ab",
+        "stock": "엔비디아",
+        "signal": "매수"
+      },
+      {
+        "id": "cd3a96b4-8c52-4dce-884f-5e89a8e228d5",
+        "stock": "TSMC",
+        "signal": "매수"
+      },
+      {
+        "id": "ff0d3e8d-9eaf-4d8a-8bde-0b64224c9a86",
+        "stock": "SK하이닉스",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "엔비디아",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "대만적체전로",
+        "signal_type": "매수"
+      }
+    ],
+    "processed_at": "2026-03-06T04:52:24.146Z"
+  },
+  {
+    "video_id": "a09e4db9-6810-4fa8-a9e6-2240ba0ccff5",
+    "old_signals": [
+      {
+        "id": "71ff56f8-deb9-49c1-9c18-bc4fd717d666",
+        "stock": "삼성전자",
+        "signal": "중립"
+      },
+      {
+        "id": "c5d155e7-b7da-4127-90a5-02e4cd45c8f7",
+        "stock": "SK하이닉스",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "삼성전자",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "부정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:52:36.712Z"
+  },
+  {
+    "video_id": "d68ab7a3-4772-49fe-86f2-eead4f4d1887",
+    "old_signals": [
+      {
+        "id": "c250cb34-04cb-4174-9843-8c069f731271",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      },
+      {
+        "id": "7ba0f471-6950-4436-8e8f-2ee5989748ce",
+        "stock": "삼성전자",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "삼성전자",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:52:48.834Z"
+  },
+  {
+    "video_id": "51767b89-2066-40e6-97dd-9d3eef2b59c2",
+    "old_signals": [
+      {
+        "id": "c938fbba-cf04-4904-a295-a607b78b640e",
+        "stock": "몽고디비",
+        "signal": "긍정"
+      },
+      {
+        "id": "9f015918-a4a2-469e-9d3a-73a60c5ddc5a",
+        "stock": "테슬라",
+        "signal": "긍정"
+      },
+      {
+        "id": "f1da5932-d0ed-406e-a3bd-81381a5d0b8c",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "테슬라",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "엔비디아",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:53:01.346Z"
+  },
+  {
+    "video_id": "cef2c937-db77-4bf6-9173-2e3fd8533334",
+    "old_signals": [
+      {
+        "id": "41daad11-7b68-4815-b380-eef73f8555c0",
+        "stock": "테슬라",
+        "signal": "긍정"
+      },
+      {
+        "id": "90831b68-b73e-4f53-b215-ffca476fc46e",
+        "stock": "원익IPS",
+        "signal": "긍정"
+      },
+      {
+        "id": "ffa1dc33-167c-4ea8-9691-5f8aa1bf1f4c",
+        "stock": "삼성전자",
+        "signal": "매수"
+      },
+      {
+        "id": "21f03a71-d3a6-437a-aafb-1ef0f8b224f6",
+        "stock": "테스",
+        "signal": "긍정"
+      },
+      {
+        "id": "5ae58cc4-830b-4abe-8d2e-c0dc7d3fe76d",
+        "stock": "유진테크",
+        "signal": "긍정"
+      },
+      {
+        "id": "bf5c5e09-5518-466d-bf4d-4655a92e4548",
+        "stock": "마이크론",
+        "signal": "매수"
+      },
+      {
+        "id": "072420e3-2ae3-4942-84f8-2c38a6e835f4",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "테슬라",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "삼성전자",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "마이크론",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "엔비디아",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:53:22.120Z"
+  },
+  {
+    "video_id": "c2952626-8842-4561-b297-468f6733d8f7",
+    "old_signals": [
+      {
+        "id": "0d83bde0-d91c-45da-af79-0a360db6c6ad",
+        "stock": "NH투자증권",
+        "signal": "긍정"
+      },
+      {
+        "id": "58b2432f-071a-4208-a1d8-90f3f0222517",
+        "stock": "삼성증권",
+        "signal": "긍정"
+      },
+      {
+        "id": "bb6deb68-005b-489c-9302-1ac7cd050453",
+        "stock": "한국금융지주",
+        "signal": "매수"
+      },
+      {
+        "id": "6ab0f37a-1bac-4010-988a-f14db3e2b1e8",
+        "stock": "키움증권",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "NH투자증권",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "삼성증권",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "한국금융지주",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "키움증권",
+        "signal_type": "매수"
+      }
+    ],
+    "processed_at": "2026-03-06T04:53:38.303Z"
+  },
+  {
+    "video_id": "bee43acd-68d6-4247-98bd-1c1365c8815d",
+    "old_signals": [
+      {
+        "id": "b5ab47f3-aa0c-4584-8a87-41a53aacb0be",
+        "stock": "NC소프트",
+        "signal": "긍정"
+      },
+      {
+        "id": "b2fc3fdd-422e-4611-ad17-2a8be169d68d",
+        "stock": "LG화학",
+        "signal": "매수"
+      },
+      {
+        "id": "997ba1c8-40cc-4255-a8f5-7a8ccd001b5e",
+        "stock": "효성중공업",
+        "signal": "매수"
+      },
+      {
+        "id": "1c3a1827-db67-458f-955b-11bb7b554575",
+        "stock": "하이브",
+        "signal": "긍정"
+      },
+      {
+        "id": "fd197edb-e670-46c0-ac68-1626c26e129e",
+        "stock": "솔브레인",
+        "signal": "긍정"
+      },
+      {
+        "id": "999ac2a9-60b3-42e6-8b24-f3ef97a36eb1",
+        "stock": "HD현대일렉트릭",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "LG화학",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "효성중공업",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "솔브레인",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "하이브",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "HD현대일렉트릭",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:54:02.578Z"
+  },
+  {
+    "video_id": "c7bf5e71-50d1-4ffa-94a7-e3bce9ec49a5",
+    "old_signals": [
+      {
+        "id": "ab0044b3-5414-4421-a6a6-5dd9077c3fd0",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      },
+      {
+        "id": "a9338662-af28-46b7-ac82-84e475646007",
+        "stock": "엔비디아",
+        "signal": "중립"
+      },
+      {
+        "id": "53975f78-e496-49e8-b92e-8e9c482dbf09",
+        "stock": "삼성전자",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "부정"
+      },
+      {
+        "stock": "삼성전자",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:54:16.521Z"
+  },
+  {
+    "video_id": "5e3e10c2-276f-49e6-b87e-57cbb7f65dac",
+    "old_signals": [
+      {
+        "id": "c6df1cd3-246d-40b7-850b-cb0a8d624a65",
+        "stock": "아이덴",
+        "signal": "중립"
+      },
+      {
+        "id": "e7426ae0-0fdd-47f7-be0e-c7d4f4f2956a",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "아이덴",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:54:29.843Z"
+  },
+  {
+    "video_id": "3394ea3c-af53-4ba1-9cad-e2d3585006ee",
+    "old_signals": [
+      {
+        "id": "f3b62b8f-f858-4489-b100-8520c5b8a110",
+        "stock": "솔라나",
+        "signal": "긍정"
+      },
+      {
+        "id": "8a2d2603-459b-4577-ae54-4928892721ac",
+        "stock": "이더리움",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [],
+    "processed_at": "2026-03-06T04:54:37.811Z"
+  },
+  {
+    "video_id": "235ea3ae-5b54-4f6b-9a12-0f57da76d919",
+    "old_signals": [
+      {
+        "id": "19d07177-090a-4774-8504-38d177a8117d",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      },
+      {
+        "id": "5a8d8634-625b-4e6a-b93b-47380dbe329c",
+        "stock": "현대차",
+        "signal": "매수"
+      },
+      {
+        "id": "33078122-93ea-4001-83bd-58ee6dc8e4df",
+        "stock": "삼성전자",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "삼성전자",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "현대차",
+        "signal_type": "매수"
+      }
+    ],
+    "processed_at": "2026-03-06T04:54:51.100Z"
+  },
+  {
+    "video_id": "33bed8cc-0c81-4eb1-a335-533411a2bff2",
+    "old_signals": [
+      {
+        "id": "37a9ac45-1d32-4458-a263-6a760e0871b7",
+        "stock": "리커전",
+        "signal": "매수"
+      },
+      {
+        "id": "626f47ef-36c1-43a2-83f9-77c6cf30ae25",
+        "stock": "JW중외제약",
+        "signal": "긍정"
+      },
+      {
+        "id": "517736ec-28a4-4d63-afe8-d7200e1d97de",
+        "stock": "삼성바이오로직스",
+        "signal": "긍정"
+      },
+      {
+        "id": "5da4e87b-af90-4acf-b92a-d84f04555394",
+        "stock": "엔비디아",
+        "signal": "매수"
+      },
+      {
+        "id": "d91fd9b3-eb4c-4e9e-a08f-c9d8d8a0b0c0",
+        "stock": "보령",
+        "signal": "긍정"
+      },
+      {
+        "id": "d8dd8ec6-5fe7-489b-bd58-068236d16e43",
+        "stock": "SK바이오팜",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "리커전",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "JW중외제약",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "삼성바이오로직스",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "엔비디아",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "보령",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "SK바이오팜",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:55:18.399Z"
+  },
+  {
+    "video_id": "8b8ddea2-1548-4db9-976f-da0b6e877a31",
+    "old_signals": [
+      {
+        "id": "eb925c37-a812-43f9-ad57-24100c9a6763",
+        "stock": "엔비디아",
+        "signal": "중립"
+      },
+      {
+        "id": "2738dd25-5dd5-4f8f-b632-b8668ee418d5",
+        "stock": "솔라나",
+        "signal": "긍정"
+      },
+      {
+        "id": "b6ef50ed-9f79-46fd-97d6-8fa0d29b993d",
+        "stock": "비트코인",
+        "signal": "긍정"
+      },
+      {
+        "id": "87860eb8-38f5-41cf-9937-7c414f197c65",
+        "stock": "이더리움",
+        "signal": "긍정"
+      },
+      {
+        "id": "9b0236ec-d587-472e-a257-ad0356ca1f4e",
+        "stock": "AMD",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [],
+    "processed_at": "2026-03-06T04:55:28.060Z"
+  },
+  {
+    "video_id": "f2ca296c-54a7-4adc-896f-af1f60dfb714",
+    "old_signals": [
+      {
+        "id": "6bdb5818-c919-43d6-b216-c05c89214066",
+        "stock": "도지코인",
+        "signal": "긍정"
+      },
+      {
+        "id": "25ac367b-90ac-4a16-9e71-f0bb3ccc7ebd",
+        "stock": "팔란티어",
+        "signal": "긍정"
+      },
+      {
+        "id": "155cd7b3-b874-4290-81e2-b1bdb35ef1c8",
+        "stock": "비트코인",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "팔란티어",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:55:43.173Z"
+  },
+  {
+    "video_id": "2f0aa05d-99f4-49ef-9156-8cdacd748417",
+    "old_signals": [
+      {
+        "id": "5521f481-8192-4ad8-817d-4941327c5e15",
+        "stock": "마이크론",
+        "signal": "중립"
+      },
+      {
+        "id": "c84d8705-85ea-4cb7-b91a-d9fb54db86ac",
+        "stock": "구글",
+        "signal": "중립"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "마이크론",
+        "signal_type": "부정"
+      },
+      {
+        "stock": "구글",
+        "signal_type": "중립"
+      }
+    ],
+    "processed_at": "2026-03-06T04:55:56.147Z"
+  },
+  {
+    "video_id": "9236a7e9-8a4b-4291-b6ef-19cc83991e5e",
+    "old_signals": [
+      {
+        "id": "75042710-e161-4b46-bb9e-ae97f1e0d98a",
+        "stock": "마이크론",
+        "signal": "긍정"
+      },
+      {
+        "id": "dfa9fdbc-5485-4a48-a007-14dab596ab31",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      },
+      {
+        "id": "83d4e654-d9db-4e5a-9a69-ac85b0ce0699",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      },
+      {
+        "id": "7ed86fea-e0bb-4604-b0c1-3ba7788966c1",
+        "stock": "삼성전자",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "마이크론",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "샌디스크",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "삼성전자",
+        "signal_type": "매수"
+      }
+    ],
+    "processed_at": "2026-03-06T04:56:14.144Z"
+  },
+  {
+    "video_id": "b1408bd1-07fc-4bd0-bc0e-fa6626b08998",
+    "old_signals": [
+      {
+        "id": "e23629fa-f4fa-4ead-9403-9d461f3f639c",
+        "stock": "비트코인",
+        "signal": "중립"
+      },
+      {
+        "id": "ddfc372f-0da1-4315-881c-0a723d4a0709",
+        "stock": "이더리���",
+        "signal": "긍정"
+      },
+      {
+        "id": "b93bfbe9-9179-472e-8a0e-64a99f648672",
+        "stock": "서클",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [],
+    "processed_at": "2026-03-06T04:56:22.482Z"
+  },
+  {
+    "video_id": "8b4186f2-3942-47d8-8601-1350fb8a1c5a",
+    "old_signals": [
+      {
+        "id": "5f35b295-8e93-4026-99b0-64c8671d9c6c",
+        "stock": "LG에너지솔루션",
+        "signal": "매수"
+      },
+      {
+        "id": "3928d1ff-9c2f-4197-8579-bb1442be8023",
+        "stock": "엘앤에프",
+        "signal": "긍정"
+      },
+      {
+        "id": "ad45ea2f-df42-426e-9598-165a6f1d5b46",
+        "stock": "삼성SDI",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "엘앤에프",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "삼성에스디아이",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:56:35.360Z"
+  },
+  {
+    "video_id": "0f17e179-0f77-49b4-a692-dd8f6ed0d44c",
+    "old_signals": [
+      {
+        "id": "8a39cf9d-0eab-4c24-bb35-50b930319196",
+        "stock": "코스피",
+        "signal": "긍정"
+      },
+      {
+        "id": "8404c2c8-0bf8-4b63-9294-25ba6f2d2e63",
+        "stock": "게임스톱",
+        "signal": "긍정"
+      },
+      {
+        "id": "02a3ef13-e68d-4fda-9bf4-580e54b89cba",
+        "stock": "비트코인",
+        "signal": "긍정"
+      },
+      {
+        "id": "39a76b66-94b5-48ea-b720-c503745a1176",
+        "stock": "테슬라",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "테슬라",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:56:44.364Z"
+  },
+  {
+    "video_id": "d3bb96ba-c657-4b02-84e7-b985c24d2476",
+    "old_signals": [
+      {
+        "id": "3906eaf2-2f5d-4cc7-b222-b7292cfb28ac",
+        "stock": "퀄컴",
+        "signal": "긍정"
+      },
+      {
+        "id": "55201485-1317-4b4f-9aed-853d435b1e4e",
+        "stock": "삼성전자",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "삼성전자",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:56:53.372Z"
+  },
+  {
+    "video_id": "811fb5ef-0e8f-4c6c-acbb-3e5888f198f3",
+    "old_signals": [
+      {
+        "id": "d1088413-8e9b-48ba-89c4-64557d3704f9",
+        "stock": "이더리움",
+        "signal": "긍정"
+      },
+      {
+        "id": "fe8f5a4d-d549-4eaa-a910-7fd06d622eeb",
+        "stock": "비트코인",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [],
+    "processed_at": "2026-03-06T04:57:02.045Z"
+  },
+  {
+    "video_id": "33d1cb70-7e31-4b3d-baf3-d499deb0ebd9",
+    "old_signals": [
+      {
+        "id": "c8ac6e7b-ca6c-444b-a629-3d14ffc0c830",
+        "stock": "한미반도체",
+        "signal": "긍정"
+      },
+      {
+        "id": "0a4f1ddf-9978-4ce8-9b36-b0d890859604",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      },
+      {
+        "id": "b33e9c79-8585-4ec4-97cf-103ed14059d1",
+        "stock": "TSMC",
+        "signal": "매수"
+      },
+      {
+        "id": "50cdb1fe-64f1-4d66-b855-ad09f458424f",
+        "stock": "삼성전자",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "한미반도체",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "TSMC",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "삼성전자",
+        "signal_type": "부정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:57:24.242Z"
+  },
+  {
+    "video_id": "75a3e88b-0b4b-4d8b-861b-51d86ce7c258",
+    "old_signals": [
+      {
+        "id": "6b52051b-376d-462c-be2d-ff48e7f90b48",
+        "stock": "SK하이닉스",
+        "signal": "매수"
+      },
+      {
+        "id": "27e91ae0-545f-4880-9c17-b5c74deed171",
+        "stock": "삼성전자",
+        "signal": "매수"
+      },
+      {
+        "id": "c2fc4a09-ac4d-4d92-ae8f-9ed6651d8479",
+        "stock": "TSMC",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "삼성전자",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "TSMC",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:57:39.220Z"
+  },
+  {
+    "video_id": "5f9776de-6056-4b8e-9179-1e34fc5ba534",
+    "old_signals": [
+      {
+        "id": "8ecb977f-0bf5-49c9-95d9-d3fceaf242f7",
+        "stock": "팔란티어",
+        "signal": "매수"
+      },
+      {
+        "id": "73a48f99-7f9c-430f-a9c2-80f21b268870",
+        "stock": "현대일렉트릭앤에너지시스템",
+        "signal": "긍정"
+      },
+      {
+        "id": "a5d76e99-2105-4a96-bfdd-67dec0a95669",
+        "stock": "SK하이닉스",
+        "signal": "매수"
+      },
+      {
+        "id": "bf82de5c-3f9d-4fe5-a10a-d18d877904a4",
+        "stock": "삼성전자",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "팔란티어",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "현대일렉트릭앤에너지시스템",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "에스케이하이닉스",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "삼성전자",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:58:00.586Z"
+  },
+  {
+    "video_id": "0a17553c-5674-4a60-9d4f-a9df93168aaf",
+    "old_signals": [
+      {
+        "id": "c8406e74-6e31-4d53-879b-d8ab0da148c9",
+        "stock": "테슬라",
+        "signal": "긍정"
+      },
+      {
+        "id": "c6341e40-1dea-4ed9-8256-c55b75fbef8b",
+        "stock": "구글",
+        "signal": "긍정"
+      },
+      {
+        "id": "d6e7de6f-956e-4612-90a1-ed161e29af13",
+        "stock": "애플",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "테슬라",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "구글",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "애플",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:58:16.408Z"
+  },
+  {
+    "video_id": "df3a6ba3-8db4-4c9c-98b3-e8bb6f0662c2",
+    "old_signals": [
+      {
+        "id": "ea14ef92-216a-42b8-92a1-7f5e64c5edec",
+        "stock": "비트코인",
+        "signal": "긍정"
+      },
+      {
+        "id": "be85eb2d-f5eb-4111-ac45-c9db8fc1ee83",
+        "stock": "클레이튼",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [],
+    "processed_at": "2026-03-06T04:58:25.490Z"
+  },
+  {
+    "video_id": "02165a4c-271d-4a6c-8fcc-86dc6209f77c",
+    "old_signals": [
+      {
+        "id": "4e92c463-03b6-4086-8355-5ca8438e1289",
+        "stock": "라이엇 플랫폼스",
+        "signal": "긍정"
+      },
+      {
+        "id": "d2b6bd3f-99f6-4555-ac0b-4e9d82d2aa48",
+        "stock": "로켓랩",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [],
+    "processed_at": "2026-03-06T04:58:35.115Z"
+  },
+  {
+    "video_id": "b5f2db59-bff9-4534-8ba1-ab285ab72b9b",
+    "old_signals": [
+      {
+        "id": "47a31f45-4b39-4325-b71e-d63d95d375c7",
+        "stock": "삼성전자",
+        "signal": "긍정"
+      },
+      {
+        "id": "853e8377-4036-46fd-819b-943799cdff6b",
+        "stock": "KB금융",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "삼성전자",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "KB금융",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:58:47.992Z"
+  },
+  {
+    "video_id": "dd2d399a-532b-43b8-bd78-42953ccfea73",
+    "old_signals": [
+      {
+        "id": "2f9f1e0c-d05e-4d0b-b7de-289ed68a2cf6",
+        "stock": "비트코인",
+        "signal": "매수"
+      },
+      {
+        "id": "d5048e12-e9d5-4792-b844-c9a3ddeeeaba",
+        "stock": "팔란티어",
+        "signal": "긍정"
+      },
+      {
+        "id": "ecb8d10f-d2aa-4d31-976a-d854bdb30ae6",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      },
+      {
+        "id": "ecff29c8-545b-499a-8877-84d1b5b7186c",
+        "stock": "로켓랩",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [],
+    "processed_at": "2026-03-06T04:58:57.975Z"
+  },
+  {
+    "video_id": "50aea750-fca7-4373-8ad5-0d9d2a4275c9",
+    "old_signals": [
+      {
+        "id": "4b8b138e-e90a-4f5e-89ff-e8fc35243c78",
+        "stock": "코인베이스",
+        "signal": "중립"
+      },
+      {
+        "id": "5a166d02-ddfe-4b5f-a99f-4b28ad161db8",
+        "stock": "이더리움",
+        "signal": "중립"
+      },
+      {
+        "id": "9ec4759d-0cea-48be-bd27-bdece93c0c06",
+        "stock": "비트코인",
+        "signal": "긍정"
+      },
+      {
+        "id": "ca99fdce-f4aa-4b0c-9096-0f2f0f3af913",
+        "stock": "솔라나",
+        "signal": "중립"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "코인베이스",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:59:07.087Z"
+  },
+  {
+    "video_id": "76442f8c-d249-4209-8237-b97c34aa1b1b",
+    "old_signals": [
+      {
+        "id": "b80074bb-2d64-4a02-80a5-b6e120ac0b3b",
+        "stock": "테슬라",
+        "signal": "매수"
+      },
+      {
+        "id": "04ed811a-14d8-4977-8b60-f5fbbaa190e4",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      },
+      {
+        "id": "64fe1036-47ea-472d-aedc-0aa853d74799",
+        "stock": "메타",
+        "signal": "긍정"
+      },
+      {
+        "id": "a3cdc851-9645-4559-b2d5-c30743af070c",
+        "stock": "애플",
+        "signal": "부정"
+      },
+      {
+        "id": "c24e2668-fd2a-4caa-9dfc-d58c9a46db38",
+        "stock": "구글",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "테슬라",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "엔비디아",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "메타",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "애플",
+        "signal_type": "부정"
+      },
+      {
+        "stock": "구글",
+        "signal_type": "부정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:59:31.497Z"
+  },
+  {
+    "video_id": "db471d9e-8357-4e5c-8a54-cb3fddb9b6c4",
+    "old_signals": [
+      {
+        "id": "cb988019-e9e6-4553-816c-2d2daba87b90",
+        "stock": "리노공업",
+        "signal": "긍정"
+      },
+      {
+        "id": "0bdeba8a-0763-416a-80d2-afe60489251e",
+        "stock": "동진쎄미켐",
+        "signal": "긍정"
+      },
+      {
+        "id": "cfa14a5a-07c5-41c5-a814-07ecc74f7f2f",
+        "stock": "솔브레인",
+        "signal": "긍정"
+      },
+      {
+        "id": "69a1a017-add0-46f4-8782-fe17c2325114",
+        "stock": "케이던스",
+        "signal": "긍정"
+      },
+      {
+        "id": "7833238b-48ee-42c3-b90f-4ad5c33dd908",
+        "stock": "두산테스나",
+        "signal": "긍정"
+      },
+      {
+        "id": "69418bca-2585-4fc5-8c3f-8a31a620b87f",
+        "stock": "시놉시스",
+        "signal": "긍정"
+      },
+      {
+        "id": "83ddf62e-c693-4b9b-800e-ef65cef1c735",
+        "stock": "엠코테크놀로지",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "리노공업",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "케이던스",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "두산테스나",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "시놉시스",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "엠코테크놀로지",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T04:59:55.610Z"
+  },
+  {
+    "video_id": "dde613a8-9030-4649-88ab-ab3d968227de",
+    "old_signals": [
+      {
+        "id": "23cb54a9-51fe-4d60-91fa-6d504cd94177",
+        "stock": "이더리움",
+        "signal": "긍정"
+      },
+      {
+        "id": "a89dada5-f4a7-44ba-85ad-e75667d65953",
+        "stock": "비트코인",
+        "signal": "긍정"
+      },
+      {
+        "id": "e9aedc29-4f72-41dc-a12b-1cb6c7bdd687",
+        "stock": "금",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [],
+    "processed_at": "2026-03-06T05:00:03.304Z"
+  },
+  {
+    "video_id": "e76edfab-ce52-45d8-bd94-67eb783ed8b0",
+    "old_signals": [
+      {
+        "id": "204339d9-23f2-4912-ad93-4d386a4495f9",
+        "stock": "퍼스트솔라",
+        "signal": "긍정"
+      },
+      {
+        "id": "0f81f822-90e2-482c-9ede-035a53d232eb",
+        "stock": "플러그파워",
+        "signal": "긍정"
+      },
+      {
+        "id": "33df09b3-b297-4809-a1bc-b3c2fd6d7386",
+        "stock": "블룸에너지",
+        "signal": "긍정"
+      },
+      {
+        "id": "ab46eb80-1ecc-44f6-94e2-68034d98b5f0",
+        "stock": "GE 버노바",
+        "signal": "긍정"
+      },
+      {
+        "id": "eeb36701-7f98-4fc4-9db8-abedf323667f",
+        "stock": "테슬라",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "퍼스트솔라",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "플러그파워",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "블룸에너지",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "GE 버르노바",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "테슬라",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:00:33.838Z"
+  },
+  {
+    "video_id": "519561b5-2a66-4b51-9b44-c4b857058f6d",
+    "old_signals": [
+      {
+        "id": "cbbed4aa-755d-43dd-9366-48f92bcb3d5b",
+        "stock": "엔비디아",
+        "signal": "중립"
+      },
+      {
+        "id": "f554e3c9-ff3c-41a8-b9ea-67f24b46ac42",
+        "stock": "삼성전자",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "엔비디아",
+        "signal_type": "중립"
+      },
+      {
+        "stock": "삼성전자",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:00:47.963Z"
+  },
+  {
+    "video_id": "80cea929-9c36-4c46-bd98-38f9db2a553f",
+    "old_signals": [
+      {
+        "id": "84e5a440-372c-436f-b563-38c2401fe91a",
+        "stock": "쉐브론",
+        "signal": "긍정"
+      },
+      {
+        "id": "0a553b66-dacb-4601-a5e1-89e1e1f241a2",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      },
+      {
+        "id": "0ea626ad-7c12-4f06-81f0-1c783b5a1c59",
+        "stock": "옥시덴탈 페트롤리엄",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "엔비디아",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "옥시덴탈 페트롤리엄",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:01:01.603Z"
+  },
+  {
+    "video_id": "96218d6d-0b4b-49a7-853e-5b4e51b780ca",
+    "old_signals": [
+      {
+        "id": "164ae414-2b53-41ef-958e-3913562f2d2d",
+        "stock": "처브",
+        "signal": "매수"
+      },
+      {
+        "id": "f8ae74c7-e482-46de-acb1-1598d95e5bfa",
+        "stock": "옥시덴탈 페트롤리엄",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "옥시덴탈 페트롤리엄",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:01:11.018Z"
+  },
+  {
+    "video_id": "e284ee64-d2f0-471f-a5cb-6a5cd16e57c0",
+    "old_signals": [
+      {
+        "id": "d0638f82-59ab-432a-b607-3abfdce83470",
+        "stock": "엔비디아",
+        "signal": "매수"
+      },
+      {
+        "id": "10f381ca-e968-4966-9ee9-bfc207efe62b",
+        "stock": "AMD",
+        "signal": "긍정"
+      },
+      {
+        "id": "e5f8573f-72f0-4c24-bf08-69010ea10941",
+        "stock": "ARM홀딩스",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "엔비디아",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "AMD",
+        "signal_type": "중립"
+      }
+    ],
+    "processed_at": "2026-03-06T05:01:24.095Z"
+  },
+  {
+    "video_id": "454ff52c-c5af-455c-9726-bd34831e135b",
+    "old_signals": [
+      {
+        "id": "2f2d38d8-a983-4086-8455-109ce8861187",
+        "stock": "오라클",
+        "signal": "긍정"
+      },
+      {
+        "id": "3f0c2c9a-8a34-46b0-b562-d6482799c5fa",
+        "stock": "애플",
+        "signal": "긍정"
+      },
+      {
+        "id": "69517714-36f6-4b2b-9819-c78d99b0da6f",
+        "stock": "삼성전자",
+        "signal": "부정"
+      },
+      {
+        "id": "25091243-8562-4d6d-a0a5-b88e626eee88",
+        "stock": "SK하이닉스",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "오라클",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "애플",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "삼성전자",
+        "signal_type": "부정"
+      },
+      {
+        "stock": "하이닉스",
+        "signal_type": "부정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:01:45.254Z"
+  },
+  {
+    "video_id": "047df037-15e8-45ed-95a1-52202d8d15b9",
+    "old_signals": [
+      {
+        "id": "b96216d8-d917-4f30-a40c-c34f5269a630",
+        "stock": "알파벳 (구글)",
+        "signal": "긍정"
+      },
+      {
+        "id": "05a6cc65-9b1f-4664-995f-35120863c1a6",
+        "stock": "애플",
+        "signal": "긍정"
+      },
+      {
+        "id": "e0c2bbf3-c9d6-4628-9d5a-049862a5ac6b",
+        "stock": "테슬라",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "구글",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "애플",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "테슬라",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:02:02.469Z"
+  },
+  {
+    "video_id": "fef2edc1-0515-4e46-839a-8b6644131303",
+    "old_signals": [
+      {
+        "id": "844663db-356b-4ee0-997f-35954b9437ce",
+        "stock": "기아",
+        "signal": "중립"
+      },
+      {
+        "id": "3422ea5f-11f2-4bd0-bd4e-4b186bbd578d",
+        "stock": "현대차",
+        "signal": "중립"
+      },
+      {
+        "id": "a344310e-4cee-4431-a4d1-2af8ef2c1910",
+        "stock": "SK하이닉스",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "기아",
+        "signal_type": "부정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:02:11.580Z"
+  },
+  {
+    "video_id": "38cae4f3-38f6-4d59-86f4-a647ebed7de3",
+    "old_signals": [
+      {
+        "id": "566eacd9-acfc-4783-93ad-cd6db9ee76aa",
+        "stock": "비트코인",
+        "signal": "매수"
+      },
+      {
+        "id": "bf01a4e0-e1c3-48c4-a4ba-a0184475e451",
+        "stock": "테슬라",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "테슬라",
+        "signal_type": "매수"
+      }
+    ],
+    "processed_at": "2026-03-06T05:02:20.898Z"
+  },
+  {
+    "video_id": "fca136d0-9541-46bc-a2da-1febbf3b9bde",
+    "old_signals": [
+      {
+        "id": "01d4e1ef-44d8-41b7-96f0-08efcf0f1eb9",
+        "stock": "노보 노디스크",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [],
+    "processed_at": "2026-03-06T05:02:32.435Z"
+  },
+  {
+    "video_id": "5b0fc074-0a47-46fe-a046-638e72056f6b",
+    "old_signals": [
+      {
+        "id": "ace9dc7c-4747-4680-af31-9f8d2b8e6a7e",
+        "stock": "삼성전자",
+        "signal": "중립"
+      },
+      {
+        "id": "d1d2ff32-9af3-4e3b-8ae4-a3ddc9b81a45",
+        "stock": "SK하이닉스",
+        "signal": "매수"
+      },
+      {
+        "id": "d6124106-570e-4161-af7a-069c4a446845",
+        "stock": "애플",
+        "signal": "매수"
+      },
+      {
+        "id": "28c88b35-d6dd-47c2-95f0-081733e94947",
+        "stock": "테슬라",
+        "signal": "긍정"
+      },
+      {
+        "id": "4a7ae072-e800-4650-ba7e-34bd8beb670f",
+        "stock": "구글",
+        "signal": "긍정"
+      },
+      {
+        "id": "71252d6b-d57c-4fef-a640-db4d5893c17a",
+        "stock": "메타",
+        "signal": "긍정"
+      },
+      {
+        "id": "c6cb4cc9-5101-4457-8916-7402cf757ed8",
+        "stock": "브로드컴",
+        "signal": "긍정"
+      },
+      {
+        "id": "df9239ab-4f1d-4949-b751-3065dc606fad",
+        "stock": "엔비디아",
+        "signal": "중립"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "애플",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "테슬라",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "구글",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "메타",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:02:57.843Z"
+  },
+  {
+    "video_id": "67a78357-8dfe-4f87-beff-869b8679759d",
+    "old_signals": [
+      {
+        "id": "602d8b8c-d916-440d-86b4-294d58f9e03b",
+        "stock": "테슬라",
+        "signal": "부정"
+      },
+      {
+        "id": "778d03fa-60ae-458e-808a-a94c17af28e1",
+        "stock": "GE베르노바",
+        "signal": "긍정"
+      },
+      {
+        "id": "bcc4ba4e-4415-4eb2-bf2a-fee7afb93267",
+        "stock": "SK하이닉스",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "매수"
+      }
+    ],
+    "processed_at": "2026-03-06T05:03:06.600Z"
+  },
+  {
+    "video_id": "d881c2dd-e098-42c3-ada8-e6e843f8ab68",
+    "old_signals": [
+      {
+        "id": "bf014307-e031-4468-accb-01692d69ebfb",
+        "stock": "팔란티어",
+        "signal": "부정"
+      },
+      {
+        "id": "7280cbba-058f-4ffd-9c05-9f008c0ed94f",
+        "stock": "마이크론",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "팔란티어",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "마이크론",
+        "signal_type": "부정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:03:18.723Z"
+  },
+  {
+    "video_id": "eeadcb2b-4523-4ec0-b5bc-1f7e46e3deee",
+    "old_signals": [
+      {
+        "id": "86ebf240-8a00-4c7d-a36f-56a39936189d",
+        "stock": "TSMC",
+        "signal": "긍정"
+      },
+      {
+        "id": "0774fa3d-43b8-4ee4-bb90-0df97986d067",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      },
+      {
+        "id": "a9a76068-64d1-4937-b482-627a01283090",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      },
+      {
+        "id": "c1c840e6-43b2-48a0-a08c-ee66bc6c12b3",
+        "stock": "삼성전자",
+        "signal": "중립"
+      },
+      {
+        "id": "c56a4b2d-bf22-425a-80ec-6ca3439e4ae3",
+        "stock": "한미반도체",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "엔비디아",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "삼성전자",
+        "signal_type": "부정"
+      },
+      {
+        "stock": "한미반도체",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:03:41.979Z"
+  },
+  {
+    "video_id": "59ae252a-ff97-4672-9616-259bbbf02b16",
+    "old_signals": [
+      {
+        "id": "3f95260c-e9c6-4208-905f-3f508048fc02",
+        "stock": "애플",
+        "signal": "긍정"
+      },
+      {
+        "id": "2fee6153-ec12-4b8c-b3be-823926910dfb",
+        "stock": "테슬라",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "애플",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "테슬라",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:03:56.603Z"
+  },
+  {
+    "video_id": "0d494926-53db-4458-a73f-dce7e0ba56c1",
+    "old_signals": [
+      {
+        "id": "ffe2b65a-cc72-40bd-a92c-b5f78c986e69",
+        "stock": "테슬라",
+        "signal": "매수"
+      },
+      {
+        "id": "9c2f0f22-facf-42fc-bc50-04328f8876fc",
+        "stock": "브로드컴",
+        "signal": "긍정"
+      },
+      {
+        "id": "593728e5-348a-4b89-bf56-c358c12a2861",
+        "stock": "오라클",
+        "signal": "중립"
+      },
+      {
+        "id": "a463b351-9505-41b5-9cf5-315c11eab5b6",
+        "stock": "팔란티어",
+        "signal": "매수"
+      },
+      {
+        "id": "c2230cc0-4030-4a29-9e89-e354806ffca4",
+        "stock": "현대차",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "브로드컴",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "현대차",
+        "signal_type": "부정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:04:09.824Z"
+  },
+  {
+    "video_id": "bb3b14a5-6506-4e7b-9ee6-6e626c8a84c2",
+    "old_signals": [
+      {
+        "id": "fadc55f6-475f-4c45-b1e7-c2c957a21e90",
+        "stock": "하나마이크론",
+        "signal": "긍정"
+      },
+      {
+        "id": "5f181940-c403-4f5e-8917-6f71d67f3a88",
+        "stock": "가온칩스",
+        "signal": "긍정"
+      },
+      {
+        "id": "b78915fa-dcb7-4dd2-bff6-4d59b7adf53c",
+        "stock": "삼성전자",
+        "signal": "긍정"
+      },
+      {
+        "id": "ea583763-a694-4bf4-940a-398e5a5f1c1f",
+        "stock": "두산테스나",
+        "signal": "긍정"
+      },
+      {
+        "id": "fa12c37c-1799-47a3-b377-0cf37e286d0b",
+        "stock": "에이디텍",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "마이크론",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "가온칩스",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "두산테스나",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "에이디텍",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:04:29.280Z"
+  },
+  {
+    "video_id": "2a8be397-eca5-40be-957a-4a64a1e1a5da",
+    "old_signals": [
+      {
+        "id": "a50399f1-5665-4d6a-b35a-aabf81988da9",
+        "stock": "퀄컴",
+        "signal": "긍정"
+      },
+      {
+        "id": "7dc89aa5-b275-4543-ba21-c64c077a326a",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      },
+      {
+        "id": "716344a9-f588-4ef9-a04d-4853d1c3e0fc",
+        "stock": "애플",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "퀄컴",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "엔비디아",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "애플",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:04:44.858Z"
+  },
+  {
+    "video_id": "06e7857c-c729-4ab1-9dc0-f140f7e4d262",
+    "old_signals": [
+      {
+        "id": "045cbeca-c197-4e7d-a676-a6919ddde69c",
+        "stock": "한미반도체",
+        "signal": "긍정"
+      },
+      {
+        "id": "91c5e9f4-2401-41c2-afb2-f9934baff3ea",
+        "stock": "삼성전자",
+        "signal": "긍정"
+      },
+      {
+        "id": "d1eb38ef-f554-4161-9005-91d36f48067d",
+        "stock": "두산테스나",
+        "signal": "긍정"
+      },
+      {
+        "id": "e17fe49a-8250-4dae-8685-65f42f4a1dbc",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "한미반도체",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "삼성전자",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "두산테스나",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:05:04.974Z"
+  },
+  {
+    "video_id": "39af56aa-81ac-4227-9235-d6387844bf48",
+    "old_signals": [
+      {
+        "id": "2e68e858-c0c7-4289-ad07-74909f6e6d42",
+        "stock": "TSMC",
+        "signal": "부정"
+      },
+      {
+        "id": "10d62044-a137-4ccb-a74a-70e79b77d7e7",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [],
+    "processed_at": "2026-03-06T05:05:14.659Z"
+  },
+  {
+    "video_id": "64ce4bcc-8d4f-4563-8798-4d2bafff6360",
+    "old_signals": [
+      {
+        "id": "2fd334ae-4c40-4bc3-90a5-75221fc77216",
+        "stock": "삼성전자",
+        "signal": "긍정"
+      },
+      {
+        "id": "4205cdf0-d438-4caa-93dc-f257afddb14a",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      },
+      {
+        "id": "70fbc8fb-0471-4aea-859d-9c3e4ad9eaaf",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      },
+      {
+        "id": "37b20712-9a29-4573-b6a9-9febb5f5b9cc",
+        "stock": "인텔",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "삼성전자",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "엔비디아",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "인텔",
+        "signal_type": "부정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:05:37.399Z"
+  },
+  {
+    "video_id": "b0cdbc85-b566-4db1-9745-b736a8c83c68",
+    "old_signals": [
+      {
+        "id": "615334cf-65ac-4087-b7b1-743835966408",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      },
+      {
+        "id": "e38bc470-4ffd-4d87-bd67-00b726d56e23",
+        "stock": "테슬라",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "엔비디아",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "테슬라",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:05:48.334Z"
+  },
+  {
+    "video_id": "ecdadb37-6dd0-4348-82b4-bd21f6c7dad3",
+    "old_signals": [
+      {
+        "id": "ce2f42b7-645a-4e6c-bdb6-10f9eb3e5aec",
+        "stock": "한미반도체",
+        "signal": "긍정"
+      },
+      {
+        "id": "f27be37f-2504-4349-8c59-8de79d2a3fe0",
+        "stock": "삼성전자",
+        "signal": "부정"
+      },
+      {
+        "id": "69ffed40-907c-4f6c-b626-79229cf2329e",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "한미반도체",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "삼성전자",
+        "signal_type": "부정"
+      },
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:06:06.418Z"
+  },
+  {
+    "video_id": "1b69ce70-0e8c-4c21-b2f9-707cdc43ed0b",
+    "old_signals": [
+      {
+        "id": "60723ec6-b22a-4668-aa90-687540a23830",
+        "stock": "마이크로소프트",
+        "signal": "매수"
+      },
+      {
+        "id": "36f001d2-7b06-40a5-aea8-8bad16a1ab7c",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      },
+      {
+        "id": "5663cf93-950e-4e8c-88a1-e7656e4ad8e9",
+        "stock": "애플",
+        "signal": "긍정"
+      },
+      {
+        "id": "e7b638f9-679e-4c3c-8dbc-2b59edbc072e",
+        "stock": "구글",
+        "signal": "긍정"
+      },
+      {
+        "id": "fc1d8263-9389-4826-88e4-50daa41a3e5e",
+        "stock": "인텔",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "마이크로소프트",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "엔비디아",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "애플",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "구글",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "인텔",
+        "signal_type": "부정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:06:33.145Z"
+  },
+  {
+    "video_id": "060f3f2f-1d91-4eab-9846-87c66a058da5",
+    "old_signals": [
+      {
+        "id": "ce0b0b57-190e-4a50-9ba1-f3179df4aaa4",
+        "stock": "메타",
+        "signal": "긍정"
+      },
+      {
+        "id": "e3cc951c-101d-4feb-b611-cf6704fdab9d",
+        "stock": "테슬라",
+        "signal": "긍정"
+      },
+      {
+        "id": "0b515590-5be8-4452-99d5-22dea940a163",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "메타",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "테슬라",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "엔비디아",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:06:48.710Z"
+  },
+  {
+    "video_id": "822b101a-0bcd-4691-b1c4-8609d1a1aff6",
+    "old_signals": [
+      {
+        "id": "2e8610db-88a1-489e-b56a-f65ddd9d9dd9",
+        "stock": "브로드컴",
+        "signal": "긍정"
+      },
+      {
+        "id": "cf3f09c6-8e8b-40fa-be18-5f460a91aa5b",
+        "stock": "구글",
+        "signal": "긍정"
+      },
+      {
+        "id": "e4f83de3-148e-46d4-b348-cc1b6cecabe9",
+        "stock": "팔란티어",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "브로드컴",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "구글",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "팔란티어",
+        "signal_type": "부정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:07:06.366Z"
+  },
+  {
+    "video_id": "fa63d50b-3610-49d0-aa78-c33c9420789b",
+    "old_signals": [
+      {
+        "id": "32b06bca-4dbd-40a5-9e63-08f7c2c8c854",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      },
+      {
+        "id": "7797698f-94ca-4ded-a6ff-730c35908555",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      },
+      {
+        "id": "a001b9cf-dd0b-4e1c-9102-15bcbc2638bc",
+        "stock": "네이버",
+        "signal": "부정"
+      },
+      {
+        "id": "45ed6d66-c154-46b1-8754-095a6e41f5e7",
+        "stock": "삼성전자",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "네이버",
+        "signal_type": "부정"
+      },
+      {
+        "stock": "삼성전자",
+        "signal_type": "부정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:07:22.679Z"
+  },
+  {
+    "video_id": "f6b446a0-7981-4ce8-a167-0800ad573c91",
+    "old_signals": [
+      {
+        "id": "b2420467-07a0-437b-871f-534f4b9c38b4",
+        "stock": "테슬라",
+        "signal": "매수"
+      },
+      {
+        "id": "2d7a50a6-1dfa-404e-b9f9-accbe2298cc6",
+        "stock": "TSMC",
+        "signal": "긍정"
+      },
+      {
+        "id": "a30d93c2-15d5-42aa-87ee-29aa82823794",
+        "stock": "애플",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "테슬라",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "애플",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "TSMC",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:07:40.812Z"
+  },
+  {
+    "video_id": "0106ae6a-575f-4df9-939e-c33cd12bdad5",
+    "old_signals": [
+      {
+        "id": "de06da9b-7f80-4ef0-882e-5bf30ce63526",
+        "stock": "현대차",
+        "signal": "부정"
+      },
+      {
+        "id": "0d6c4ecf-fff2-4ee0-b137-cba16f7e4045",
+        "stock": "테슬라",
+        "signal": "부정"
+      },
+      {
+        "id": "f5c479ee-f205-4e50-8038-da1179b60d64",
+        "stock": "기아",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [],
+    "processed_at": "2026-03-06T05:07:48.681Z"
+  },
+  {
+    "video_id": "c3b18194-38bc-4b25-98ab-d95d1e8dfbfe",
+    "old_signals": [
+      {
+        "id": "89741ee9-3e7b-45b3-afad-8530609e5aac",
+        "stock": "JP모건",
+        "signal": "긍정"
+      },
+      {
+        "id": "178b8120-5228-4f13-839b-4550484a2148",
+        "stock": "마이크로스트래티지",
+        "signal": "매수"
+      },
+      {
+        "id": "721b39ab-9f90-4f59-9f82-467993122e21",
+        "stock": "어펌",
+        "signal": "긍정"
+      },
+      {
+        "id": "e3334104-db32-4c43-b4cb-5d3f3dae6481",
+        "stock": "코인베이스",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [],
+    "processed_at": "2026-03-06T05:07:59.404Z"
+  },
+  {
+    "video_id": "c3c20a33-8415-49cb-9f82-48590d561514",
+    "old_signals": [
+      {
+        "id": "2abcb97c-c137-44cf-8fd7-227f97eab056",
+        "stock": "테슬라",
+        "signal": "매수"
+      },
+      {
+        "id": "143161df-74d0-43f3-a3b4-e6edd0ddcbe5",
+        "stock": "네이버",
+        "signal": "긍정"
+      },
+      {
+        "id": "24edb37b-1a2b-4aa8-89fa-8fac1848d329",
+        "stock": "카카오뱅크",
+        "signal": "긍정"
+      },
+      {
+        "id": "2cea43ac-b304-48da-a5e1-9b5e5436671b",
+        "stock": "카카오",
+        "signal": "긍정"
+      },
+      {
+        "id": "370b6eb0-8c6f-4f15-a2d5-2899380f7971",
+        "stock": "삼성전자",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "테슬라",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "네이버",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "카카오",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "삼성전자",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:08:19.029Z"
+  },
+  {
+    "video_id": "21ef25b1-44fd-469a-9361-328513c59b30",
+    "old_signals": [
+      {
+        "id": "8ffedca5-be48-4cd7-8edc-a44f7553f113",
+        "stock": "삼성전자",
+        "signal": "부정"
+      },
+      {
+        "id": "36e8184c-926d-4788-ba9c-1d69af1f8a2b",
+        "stock": "TSMC",
+        "signal": "긍정"
+      },
+      {
+        "id": "829d66f4-8f8e-4428-a188-8d7c807638b5",
+        "stock": "ARM홀��스",
+        "signal": "매수"
+      },
+      {
+        "id": "81e3bc36-6ddc-40b4-84d0-eee9752d2177",
+        "stock": "퀄컴",
+        "signal": "매수"
+      },
+      {
+        "id": "af7eb78c-459f-4664-be5f-e0cc31511b4d",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      },
+      {
+        "id": "fe9098df-cbf0-4890-90a4-7d9f272950fb",
+        "stock": "엔비디아",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "삼성전자",
+        "signal_type": "부정"
+      },
+      {
+        "stock": "TSMC",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "AMD",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "퀄컴",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "엔비디아",
+        "signal_type": "부정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:08:47.785Z"
+  },
+  {
+    "video_id": "41516750-f657-49ca-8b6c-57a8229ded27",
+    "old_signals": [
+      {
+        "id": "05d49eb9-acff-4387-8963-550787103669",
+        "stock": "한미반도체",
+        "signal": "긍정"
+      },
+      {
+        "id": "7c29cf8f-3176-4a0a-9d5b-249bf131de58",
+        "stock": "엔비디아",
+        "signal": "매수"
+      },
+      {
+        "id": "5e277a8e-2064-4b3a-a7b1-d5ca386457ba",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "한미반도체",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "엔비디아",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:09:05.951Z"
+  },
+  {
+    "video_id": "2eafa800-31e3-47dc-8d21-7bf353f380da",
+    "old_signals": [
+      {
+        "id": "0fc3ae57-8bfa-48dc-a5dc-915e1c1e685d",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      },
+      {
+        "id": "996268b9-bda3-4f42-b139-d3356d697e10",
+        "stock": "한미반도체",
+        "signal": "긍정"
+      },
+      {
+        "id": "3edb3863-219b-41e6-bc3b-7b9061d24e1e",
+        "stock": "삼성전자",
+        "signal": "긍정"
+      },
+      {
+        "id": "f9c72f1c-3df7-46f1-821c-3490afe07bd1",
+        "stock": "네이버",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "한미반도체",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:09:15.023Z"
+  },
+  {
+    "video_id": "0d3971b7-28bf-4473-8641-12398d035cc4",
+    "old_signals": [
+      {
+        "id": "c88e03fd-28ac-4438-bac2-5d570b728b53",
+        "stock": "옥시덴탈 (OXY)",
+        "signal": "긍정"
+      },
+      {
+        "id": "c859f6f1-9127-408b-a48a-2a8a6886f6fa",
+        "stock": "처브 (CB)",
+        "signal": "매수"
+      },
+      {
+        "id": "2c667222-8d3e-4a03-8505-80ed37bc1f36",
+        "stock": "컨스텔레이션 브랜즈 (STZ)",
+        "signal": "매수"
+      },
+      {
+        "id": "d30ce2c1-e20f-4da5-b7d4-03b5190d93ba",
+        "stock": "크리스퍼 테라퓨틱스",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "옥시덴탈 페트롤리움",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "컨스텔레이션 브랜즈",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "크리스퍼 테라퓨틱스",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:09:32.811Z"
+  },
+  {
+    "video_id": "9daa3302-c6f4-45f5-a398-01a9f65f14aa",
+    "old_signals": [
+      {
+        "id": "65441389-2517-4bae-9457-7a12b47068ba",
+        "stock": "구글 (알파벳)",
+        "signal": "매수"
+      },
+      {
+        "id": "9d61fe6e-c05c-4262-9767-b0c53ce7f61c",
+        "stock": "브로드컴",
+        "signal": "긍정"
+      },
+      {
+        "id": "30a3e952-4538-41f6-9ec4-e23cdf25dd46",
+        "stock": "테슬라",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "테슬라",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "팔란티어",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "브로드컴",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:09:50.717Z"
+  },
+  {
+    "video_id": "aa42c49b-5266-432f-9857-6c1a623431a5",
+    "old_signals": [
+      {
+        "id": "3ad21f53-5d2a-4b98-a1f2-ed8c84e2575b",
+        "stock": "LG에너지솔루션",
+        "signal": "매수"
+      },
+      {
+        "id": "9dc76448-4dc2-4877-bf0d-ce1aa1e6d823",
+        "stock": "삼성전자",
+        "signal": "매수"
+      },
+      {
+        "id": "a1003a18-b802-44d1-8885-d0bf3af46bcf",
+        "stock": "테슬라",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "LG에너지솔루션",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "삼성전자",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:10:03.807Z"
+  },
+  {
+    "video_id": "eca59256-08a2-4a17-8427-004785a370d5",
+    "old_signals": [
+      {
+        "id": "5d0a397d-bac7-438d-b846-cdcf0bcc5c0e",
+        "stock": "네이버",
+        "signal": "긍정"
+      },
+      {
+        "id": "c57eafc5-7234-493e-9029-84ba4f13e69e",
+        "stock": "SK하이닉스",
+        "signal": "매수"
+      },
+      {
+        "id": "58bc051d-20cb-40bd-ba2e-e172fc223ab6",
+        "stock": "삼성전자",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "삼성전자",
+        "signal_type": "부정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:10:17.423Z"
+  },
+  {
+    "video_id": "554b9bca-c0a3-4d0c-8076-d4c229fc0a6d",
+    "old_signals": [
+      {
+        "id": "052b22c9-4770-43ad-af62-b1dbd2f87022",
+        "stock": "애플",
+        "signal": "긍정"
+      },
+      {
+        "id": "e7c43627-be0f-471f-9e1c-bba5b41aebd1",
+        "stock": "테슬라",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "애플",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:10:26.577Z"
+  },
+  {
+    "video_id": "44933662-1a45-44d2-ad61-512e2ab61b99",
+    "old_signals": [
+      {
+        "id": "f8f16e7d-c3b9-42f8-8752-f3d44ee49a34",
+        "stock": "테슬라",
+        "signal": "매수"
+      },
+      {
+        "id": "2686ff43-b399-4dd2-883b-08c480dd3f06",
+        "stock": "SK하이닉스",
+        "signal": "매수"
+      },
+      {
+        "id": "d31cd7a6-8485-490d-a48b-652cee387cd4",
+        "stock": "삼성전자",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "삼성전자",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:10:38.572Z"
+  },
+  {
+    "video_id": "69606752-f7b7-469b-aee8-ba73acefdc91",
+    "old_signals": [
+      {
+        "id": "43f7b582-5097-49b7-8719-f3dfbccf3844",
+        "stock": "하이아트호텔",
+        "signal": "긍정"
+      },
+      {
+        "id": "b7f216a0-fd81-469a-af0e-f1b4363053b2",
+        "stock": "베일리조트",
+        "signal": "매수"
+      },
+      {
+        "id": "ab5565c8-f87d-491d-ac1d-1e27eb133af7",
+        "stock": "MSCI",
+        "signal": "긍정"
+      },
+      {
+        "id": "bcf87830-7002-4d2b-a723-b4d9ff01a027",
+        "stock": "테슬라",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "하야트",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "베일리조트",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "MSCI",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "테슬라",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:11:04.011Z"
+  },
+  {
+    "video_id": "8f49bbf2-a07d-4cf4-9ed6-80b09f3adb3b",
+    "old_signals": [
+      {
+        "id": "f4c96586-2efe-4b83-9378-38e7e8d14831",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      },
+      {
+        "id": "5e7f1ea6-55f1-4313-a889-4f05197cd98c",
+        "stock": "오라클",
+        "signal": "긍정"
+      },
+      {
+        "id": "8f506dde-682f-4f78-a71c-86a42b820de9",
+        "stock": "삼성전자",
+        "signal": "긍정"
+      },
+      {
+        "id": "e764d786-c77a-4b3d-ae08-1838b2355c86",
+        "stock": "테슬라",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "삼성전자",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "테슬라",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:11:20.414Z"
+  },
+  {
+    "video_id": "e9c2888e-a2ea-4ef3-a86f-3418b95f6ad9",
+    "old_signals": [
+      {
+        "id": "058b633c-69ae-4a49-a5d8-e59f77fc9a7d",
+        "stock": "테슬라",
+        "signal": "긍정"
+      },
+      {
+        "id": "8e65751a-d321-4738-a228-7c99003aa62b",
+        "stock": "메타",
+        "signal": "긍정"
+      },
+      {
+        "id": "eac20ffd-67c6-4014-af09-77d2cce7e363",
+        "stock": "엔비디아",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "테슬라",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "메타",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "엔비디아",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:11:38.513Z"
+  },
+  {
+    "video_id": "912a3808-8336-45f8-8201-9ba2ffae95e5",
+    "old_signals": [
+      {
+        "id": "b647c9b7-7aa8-42db-9649-1337d5d51dc8",
+        "stock": "삼성전자",
+        "signal": "중립"
+      },
+      {
+        "id": "f05ea4d3-a19e-4459-94f1-c322855a2178",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      },
+      {
+        "id": "2736d1fa-6fb6-4642-9301-b0f302fb71bf",
+        "stock": "브로드컴",
+        "signal": "긍정"
+      },
+      {
+        "id": "cfdbcdb6-3827-47f7-8b57-7bc1896b0b81",
+        "stock": "구글",
+        "signal": "매수"
+      },
+      {
+        "id": "e39ed051-9fdb-4201-81be-f8f87d5a9039",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "브로드컴",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "엔비디아",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:11:57.351Z"
+  },
+  {
+    "video_id": "13ca5e8f-2309-4e99-a77b-2ecbe2e8aa4b",
+    "old_signals": [
+      {
+        "id": "1093382d-04a2-4899-9843-43d519d42eb2",
+        "stock": "구글",
+        "signal": "긍정"
+      },
+      {
+        "id": "3724c377-fe6b-48f0-b147-74a9d74fa884",
+        "stock": "테슬라",
+        "signal": "긍정"
+      },
+      {
+        "id": "f266ec71-a29d-4130-aa1d-432b9a61611d",
+        "stock": "팔란티어",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "구글",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "테슬라",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "팔란티어",
+        "signal_type": "매수"
+      }
+    ],
+    "processed_at": "2026-03-06T05:12:12.692Z"
+  },
+  {
+    "video_id": "9a92f069-9689-4d18-90aa-f7b1c5ddfacf",
+    "old_signals": [
+      {
+        "id": "91490396-eacc-47a7-be0a-5daa43bb396b",
+        "stock": "테슬라",
+        "signal": "부정"
+      },
+      {
+        "id": "528f768a-f06b-407b-8228-1f99f7d00a6f",
+        "stock": "애플",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [],
+    "processed_at": "2026-03-06T05:12:20.507Z"
+  },
+  {
+    "video_id": "cdaa5197-b823-49b8-b945-ddd385c73e4b",
+    "old_signals": [
+      {
+        "id": "2deb64ad-fabc-4140-93b6-154315c364c8",
+        "stock": "한미반도체",
+        "signal": "긍정"
+      },
+      {
+        "id": "138b6ac5-aa4c-443d-a802-4c52260c691e",
+        "stock": "ARM",
+        "signal": "매수"
+      },
+      {
+        "id": "1470aae4-e764-472d-9610-374ec910c725",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "ARM",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:12:32.376Z"
+  },
+  {
+    "video_id": "138acc80-a52e-4ee5-aeba-9c49d8361818",
+    "old_signals": [
+      {
+        "id": "ecf00f6e-c880-49e7-9861-c3a83906e3be",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      },
+      {
+        "id": "aa9cca85-4fcc-47f6-aafb-3e4d8bdcf239",
+        "stock": "마이크로소프트",
+        "signal": "매수"
+      },
+      {
+        "id": "1eb2616b-b08e-461b-937c-98b299e8a535",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "마이크로소프트",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "엔비디아",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:12:44.420Z"
+  },
+  {
+    "video_id": "17cfbd09-7f0a-4608-b26c-f1b45442e557",
+    "old_signals": [
+      {
+        "id": "978b0925-5a29-453f-99f5-ddf3b1b4dc9b",
+        "stock": "테슬라",
+        "signal": "긍정"
+      },
+      {
+        "id": "b03e8192-df19-4891-bceb-81454aacd013",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      },
+      {
+        "id": "28515b9f-a6e1-4a09-8c95-1b3f69cf0d25",
+        "stock": "팔란티어",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "팔란티어",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:12:53.602Z"
+  },
+  {
+    "video_id": "7737dbab-6647-44db-aaa7-324df56eccf8",
+    "old_signals": [
+      {
+        "id": "08751e43-ce2b-4e8a-9d87-373033cbc71b",
+        "stock": "페이팔",
+        "signal": "매수"
+      },
+      {
+        "id": "12cf2efb-ae2e-4f42-97fc-cddcfed11334",
+        "stock": "구글",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "페이팔",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "구글",
+        "signal_type": "부정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:13:05.504Z"
+  },
+  {
+    "video_id": "61b3aba6-71d1-4426-be30-66d29cf14bd5",
+    "old_signals": [
+      {
+        "id": "a18c1cad-82bd-4604-b2a7-ac17680e1841",
+        "stock": "이스트 웨스트 뱅크",
+        "signal": "매수"
+      },
+      {
+        "id": "1d119bd0-41dc-4b65-904f-f5ff0037b261",
+        "stock": "뱅크 오브 아메리카",
+        "signal": "매수"
+      },
+      {
+        "id": "8c6c7a22-bf3b-486b-a30f-1c4eb2584dea",
+        "stock": "마이크론",
+        "signal": "매도"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "뱅크오브아메리카",
+        "signal_type": "매수"
+      },
+      {
+        "stock": "마이크론",
+        "signal_type": "부정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:13:18.532Z"
+  },
+  {
+    "video_id": "5de08e26-058d-4f44-be7b-f8f995a0fdce",
+    "old_signals": [
+      {
+        "id": "bcad0af0-7fff-4393-8e6e-ef73d981f8fe",
+        "stock": "애플",
+        "signal": "긍정"
+      },
+      {
+        "id": "53fcd4b0-a0c9-4edf-bd8a-0ac1555c9e4e",
+        "stock": "셀트리온",
+        "signal": "긍정"
+      },
+      {
+        "id": "53008b15-a438-4f9a-8dd2-98e247f641b9",
+        "stock": "심텍",
+        "signal": "긍정"
+      },
+      {
+        "id": "bac46ce1-22cf-44d5-914c-b97a0d199de6",
+        "stock": "이노텍",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "심텍",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "이노텍",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "셀트리온",
+        "signal_type": "중립"
+      }
+    ],
+    "processed_at": "2026-03-06T05:13:34.788Z"
+  },
+  {
+    "video_id": "77dc943b-c4a4-42b2-b3b1-38171772f2a9",
+    "old_signals": [
+      {
+        "id": "0d6e525d-bb46-4929-919c-1ac7c77f31bb",
+        "stock": "한미반도체",
+        "signal": "긍정"
+      },
+      {
+        "id": "24177bde-2c5b-404b-9c66-0edd1582427c",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      },
+      {
+        "id": "3337492a-e7b1-4414-b0be-bf39bbb8586c",
+        "stock": "퀄컴",
+        "signal": "긍정"
+      },
+      {
+        "id": "4fb38db2-25b5-4431-9bd4-df024fb4a5aa",
+        "stock": "애플",
+        "signal": "긍정"
+      },
+      {
+        "id": "55f50944-f93f-4fb1-96fa-69d33a0f8e90",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      },
+      {
+        "id": "b0ac0bb8-68e1-47d4-ac30-10fb1234ec45",
+        "stock": "삼성전자",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "한미반도체",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "엔비디아",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "애플",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "삼성전자",
+        "signal_type": "부정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:14:02.743Z"
+  },
+  {
+    "video_id": "416b9fbf-448a-49bc-8249-6254e3bdde99",
+    "old_signals": [
+      {
+        "id": "0333b06f-28d0-416f-8737-178ca6e07d4f",
+        "stock": "오라클",
+        "signal": "긍정"
+      },
+      {
+        "id": "060fa922-69ab-463a-a5c7-dc8c4c499a69",
+        "stock": "애플",
+        "signal": "중립"
+      },
+      {
+        "id": "536fbc36-4fda-4e00-b260-618380221191",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "오라클",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "애플",
+        "signal_type": "부정"
+      },
+      {
+        "stock": "엔비디아",
+        "signal_type": "매수"
+      }
+    ],
+    "processed_at": "2026-03-06T05:14:20.674Z"
+  },
+  {
+    "video_id": "326af6e2-45f6-45de-a0a3-db094f41ffde",
+    "old_signals": [
+      {
+        "id": "da11a42a-6380-4dbb-8d46-911dfcfbe81b",
+        "stock": "SK바이오팜",
+        "signal": "매수"
+      },
+      {
+        "id": "9bb5f3f3-32a5-4528-bc84-26c6954f6e9e",
+        "stock": "보령",
+        "signal": "긍정"
+      },
+      {
+        "id": "0418488a-7cb6-4630-af30-16d706b923fc",
+        "stock": "리커전",
+        "signal": "매수"
+      },
+      {
+        "id": "2510565d-4eec-49b1-a8a1-768e1ee0ea59",
+        "stock": "JW중외제약",
+        "signal": "긍정"
+      },
+      {
+        "id": "455f1178-4cd7-49ac-b458-8c69d942eabc",
+        "stock": "노보 노디스크",
+        "signal": "긍정"
+      },
+      {
+        "id": "6632bccc-fd2e-45b5-9dfb-67413fd19637",
+        "stock": "일라이 릴리",
+        "signal": "긍정"
+      },
+      {
+        "id": "9ecb057d-2304-4e3a-ae39-4f2e19441371",
+        "stock": "삼성바이오로직스",
+        "signal": "긍정"
+      },
+      {
+        "id": "e35320ad-3031-480d-be79-ff9004d339c7",
+        "stock": "엔비디아",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "SK바이오팜",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "보령",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "리커전",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "JW중외제약",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "노보노디스크",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "릴리",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "삼성바이오로직스",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "엔비디아",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:14:54.588Z"
+  },
+  {
+    "video_id": "403e0eae-931a-452f-998f-433f91803b7a",
+    "old_signals": [
+      {
+        "id": "14595425-7032-4c8e-b9ce-878012bbbdbc",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      },
+      {
+        "id": "1d26899b-b9bd-4317-aaf8-70f840f95e09",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      },
+      {
+        "id": "973963c0-50a9-4745-916a-b1cee56fe1bd",
+        "stock": "삼성전자",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "엔비디아",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:15:06.260Z"
+  },
+  {
+    "video_id": "fe2d2023-5d8e-4b79-ba48-f270c83072b7",
+    "old_signals": [
+      {
+        "id": "41ae3546-1699-42a0-8640-419d65d5260c",
+        "stock": "테슬라",
+        "signal": "긍정"
+      },
+      {
+        "id": "9fb5eb6a-caff-4dec-9692-b1bc7fbaa84c",
+        "stock": "엔비디아",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "테슬라",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "엔비디아",
+        "signal_type": "부정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:15:20.190Z"
+  },
+  {
+    "video_id": "283d58d0-063d-47ea-8872-c021f49e64c0",
+    "old_signals": [
+      {
+        "id": "e00c1579-4bba-475d-99bf-e975914da1fd",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      },
+      {
+        "id": "f9709ee4-3d24-42f8-bc82-17a96e1fc8ec",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      },
+      {
+        "id": "a747b64e-7ab1-4384-8fe4-c7962938e30c",
+        "stock": "삼성전자",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "삼성전자",
+        "signal_type": "부정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:15:31.972Z"
+  },
+  {
+    "video_id": "6327cd19-9ee4-4483-b3d3-1cccbbf23073",
+    "old_signals": [
+      {
+        "id": "9a5bc854-4118-445b-ad4b-ce12f699fb43",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      },
+      {
+        "id": "f30b61d8-97ab-455d-85c0-5e08a641ebe3",
+        "stock": "슈퍼마이크로컴퓨터",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "슈퍼마이크로컴퓨터",
+        "signal_type": "부정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:15:40.359Z"
+  },
+  {
+    "video_id": "d96e7b47-0771-4401-bf34-02d5d50639a1",
+    "old_signals": [
+      {
+        "id": "ff7aa057-8800-4fe9-b71e-c490091ecbad",
+        "stock": "SK하이닉스",
+        "signal": "매수"
+      },
+      {
+        "id": "c11cff37-2ccd-45cc-be4a-86eadcf100e4",
+        "stock": "TSMC",
+        "signal": "긍정"
+      },
+      {
+        "id": "950cda65-5ef7-4123-aabe-1dc0338d7811",
+        "stock": "삼성전자",
+        "signal": "긍정"
+      },
+      {
+        "id": "8322b271-551b-43be-9bcb-f62bae91cb66",
+        "stock": "한미반도체",
+        "signal": "긍정"
+      },
+      {
+        "id": "8fc51f20-fc5d-40de-8571-25500daeae1e",
+        "stock": "엔비디아",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "SK하이닉스",
+        "signal_type": "긍정"
+      },
+      {
+        "stock": "한미반도체",
+        "signal_type": "긍정"
+      }
+    ],
+    "processed_at": "2026-03-06T05:15:52.646Z"
+  },
+  {
+    "video_id": "15848bb5-15a5-4c8b-9fb2-64540c7fd695",
+    "old_signals": [
+      {
+        "id": "808f641c-c19b-4bd8-88db-6797fe48ba55",
+        "stock": "테슬라",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "테슬라",
+        "ticker": "TSLA",
+        "signal_type": "긍정",
+        "key_quote": "테슬라가 5,000대의 옵티머스 휴머노이드 로봇을 본격 배치하면서 AI 기술의 기하급수적 발전이 예상됩니다",
+        "reasoning": "화자는 테슬라의 대규모 휴머노이드 로봇 배치를 통한 기술 발전을 전망했습니다. 5,000대라는 압도적 규모로 실시간 데이터 수집과 강화학습이 가능해져 실험실 수준에서 상용화 단계로의 급속한 진입을 예상한다고 분석했습니다. 특히 대량의 학습 데이터 축적을 통해 경쟁사 대비 확실한 기술 격차 창출이 가능할 것이라는 긍정적 전망을 제시했습니다.",
+        "timestamp": "0:30",
+        "confidence": 7
+      }
+    ],
+    "processed_at": "2026-03-06T07:18:17.721Z"
+  },
+  {
+    "video_id": "d1bdb604-1a77-400c-903f-c8274f0c722f",
+    "old_signals": [
+      {
+        "id": "005daa2c-b89b-41ca-87d6-89973ea08773",
+        "stock": "브로드컴",
+        "signal": "긍정"
+      },
+      {
+        "id": "04ff9334-94ab-476d-8e56-448f9592dcf0",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      },
+      {
+        "id": "2c089403-574e-4c1f-896e-8fb0a25f8d57",
+        "stock": "아리스타 네트웍스",
+        "signal": "긍정"
+      },
+      {
+        "id": "585ff655-9fa4-485a-974a-304b426addad",
+        "stock": "마이크로소프트",
+        "signal": "긍정"
+      },
+      {
+        "id": "76fbc42a-2b78-4a2f-9bc4-d3cb988d9095",
+        "stock": "버티브",
+        "signal": "매수"
+      },
+      {
+        "id": "e0bcee1a-39c4-4746-9789-8ef04d9e54d1",
+        "stock": "테슬라",
+        "signal": "긍정"
+      },
+      {
+        "id": "f49d1e4f-6ff7-41d1-a4ab-749985ba9a3f",
+        "stock": "애플",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "브로드컴",
+        "ticker": "AVGO",
+        "signal_type": "긍정",
+        "key_quote": "브로드컴의 ASIC 설계 사업이 정말 폭발적으로 성장하고 있는데, 작년 3.5억 달러에서 올해는 거의 세 배나 늘어난 9억 달러 매출을 기록할 것으로 예상됩니다",
+        "reasoning": "브로드컴의 ASIC 설계 사업의 급격한 성장세를 강조하며 언급했습니다. 매출이 3.5억 달러에서 9억 달러로 약 3배 증가하고 전체 매출 비중이 10%에서 18%로 급증했다고 분석했습니다. 구글 TPU 등 빅테크들의 맞춤형 AI 칩 수요 폭증으로 브로드컴의 고부가가치 ASIC 설계 역량이 핵심 성장 동력이 되고 있다고 평가했습니다. AI 칩 시장 확대와 함께 브로드컴의 성장 지속 가능성을 긍정적으로 전망했습니다.",
+        "timestamp": "0:30",
+        "confidence": 7
+      }
+    ],
+    "processed_at": "2026-03-06T07:18:26.962Z"
+  },
+  {
+    "video_id": "69641510-829c-4ead-a6ff-af85b04a76f9",
+    "old_signals": [
+      {
+        "id": "cf2515c6-f117-43cc-acef-2a099d223f16",
+        "stock": "퍼스트솔라",
+        "signal": "긍정"
+      },
+      {
+        "id": "1bce020e-61ee-40fd-86e4-713287711707",
+        "stock": "치폴레",
+        "signal": "긍정"
+      },
+      {
+        "id": "68b5b9a0-450b-42a2-954a-87af2d3d40c7",
+        "stock": "페이팔",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "퍼스트솔라",
+        "ticker": "FSLR",
+        "signal_type": "긍정",
+        "key_quote": "퍼스트솔라 에너지가 4분기 실적이 시장 예상을 크게 웃돌면서 시간외 거래에서 15% 급등하고 있고, 주목할 만한 투자 기회로 보입니다",
+        "reasoning": "화자는 퍼스트솔라의 강력한 실적 발표를 근거로 긍정적 전망을 제시했습니다. 4분기 실적이 시장 예상을 크게 상회하고 다음 분기 가이던스도 예상치보다 10% 이상 높게 제시되어 회사의 실행력이 입증되었다고 분석했습니다. 또한 글로벌 재생에너지 확산 정책과 탄소중립 트렌드라는 거시적 환경이 태양광 모듈 제조업체에게 유리하게 작용할 것이라는 전망을 제시했습니다. 다만 직접적인 매수 권유는 없어 긍정 시그널로 분류됩니다.",
+        "timestamp": "0:30",
+        "confidence": 7
+      }
+    ],
+    "processed_at": "2026-03-06T07:18:36.447Z"
+  },
+  {
+    "video_id": "c85f46e3-202a-4152-83c9-8bb0bbb61ee1",
+    "old_signals": [
+      {
+        "id": "14c248e4-15ed-4cb6-a83b-ff225bf9fafb",
+        "stock": "인텔",
+        "signal": "긍정"
+      },
+      {
+        "id": "46e4953a-88db-4aaf-bd32-dfa9d3c8d2ab",
+        "stock": "퀄컴",
+        "signal": "긍정"
+      },
+      {
+        "id": "e12e6284-a6bd-4c1c-9895-cfc5037dab49",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "인텔",
+        "ticker": "INTC",
+        "signal_type": "긍정",
+        "key_quote": "장기적으로 봤을 때 인텔이 결국에는 좀 딛고 올라올 거라 생각해요. 미국 정부가 파운드리 사업에 대규모 지원금을 투입하고 있고, 마이크로소프트와 AI 칩 계약도 체결했잖아요.",
+        "reasoning": "화자는 인텔의 장기적 회복 가능성에 대해 긍정적인 전망을 제시했습니다. 미국 정부의 파운드리 사업 지원금과 마이크로소프트와의 AI 칩 계약을 주요 근거로 들었습니다. 또한 개방형 시스템 전략을 통한 고객사 확보와 기존 기술력을 바탕으로 한 경쟁력 회복 가능성을 언급했습니다. 다만 직접적인 매수 권유보다는 분석적 관점에서의 긍정적 평가로 판단됩니다.",
+        "timestamp": "0:30",
+        "confidence": 7
+      }
+    ],
+    "processed_at": "2026-03-06T07:18:45.698Z"
+  },
+  {
+    "video_id": "ea21e408-c5ac-4b75-9891-95371521f345",
+    "old_signals": [
+      {
+        "id": "1c1d8c01-1083-46c2-be56-f1fa30651faa",
+        "stock": "네이버",
+        "signal": "긍정"
+      },
+      {
+        "id": "650269f8-cb30-4585-9ac9-380aedb7affd",
+        "stock": "카카오",
+        "signal": "긍정"
+      },
+      {
+        "id": "86da3d18-b7e7-4374-a8b2-2c9298839232",
+        "stock": "SK가스",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "네이버",
+        "ticker": "035420",
+        "signal_type": "긍정",
+        "key_quote": "네이버의 경우 국내 검색 시장 독점적 지위를 기반으로 커머스, 핀테크, 클라우드 등 신사업 영역에서 꾸준한 성과를 내고 있고, AI 기술력 강화와 글로벌 진출 가속화를 통해 새로운 성장 동력을 확보해 나가고 있어 향후 재평가 받을 가능성이 높습니다",
+        "reasoning": "화자는 네이버가 최근 주가 조정을 겪었지만 중장기적 성장 스토리는 여전히 유효하다고 평가했습니다. 국내 검색 시장 독점적 지위라는 기본 경쟁력을 바탕으로 커머스, 핀테크, 클라우드 등 신사업 영역에서 꾸준한 성과를 거두고 있다고 분석했습니다. 특히 AI 기술력 강화와 글로벌 진출 가속화를 새로운 성장 동력으로 제시하며, 이를 통해 향후 재평가 받을 가능성이 높다고 긍정적인 전망을 제시했습니다.",
+        "timestamp": "0:30",
+        "confidence": 7
+      },
+      {
+        "stock": "카카오",
+        "ticker": "035720",
+        "signal_type": "긍정",
+        "key_quote": "네이버와 카카오는 최근 주가 조정을 겪었지만, 중장기적 관점에서 볼 때 성장 스토리는 아직 끝나지 않았다고 봅니다",
+        "reasoning": "화자는 카카오가 네이버와 함께 최근 주가 조정을 겪었지만, 중장기적인 관점에서는 여전히 성장 가능성이 있다고 평가했습니다. 비록 구체적인 근거는 네이버 위주로 제시되었지만, 두 종목을 동일한 맥락에서 언급하며 성장 스토리가 끝나지 않았다고 긍정적인 시각을 나타냈습니다. 플랫폼 기업으로서의 기본 경쟁력과 디지털 전환 트렌드 지속에 따른 중장기적 성장 잠재력을 인정하는 것으로 해석됩니다.",
+        "timestamp": "0:30",
+        "confidence": 6
+      }
+    ],
+    "processed_at": "2026-03-06T07:18:59.572Z"
+  },
+  {
+    "video_id": "9970ad31-cd10-4db9-a2af-141fd45dd422",
+    "old_signals": [
+      {
+        "id": "22f86e5f-3fab-4ec0-8eba-94b727fe5c33",
+        "stock": "현대차",
+        "signal": "긍정"
+      },
+      {
+        "id": "d4144804-de65-4593-b6e5-2f477e618c81",
+        "stock": "테슬라",
+        "signal": "부정"
+      },
+      {
+        "id": "e8ce469b-0fae-4433-a4f7-9ea5d36c270d",
+        "stock": "기아",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "현대차",
+        "ticker": "005380",
+        "signal_type": "긍정",
+        "key_quote": "현대차는 어려운 환경 속에서도 안정적인 수익구조를 유지하며 글로벌 전기차 시장의 주요 플레이어로 자리잡고 있어 투자 매력도가 상당히 높다고 봅니다",
+        "reasoning": "화자는 전기차 시장에서 실제 수익을 내는 몇 안 되는 기업으로 현대차를 언급했습니다. 많은 전통 자동차 제조업체들이 전기차 전환 과정에서 막대한 투자비용과 낮은 수익성으로 고전하는 상황에서, 현대차는 안정적인 수익구조를 유지하고 있다고 평가했습니다. 글로벌 전기차 시장의 주요 플레이어로 자리잡았으며, 이에 따라 투자 매력도가 상당히 높다는 긍정적 전망을 제시했습니다.",
+        "timestamp": "0:45",
+        "confidence": 7
+      },
+      {
+        "stock": "기아",
+        "ticker": "000270",
+        "signal_type": "긍정",
+        "key_quote": "현재 전기차 시장에서 실제로 수익을 내고 있는 기업은 테슬라, 그 다음에 중국의 BYD, 그리고 현대차와 기아 정도밖에 없는 상황입니다",
+        "reasoning": "화자는 전기차 시장에서 실제 수익을 창출하는 소수의 기업 중 하나로 기아를 언급했습니다. 전기차 시장에서 많은 기업들이 어려움을 겪고 있는 상황에서, 테슬라, BYD, 현대차와 함께 수익성을 확보한 주요 기업으로 평가했습니다. 이는 기아의 전기차 사업 경쟁력과 수익성을 긍정적으로 평가한 것으로 해석됩니다.",
+        "timestamp": "0:30",
+        "confidence": 6
+      }
+    ],
+    "processed_at": "2026-03-06T07:19:11.887Z"
+  },
+  {
+    "video_id": "27d61afe-1d54-4185-a467-195f32b9b0d8",
+    "old_signals": [
+      {
+        "id": "354fdc13-d5db-46ea-be0f-1c3ed2c89f51",
+        "stock": "삼성바이오로직스",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "삼성바이오로직스",
+        "ticker": "207940",
+        "signal_type": "매수",
+        "key_quote": "삼성바이오로직스로의 물량 이동이 본격화되고 있어, 목표 주가로 제시된 115만원 수준까지는 충분히 도달할 수 있는 상승 여력을 갖추고 있다고 봅니다",
+        "reasoning": "화자는 삼성바이오로직스가 글로벌 CDMO 시장에서 독보적 대량 생산 능력을 확보한 핵심 업체라고 평가했습니다. 중국 우시바이오로직스가 생물보안법 강화로 타격을 받으면서 글로벌 제약회사들의 대체 CDMO 파트너 수요가 급증하고 있다고 분석했습니다. 이러한 시장 환경 변화로 삼성바이오로직스로의 물량 이동이 본격화되고 있으며, 목표 주가 115만원까지 도달할 수 있는 충분한 상승 여력이 있다고 전망했습니다.",
+        "timestamp": "2:30",
+        "confidence": 8
+      }
+    ],
+    "processed_at": "2026-03-06T07:19:21.125Z"
+  },
+  {
+    "video_id": "fa0e6020-8485-43e1-81c4-aacd1891d534",
+    "old_signals": [
+      {
+        "id": "5542c842-f92c-4f95-9fe8-62607b19ca67",
+        "stock": "엔비디아",
+        "signal": "긍정"
+      },
+      {
+        "id": "9409a281-b484-4952-945d-588b5fca8b08",
+        "stock": "아마존",
+        "signal": "매수"
+      },
+      {
+        "id": "b000a4b9-23c7-46b4-9f18-7aa2e8898ba9",
+        "stock": "테슬라",
+        "signal": "긍정"
+      },
+      {
+        "id": "bb2974b2-a88b-4d5b-84da-104096eb85c8",
+        "stock": "현대차",
+        "signal": "긍정"
+      },
+      {
+        "id": "f0e89897-6d2c-446d-9222-a01855d27bf4",
+        "stock": "SK하이닉스",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "엔비디아",
+        "ticker": "NVDA",
+        "signal_type": "긍정",
+        "key_quote": "엔비디아가 각 산업 분야마다 핵심 파트너들과 전략적 동맹을 구축하면서 AI 생태계의 절대 강자로 포지셔닝하고 있어요",
+        "reasoning": "화자는 엔비디아의 전략적 사업 확장에 대해 분석하고 있습니다. 아마존과의 클라우드 AI 서비스 협력, 현대차와의 자율주행 플랫폼 개발 등 다양한 산업 분야로의 파트너십 확대를 긍정적으로 평가했습니다. 단순한 GPU 제조사에서 AI 솔루션 전체를 아우르는 플랫폼 기업으로의 변신을 강조하며, AI 생태계에서의 지배적 위치 구축을 높이 평가하고 있습니다.",
+        "timestamp": "0:30",
+        "confidence": 7
+      }
+    ],
+    "processed_at": "2026-03-06T07:19:30.149Z"
+  },
+  {
+    "video_id": "03a2af36-934f-43ac-847e-d98d9400d57a",
+    "old_signals": [
+      {
+        "id": "4b728f9c-f588-469e-a31d-f920b8aca6d3",
+        "stock": "LG에너지솔루션",
+        "signal": "중립"
+      },
+      {
+        "id": "a105e15c-de6d-4b97-b3c9-7a8ade998e63",
+        "stock": "테슬라",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [],
+    "processed_at": "2026-03-06T07:19:40.073Z"
+  },
+  {
+    "video_id": "c186fc91-b734-40a4-a76e-20853b3da15e",
+    "old_signals": [
+      {
+        "id": "7a782744-c985-4eb3-9675-5d066a37e864",
+        "stock": "팔란티어 (PLTR)",
+        "signal": "긍정"
+      },
+      {
+        "id": "df751595-2532-4dd2-b636-50c441790f86",
+        "stock": "아이렌 (IREN)",
+        "signal": "매수"
+      },
+      {
+        "id": "fa211f07-7dd1-4f26-8fcb-c93fef00b66d",
+        "stock": "비트코인 (BTC)",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "팔란티어",
+        "ticker": "PLTR",
+        "signal_type": "긍정",
+        "key_quote": "팔란티어는 비트코인, 아이렌과 함께 10배 수익률을 낼 수 있는 대표적인 성장주입니다",
+        "reasoning": "화자는 팔란티어를 10배 수익률을 낼 수 있는 대표적인 성장주로 평가했습니다. 정부와 기업 대상 빅데이터 분석 플랫폼 사업을 영위하고 있으며, AI와 데이터 분석 수요가 폭증하는 현 시대에 적합한 비즈니스 모델을 보유하고 있다고 분석했습니다. 장기적으로 큰 성장이 기대된다고 전망을 제시했으나, 직접적인 매수 권유는 없었습니다.",
+        "timestamp": "0:30",
+        "confidence": 7
+      }
+    ],
+    "processed_at": "2026-03-06T07:19:51.170Z"
+  },
+  {
+    "video_id": "091eaf41-e6b1-469e-b57f-b1cc47b68ae8",
+    "old_signals": [
+      {
+        "id": "92b28cc0-189b-4b07-8fec-28827bfbe41d",
+        "stock": "테슬라",
+        "signal": "매도"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "테슬라",
+        "ticker": "TSLA",
+        "signal_type": "부정",
+        "key_quote": "테슬라가 11.4% 급락하며 52주 신저가를 기록한 상황에서 추가 하락 리스크가 상당해 보입니다",
+        "reasoning": "테슬라 주가가 11.4% 급락하며 52주 신저가를 기록한 상황에서 여러 부정적 요인들이 겹쳐있다고 분석했습니다. 중국 상하이 기가팩토리의 생산량 감축은 핵심 수익원인 중국 시장 수요 급감을 의미하며, 이는 일시적 조정이 아닌 구조적 문제일 가능성이 높다고 평가했습니다. 팬데믹 랠리 대비 50% 넘게 하락한 상태에서 기술적 지지선마저 무너지고 있어 당분간 약세 흐름이 지속될 것으로 전망했습니다.",
+        "timestamp": "0:30",
+        "confidence": 7
+      }
+    ],
+    "processed_at": "2026-03-06T07:19:59.746Z"
+  },
+  {
+    "video_id": "4527d27f-ef23-41ec-8306-17d433e2df43",
+    "old_signals": [
+      {
+        "id": "c409442b-6d6b-4e0c-98c7-712196d75ef3",
+        "stock": "팔란티어",
+        "signal": "매수"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "팔란티어",
+        "ticker": "PLTR",
+        "signal_type": "매수",
+        "key_quote": "팔란티어 지금이 정말 시작이라고 봅니다. 그래서 돈 있으면 계속 사는 거예요.",
+        "reasoning": "화자는 팔란티어의 성장성과 수익성을 동시에 확보했다고 평가하며 룰포4 지표 84를 근거로 제시했습니다. 한번 도입한 기업들이 데이터 종속성 때문에 빠져나가기 어려운 강력한 경제적 해자를 가지고 있다고 분석했습니다. AI와 빅데이터 시장의 폭발적 성장과 정부기관 및 대기업 대상 사업 확장을 통해 향후 전망이 밝다고 전망했습니다. '돈 있으면 계속 사는 거예요'라는 직접적인 매수 권유로 강한 투자 의견을 표현했습니다.",
+        "timestamp": "0:30",
+        "confidence": 9
+      }
+    ],
+    "processed_at": "2026-03-06T07:20:09.355Z"
+  },
+  {
+    "video_id": "e4cc1a66-eb31-4408-a690-f8eb690c22fd",
+    "old_signals": [
+      {
+        "id": "d800e5bc-390f-4974-b71a-5af73e7823fd",
+        "stock": "테슬라",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "테슬라",
+        "ticker": "TSLA",
+        "signal_type": "긍정",
+        "key_quote": "테슬라가 2분기 실적에서 시장 예상치를 뛰어넘는 성과를 거두며 투자 매력이 크게 부각되고 있습니다",
+        "reasoning": "화자는 테슬라의 2분기 실적 호조를 언급하며 투자 매력이 부각되고 있다고 평가했습니다. 자동차 인도량과 매출 실적이 견고했고, 에너지 저장 사업과 자율주행 기술에서 의미 있는 진전을 보이고 있다는 점을 긍정적 근거로 제시했습니다. 하반기 신규 모델 런칭과 글로벌 생산능력 확대로 실적 개선 모멘텀이 지속될 것으로 전망한다고 밝혔습니다. 다만 직접적인 매수 권유는 없어 긍정적 분석에 머물렀습니다.",
+        "timestamp": "0:30",
+        "confidence": 7
+      }
+    ],
+    "processed_at": "2026-03-06T07:20:20.120Z"
+  },
+  {
+    "video_id": "d2962ed5-415f-43ee-bb4e-cd685e9d92e4",
+    "old_signals": [
+      {
+        "id": "dc5bd2b5-4bd8-40a5-8d0f-376696c105b4",
+        "stock": "삼성전자",
+        "signal": "긍정"
+      }
+    ],
+    "new_signals": [],
+    "processed_at": "2026-03-06T07:20:30.701Z"
+  },
+  {
+    "video_id": "e0055607-263d-403b-b768-b91d84c7599e",
+    "old_signals": [
+      {
+        "id": "f1b95942-ae0d-4139-8c12-77497585131f",
+        "stock": "네이버",
+        "signal": "매도"
+      },
+      {
+        "id": "f2f82535-cd69-42ba-8f78-292a2f36525e",
+        "stock": "구글",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "네이버",
+        "ticker": "035420",
+        "signal_type": "부정",
+        "key_quote": "네이버의 중장기 전망은 상당히 우려스럽게 보고 있습니다. ChatGPT 등 생성형 AI 혁신 물결에 제대로 대응하지 못하면서 핵심 경쟁력이 급속히 무너지고 있어요.",
+        "reasoning": "화자는 네이버의 중장기 전망에 대해 우려를 표명했습니다. 국내 검색 시장 독점 기업이었던 네이버가 ChatGPT 등 생성형 AI 혁신에 제대로 대응하지 못하고 있다고 분석했습니다. 구글, 마이크로소프트 같은 글로벌 빅테크 대비 AI 기술 격차가 심각하게 벌어지고 있고, 실제로 국내 시장점유율도 50%대로 하락하는 등 위기 신호가 뚜렷하다고 평가했습니다. 핵심 경쟁력 약화와 시장점유율 하락으로 인한 부정적 전망을 제시했습니다.",
+        "timestamp": "0:30",
+        "confidence": 8
+      }
+    ],
+    "processed_at": "2026-03-06T07:20:39.856Z"
+  },
+  {
+    "video_id": "bb123c6b-c7f5-4a8e-945d-11db1bb6ed45",
+    "old_signals": [
+      {
+        "id": "029b47d0-ee99-4d31-bb84-07fce020659e",
+        "stock": "아이온큐",
+        "signal": "부정"
+      }
+    ],
+    "new_signals": [
+      {
+        "stock": "아이온큐",
+        "ticker": "IONQ",
+        "signal_type": "부정",
+        "key_quote": "아이온큐는 지금 완전히 과열 상태예요. 30달러라는 현재 주가는 매출 대비 200배가 넘는 PSR을 기록할 정도로 밸류에이션이 말이 안 되는 수준까지 올라왔거든요.",
+        "reasoning": "화자는 아이온큐의 현재 밸류에이션을 강하게 비판하고 있습니다. 매출 대비 200배가 넘는 PSR은 과도한 수준이라고 판단하고 있으며, 양자컴퓨팅 기술의 상용화까지 수년이 소요될 것으로 보면서도 현재 주가는 미래 가치를 지나치게 선반영했다고 평가합니다. AI 붐으로 인한 급등 이후 열기가 식으면 상당한 조정이 불가피하다는 전망을 제시하며 투자자들에게 주의를 당부하고 있습니다.",
+        "timestamp": "0:30",
+        "confidence": 8
+      }
+    ],
+    "processed_at": "2026-03-06T07:20:49.594Z"
+  }
+]

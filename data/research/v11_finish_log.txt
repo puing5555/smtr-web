@@ -1,0 +1,77 @@
+[2026-03-06T07:18:10.475Z] === V11 DB UPDATE + 나머지 처리 시작 ===
+[2026-03-06T07:18:10.478Z] Loading existing progress...
+[2026-03-06T07:18:10.478Z] Existing processed videos: 100
+[2026-03-06T07:18:10.479Z] Fetching all signals from DB...
+[2026-03-06T07:18:12.021Z] Total signals in DB: 804
+[2026-03-06T07:18:12.022Z] Videos to process: 16
+[2026-03-06T07:18:12.022Z] Videos with 200+ chars total: 19
+[2026-03-06T07:18:12.023Z] [1/16] Processing video 15848bb5... (1 signals, 246 chars)
+[2026-03-06T07:18:17.720Z]   Tokens: 993 in / 346 out | Cost: $0.0082
+[2026-03-06T07:18:17.721Z]   Results: 1 old signals → 1 new signals
+[2026-03-06T07:18:20.728Z] [2/16] Processing video d1bdb604... (7 signals, 227 chars)
+[2026-03-06T07:18:26.962Z]   Tokens: 1006 in / 419 out | Cost: $0.0093
+[2026-03-06T07:18:26.962Z]   Results: 7 old signals → 1 new signals
+[2026-03-06T07:18:29.974Z] [3/16] Processing video 69641510... (3 signals, 212 chars)
+[2026-03-06T07:18:36.447Z]   Tokens: 990 in / 416 out | Cost: $0.0092
+[2026-03-06T07:18:36.447Z]   Results: 3 old signals → 1 new signals
+[2026-03-06T07:18:39.456Z] [4/16] Processing video c85f46e3... (3 signals, 222 chars)
+[2026-03-06T07:18:45.698Z]   Tokens: 991.75 in / 393 out | Cost: $0.0089
+[2026-03-06T07:18:45.698Z]   Results: 3 old signals → 1 new signals
+[2026-03-06T07:18:48.704Z] [5/16] Processing video ea21e408... (3 signals, 207 chars)
+[2026-03-06T07:18:59.572Z]   Tokens: 988.5 in / 822 out | Cost: $0.0153
+[2026-03-06T07:18:59.572Z]   Results: 3 old signals → 2 new signals
+[2026-03-06T07:19:02.577Z] [6/16] Processing video 9970ad31... (3 signals, 223 chars)
+[2026-03-06T07:19:11.886Z]   Tokens: 992 in / 705 out | Cost: $0.0136
+[2026-03-06T07:19:11.887Z]   Results: 3 old signals → 2 new signals
+[2026-03-06T07:19:14.900Z] [7/16] Processing video 27d61afe... (1 signals, 251 chars)
+[2026-03-06T07:19:21.125Z]   Tokens: 995.5 in / 404 out | Cost: $0.0090
+[2026-03-06T07:19:21.125Z]   Results: 1 old signals → 1 new signals
+[2026-03-06T07:19:24.129Z] [8/16] Processing video fa0e6020... (5 signals, 211 chars)
+[2026-03-06T07:19:30.148Z]   Tokens: 995.25 in / 357 out | Cost: $0.0083
+[2026-03-06T07:19:30.149Z]   Results: 5 old signals → 1 new signals
+[2026-03-06T07:19:33.149Z] [9/16] Processing video 03a2af36... (2 signals, 201 chars)
+[2026-03-06T07:19:40.072Z]   Tokens: 985.5 in / 345 out | Cost: $0.0081
+[2026-03-06T07:19:40.073Z]   Results: 2 old signals → 0 new signals
+[2026-03-06T07:19:43.073Z] [10/16] Processing video c186fc91... (3 signals, 252 chars)
+[2026-03-06T07:19:51.170Z]   Tokens: 1005 in / 493 out | Cost: $0.0104
+[2026-03-06T07:19:51.170Z]   Results: 3 old signals → 1 new signals
+[2026-03-06T07:19:51.171Z]   Saved progress: 10 results
+[2026-03-06T07:19:54.185Z] [11/16] Processing video 091eaf41... (1 signals, 225 chars)
+[2026-03-06T07:19:59.746Z]   Tokens: 987.75 in / 372 out | Cost: $0.0085
+[2026-03-06T07:19:59.746Z]   Results: 1 old signals → 1 new signals
+[2026-03-06T07:20:02.753Z] [12/16] Processing video 4527d27f... (1 signals, 214 chars)
+[2026-03-06T07:20:09.355Z]   Tokens: 985.25 in / 372 out | Cost: $0.0085
+[2026-03-06T07:20:09.355Z]   Results: 1 old signals → 1 new signals
+[2026-03-06T07:20:12.359Z] [13/16] Processing video e4cc1a66... (1 signals, 231 chars)
+[2026-03-06T07:20:20.119Z]   Tokens: 989.25 in / 380 out | Cost: $0.0087
+[2026-03-06T07:20:20.120Z]   Results: 1 old signals → 1 new signals
+[2026-03-06T07:20:23.131Z] [14/16] Processing video d2962ed5... (1 signals, 280 chars)
+[2026-03-06T07:20:30.701Z]   Tokens: 1001.75 in / 353 out | Cost: $0.0083
+[2026-03-06T07:20:30.701Z]   Results: 1 old signals → 0 new signals
+[2026-03-06T07:20:33.712Z] [15/16] Processing video e0055607... (2 signals, 203 chars)
+[2026-03-06T07:20:39.855Z]   Tokens: 984.5 in / 421 out | Cost: $0.0093
+[2026-03-06T07:20:39.856Z]   Results: 2 old signals → 1 new signals
+[2026-03-06T07:20:42.865Z] [16/16] Processing video bb123c6b... (1 signals, 225 chars)
+[2026-03-06T07:20:49.594Z]   Tokens: 988 in / 394 out | Cost: $0.0089
+[2026-03-06T07:20:49.594Z]   Results: 1 old signals → 1 new signals
+[2026-03-06T07:20:52.606Z] Final results saved: 116 total processed videos
+[2026-03-06T07:20:52.606Z] 
+=== DB UPDATE 시작 ===
+[2026-03-06T07:20:56.675Z]   DB Updated: 50 records
+[2026-03-06T07:21:00.899Z]   DB Updated: 100 records
+[2026-03-06T07:21:05.082Z]   DB Updated: 150 records
+[2026-03-06T07:21:09.279Z]   DB Updated: 200 records
+[2026-03-06T07:21:13.270Z] 
+=== 최종 확인 ===
+[2026-03-06T07:21:13.343Z] Final signal distribution:
+[2026-03-06T07:21:13.344Z]   긍정: 509개
+[2026-03-06T07:21:13.344Z]   매수: 151개
+[2026-03-06T07:21:13.344Z]   부정: 96개
+[2026-03-06T07:21:13.344Z]   중립: 43개
+[2026-03-06T07:21:13.344Z]   매도: 5개
+[2026-03-06T07:21:13.344Z] 
+=== 완료 ===
+[2026-03-06T07:21:13.344Z] 처리 완료: 전체 116개 영상
+[2026-03-06T07:21:13.344Z] 새로 처리: 16개 영상
+[2026-03-06T07:21:13.344Z] DB 업데이트: 249건
+[2026-03-06T07:21:13.344Z] 총 비용: $0.15
