@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && touch out/.nojekyll"
+    "deploy": "next build && node -e \"require('fs').writeFileSync('out/.nojekyll','')\" && echo Deploy ready: out/ folder with .nojekyll"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.78.0",
