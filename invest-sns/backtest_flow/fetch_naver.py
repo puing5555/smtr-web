@@ -58,7 +58,7 @@ def get_kospi_tickers_naver():
         return []
 
 
-def fetch_naver_flow(ticker, start=START_DATE, end=END_DATE, max_pages=80):
+def fetch_naver_flow(ticker, start=START_DATE, end=END_DATE, max_pages=42):
     """
     네이버 금융에서 기관/외국인 순매수 일별 데이터 수집
     컬럼: 날짜, 종가, 기관, 외국인, 개인(계산)
@@ -112,7 +112,7 @@ def fetch_naver_flow(ticker, start=START_DATE, end=END_DATE, max_pages=80):
             if min_date < pd.to_datetime(start):
                 break
 
-            time.sleep(0.2)
+            time.sleep(0.1)
 
         except Exception as e:
             break
@@ -186,7 +186,7 @@ def collect_data(tickers, max_tickers=50):
             if price is None:
                 reason.append("주가없음")
 
-        time.sleep(0.3)
+        time.sleep(0.1)
 
     print(f"\n✅ 수집 완료: {len(all_flow)}개 / 실패: {len(failed)}개")
     if failed:
