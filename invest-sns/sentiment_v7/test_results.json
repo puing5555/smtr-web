@@ -1,0 +1,46 @@
+{
+  "1. 모멘텀 (코스피 vs 50일 이평)": {
+    "status": "OK",
+    "raw": 11.38446095671108
+  },
+  "2. 주가강도 (52주 신고/신저)": {
+    "status": "FAIL",
+    "error": "신고가+신저가=0"
+  },
+  "3. 시장폭 (상승/하락 비율)": {
+    "status": "FAIL",
+    "error": "OTP 실패: B92No2eJ4Jozfwks63YkhIzkQIM1yhyNBrDR4DHknYYRtSksuL"
+  },
+  "4. 풋/콜 비율": {
+    "status": "FAIL",
+    "error": "OTP 실패"
+  },
+  "5. 변동성 (VKOSPI vs 50일)": {
+    "status": "FAIL",
+    "error": "'지수명'"
+  },
+  "6. 안전자산 수요 (코스피 vs 국채)": {
+    "status": "OK",
+    "raw": 38.37111147983414
+  },
+  "7. 정크본드 (AA- vs BBB- 스프레드)": {
+    "status": "FAIL",
+    "error": "AA-=None, BBB-=None"
+  },
+  "8. 외국인 수급 (5일 순매수)": {
+    "status": "FAIL",
+    "error": "'거래대금'"
+  },
+  "9. 신용잔고": {
+    "status": "FAIL",
+    "error": "파싱 실패 (status=200, len=2531)"
+  },
+  "10. 고객예탁금": {
+    "status": "FAIL",
+    "error": "파싱 실패 (status=200)"
+  },
+  "11. 코스닥/코스피 상대강도": {
+    "status": "OK",
+    "raw": -10.425229047156426
+  }
+}
