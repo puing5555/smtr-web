@@ -71,6 +71,8 @@ export default function DashboardPage() {
 
   const loadDashboard = async () => {
     setLoading(true);
+    // 8초 타임아웃: API hang 방지
+    const timeoutId = setTimeout(() => setLoading(false), 8000);
     try {
       const [stocksRes, watchlistRes, notifRes, statsRes] = await Promise.all([
         getUserStocks(),
@@ -87,6 +89,7 @@ export default function DashboardPage() {
     } catch (e) {
       console.error('Dashboard load error:', e);
     }
+    clearTimeout(timeoutId);
     setLoading(false);
   };
 
