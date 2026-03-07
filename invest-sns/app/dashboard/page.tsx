@@ -15,9 +15,9 @@ type UserNotification = Database['public']['Tables']['user_notifications']['Row'
 
 // Mock 시황 데이터 (추후 API 연동)
 const MARKET_DATA = [
-  { flag: '🇺🇸', items: ['S&P 5,234 +0.3%', '나스닥 16,832 +0.5%', '다우 39,420 +0.1%'] },
-  { flag: '🇰🇷', items: ['코스피 2,578 -0.2%', '코스닥 752 +0.4%'] },
-  { flag: '₿', items: ['BTC $85,420 +1.2%', '금 $2,914 +0.3%', '원달러 1,455 +0.1%'] },
+  { label: 'US', items: ['S&P 5,234 +0.3%', '나스닥 16,832 +0.5%', '다우 39,420 +0.1%'] },
+  { label: 'KR', items: ['코스피 2,578 -0.2%', '코스닥 752 +0.4%'] },
+  { label: '₿', items: ['BTC $85,420 +1.2%', '금 $2,914 +0.3%', '원달러 1,455 +0.1%'] },
 ];
 
 type TabKey = '지금' | '뉴스' | 'LIVE' | '시장';
@@ -31,8 +31,94 @@ interface VideoCard {
   youtube_url: string;
   mentioned_stocks: string[] | null;
   channel_id: string;
+  category?: string;
 }
 
+// ─── Design Tokens ───────────────────────────────────────────
+const C = {
+  bg: '#F8F9FA',
+  card: '#FFFFFF',
+  primary: '#1A1A2E',
+  accent: '#2563EB',
+  red: '#EF4444',
+  blue: '#3B82F6',
+  green: '#10B981',
+  gray: '#6B7280',
+  lightGray: '#E5E7EB',
+};
+
+const cardStyle: React.CSSProperties = {
+  background: C.card,
+  borderRadius: 16,
+  padding: '20px 24px',
+  marginBottom: 16,
+  boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
+};
+
+// FilterPill
+function FilterPill({
+  label,
+  active,
+  onClick,
+}: {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      style={{
+        padding: '8px 16px',
+        borderRadius: 20,
+        background: active ? C.accent : C.card,
+        color: active ? '#fff' : C.gray,
+        border: active ? 'none' : `1px solid ${C.lightGray}`,
+        fontSize: 13,
+        fontWeight: 600,
+        cursor: 'pointer',
+        flexShrink: 0,
+        transition: 'all 0.15s',
+        fontFamily: 'inherit',
+      }}
+    >
+      {label}
+    </button>
+  );
+}
+
+// Category badge colors
+function getCategoryStyle(category: string): React.CSSProperties {
+  const map: Record<string, { bg: string; color: string }> = {
+    'stock_analysis': { bg: '#DBEAFE', color: '#1E40AF' },
+    '한국주식': { bg: '#DBEAFE', color: '#1E40AF' },
+    'us_stock': { bg: '#FEE2E2', color: '#991B1B' },
+    '미국주식': { bg: '#FEE2E2', color: '#991B1B' },
+    'crypto': { bg: '#FEF3C7', color: '#92400E' },
+    '크립토': { bg: '#FEF3C7', color: '#92400E' },
+  };
+  const s = map[category] || { bg: '#F3F4F6', color: '#374151' };
+  return {
+    background: s.bg,
+    color: s.color,
+    padding: '2px 8px',
+    borderRadius: 6,
+    fontSize: 11,
+    fontWeight: 600,
+  };
+}
+
+const CATEGORY_LABELS: Record<string, string> = {
+  'stock_analysis': '종목분석',
+  'market_overview': '시황',
+  'education': '교육',
+  'macro': '매크로',
+  'general': '일반',
+  'us_stock': '미국주식',
+  'crypto': '크립토',
+};
+
+// ─── Main Component ────────────────────────────────────────────
 export default function DashboardPage() {
   const { user, loading: authLoading } = useAuth();
   const router = useRouter();
@@ -71,7 +157,6 @@ export default function DashboardPage() {
 
   const loadDashboard = async () => {
     setLoading(true);
-    // 8초 타임아웃: API hang 방지
     const timeoutId = setTimeout(() => setLoading(false), 8000);
     try {
       const [stocksRes, watchlistRes, notifRes, statsRes] = await Promise.all([
@@ -84,7 +169,6 @@ export default function DashboardPage() {
       if (watchlistRes.data) setWatchlist(watchlistRes.data);
       if (notifRes.data) setNotifications(notifRes.data.slice(0, 5));
       if (statsRes.data) setUnreadCount(statsRes.data.unread);
-      // videos 테이블 조회 (없으면 빈 배열)
       await loadVideos();
     } catch (e) {
       console.error('Dashboard load error:', e);
@@ -146,160 +230,206 @@ export default function DashboardPage() {
     } catch { return iso; }
   };
 
-  const CATEGORY_LABELS: Record<string, string> = {
-    'stock_analysis': '종목분석',
-    'market_overview': '시황',
-    'education': '교육',
-    'macro': '매크로',
-    'general': '일반',
-  };
-
   const userStockNames = stocks.map(s => s.stock_name);
   const userWatchlistNames = watchlist.map(w => w.stock_name);
   const userStocks = new Set([...userStockNames, ...userWatchlistNames]);
 
   const filteredVideos = videos.filter(video => {
-    // 내 종목 필터
     if (videoFilter === '내 종목') {
       if (!video.mentioned_stocks || video.mentioned_stocks.length === 0) return false;
       const hasMyStock = video.mentioned_stocks.some(s => userStocks.has(s));
       if (!hasMyStock) return false;
     }
-    // 채널 필터
     if (channelFilter.length > 0 && !channelFilter.includes(video.channel_name)) return false;
-    // 카테고리 필터
     if (categoryFilter !== '전체') {
       const catMap: Record<string, string> = {
-        '종목분석': 'stock_analysis',
-        '시황': 'market_overview',
-        '교육': 'education',
-        '매크로': 'macro',
+        '한국주식': 'stock_analysis',
+        '미국주식': 'us_stock',
+        '크립토': 'crypto',
       };
       if ((video as any).category !== catMap[categoryFilter]) return false;
     }
     return true;
   });
 
+  // ─── Loading ──────────────────────────────────────────────────
   if (authLoading || loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-4xl mb-3">📊</div>
-          <div className="text-[#8b95a1]">대시보드 로딩 중...</div>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: C.bg }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: 40, marginBottom: 12 }}>📊</div>
+          <div style={{ color: C.gray, fontSize: 14 }}>대시보드 로딩 중...</div>
         </div>
       </div>
     );
   }
 
-  const TABS: TabKey[] = ['지금', '뉴스', 'LIVE', '시장'];
+  const TABS: { key: TabKey; label: string }[] = [
+    { key: '지금', label: '지금' },
+    { key: '뉴스', label: '뉴스' },
+    { key: 'LIVE', label: '🔴 LIVE' },
+    { key: '시장', label: '시장' },
+  ];
 
+  // ─── Render ───────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-[#f4f4f4]">
-      {/* Header */}
-      <div className="bg-white border-b border-[#e8e8e8] px-6 py-5">
-        <h1 className="text-xl font-bold text-[#191f28]">📊 대시보드</h1>
-        <p className="text-sm text-[#8b95a1] mt-1">{user?.email} 님의 포트폴리오</p>
-      </div>
+    <div style={{ minHeight: '100vh', background: C.bg, fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif" }}>
 
-      {/* 탭 네비게이션 */}
-      <div className="bg-white border-b border-[#e8e8e8] sticky top-0 z-10">
-        <div className="max-w-3xl mx-auto px-4">
-          <div className="flex">
-            {TABS.map(tab => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-5 py-4 text-sm font-medium border-b-2 transition-colors ${
-                  activeTab === tab
-                    ? 'border-[#3182f6] text-[#3182f6]'
-                    : 'border-transparent text-[#8b95a1] hover:text-[#191f28]'
-                }`}
-              >
-                {tab === 'LIVE' ? '🔴 LIVE' : tab}
-              </button>
-            ))}
-          </div>
+      {/* ── Header ─────────────────────────────────────────── */}
+      <div style={{ background: C.card, borderBottom: `1px solid ${C.lightGray}`, padding: '20px 24px' }}>
+        <div style={{ maxWidth: 800, margin: '0 auto' }}>
+          <h1 style={{ fontSize: 20, fontWeight: 700, color: C.primary, margin: 0 }}>📊 대시보드</h1>
+          <p style={{ fontSize: 13, color: C.gray, marginTop: 4, marginBottom: 0 }}>{user?.email} 님의 포트폴리오</p>
         </div>
       </div>
 
-      <div className="max-w-3xl mx-auto px-4 py-6 space-y-6">
+      {/* ── Tab Bar ───────────────────────────────────────── */}
+      <div style={{ background: C.card, borderBottom: `2px solid ${C.lightGray}`, position: 'sticky', top: 0, zIndex: 10 }}>
+        <div style={{ maxWidth: 800, margin: '0 auto', padding: '0 16px', display: 'flex' }}>
+          {TABS.map(tab => (
+            <button
+              key={tab.key}
+              onClick={() => setActiveTab(tab.key)}
+              style={{
+                padding: '14px 20px',
+                fontSize: 14,
+                fontWeight: activeTab === tab.key ? 700 : 500,
+                color: activeTab === tab.key ? C.accent : C.gray,
+                background: 'none',
+                border: 'none',
+                borderBottom: activeTab === tab.key ? `3px solid ${C.accent}` : '3px solid transparent',
+                cursor: 'pointer',
+                transition: 'all 0.15s',
+                fontFamily: 'inherit',
+                marginBottom: -2,
+              }}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+      </div>
 
-        {/* ===== 탭1: 지금 ===== */}
+      {/* ── Content ───────────────────────────────────────── */}
+      <div style={{ maxWidth: 800, margin: '0 auto', padding: '16px 16px 40px' }}>
+
+        {/* ══════════════════════════════════════════════════
+            탭 1: 지금
+        ══════════════════════════════════════════════════ */}
         {activeTab === '지금' && (
           <>
             {/* ① 보유종목 */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-sm font-medium text-[#8b95a1]">보유종목</h2>
-                <Link href="/my-portfolio" className="text-xs text-[#3182f6]">전체보기 →</Link>
+            <div style={cardStyle}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+                <span style={{ fontSize: 13, fontWeight: 600, color: C.gray }}>보유종목</span>
+                <Link href="/my-portfolio" style={{ fontSize: 12, color: C.accent, textDecoration: 'none' }}>전체보기 →</Link>
               </div>
               {stocks.length > 0 ? (
-                <div className="space-y-3">
-                  {stocks.slice(0, 4).map((stock) => {
+                <div>
+                  {stocks.slice(0, 4).map((stock, idx) => {
                     const returnPct = (stock as any).return_pct ?? 0;
                     const returnAmt = (stock as any).return_amount ?? 0;
+                    const currentPrice = (stock as any).current_price ?? stock.avg_buy_price;
+                    const isPositive = returnPct >= 0;
                     return (
-                      <div key={stock.id} className="flex justify-between items-center py-2 border-b border-[#f0f0f0] last:border-0">
+                      <div key={stock.id} style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        padding: '12px 0',
+                        borderBottom: idx < Math.min(stocks.length, 4) - 1 ? `1px solid ${C.lightGray}` : 'none',
+                      }}>
+                        {/* 왼쪽: 종목명 + 코드 + 수량·단가 */}
                         <div>
-                          <p className="font-medium text-[#191f28]">{stock.stock_name}</p>
-                          <p className="text-xs text-[#8b95a1]">{stock.stock_code} · {stock.market}</p>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                            <span style={{ fontWeight: 700, fontSize: 15, color: C.primary }}>{stock.stock_name}</span>
+                            <span style={{ fontSize: 12, color: C.gray }}>{stock.stock_code}</span>
+                          </div>
+                          <div style={{ fontSize: 12, color: C.gray }}>
+                            {stock.quantity}주 · 평균 {stock.avg_buy_price.toLocaleString('ko-KR')}원
+                          </div>
                         </div>
-                        <div className="text-right">
-                          <p className={`font-semibold ${returnPct >= 0 ? 'text-[#f04452]' : 'text-[#3182f6]'}`}>
+                        {/* 오른쪽: 현재가 + 수익률 */}
+                        <div style={{ textAlign: 'right' }}>
+                          <div style={{ fontWeight: 700, fontSize: 16, color: C.primary, marginBottom: 4 }}>
+                            {currentPrice.toLocaleString('ko-KR')}원
+                          </div>
+                          <div style={{ fontWeight: 700, fontSize: 14, color: isPositive ? C.red : C.blue }}>
                             {formatPercent(returnPct)}
-                          </p>
-                          <p className={`text-xs ${returnAmt >= 0 ? 'text-[#f04452]' : 'text-[#3182f6]'}`}>
-                            {returnAmt >= 0 ? '+' : ''}{formatKRW(returnAmt)}
-                          </p>
+                          </div>
                         </div>
                       </div>
                     );
                   })}
                 </div>
               ) : (
-                <div className="text-center py-8 text-[#8b95a1]">
-                  <p>보유 종목이 없습니다</p>
-                  <Link href="/my-portfolio" className="text-[#3182f6] text-sm mt-2 inline-block">종목 추가하기 →</Link>
+                <div style={{ textAlign: 'center', padding: '24px 0', color: C.gray }}>
+                  <p style={{ marginBottom: 8, fontSize: 14 }}>보유 종목이 없습니다</p>
+                  <Link href="/my-portfolio" style={{ fontSize: 13, color: C.accent, textDecoration: 'none' }}>종목 추가하기 →</Link>
                 </div>
               )}
             </div>
 
             {/* ② 관심종목 */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-sm font-medium text-[#8b95a1]">관심종목</h2>
-                <Link href="/my-watchlist" className="text-xs text-[#3182f6]">전체보기 →</Link>
+            <div style={cardStyle}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+                <span style={{ fontSize: 13, fontWeight: 600, color: C.gray }}>관심종목</span>
+                <Link href="/my-watchlist" style={{ fontSize: 12, color: C.accent, textDecoration: 'none' }}>전체보기 →</Link>
               </div>
               {watchlist.length > 0 ? (
-                <div className="flex flex-wrap gap-2">
-                  {watchlist.slice(0, 5).map((item) => (
-                    <span key={item.id} className="px-3 py-1.5 bg-[#f4f4f4] rounded-full text-sm text-[#191f28]">
-                      {item.stock_name}
-                      {item.alert_on_signals && <span className="ml-1 text-xs">🔔</span>}
-                    </span>
-                  ))}
+                <div style={{ display: 'flex', gap: 10, overflowX: 'auto', paddingBottom: 4 }}>
+                  {watchlist.slice(0, 8).map((item) => {
+                    const changePct = (item as any).change_pct ?? 0;
+                    const isPos = changePct >= 0;
+                    return (
+                      <div key={item.id} style={{
+                        minWidth: 120,
+                        borderRadius: 12,
+                        background: '#F8F9FA',
+                        padding: '10px 12px',
+                        textAlign: 'center',
+                        flexShrink: 0,
+                        border: `1px solid ${C.lightGray}`,
+                      }}>
+                        <div style={{ fontWeight: 600, fontSize: 13, color: C.primary, marginBottom: 2 }}>
+                          {item.stock_name}
+                          {item.alert_on_signals && <span style={{ marginLeft: 4 }}>🔔</span>}
+                        </div>
+                        <div style={{ fontSize: 12, color: C.gray, marginBottom: 4 }}>{(item as any).stock_code || ''}</div>
+                        <div style={{ fontWeight: 700, fontSize: 14, color: isPos ? C.red : C.blue }}>
+                          {changePct !== 0 ? (isPos ? '+' : '') + changePct.toFixed(2) + '%' : '-'}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               ) : (
-                <div className="text-center py-4 text-[#8b95a1] text-sm">
-                  <p>관심종목이 없습니다</p>
-                  <Link href="/my-watchlist" className="text-[#3182f6] text-sm mt-2 inline-block">관심종목 추가 →</Link>
+                <div style={{ textAlign: 'center', padding: '16px 0', color: C.gray, fontSize: 14 }}>
+                  <p style={{ marginBottom: 8 }}>관심종목이 없습니다</p>
+                  <Link href="/my-watchlist" style={{ fontSize: 13, color: C.accent, textDecoration: 'none' }}>관심종목 추가 →</Link>
                 </div>
               )}
             </div>
 
-            {/* ③ 시황 3줄 */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm">
-              <h2 className="text-sm font-medium text-[#8b95a1] mb-4">시황</h2>
-              <div className="space-y-3">
+            {/* ③ 시황 */}
+            <div style={cardStyle}>
+              <div style={{ fontSize: 13, fontWeight: 600, color: C.gray, marginBottom: 14 }}>시황</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {MARKET_DATA.map((group) => (
-                  <div key={group.flag} className="flex items-start gap-3">
-                    <span className="text-lg">{group.flag}</span>
-                    <div className="flex flex-wrap gap-x-4 gap-y-1">
+                  <div key={group.label} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+                    <span style={{ fontWeight: 700, fontSize: 13, color: C.gray, width: 28, flexShrink: 0, paddingTop: 1 }}>
+                      {group.label}
+                    </span>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 12px' }}>
                       {group.items.map((item) => {
-                        const isPositive = item.includes('+');
-                        const isNegative = item.includes('-') && !item.includes('원달러');
+                        const hasMinus = item.includes('-') && !item.includes('원달러');
+                        const hasPlus = item.includes('+');
                         return (
-                          <span key={item} className={`text-sm ${isPositive ? 'text-[#f04452]' : isNegative ? 'text-[#3182f6]' : 'text-[#191f28]'}`}>
+                          <span key={item} style={{
+                            fontSize: 13,
+                            fontWeight: 700,
+                            color: hasPlus ? C.red : hasMinus ? C.blue : C.primary,
+                          }}>
                             {item}
                           </span>
                         );
@@ -308,237 +438,332 @@ export default function DashboardPage() {
                   </div>
                 ))}
               </div>
-              <p className="text-xs text-[#b0b8c1] mt-3">※ 시황 데이터 추후 API 연동 예정</p>
+              <p style={{ fontSize: 11, color: '#9CA3AF', marginTop: 12, marginBottom: 0 }}>※ 시황 데이터 추후 API 연동 예정</p>
             </div>
 
             {/* ④ 오늘 알림 */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-sm font-medium text-[#8b95a1]">
-                  오늘 알림 {unreadCount > 0 && (
-                    <span className="bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full ml-1">{unreadCount}</span>
+            <div style={cardStyle}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+                <span style={{ fontSize: 13, fontWeight: 600, color: C.gray }}>
+                  오늘 알림{' '}
+                  {unreadCount > 0 && (
+                    <span style={{
+                      background: C.red,
+                      color: '#fff',
+                      fontSize: 11,
+                      padding: '1px 6px',
+                      borderRadius: 10,
+                      marginLeft: 6,
+                      fontWeight: 700,
+                    }}>{unreadCount}</span>
                   )}
-                </h2>
-                <Link href="/notifications" className="text-xs text-[#3182f6]">전체보기 →</Link>
+                </span>
+                <Link href="/notifications" style={{ fontSize: 12, color: C.accent, textDecoration: 'none' }}>전체보기 →</Link>
               </div>
               {notifications.length > 0 ? (
-                <div className="space-y-3">
-                  {notifications.map((notif) => (
-                    <div key={notif.id} className={`py-2 border-b border-[#f0f0f0] last:border-0 ${!notif.is_read ? 'bg-blue-50 -mx-2 px-2 rounded-lg' : ''}`}>
-                      <p className="text-sm font-medium text-[#191f28]">{notif.title}</p>
-                      <p className="text-xs text-[#8b95a1] mt-0.5">{notif.message}</p>
-                      <p className="text-xs text-[#b0b8c1] mt-1">{new Date(notif.created_at).toLocaleString('ko-KR')}</p>
-                    </div>
-                  ))}
+                <div>
+                  {notifications.map((notif, idx) => {
+                    const notifIcon = (notif as any).icon || '🔔';
+                    return (
+                      <div key={notif.id} style={{
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        gap: 12,
+                        padding: '12px 0',
+                        borderBottom: idx < notifications.length - 1 ? `1px solid ${C.lightGray}` : 'none',
+                        background: !notif.is_read ? '#F0F7FF' : 'transparent',
+                        margin: !notif.is_read ? '0 -8px' : 0,
+                        padding: !notif.is_read ? '12px 8px' : '12px 0',
+                        borderRadius: !notif.is_read ? 8 : 0,
+                      }}>
+                        <span style={{ fontSize: 20, flexShrink: 0, lineHeight: 1 }}>{notifIcon}</span>
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ fontWeight: 700, fontSize: 14, color: C.primary, marginBottom: 3 }}>{notif.title}</div>
+                          <div style={{ fontSize: 13, color: C.gray, lineHeight: 1.4 }}>{notif.message}</div>
+                          <div style={{ fontSize: 12, color: '#9CA3AF', marginTop: 4 }}>
+                            {new Date(notif.created_at).toLocaleString('ko-KR')}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               ) : (
-                <p className="text-center py-4 text-[#8b95a1] text-sm">알림이 없습니다</p>
+                <p style={{ textAlign: 'center', padding: '16px 0', color: C.gray, fontSize: 14 }}>알림이 없습니다</p>
               )}
             </div>
           </>
         )}
 
-        {/* ===== 탭2: 뉴스 ===== */}
+        {/* ══════════════════════════════════════════════════
+            탭 2: 뉴스
+        ══════════════════════════════════════════════════ */}
         {activeTab === '뉴스' && (
           <>
-            {/* 서브 필터 */}
-            <div className="flex gap-2">
+            {/* 필터 */}
+            <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
               {(['전체', '공시', '내종목'] as const).map(f => (
-                <button
-                  key={f}
-                  onClick={() => setNewsFilter(f)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                    newsFilter === f ? 'bg-[#3182f6] text-white' : 'bg-white text-[#8b95a1] border border-[#e8e8e8]'
-                  }`}
-                >
-                  {f}
-                </button>
+                <FilterPill key={f} label={f} active={newsFilter === f} onClick={() => setNewsFilter(f)} />
               ))}
             </div>
 
-            {/* 공시 AI분석 카드 placeholder */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm">
-              <h2 className="text-sm font-medium text-[#8b95a1] mb-4">공시 AI 분석</h2>
-              <div className="text-center py-8 text-[#8b95a1]">
-                <div className="text-3xl mb-2">📋</div>
-                <p className="text-sm">공시 데이터 로딩 중...</p>
-                <Link href="/explore" className="text-[#3182f6] text-sm mt-2 inline-block">공시 탭에서 보기 →</Link>
+            {/* 공시 AI 분석 */}
+            <div style={cardStyle}>
+              <div style={{ fontSize: 13, fontWeight: 600, color: C.gray, marginBottom: 16 }}>공시 AI 분석</div>
+              {/* Placeholder — 실제 공시 데이터 연동 시 아래 구조로 렌더링 */}
+              <div style={{ textAlign: 'center', padding: '24px 0', color: C.gray }}>
+                <div style={{ fontSize: 32, marginBottom: 10 }}>📋</div>
+                <p style={{ fontSize: 14, marginBottom: 8 }}>공시 데이터 로딩 중...</p>
+                <Link href="/explore" style={{ fontSize: 13, color: C.accent, textDecoration: 'none' }}>공시 탭에서 보기 →</Link>
               </div>
+              {/* 공시 카드 예시 구조 (데이터 있을 때 사용)
+              {disclosures.map(d => {
+                const isPos = d.sentiment === '긍정';
+                const isNeg = d.sentiment === '부정';
+                const borderColor = isPos ? C.green : isNeg ? C.red : C.gray;
+                return (
+                  <div key={d.id} style={{
+                    background: '#F8F9FA', borderRadius: 12, padding: 16, marginBottom: 12,
+                    borderLeft: `4px solid ${borderColor}`,
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8, flexWrap: 'wrap' }}>
+                      <span style={{ fontWeight: 700, fontSize: 15, color: C.primary }}>{d.company}</span>
+                      {d.type && (
+                        <span style={{ background: isPos ? '#D1FAE5' : isNeg ? '#FEE2E2' : '#F3F4F6',
+                          color: isPos ? '#065F46' : isNeg ? '#991B1B' : C.gray,
+                          padding: '2px 8px', borderRadius: 6, fontSize: 11, fontWeight: 600 }}>
+                          {d.type}
+                        </span>
+                      )}
+                      {d.grade && (
+                        <span style={{ background: '#EEF2FF', color: '#4338CA', padding: '2px 8px', borderRadius: 6, fontSize: 11, fontWeight: 600 }}>
+                          {d.grade}
+                        </span>
+                      )}
+                      <span style={{ fontSize: 12, color: C.gray, marginLeft: 'auto' }}>{formatTime(d.created_at)}</span>
+                    </div>
+                    <p style={{ fontWeight: 600, fontSize: 14, color: C.primary, marginBottom: 6 }}>{d.title}</p>
+                    <p style={{ fontSize: 13, color: C.gray, lineHeight: 1.5, marginBottom: 8 }}>{d.summary}</p>
+                    {(d.what || d.so_what || d.now_what) && (
+                      <div style={{ fontSize: 12, color: '#4B5563', lineHeight: 1.6 }}>
+                        {d.what && <div>💡 <strong>What</strong> {d.what}</div>}
+                        {d.so_what && <div>🔍 <strong>So What</strong> {d.so_what}</div>}
+                        {d.now_what && <div>📌 <strong>Now What</strong> {d.now_what}</div>}
+                      </div>
+                    )}
+                  </div>
+                );
+              })} */}
             </div>
 
-            {/* 뉴스 헤드라인 placeholder */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm">
-              <h2 className="text-sm font-medium text-[#8b95a1] mb-4">뉴스 헤드라인</h2>
-              <div className="text-center py-8 text-[#8b95a1]">
-                <div className="text-3xl mb-2">📰</div>
-                <p className="text-sm">뉴스 API 연동 예정</p>
+            {/* 뉴스 헤드라인 */}
+            <div style={cardStyle}>
+              <div style={{ fontSize: 13, fontWeight: 600, color: C.gray, marginBottom: 16 }}>뉴스 헤드라인</div>
+              <div style={{ textAlign: 'center', padding: '24px 0', color: C.gray }}>
+                <div style={{ fontSize: 32, marginBottom: 10 }}>📰</div>
+                <p style={{ fontSize: 14 }}>뉴스 API 연동 예정</p>
               </div>
+              {/* 뉴스 카드 예시 구조 (데이터 있을 때 사용)
+              {news.map((n, idx) => (
+                <div key={n.id} style={{
+                  padding: '12px 0',
+                  borderBottom: idx < news.length - 1 ? `1px solid ${C.lightGray}` : 'none',
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
+                    <span style={{ background: '#F3F4F6', color: C.gray, fontSize: 11, padding: '2px 8px', borderRadius: 6, fontWeight: 600 }}>
+                      {n.tag}
+                    </span>
+                  </div>
+                  <p style={{ fontSize: 14, fontWeight: 500, color: C.primary, lineHeight: 1.4, marginBottom: 6 }}>{n.title}</p>
+                  <p style={{ fontSize: 12, color: C.gray }}>{n.source} · {formatTime(n.published_at)}</p>
+                </div>
+              ))} */}
             </div>
           </>
         )}
 
-        {/* ===== 탭3: LIVE ===== */}
+        {/* ══════════════════════════════════════════════════
+            탭 3: LIVE
+        ══════════════════════════════════════════════════ */}
         {activeTab === 'LIVE' && (
           <>
-            {/* 필터 바 */}
-            <div className="space-y-2">
-              {/* 1행: 주요 필터 */}
-              <div className="flex gap-2 overflow-x-auto pb-1">
+            {/* 필터 2줄 */}
+            <div style={{ marginBottom: 16 }}>
+              {/* 1줄: 내 종목 / 전체 */}
+              <div style={{ display: 'flex', gap: 8, marginBottom: 8, overflowX: 'auto', paddingBottom: 2 }}>
                 {['내 종목', '전체'].map(f => (
-                  <button
+                  <FilterPill
                     key={f}
+                    label={f === '내 종목' ? '⭐ 내 종목' : '전체'}
+                    active={videoFilter === f}
                     onClick={() => {
                       setVideoFilter(f);
                       setCategoryFilter('전체');
                       setChannelFilter([]);
                     }}
-                    className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                      videoFilter === f
-                        ? 'bg-[#3182f6] text-white'
-                        : 'bg-white text-[#8b95a1] border border-[#e8e8e8]'
-                    }`}
-                  >
-                    {f === '내 종목' ? '⭐ 내 종목' : f}
-                  </button>
+                  />
                 ))}
-
-                {/* 채널별 드롭다운 */}
-                <div className="relative flex-shrink-0">
-                  <select
-                    value={channelFilter[0] || ''}
-                    onChange={e => {
-                      const val = e.target.value;
-                      setChannelFilter(val ? [val] : []);
-                      setVideoFilter('전체');
+              </div>
+              {/* 2줄: 카테고리 */}
+              <div style={{ display: 'flex', gap: 8, overflowX: 'auto', paddingBottom: 2 }}>
+                {['전체', '한국주식', '미국주식', '크립토'].map(f => (
+                  <FilterPill
+                    key={f}
+                    label={f}
+                    active={categoryFilter === f}
+                    onClick={() => {
+                      setCategoryFilter(f);
+                      if (f !== '전체') setVideoFilter('전체');
                     }}
-                    className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors appearance-none cursor-pointer ${
-                      channelFilter.length > 0
-                        ? 'bg-[#3182f6] text-white border-[#3182f6]'
-                        : 'bg-white text-[#8b95a1] border-[#e8e8e8]'
-                    }`}
-                  >
-                    <option value="">채널별 ▼</option>
-                    {Array.from(new Set(videos.map(v => v.channel_name))).map(ch => (
-                      <option key={ch} value={ch}>{ch}</option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* 카테고리 드롭다운 */}
-                <div className="relative flex-shrink-0">
-                  <select
-                    value={categoryFilter}
-                    onChange={e => {
-                      setCategoryFilter(e.target.value);
-                      if (e.target.value !== '전체') setVideoFilter('전체');
-                    }}
-                    className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors appearance-none cursor-pointer ${
-                      categoryFilter !== '전체'
-                        ? 'bg-[#3182f6] text-white border-[#3182f6]'
-                        : 'bg-white text-[#8b95a1] border-[#e8e8e8]'
-                    }`}
-                  >
-                    <option value="전체">카테고리 ▼</option>
-                    <option value="종목분석">종목분석</option>
-                    <option value="시황">시황</option>
-                    <option value="교육">교육</option>
-                    <option value="매크로">매크로</option>
-                  </select>
-                </div>
+                  />
+                ))}
               </div>
             </div>
 
             {/* 영상 카드 목록 */}
             {filteredVideos.length > 0 ? (
-              <div className="space-y-4">
+              <div>
                 {filteredVideos.map(video => {
                   const isExpanded = expandedCards.has(video.id);
                   const summary = video.long_summary || '';
                   const SHORT_LIMIT = 120;
                   const needsToggle = summary.length > SHORT_LIMIT;
-                  const category = (video as any).category;
+                  const category = (video as any).category || '';
+                  const hasMyStock = video.mentioned_stocks?.some(s => userStocks.has(s));
+
                   return (
-                    <div key={video.id} className="bg-white rounded-2xl p-6 shadow-sm">
-                      {/* 채널명 + 시간 + 카테고리 */}
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 bg-[#f4f4f4] rounded-full flex items-center justify-center text-sm font-bold text-[#3182f6]">
+                    <div key={video.id} style={{
+                      ...cardStyle,
+                      border: hasMyStock ? `2px solid ${C.accent}` : `1px solid #F3F4F6`,
+                      background: hasMyStock ? '#F8FAFF' : C.card,
+                    }}>
+                      {/* 채널 + 카테고리 + 시간 */}
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                          {/* 아바타 */}
+                          <div style={{
+                            width: 36, height: 36, borderRadius: '50%', background: C.lightGray,
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            fontWeight: 700, fontSize: 15, color: C.primary, flexShrink: 0,
+                          }}>
                             {video.channel_name[0]}
                           </div>
                           <div>
-                            <p className="text-sm font-medium text-[#191f28]">{video.channel_name}</p>
-                            <p className="text-xs text-[#b0b8c1]">{formatTime(video.upload_date)}</p>
+                            <div style={{ fontWeight: 700, fontSize: 14, color: C.primary }}>{video.channel_name}</div>
+                            <div style={{ fontSize: 12, color: C.gray }}>{formatTime(video.upload_date)}</div>
                           </div>
                         </div>
-                        {category && category !== 'general' && (
-                          <span className="px-2 py-0.5 bg-[#f4f4f4] rounded text-xs text-[#8b95a1]">
+                        {/* 카테고리 뱃지 */}
+                        {category && (
+                          <span style={getCategoryStyle(category)}>
                             {CATEGORY_LABELS[category] || category}
                           </span>
                         )}
                       </div>
+
                       {/* 제목 */}
-                      <h3 className="font-bold text-[#191f28] mb-2 leading-snug">{video.title}</h3>
+                      <h3 style={{ fontWeight: 700, fontSize: 15, color: C.primary, lineHeight: 1.4, marginBottom: 8, margin: '0 0 8px 0' }}>
+                        {video.title}
+                      </h3>
+
                       {/* 요약 */}
                       {summary && (
-                        <div className="mb-3">
-                          <p className="text-sm text-[#4e5968] leading-relaxed">
-                            {isExpanded || !needsToggle ? summary : summary.slice(0, SHORT_LIMIT) + '...'}
+                        <div style={{ marginBottom: 10 }}>
+                          <p style={{
+                            fontSize: 13,
+                            color: '#4B5563',
+                            lineHeight: 1.6,
+                            margin: 0,
+                            display: !isExpanded && needsToggle ? '-webkit-box' : 'block',
+                            WebkitLineClamp: !isExpanded && needsToggle ? 2 : undefined,
+                            WebkitBoxOrient: 'vertical' as const,
+                            overflow: !isExpanded && needsToggle ? 'hidden' : 'visible',
+                          }}>
+                            {summary}
                           </p>
                           {needsToggle && (
-                            <button onClick={() => toggleExpand(video.id)} className="text-xs text-[#3182f6] mt-1">
-                              {isExpanded ? '접기' : '더보기'}
+                            <button
+                              onClick={() => toggleExpand(video.id)}
+                              style={{
+                                fontSize: 12, color: C.accent, background: 'none', border: 'none',
+                                cursor: 'pointer', padding: '4px 0', fontFamily: 'inherit', fontWeight: 600,
+                              }}
+                            >
+                              {isExpanded ? '접기▲' : '더보기▼'}
                             </button>
                           )}
                         </div>
                       )}
-                      {/* 언급 종목 */}
+
+                      {/* 종목 태그 */}
                       {video.mentioned_stocks && video.mentioned_stocks.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5 mb-3">
-                          <span className="text-xs text-[#8b95a1]">📌 언급:</span>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 12, alignItems: 'center' }}>
+                          <span style={{ fontSize: 12, color: C.gray }}>📌</span>
                           {video.mentioned_stocks.slice(0, 5).map(s => (
                             <span
                               key={s}
-                              className={`px-2 py-0.5 rounded text-xs ${
-                                userStocks.has(s) ? 'bg-[#fff3cd] text-[#856404] font-medium' : 'bg-[#f4f4f4] text-[#191f28]'
-                              }`}
+                              style={{
+                                padding: '2px 8px',
+                                borderRadius: 6,
+                                fontSize: 12,
+                                fontWeight: userStocks.has(s) ? 600 : 400,
+                                background: userStocks.has(s) ? '#DBEAFE' : '#F3F4F6',
+                                color: userStocks.has(s) ? '#1E40AF' : C.gray,
+                              }}
                             >
                               {s}
                             </span>
                           ))}
                         </div>
                       )}
-                      {/* 영상 보기 */}
-                      <a href={video.youtube_url} target="_blank" rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs text-[#3182f6] font-medium">
-                        🎬 영상 보기 →
+
+                      {/* 영상 보기 버튼 */}
+                      <a
+                        href={video.youtube_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: 6,
+                          background: C.red,
+                          color: '#fff',
+                          borderRadius: 8,
+                          padding: '6px 14px',
+                          fontSize: 12,
+                          fontWeight: 600,
+                          textDecoration: 'none',
+                        }}
+                      >
+                        🎬 영상 보기
                       </a>
                     </div>
                   );
                 })}
 
-                {/* 무한 스크롤 로딩 */}
+                {/* 무한 스크롤 */}
                 {loadingMore && (
-                  <div className="text-center py-4 text-[#8b95a1] text-sm">
-                    <div className="inline-block animate-spin mr-2">⟳</div>로딩 중...
+                  <div style={{ textAlign: 'center', padding: '16px 0', color: C.gray, fontSize: 14 }}>
+                    <span style={{ display: 'inline-block', animation: 'spin 1s linear infinite', marginRight: 6 }}>⟳</span>로딩 중...
                   </div>
                 )}
                 {!hasMore && filteredVideos.length > 0 && (
-                  <p className="text-center py-4 text-[#b0b8c1] text-xs">모든 영상을 불러왔습니다</p>
+                  <p style={{ textAlign: 'center', padding: '16px 0', color: '#9CA3AF', fontSize: 12 }}>모든 영상을 불러왔습니다</p>
                 )}
               </div>
             ) : (
-              <div className="bg-white rounded-2xl p-12 shadow-sm text-center">
-                <div className="text-4xl mb-3">🎬</div>
+              <div style={{ ...cardStyle, textAlign: 'center', padding: '48px 24px' }}>
+                <div style={{ fontSize: 40, marginBottom: 12 }}>🎬</div>
                 {videoFilter === '내 종목' && userStocks.size === 0 ? (
                   <>
-                    <p className="text-[#8b95a1] font-medium">보유/관심 종목을 추가하면</p>
-                    <p className="text-[#8b95a1] font-medium">관련 영상이 표시됩니다</p>
-                    <Link href="/my-portfolio" className="text-[#3182f6] text-sm mt-3 inline-block">종목 추가하기 →</Link>
+                    <p style={{ color: C.gray, fontSize: 14, marginBottom: 4 }}>보유/관심 종목을 추가하면</p>
+                    <p style={{ color: C.gray, fontSize: 14, marginBottom: 12 }}>관련 영상이 표시됩니다</p>
+                    <Link href="/my-portfolio" style={{ fontSize: 13, color: C.accent, textDecoration: 'none' }}>종목 추가하기 →</Link>
                   </>
                 ) : (
                   <>
-                    <p className="text-[#8b95a1] font-medium">영상 데이터 준비 중</p>
-                    <p className="text-xs text-[#b0b8c1] mt-2">추적 채널의 영상이 수집되면 여기에 표시됩니다</p>
+                    <p style={{ color: C.gray, fontSize: 14, marginBottom: 4 }}>영상 데이터 준비 중</p>
+                    <p style={{ color: '#9CA3AF', fontSize: 12 }}>추적 채널의 영상이 수집되면 여기에 표시됩니다</p>
                   </>
                 )}
               </div>
@@ -546,12 +771,17 @@ export default function DashboardPage() {
           </>
         )}
 
-        {/* ===== 탭4: 시장 ===== */}
+        {/* ══════════════════════════════════════════════════
+            탭 4: 시장
+        ══════════════════════════════════════════════════ */}
         {activeTab === '시장' && (
-          <div className="bg-white rounded-2xl p-12 shadow-sm text-center">
-            <div className="text-4xl mb-3">📈</div>
-            <p className="text-[#191f28] font-medium">준비 중입니다</p>
-            <p className="text-xs text-[#b0b8c1] mt-2">Fear & Greed 게이지, 섹터별 등락, 외국인/기관 수급, 유튜버 전체 컨센서스</p>
+          <div style={{ ...cardStyle, textAlign: 'center', padding: '48px 24px' }}>
+            <div style={{ fontSize: 48, marginBottom: 16 }}>📊</div>
+            <p style={{ fontWeight: 700, fontSize: 18, color: C.primary, marginBottom: 10 }}>시장 탭 준비 중</p>
+            <p style={{ fontSize: 14, color: C.gray, lineHeight: 1.7, margin: 0 }}>
+              Fear &amp; Greed 게이지 · 섹터별 등락<br />
+              외국인/기관 수급 · 유튜버 전체 컨센서스
+            </p>
           </div>
         )}
 
