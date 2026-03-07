@@ -1,121 +1,130 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { getInfluencerProfile, getSignalColor } from '@/lib/supabase';
-
-// 신호별 색상 매핑
-function getSignalLabel(signal: string) {
-  // DB는 한글로 저장되어 있으므로 그대로 사용
-  return signal;
-}
-
-function getSignalDotColor(signal: string) {
-  switch (signal) {
-    case 'BUY': return '#3182f6';
-    case 'POSITIVE': return '#22c55e';
-    case 'NEUTRAL': return '#eab308';
-    case 'CONCERN': return '#f97316';
-    case 'SELL': return '#ef4444';
-    default: return '#9ca3af';
-  }
-}
+import { getInfluencerProfileBySpeaker, getSignalVoteCounts } from '@/lib/supabase';
+import { slugToSpeaker } from '@/lib/speakerSlugs';
+import SignalDetailModal from '@/components/SignalDetailModal';
+import { formatStockDisplay, formatStockShort } from '@/lib/stockNames';
+import { formatStockPrice } from '@/lib/currency';
 
 export default function InfluencerProfileClient({ id }: { id: string }) {
   const router = useRouter();
-  const [isFollowing, setIsFollowing] = useState(false);
-  const [selectedSignal, setSelectedSignal] = useState<any | null>(null);
-  const [influencer, setInfluencer] = useState<any>(null);
+  const speakerName = slugToSpeaker(id) || decodeURIComponent(id);
+  const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [selectedSignal, setSelectedSignal] = useState<any>(null);
+  const [activeStock, setActiveStock] = useState<string>('전체');
+  const [priceData, setPriceData] = useState<Record<string, { price_at_signal: number; price_current: number; return_pct: number }>>({});
+  const [likeCounts, setLikeCounts] = useState<Record<string, number>>({});
 
-  // 데이터 로드
   useEffect(() => {
-    const loadInfluencerData = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const data = await getInfluencerProfile(id);
-        
-        if (!data) {
-          setError('인플루언서를 찾을 수 없습니다');
-          return;
+    const load = async () => {
+      setLoading(true);
+      const [data] = await Promise.all([
+        getInfluencerProfileBySpeaker(speakerName),
+        fetch('/invest-sns/signal_prices.json')
+          .then(r => r.ok ? r.json() : {})
+          .then(d => setPriceData(d))
+          .catch(() => {}),
+      ]);
+      setProfile(data);
+
+      // 좋아요 카운트 가져오기
+      if (data?.signals?.length > 0) {
+        const signalIds = data.signals.map((s: any) => s.id).filter(Boolean);
+        if (signalIds.length > 0) {
+          try {
+            const counts = await getSignalVoteCounts(signalIds);
+            setLikeCounts(counts);
+          } catch (e) {
+            console.error('Failed to load like counts:', e);
+          }
         }
-
-        // 데이터를 UI용 형태로 변환
-        const transformedData = {
-          id: data.id,
-          name: data.channel_name,
-          avatar: data.channel_name.charAt(0),
-          badge: '유튜버',
-          subscribers: data.subscriber_count ? `${Math.floor(data.subscriber_count / 10000)}만` : 'N/A',
-          videos: 0, // TODO: 영상 수 계산
-          mentions: data.signals?.length || 0,
-          avgReturn: 'N/A', // TODO: 평균 수익률 계산
-          positiveRatio: 'N/A', // TODO: 긍정 비율 계산
-          totalSignals: data.signals?.length || 0,
-          coverStocks: new Set(data.signals?.map((s: any) => s.stock)).size || 0,
-          stocks: [], // TODO: 주요 종목 계산
-          signalHistory: (data.signals || []).map((signal: any) => {
-            const publishedDate = signal.influencer_videos?.published_at 
-              ? new Date(signal.influencer_videos.published_at)
-              : new Date();
-            
-            const videoUrl = signal.influencer_videos?.video_id 
-              ? `https://youtube.com/watch?v=${signal.influencer_videos.video_id}`
-              : '#';
-
-            return {
-              date: publishedDate.toLocaleDateString('ko-KR', { month: '2-digit', day: '2-digit' }),
-              stock: signal.stock,
-              stockCode: signal.ticker,
-              signal: signal.signal,
-              content: signal.key_quote || '키 인용문이 없습니다.',
-              returnPct: 'N/A', // TODO: 수익률 계산
-              source: data.channel_name,
-              videoUrl,
-              timestamp: signal.timestamp ? `[${Math.floor(signal.timestamp / 60)}:${String(signal.timestamp % 60).padStart(2, '0')}]` : '[0:00]',
-              videoTitle: signal.influencer_videos?.title || 'Unknown Video',
-              summary: signal.reasoning || '분석 내용이 없습니다.'
-            };
-          })
-        };
-
-        setInfluencer(transformedData);
-      } catch (err) {
-        console.error('Error loading influencer data:', err);
-        setError('데이터를 불러오는 중 오류가 발생했습니다');
-      } finally {
-        setLoading(false);
       }
-    };
 
-    loadInfluencerData();
-  }, [id]);
+      setLoading(false);
+    };
+    load();
+  }, [speakerName]);
 
   if (loading) {
     return (
       <div className="min-h-screen bg-[#f4f4f4] flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-4xl mb-4">⏳</div>
-          <h2 className="text-xl font-bold text-[#191f28] mb-2">데이터를 불러오는 중...</h2>
-        </div>
+        <div className="text-4xl mb-4">⏳</div>
       </div>
     );
   }
 
-  if (error || !influencer) {
+  if (!profile || profile.totalSignals === 0) {
     return (
       <div className="min-h-screen bg-[#f4f4f4] flex items-center justify-center">
         <div className="text-center">
           <div className="text-4xl mb-4">🔍</div>
-          <h2 className="text-xl font-bold text-[#191f28] mb-2">{error || '인플루언서를 찾을 수 없습니다'}</h2>
+          <h2 className="text-xl font-bold text-[#191f28] mb-2">'{speakerName}' 시그널을 찾을 수 없습니다</h2>
           <Link href="/explore/influencer" className="text-[#3182f6]">← 인플루언서 목록으로</Link>
         </div>
       </div>
     );
   }
+
+  // 종목별 카운트 계산 (발언 많은 순, 같은 종목 합산)
+  const stockCounts: { name: string; count: number; shortName: string }[] = [];
+  if (profile?.signals) {
+    const countMap: Record<string, number> = {};
+    const displayMap: Record<string, string> = {};
+    for (const s of profile.signals) {
+      // shortName 기준으로 그룹핑 (중복 제거)
+      const shortName = formatStockShort(s.stock, s.ticker) || '기타';
+      const displayName = formatStockDisplay(s.stock, s.ticker) || '기타';
+      countMap[shortName] = (countMap[shortName] || 0) + 1;
+      if (!displayMap[shortName]) displayMap[shortName] = displayName;
+    }
+    Object.entries(countMap)
+      .sort((a, b) => b[1] - a[1])
+      .forEach(([shortName, count]) => stockCounts.push({ name: displayMap[shortName], count, shortName }));
+  }
+
+  // 필터링된 시그널 (published_at 우선 최신순 정렬)
+  const sortByDate = (a: any, b: any) => {
+    const dateA = a.influencer_videos?.published_at || a.created_at || '';
+    const dateB = b.influencer_videos?.published_at || b.created_at || '';
+    return dateB.localeCompare(dateA);
+  };
+  const filteredSignals = (activeStock === '전체'
+    ? (profile?.signals || [])
+    : (profile?.signals || []).filter((s: any) => (formatStockShort(s.stock, s.ticker) || '기타') === activeStock)
+  ).sort(sortByDate);
+
+  const handleCardClick = (signal: any) => {
+    const channelName = signal.influencer_videos?.influencer_channels?.channel_name || '';
+    setSelectedSignal({
+      id: signal.id,
+      date: signal.influencer_videos?.published_at || signal.created_at,
+      influencer: speakerName,
+      signal: signal.signal,
+      quote: signal.key_quote || '',
+      videoUrl: (() => {
+        const vid = signal.influencer_videos?.video_id;
+        if (!vid) return '#';
+        let url = `https://youtube.com/watch?v=${vid}`;
+        const ts = signal.timestamp;
+        if (ts && ts !== 'N/A' && ts !== 'null') {
+          const parts = ts.split(':').map(Number);
+          const secs = parts.length === 3 ? parts[0]*3600+parts[1]*60+parts[2] : parts.length === 2 ? parts[0]*60+parts[1] : parts[0];
+          if (secs > 0) url += `&t=${secs}`;
+        }
+        return url;
+      })(),
+      analysis_reasoning: signal.reasoning,
+      videoTitle: signal.influencer_videos?.title,
+      channelName,
+      timestamp: signal.timestamp,
+      ticker: signal.ticker,
+      likeCount: likeCounts[signal.id] || 0,
+    });
+  };
 
   return (
     <div className="min-h-screen bg-[#f4f4f4]">
@@ -128,171 +137,163 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
           </button>
         </div>
 
-        <div className="flex items-start gap-5">
-          <div className="w-16 h-16 rounded-full bg-[#e8f4fd] flex items-center justify-center text-2xl font-bold text-[#3182f6] flex-shrink-0">
-            {influencer.avatar}
+        <div className="flex items-center gap-4">
+          <div className="w-14 h-14 rounded-full bg-[#e8f4fd] flex items-center justify-center text-2xl font-bold text-[#3182f6] flex-shrink-0">
+            {speakerName.charAt(0)}
           </div>
-          <div className="flex-1">
-            <div className="flex items-center gap-3 mb-1 flex-wrap">
-              <h1 className="text-xl font-bold text-[#191f28]">{influencer.name}</h1>
-              <span className="px-2 py-0.5 bg-blue-100 text-[#3182f6] text-xs rounded-full border border-blue-200">{influencer.badge}</span>
-              <span className="px-2 py-0.5 bg-[#f2f4f6] text-[#8b95a1] text-xs rounded-full">한국주식 · 미국주식</span>
-            </div>
-            <div className="text-sm text-[#8b95a1] mb-3">
-              구독자 {influencer.subscribers} · 분석 영상 {influencer.videos}개 · 종목 언급 {influencer.mentions}건
-            </div>
-            <div className="flex gap-5 flex-wrap">
-              <div><span className="text-lg font-bold text-[#3182f6]">{influencer.positiveRatio}</span><span className="text-xs text-[#8b95a1] ml-1">긍정 신호 비율</span></div>
-              <div><span className="text-lg font-bold text-[#191f28]">{influencer.totalSignals}건</span><span className="text-xs text-[#8b95a1] ml-1">총 신호</span></div>
-              <div><span className="text-lg font-bold text-[#191f28]">{influencer.coverStocks}개</span><span className="text-xs text-[#8b95a1] ml-1">커버 종목</span></div>
-            </div>
+          <div>
+            <h1 className="text-xl font-bold text-[#191f28]">{speakerName}</h1>
+            <p className="text-sm text-[#8b95a1] mt-1">총 {profile.totalSignals}건의 시그널</p>
           </div>
-          <button
-            onClick={() => setIsFollowing(!isFollowing)}
-            className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-colors flex-shrink-0 ${
-              isFollowing ? 'bg-[#f2f4f6] text-[#8b95a1] border border-[#e8e8e8]' : 'bg-[#3182f6] text-white hover:bg-[#2171e5]'
-            }`}
-          >
-            {isFollowing ? '팔로잉' : '팔로우'}
-          </button>
         </div>
+
+        {stockCounts.length > 0 && (
+          <div className="mt-4">
+            <p className="text-xs text-[#8b95a1] mb-1.5">관심 종목</p>
+            <p className="text-sm text-[#333d4b]">
+              {stockCounts.slice(0, 5).map((s, i) => (
+                <span key={s.shortName}>
+                  {i > 0 && <span className="text-[#d1d6db] mx-1">·</span>}
+                  <span className="font-medium">{s.shortName}</span>
+                  <span className="text-[#8b95a1]">({s.count})</span>
+                </span>
+              ))}
+            </p>
+          </div>
+        )}
       </div>
 
-      <div className="px-4 py-4 space-y-4">
-        {/* 관심종목 태그 */}
-        <div className="bg-white rounded-lg border border-[#e8e8e8] p-5">
-          <div className="text-xs font-medium text-[#8b95a1] mb-3">📌 관심 종목 (클릭 시 해당 종목 차트 + 신호 확인)</div>
-          <div className="flex flex-wrap gap-2">
-            {influencer.stocks.map(stock => (
-              <Link
-                key={stock.code}
-                href={`/stock/${stock.code}?tab=influencer`}
-                className="px-3 py-2 bg-[#e8f4fd] text-[#3182f6] rounded-full text-sm border border-blue-200 hover:bg-blue-200 transition-colors"
+      {/* 종목 필터 탭 (시그널 5개 이상만) */}
+      {(() => {
+        const filteredTabs = stockCounts.filter(s => s.count >= 5);
+        return filteredTabs.length > 0 ? (
+          <div className="px-4 pt-4 pb-0">
+            <div className="flex gap-2 overflow-x-auto no-scrollbar">
+              <button
+                onClick={() => setActiveStock('전체')}
+                className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                  activeStock === '전체'
+                    ? 'bg-[#191f28] text-white'
+                    : 'bg-white text-[#8b95a1] border border-[#e8e8e8]'
+                }`}
               >
-                {stock.name} ({stock.mentions})
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        {/* 종목별 신호 차트 */}
-        <div className="bg-white rounded-lg border border-[#e8e8e8] p-5">
-          <div className="text-xs font-medium text-[#8b95a1] mb-3">📊 종목별 신호 차트</div>
-          <div className="flex gap-2 mb-4 flex-wrap">
-            <span className="px-3 py-1.5 bg-[#3182f6] text-white rounded-full text-xs">전체 ({influencer.totalSignals})</span>
-            {influencer.stocks.map(s => (
-              <span key={s.code} className="px-3 py-1.5 bg-[#f2f4f6] text-[#8b95a1] rounded-full text-xs border border-[#e8e8e8] hover:bg-[#e9ecef] cursor-pointer">{s.name} ({s.mentions})</span>
-            ))}
-          </div>
-          <div className="relative h-48 bg-[#f8f9fa] rounded-lg border border-[#e8e8e8] overflow-hidden">
-            <svg viewBox="0 0 500 180" className="w-full h-full">
-              <polyline fill="none" stroke="#d1d5db" strokeWidth="1.5" points="20,140 80,120 140,100 200,110 260,80 320,70 380,60 440,50 480,45" />
-              {influencer.signalHistory.slice(0, 6).map((sig, i) => {
-                const x = 60 + i * 75;
-                const y = 130 - i * 15 + (i % 2 === 0 ? -10 : 10);
-                return <circle key={i} cx={x} cy={y} r="6" fill={getSignalDotColor(sig.signal)} stroke="white" strokeWidth="2" />;
-              })}
-            </svg>
-            <div className="absolute bottom-2 left-4 flex gap-3 text-[10px] text-[#8b95a1]">
-              <span><span className="inline-block w-2 h-2 rounded-full bg-[#3182f6] mr-1"></span>매수</span>
-              <span><span className="inline-block w-2 h-2 rounded-full bg-[#22c55e] mr-1"></span>긍정</span>
-              <span><span className="inline-block w-2 h-2 rounded-full bg-[#eab308] mr-1"></span>중립</span>
-              <span><span className="inline-block w-2 h-2 rounded-full bg-[#f97316] mr-1"></span>경계</span>
-              <span><span className="inline-block w-2 h-2 rounded-full bg-[#ef4444] mr-1"></span>매도</span>
+                전체 {profile.totalSignals}
+              </button>
+              {filteredTabs.map((s) => (
+                <button
+                  key={s.shortName}
+                  onClick={() => setActiveStock(s.shortName)}
+                  className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                    activeStock === s.shortName
+                      ? 'bg-[#191f28] text-white'
+                      : 'bg-white text-[#8b95a1] border border-[#e8e8e8]'
+                  }`}
+                >
+                  {s.shortName} {s.count}
+                </button>
+              ))}
             </div>
           </div>
-        </div>
+        ) : null;
+      })()}
 
-        {/* 전체 발언 이력 */}
-        <div className="bg-white rounded-lg border border-[#e8e8e8] p-5">
-          <div className="text-xs font-medium text-[#8b95a1] mb-3">📋 전체 발언 이력</div>
+      {/* 시그널 테이블 */}
+      <div className="px-4 py-4">
+        <div className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-[#e8e8e8]">
-                  <th className="text-left py-3 px-2 text-[#8b95a1] font-medium text-xs">날짜</th>
-                  <th className="text-left py-3 px-2 text-[#8b95a1] font-medium text-xs">종목</th>
-                  <th className="text-left py-3 px-2 text-[#8b95a1] font-medium text-xs">신호</th>
-                  <th className="text-left py-3 px-2 text-[#8b95a1] font-medium text-xs">핵심 발언</th>
-                  <th className="text-left py-3 px-2 text-[#8b95a1] font-medium text-xs">수익률</th>
-                  <th className="text-left py-3 px-2 text-[#8b95a1] font-medium text-xs">출처</th>
-                  <th className="text-left py-3 px-2 text-[#8b95a1] font-medium text-xs">영상</th>
+            <table className="w-full">
+              <thead className="bg-[#f8f9fa]">
+                <tr>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">날짜</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">종목</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">신호</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">핵심발언</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">수익률</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">영상링크</th>
                 </tr>
               </thead>
-              <tbody>
-                {influencer.signalHistory.map((item, i) => (
-                  <tr key={i} className="border-b border-[#f0f0f0] hover:bg-[#f8f9fa] cursor-pointer" onClick={() => setSelectedSignal(item)}>
-                    <td className="py-3 px-2 text-[#191f28] whitespace-nowrap">{item.date}</td>
-                    <td className="py-3 px-2">
-                      <Link href={`/stock/${item.stockCode}?tab=influencer`} className="text-[#191f28] font-medium hover:text-[#3182f6]">
-                        {item.stock}
-                      </Link>
-                    </td>
-                    <td className="py-3 px-2">
-                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium border ${getSignalColor(item.signal)}`}>
-                        {item.signal}
-                      </span>
-                    </td>
-                    <td className="py-3 px-2 text-[#191f28] max-w-[200px] truncate">{item.content}</td>
-                    <td className={`py-3 px-2 font-medium ${item.returnPct.startsWith('+') ? 'text-[#22c55e]' : 'text-[#ef4444]'}`}>{item.returnPct}</td>
-                    <td className="py-3 px-2 text-[#8b95a1]">{item.source}</td>
-                    <td className="py-3 px-2">
-                      <button onClick={() => setSelectedSignal(item)} className="text-[#3182f6] hover:underline text-xs">▶ 영상</button>
-                    </td>
-                  </tr>
-                ))}
+              <tbody className="divide-y divide-[#f0f0f0]">
+                {filteredSignals.map((signal: any, i: number) => {
+                  const publishedAt = signal.influencer_videos?.published_at || signal.created_at;
+                  const videoId = signal.influencer_videos?.video_id;
+                  const date = publishedAt ? new Date(publishedAt).toLocaleDateString('ko-KR', { year: 'numeric', month: 'short', day: 'numeric' }) : '';
+                  const signalEmoji = (() => {
+                    switch (signal.signal) {
+                      case '매수': return '🟢';
+                      case '긍정': return '🔵';
+                      case '중립': return '🟡';
+                      case '부정': return '🟠';
+                      case '매도': return '🔴';
+                      default: return '⚪';
+                    }
+                  })();
+
+                  return (
+                    <tr
+                      key={signal.id || i}
+                      className="hover:bg-[#f8f9fa] cursor-pointer transition-colors"
+                      onClick={() => handleCardClick(signal)}
+                    >
+                      <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">{date}</td>
+                      <td className="px-4 py-4 text-sm font-medium text-[#191f28] whitespace-nowrap">{formatStockDisplay(signal.stock, signal.ticker)}</td>
+                      <td className="px-4 py-4">
+                        <div className="flex items-center gap-2">
+                          <span className="text-lg">{signalEmoji}</span>
+                          <span className="text-xs font-medium">{signal.signal}</span>
+                        </div>
+                      </td>
+                      <td className="px-4 py-4 text-sm text-[#191f28] max-w-xs">
+                        <div className="truncate" title={signal.key_quote}>{signal.key_quote || '-'}</div>
+                      </td>
+                      <td className="px-4 py-4 text-sm whitespace-nowrap">
+                        {(() => {
+                          if (signal.signal === '중립') return <span className="text-[#8b95a1]">N/A</span>;
+                          const pd = priceData[signal.id];
+                          if (!pd || pd.return_pct == null) return <span className="text-[#8b95a1]">-</span>;
+                          const ret = pd.return_pct;
+                          const isBullish = signal.signal === '매수' || signal.signal === '긍정';
+                          const isGood = isBullish ? ret >= 0 : ret <= 0;
+                          const color = isGood ? 'text-[#22c55e]' : 'text-[#ef4444]';
+                          const arrow = ret >= 0 ? '▲' : '▼';
+                          return (
+                            <span className={`font-medium ${color}`} title={`시점가 ${formatStockPrice(pd.price_at_signal || 0, signal.stock)} → 현재 ${formatStockPrice(pd.price_current || 0, signal.stock)}`}>
+                              {arrow} {ret >= 0 ? '+' : ''}{ret}%
+                            </span>
+                          );
+                        })()}
+                      </td>
+                      <td className="px-4 py-4">
+                        {videoId ? (
+                          <a
+                            href={(() => {
+                              let url = `https://youtube.com/watch?v=${videoId}`;
+                              const ts = signal.timestamp;
+                              if (ts && ts !== 'N/A' && ts !== 'null') {
+                                const parts = ts.split(':').map(Number);
+                                const secs = parts.length === 3 ? parts[0]*3600+parts[1]*60+parts[2] : parts.length === 2 ? parts[0]*60+parts[1] : parts[0];
+                                if (secs > 0) url += `&t=${secs}`;
+                              }
+                              return url;
+                            })()}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#3182f6] hover:text-[#2171e5] text-sm font-medium"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            영상보기 →
+                          </a>
+                        ) : '-'}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
         </div>
       </div>
 
-      {/* 영상 분석 팝업 */}
-      {selectedSignal && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setSelectedSignal(null)}>
-          <div className="bg-white rounded-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto shadow-2xl" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-center justify-between px-6 py-4 border-b border-[#e8e8e8]">
-              <h3 className="font-bold text-[#191f28] text-lg">▶ 영상 분석</h3>
-              <div className="flex items-center gap-2">
-                <button className="w-9 h-9 rounded-full bg-[#f8f9fa] flex items-center justify-center text-[#8b95a1] hover:bg-[#e9ecef]" title="메모 저장">♡</button>
-                <button className="w-9 h-9 rounded-full bg-[#f8f9fa] flex items-center justify-center text-[#8b95a1] hover:bg-[#e9ecef]" title="신고">⚠️</button>
-                <button onClick={() => setSelectedSignal(null)} className="w-9 h-9 rounded-full bg-[#f8f9fa] flex items-center justify-center text-[#8b95a1] hover:bg-[#e9ecef]">✕</button>
-              </div>
-            </div>
-            <div className="px-6 py-5">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-xl font-bold text-[#191f28]">{selectedSignal.stock}</span>
-                <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getSignalColor(selectedSignal.signal)}`}>
-                  {selectedSignal.signal}
-                </span>
-              </div>
-              <p className="text-sm text-[#8b95a1] mb-5">{selectedSignal.videoTitle} · {selectedSignal.date}</p>
-              <div className="mb-5">
-                <div className="text-xs font-medium text-[#8b95a1] mb-2">💬 발언 내용</div>
-                <div className="bg-[#f8f9fa] rounded-xl p-4 border border-[#e8e8e8]">
-                  <p className="text-[#191f28] leading-relaxed text-[15px]">{selectedSignal.content}</p>
-                  <p className="text-xs text-[#3182f6] mt-2">타임스탬프: {selectedSignal.timestamp}</p>
-                </div>
-              </div>
-              <div className="mb-6">
-                <div className="text-xs font-medium text-[#8b95a1] mb-2">📎 영상 요약</div>
-                <p className="text-[#4e5968] text-sm leading-relaxed">{selectedSignal.summary}</p>
-              </div>
-              <div className="flex gap-3">
-                <button
-                  onClick={() => { setSelectedSignal(null); router.push(`/stock/${selectedSignal.stockCode}?tab=influencer`); }}
-                  className="flex-1 py-3.5 bg-[#e8f4fd] text-[#3182f6] rounded-xl text-center font-medium hover:bg-[#d0e8fc] transition-colors border border-blue-200"
-                >
-                  📊 차트보기
-                </button>
-                <a href={selectedSignal.videoUrl} target="_blank" rel="noopener noreferrer" className="flex-1 py-3.5 bg-[#3182f6] text-white rounded-xl text-center font-medium hover:bg-[#2171e5] transition-colors">
-                  ▶ 영상보기
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <SignalDetailModal signal={selectedSignal} onClose={() => setSelectedSignal(null)} />
     </div>
   );
 }
