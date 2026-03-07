@@ -4,40 +4,40 @@
     "raw": 11.38446095671108
   },
   "2. 주가강도 (52주 신고/신저)": {
-    "status": "FAIL",
-    "error": "신고가+신저가=0"
+    "status": "SKIP",
+    "error": "KRX API 세션 인증 필요 (LOGOUT 400)"
   },
   "3. 시장폭 (상승/하락 비율)": {
-    "status": "FAIL",
-    "error": "OTP 실패: B92No2eJ4Jozfwks63YkhIzkQIM1yhyNBrDR4DHknYYRtSksuL"
+    "status": "SKIP",
+    "error": "KRX API 세션 인증 필요 (LOGOUT 400)"
   },
   "4. 풋/콜 비율": {
-    "status": "FAIL",
-    "error": "OTP 실패"
+    "status": "SKIP",
+    "error": "KRX API 세션 인증 필요 (LOGOUT 400)"
   },
-  "5. 변동성 (VKOSPI vs 50일)": {
-    "status": "FAIL",
-    "error": "'지수명'"
+  "5. 변동성 (실현변동성 VKOSPI대체)": {
+    "status": "OK",
+    "raw": 1.4407395577233333
   },
   "6. 안전자산 수요 (코스피 vs 국채)": {
     "status": "OK",
     "raw": 38.37111147983414
   },
   "7. 정크본드 (AA- vs BBB- 스프레드)": {
-    "status": "FAIL",
-    "error": "AA-=None, BBB-=None"
+    "status": "OK",
+    "raw": 5.821
   },
-  "8. 외국인 수급 (5일 순매수)": {
-    "status": "FAIL",
-    "error": "'거래대금'"
+  "8. 외국인 수급 (EWY 프록시)": {
+    "status": "OK",
+    "raw": -14.104643402579809
   },
   "9. 신용잔고": {
-    "status": "FAIL",
-    "error": "파싱 실패 (status=200, len=2531)"
+    "status": "SKIP",
+    "error": "JavaScript 동적 로딩 (API 없음)"
   },
   "10. 고객예탁금": {
-    "status": "FAIL",
-    "error": "파싱 실패 (status=200)"
+    "status": "SKIP",
+    "error": "JavaScript 동적 로딩 (API 없음)"
   },
   "11. 코스닥/코스피 상대강도": {
     "status": "OK",
