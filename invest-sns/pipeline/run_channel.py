@@ -17,8 +17,15 @@ import argparse
 import json
 import os
 import sys
+import io
 import time
 from datetime import datetime
+
+# Windows 콘솔 UTF-8 출력 강제
+if sys.stdout.encoding != 'utf-8':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', line_buffering=True)
+if sys.stderr.encoding != 'utf-8':
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', line_buffering=True)
 
 PIPELINE_DIR = os.path.dirname(os.path.abspath(__file__))
 if PIPELINE_DIR not in sys.path:

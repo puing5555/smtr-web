@@ -11,7 +11,7 @@ import re
 import time
 import anthropic
 
-ANTHROPIC_API_KEY = "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"
+ANTHROPIC_API_KEY = "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"
 PIPELINE_V10_PATH = r'C:\Users\Mario\work\prompts\pipeline_v10.md'
 
 VALID_SIGNALS = {'매수', '긍정', '중립', '경계', '매도'}

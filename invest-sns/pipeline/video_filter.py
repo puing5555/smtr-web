@@ -13,7 +13,7 @@ import random
 import os
 import anthropic
 
-ANTHROPIC_API_KEY = "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"
+ANTHROPIC_API_KEY = "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"
 
 # 필터링 규칙
 EXCLUDE_TITLE_KEYWORDS = ['일상', '먹방', '여행', '브이로그', 'vlog', '구독', '이벤트', '경품', '광고', '협찬', '소개', '인사']
