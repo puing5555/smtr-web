@@ -171,22 +171,26 @@ def collect_data(tickers, max_tickers=50):
     print(f"\n📦 네이버 금융 수급 데이터 수집: {len(sample)}개 종목")
     print(f"   기간: {START_DATE} ~ {END_DATE}")
 
-    for ticker in tqdm(sample, desc="수집"):
-        flow  = fetch_naver_flow(ticker)
-        price = fetch_naver_price(ticker)
+    for idx, ticker in enumerate(tqdm(sample, desc="수집")):
+        try:
+            flow  = fetch_naver_flow(ticker)
+            price = fetch_naver_price(ticker)
 
-        if flow is not None and price is not None and len(flow) > 50:
-            all_flow[ticker]  = flow
-            all_price[ticker] = price
-        else:
+            if flow is not None and price is not None and len(flow) > 50:
+                all_flow[ticker]  = flow
+                all_price[ticker] = price
+            else:
+                failed.append(ticker)
+
+            time.sleep(0.1)
+        except Exception as e:
+            print(f"\n오류 {ticker}: {e}")
             failed.append(ticker)
-            reason = []
-            if flow is None or len(flow) <= 50:
-                reason.append(f"수급없음({len(flow) if flow is not None else 0}행)")
-            if price is None:
-                reason.append("주가없음")
 
-        time.sleep(0.1)
+        # 10개마다 중간 저장
+        if (idx + 1) % 10 == 0 or (idx + 1) == len(sample):
+            save_data(all_flow, all_price, failed)
+            print(f"\n[중간저장] {idx+1}/{len(sample)} 완료, 수집 {len(all_flow)}개")
 
     print(f"\n✅ 수집 완료: {len(all_flow)}개 / 실패: {len(failed)}개")
     if failed:

@@ -17,7 +17,7 @@ from datetime import datetime
 
 # --- 경로 설정 ---
 SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
-SUBS_DIR = r'C:\Users\Mario\work\invest-sns\pipeline\subs\GODofIT_'
+SUBS_DIR = r'C:\Users\Mario\work\invest-sns\subs'
 PROMPT_PATH = r'C:\Users\Mario\work\prompts\pipeline_v11.md'
 PROGRESS_FILE = r'C:\Users\Mario\work\invest-sns\pipeline\data\godofIT_progress.json'
 LOG_FILE = r'C:\Users\Mario\work\invest-sns\pipeline\data\godofIT_log.txt'
