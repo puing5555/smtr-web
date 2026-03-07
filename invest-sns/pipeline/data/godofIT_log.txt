@@ -11,3 +11,9 @@
 [15:57:01] [2/5] 1iuRuDfMLUE
 [15:57:02]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoSays9tGF1gx3bqDKWo"}
 [15:57:02]   API 호출 실패. 에러 목록에 추가.
+[15:57:07] [3/5] 4wCO1fdl9iU
+[15:57:08]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoSbQLZYRY4qBSLEdzb3"}
+[15:57:08]   API 호출 실패. 에러 목록에 추가.
+[15:57:13] [4/5] 8-hYd-8eojE
+[15:57:14]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoSbpj1eFjLrPhUYNMB4"}
+[15:57:14]   API 호출 실패. 에러 목록에 추가.
