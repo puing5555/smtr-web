@@ -1,6 +1,6 @@
 {
-  "total_signals": 10,
-  "total_cost": 4.879158000000001,
+  "total_signals": 35,
+  "total_cost": 5.383761000000002,
   "done": [
     "-Df70G1xPXA",
     "0V8hubTBLis",
@@ -42,7 +42,11 @@
     "CXorZshAqq4",
     "Ceuu9plkhUY",
     "CtXmDzrEVyY",
-    "Cv2YDiaFM_M"
+    "Cv2YDiaFM_M",
+    "DDA5NpaigGU",
+    "DspQJVFUyOo",
+    "ENBTNEnFQoQ",
+    "Eh1yXSl1dgA"
   ],
   "errors": []
 }
