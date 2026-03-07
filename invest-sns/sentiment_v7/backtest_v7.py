@@ -54,8 +54,10 @@ def load_all_series():
     series["안전자산"] = get_safe_haven_series(START, END)
     print(f"        {len(series['안전자산'])}일")
 
-    print("  [4/6] 정크본드...")
-    series["정크본드"] = get_junk_bond_series_daily(START, END)
+    print("  [4/6] 정크본드 (월별 ECOS)...")
+    # 백테스트용: 연도별 분할 요청
+    from sentiment_v7 import get_junk_bond_series_monthly
+    series["정크본드"] = get_junk_bond_series_monthly("201501", "202512")
     print(f"        {len(series['정크본드'])}건")
 
     print("  [5/6] 외국인수급...")
