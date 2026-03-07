@@ -1,16 +1,10 @@
-﻿'use client';
+'use client';
 
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { getStockSignals, getSignalColor } from '@/lib/supabase';
 import StockChart from '@/components/StockChart';
 import StockDisclosureTab from '@/components/stock/StockDisclosureTab';
-import StockAnalystTab from '@/components/stock/StockAnalystTab';
-import FeedCard from '@/components/FeedCard';
-import StockSignalChart from '@/components/StockSignalChart';
-import { formatStockDisplay } from '@/lib/stockNames';
-import { formatStockPrice, isKoreanStock } from '@/lib/currency';
-import ReportDetailModal from '@/components/ReportDetailModal';
 import { influencers } from '@/data/influencerData';
 interface StockDetailClientProps {
   code: string;
@@ -56,67 +50,33 @@ const tabs = [
   { id: 'analyst', label: '애널리스트', icon: '📊' },
   { id: 'disclosure', label: '공시', icon: '📋' },
   { id: 'earnings', label: '실적', icon: '📈' },
+  { id: 'reports', label: '리포트', icon: '📄' },
   { id: 'insider', label: '임원매매', icon: '💼' },
   { id: 'calendar', label: '일정', icon: '📅' },
   { id: 'memo', label: '메모', icon: '📝' },
 ];
 
-import stockPricesData from '@/data/stockPrices.json';
-
-// 종목 데이터 - 실제 Yahoo Finance 데이터 사용 (동적 종목명 지원)
-const getStockData = (code: string, dynamicName?: string) => {
-  // 확장된 종목명 매핑 (기본 fallback용)
-  const nameMap: { [key: string]: string } = {
-    '005930': '삼성전자', '000660': 'SK하이닉스', '035420': 'NAVER',
-    '051910': 'LG화학', '005380': '현대차', '086520': '에코프로',
-    '009540': '한국가스공사', '399720': '퓨처켐', '298040': '효성중공업',
-    '036930': '주성엔지니어링', '042700': '한미반도체', '095610': '테스',
-    '000720': '현대건설', '004170': '신세계', '006400': '삼성SDI',
-    '267260': 'HD현대일렉트릭', '090430': '아모레퍼시픽', '036570': 'NC소프트',
-    '207940': '삼성바이오로직스', '079160': 'CGV', '403870': 'HPSP',
-    '240810': '원익IPS', '284620': '쿠팡', '005940': 'NH투자증권',
-    '016360': '삼성증권', '039490': '키네마스터', '071050': '한국금융지주',
-    '352820': 'COI머티리얼즈', '357780': '솔브레인', '084370': '맘스터치',
-    // 해외주식
-    'NVDA': '엔비디아 (NVDA)', 'TSLA': '테슬라 (TSLA)', 'PLTR': '팔란티어 (PLTR)', 'AMD': 'AMD (AMD)',
-    'TSM': 'TSMC (TSM)', 'ASML': 'ASML (ASML)', 'GOOGL': '구글 (GOOGL)', 'MSTR': '마이크로스트래티지 (MSTR)',
-    'RKLB': '로켓랩 (RKLB)', 'SQ': '스퀘어 (SQ)', 'RIOT': 'Riot Blockchain (RIOT)',
-    'GBTC': '그레이스케일 비트코인 신탁 (GBTC)', 'COIN': '코인베이스 (COIN)', 'IREN': 'IREN (IREN)',
-    'GME': '게임스톱 (GME)', 'SOXX': 'SOXX ETF (SOXX)', 'MU': '마이크론 (MU)', 'KS11': '코스피 (KS11)',
-    // 코인
-    'BTC': '비트코인 (BTC)', 'ETH': '이더리움 (ETH)', 'SOL': '솔라나 (SOL)', 'DOGE': '도지코인 (DOGE)', 'KLAY': '클레이튼 (KLAY)',
+// 더미 종목 데이터
+const getStockData = (code: string) => {
+  const stockMap: { [key: string]: any } = {
+    '005930': { name: '삼성전자', price: 68500, change: 1200, changePercent: 1.78 },
+    '000660': { name: 'SK하이닉스', price: 178000, change: -2100, changePercent: -1.16 },
+    '035420': { name: 'NAVER', price: 185500, change: 3200, changePercent: 1.76 },
+    '051910': { name: 'LG화학', price: 412000, change: -5500, changePercent: -1.32 },
+    '005380': { name: '현대차', price: 221000, change: 4500, changePercent: 2.08 },
   };
 
-  // 한국 종목인지 확인 (숫자로만 이뤄진 코드)
-  const isKoreanStock = /^\d+$/.test(code);
-  
-  // 동적 종목명이 있으면 우선 사용, 없으면 nameMap fallback
-  // 해외/코인 종목은 "비트코인 (BTC)" 형식으로 표시
-  const baseName = dynamicName || nameMap[code] || code;
-  // 공통 유틸 함수로 ticker 중복 방지
-  const stockName = isKoreanStock ? baseName : formatStockDisplay(baseName, code);
-
-  const realData = (stockPricesData as any)[code];
-  if (realData) {
-    return {
-      name: stockName,
-      price: realData.currentPrice,
-      change: realData.change,
-      changePercent: realData.changePercent,
-    };
-  }
-
-  return { name: stockName, price: 0, change: 0, changePercent: 0 };
+  return stockMap[code] || { name: `종목 ${code}`, price: 50000, change: 0, changePercent: 0 };
 };
 
 export default function StockDetailClient({ code }: StockDetailClientProps) {
   const [activeTab, setActiveTab] = useState('feed');
   const [isWatched, setIsWatched] = useState(false);
-  const [realStockSignals, setRealStockSignals] = useState<any[]>([]);
-  const [dynamicStockName, setDynamicStockName] = useState<string>('');
+  const [showComments, setShowComments] = useState<{ [key: number]: boolean }>({});
+  const [commentInputs, setCommentInputs] = useState<{ [key: number]: string }>({});
   const searchParams = useSearchParams();
   const router = useRouter();
-  const stockData = getStockData(code, dynamicStockName);
+  const stockData = getStockData(code);
   const timeline = getStockTimeline(code);
 
   // URL 쿼리 파라미터에서 탭 설정
@@ -126,26 +86,6 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
       setActiveTab(tabParam);
     }
   }, [searchParams]);
-
-  // Supabase에서 실제 시그널 데이터와 종목명 정보 가져오기
-  useEffect(() => {
-    const fetchRealStockData = async () => {
-      try {
-        const signals = await getStockSignals(code);
-        setRealStockSignals(signals);
-        
-        // 시그널 데이터에서 종목명 추출 (첫 번째로 찾은 stock 정보 사용)
-        const signalWithStock = signals.find((signal: any) => signal.stock);
-        if (signalWithStock && signalWithStock.stock) {
-          setDynamicStockName(signalWithStock.stock);
-        }
-      } catch (error) {
-        console.error('Error fetching real stock data:', error);
-      }
-    };
-
-    fetchRealStockData();
-  }, [code]);
 
   // 해당 종목의 시그널 가져오기
   const getStockSignals = (code: string, name: string) => {
@@ -195,17 +135,117 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
     switch (activeTab) {
       case 'feed':
         return (
-          <div className="space-y-4">
+          <div className="space-y-6">
+            {/* 타임라인 이벤트 (차트 제거) */}
+            <div className="space-y-4">
             {timeline.map((event) => (
-              <FeedCard
-                key={event.id}
-                icon={event.icon}
-                categoryName={event.categoryName}
-                title={event.title}
-                date={event.time}
-                onClick={() => setActiveTab(event.tab)}
-              />
+              <div key={event.id} className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
+                <div
+                  onClick={() => setActiveTab(event.tab)}
+                  className="px-4 py-4 hover:bg-[#f8f9fa] cursor-pointer transition-colors"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-[#f8f9fa] flex items-center justify-center text-lg flex-shrink-0">
+                      {event.icon}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-sm font-medium text-[#8b95a1] bg-[#f2f4f6] px-2 py-0.5 rounded">
+                          {event.categoryName}
+                        </span>
+                      </div>
+                      <h3 className="text-[15px] font-medium text-[#191f28] leading-[1.4] mb-1">
+                        {event.title}
+                      </h3>
+                      <span className="text-sm text-[#8b95a1]">{event.time}</span>
+                    </div>
+                    <div className="text-[#8b95a1] text-sm">→</div>
+                  </div>
+                </div>
+                
+                {/* Comment Section */}
+                <div className="border-t border-[#f0f0f0] px-4 py-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowComments(prev => ({
+                          ...prev,
+                          [event.id]: !prev[event.id]
+                        }));
+                      }}
+                      className="text-xs text-[#8b95a1] hover:text-[#191f28] transition-colors"
+                    >
+                      💬 댓글 {Math.floor(Math.random() * 10) + 1}개
+                    </button>
+                    <span className="text-xs text-[#8b95a1]">•</span>
+                    <button className="text-xs text-[#8b95a1] hover:text-[#191f28] transition-colors">
+                      ❤️ 좋아요 {Math.floor(Math.random() * 50) + 5}개
+                    </button>
+                  </div>
+                  
+                  {/* Comment Input */}
+                  <div className="flex gap-2">
+                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-xs flex-shrink-0">
+                      👤
+                    </div>
+                    <input
+                      type="text"
+                      placeholder="댓글을 입력하세요..."
+                      value={commentInputs[event.id] || ''}
+                      onChange={(e) => {
+                        setCommentInputs(prev => ({
+                          ...prev,
+                          [event.id]: e.target.value
+                        }));
+                      }}
+                      onClick={(e) => e.stopPropagation()}
+                      className="flex-1 text-sm border border-[#e8e8e8] rounded-full px-3 py-1 focus:outline-none focus:ring-1 focus:ring-[#3182f6] focus:border-transparent"
+                    />
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (commentInputs[event.id]?.trim()) {
+                          // Here you would handle comment submission
+                          setCommentInputs(prev => ({
+                            ...prev,
+                            [event.id]: ''
+                          }));
+                        }
+                      }}
+                      className="text-xs px-3 py-1 bg-[#3182f6] text-white rounded-full hover:bg-[#2171e5] transition-colors"
+                    >
+                      등록
+                    </button>
+                  </div>
+                  
+                  {/* Comments List */}
+                  {showComments[event.id] && (
+                    <div className="mt-3 space-y-2 pl-8">
+                      <div className="flex gap-2 text-sm">
+                        <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center text-xs flex-shrink-0">
+                          🐶
+                        </div>
+                        <div>
+                          <span className="font-medium text-[#191f28]">투자왕</span>
+                          <span className="text-[#8b95a1] ml-2">좋은 정보네요!</span>
+                        </div>
+                      </div>
+                      <div className="flex gap-2 text-sm">
+                        <div className="w-5 h-5 bg-yellow-100 rounded-full flex items-center justify-center text-xs flex-shrink-0">
+                          🎯
+                        </div>
+                        <div>
+                          <span className="font-medium text-[#191f28]">주식초보</span>
+                          <span className="text-[#8b95a1] ml-2">매수 타이밍 맞나요?</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
             ))}
+            </div>
           </div>
         );
 
@@ -213,7 +253,7 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
         return <InfluencerTab code={code} />;
 
       case 'analyst':
-        return <StockAnalystTab code={code} />;
+        return <AnalystTab code={code} />;
 
       case 'disclosure':
         return <StockDisclosureTab code={code} />;
@@ -224,6 +264,15 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
             <div className="text-4xl mb-4">📊</div>
             <h3 className="text-lg font-bold text-[#191f28] mb-2">실적 분석</h3>
             <p className="text-[#8b95a1]">상세 실적 분석을 준비중입니다</p>
+          </div>
+        );
+
+      case 'reports':
+        return (
+          <div className="text-center py-12">
+            <div className="text-4xl mb-4">📄</div>
+            <h3 className="text-lg font-bold text-[#191f28] mb-2">리서치 리포트</h3>
+            <p className="text-[#8b95a1]">증권사 리포트를 준비중입니다</p>
           </div>
         );
 
@@ -310,12 +359,12 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
               </h1>
               <div className="flex items-center gap-4 mt-2">
                 <span className="text-3xl font-bold text-[#191f28]">
-                  {formatStockPrice(stockData.price, code)}
+                  {stockData.price.toLocaleString()}원
                 </span>
                 <span className={`text-lg font-medium ${
                   stockData.change >= 0 ? 'text-red-500' : 'text-blue-500'
                 }`}>
-                  {isKoreanStock(code) ? `${stockData.change >= 0 ? '+' : ''}${stockData.change.toLocaleString()}원` : `${stockData.change >= 0 ? '+' : ''}$${stockData.change.toLocaleString()}`}
+                  {stockData.change >= 0 ? '+' : ''}{stockData.change.toLocaleString()}원
                   ({stockData.change >= 0 ? '+' : ''}{stockData.changePercent}%)
                 </span>
               </div>
@@ -379,227 +428,201 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
   );
 }
 
-// 애널리스트 탭 컴포넌트 (테이블형 + 실데이터)
+// 애널리스트 탭 컴포넌트
 function AnalystTab({ code }: { code: string }) {
-  const [reports, setReports] = useState<any[]>([]);
-  const [selectedReport, setSelectedReport] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
   const stockData = getStockData(code);
 
-  useEffect(() => {
-    const loadReports = async () => {
-      try {
-        setLoading(true);
-        const allReports = (await import('@/data/analyst_reports.json')).default as Record<string, any[]>;
-        const tickerReports = (allReports as any)[code] || [];
-        setReports(tickerReports);
-      } catch {
-        setReports([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadReports();
-  }, [code]);
+  // 더미 애널리스트 데이터
+  const analystReports = [
+    {
+      analyst: '김선우',
+      firm: '한국투자증권',
+      rating: '매수',
+      targetPrice: 85000,
+      currentPrice: stockData.price,
+      date: '2024-02-15',
+      title: `${stockData.name} 3분기 실적 컨센서스 상회 예상`,
+      summary: 'AI 반도체 수요 증가로 인한 실적 개선 기대',
+    },
+    {
+      analyst: '이미래',
+      firm: '미래에셋증권',
+      rating: '매수',
+      targetPrice: 82000,
+      currentPrice: stockData.price,
+      date: '2024-02-10',
+      title: `${stockData.name} 메모리 업황 회복 본격화`,
+      summary: '2024년 하반기부터 메모리 수요 회복세 지속 전망',
+    },
+    {
+      analyst: '박테크',
+      firm: '삼성증권',
+      rating: '중립',
+      targetPrice: 70000,
+      currentPrice: stockData.price,
+      date: '2024-02-05',
+      title: `${stockData.name} 단기 조정 후 재평가 필요`,
+      summary: '밸류에이션 부담은 있으나 중장기 성장성은 긍정적',
+    },
+  ];
 
-  const getOpinionLabel = (op: string) => {
-    switch (op) {
-      case 'BUY': return '매수';
-      case 'HOLD': return '중립';
-      case 'SELL': return '매도';
-      default: return op;
-    }
-  };
-
-  const getOpinionColor = (op: string) => {
-    switch (op) {
-      case 'BUY': return 'text-green-600 bg-green-100';
-      case 'HOLD': return 'text-yellow-600 bg-yellow-100';
-      case 'SELL': return 'text-red-600 bg-red-100';
+  const getRatingColor = (rating: string) => {
+    switch (rating) {
+      case '매수': return 'text-blue-600 bg-blue-100';
+      case '중립': return 'text-yellow-600 bg-yellow-100';
+      case '매도': return 'text-red-600 bg-red-100';
       default: return 'text-gray-600 bg-gray-100';
     }
   };
 
-  const getOpinionEmoji = (op: string) => {
-    switch (op) {
-      case 'BUY': return '🟢';
-      case 'HOLD': return '🟡';
-      case 'SELL': return '🔴';
-      default: return '⚪';
-    }
+  const getUpside = (target: number, current: number) => {
+    return ((target - current) / current * 100).toFixed(1);
   };
-
-  if (loading) {
-    return (
-      <div className="text-center py-8">
-        <div className="text-lg text-[#8b95a1]">데이터를 불러오는 중...</div>
-      </div>
-    );
-  }
-
-  const avgTarget = reports.filter(r => r.target_price).reduce((s, r) => s + r.target_price, 0) / (reports.filter(r => r.target_price).length || 1);
-  const buyCount = reports.filter(r => r.opinion === 'BUY').length;
 
   return (
     <div className="space-y-6">
-      {/* 요약 카드 */}
+      {/* 주가 차트 + 목표주가 */}
       <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
-        <div className="grid grid-cols-3 gap-4">
+        <div className="flex justify-between items-center mb-4">
+          <h4 className="font-medium text-[#191f28]">주가 차트 & 목표주가</h4>
+          <div className="text-sm text-[#8b95a1]">
+            애널리스트 {analystReports.length}명
+          </div>
+        </div>
+        
+        <div className="relative h-80 bg-[#f8f9fa] rounded-lg overflow-hidden">
+          <svg className="w-full h-full" viewBox="0 0 400 200">
+            {/* 배경 격자 */}
+            <defs>
+              <pattern id="grid-analyst" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e8e8e8" strokeWidth="0.5"/>
+              </pattern>
+              <linearGradient id="priceGradient-analyst" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#3182f6" stopOpacity="0.2"/>
+                <stop offset="100%" stopColor="#3182f6" stopOpacity="0.05"/>
+              </linearGradient>
+            </defs>
+            
+            <rect width="100%" height="100%" fill="url(#grid-analyst)" />
+            
+            {/* 주가 라인 */}
+            <path
+              d="M 20 120 L 60 100 L 100 90 L 140 110 L 180 80 L 220 70 L 260 85 L 300 65 L 340 75 L 380 60"
+              fill="none"
+              stroke="#3182f6"
+              strokeWidth="3"
+            />
+            
+            {/* 주가 영역 */}
+            <path
+              d="M 20 120 L 60 100 L 100 90 L 140 110 L 180 80 L 220 70 L 260 85 L 300 65 L 340 75 L 380 60 L 380 200 L 20 200 Z"
+              fill="url(#priceGradient-analyst)"
+            />
+            
+            {/* 목표주가 라인들 */}
+            <line x1="20" y1="40" x2="380" y2="40" stroke="#dc3545" strokeWidth="2" strokeDasharray="5,5" opacity="0.8" />
+            <line x1="20" y1="50" x2="380" y2="50" stroke="#28a745" strokeWidth="2" strokeDasharray="5,5" opacity="0.8" />
+            <line x1="20" y1="80" x2="380" y2="80" stroke="#ffc107" strokeWidth="2" strokeDasharray="5,5" opacity="0.8" />
+            
+            {/* 현재가 라인 */}
+            <line x1="20" y1="60" x2="380" y2="60" stroke="#3182f6" strokeWidth="2" opacity="0.9" />
+            
+            {/* 목표가 라벨 */}
+            <text x="385" y="45" className="text-xs fill-red-600">85,000원</text>
+            <text x="385" y="55" className="text-xs fill-green-600">82,000원</text>
+            <text x="385" y="85" className="text-xs fill-yellow-600">70,000원</text>
+            <text x="385" y="65" className="text-xs fill-blue-600">현재가</text>
+          </svg>
+        </div>
+        
+        {/* 목표주가 요약 */}
+        <div className="mt-4 grid grid-cols-3 gap-4">
           <div className="text-center">
             <div className="text-sm text-[#8b95a1] mb-1">평균 목표가</div>
             <div className="text-lg font-bold text-[#191f28]">
-              {avgTarget > 0 ? formatStockPrice(Math.round(avgTarget), code) : '-'}
+              {Math.round(analystReports.reduce((sum, report) => sum + report.targetPrice, 0) / analystReports.length).toLocaleString()}원
             </div>
           </div>
           <div className="text-center">
-            <div className="text-sm text-[#8b95a1] mb-1">리포트 수</div>
-            <div className="text-lg font-bold text-[#191f28]">{reports.length}건</div>
+            <div className="text-sm text-[#8b95a1] mb-1">평균 상승여력</div>
+            <div className="text-lg font-bold text-green-600">
+              +{Math.round(analystReports.reduce((sum, report) => sum + parseFloat(getUpside(report.targetPrice, report.currentPrice)), 0) / analystReports.length)}%
+            </div>
           </div>
           <div className="text-center">
             <div className="text-sm text-[#8b95a1] mb-1">매수 의견</div>
             <div className="text-lg font-bold text-blue-600">
-              {buyCount}/{reports.length}
+              {analystReports.filter(r => r.rating === '매수').length}/{analystReports.length}
             </div>
           </div>
         </div>
       </div>
 
-      {/* 리포트 테이블 */}
+      {/* 애널리스트 리포트 목록 */}
       <div className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
         <div className="p-6 border-b border-[#e8e8e8]">
-          <h4 className="font-medium text-[#191f28]">애널리스트 리포트 이력</h4>
+          <h4 className="font-medium text-[#191f28]">애널리스트 리포트</h4>
         </div>
-        {reports.length === 0 ? (
-          <div className="p-8 text-center text-[#8b95a1]">이 종목의 애널리스트 리포트가 없습니다.</div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-[#f8f9fa]">
-                <tr>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">날짜</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">증권사</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">투자의견</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">리포트 제목</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">목표가</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">리포트</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#f0f0f0]">
-                {reports.map((report, index) => (
-                  <tr
-                    key={index}
-                    className="hover:bg-[#f8f9fa] cursor-pointer transition-colors"
-                    onClick={() => setSelectedReport(report)}
-                  >
-                    <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">
-                      {new Date(report.published_at).toLocaleDateString('ko-KR', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                    </td>
-                    <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">
-                      {report.firm}
-                    </td>
-                    <td className="px-4 py-4">
-                      <div className="flex items-center gap-2">
-                        <span className="text-lg">{getOpinionEmoji(report.opinion)}</span>
-                        <span className={`px-2 py-1 rounded text-xs font-medium ${getOpinionColor(report.opinion)}`}>
-                          {getOpinionLabel(report.opinion)}
-                        </span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-4 text-sm text-[#191f28] max-w-xs">
-                      <div className="truncate" title={report.title}>{report.title}</div>
-                    </td>
-                    <td className="px-4 py-4 text-sm font-medium text-[#191f28] whitespace-nowrap">
-                      {report.target_price ? formatStockPrice(report.target_price, code) : '-'}
-                    </td>
-                    <td className="px-4 py-4">
-                      {report.pdf_url ? (
-                        <a
-                          href={report.pdf_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[#3182f6] hover:text-[#2171e5] text-sm font-medium"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          PDF →
-                        </a>
-                      ) : (
-                        <span className="text-[#8b95a1] text-sm">-</span>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
-
-      {/* 리포트 상세 모달 */}
-      {selectedReport && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setSelectedReport(null)}>
-          <div className="bg-white rounded-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-            <div className="p-6">
-              {/* 헤더 */}
-              <div className="flex justify-between items-start mb-4">
-                <div className="flex-1">
-                  <h3 className="text-lg font-bold text-[#191f28] mb-2">{selectedReport.title}</h3>
-                  <div className="flex items-center gap-2 text-sm text-[#8b95a1]">
-                    <span>{selectedReport.firm}</span>
-                    <span>·</span>
-                    <span>{new Date(selectedReport.published_at).toLocaleDateString('ko-KR', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}</span>
-                  </div>
-                </div>
-                <button onClick={() => setSelectedReport(null)} className="text-[#8b95a1] hover:text-[#191f28] text-xl">✕</button>
-              </div>
-
-              {/* 투자의견 + 목표가 */}
-              <div className="bg-[#f8f9fa] rounded-lg p-4 mb-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg">{getOpinionEmoji(selectedReport.opinion)}</span>
-                    <span className={`px-3 py-1.5 rounded-full text-sm font-bold ${getOpinionColor(selectedReport.opinion)}`}>
-                      {getOpinionLabel(selectedReport.opinion)}
+        <div className="divide-y divide-[#f0f0f0]">
+          {analystReports.map((report, index) => (
+            <div key={index} className="p-6 hover:bg-[#f8f9fa] transition-colors">
+              <div className="flex items-start justify-between mb-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center">
+                    <span className="text-sm font-medium text-blue-800">
+                      {report.analyst[0]}
                     </span>
                   </div>
-                  <div className="text-right">
-                    <div className="text-sm text-[#8b95a1]">목표가</div>
-                    <div className="text-xl font-bold text-[#191f28]">
-                      {selectedReport.target_price ? formatStockPrice(selectedReport.target_price, code) : '-'}
-                    </div>
+                  <div>
+                    <div className="font-medium text-[#191f28]">{report.analyst}</div>
+                    <div className="text-sm text-[#8b95a1]">{report.firm}</div>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <span className={`px-2 py-1 rounded text-xs font-medium ${getRatingColor(report.rating)}`}>
+                    {report.rating}
+                  </span>
+                  <div className="text-sm text-[#8b95a1] mt-1">
+                    {new Date(report.date).toLocaleDateString('ko-KR', { 
+                      month: 'short', 
+                      day: 'numeric' 
+                    })}
                   </div>
                 </div>
               </div>
 
-              {/* PDF 링크 */}
-              {selectedReport.pdf_url && (
-                <a
-                  href={selectedReport.pdf_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full text-center bg-[#3182f6] text-white py-3 rounded-lg font-medium hover:bg-[#2171e5] transition-colors mb-4"
-                >
-                  📄 PDF 원문 보기
-                </a>
-              )}
+              <div className="mb-3">
+                <h5 className="font-medium text-[#191f28] mb-1">{report.title}</h5>
+                <p className="text-sm text-[#8b95a1]">{report.summary}</p>
+              </div>
 
-              {/* 종목 정보 */}
-              <div className="border-t border-[#e8e8e8] pt-4">
-                <div className="text-sm text-[#8b95a1]">
-                  종목: {stockData.name} ({code})
+              <div className="flex items-center justify-between pt-3 border-t border-[#f0f0f0]">
+                <div className="flex gap-4 text-sm">
+                  <div>
+                    <span className="text-[#8b95a1]">목표가: </span>
+                    <span className="font-medium text-[#191f28]">
+                      {report.targetPrice.toLocaleString()}원
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-[#8b95a1]">상승여력: </span>
+                    <span className={`font-medium ${
+                      parseFloat(getUpside(report.targetPrice, report.currentPrice)) > 0 
+                        ? 'text-green-600' 
+                        : 'text-red-600'
+                    }`}>
+                      {getUpside(report.targetPrice, report.currentPrice)}%
+                    </span>
+                  </div>
                 </div>
+                <button className="text-[#3182f6] hover:text-[#2171e5] text-sm font-medium">
+                  리포트 보기 →
+                </button>
               </div>
             </div>
-          </div>
+          ))}
         </div>
-      )}
+      </div>
     </div>
   );
 }
@@ -613,10 +636,6 @@ function InfluencerTab({ code }: { code: string }) {
     { name: '전체', count: null }
   ]);
   const [loading, setLoading] = useState(true);
-  const [selectedSignal, setSelectedSignal] = useState<any>(null);
-  const [activeSignalTypes, setActiveSignalTypes] = useState(['매수', '긍정', '중립', '부정', '매도']);
-  const [priceData, setPriceData] = useState<Record<string, { price_at_signal: number; price_current: number; return_pct: number }>>({});
-  const [likeCounts, setLikeCounts] = useState<Record<string, number>>({});
 
   const periodOptions = ['1개월', '6개월', '1년', '3년', '전체'];
 
@@ -626,15 +645,8 @@ function InfluencerTab({ code }: { code: string }) {
       try {
         setLoading(true);
         
-        const { getStockSignals, getSignalVoteCounts } = await import('@/lib/supabase');
-        const videoSummaries = (await import('@/data/video_summaries.json')).default as Record<string, string>;
-        const [signals] = await Promise.all([
-          getStockSignals(code),
-          fetch('/invest-sns/signal_prices.json')
-            .then(r => r.ok ? r.json() : {})
-            .then(d => setPriceData(d))
-            .catch(() => {}),
-        ]);
+        const { getStockSignals } = await import('@/lib/supabase');
+        const signals = await getStockSignals(code);
         
         // 데이터를 UI용 형태로 변환
         const transformedSignals = signals.map((signal: any) => {
@@ -642,61 +654,22 @@ function InfluencerTab({ code }: { code: string }) {
             ? new Date(signal.influencer_videos.published_at)
             : new Date();
           
-          const videoUrl = (() => {
-            const vid = signal.influencer_videos?.video_id;
-            if (!vid) return '#';
-            let url = `https://youtube.com/watch?v=${vid}`;
-            const ts = signal.timestamp;
-            if (ts && ts !== 'N/A' && ts !== 'null') {
-              const parts = ts.split(':').map(Number);
-              const secs = parts.length === 3 ? parts[0]*3600+parts[1]*60+parts[2] : parts.length === 2 ? parts[0]*60+parts[1] : parts[0];
-              if (secs > 0) url += `&t=${secs}`;
-            }
-            return url;
-          })();
-
-          const speakerName = signal.speakers?.name || '';
-          const channelName = signal.influencer_videos?.influencer_channels?.channel_name || '';
-          // 호스트: 채널명만. 게스트: 화자 이름만
-          const isHost = !speakerName || !channelName || speakerName === channelName || channelName.includes(speakerName) || speakerName.includes(channelName);
-          const influencerDisplay = isHost
-            ? (channelName || speakerName || 'Unknown')
-            : speakerName;
+          const videoUrl = signal.influencer_videos?.video_id 
+            ? `https://youtube.com/watch?v=${signal.influencer_videos.video_id}`
+            : '#';
 
           return {
-            signalId: signal.id,
             date: publishedDate.toISOString().split('T')[0],
-            influencer: influencerDisplay,
+            influencer: signal.speakers?.name || signal.influencer_videos?.influencer_channels?.channel_name || 'Unknown',
             signal: signal.signal,
             quote: signal.key_quote || '키 인용문이 없습니다.',
-            return: 'N/A',
+            return: 'N/A', // TODO: 수익률 계산
             videoUrl,
-            price: 0,
-            confidence: signal.confidence,
-            analysis_reasoning: signal.influencer_videos?.video_summary || videoSummaries[signal.video_id] || signal.reasoning,
-            mention_type: signal.mention_type,
-            timestamp: signal.timestamp,
-            videoTitle: signal.influencer_videos?.title,
-            channelName,
+            price: 0 // TODO: 발언 시점 주가
           };
         });
         
-        // published_at 우선 최신순 정렬
-        transformedSignals.sort((a: any, b: any) => (b.date || '').localeCompare(a.date || ''));
         setSignalData(transformedSignals);
-
-        // 좋아요 카운트 가져오기
-        if (transformedSignals.length > 0) {
-          const signalIds = transformedSignals.map((s: any) => s.signalId).filter(Boolean);
-          if (signalIds.length > 0) {
-            try {
-              const counts = await getSignalVoteCounts(signalIds);
-              setLikeCounts(counts);
-            } catch (e) {
-              console.error('Failed to load like counts:', e);
-            }
-          }
-        }
         
         // 인플루언서별 카운트 생성
         const influencerCounts = transformedSignals.reduce((acc: any, signal: any) => {
@@ -729,12 +702,12 @@ function InfluencerTab({ code }: { code: string }) {
   const getLocalSignalColor = (signal: string) => {
     switch (signal) {
       case '매수':
-      case 'BUY': return 'text-green-600 bg-green-100';
+      case 'BUY': return 'text-blue-600 bg-blue-100';
       case '긍정':
-      case 'POSITIVE': return 'text-blue-600 bg-blue-100';
+      case 'POSITIVE': return 'text-green-600 bg-green-100';
       case '중립':
       case 'NEUTRAL': return 'text-yellow-600 bg-yellow-100';
-      case '부정':
+      case '경계':
       case 'CONCERN': return 'text-orange-600 bg-orange-100';
       case '매도':
       case 'SELL': return 'text-red-600 bg-red-100';
@@ -745,12 +718,12 @@ function InfluencerTab({ code }: { code: string }) {
   const getSignalEmoji = (signal: string) => {
     switch (signal) {
       case '매수':
-      case 'BUY': return '🟢';
+      case 'BUY': return '🔵';
       case '긍정':
-      case 'POSITIVE': return '🔵';
+      case 'POSITIVE': return '🟢';
       case '중립':
       case 'NEUTRAL': return '🟡';
-      case '부정':
+      case '경계':
       case 'CONCERN': return '🟠';
       case '매도':
       case 'SELL': return '🔴';
@@ -798,18 +771,7 @@ function InfluencerTab({ code }: { code: string }) {
     return filtered;
   };
 
-  const handleSignalTypeToggle = (type: string) => {
-    setActiveSignalTypes(prev => {
-      if (prev.includes(type)) {
-        // Don't allow deselecting all
-        if (prev.length === 1) return prev;
-        return prev.filter(t => t !== type);
-      }
-      return [...prev, type];
-    });
-  };
-
-  const filteredSignals = getFilteredSignals().filter(s => activeSignalTypes.includes(s.signal));
+  const filteredSignals = getFilteredSignals();
 
   if (loading) {
     return (
@@ -867,15 +829,50 @@ function InfluencerTab({ code }: { code: string }) {
         </div>
       </div>
 
-      {/* 차트 영역 - 실제 Yahoo Finance 데이터 */}
-      <StockSignalChart
-        code={code}
-        signals={getFilteredSignals()}
-        periodFilter={periodFilter}
-        onSignalClick={(sig) => setSelectedSignal(sig)}
-        activeSignalTypes={activeSignalTypes}
-        onSignalTypeToggle={handleSignalTypeToggle}
-      />
+      {/* 차트 영역 */}
+      <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
+        <h4 className="font-medium text-[#191f28] mb-4">주가 차트 & 신호</h4>
+        <div className="relative h-64 bg-[#f8f9fa] rounded-lg overflow-hidden">
+          {/* 간단한 주가 차트 (SVG) */}
+          <svg className="w-full h-full" viewBox="0 0 400 200">
+            {/* 배경 격자 */}
+            <defs>
+              <pattern id="grid" width="40" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 20" fill="none" stroke="#e8e8e8" strokeWidth="1"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+            
+            {/* 주가 라인 */}
+            <path
+              d="M 20 120 L 60 100 L 100 90 L 140 110 L 180 80 L 220 70 L 260 85 L 300 65 L 340 75 L 380 60"
+              fill="none"
+              stroke="#3182f6"
+              strokeWidth="2"
+            />
+            
+            {/* 신호 점들 */}
+            <circle cx="60" cy="100" r="6" fill="#dc3545" stroke="white" strokeWidth="2" />
+            <circle cx="140" cy="110" r="6" fill="#17a2b8" stroke="white" strokeWidth="2" />
+            <circle cx="220" cy="70" r="6" fill="#28a745" stroke="white" strokeWidth="2" />
+            <circle cx="300" cy="65" r="6" fill="#ffc107" stroke="white" strokeWidth="2" />
+            <circle cx="380" cy="60" r="6" fill="#007bff" stroke="white" strokeWidth="2" />
+          </svg>
+          
+          {/* 범례 */}
+          <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg p-3 text-xs">
+            <div className="flex items-center gap-2 mb-1">
+              <span>🔵 매수</span>
+              <span>🟢 긍정</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span>🟡 중립</span>
+              <span>🟠 경계</span>
+              <span>🔴 매도</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* 신호 테이블 */}
       <div className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
@@ -896,23 +893,14 @@ function InfluencerTab({ code }: { code: string }) {
             </thead>
             <tbody className="divide-y divide-[#f0f0f0]">
               {filteredSignals.map((signal, index) => (
-                <tr
-                  key={index}
-                  className="hover:bg-[#f8f9fa] cursor-pointer transition-colors"
-                  onClick={() => setSelectedSignal({
-                    ...signal,
-                    id: signal.signalId,
-                    likeCount: likeCounts[signal.signalId] || 0
-                  })}
-                >
+                <tr key={index} className="hover:bg-[#f8f9fa]">
                   <td className="px-4 py-4 text-sm text-[#191f28]">
                     {new Date(signal.date).toLocaleDateString('ko-KR', { 
-                      year: 'numeric',
-                      month: 'long', 
+                      month: 'short', 
                       day: 'numeric' 
                     })}
                   </td>
-                  <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">
+                  <td className="px-4 py-4 text-sm font-medium text-[#191f28]">
                     {signal.influencer}
                   </td>
                   <td className="px-4 py-4">
@@ -924,24 +912,12 @@ function InfluencerTab({ code }: { code: string }) {
                     </div>
                   </td>
                   <td className="px-4 py-4 text-sm text-[#191f28] max-w-xs">
-                    <div className="truncate" title={signal.quote}>{signal.quote}</div>
+                    <div className="truncate">{signal.quote}</div>
                   </td>
-                  <td className="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                    {(() => {
-                      if (signal.signal === '중립') return <span className="text-[#8b95a1]">N/A</span>;
-                      const pd = priceData[signal.signalId];
-                      if (!pd || pd.return_pct == null) return <span className="text-[#8b95a1]">-</span>;
-                      const ret = pd.return_pct;
-                      const isBullish = signal.signal === '매수' || signal.signal === '긍정';
-                      const isGood = isBullish ? ret >= 0 : ret <= 0;
-                      const color = isGood ? 'text-[#22c55e]' : 'text-[#ef4444]';
-                      const arrow = ret >= 0 ? '▲' : '▼';
-                      return (
-                        <span className={color} title={`${formatStockPrice(pd.price_at_signal || 0, code)} → ${formatStockPrice(pd.price_current || 0, code)}`}>
-                          {arrow} {ret >= 0 ? '+' : ''}{ret}%
-                        </span>
-                      );
-                    })()}
+                  <td className="px-4 py-4 text-sm font-medium">
+                    <span className={signal.return.startsWith('+') ? 'text-red-600' : 'text-blue-600'}>
+                      {signal.return}
+                    </span>
                   </td>
                   <td className="px-4 py-4">
                     <a
@@ -949,7 +925,6 @@ function InfluencerTab({ code }: { code: string }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[#3182f6] hover:text-[#2171e5] text-sm font-medium"
-                      onClick={(e) => e.stopPropagation()}
                     >
                       영상보기 →
                     </a>
@@ -960,14 +935,6 @@ function InfluencerTab({ code }: { code: string }) {
           </table>
         </div>
       </div>
-
-      {/* 시그널 상세 모달 */}
-      <ReportDetailModal
-        report={selectedSignal}
-        isOpen={!!selectedSignal}
-        onClose={() => setSelectedSignal(null)}
-        type="signal"
-      />
     </div>
   );
 }

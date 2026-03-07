@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { Analyst, opinionColors, opinionLabels } from '@/data/analystData';
-import { formatStockPrice } from '@/lib/currency';
 
 interface Props {
   analyst: Analyst;

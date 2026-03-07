@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const bottomNavItems = [
-  { icon: '📊', label: '대시보드', href: '/dashboard' },
+  { icon: '🏠', label: '피드', href: '/' },
+  { icon: '⭐', label: '내 종목', href: '/my-stocks' },
   { icon: '🔍', label: '탐색', href: '/explore' },
-  { icon: '💼', label: '포트폴리오', href: '/portfolio' },
   { icon: '🔔', label: '알림', href: '/notifications' },
   { icon: '👤', label: '프로필', href: '/profile' },
 ];

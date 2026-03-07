@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
@@ -482,18 +482,9 @@ function InfluencerTab({ code }: { code: string }) {
             ? `https://youtube.com/watch?v=${signal.influencer_videos.video_id}`
             : '#';
 
-          const speakerName = signal.speakers?.name || '';
-          const channelName = signal.influencer_videos?.influencer_channels?.channel_name || '';
-          // 게스트면 "스피커 · 채널", 호스트(스피커==채널 or 스피커 없음)면 채널명만
-          // 호스트: 채널명만. 게스트: 화자 이름만
-          const isHost = !speakerName || !channelName || speakerName === channelName || channelName.includes(speakerName) || speakerName.includes(channelName);
-          const influencerDisplay = isHost
-            ? (channelName || speakerName || 'Unknown')
-            : speakerName;
-
           return {
             date: publishedDate.toISOString().split('T')[0],
-            influencer: influencerDisplay,
+            influencer: signal.speakers?.name || signal.influencer_videos?.influencer_channels?.channel_name || 'Unknown',
             signal: signal.signal,
             quote: signal.key_quote || '키 인용문이 없습니다.',
             return: 'N/A', // TODO: 수익률 계산
@@ -503,8 +494,6 @@ function InfluencerTab({ code }: { code: string }) {
           };
         });
         
-        // published_at 우선 최신순 정렬
-        transformedSignals.sort((a: any, b: any) => (b.date || '').localeCompare(a.date || ''));
         setSignalData(transformedSignals);
         
         // 인플루언서별 카운트 생성
@@ -543,7 +532,7 @@ function InfluencerTab({ code }: { code: string }) {
       case 'POSITIVE': return 'text-green-600 bg-green-100';
       case '중립':
       case 'NEUTRAL': return 'text-yellow-600 bg-yellow-100';
-      case '부정':
+      case '경계':
       case 'CONCERN': return 'text-orange-600 bg-orange-100';
       case '매도':
       case 'SELL': return 'text-red-600 bg-red-100';
@@ -559,7 +548,7 @@ function InfluencerTab({ code }: { code: string }) {
       case 'POSITIVE': return '🟢';
       case '중립':
       case 'NEUTRAL': return '🟡';
-      case '부정':
+      case '경계':
       case 'CONCERN': return '🟠';
       case '매도':
       case 'SELL': return '🔴';
@@ -575,7 +564,7 @@ function InfluencerTab({ code }: { code: string }) {
       case 'POSITIVE': return '#10B981'; // green-500
       case '중립':
       case 'NEUTRAL': return '#F59E0B'; // yellow-500
-      case '부정':
+      case '경계':
       case 'CONCERN': return '#F97316'; // orange-500
       case '매도':
       case 'SELL': return '#EF4444'; // red-500
@@ -761,7 +750,7 @@ function InfluencerTab({ code }: { code: string }) {
               <span className="flex items-center gap-1"><span className="w-2 h-2 bg-blue-500 rounded-full"></span>매수</span>
               <span className="flex items-center gap-1"><span className="w-2 h-2 bg-green-500 rounded-full"></span>긍정</span>
               <span className="flex items-center gap-1"><span className="w-2 h-2 bg-yellow-500 rounded-full"></span>중립</span>
-              <span className="flex items-center gap-1"><span className="w-2 h-2 bg-orange-500 rounded-full"></span>부정</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 bg-orange-500 rounded-full"></span>경계</span>
               <span className="flex items-center gap-1"><span className="w-2 h-2 bg-red-500 rounded-full"></span>매도</span>
             </div>
             <div className="mt-2 text-gray-600">
@@ -797,7 +786,7 @@ function InfluencerTab({ code }: { code: string }) {
                       day: 'numeric' 
                     })}
                   </td>
-                  <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">
+                  <td className="px-4 py-4 text-sm font-medium text-[#191f28]">
                     {signal.influencer}
                   </td>
                   <td className="px-4 py-4">
@@ -916,7 +905,7 @@ function AnalystTab({ code }: { code: string }) {
       case '매수': return 'text-blue-600 bg-blue-100';
       case '긍정': return 'text-green-600 bg-green-100';
       case '중립': return 'text-yellow-600 bg-yellow-100';
-      case '부정': return 'text-orange-600 bg-orange-100';
+      case '경계': return 'text-orange-600 bg-orange-100';
       case '매도': return 'text-red-600 bg-red-100';
       default: return 'text-gray-600 bg-gray-100';
     }
@@ -927,7 +916,7 @@ function AnalystTab({ code }: { code: string }) {
       case '매수': return '🔵';
       case '긍정': return '🟢';
       case '중립': return '🟡';
-      case '부정': return '🟠';
+      case '경계': return '🟠';
       case '매도': return '🔴';
       default: return '⚪';
     }

@@ -1,4 +1,4 @@
-﻿import { createClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js'
 
 export const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -10,7 +10,7 @@ export const signalMapping = {
   '매수': 'BUY',
   '긍정': 'POSITIVE',
   '중립': 'NEUTRAL',
-  '부정': 'CONCERN',
+  '경계': 'CONCERN',
   '매도': 'SELL'
 } as const;
 
@@ -18,7 +18,7 @@ export const reverseSignalMapping = {
   'BUY': '매수',
   'POSITIVE': '긍정',
   'NEUTRAL': '중립',
-  'CONCERN': '부정',
+  'CONCERN': '경계',
   'SELL': '매도'
 } as const;
 
@@ -27,14 +27,14 @@ export const getSignalColor = (signal: string) => {
   switch (signal) {
     case '매수':
     case 'BUY': 
-      return 'bg-green-100 text-[#22c55e] border-green-200';
+      return 'bg-blue-100 text-[#3182f6] border-blue-200';
     case '긍정':
     case 'POSITIVE': 
-      return 'bg-blue-100 text-[#3182f6] border-blue-200';
+      return 'bg-green-100 text-[#22c55e] border-green-200';
     case '중립':
     case 'NEUTRAL': 
       return 'bg-yellow-100 text-[#eab308] border-yellow-200';
-    case '부정':
+    case '경계':
     case 'CONCERN': 
       return 'bg-orange-100 text-[#f97316] border-orange-200';
     case '매도':
@@ -55,8 +55,6 @@ export async function getLatestInfluencerSignals(limit = 20) {
         influencer_videos (
           title,
           published_at,
-          video_id,
-          video_summary,
           channel_id,
           influencer_channels (
             channel_name,
@@ -67,7 +65,8 @@ export async function getLatestInfluencerSignals(limit = 20) {
           name
         )
       `)
-      .order('created_at', { ascending: false })
+      .eq('review_status', 'approved')
+      .order('timestamp', { ascending: false })
       .limit(limit);
 
     if (error) {
@@ -78,68 +77,6 @@ export async function getLatestInfluencerSignals(limit = 20) {
     return data || [];
   } catch (error) {
     console.error('Error in getLatestInfluencerSignals:', error);
-    return [];
-  }
-}
-
-export async function getInfluencerSignalsSampled(perChannelLimit = 50) {
-  try {
-    // 1. 모든 채널 ID 가져오기
-    const { data: channels, error: chErr } = await supabase
-      .from('influencer_channels')
-      .select('id, channel_name');
-    if (chErr || !channels) return [];
-
-    // 2. 채널별로 최신 N개씩 가져오기
-    const allSignals: any[] = [];
-    for (const ch of channels) {
-      const { data: videos } = await supabase
-        .from('influencer_videos')
-        .select('id')
-        .eq('channel_id', ch.id);
-      if (!videos || videos.length === 0) continue;
-      
-      const videoIds = videos.map((v: any) => v.id);
-      // video_id가 많으면 URL 한도 초과하므로 청크로 나눠서 쿼리
-      const CHUNK = 100;
-      const channelSignals: any[] = [];
-      for (let i = 0; i < videoIds.length; i += CHUNK) {
-        const chunk = videoIds.slice(i, i + CHUNK);
-        const { data: signals, error: sigErr } = await supabase
-          .from('influencer_signals')
-          .select(`
-            *,
-            influencer_videos (
-              title,
-              published_at,
-              video_id,
-              video_summary,
-              channel_id,
-              influencer_channels (
-                channel_name,
-                channel_handle
-              )
-            ),
-            speakers (
-              name
-            )
-          `)
-          .in('video_id', chunk)
-          .order('created_at', { ascending: false })
-          .limit(perChannelLimit);
-        
-        if (!sigErr && signals) {
-          channelSignals.push(...signals);
-        }
-      }
-      // 청크 결과 합친 후 최신순 정렬 & limit 적용
-      channelSignals.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
-      allSignals.push(...channelSignals.slice(0, perChannelLimit));
-    }
-    
-    return allSignals;
-  } catch (error) {
-    console.error('Error in getInfluencerSignalsSampled:', error);
     return [];
   }
 }
@@ -173,7 +110,8 @@ export async function getInfluencerChannels() {
               .select('id')
               .eq('channel_id', channel.id)
               .then(({ data: videos }) => videos?.map(v => v.id) || [])
-          );
+          )
+          .eq('review_status', 'approved');
 
         return {
           ...channel,
@@ -201,7 +139,8 @@ export async function getStockSignalGroups() {
         speakers (
           name
         )
-      `);
+      `)
+      .eq('review_status', 'approved');
 
     if (error) {
       console.error('Error fetching stock signals:', error);
@@ -276,7 +215,8 @@ export async function getInfluencerProfile(channelHandle: string) {
           .eq('channel_id', channelData.id)
           .then(({ data: videos }) => videos?.map(v => v.id) || [])
       )
-      .order('created_at', { ascending: false });
+      .eq('review_status', 'approved')
+      .order('timestamp', { ascending: false });
 
     if (signalsError) {
       console.error('Error fetching signals:', signalsError);
@@ -293,11 +233,10 @@ export async function getInfluencerProfile(channelHandle: string) {
   }
 }
 
-// 발언자 이름으로 프로필 + 시그널 가져오기
-export async function getInfluencerProfileBySpeaker(speakerName: string) {
+// 특정 종목의 시그널을 가져오는 함수
+export async function getStockSignals(ticker: string) {
   try {
-    // 1) speaker_id가 이름인 경우 직접 조회
-    let { data: signals, error } = await supabase
+    const { data, error } = await supabase
       .from('influencer_signals')
       .select(`
         *,
@@ -305,95 +244,6 @@ export async function getInfluencerProfileBySpeaker(speakerName: string) {
           title,
           published_at,
           video_id,
-          influencer_channels (
-            channel_name,
-            channel_handle
-          )
-        ),
-        speakers (
-          name
-        )
-      `)
-      .eq('speaker_id', speakerName)
-      .order('created_at', { ascending: false });
-
-    // 2) 결과 없으면 speakers 테이블에서 이름으로 UUID 찾아서 재조회
-    if (!signals || signals.length === 0) {
-      const { data: speakerRows } = await supabase
-        .from('speakers')
-        .select('id')
-        .eq('name', speakerName);
-
-      if (speakerRows && speakerRows.length > 0) {
-        const speakerIds = speakerRows.map((s: any) => s.id);
-        const { data: signals2, error: error2 } = await supabase
-          .from('influencer_signals')
-          .select(`
-            *,
-            influencer_videos (
-              title,
-              published_at,
-              video_id,
-              influencer_channels (
-                channel_name,
-                channel_handle
-              )
-            ),
-            speakers (
-              name
-            )
-          `)
-          .in('speaker_id', speakerIds)
-          .order('created_at', { ascending: false });
-
-        if (!error2) {
-          signals = signals2;
-          error = error2;
-        }
-      }
-    }
-
-    if (error) {
-      console.error('Error fetching speaker signals:', error);
-      return null;
-    }
-
-    return {
-      speakerName,
-      signals: signals || [],
-      totalSignals: signals?.length || 0,
-      stocks: [...new Set(signals?.map(s => s.stock).filter(Boolean))],
-      channels: [...new Set(signals?.map(s => s.influencer_videos?.influencer_channels?.channel_name).filter(Boolean))],
-    };
-  } catch (error) {
-    console.error('Error in getInfluencerProfileBySpeaker:', error);
-    return null;
-  }
-}
-
-// 특정 종목의 시그널을 가져오는 함수
-export async function getStockSignals(ticker: string) {
-  try {
-    // 티커→한글 종목명 매핑 (대부분 시그널이 ticker 없이 stock만 있음)
-    const nameMap: Record<string, string> = {
-      '005930': '삼성전자', '000660': 'SK하이닉스', '035420': 'NAVER',
-      '051910': 'LG화학', '005380': '현대차', '086520': '에코프로',
-      '009540': '한국가스공사', '399720': '퓨처켐', '298040': '효성중공업',
-      '036930': '주성엔지니어링', '042700': '한미반도체', '095610': '테스',
-      '000720': '현대건설', '004170': '신세계', '006400': '삼성SDI',
-      '267260': 'HD현대일렉트릭', '090430': '아모레퍼시픽', '036570': 'NC소프트',
-      '207940': '삼성바이오로직스', '079160': 'CGV', '403870': 'HPSP',
-      '240810': '원익IPS',
-    };
-    const stockName = nameMap[ticker];
-    
-    const selectQuery = `
-        *,
-        influencer_videos (
-          title,
-          published_at,
-          video_id,
-          video_summary,
           channel_id,
           influencer_channels (
             channel_name,
@@ -403,16 +253,10 @@ export async function getStockSignals(ticker: string) {
         speakers (
           name
         )
-      `;
-
-    // ticker 또는 stock(한글명)으로 검색
-    let query = supabase.from('influencer_signals').select(selectQuery);
-    if (stockName) {
-      query = query.or(`ticker.eq.${ticker},stock.eq.${stockName}`);
-    } else {
-      query = query.eq('ticker', ticker);
-    }
-    const { data, error } = await query.order('created_at', { ascending: false });
+      `)
+      .eq('ticker', ticker)
+      .eq('review_status', 'approved')
+      .order('timestamp', { ascending: false });
 
     if (error) {
       console.error('Error fetching stock signals:', error);
@@ -423,224 +267,5 @@ export async function getStockSignals(ticker: string) {
   } catch (error) {
     console.error('Error in getStockSignals:', error);
     return [];
-  }
-}
-
-// 신고 관련 함수들
-export async function insertSignalReport(signalId: string, reason: string, detail?: string) {
-  try {
-    const { data, error } = await supabase
-      .from('signal_reports')
-      .insert({
-        signal_id: signalId,
-        reason,
-        detail: detail || null
-      })
-      .select()
-      .single();
-
-    if (error) {
-      console.error('Error inserting signal report:', error);
-      throw error;
-    }
-
-    return data;
-  } catch (error) {
-    console.error('Error in insertSignalReport:', error);
-    throw error;
-  }
-}
-
-export async function getSignalReports() {
-  try {
-    const { data, error } = await supabase
-      .from('signal_reports')
-      .select(`
-        *,
-        influencer_signals (
-          id,
-          stock,
-          ticker,
-          signal,
-          key_quote,
-          reasoning,
-          influencer_videos (
-            title,
-            published_at,
-            video_id,
-            influencer_channels (
-              channel_name,
-              channel_handle
-            )
-          ),
-          speakers (
-            name
-          )
-        )
-      `)
-      .order('created_at', { ascending: false });
-
-    if (error) {
-      console.error('Error fetching signal reports:', error);
-      return [];
-    }
-
-    return data || [];
-  } catch (error) {
-    console.error('Error in getSignalReports:', error);
-    return [];
-  }
-}
-
-export async function updateReportStatus(reportId: string, status: string) {
-  try {
-    const { data, error } = await supabase
-      .from('signal_reports')
-      .update({ status })
-      .eq('id', reportId)
-      .select()
-      .single();
-
-    if (error) {
-      console.error('Error updating report status:', error);
-      throw error;
-    }
-
-    return data;
-  } catch (error) {
-    console.error('Error in updateReportStatus:', error);
-    throw error;
-  }
-}
-
-// 좋아요 관련 함수들
-export async function insertSignalVote(signalId: string, memo?: string) {
-  try {
-    const { data, error } = await supabase
-      .from('signal_votes')
-      .insert({ 
-        signal_id: signalId, 
-        vote_type: 'like', 
-        memo 
-      })
-      .select()
-      .single();
-
-    if (error) {
-      console.error('Error inserting signal vote:', error);
-      throw error;
-    }
-
-    return data;
-  } catch (error) {
-    console.error('Error in insertSignalVote:', error);
-    throw error;
-  }
-}
-
-export async function getSignalVoteCounts(signalIds: string[]): Promise<Record<string, number>> {
-  try {
-    if (!signalIds.length) return {};
-
-    const { data, error } = await supabase
-      .from('signal_votes')
-      .select('signal_id')
-      .in('signal_id', signalIds);
-
-    if (error) {
-      console.error('Error fetching signal vote counts:', error);
-      return {};
-    }
-
-    const counts: Record<string, number> = {};
-    data?.forEach(v => {
-      counts[v.signal_id] = (counts[v.signal_id] || 0) + 1;
-    });
-
-    return counts;
-  } catch (error) {
-    console.error('Error in getSignalVoteCounts:', error);
-    return {};
-  }
-}
-
-// 메모 관련 함수들
-export async function insertSignalMemo(signalId: string, memo: string, userId?: string) {
-  try {
-    const { data, error } = await supabase
-      .from('signal_memos')
-      .insert({ 
-        signal_id: signalId, 
-        memo, 
-        user_id: userId || null 
-      })
-      .select()
-      .single();
-
-    if (error) {
-      console.error('Error inserting signal memo:', error);
-      throw error;
-    }
-
-    return data;
-  } catch (error) {
-    console.error('Error in insertSignalMemo:', error);
-    throw error;
-  }
-}
-
-// 대시보드 통계 함수
-export async function getAdminStats() {
-  try {
-    // 안전한 count 헬퍼 (테이블 없거나 RLS 에러 시 0 반환)
-    const safeCount = async (table: string, filter?: { col: string; val: string }) => {
-      try {
-        let query = supabase.from(table).select('*', { count: 'exact', head: true });
-        if (filter) query = query.eq(filter.col, filter.val);
-        const { count, error } = await query;
-        if (error) { console.warn(`Count error for ${table}:`, error.message); return 0; }
-        return count || 0;
-      } catch { return 0; }
-    };
-
-    const [totalSignals, totalVotes, totalReports, totalMemos] = await Promise.all([
-      safeCount('influencer_signals'),
-      safeCount('signal_votes'),
-      safeCount('signal_reports'),
-      safeCount('signal_memos'),
-    ]);
-
-    const [pendingCount, reviewedCount, resolvedCount] = await Promise.all([
-      safeCount('signal_reports', { col: 'status', val: 'pending' }),
-      safeCount('signal_reports', { col: 'status', val: 'reviewed' }),
-      safeCount('signal_reports', { col: 'status', val: 'resolved' }),
-    ]);
-
-    // 유저 참여율 계산 (좋아요+신고+메모 / 시그널 수)
-    const participationRate = totalSignals > 0 ? 
-      Math.round(((totalVotes + totalReports + totalMemos) / totalSignals) * 100) : 0;
-
-    return {
-      totalSignals,
-      totalVotes,
-      totalReports,
-      totalMemos,
-      pendingReports: pendingCount,
-      reviewedReports: reviewedCount,
-      resolvedReports: resolvedCount,
-      participationRate
-    };
-  } catch (error) {
-    console.error('Error in getAdminStats:', error);
-    return {
-      totalSignals: 0,
-      totalVotes: 0,
-      totalReports: 0,
-      totalMemos: 0,
-      pendingReports: 0,
-      reviewedReports: 0,
-      resolvedReports: 0,
-      participationRate: 0
-    };
   }
 }

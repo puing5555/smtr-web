@@ -101,9 +101,7 @@ export default function GuruCard({ guru, onClick }: GuruCardProps) {
             <div key={index} className="flex items-center justify-between">
               <div className="text-sm">
                 <span className="text-[#191f28] font-medium">{holding.name}</span>
-                {holding.ticker && !/^\d+$/.test(holding.ticker) && (
-                  <span className="text-[#6b7280] ml-1">({holding.ticker})</span>
-                )}
+                <span className="text-[#6b7280] ml-1">({holding.ticker})</span>
               </div>
               <div className="flex items-center gap-3">
                 <span className="text-[#374151] text-sm font-medium">{holding.percentage}%</span>
