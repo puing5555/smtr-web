@@ -172,3 +172,24 @@
 [16:08:39] [8/30] Ke7gQMbIFLI
 [16:08:52]   -> 시그널 0개 / 0개 INSERT | 비용 $0.1043 | 누적 $1.236
 [16:08:55] [9/30] Sb3FpphamPo
+[16:09:19]   -> 시그널 0개 / 0개 INSERT | 비용 $0.1442 | 누적 $1.380
+[16:09:22] [10/30] Xv-wNA91EPE
+[16:09:52]   -> 시그널 0개 / 5개 INSERT | 비용 $0.1464 | 누적 $1.526
+[16:09:55] [11/30] XveVkr3JHs4
+[16:10:12]   -> 시그널 0개 / 0개 INSERT | 비용 $0.1459 | 누적 $1.672
+[16:10:15] [12/30] f519DUfXkzQ
+[16:10:30]   -> 시그널 0개 / 0개 INSERT | 비용 $0.2336 | 누적 $1.906
+[16:10:33] [13/30] jXME1wXZDRU
+[16:10:56]   -> 시그널 0개 / 0개 INSERT | 비용 $0.1348 | 누적 $2.040
+[16:10:59] [14/30] wsaj_0pS0CTDgVmU_[기업해부학] Amazon 아마존 3Q 2023 어닝콜! 클라우드 매출 하회했는데 주가는 왜 올랐을까？
+[16:10:59]   REST GET 오류 (influencer_videos): URL can't contain control characters. '/rest/v1/influencer_videos?select=id&video_id=eq.wsaj_0pS0CTDgVmU_[기업해부학] Amazon 아마존 3Q 2023 어닝콜! 클라우드 매출 하회했는데 주가는 왜 올랐을까？' (found at least ' ')
+[16:11:27]   -> 시그널 0개 / 0개 INSERT | 비용 $0.1257 | 누적 $2.166
+[16:11:30] [15/30] wsaj_57NbdmLvy6I_[기업해부학] 비만 치료제로 유럽 시총 1위？!  헬스케어 시장을 이끄는 노보 노디스크 & 일라이 릴리 파헤치기!
+[16:11:30]   REST GET 오류 (influencer_videos): URL can't contain control characters. '/rest/v1/influencer_videos?select=id&video_id=eq.wsaj_57NbdmLvy6I_[기업해부학] 비만 치료제로 유럽 시총 1위？!  헬스케어 시장을 이끄는 노보 노디스크 & 일라이 릴리 파헤치기!' (found at least ' ')
+[16:11:52]   -> 시그널 0개 / 0개 INSERT | 비용 $0.1258 | 누적 $2.292
+[16:11:55] [16/30] wsaj_5fhbkQ2Qidc_[기업해부학] 가치평가의 대가가 엔비디아 주식을 전부 팔지 않은 이유？
+[16:11:55]   REST GET 오류 (influencer_videos): URL can't contain control characters. '/rest/v1/influencer_videos?select=id&video_id=eq.wsaj_5fhbkQ2Qidc_[기업해부학] 가치평가의 대가가 엔비디아 주식을 전부 팔지 않은 이유？' (found at least ' ')
+[16:12:16]   -> 시그널 0개 / 0개 INSERT | 비용 $0.1274 | 누적 $2.419
+[16:12:19] [17/30] wsaj_7x3HE_uXttI_[기업해부학] AI 투자자 시청 필수! AI 수혜주 파헤치기
+[16:12:19]   REST GET 오류 (influencer_videos): URL can't contain control characters. '/rest/v1/influencer_videos?select=id&video_id=eq.wsaj_7x3HE_uXttI_[기업해부학] AI 투자자 시청 필수! AI 수혜주 파헤치기' (found at least ' ')
+[16:12:36]   -> 시그널 0개 / 0개 INSERT | 비용 $0.1170 | 누적 $2.536
