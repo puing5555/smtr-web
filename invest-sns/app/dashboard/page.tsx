@@ -391,44 +391,86 @@ export default function DashboardPage() {
         ══════════════════════════════════════════════════ */}
         {activeTab === '지금' && (
           <>
-            {/* ① 보유종목 */}
+            {/* ① 오늘 알림 - 데이터 있을 때만 표시 */}
+            {displayNotifications.length > 0 && (
             <div style={cardStyle}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-                <span style={{ fontSize: 13, fontWeight: 600, color: C.gray }}>보유종목</span>
-                <Link href="/my-portfolio" style={{ fontSize: 12, color: C.accent, textDecoration: 'none' }}>전체보기 →</Link>
+                <span style={{ fontSize: 13, fontWeight: 600, color: C.gray }}>
+                  🔔 오늘 알림{' '}
+                  {unreadCount > 0 && (
+                    <span style={{
+                      background: C.red,
+                      color: '#fff',
+                      fontSize: 11,
+                      padding: '1px 6px',
+                      borderRadius: 10,
+                      marginLeft: 6,
+                      fontWeight: 700,
+                    }}>{unreadCount}</span>
+                  )}
+                </span>
+                <Link href="/notifications" style={{ fontSize: 12, color: C.accent, textDecoration: 'none' }}>전체보기 →</Link>
               </div>
               <div>
-                {displayStocks.slice(0, 4).map((stock: any, idx: number) => {
+                {displayNotifications.slice(0, 4).map((notif: any, idx: number) => {
+                  const notifIcon = notif.icon || '🔔';
+                  const isUnread = !notif.is_read;
+                  let timeStr = notif.time || notif.created_at || '';
+                  try { if (timeStr.length > 5) timeStr = new Date(timeStr).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' }); } catch { }
+                  return (
+                    <div key={notif.id} style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: 12,
+                      padding: '12px 0',
+                      borderBottom: idx < Math.min(displayNotifications.length, 4) - 1 ? `1px solid ${C.lightGray}` : 'none',
+                    }}>
+                      <span style={{ fontSize: 20 }}>{notifIcon}</span>
+                      <div style={{ flex: 1 }}>
+                        <div style={{ fontWeight: 700, fontSize: 14, color: C.primary }}>{notif.title}</div>
+                        <div style={{ fontSize: 13, color: C.gray, marginTop: 2 }}>{notif.message || notif.desc || ''}</div>
+                      </div>
+                      <span style={{ fontSize: 12, color: C.gray, whiteSpace: 'nowrap' }}>{timeStr}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            )}
+
+            {/* ② 보유종목 - 가로 스크롤 카드 */}
+            <div style={cardStyle}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+                <span style={{ fontSize: 13, fontWeight: 600, color: C.gray }}>🧳 보유종목</span>
+                <Link href="/my-portfolio" style={{ fontSize: 12, color: C.accent, textDecoration: 'none' }}>전체보기 →</Link>
+              </div>
+              <div style={{ display: 'flex', gap: 10, overflowX: 'auto', paddingBottom: 4 }}>
+                {displayStocks.slice(0, 8).map((stock: any) => {
                   const returnPct = stock.return_pct ?? 0;
                   const currentPrice = stock.current_price ?? stock.avg_buy_price ?? stock.avg_price ?? 0;
-                  const avgPrice = stock.avg_buy_price ?? stock.avg_price ?? 0;
                   const isPositive = returnPct >= 0;
                   return (
                     <div key={stock.id} style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      padding: '12px 0',
-                      borderBottom: idx < Math.min(displayStocks.length, 4) - 1 ? `1px solid ${C.lightGray}` : 'none',
+                      minWidth: 120,
+                      borderRadius: 12,
+                      background: '#F8F9FA',
+                      padding: '10px 12px',
+                      textAlign: 'center',
+                      flexShrink: 0,
+                      border: `1px solid ${C.lightGray}`,
                     }}>
-                      {/* 왼쪽: 종목명 + 코드 + 수량·단가 */}
-                      <div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-                          <span style={{ fontWeight: 700, fontSize: 15, color: C.primary }}>{stock.stock_name}</span>
-                          <span style={{ fontSize: 12, color: C.gray }}>{stock.stock_code || stock.ticker || ''}</span>
-                        </div>
-                        <div style={{ fontSize: 12, color: C.gray }}>
-                          {stock.quantity}주 · 평균 {avgPrice.toLocaleString('ko-KR')}원
-                        </div>
+                      <div style={{ fontWeight: 700, fontSize: 13, color: C.primary, marginBottom: 2 }}>
+                        {stock.stock_name}
                       </div>
-                      {/* 오른쪽: 현재가 + 수익률 */}
-                      <div style={{ textAlign: 'right' }}>
-                        <div style={{ fontWeight: 700, fontSize: 16, color: C.primary, marginBottom: 4 }}>
-                          {currentPrice.toLocaleString('ko-KR')}원
-                        </div>
-                        <div style={{ fontWeight: 700, fontSize: 14, color: isPositive ? C.red : C.blue }}>
-                          {formatPercent(returnPct)}
-                        </div>
+                      <div style={{ fontSize: 12, color: C.gray, marginBottom: 4 }}>
+                        {typeof currentPrice === 'number' && currentPrice > 0
+                          ? currentPrice > 1000
+                            ? currentPrice.toLocaleString('ko-KR') + '원'
+                            : '$' + currentPrice.toLocaleString('en-US')
+                          : '-'}
+                      </div>
+                      <div style={{ fontWeight: 700, fontSize: 14, color: isPositive ? C.red : C.blue }}>
+                        {returnPct !== 0 ? (isPositive ? '+' : '') + returnPct.toFixed(2) + '%' : '-'}
                       </div>
                     </div>
                   );
@@ -500,53 +542,6 @@ export default function DashboardPage() {
               <p style={{ fontSize: 11, color: '#9CA3AF', marginTop: 12, marginBottom: 0 }}>※ 시황 데이터 추후 API 연동 예정</p>
             </div>
 
-            {/* ④ 오늘 알림 */}
-            <div style={cardStyle}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-                <span style={{ fontSize: 13, fontWeight: 600, color: C.gray }}>
-                  오늘 알림{' '}
-                  {unreadCount > 0 && (
-                    <span style={{
-                      background: C.red,
-                      color: '#fff',
-                      fontSize: 11,
-                      padding: '1px 6px',
-                      borderRadius: 10,
-                      marginLeft: 6,
-                      fontWeight: 700,
-                    }}>{unreadCount}</span>
-                  )}
-                </span>
-                <Link href="/notifications" style={{ fontSize: 12, color: C.accent, textDecoration: 'none' }}>전체보기 →</Link>
-              </div>
-              <div>
-                {displayNotifications.map((notif: any, idx: number) => {
-                  const notifIcon = notif.icon || '🔔';
-                  const isUnread = !notif.is_read;
-                  let timeStr = notif.created_at;
-                  try { timeStr = new Date(notif.created_at).toLocaleString('ko-KR'); } catch { }
-                  return (
-                    <div key={notif.id} style={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: 12,
-                      padding: isUnread ? '12px 8px' : '12px 0',
-                      borderBottom: idx < displayNotifications.length - 1 ? `1px solid ${C.lightGray}` : 'none',
-                      background: isUnread ? '#F0F7FF' : 'transparent',
-                      margin: isUnread ? '0 -8px' : 0,
-                      borderRadius: isUnread ? 8 : 0,
-                    }}>
-                      <span style={{ fontSize: 20, flexShrink: 0, lineHeight: 1 }}>{notifIcon}</span>
-                      <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ fontWeight: 700, fontSize: 14, color: C.primary, marginBottom: 3 }}>{notif.title}</div>
-                        <div style={{ fontSize: 13, color: C.gray, lineHeight: 1.4 }}>{notif.message}</div>
-                        <div style={{ fontSize: 12, color: '#9CA3AF', marginTop: 4 }}>{timeStr}</div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
           </>
         )}
 
