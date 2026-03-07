@@ -34,6 +34,56 @@ interface VideoCard {
   category?: string;
 }
 
+// ─── 더미 데이터 (DB 없을 때 fallback) ────────────────────────
+const dummyHoldings = [
+  { name: "삼성전자", code: "005930", qty: 30, avgPrice: 68500, currentPrice: 74600, returnPct: 8.91 },
+  { name: "SK하이닉스", code: "000660", qty: 10, avgPrice: 175000, currentPrice: 192500, returnPct: 10.0 },
+  { name: "NVIDIA", code: "NVDA", qty: 5, avgPrice: 700, currentPrice: 824.03, returnPct: 17.72 },
+  { name: "카카오", code: "035720", qty: 20, avgPrice: 52000, currentPrice: 41300, returnPct: -20.58 },
+];
+
+const dummyWatchlist = [
+  { name: "하이트진로", code: "000080", currentPrice: 21500, changePct: 2.1 },
+  { name: "CELH", code: "CELH", currentPrice: 32.45, changePct: 0.5 },
+  { name: "테슬라", code: "TSLA", currentPrice: 267.89, changePct: -1.2 },
+  { name: "한화에어로", code: "012450", currentPrice: 315000, changePct: 4.3 },
+  { name: "SOFI", code: "SOFI", currentPrice: 12.34, changePct: 3.7 },
+];
+
+const dummyAlerts = [
+  { time: "07:15", icon: "🤖", title: "삼성전자 AI 시그널", desc: "매수 시그널 3개 집중 — 반도체 업황 개선 기대감" },
+  { time: "06:50", icon: "📢", title: "SK하이닉스 공시", desc: "2024년 4분기 실적 발표 — 영업이익 7.7조 원" },
+  { time: "06:30", icon: "📈", title: "NVIDIA 목표가 상향", desc: "골드만삭스 목표가 $950 → $1,100 상향" },
+  { time: "06:00", icon: "⚠️", title: "카카오 손절 검토", desc: "AI 판단: 손절 라인 도달, 포지션 재검토 필요" },
+];
+
+const dummyDisclosures = [
+  { time: "08:30", company: "SK하이닉스", type: "실적", grade: "A+", title: "4분기 실적 발표", summary: "영업이익 7.7조원, 컨센서스 대비 +15% 서프라이즈. HBM 매출 비중 확대.", verdict: "긍정", what: "분기 영업이익 역대 최고치 경신", so_what: "HBM 수요 지속 + AI 인프라 투자 확대 수혜", now_what: "목표가 상향 가능성 높음, 보유 유지 권장" },
+  { time: "07:45", company: "삼성전자", type: "자사주", grade: "A", title: "자사주 3조원 매입 결정", summary: "향후 6개월간 3조원 규모 자사주 매입. 주주환원 강화.", verdict: "긍정", what: "3조원 규모 자사주 매입 프로그램 발표", so_what: "주가 하방 지지 + 주주환원 시그널", now_what: "단기 주가 지지 효과 기대" },
+  { time: "07:00", company: "에코프로비엠", type: "CB발행", grade: "C", title: "2000억 CB 발행 결정", summary: "전환가액 25만원, 희석률 약 4.2%. 시설투자 목적.", verdict: "부정", what: "2000억원 규모 전환사채 발행", so_what: "주식 전환 시 4.2% 지분 희석", now_what: "단기 매도 압력 가능성, 전환가 대비 현재가 모니터링" },
+];
+
+const dummyNews = [
+  { time: "08:00", source: "한경", title: "미국 반도체 수출규제 완화 시그널... 엔비디아 시간외 +3%", tag: "반도체" },
+  { time: "07:30", source: "매경", title: "연준 파월 \"인플레이션 둔화 확인\"... 6월 금리인하 기대↑", tag: "매크로" },
+  { time: "07:00", source: "Bloomberg", title: "비트코인 $90K 돌파 임박, ETF 자금 유입 가속", tag: "크립토" },
+  { time: "06:30", source: "로이터", title: "삼성전자-TSMC AI칩 수주 경쟁 격화", tag: "반도체" },
+  { time: "06:00", source: "조선비즈", title: "2차전지 섹터 반등세... LG엔솔 외국인 3일 연속 순매수", tag: "2차전지" },
+];
+
+const dummyVideos: VideoCard[] = [
+  { id: "d1", channel_name: "이효석아카데미", upload_date: "오늘 07:30", title: "반도체 사이클 2차 랠리 시작된다", category: "한국주식", long_summary: "필라델피아 반도체 지수가 3일 연속 상승하며 2차 랠리 신호를 보이고 있다. HBM 수요가 예상보다 강하고, SK하이닉스와 삼성전자의 실적 서프라이즈 가능성이 높다. 미국 AI 인프라 투자가 가속화되면서 메모리 수요는 하반기까지 이어질 전망.", mentioned_stocks: ["SK하이닉스", "삼성전자", "ASML"], youtube_url: "#", channel_id: "d1" },
+  { id: "d2", channel_name: "월가아재", upload_date: "오늘 06:00", title: "미국 고용지표 쇼크, 연준 피벗 앞당겨질까", category: "미국주식", long_summary: "비농업 고용이 컨센서스 대비 크게 하회하며 경기 둔화 우려가 부각됐다. 연준의 6월 금리인하 가능성이 70%까지 상승. 기술주 중심으로 반등 가능성 높으나, 경기침체 시그널과 구분해야 한다.", mentioned_stocks: ["SPY", "QQQ", "TLT"], youtube_url: "#", channel_id: "d2" },
+  { id: "d3", channel_name: "삼프로TV", upload_date: "오늘 08:00", title: "[마감시황] 외국인 반도체 폭풍매수, 코스피 2600 돌파", category: "한국주식", long_summary: "외국인이 삼성전자와 SK하이닉스를 중심으로 4거래일 연속 순매수. 코스피가 2600선을 돌파하며 3개월 만에 최고치를 기록. 기관은 차익실현 매도세를 보이고 있으나 외국인 수급이 압도적.", mentioned_stocks: ["삼성전자", "SK하이닉스"], youtube_url: "#", channel_id: "d3" },
+  { id: "d4", channel_name: "코인데스크코리아", upload_date: "오늘 07:00", title: "비트코인 $85K 돌파, ETF 자금 유입 역대급", category: "크립토", long_summary: "비트코인 현물 ETF에 하루 $1.2B 유입되며 역대 최고 기록. 기관 투자자들의 본격적인 진입 신호로 해석. 이더리움도 $3,200 돌파하며 알트코인 랠리 기대감 상승.", mentioned_stocks: ["BTC", "ETH"], youtube_url: "#", channel_id: "d4" },
+  { id: "d5", channel_name: "슈카월드", upload_date: "오늘 09:00", title: "미국이 금리를 안 내리는 진짜 이유", category: "미국주식", long_summary: "미국 경제가 여전히 강한 고용과 소비를 보이고 있어 연준이 금리 인하를 서두르지 않는 배경을 분석. 인플레이션의 구조적 변화와 재정적자 문제까지 함께 다루며 하반기 전망을 제시.", mentioned_stocks: [], youtube_url: "#", channel_id: "d5" },
+  { id: "d6", channel_name: "소수몽키", upload_date: "오늘 06:30", title: "테슬라 이번에는 진짜 바닥일까? FSD 12.5 분석", category: "미국주식", long_summary: "테슬라 FSD 12.5 업데이트가 완전자율주행에 한 걸음 더 다가갔다는 평가. 중국 시장 매출 반등과 사이버트럭 생산 정상화도 긍정적. 다만 밸류에이션 논란은 여전.", mentioned_stocks: ["테슬라"], youtube_url: "#", channel_id: "d6" },
+  { id: "d7", channel_name: "GODofIT", upload_date: "오늘 08:30", title: "엔비디아 실적 프리뷰: 이번에도 서프라이즈?", category: "미국주식", long_summary: "엔비디아 다음 주 실적 발표를 앞두고 주요 체크포인트 분석. 데이터센터 매출 YoY +200% 예상, H200/B100 전환 사이클, 중국 수출 규제 영향까지 종합 정리.", mentioned_stocks: ["NVIDIA", "AMD"], youtube_url: "#", channel_id: "d7" },
+  { id: "d8", channel_name: "세상학개론", upload_date: "어제 22:00", title: "2024년에 반드시 사야 할 한국 배당주 TOP 5", category: "한국주식", long_summary: "고배당 + 성장성을 겸비한 한국 배당주 5개를 선정. 배당수익률 5% 이상이면서 실적 성장이 확인된 종목 위주로 분석. KT&G, 하나금융, SK텔레콤 등이 포함.", mentioned_stocks: ["KT&G", "하나금융", "SK텔레콤"], youtube_url: "#", channel_id: "d8" },
+  { id: "d9", channel_name: "이효석아카데미", upload_date: "어제 20:00", title: "비트코인 10만불 간다? 반감기 후 시나리오", category: "크립토", long_summary: "비트코인 반감기 이후 역사적 패턴을 분석하며 $100K 시나리오를 제시. 기관 ETF 자금 유입, 스테이블코인 시가총액 증가, 온체인 데이터 모두 긍정적 신호를 보이고 있다.", mentioned_stocks: ["BTC"], youtube_url: "#", channel_id: "d9" },
+  { id: "d10", channel_name: "리치고TV", upload_date: "어제 19:00", title: "초보자가 절대 사면 안되는 ETF 3가지", category: "미국주식", long_summary: "레버리지 ETF, 인버스 ETF, 테마형 ETF의 위험성을 구체적 사례와 함께 설명. 장기 보유 시 괴리율 문제와 비용 구조를 분석하며 초보자에게 적합한 대안 ETF도 제시.", mentioned_stocks: [], youtube_url: "#", channel_id: "d10" },
+];
+
 // ─── Design Tokens ───────────────────────────────────────────
 const C = {
   bg: '#F8F9FA',
@@ -140,7 +190,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     if (authLoading) return;
-    if (!user) { router.push('/login'); return; }
+    // if (!user) { router.push('/login'); return; } // 데모: 비로그인도 더미 대시보드 표시
     loadDashboard();
   }, [user, authLoading]);
 
@@ -230,11 +280,34 @@ export default function DashboardPage() {
     } catch { return iso; }
   };
 
-  const userStockNames = stocks.map(s => s.stock_name);
-  const userWatchlistNames = watchlist.map(w => w.stock_name);
+  // ─── Fallback display 데이터 (DB 없으면 더미) ─────────────────
+  const displayStocks = stocks.length > 0 ? stocks : dummyHoldings.map(d => ({
+    id: d.code, stock_name: d.name, stock_code: d.code, ticker: d.code,
+    quantity: d.qty, avg_buy_price: d.avgPrice, avg_price: d.avgPrice,
+    current_price: d.currentPrice, return_pct: d.returnPct,
+    user_id: '', created_at: '',
+  } as any));
+
+  const displayWatchlist = watchlist.length > 0 ? watchlist : dummyWatchlist.map(d => ({
+    id: d.code, stock_name: d.name, stock_code: d.code, ticker: d.code,
+    current_price: d.currentPrice, change_pct: d.changePct,
+    alert_on_signals: false, user_id: '', created_at: '',
+  } as any));
+
+  const displayNotifications = notifications.length > 0 ? notifications : dummyAlerts.map((a, i) => ({
+    id: String(i), title: a.title, message: a.desc, icon: a.icon,
+    type: 'signal', is_read: false, created_at: a.time, user_id: '',
+  } as any));
+
+  const displayVideos = videos.length > 0 ? videos : dummyVideos;
+  const displayDisclosures = dummyDisclosures; // 실제 DB 연동 전까지 더미 사용
+  const displayNews = dummyNews; // 실제 DB 연동 전까지 더미 사용
+
+  const userStockNames = displayStocks.map((s: any) => s.stock_name);
+  const userWatchlistNames = displayWatchlist.map((w: any) => w.stock_name);
   const userStocks = new Set([...userStockNames, ...userWatchlistNames]);
 
-  const filteredVideos = videos.filter(video => {
+  const filteredVideos = displayVideos.filter(video => {
     if (videoFilter === '내 종목') {
       if (!video.mentioned_stocks || video.mentioned_stocks.length === 0) return false;
       const hasMyStock = video.mentioned_stocks.some(s => userStocks.has(s));
@@ -279,7 +352,7 @@ export default function DashboardPage() {
       <div style={{ background: C.card, borderBottom: `1px solid ${C.lightGray}`, padding: '20px 24px' }}>
         <div style={{ maxWidth: 800, margin: '0 auto' }}>
           <h1 style={{ fontSize: 20, fontWeight: 700, color: C.primary, margin: 0 }}>📊 대시보드</h1>
-          <p style={{ fontSize: 13, color: C.gray, marginTop: 4, marginBottom: 0 }}>{user?.email} 님의 포트폴리오</p>
+          <p style={{ fontSize: 13, color: C.gray, marginTop: 4, marginBottom: 0 }}>{user?.email ?? '게스트'} 님의 포트폴리오</p>
         </div>
       </div>
 
@@ -324,50 +397,43 @@ export default function DashboardPage() {
                 <span style={{ fontSize: 13, fontWeight: 600, color: C.gray }}>보유종목</span>
                 <Link href="/my-portfolio" style={{ fontSize: 12, color: C.accent, textDecoration: 'none' }}>전체보기 →</Link>
               </div>
-              {stocks.length > 0 ? (
-                <div>
-                  {stocks.slice(0, 4).map((stock, idx) => {
-                    const returnPct = (stock as any).return_pct ?? 0;
-                    const returnAmt = (stock as any).return_amount ?? 0;
-                    const currentPrice = (stock as any).current_price ?? stock.avg_buy_price;
-                    const isPositive = returnPct >= 0;
-                    return (
-                      <div key={stock.id} style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        padding: '12px 0',
-                        borderBottom: idx < Math.min(stocks.length, 4) - 1 ? `1px solid ${C.lightGray}` : 'none',
-                      }}>
-                        {/* 왼쪽: 종목명 + 코드 + 수량·단가 */}
-                        <div>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-                            <span style={{ fontWeight: 700, fontSize: 15, color: C.primary }}>{stock.stock_name}</span>
-                            <span style={{ fontSize: 12, color: C.gray }}>{stock.stock_code}</span>
-                          </div>
-                          <div style={{ fontSize: 12, color: C.gray }}>
-                            {stock.quantity}주 · 평균 {stock.avg_buy_price.toLocaleString('ko-KR')}원
-                          </div>
+              <div>
+                {displayStocks.slice(0, 4).map((stock: any, idx: number) => {
+                  const returnPct = stock.return_pct ?? 0;
+                  const currentPrice = stock.current_price ?? stock.avg_buy_price ?? stock.avg_price ?? 0;
+                  const avgPrice = stock.avg_buy_price ?? stock.avg_price ?? 0;
+                  const isPositive = returnPct >= 0;
+                  return (
+                    <div key={stock.id} style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      padding: '12px 0',
+                      borderBottom: idx < Math.min(displayStocks.length, 4) - 1 ? `1px solid ${C.lightGray}` : 'none',
+                    }}>
+                      {/* 왼쪽: 종목명 + 코드 + 수량·단가 */}
+                      <div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                          <span style={{ fontWeight: 700, fontSize: 15, color: C.primary }}>{stock.stock_name}</span>
+                          <span style={{ fontSize: 12, color: C.gray }}>{stock.stock_code || stock.ticker || ''}</span>
                         </div>
-                        {/* 오른쪽: 현재가 + 수익률 */}
-                        <div style={{ textAlign: 'right' }}>
-                          <div style={{ fontWeight: 700, fontSize: 16, color: C.primary, marginBottom: 4 }}>
-                            {currentPrice.toLocaleString('ko-KR')}원
-                          </div>
-                          <div style={{ fontWeight: 700, fontSize: 14, color: isPositive ? C.red : C.blue }}>
-                            {formatPercent(returnPct)}
-                          </div>
+                        <div style={{ fontSize: 12, color: C.gray }}>
+                          {stock.quantity}주 · 평균 {avgPrice.toLocaleString('ko-KR')}원
                         </div>
                       </div>
-                    );
-                  })}
-                </div>
-              ) : (
-                <div style={{ textAlign: 'center', padding: '24px 0', color: C.gray }}>
-                  <p style={{ marginBottom: 8, fontSize: 14 }}>보유 종목이 없습니다</p>
-                  <Link href="/my-portfolio" style={{ fontSize: 13, color: C.accent, textDecoration: 'none' }}>종목 추가하기 →</Link>
-                </div>
-              )}
+                      {/* 오른쪽: 현재가 + 수익률 */}
+                      <div style={{ textAlign: 'right' }}>
+                        <div style={{ fontWeight: 700, fontSize: 16, color: C.primary, marginBottom: 4 }}>
+                          {currentPrice.toLocaleString('ko-KR')}원
+                        </div>
+                        <div style={{ fontWeight: 700, fontSize: 14, color: isPositive ? C.red : C.blue }}>
+                          {formatPercent(returnPct)}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
 
             {/* ② 관심종목 */}
@@ -376,39 +442,32 @@ export default function DashboardPage() {
                 <span style={{ fontSize: 13, fontWeight: 600, color: C.gray }}>관심종목</span>
                 <Link href="/my-watchlist" style={{ fontSize: 12, color: C.accent, textDecoration: 'none' }}>전체보기 →</Link>
               </div>
-              {watchlist.length > 0 ? (
-                <div style={{ display: 'flex', gap: 10, overflowX: 'auto', paddingBottom: 4 }}>
-                  {watchlist.slice(0, 8).map((item) => {
-                    const changePct = (item as any).change_pct ?? 0;
-                    const isPos = changePct >= 0;
-                    return (
-                      <div key={item.id} style={{
-                        minWidth: 120,
-                        borderRadius: 12,
-                        background: '#F8F9FA',
-                        padding: '10px 12px',
-                        textAlign: 'center',
-                        flexShrink: 0,
-                        border: `1px solid ${C.lightGray}`,
-                      }}>
-                        <div style={{ fontWeight: 600, fontSize: 13, color: C.primary, marginBottom: 2 }}>
-                          {item.stock_name}
-                          {item.alert_on_signals && <span style={{ marginLeft: 4 }}>🔔</span>}
-                        </div>
-                        <div style={{ fontSize: 12, color: C.gray, marginBottom: 4 }}>{(item as any).stock_code || ''}</div>
-                        <div style={{ fontWeight: 700, fontSize: 14, color: isPos ? C.red : C.blue }}>
-                          {changePct !== 0 ? (isPos ? '+' : '') + changePct.toFixed(2) + '%' : '-'}
-                        </div>
+              <div style={{ display: 'flex', gap: 10, overflowX: 'auto', paddingBottom: 4 }}>
+                {displayWatchlist.slice(0, 8).map((item: any) => {
+                  const changePct = item.change_pct ?? 0;
+                  const isPos = changePct >= 0;
+                  return (
+                    <div key={item.id} style={{
+                      minWidth: 120,
+                      borderRadius: 12,
+                      background: '#F8F9FA',
+                      padding: '10px 12px',
+                      textAlign: 'center',
+                      flexShrink: 0,
+                      border: `1px solid ${C.lightGray}`,
+                    }}>
+                      <div style={{ fontWeight: 600, fontSize: 13, color: C.primary, marginBottom: 2 }}>
+                        {item.stock_name}
+                        {item.alert_on_signals && <span style={{ marginLeft: 4 }}>🔔</span>}
                       </div>
-                    );
-                  })}
-                </div>
-              ) : (
-                <div style={{ textAlign: 'center', padding: '16px 0', color: C.gray, fontSize: 14 }}>
-                  <p style={{ marginBottom: 8 }}>관심종목이 없습니다</p>
-                  <Link href="/my-watchlist" style={{ fontSize: 13, color: C.accent, textDecoration: 'none' }}>관심종목 추가 →</Link>
-                </div>
-              )}
+                      <div style={{ fontSize: 12, color: C.gray, marginBottom: 4 }}>{item.stock_code || item.ticker || ''}</div>
+                      <div style={{ fontWeight: 700, fontSize: 14, color: isPos ? C.red : C.blue }}>
+                        {changePct !== 0 ? (isPos ? '+' : '') + changePct.toFixed(2) + '%' : '-'}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
 
             {/* ③ 시황 */}
@@ -460,37 +519,33 @@ export default function DashboardPage() {
                 </span>
                 <Link href="/notifications" style={{ fontSize: 12, color: C.accent, textDecoration: 'none' }}>전체보기 →</Link>
               </div>
-              {notifications.length > 0 ? (
-                <div>
-                  {notifications.map((notif, idx) => {
-                    const notifIcon = (notif as any).icon || '🔔';
-                    return (
-                      <div key={notif.id} style={{
-                        display: 'flex',
-                        alignItems: 'flex-start',
-                        gap: 12,
-                        padding: '12px 0',
-                        borderBottom: idx < notifications.length - 1 ? `1px solid ${C.lightGray}` : 'none',
-                        background: !notif.is_read ? '#F0F7FF' : 'transparent',
-                        margin: !notif.is_read ? '0 -8px' : 0,
-                        padding: !notif.is_read ? '12px 8px' : '12px 0',
-                        borderRadius: !notif.is_read ? 8 : 0,
-                      }}>
-                        <span style={{ fontSize: 20, flexShrink: 0, lineHeight: 1 }}>{notifIcon}</span>
-                        <div style={{ flex: 1, minWidth: 0 }}>
-                          <div style={{ fontWeight: 700, fontSize: 14, color: C.primary, marginBottom: 3 }}>{notif.title}</div>
-                          <div style={{ fontSize: 13, color: C.gray, lineHeight: 1.4 }}>{notif.message}</div>
-                          <div style={{ fontSize: 12, color: '#9CA3AF', marginTop: 4 }}>
-                            {new Date(notif.created_at).toLocaleString('ko-KR')}
-                          </div>
-                        </div>
+              <div>
+                {displayNotifications.map((notif: any, idx: number) => {
+                  const notifIcon = notif.icon || '🔔';
+                  const isUnread = !notif.is_read;
+                  let timeStr = notif.created_at;
+                  try { timeStr = new Date(notif.created_at).toLocaleString('ko-KR'); } catch { }
+                  return (
+                    <div key={notif.id} style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: 12,
+                      padding: isUnread ? '12px 8px' : '12px 0',
+                      borderBottom: idx < displayNotifications.length - 1 ? `1px solid ${C.lightGray}` : 'none',
+                      background: isUnread ? '#F0F7FF' : 'transparent',
+                      margin: isUnread ? '0 -8px' : 0,
+                      borderRadius: isUnread ? 8 : 0,
+                    }}>
+                      <span style={{ fontSize: 20, flexShrink: 0, lineHeight: 1 }}>{notifIcon}</span>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ fontWeight: 700, fontSize: 14, color: C.primary, marginBottom: 3 }}>{notif.title}</div>
+                        <div style={{ fontSize: 13, color: C.gray, lineHeight: 1.4 }}>{notif.message}</div>
+                        <div style={{ fontSize: 12, color: '#9CA3AF', marginTop: 4 }}>{timeStr}</div>
                       </div>
-                    );
-                  })}
-                </div>
-              ) : (
-                <p style={{ textAlign: 'center', padding: '16px 0', color: C.gray, fontSize: 14 }}>알림이 없습니다</p>
-              )}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </>
         )}
@@ -510,74 +565,61 @@ export default function DashboardPage() {
             {/* 공시 AI 분석 */}
             <div style={cardStyle}>
               <div style={{ fontSize: 13, fontWeight: 600, color: C.gray, marginBottom: 16 }}>공시 AI 분석</div>
-              {/* Placeholder — 실제 공시 데이터 연동 시 아래 구조로 렌더링 */}
-              <div style={{ textAlign: 'center', padding: '24px 0', color: C.gray }}>
-                <div style={{ fontSize: 32, marginBottom: 10 }}>📋</div>
-                <p style={{ fontSize: 14, marginBottom: 8 }}>공시 데이터 로딩 중...</p>
-                <Link href="/explore" style={{ fontSize: 13, color: C.accent, textDecoration: 'none' }}>공시 탭에서 보기 →</Link>
-              </div>
-              {/* 공시 카드 예시 구조 (데이터 있을 때 사용)
-              {disclosures.map(d => {
-                const isPos = d.sentiment === '긍정';
-                const isNeg = d.sentiment === '부정';
+              {displayDisclosures.map((d, idx) => {
+                const isPos = d.verdict === '긍정';
+                const isNeg = d.verdict === '부정';
                 const borderColor = isPos ? C.green : isNeg ? C.red : C.gray;
                 return (
-                  <div key={d.id} style={{
+                  <div key={idx} style={{
                     background: '#F8F9FA', borderRadius: 12, padding: 16, marginBottom: 12,
                     borderLeft: `4px solid ${borderColor}`,
                   }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8, flexWrap: 'wrap' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8, flexWrap: 'wrap' as const }}>
                       <span style={{ fontWeight: 700, fontSize: 15, color: C.primary }}>{d.company}</span>
                       {d.type && (
-                        <span style={{ background: isPos ? '#D1FAE5' : isNeg ? '#FEE2E2' : '#F3F4F6',
+                        <span style={{
+                          background: isPos ? '#D1FAE5' : isNeg ? '#FEE2E2' : '#F3F4F6',
                           color: isPos ? '#065F46' : isNeg ? '#991B1B' : C.gray,
-                          padding: '2px 8px', borderRadius: 6, fontSize: 11, fontWeight: 600 }}>
-                          {d.type}
-                        </span>
+                          padding: '2px 8px', borderRadius: 6, fontSize: 11, fontWeight: 600,
+                        }}>{d.type}</span>
                       )}
                       {d.grade && (
                         <span style={{ background: '#EEF2FF', color: '#4338CA', padding: '2px 8px', borderRadius: 6, fontSize: 11, fontWeight: 600 }}>
                           {d.grade}
                         </span>
                       )}
-                      <span style={{ fontSize: 12, color: C.gray, marginLeft: 'auto' }}>{formatTime(d.created_at)}</span>
+                      <span style={{ fontSize: 12, color: C.gray, marginLeft: 'auto' }}>{d.time}</span>
                     </div>
                     <p style={{ fontWeight: 600, fontSize: 14, color: C.primary, marginBottom: 6 }}>{d.title}</p>
                     <p style={{ fontSize: 13, color: C.gray, lineHeight: 1.5, marginBottom: 8 }}>{d.summary}</p>
-                    {(d.what || d.so_what || d.now_what) && (
-                      <div style={{ fontSize: 12, color: '#4B5563', lineHeight: 1.6 }}>
-                        {d.what && <div>💡 <strong>What</strong> {d.what}</div>}
-                        {d.so_what && <div>🔍 <strong>So What</strong> {d.so_what}</div>}
-                        {d.now_what && <div>📌 <strong>Now What</strong> {d.now_what}</div>}
-                      </div>
-                    )}
+                    <div style={{ fontSize: 12, color: '#4B5563', lineHeight: 1.6 }}>
+                      {d.what && <div>💡 <strong>What</strong> {d.what}</div>}
+                      {d.so_what && <div>🔍 <strong>So What</strong> {d.so_what}</div>}
+                      {d.now_what && <div>📌 <strong>Now What</strong> {d.now_what}</div>}
+                    </div>
                   </div>
                 );
-              })} */}
+              })}
             </div>
 
             {/* 뉴스 헤드라인 */}
             <div style={cardStyle}>
               <div style={{ fontSize: 13, fontWeight: 600, color: C.gray, marginBottom: 16 }}>뉴스 헤드라인</div>
-              <div style={{ textAlign: 'center', padding: '24px 0', color: C.gray }}>
-                <div style={{ fontSize: 32, marginBottom: 10 }}>📰</div>
-                <p style={{ fontSize: 14 }}>뉴스 API 연동 예정</p>
-              </div>
-              {/* 뉴스 카드 예시 구조 (데이터 있을 때 사용)
-              {news.map((n, idx) => (
-                <div key={n.id} style={{
+              {displayNews.map((n, idx) => (
+                <div key={idx} style={{
                   padding: '12px 0',
-                  borderBottom: idx < news.length - 1 ? `1px solid ${C.lightGray}` : 'none',
+                  borderBottom: idx < displayNews.length - 1 ? `1px solid ${C.lightGray}` : 'none',
                 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
                     <span style={{ background: '#F3F4F6', color: C.gray, fontSize: 11, padding: '2px 8px', borderRadius: 6, fontWeight: 600 }}>
                       {n.tag}
                     </span>
+                    <span style={{ fontSize: 12, color: '#9CA3AF', marginLeft: 'auto' }}>{n.time}</span>
                   </div>
-                  <p style={{ fontSize: 14, fontWeight: 500, color: C.primary, lineHeight: 1.4, marginBottom: 6 }}>{n.title}</p>
-                  <p style={{ fontSize: 12, color: C.gray }}>{n.source} · {formatTime(n.published_at)}</p>
+                  <p style={{ fontSize: 14, fontWeight: 500, color: C.primary, lineHeight: 1.4, marginBottom: 4 }}>{n.title}</p>
+                  <p style={{ fontSize: 12, color: C.gray }}>{n.source}</p>
                 </div>
-              ))} */}
+              ))}
             </div>
           </>
         )}
