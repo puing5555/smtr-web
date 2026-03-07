@@ -4,6 +4,7 @@ import json
 import requests
 from typing import List, Dict, Any, Optional
 from pipeline_config import PipelineConfig
+from stock_normalizer import normalize_signal
 
 class SignalAnalyzer:
     def __init__(self):
@@ -41,11 +42,20 @@ URL: {video_data['url']}
 길이: {video_data.get('duration', 'N/A')}
 업로드: {video_data.get('upload_date', 'N/A')}
 
-=== 자막 내용 ===
+=== 자막 내용 (타임스탬프 포함) ===
+자막은 [MM:SS] 형식의 타임스탬프가 각 줄 앞에 붙어 있습니다.
+예: [15:30] 삼성전자는 지금 매수 타이밍이라고 봅니다
+
 {subtitle}
 
 === 분석 지시사항 ===
 위 영상의 자막을 V10.1 프롬프트 규칙에 따라 분석하고, JSON 형태로 시그널을 추출해주세요.
+
+⚠️ 타임스탬프 규칙 (필수):
+- 각 시그널의 timestamp는 해당 종목이 실제 언급된 자막 줄의 [MM:SS] 값을 사용
+- 자막에 [15:30] 앞에 해당 종목 언급이 있으면 → timestamp: "15:30"
+- 절대 0:00 또는 00:00 사용 금지
+- 자막에서 타임스탬프를 찾지 못한 경우에만 "N/A" 사용
 """
         
         return prompt + "\n\n" + video_info
@@ -76,6 +86,13 @@ URL: {video_data['url']}
             
             # JSON 파싱
             result = json.loads(json_str)
+
+            # ── 종목명 정규화 (V11 추가) ──────────────────────────────
+            # Claude가 추출한 직후 표준명으로 변환
+            # "엔비디아 (NVDA)" → "엔비디아", "버크셀" → "버크셔해서웨이" 등
+            if 'signals' in result and isinstance(result['signals'], list):
+                result['signals'] = [normalize_signal(s) for s in result['signals']]
+
             return result
             
         except json.JSONDecodeError as e:

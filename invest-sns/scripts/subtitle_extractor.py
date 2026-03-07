@@ -13,7 +13,26 @@ class SubtitleExtractor:
     def __init__(self):
         self.config = PipelineConfig()
         self.proxy_config = self.config.get_proxy_config()
-        self.formatter = TextFormatter()
+        self.formatter = TextFormatter()  # fallback용만 유지
+
+    def format_with_timestamps(self, transcript_data: list) -> str:
+        """
+        자막 데이터를 타임스탬프 포함 형태로 변환
+        형식: [MM:SS] 텍스트
+        Claude가 정확한 종목 언급 시점을 파악할 수 있도록 타임스탬프 보존
+        """
+        lines = []
+        for entry in transcript_data:
+            seconds = int(entry.get('start', 0))
+            minutes = seconds // 60
+            secs = seconds % 60
+            timestamp = f"{minutes}:{secs:02d}"
+            text = entry.get('text', '').strip()
+            # 줄바꿈 정리
+            text = text.replace('\n', ' ').strip()
+            if text:
+                lines.append(f"[{timestamp}] {text}")
+        return '\n'.join(lines)
         
         # yt-dlp 설정
         self.ydl_opts = {
@@ -61,8 +80,8 @@ class SubtitleExtractor:
                     try:
                         transcript = transcript_list.find_manually_created_transcript([lang])
                         subtitle_data = transcript.fetch()
-                        subtitle_text = self.formatter.format_transcript(subtitle_data)
-                        print(f"[OK] 수동 자막 추출 성공 ({lang}): {len(subtitle_text)} 글자")
+                        subtitle_text = self.format_with_timestamps(subtitle_data)
+                        print(f"[OK] 수동 자막 추출 성공 ({lang}): {len(subtitle_text)} 글자 (타임스탬프 포함)")
                         return subtitle_text
                     except:
                         pass
@@ -71,8 +90,8 @@ class SubtitleExtractor:
                     try:
                         transcript = transcript_list.find_generated_transcript([lang])
                         subtitle_data = transcript.fetch()
-                        subtitle_text = self.formatter.format_transcript(subtitle_data)
-                        print(f"[OK] 자동 자막 추출 성공 ({lang}): {len(subtitle_text)} 글자")
+                        subtitle_text = self.format_with_timestamps(subtitle_data)
+                        print(f"[OK] 자동 자막 추출 성공 ({lang}): {len(subtitle_text)} 글자 (타임스탬프 포함)")
                         return subtitle_text
                     except:
                         pass
@@ -142,30 +161,61 @@ class SubtitleExtractor:
             return None
     
     def parse_vtt_content(self, content: str) -> str:
-        """VTT 파일 내용을 텍스트로 파싱"""
+        """
+        VTT 파일 내용을 타임스탬프 포함 텍스트로 파싱
+        형식: [MM:SS] 텍스트
+        """
         import re
         
         lines = content.split('\n')
-        subtitle_text = []
+        result = []
+        current_timestamp = None
+        current_text = []
         
         for line in lines:
             line = line.strip()
             
-            # 시간 정보와 설정 라인 건너뛰기
-            if (line.startswith('WEBVTT') or 
-                '-->' in line or
-                line.startswith('NOTE') or
-                line.isdigit() or
-                not line):
-                continue
-            
-            # HTML 태그 제거
-            line = re.sub(r'<[^>]+>', '', line)
-            
-            if line:
-                subtitle_text.append(line)
+            if '-->' in line:
+                # 이전 블록 저장
+                if current_text and current_timestamp:
+                    text = ' '.join(current_text)
+                    clean_text = re.sub(r'<[^>]+>', '', text).strip()
+                    if clean_text:
+                        result.append(f"[{current_timestamp}] {clean_text}")
+                current_text = []
+                
+                # 시작 시간 파싱: "00:15:30.000 --> 00:15:32.000"
+                start_raw = line.split('-->')[0].strip()
+                parts = start_raw.split(':')
+                try:
+                    if len(parts) == 3:
+                        # HH:MM:SS.mmm
+                        total_minutes = int(parts[0]) * 60 + int(parts[1])
+                        secs = int(float(parts[2]))
+                        current_timestamp = f"{total_minutes}:{secs:02d}"
+                    elif len(parts) == 2:
+                        # MM:SS.mmm
+                        current_timestamp = f"{int(parts[0])}:{int(float(parts[1])):02d}"
+                except:
+                    current_timestamp = "0:00"
+                    
+            elif (line and 
+                  not line.startswith('WEBVTT') and 
+                  not line.startswith('NOTE') and
+                  not line.isdigit()):
+                # HTML 태그 제거
+                clean = re.sub(r'<[^>]+>', '', line).strip()
+                if clean:
+                    current_text.append(clean)
         
-        return ' '.join(subtitle_text)
+        # 마지막 블록 저장
+        if current_text and current_timestamp:
+            text = ' '.join(current_text)
+            clean_text = re.sub(r'<[^>]+>', '', text).strip()
+            if clean_text:
+                result.append(f"[{current_timestamp}] {clean_text}")
+        
+        return '\n'.join(result)
     
     def extract_subtitle(self, url: str, retries: int = 3) -> Optional[str]:
         """
