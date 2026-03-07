@@ -330,9 +330,8 @@ def main():
     prompt_template = load_prompt()
     log('V11 프롬프트 로드 완료 ({} chars)'.format(len(prompt_template)))
 
-    # VTT 파일 목록 (wsaj_ prefix 제외 — GODofIT 파일만)
-    vtt_files = sorted([f for f in glob.glob(os.path.join(SUBS_DIR, '*.ko.vtt'))
-                        if not os.path.basename(f).startswith('wsaj_')])
+    # VTT 파일 목록
+    vtt_files = sorted(glob.glob(os.path.join(SUBS_DIR, '*.ko.vtt')))
     log('VTT 파일: {}개'.format(len(vtt_files)))
 
     if TEST_MODE:
