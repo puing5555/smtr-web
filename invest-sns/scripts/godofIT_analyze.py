@@ -41,7 +41,10 @@ os.makedirs(os.path.dirname(PROGRESS_FILE), exist_ok=True)
 def log(msg):
     ts = datetime.now().strftime('%H:%M:%S')
     line = '[{}] {}'.format(ts, msg)
-    print(line, flush=True)
+    try:
+        print(line, flush=True)
+    except UnicodeEncodeError:
+        print(line.encode('ascii', errors='replace').decode('ascii'), flush=True)
     with open(LOG_FILE, 'a', encoding='utf-8') as f:
         f.write(line + '\n')
 
@@ -84,8 +87,15 @@ def parse_vtt(vtt_path):
 
 
 def get_video_id_from_filename(filename):
-    """파일명에서 YouTube video_id 추출: AbcdXyz.ko.vtt -> AbcdXyz"""
-    return filename.replace('.ko.vtt', '')
+    """파일명에서 YouTube video_id 추출
+    패턴1: AbcdXyz.ko.vtt -> AbcdXyz (11자 ID)
+    패턴2: wsaj_AbcdXyz_제목.ko.vtt -> AbcdXyz (wsaj_ 이후 11자)
+    """
+    base = filename.replace('.ko.vtt', '')
+    if base.startswith('wsaj_') and len(base) > 16:
+        # wsaj_ 다음 11자가 YouTube ID
+        return base[5:16]
+    return base
 
 
 def call_anthropic(prompt_text):
