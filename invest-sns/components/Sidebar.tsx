@@ -7,6 +7,7 @@ import { useAuth } from '@/context/AuthContext';
 const navItems = [
   { icon: '🏠', label: '피드', href: '/' },
   { icon: '📊', label: '대시보드', href: '/dashboard' },
+  { icon: '📋', label: '포트폴리오 관리', href: '/portfolio' },
   { icon: '💼', label: '보유종목', href: '/my-portfolio' },
   { icon: '👀', label: '관심종목', href: '/my-watchlist' },
   { icon: '⭐', label: '내 종목', href: '/my-stocks' },

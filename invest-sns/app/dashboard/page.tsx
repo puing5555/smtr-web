@@ -188,7 +188,7 @@ export default function DashboardPage() {
 
         {/* ② 보유종목 / 관심종목 */}
         <section className="bg-white border border-[#e8e8e8] rounded-2xl overflow-hidden shadow-sm">
-          <div className="flex border-b border-[#e8e8e8]">
+          <div className="flex items-center border-b border-[#e8e8e8]">
             <button
               onClick={() => setPortfolioTab('holdings')}
               className={`flex-1 py-3.5 text-sm font-medium transition-colors ${
@@ -209,6 +209,9 @@ export default function DashboardPage() {
             >
               ⭐ 관심종목 {WATCHLIST.length}
             </button>
+            <Link href="/portfolio" className="text-xs text-[#3182f6] px-3 whitespace-nowrap">
+              관리 →
+            </Link>
           </div>
 
           {portfolioTab === 'holdings' && (
