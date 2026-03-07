@@ -1,0 +1,134 @@
+﻿[
+    {
+        "id":  "d51174bd-d7e5-4410-91f5-b28e149786b0",
+        "stock":  "삼성디스플레이",
+        "ticker":  "",
+        "signal":  "긍정",
+        "mention_type":  "결론",
+        "confidence":  "medium",
+        "timestamp":  "02:15",
+        "key_quote":  "중국 쪽 스마트폰 수요가 살아나면 가장 수혜를 기대하는 쪽은 디스플레이 쪽이겠죠 삼성디스플레이가 기대감 있는 거고",
+        "reasoning":  "중국 스마트폰 수요 회복에 따른 수혜 전망을 제시하며 기대감을 표현했으나, 명확한 매수 권유는 없음. 조건부 발언(중국 수요 살아나면)으로 confidence medium"
+    },
+    {
+        "id":  "ddb27da5-94bb-4a2d-b47c-e31a01f0af4a",
+        "stock":  "원익IPS",
+        "ticker":  "240810",
+        "signal":  "긍정",
+        "mention_type":  "결론",
+        "confidence":  "medium",
+        "timestamp":  "13:10",
+        "key_quote":  "원자층 장비인데 요거는 원익IPS가 납품을 하고 있고요",
+        "reasoning":  "DDR5 관련 ALD 장비 수혜업체로 구체적인 사업 영역과 함께 언급했으나, 명확한 투자 권유는 없음. 업체 소개 수준"
+    },
+    {
+        "id":  "aa4e81d4-ba31-4f79-b047-ad83f3682cc8",
+        "stock":  "LG디스플레이",
+        "ticker":  "034220",
+        "signal":  "긍정",
+        "mention_type":  "결론",
+        "confidence":  "medium",
+        "timestamp":  "02:15",
+        "key_quote":  "중국 쪽 스마트폰 수요가 살아나면 가장 수혜를 기대하는 쪽은 디스플레이 쪽이겠죠 LG디스플레이가 기대감 있는 거고",
+        "reasoning":  "중국 스마트폰 수요 회복에 따른 수혜 전망을 제시하며 기대감을 표현했으나, 명확한 매수 권유는 없음. 조건부 발언(중국 수요 살아나면)으로 confidence medium"
+    },
+    {
+        "id":  "5d9a3c4b-c4c0-437f-8922-7f0c2f7c93ed",
+        "stock":  "주성엔지니어링",
+        "ticker":  "036930",
+        "signal":  "긍정",
+        "mention_type":  "결론",
+        "confidence":  "medium",
+        "timestamp":  "13:10",
+        "key_quote":  "원자층 장비인데 요거는 주성엔지니어링이 납품을 하고 있고요",
+        "reasoning":  "DDR5 관련 ALD 장비 수혜업체로 구체적인 사업 영역과 함께 언급했으나, 명확한 투자 권유는 없음. 업체 소개 수준"
+    },
+    {
+        "id":  "938e0386-4fea-491c-8647-a70590e2cbae",
+        "stock":  "삼성전기",
+        "ticker":  "009150",
+        "signal":  "긍정",
+        "mention_type":  "결론",
+        "confidence":  "medium",
+        "timestamp":  "05:30",
+        "key_quote":  "정말 이제 퓨어하게 수혜를 보는 쪽은 오히려 삼성전기 같은 mlcc 하는 업체들이 오히려 좀 더 낫지 않을까 그렇게 보고 있습니다",
+        "reasoning":  "중국 스마트폰 수요 회복 시 순수한 수혜주로 언급하며 긍정적 전망을 제시했으나, 명확한 매수 권유는 없음. \u0027낫지 않을까\u0027는 전망성 표현"
+    },
+    {
+        "id":  "2c9c5d6e-b02e-4b6c-a3cb-76ddc8ec882c",
+        "stock":  "아비코전자",
+        "ticker":  "036010",
+        "signal":  "긍정",
+        "mention_type":  "결론",
+        "confidence":  "medium",
+        "timestamp":  "13:40",
+        "key_quote":  "DDR5용 수동 소자를 납품하는 아비코전자라는 회사가 있고요",
+        "reasoning":  "DDR5 관련 수동소자 수혜업체로 구체적인 사업 영역과 함께 언급했으나, 명확한 투자 권유는 없음. 업체 소개 수준"
+    },
+    {
+        "id":  "74206ffd-7cef-437c-b14c-91585966209e",
+        "stock":  "DNF",
+        "ticker":  "217820",
+        "signal":  "긍정",
+        "mention_type":  "결론",
+        "confidence":  "medium",
+        "timestamp":  "12:45",
+        "key_quote":  "하이케이 소재를 납품하는 회사는 DNF라는 사가 있고요",
+        "reasoning":  "DDR5 관련 수혜업체로 구체적인 사업 영역(하이케이 소재)과 함께 언급했으나, 명확한 투자 권유는 없음. 업체 소개 수준"
+    },
+    {
+        "id":  "eb236fb1-417a-44d6-b783-4a5bac68fc78",
+        "stock":  "심텍",
+        "ticker":  "222800",
+        "signal":  "긍정",
+        "mention_type":  "결론",
+        "confidence":  "medium",
+        "timestamp":  "14:00",
+        "key_quote":  "DDR5형 기판을 하는 심텍이 수혜를 기대할 수 있겠습니다",
+        "reasoning":  "DDR5 관련 기판 수혜업체로 구체적인 사업 영역과 함께 수혜 기대감을 표현했으나, 명확한 매수 권유는 없음. 수혜 전망 제시"
+    },
+    {
+        "id":  "3ffc2575-e114-4c3d-9c0f-241ff8d81d25",
+        "stock":  "레이크머티리얼즈",
+        "ticker":  "281740",
+        "signal":  "긍정",
+        "mention_type":  "결론",
+        "confidence":  "medium",
+        "timestamp":  "12:50",
+        "key_quote":  "하이케이 소재를 납품하는 회사는 레이크머티리얼즈라는 회사도 있습니다",
+        "reasoning":  "DDR5 관련 수혜업체로 구체적인 사업 영역(하이케이 소재)과 함께 언급했으나, 명확한 투자 권유는 없음. 업체 소개 수준"
+    },
+    {
+        "id":  "1ae1ba89-8ab3-491b-b06a-94821b31f2e6",
+        "stock":  "대덕전자",
+        "ticker":  "353200",
+        "signal":  "긍정",
+        "mention_type":  "결론",
+        "confidence":  "medium",
+        "timestamp":  "14:00",
+        "key_quote":  "DDR5형 기판을 하는 대덕전자가 수혜를 기대할 수 있겠습니다",
+        "reasoning":  "DDR5 관련 기판 수혜업체로 구체적인 사업 영역과 함께 수혜 기대감을 표현했으나, 명확한 매수 권유는 없음. 수혜 전망 제시"
+    },
+    {
+        "id":  "92a3a753-9fc9-4205-9f80-58edc1d49d52",
+        "stock":  "유진테크",
+        "ticker":  "084370",
+        "signal":  "긍정",
+        "mention_type":  "결론",
+        "confidence":  "medium",
+        "timestamp":  "13:10",
+        "key_quote":  "원자층 장비인데 요거는 유진테크가 납품을 하고 있고요",
+        "reasoning":  "DDR5 관련 ALD 장비 수혜업체로 구체적인 사업 영역과 함께 언급했으나, 명확한 투자 권유는 없음. 업체 소개 수준"
+    },
+    {
+        "id":  "a24bec77-5adf-4941-b509-7808f8d6c0e4",
+        "stock":  "TLB",
+        "ticker":  "271940",
+        "signal":  "긍정",
+        "mention_type":  "결론",
+        "confidence":  "medium",
+        "timestamp":  "14:00",
+        "key_quote":  "DDR5형 기판을 하는 TLB가 수혜를 기대할 수 있겠습니다",
+        "reasoning":  "DDR5 관련 기판 수혜업체로 구체적인 사업 영역과 함께 수혜 기대감을 표현했으나, 명확한 매수 권유는 없음. 수혜 전망 제시"
+    }
+]
