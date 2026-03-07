@@ -75,23 +75,37 @@ const SPEAKER_SLUGS: Record<string, string> = {
   '홍진채': 'hong-jinchae',
 };
 
-// 한글 → hash 기반 slug (매핑에 없는 발언자 fallback용)
+// 한글 → 가역 hex 인코딩 slug (매핑에 없는 발언자 fallback용)
+// 형식: 'u' + 각 문자 codePoint 4자리 hex → 역변환 가능
 function koreanToSlug(name: string): string {
   if (/^[a-zA-Z0-9_-]+$/.test(name)) return name.toLowerCase();
-  let hash = 0;
-  for (let i = 0; i < name.length; i++) {
-    hash = ((hash << 5) - hash) + name.charCodeAt(i);
-    hash |= 0;
+  return 'u' + Array.from(name)
+    .map(c => (c.codePointAt(0) ?? 0).toString(16).padStart(4, '0'))
+    .join('');
+}
+
+// 'u' + hex → 원래 이름 복원
+function koreanFromSlug(slug: string): string | null {
+  if (!slug.startsWith('u') || slug.length < 5) return null;
+  try {
+    const hex = slug.slice(1);
+    if (hex.length % 4 !== 0) return null;
+    let name = '';
+    for (let i = 0; i < hex.length; i += 4) {
+      name += String.fromCodePoint(parseInt(hex.slice(i, i + 4), 16));
+    }
+    return name || null;
+  } catch {
+    return null;
   }
-  return `speaker-${Math.abs(hash).toString(36)}`;
 }
 
 // 역방향 매핑 (slug → speaker name)
 const SLUG_TO_SPEAKER: Record<string, string> = {};
 Object.entries(SPEAKER_SLUGS).forEach(([name, slug]) => {
   SLUG_TO_SPEAKER[slug] = name;
-  const hashSlug = koreanToSlug(name);
-  if (hashSlug !== slug) SLUG_TO_SPEAKER[hashSlug] = name;
+  const hexSlug = koreanToSlug(name);
+  if (hexSlug !== slug) SLUG_TO_SPEAKER[hexSlug] = name;
 });
 
 export function speakerToSlug(name: string): string {
@@ -99,7 +113,7 @@ export function speakerToSlug(name: string): string {
 }
 
 export function slugToSpeaker(slug: string): string | null {
-  return SLUG_TO_SPEAKER[slug] || null;
+  return SLUG_TO_SPEAKER[slug] || koreanFromSlug(slug) || null;
 }
 
 export function getAllSpeakerSlugs(): string[] {

@@ -1,398 +1,389 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
-// ─────────────────────────────────────────────
-// Mock Data (나중에 Supabase fetch 함수로 교체)
-// ─────────────────────────────────────────────
+// ── Mock Data ──────────────────────────────────────────────────────────────
 
-const MARKET = {
-  updated: "03/06 07:00",
-  us: [
-    { name: "S&P 500", value: "5,842", change: "+0.8%", positive: true },
-    { name: "나스닥", value: "18,350", change: "+1.2%", positive: true },
-    { name: "다우", value: "43,200", change: "+0.3%", positive: true },
-  ],
-  kr: [
-    { name: "코스피 선물", value: "", change: "+0.5%", positive: true },
-    { name: "환율 ₩/$", value: "1,345", change: "-0.2%", positive: true },
-  ],
-  issues: [
-    "연준 파월 \"금리 인하 서두르지 않겠다\" — 시장 예상 범위 내",
-    "엔비디아 실적 서프라이즈 — AI CapEx 사이클 재확인",
-    "중국 경기부양책 발표 — 아시아 증시 긍정적",
-  ],
-};
-
-const OVERNIGHT = [
-  { name: "테슬라", prev: 370, now: 375, change: "+1.3%", positive: true, note: "FSD 업데이트 발표" },
-  { name: "엔비디아", prev: 180, now: 178, change: "-1.1%", positive: false, note: "차익실현 매물" },
-  { name: "팔란티어", prev: 80, now: 82, change: "+2.5%", positive: true, note: "정부 계약 수주" },
-];
-
-const PORTFOLIO = {
-  totalValue: 45230000,
-  totalReturn: 17.5,
-  totalReturnAmt: 6730000,
-  todayChange: 320000,
-  todayPercent: 0.7,
-};
-
-const ALERTS = [
-  { id: 1, type: "보유", icon: "🔴", stock: "삼성전자", title: "공시 A등급 — 자사주 소각", detail: "시총 5% 파격적. 매수가 기준 +5% 가치 상승", time: "10분 전", color: "#ef4444" },
-  { id: 2, type: "관심", icon: "⚡", stock: "SK하이닉스", title: "관심가 180,000원 도달!", detail: "유튜버 81% 매수. 진입 검토.", time: "30분 전", color: "#f59e0b" },
-  { id: 3, type: "보유", icon: "🟢", stock: "테슬라", title: "이효석 매수 유지", detail: "적중률 67%. 보유 유지.", time: "2시간 전", color: "#22c55e" },
+const NOTIFICATIONS = [
+  {
+    id: '1',
+    icon: '📢',
+    type: 'disclosure',
+    title: 'SK하이닉스 공시',
+    body: '2024년 4분기 실적 발표 — 영업이익 7.7조 원',
+    time: '06:50',
+    read: false,
+    ticker: '000660',
+    tab: 'disclosure',
+  },
+  {
+    id: '2',
+    icon: '🤖',
+    type: 'signal',
+    title: '삼성전자 AI 시그널',
+    body: '매수 시그널 3개 집중 — 반도체 업황 개선 기대감',
+    time: '07:15',
+    read: false,
+    ticker: '005930',
+    tab: '',
+  },
+  {
+    id: '3',
+    icon: '📈',
+    type: 'price',
+    title: 'NVIDIA 가격 알림',
+    body: '$820 돌파 — 목표가 1차 달성',
+    time: '06:30',
+    read: true,
+    ticker: 'NVDA',
+    tab: '',
+  },
+  {
+    id: '4',
+    icon: '🎙️',
+    type: 'signal',
+    title: '카카오 신규 시그널',
+    body: '긍정 시그널 — "카카오페이 흑자 전환 기대"',
+    time: '어제',
+    read: true,
+    ticker: '035720',
+    tab: '',
+  },
 ];
 
 const HOLDINGS = [
-  { id: 1, name: "팔란티어", ticker: "PLTR", cur: "$", shares: 200, buy: 25, now: 82, ret: 220.0, retAmt: 11400, weight: 36.2, today: 2.5, ytb: 60, ytbT: 12, disc: null, analyst: "HOLD $75", trend: null, ai: "목표가 초과. 부분 익절 고려." },
-  { id: 2, name: "테슬라", ticker: "TSLA", cur: "$", shares: 50, buy: 230, now: 375, ret: 63.0, retAmt: 7250, weight: 41.4, today: 1.3, ytb: 81, ytbT: 16, disc: null, analyst: "BUY $420", trend: "FSD 7점", ai: "이효석 매수 유지 (적중률 67%). 보유." },
-  { id: 3, name: "엔비디아", ticker: "NVDA", cur: "$", shares: 30, buy: 120, now: 178, ret: 48.3, retAmt: 1740, weight: 11.8, today: -1.1, ytb: 81, ytbT: 19, disc: null, analyst: "BUY $220", trend: "AI CapEx 8점", ai: "AI CapEx 지속. 보유 유지." },
-  { id: 4, name: "삼성전자", ticker: "005930", cur: "₩", shares: 100, buy: 68000, now: 54000, ret: -20.6, retAmt: -1400000, weight: 11.9, today: -0.7, ytb: 72, ytbT: 19, disc: "A", analyst: "BUY 28만", trend: "HBM 7점", ai: "공시 호재. 보유 유지. 반등 대기." },
+  { name: '삼성전자', ticker: '005930', qty: 30, avgPrice: 68500, currentPrice: 74600, profitPct: '+8.91%', up: true, aiOpinion: '보유 유지', aiColor: 'text-blue-500' },
+  { name: 'SK하이닉스', ticker: '000660', qty: 10, avgPrice: 175000, currentPrice: 192500, profitPct: '+10.00%', up: true, aiOpinion: '추가 매수', aiColor: 'text-green-600' },
+  { name: 'NVIDIA', ticker: 'NVDA', qty: 5, avgPrice: 700.00, currentPrice: 824.03, profitPct: '+17.72%', up: true, aiOpinion: '목표가 상향 검토', aiColor: 'text-blue-500' },
+  { name: '카카오', ticker: '035720', qty: 20, avgPrice: 52000, currentPrice: 41300, profitPct: '-20.58%', up: false, aiOpinion: '손절 검토', aiColor: 'text-red-500' },
 ];
 
 const WATCHLIST = [
-  { id: 1, name: "SK하이닉스", ticker: "000660", cur: "₩", now: 178000, target: 180000, near: true, ytb: 81, ytbT: 19, trend: "HBM 8점", analyst: "BUY 25만", ai: "관심가 근접! 유튜버 81% 매수. 진입 검토.", reason: "HBM4 수혜" },
-  { id: 2, name: "하이트진로", ticker: "000080", cur: "₩", now: 21500, target: 20000, near: false, ytb: 0, ytbT: 0, trend: "🔥무설탕소주 9점", analyst: "BUY 3만", ai: "소셜 트렌드 극초기. 정보 불균형 최대.", reason: "무설탕 소주 트렌드" },
-  { id: 3, name: "Bloom Energy", ticker: "BE", cur: "$", now: 28, target: 22, near: false, ytb: 40, ytbT: 5, trend: "AI전력 7점", analyst: "BUY $35", ai: "AI 전력 수혜 중 덜 반영. 관심가 대기.", reason: "AI 전력 인프라" },
+  { name: 'TSMC', ticker: 'TSM', currentPrice: 147.80, change: '-1.60%', up: false, aiOpinion: '매수 대기', aiColor: 'text-yellow-600' },
+  { name: '현대차', ticker: '005380', currentPrice: 231000, change: '+0.87%', up: true, aiOpinion: '관심 유지', aiColor: 'text-blue-500' },
+  { name: 'Tesla', ticker: 'TSLA', currentPrice: 178.65, change: '-2.14%', up: false, aiOpinion: '추가 하락 경계', aiColor: 'text-orange-500' },
+  { name: 'LG에너지솔루션', ticker: '373220', currentPrice: 388000, change: '+2.38%', up: true, aiOpinion: '분할 매수 검토', aiColor: 'text-green-600' },
+  { name: 'Meta', ticker: 'META', currentPrice: 515.20, change: '+1.77%', up: true, aiOpinion: '보유 추천', aiColor: 'text-blue-500' },
 ];
+
+const MARKET = {
+  us: [
+    { name: 'S&P 500', value: '5,204.34', change: '+0.82%', up: true },
+    { name: '나스닥', value: '16,265.64', change: '+1.14%', up: true },
+    { name: '다우', value: '38,996.39', change: '+0.34%', up: true },
+  ],
+  kr: [
+    { name: '코스피', value: '2,715.82', change: '+0.42%', up: true },
+    { name: '코스닥', value: '867.43', change: '+0.68%', up: true },
+  ],
+  others: [
+    { name: '금', value: '$2,185', change: '+0.30%', up: true },
+    { name: '은', value: '$24.50', change: '-0.20%', up: false },
+    { name: '비트코인', value: '$67,800', change: '+2.10%', up: true },
+  ],
+  fearGreed: { value: 72, label: '탐욕', color: 'text-green-600', bg: 'bg-green-50', border: 'border-green-200' },
+  issues: [
+    '연준 파월 의장 "금리 인하 서두르지 않겠다" 발언 → 시장 소화',
+    'NVIDIA 실적 호조로 반도체·AI 섹터 강세 지속',
+    '달러 인덱스 약세 전환 → 원화 강세 가능성',
+  ],
+};
 
 const AI_INSIGHTS = [
-  { icon: "📊", text: "미국주식 88% 편중. 환율 리스크 주의. SK하이닉스 매수 시 한국 비중 개선.", color: "#3b82f6" },
-  { icon: "⚠️", text: "삼성전자 -20.6%. 추가 매수 30주 시 평단 62,000원. 과거 회복 확률 73%.", color: "#f59e0b" },
-  { icon: "🎯", text: "SK하이닉스 관심가 도달 + 유튜버 81% 매수. 이효석도 최근 긍정.", color: "#22c55e" },
+  {
+    icon: '🧠',
+    title: '포트폴리오 집중도 경고',
+    body: '반도체 비중이 전체의 62%입니다. 섹터 분산을 검토하세요. 에너지·헬스케어 섹터 편입을 고려해볼 시점입니다.',
+    tag: '리스크',
+    tagColor: 'bg-orange-50 text-orange-600 border-orange-200',
+  },
+  {
+    icon: '💡',
+    title: '수익 실현 타이밍 분석',
+    body: 'NVIDIA +17.7% · SK하이닉스 +10% 수익 중. 고점 부근 저항선 접근 중으로 일부 차익 실현 고려 권장.',
+    tag: '기회',
+    tagColor: 'bg-blue-50 text-blue-600 border-blue-200',
+  },
+  {
+    icon: '⚠️',
+    title: '카카오 손실 관리',
+    body: '카카오 -20.6% 손실 중. 추가 하락 가능성 높음. 원칙 손절선 -25% 도달 전 대응 플랜 수립 권장.',
+    tag: '경고',
+    tagColor: 'bg-red-50 text-red-600 border-red-200',
+  },
 ];
 
-// ─────────────────────────────────────────────
-// Supabase fetch 함수 (추후 연동)
-// ─────────────────────────────────────────────
-
-// async function fetchMarket() { /* supabase.from('market').select('*') */ return MARKET; }
-// async function fetchPortfolio(userId: string) { /* supabase.from('holdings').select('*').eq('user_id', userId) */ return { PORTFOLIO, HOLDINGS }; }
-// async function fetchWatchlist(userId: string) { /* supabase.from('watchlist').select('*').eq('user_id', userId) */ return WATCHLIST; }
-// async function fetchAlerts(userId: string) { /* supabase.from('alerts').select('*').eq('user_id', userId).order('created_at', { ascending: false }) */ return ALERTS; }
-// async function fetchAIInsights(userId: string) { /* supabase.from('ai_insights').select('*').eq('user_id', userId) */ return AI_INSIGHTS; }
-
-// ─────────────────────────────────────────────
-// Utilities
-// ─────────────────────────────────────────────
-
-function fmt(n: number): string {
-  if (Math.abs(n) >= 100000000) return (n / 100000000).toFixed(1) + "억";
-  if (Math.abs(n) >= 10000) return Math.round(n / 10000).toLocaleString() + "만";
-  return n.toLocaleString();
-}
-
-// ─────────────────────────────────────────────
-// Sub-components
-// ─────────────────────────────────────────────
-
-function Section({ title, children, defaultOpen = true }: { title: string; children: React.ReactNode; defaultOpen?: boolean }) {
-  const [open, setOpen] = useState(defaultOpen);
-  return (
-    <div style={{ marginBottom: 14 }}>
-      <div
-        onClick={() => setOpen(!open)}
-        style={{ display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer", marginBottom: open ? 8 : 0 }}
-      >
-        <span style={{ fontSize: 13, fontWeight: 700, color: "#f1f5f9" }}>{title}</span>
-        <span style={{ fontSize: 10, color: "#475569", userSelect: "none" }}>{open ? "▲" : "▼"}</span>
-      </div>
-      {open && children}
-    </div>
-  );
-}
-
-function MarketSection() {
-  return (
-    <div style={{ background: "#0f172a", border: "1px solid #1e293b", borderRadius: 10, padding: 14, marginBottom: 14 }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-        <span style={{ fontSize: 13, fontWeight: 700, color: "#f1f5f9" }}>📊 시황</span>
-        <span style={{ fontSize: 10, color: "#475569" }}>{MARKET.updated}</span>
-      </div>
-      <div style={{ fontSize: 10, color: "#64748b", marginBottom: 4 }}>🇺🇸 어젯밤 미국장</div>
-      <div style={{ display: "flex", gap: 6, marginBottom: 10 }}>
-        {MARKET.us.map((m, i) => (
-          <div key={i} style={{ flex: 1, background: "#1e293b", borderRadius: 8, padding: "8px 10px", textAlign: "center" }}>
-            <div style={{ fontSize: 10, color: "#64748b", marginBottom: 2 }}>{m.name}</div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: m.positive ? "#22c55e" : "#ef4444" }}>{m.change}</div>
-            <div style={{ fontSize: 10, color: "#94a3b8" }}>{m.value}</div>
-          </div>
-        ))}
-      </div>
-      <div style={{ fontSize: 10, color: "#64748b", marginBottom: 4 }}>🇰🇷 오늘 한국장 예상</div>
-      <div style={{ display: "flex", gap: 6, marginBottom: 10 }}>
-        {MARKET.kr.map((m, i) => (
-          <div key={i} style={{ flex: 1, background: "#1e293b", borderRadius: 8, padding: "8px 10px", textAlign: "center" }}>
-            <div style={{ fontSize: 10, color: "#64748b", marginBottom: 2 }}>{m.name}</div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: m.positive ? "#22c55e" : "#ef4444" }}>{m.change}</div>
-            {m.value && <div style={{ fontSize: 10, color: "#94a3b8" }}>{m.value}</div>}
-          </div>
-        ))}
-      </div>
-      <div style={{ fontSize: 10, color: "#64748b", marginBottom: 4 }}>💡 핵심 이슈</div>
-      {MARKET.issues.map((issue, i) => (
-        <div key={i} style={{ fontSize: 11, color: "#cbd5e1", padding: "4px 0", borderBottom: i < MARKET.issues.length - 1 ? "1px solid #1e293b" : "none", lineHeight: 1.5 }}>
-          {issue}
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function OvernightSection() {
-  return (
-    <div style={{ background: "#0f172a", border: "1px solid #1e293b", borderRadius: 10, padding: 14, marginBottom: 14 }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-        <span style={{ fontSize: 13, fontWeight: 700, color: "#f1f5f9" }}>🌙 내 종목 어젯밤</span>
-        <span style={{ fontSize: 12, fontWeight: 700, color: "#22c55e" }}>전체 +0.7%</span>
-      </div>
-      {OVERNIGHT.map((o, i) => (
-        <div key={i} style={{ display: "flex", alignItems: "center", padding: "6px 0", borderBottom: i < OVERNIGHT.length - 1 ? "1px solid #1e293b" : "none" }}>
-          <div style={{ flex: 1 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <span style={{ fontSize: 13, fontWeight: 600, color: "#f1f5f9" }}>{o.name}</span>
-              <span style={{ fontSize: 11, color: "#64748b" }}>${o.prev} → ${o.now}</span>
-            </div>
-            <div style={{ fontSize: 10, color: "#94a3b8", marginTop: 1 }}>{o.note}</div>
-          </div>
-          <span style={{ fontSize: 14, fontWeight: 700, color: o.positive ? "#22c55e" : "#ef4444", minWidth: 55, textAlign: "right" }}>{o.change}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-interface Holding {
-  id: number; name: string; ticker: string; cur: string; shares: number; buy: number; now: number;
-  ret: number; retAmt: number; weight: number; today: number; ytb: number; ytbT: number;
-  disc: string | null; analyst: string; trend: string | null; ai: string;
-}
-
-function ReturnBar({ h }: { h: Holding }) {
-  const isPos = h.ret >= 0;
-  const color = isPos ? "#22c55e" : "#ef4444";
-  const w = Math.min(100, (Math.abs(h.ret) / 220) * 100);
-  return (
-    <div style={{ marginBottom: 8 }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 3 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-          <span style={{ fontSize: 12, fontWeight: 600, color: "#f1f5f9" }}>{h.name}</span>
-          <span style={{ fontSize: 9, color: "#475569" }}>{h.weight}%</span>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ fontSize: 9, color: h.today >= 0 ? "#22c55e88" : "#ef444488" }}>오늘 {h.today >= 0 ? "+" : ""}{h.today}%</span>
-          <span style={{ fontSize: 13, fontWeight: 800, color }}>{isPos ? "+" : ""}{h.ret}%</span>
-        </div>
-      </div>
-      <div style={{ height: 6, background: "#1e293b", borderRadius: 3, overflow: "hidden" }}>
-        <div style={{ width: `${w}%`, height: "100%", background: `linear-gradient(90deg, ${color}66, ${color})`, borderRadius: 3 }} />
-      </div>
-    </div>
-  );
-}
-
-function HoldingCard({ h, expanded, onToggle }: { h: Holding; expanded: boolean; onToggle: () => void }) {
-  const isPos = h.ret >= 0;
-  const color = isPos ? "#22c55e" : "#ef4444";
-  const c = h.cur === "$" ? "$" : "";
-  const u = h.cur === "$" ? "" : "원";
-  return (
-    <div onClick={onToggle} style={{ background: "#0f172a", border: "1px solid #1e293b", borderRadius: 8, marginBottom: 6, cursor: "pointer", borderLeft: `3px solid ${color}`, overflow: "hidden" }}>
-      <div style={{ padding: "10px 12px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 3 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-            <span style={{ fontSize: 13, fontWeight: 700, color: "#f1f5f9" }}>{h.name}</span>
-            <span style={{ fontSize: 10, color: "#475569" }}>{h.ticker}</span>
-            {h.disc && <span style={{ fontSize: 8, padding: "1px 5px", borderRadius: 3, background: "#ef444420", color: "#ef4444", fontWeight: 700 }}>공시{h.disc}</span>}
-          </div>
-          <span style={{ fontSize: 15, fontWeight: 800, color }}>{isPos ? "+" : ""}{h.ret}%</span>
-        </div>
-        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 10, color: "#64748b", marginBottom: 6 }}>
-          <span>{h.shares}주 · {c}{h.buy.toLocaleString()}{u} → {c}{h.now.toLocaleString()}{u}</span>
-          <span style={{ color }}>{isPos ? "+" : ""}{h.cur === "$" ? "$" + h.retAmt.toLocaleString() : fmt(h.retAmt) + "원"}</span>
-        </div>
-        <div style={{ display: "flex", gap: 4, flexWrap: "wrap", marginBottom: 5 }}>
-          {h.ytbT > 0 && <span style={{ fontSize: 9, padding: "1px 6px", borderRadius: 3, background: h.ytb >= 70 ? "#22c55e15" : "#f59e0b15", color: h.ytb >= 70 ? "#22c55e" : "#f59e0b" }}>유튜버 {h.ytb}%매수</span>}
-          <span style={{ fontSize: 9, padding: "1px 6px", borderRadius: 3, background: "#3b82f615", color: "#3b82f6" }}>{h.analyst}</span>
-          {h.trend && <span style={{ fontSize: 9, padding: "1px 6px", borderRadius: 3, background: "#8b5cf615", color: "#8b5cf6" }}>{h.trend}</span>}
-        </div>
-        <div style={{ fontSize: 10, color: "#94a3b8", background: "#1e293b", borderRadius: 5, padding: "5px 8px" }}>🤖 {h.ai}</div>
-      </div>
-      {expanded && (
-        <div style={{ padding: "8px 12px 10px", borderTop: "1px solid #1e293b", display: "flex", gap: 5 }}>
-          <button style={{ flex: 1, padding: 6, borderRadius: 5, border: "1px solid #334155", background: "transparent", color: "#94a3b8", fontSize: 10 }}>상세</button>
-          <button style={{ flex: 1, padding: 6, borderRadius: 5, border: "1px solid #334155", background: "transparent", color: "#94a3b8", fontSize: 10 }}>매도기록</button>
-          <button style={{ flex: 1, padding: 6, borderRadius: 5, border: "1px solid #f59e0b33", background: "#f59e0b08", color: "#f59e0b", fontSize: 10 }}>메모</button>
-        </div>
-      )}
-    </div>
-  );
-}
-
-interface WatchItem {
-  id: number; name: string; ticker: string; cur: string; now: number; target: number; near: boolean;
-  ytb: number; ytbT: number; trend: string; analyst: string; ai: string; reason: string;
-}
-
-function WatchCard({ w }: { w: WatchItem }) {
-  const c = w.cur === "$" ? "$" : "";
-  const u = w.cur === "$" ? "" : "원";
-  return (
-    <div style={{ background: "#0f172a", border: w.near ? "1px solid #f59e0b44" : "1px solid #1e293b", borderRadius: 8, padding: "10px 12px", marginBottom: 6, position: "relative" }}>
-      {w.near && <div style={{ position: "absolute", top: -1, right: 12, background: "#f59e0b", color: "#000", fontSize: 8, fontWeight: 700, padding: "1px 7px", borderRadius: "0 0 4px 4px" }}>⚡매수기회</div>}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-          <span style={{ fontSize: 13, fontWeight: 700, color: "#f1f5f9" }}>{w.name}</span>
-          <span style={{ fontSize: 10, color: "#475569" }}>{w.ticker}</span>
-        </div>
-        <div style={{ textAlign: "right" }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: "#e2e8f0" }}>{c}{w.now.toLocaleString()}{u}</div>
-          <div style={{ fontSize: 9, color: w.near ? "#f59e0b" : "#475569" }}>관심가 {c}{w.target.toLocaleString()}{u}</div>
-        </div>
-      </div>
-      <div style={{ fontSize: 10, color: "#64748b", marginBottom: 4 }}>{w.reason}</div>
-      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", marginBottom: 5 }}>
-        {w.ytbT > 0 && <span style={{ fontSize: 9, padding: "1px 6px", borderRadius: 3, background: "#22c55e15", color: "#22c55e" }}>유튜버 {w.ytb}%매수</span>}
-        {w.trend && <span style={{ fontSize: 9, padding: "1px 6px", borderRadius: 3, background: w.trend.includes("🔥") ? "#ef444415" : "#8b5cf615", color: w.trend.includes("🔥") ? "#ef4444" : "#8b5cf6", fontWeight: 600 }}>{w.trend}</span>}
-        <span style={{ fontSize: 9, padding: "1px 6px", borderRadius: 3, background: "#3b82f615", color: "#3b82f6" }}>{w.analyst}</span>
-      </div>
-      <div style={{ fontSize: 10, color: "#94a3b8", background: "#1e293b", borderRadius: 5, padding: "5px 8px", marginBottom: 6 }}>🤖 {w.ai}</div>
-      <div style={{ display: "flex", gap: 5 }}>
-        <button style={{ flex: 1, padding: 6, borderRadius: 5, background: "#22c55e15", border: "1px solid #22c55e33", color: "#22c55e", fontSize: 10, fontWeight: 600 }}>매수 기록</button>
-        <button style={{ flex: 1, padding: 6, borderRadius: 5, border: "1px solid #334155", background: "transparent", color: "#94a3b8", fontSize: 10 }}>알림 설정</button>
-      </div>
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────────
-// Main Page
-// ─────────────────────────────────────────────
+// ──────────────────────────────────────────────────────────────────────────
 
 export default function DashboardPage() {
-  const [tab, setTab] = useState<"전체" | "보유" | "관심">("전체");
-  const [expandedId, setExpandedId] = useState<number | null>(null);
+  const router = useRouter();
+  const [portfolioTab, setPortfolioTab] = useState<'holdings' | 'watchlist'>('holdings');
+  const [notifications, setNotifications] = useState(NOTIFICATIONS);
 
-  const returnColor = PORTFOLIO.totalReturn >= 0 ? "#22c55e" : "#ef4444";
-  const sorted = [...HOLDINGS].sort((a, b) => b.ret - a.ret);
+  const unreadCount = notifications.filter((n) => !n.read).length;
+
+  const handleNotificationClick = (n: typeof NOTIFICATIONS[0]) => {
+    // 읽음 처리
+    setNotifications((prev) =>
+      prev.map((item) => (item.id === n.id ? { ...item, read: true } : item))
+    );
+    // 해당 종목 페이지로 이동
+    const url = n.tab ? `/stock/${n.ticker}?tab=${n.tab}` : `/stock/${n.ticker}`;
+    router.push(url);
+  };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#020617", color: "#e2e8f0", fontFamily: "'Pretendard', -apple-system, sans-serif", maxWidth: 480, margin: "0 auto" }}>
-      {/* Sticky Header */}
-      <div style={{ background: "#0f172a", borderBottom: "1px solid #1e293b", padding: "14px 20px 10px", position: "sticky", top: 0, zIndex: 10 }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-          <div>
-            <div style={{ fontSize: 10, color: "#64748b" }}>내 포트폴리오</div>
-            <div style={{ fontSize: 20, fontWeight: 800, color: "#f1f5f9" }}>
-              {PORTFOLIO.totalValue.toLocaleString()}<span style={{ fontSize: 12, color: "#64748b" }}>원</span>
-            </div>
-          </div>
-          <div style={{ textAlign: "right" }}>
-            <div style={{ fontSize: 18, fontWeight: 800, color: returnColor }}>+{PORTFOLIO.totalReturn}%</div>
-            <div style={{ fontSize: 9, color: returnColor }}>오늘 +{fmt(PORTFOLIO.todayChange)} (+{PORTFOLIO.todayPercent}%)</div>
-          </div>
-        </div>
-        {/* Tab Bar */}
-        <div style={{ display: "flex", gap: 3 }}>
-          {(["전체", "보유", "관심"] as const).map(t => (
-            <button
-              key={t}
-              onClick={() => setTab(t)}
-              style={{
-                flex: 1, padding: "6px 0", borderRadius: 6, fontSize: 11, fontWeight: 600, cursor: "pointer",
-                background: tab === t ? "#334155" : "transparent",
-                color: tab === t ? "#f1f5f9" : "#64748b",
-                border: "none",
-              }}
-            >
-              {t === "보유" ? `보유 ${HOLDINGS.length}` : t === "관심" ? `관심 ${WATCHLIST.length}` : t}
-            </button>
-          ))}
-        </div>
+    <div className="min-h-screen bg-[#f4f4f4]">
+      {/* Header */}
+      <div className="bg-white border-b border-[#e8e8e8] px-6 py-5">
+        <h1 className="text-xl font-bold text-[#191f28]">📊 대시보드</h1>
+        <p className="text-sm text-[#8b95a1] mt-1">내 종목 현황</p>
       </div>
 
-      {/* Content */}
-      <div style={{ padding: "12px 20px 80px" }}>
-        {/* 1. 시황 */}
-        {tab === "전체" && <MarketSection />}
+      <div className="max-w-3xl mx-auto px-4 py-5 space-y-5">
 
-        {/* 2. 어젯밤 내 종목 */}
-        {tab === "전체" && <OvernightSection />}
-
-        {/* 3. 알림 */}
-        {tab === "전체" && (
-          <Section title={`🔔 오늘 알림 ${ALERTS.length}건`}>
-            <div style={{ background: "#0f172a", border: "1px solid #1e293b", borderRadius: 10, padding: "2px 12px" }}>
-              {ALERTS.map((a, i) => (
-                <div key={a.id} style={{ display: "flex", gap: 8, padding: "8px 0", borderBottom: i < ALERTS.length - 1 ? "1px solid #1e293b" : "none" }}>
-                  <span style={{ fontSize: 16 }}>{a.icon}</span>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 4, marginBottom: 1 }}>
-                      <span style={{ fontSize: 8, padding: "1px 4px", borderRadius: 2, background: a.color + "18", color: a.color }}>{a.type}</span>
-                      <span style={{ fontSize: 11, fontWeight: 700, color: "#f1f5f9" }}>{a.stock}</span>
-                      <span style={{ fontSize: 9, color: "#475569", marginLeft: "auto" }}>{a.time}</span>
+        {/* ① 오늘 알림 */}
+        <section className="bg-white border border-[#e8e8e8] rounded-2xl overflow-hidden shadow-sm">
+          <div className="flex items-center justify-between px-5 py-4 border-b border-[#f0f0f0]">
+            <h2 className="text-sm font-bold text-[#191f28]">
+              🔔 오늘 알림
+              {unreadCount > 0 && (
+                <span className="ml-2 text-[10px] font-bold text-white bg-[#f04452] rounded-full px-1.5 py-0.5">
+                  {unreadCount}
+                </span>
+              )}
+            </h2>
+            <button className="text-xs text-[#3182f6]">전체 보기</button>
+          </div>
+          <div>
+            {notifications.map((n) => (
+              <button
+                key={n.id}
+                onClick={() => handleNotificationClick(n)}
+                className={`w-full text-left px-5 py-3.5 border-b border-[#f0f0f0] last:border-0 hover:bg-gray-50 active:bg-gray-100 transition-colors ${
+                  !n.read ? 'bg-[#f0faf5]' : 'bg-white'
+                }`}
+              >
+                <div className="flex items-start gap-3">
+                  {!n.read && (
+                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 flex-shrink-0" />
+                  )}
+                  {n.read && <div className="w-1.5 flex-shrink-0" />}
+                  <div className="text-base flex-shrink-0">{n.icon}</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-medium text-[#191f28]">{n.title}</span>
+                      <span className="text-xs text-[#b0b8c1] ml-2 flex-shrink-0">{n.time}</span>
                     </div>
-                    <div style={{ fontSize: 10, color: "#e2e8f0" }}>{a.title}</div>
-                    <div style={{ fontSize: 9, color: "#94a3b8" }}>{a.detail}</div>
+                    <p className="text-xs text-[#4e5968] mt-0.5">{n.body}</p>
+                  </div>
+                  <span className="text-[#b0b8c1] text-xs flex-shrink-0">›</span>
+                </div>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        {/* ② 보유종목 / 관심종목 */}
+        <section className="bg-white border border-[#e8e8e8] rounded-2xl overflow-hidden shadow-sm">
+          <div className="flex border-b border-[#e8e8e8]">
+            <button
+              onClick={() => setPortfolioTab('holdings')}
+              className={`flex-1 py-3.5 text-sm font-medium transition-colors ${
+                portfolioTab === 'holdings'
+                  ? 'text-[#3182f6] border-b-2 border-[#3182f6] bg-white'
+                  : 'text-[#8b95a1] bg-[#f9f9f9]'
+              }`}
+            >
+              💼 보유종목 {HOLDINGS.length}
+            </button>
+            <button
+              onClick={() => setPortfolioTab('watchlist')}
+              className={`flex-1 py-3.5 text-sm font-medium transition-colors ${
+                portfolioTab === 'watchlist'
+                  ? 'text-[#3182f6] border-b-2 border-[#3182f6] bg-white'
+                  : 'text-[#8b95a1] bg-[#f9f9f9]'
+              }`}
+            >
+              ⭐ 관심종목 {WATCHLIST.length}
+            </button>
+          </div>
+
+          {portfolioTab === 'holdings' && (
+            <div className="divide-y divide-[#f0f0f0]">
+              {HOLDINGS.map((stock) => (
+                <Link
+                  key={stock.ticker}
+                  href={`/stock/${stock.ticker}`}
+                  className="flex items-center justify-between px-5 py-4 hover:bg-gray-50 active:bg-gray-100 transition-colors"
+                >
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-bold text-[#191f28]">{stock.name}</span>
+                      <span className="text-xs text-[#b0b8c1]">{stock.ticker}</span>
+                    </div>
+                    <div className="text-xs text-[#8b95a1] mt-0.5">
+                      {stock.qty}주 · 평균 {stock.avgPrice.toLocaleString()}원
+                    </div>
+                    <div className={`text-xs font-medium mt-1 ${stock.aiColor}`}>
+                      🤖 {stock.aiOpinion}
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-sm font-bold text-[#191f28]">
+                      {stock.currentPrice.toLocaleString()}
+                    </div>
+                    <div className={`text-xs font-bold mt-0.5 ${stock.up ? 'text-green-600' : 'text-red-500'}`}>
+                      {stock.profitPct}
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {portfolioTab === 'watchlist' && (
+            <div className="divide-y divide-[#f0f0f0]">
+              {WATCHLIST.map((stock) => (
+                <Link
+                  key={stock.ticker}
+                  href={`/stock/${stock.ticker}`}
+                  className="flex items-center justify-between px-5 py-4 hover:bg-gray-50 active:bg-gray-100 transition-colors"
+                >
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-bold text-[#191f28]">{stock.name}</span>
+                      <span className="text-xs text-[#b0b8c1]">{stock.ticker}</span>
+                    </div>
+                    <div className={`text-xs font-medium mt-1 ${stock.aiColor}`}>
+                      🤖 {stock.aiOpinion}
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-sm font-bold text-[#191f28]">
+                      {typeof stock.currentPrice === 'number'
+                        ? stock.currentPrice.toLocaleString()
+                        : stock.currentPrice}
+                    </div>
+                    <div className={`text-xs font-medium mt-0.5 ${stock.up ? 'text-green-600' : 'text-red-500'}`}>
+                      {stock.change}
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+        </section>
+
+        {/* ③ 시황 */}
+        <section className="bg-white border border-[#e8e8e8] rounded-2xl p-5 shadow-sm space-y-4">
+          <h2 className="text-sm font-bold text-[#191f28]">🌐 시황</h2>
+
+          {/* 미국장 */}
+          <div>
+            <p className="text-xs font-medium text-[#8b95a1] mb-2">🇺🇸 미국장</p>
+            <div className="grid grid-cols-3 gap-2">
+              {MARKET.us.map((m) => (
+                <div key={m.name} className="bg-[#f9f9f9] border border-[#e8e8e8] rounded-xl p-3 text-center">
+                  <div className="text-xs text-[#8b95a1] mb-1">{m.name}</div>
+                  <div className="text-sm font-bold text-[#191f28]">{m.value}</div>
+                  <div className={`text-xs font-medium mt-0.5 ${m.up ? 'text-green-600' : 'text-red-500'}`}>
+                    {m.change}
                   </div>
                 </div>
               ))}
             </div>
-          </Section>
-        )}
+          </div>
 
-        {/* 4. 보유 종목 */}
-        {(tab === "전체" || tab === "보유") && (
-          <Section title="📦 보유 종목">
-            {/* Portfolio Summary */}
-            <div style={{ background: "#0f172a", border: "1px solid #1e293b", borderRadius: 10, padding: 14, marginBottom: 8 }}>
-              <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
-                {[
-                  { label: "총 수익률", value: `+${PORTFOLIO.totalReturn}%`, color: returnColor },
-                  { label: "총 수익금", value: `+${fmt(PORTFOLIO.totalReturnAmt)}`, color: returnColor },
-                  { label: "오늘", value: `+${PORTFOLIO.todayPercent}%`, color: returnColor },
-                ].map((v, i) => (
-                  <div key={i} style={{ flex: 1, textAlign: "center", background: "#1e293b", borderRadius: 6, padding: "8px 4px" }}>
-                    <div style={{ fontSize: 15, fontWeight: 800, color: v.color }}>{v.value}</div>
-                    <div style={{ fontSize: 9, color: "#64748b" }}>{v.label}</div>
+          {/* 코스피/코스닥 */}
+          <div>
+            <p className="text-xs font-medium text-[#8b95a1] mb-2">🇰🇷 국내장</p>
+            <div className="grid grid-cols-2 gap-2">
+              {MARKET.kr.map((m) => (
+                <div key={m.name} className="bg-[#f9f9f9] border border-[#e8e8e8] rounded-xl p-3 text-center">
+                  <div className="text-xs text-[#8b95a1] mb-1">{m.name}</div>
+                  <div className="text-sm font-bold text-[#191f28]">{m.value}</div>
+                  <div className={`text-xs font-medium mt-0.5 ${m.up ? 'text-green-600' : 'text-red-500'}`}>
+                    {m.change}
                   </div>
-                ))}
-              </div>
-              {sorted.map(h => <ReturnBar key={h.id} h={h} />)}
+                </div>
+              ))}
             </div>
-            {/* Holding Cards */}
-            {sorted.map(h => (
-              <HoldingCard
-                key={h.id}
-                h={h}
-                expanded={expandedId === h.id}
-                onToggle={() => setExpandedId(expandedId === h.id ? null : h.id)}
-              />
-            ))}
-          </Section>
-        )}
+          </div>
 
-        {/* 4. 관심 종목 */}
-        {(tab === "전체" || tab === "관심") && (
-          <Section title="👀 관심 종목">
-            {WATCHLIST.map(w => <WatchCard key={w.id} w={w} />)}
-            <button style={{ width: "100%", padding: 8, borderRadius: 8, border: "1px dashed #334155", background: "transparent", color: "#475569", fontSize: 11, cursor: "pointer" }}>
-              + 관심 종목 추가
-            </button>
-          </Section>
-        )}
+          {/* 금/은/비트코인 */}
+          <div>
+            <p className="text-xs font-medium text-[#8b95a1] mb-2">🪙 원자재 · 코인</p>
+            <div className="grid grid-cols-3 gap-2">
+              {MARKET.others.map((m) => (
+                <div key={m.name} className="bg-[#f9f9f9] border border-[#e8e8e8] rounded-xl p-3 text-center">
+                  <div className="text-xs text-[#8b95a1] mb-1">{m.name}</div>
+                  <div className="text-sm font-bold text-[#191f28]">{m.value}</div>
+                  <div className={`text-xs font-medium mt-0.5 ${m.up ? 'text-green-600' : 'text-red-500'}`}>
+                    {m.change}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
-        {/* 5. AI 인사이트 */}
-        {tab === "전체" && (
-          <Section title="🤖 맞춤 인사이트">
-            {AI_INSIGHTS.map((ins, i) => (
-              <div key={i} style={{ background: "#0f172a", border: "1px solid #1e293b", borderRadius: 8, padding: "10px 12px", marginBottom: 5, borderLeft: `3px solid ${ins.color}` }}>
-                <div style={{ fontSize: 11, color: "#cbd5e1", lineHeight: 1.6 }}>{ins.icon} {ins.text}</div>
+          {/* Fear & Greed */}
+          <div className={`flex items-center justify-between rounded-xl px-4 py-3 border ${MARKET.fearGreed.border} ${MARKET.fearGreed.bg}`}>
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">😨</span>
+              <div>
+                <div className="text-xs text-[#8b95a1]">Fear & Greed Index</div>
+                <div className="text-lg font-black text-[#191f28]">{MARKET.fearGreed.value}</div>
+              </div>
+            </div>
+            <div className={`text-sm font-bold ${MARKET.fearGreed.color}`}>
+              {MARKET.fearGreed.label}
+            </div>
+          </div>
+
+          {/* 핵심 이슈 */}
+          <div>
+            <p className="text-xs font-medium text-[#8b95a1] mb-2">📌 핵심 이슈</p>
+            <div className="space-y-2">
+              {MARKET.issues.map((issue, i) => (
+                <div key={i} className="flex items-start gap-2">
+                  <span className="text-[10px] font-bold text-[#3182f6] bg-blue-50 border border-blue-100 rounded px-1.5 py-0.5 flex-shrink-0 mt-0.5">
+                    {i + 1}
+                  </span>
+                  <p className="text-xs text-[#4e5968] leading-relaxed">{issue}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ④ 오늘의 인사이트 (AI) */}
+        <section className="bg-white border border-[#e8e8e8] rounded-2xl p-5 shadow-sm">
+          <h2 className="text-sm font-bold text-[#191f28] mb-4">🤖 오늘의 인사이트</h2>
+          <div className="space-y-3">
+            {AI_INSIGHTS.map((insight, i) => (
+              <div key={i} className="bg-[#f9f9f9] border border-[#e8e8e8] rounded-xl p-4">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className="text-base">{insight.icon}</span>
+                  <span className="text-sm font-bold text-[#191f28]">{insight.title}</span>
+                  <span className={`ml-auto text-[10px] font-bold border rounded px-1.5 py-0.5 ${insight.tagColor}`}>
+                    {insight.tag}
+                  </span>
+                </div>
+                <p className="text-xs text-[#4e5968] leading-relaxed">{insight.body}</p>
               </div>
             ))}
-          </Section>
-        )}
+          </div>
+        </section>
+
+        {/* Footer */}
+        <div className="text-center py-2 pb-8">
+          <Link href="/" className="text-sm text-[#3182f6] hover:underline">
+            ← 메인으로 돌아가기
+          </Link>
+        </div>
       </div>
     </div>
   );
