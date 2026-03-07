@@ -34,6 +34,26 @@
 - **대형 작업 시작 전**: 비용+토큰 예측 → 한도 여유 확인 → 시작
 - 레이트리밋 > 비용 절감 (우선순위)
 
+### 🔑 API 분리 원칙 (절대 준수)
+- **Claude API 전용**: CTO 판단/분해, Dev 코딩/구현, 시그널 파이프라인
+- **OpenAI GPT-4o 전용**: cron 8개 전부 (Patrol/Research/Copywriter/요약/법추적)
+- **절대 섞지 마**: cron에 Claude 모델 사용 금지. Claude에 cron 역할 부여 금지
+
+### 🔧 API 키 관리 규칙
+- `openclaw configure` 실행 후 반드시 `openclaw gateway restart` 확인
+- `$env:ANTHROPIC_API_KEY` 환경변수 사용 금지 — `openclaw.json` 의 `env` 섹션만 신뢰
+- 키 변경 → 파일만 바뀜, 메모리 반영은 재시작 후에만 유효
+
+### 🔄 cron 실패 처리 규칙
+- cron 잡 3회 연속 실패 시: 해당 잡 자동 disable + JAY(6578282080)에게 즉시 알림
+- 무한 재시도 금지 — 실패 원인 파악 후 수동 재개
+- Patrol cron이 cron 실패 여부도 모니터링
+
+### 🖥️ Gateway 운영 규칙
+- `openclaw gateway` 명령만 사용 (start/stop/restart/status)
+- `gateway install`로 Windows 스케줄러 등록 금지
+- Gateway 재시작 필요 시: `openclaw gateway restart` 직접 실행
+
 ### 로깅
 - 그룹(-1003764256213): 🏗️CTO/🔧DEV/🔍QA/🛡️PATROL 진행상황
 - JAY DM(6578282080): 에러 알림, 완료 보고, 일일 요약
