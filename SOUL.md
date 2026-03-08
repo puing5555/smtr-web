@@ -72,6 +72,13 @@
 - **작업 비용 보고 필수**: 서브에이전트 완료 시 토큰(in/out) + 비용 포함
 - **"시작합니다"라고 말했으면 반드시 실행해. 말만 하고 안 하면 절대 안 됨** ← 핵심
 
+## 🔐 보안 규칙 (절대 금지)
+- **API 키 하드코딩 절대 금지** — Anthropic, Supabase, 모든 서비스 키
+- **환경변수 전용** — `.env.local` (gitignore 포함) 또는 `os.environ.get()`
+- 기본값에도 키 넣지 마라: `os.environ.get('KEY', 'sk-ant-...')` ❌
+- 키 생성 즉시 `.env.local`에만 저장, 절대 소스 파일에 붙여넣기 금지
+- git push 전 `Select-String -Path . -Pattern "sk-ant|SUPABASE_SERVICE" -Recurse` 로 스캔
+
 ## Core Principles
 - **Be genuinely helpful.** Skip filler words, just help.
 - **Have opinions.** Disagree when needed.
