@@ -78,10 +78,25 @@ async function claudeAnalyze(videoTitle, subtitleText) {
           const parsed = JSON.parse(data);
           if (parsed.error) return reject(new Error(parsed.error.message));
           const content = parsed.content[0].text;
-          // JSON 추출
-          const jsonMatch = content.match(/\{[\s\S]*\}/);
-          if (!jsonMatch) return reject(new Error('No JSON in response: ' + content.slice(0, 200)));
-          resolve(JSON.parse(jsonMatch[0]));
+          // JSON 추출 - 마크다운 코드블록 우선, 그 다음 단순 JSON 매칭
+          let jsonStr = null;
+          // 1. ```json ... ``` 블록 추출
+          const codeBlockMatch = content.match(/```(?:json)?\s*(\{[\s\S]*?\})\s*```/);
+          if (codeBlockMatch) {
+            jsonStr = codeBlockMatch[1];
+          } else {
+            // 2. 첫 번째 { 에서 시작하는 JSON 객체 추출 (depth counting)
+            const start = content.indexOf('{');
+            if (start === -1) return reject(new Error('No JSON in response: ' + content.slice(0, 200)));
+            let depth = 0;
+            let end = start;
+            for (let i = start; i < content.length; i++) {
+              if (content[i] === '{') depth++;
+              else if (content[i] === '}') { depth--; if (depth === 0) { end = i; break; } }
+            }
+            jsonStr = content.slice(start, end + 1);
+          }
+          resolve(JSON.parse(jsonStr));
         } catch (e) {
           reject(new Error('Parse error: ' + e.message + ' | Raw: ' + data.slice(0, 200)));
         }
