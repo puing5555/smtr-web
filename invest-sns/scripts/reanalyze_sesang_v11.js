@@ -11,7 +11,16 @@ const https = require('https');
 // ====== 설정 ======
 const SUPABASE_URL = 'https://arypzhotxflimroprmdk.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyeXB6aG90eGZsaW1yb3BybWRrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MjAwNjExMCwiZXhwIjoyMDg3NTgyMTEwfQ.Q4ycJvyDqh-3ns3yk6JE4hB2gKAC39tgHE9ofSn0li8';
-const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || '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';
+// openclaw.json에서 실제 API 키 읽기 (env는 구버전 키일 수 있음)
+function getAnthropicKey() {
+  try {
+    const oclawPath = path.join(process.env.USERPROFILE || process.env.HOME, '.openclaw', 'openclaw.json');
+    const config = JSON.parse(fs.readFileSync(oclawPath, 'utf-8'));
+    return config.env?.ANTHROPIC_API_KEY;
+  } catch {}
+  return null;
+}
+const ANTHROPIC_API_KEY = getAnthropicKey() || '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';
 const CHANNEL_ID = 'd68f8efd-64c8-4c07-9d34-e98c2954f4e1';
 const SPEAKER_ID = 'b9496a5f-06fa-47eb-bc2d-47060b095534';
 const PIPELINE_VERSION = 'V11.1';
@@ -203,7 +212,7 @@ async function main() {
   // Step 4: DB 업데이트
   console.log('\n💾 Step 4: DB 업데이트...');
   
-  // 기존 pending 시그널 DELETE
+  // 기존 pending 시그널 DELETE (이미 없으면 skip)
   if (pendingSignals.length > 0) {
     const pendingIds = pendingSignals.map(s => s.id).join(',');
     await sbFetch(
@@ -211,6 +220,8 @@ async function main() {
       { method: 'DELETE', headers: { 'Prefer': 'return=minimal' } }
     );
     console.log(`  🗑️  기존 pending 시그널 ${pendingSignals.length}개 삭제 완료`);
+  } else {
+    console.log(`  ℹ️  삭제할 pending 시그널 없음 (이미 삭제됨)`);
   }
   
   // 새 시그널 INSERT (배치)
