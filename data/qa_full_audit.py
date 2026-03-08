@@ -1,4 +1,4 @@
-import requests, json, time, os, sys
+﻿import requests, json, time, os, sys
 
 SUPABASE_URL = "https://arypzhotxflimroprmdk.supabase.co"
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyeXB6aG90eGZsaW1yb3BybWRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwMDYxMTAsImV4cCI6MjA4NzU4MjExMH0.qcqFIvYRiixwu609Wjj9H3HxscU8vNpo9nS_KQ3f00A"
@@ -38,7 +38,7 @@ def fetch_all_signals():
     
     for s in signals:
         vid = video_map.get(s.get('video_id'), {})
-        s['_title'] = vid.get('title', '제목없음')
+        s['_title'] = vid.get('title', '?쒕ぉ?놁쓬')
         s['_channel_id'] = vid.get('channel_id', 'unknown')
     
     return signals
@@ -77,33 +77,33 @@ def call_anthropic(model, prompt, max_retries=3):
             m = re.search(r'\{[^}]+\}', text)
             if m:
                 return json.loads(m.group())
-            return {"relevance": "?", "opinion": "?", "evidence": "?", "verdict": "불량", "reason": "JSON 파싱 실패"}
+            return {"relevance": "?", "opinion": "?", "evidence": "?", "verdict": "遺덈웾", "reason": "JSON ?뚯떛 ?ㅽ뙣"}
         except Exception as e:
             if attempt < max_retries - 1:
                 print(f"  Error: {e}, retrying in 10s")
                 time.sleep(10)
             else:
-                return {"relevance": "?", "opinion": "?", "evidence": "?", "verdict": "불량", "reason": f"API 오류: {str(e)[:50]}"}
+                return {"relevance": "?", "opinion": "?", "evidence": "?", "verdict": "遺덈웾", "reason": f"API ?ㅻ쪟: {str(e)[:50]}"}
 
 def make_prompt(s):
-    return f"""다음 시그널의 품질을 검증하세요.
+    return f"""?ㅼ쓬 ?쒓렇?먯쓽 ?덉쭏??寃利앺븯?몄슂.
 
-영상 제목: {s['_title']}
-시그널 종목: {s['stock']} ({s['ticker']})
-시그널 타입: {s['signal']}
-핵심 발언: {s.get('key_quote', '')}
-근거: {s.get('reasoning', '')}
+?곸긽 ?쒕ぉ: {s['_title']}
+?쒓렇??醫낅ぉ: {s['stock']} ({s['ticker']})
+?쒓렇????? {s['signal']}
+?듭떖 諛쒖뼵: {s.get('key_quote', '')}
+洹쇨굅: {s.get('reasoning', '')}
 confidence: {s.get('confidence', '')}
 
-판정 항목 (각각 O 또는 X):
-1. 종목관련성: 영상 제목/주제와 시그널 종목이 관련 있는가?
-2. 투자의견: key_quote가 해당 종목에 대한 실제 투자 의견(매수/매도/전망)인가? (단순 언급은 X)
-3. 근거충분: reasoning이 구체적 근거를 포함하는가?
+?먯젙 ??ぉ (媛곴컖 O ?먮뒗 X):
+1. 醫낅ぉ愿?⑥꽦: ?곸긽 ?쒕ぉ/二쇱젣? ?쒓렇??醫낅ぉ??愿???덈뒗媛?
+2. ?ъ옄?섍껄: key_quote媛 ?대떦 醫낅ぉ??????ㅼ젣 ?ъ옄 ?섍껄(留ㅼ닔/留ㅻ룄/?꾨쭩)?멸?? (?⑥닚 ?멸툒? X)
+3. 洹쇨굅異⑸텇: reasoning??援ъ껜??洹쇨굅瑜??ы븿?섎뒗媛?
 
-최종판정: 정상 / 의심 / 불량
+理쒖쥌?먯젙: ?뺤긽 / ?섏떖 / 遺덈웾
 
-JSON으로만 응답:
-{{"relevance": "O", "opinion": "O", "evidence": "O", "verdict": "정상", "reason": "한줄 사유"}}"""
+JSON?쇰줈留??묐떟:
+{{"relevance": "O", "opinion": "O", "evidence": "O", "verdict": "?뺤긽", "reason": "?쒖쨪 ?ъ쑀"}}"""
 
 def log_telegram(msg):
     """Print and flush for the main agent to pick up"""
@@ -117,7 +117,7 @@ def main():
     signals = fetch_all_signals()
     total = len(signals)
     print(f"Fetched {total} signals", flush=True)
-    log_telegram(f"🔍 [QA] 1단계 Haiku 검증 시작: 총 {total}개")
+    log_telegram(f"?뵇 [QA] 1?④퀎 Haiku 寃利??쒖옉: 珥?{total}媛?)
 
     # Phase 1: Haiku
     results = []
@@ -149,11 +149,11 @@ def main():
             "key_quote": s.get('key_quote', ''),
             "video_title": s['_title'],
             "channel_id": s.get('_channel_id', 'unknown'),
-            "haiku_verdict": verdict.get('verdict', '불량'),
+            "haiku_verdict": verdict.get('verdict', '遺덈웾'),
             "haiku_reason": verdict.get('reason', ''),
             "haiku_detail": verdict,
             "sonnet_verdict": None,
-            "final_verdict": verdict.get('verdict', '불량'),
+            "final_verdict": verdict.get('verdict', '遺덈웾'),
             "reason": verdict.get('reason', '')
         })
         
@@ -161,7 +161,7 @@ def main():
         
         count = len(results)
         if count % 100 == 0:
-            log_telegram(f"🔍 [QA] 1단계 Haiku 검증 진행: {count}/{total}")
+            log_telegram(f"?뵇 [QA] 1?④퀎 Haiku 寃利?吏꾪뻾: {count}/{total}")
             # Save checkpoint
             with open(checkpoint_file, 'w', encoding='utf-8') as f:
                 json.dump({"results": results}, f, ensure_ascii=False)
@@ -170,14 +170,14 @@ def main():
             print(f"  Progress: {count}/{total}", flush=True)
     
     # Phase 1 stats
-    h_normal = sum(1 for r in results if r['haiku_verdict'] == '정상')
-    h_suspect = sum(1 for r in results if r['haiku_verdict'] == '의심')
-    h_bad = sum(1 for r in results if r['haiku_verdict'] == '불량')
-    log_telegram(f"🔍 [QA] 1단계 완료: 정상 {h_normal} / 의심 {h_suspect} / 불량 {h_bad}")
+    h_normal = sum(1 for r in results if r['haiku_verdict'] == '?뺤긽')
+    h_suspect = sum(1 for r in results if r['haiku_verdict'] == '?섏떖')
+    h_bad = sum(1 for r in results if r['haiku_verdict'] == '遺덈웾')
+    log_telegram(f"?뵇 [QA] 1?④퀎 ?꾨즺: ?뺤긽 {h_normal} / ?섏떖 {h_suspect} / 遺덈웾 {h_bad}")
     
     # Phase 2: Sonnet for suspect/bad
-    need_sonnet = [r for r in results if r['haiku_verdict'] in ('의심', '불량')]
-    log_telegram(f"🔍 [QA] 2단계 Sonnet: {len(need_sonnet)}건 재확인 시작")
+    need_sonnet = [r for r in results if r['haiku_verdict'] in ('?섏떖', '遺덈웾')]
+    log_telegram(f"?뵇 [QA] 2?④퀎 Sonnet: {len(need_sonnet)}嫄??ы솗???쒖옉")
     
     signal_map = {s['id']: s for s in signals}
     
@@ -186,23 +186,23 @@ def main():
         if not s:
             continue
         prompt = make_prompt(s)
-        verdict = call_anthropic("claude-sonnet-4-20250514", prompt)
+        verdict = call_anthropic("claude-sonnet-4-6", prompt)
         
-        r['sonnet_verdict'] = verdict.get('verdict', '불량')
+        r['sonnet_verdict'] = verdict.get('verdict', '遺덈웾')
         r['sonnet_detail'] = verdict
-        r['final_verdict'] = verdict.get('verdict', '불량')
+        r['final_verdict'] = verdict.get('verdict', '遺덈웾')
         r['reason'] = verdict.get('reason', r['reason'])
         
         time.sleep(0.5)
         
         if (i+1) % 50 == 0:
-            log_telegram(f"🔍 [QA] 2단계 Sonnet 진행: {i+1}/{len(need_sonnet)}")
+            log_telegram(f"?뵇 [QA] 2?④퀎 Sonnet 吏꾪뻾: {i+1}/{len(need_sonnet)}")
             print(f"  Sonnet progress: {i+1}/{len(need_sonnet)}", flush=True)
     
     # Final stats
-    f_normal = sum(1 for r in results if r['final_verdict'] == '정상')
-    f_suspect = sum(1 for r in results if r['final_verdict'] == '의심')
-    f_bad = sum(1 for r in results if r['final_verdict'] == '불량')
+    f_normal = sum(1 for r in results if r['final_verdict'] == '?뺤긽')
+    f_suspect = sum(1 for r in results if r['final_verdict'] == '?섏떖')
+    f_bad = sum(1 for r in results if r['final_verdict'] == '遺덈웾')
     
     # Flipped count
     flipped = sum(1 for r in results if r['sonnet_verdict'] and r['sonnet_verdict'] != r['haiku_verdict'])
@@ -214,9 +214,9 @@ def main():
         if ch not in channel_stats:
             channel_stats[ch] = {'total': 0, 'bad': 0, 'suspect': 0}
         channel_stats[ch]['total'] += 1
-        if r['final_verdict'] == '불량':
+        if r['final_verdict'] == '遺덈웾':
             channel_stats[ch]['bad'] += 1
-        elif r['final_verdict'] == '의심':
+        elif r['final_verdict'] == '?섏떖':
             channel_stats[ch]['suspect'] += 1
     
     # Cost estimate
@@ -247,50 +247,46 @@ def main():
         json.dump(clean_results, f, ensure_ascii=False, indent=2)
     
     # Defects markdown
-    defects_md = f"""# 시그널 품질 검증 결과
+    defects_md = f"""# ?쒓렇???덉쭏 寃利?寃곌낵
 
-## 통계 요약
-- 총 시그널: {total}개
-- **1단계 Haiku**: 정상 {h_normal} / 의심 {h_suspect} / 불량 {h_bad}
-- **2단계 Sonnet**: {len(need_sonnet)}건 재확인, {flipped}건 판정 변경
-- **최종**: 정상 {f_normal} / 의심 {f_suspect} / 불량 {f_bad}
-- **추정 비용**: ${total_cost:.2f}
+## ?듦퀎 ?붿빟
+- 珥??쒓렇?? {total}媛?- **1?④퀎 Haiku**: ?뺤긽 {h_normal} / ?섏떖 {h_suspect} / 遺덈웾 {h_bad}
+- **2?④퀎 Sonnet**: {len(need_sonnet)}嫄??ы솗?? {flipped}嫄??먯젙 蹂寃?- **理쒖쥌**: ?뺤긽 {f_normal} / ?섏떖 {f_suspect} / 遺덈웾 {f_bad}
+- **異붿젙 鍮꾩슜**: ${total_cost:.2f}
 
-## 채널별 불량률
-| 채널 | 총 시그널 | 불량 | 의심 | 불량률 |
+## 梨꾨꼸蹂?遺덈웾瑜?| 梨꾨꼸 | 珥??쒓렇??| 遺덈웾 | ?섏떖 | 遺덈웾瑜?|
 |------|----------|------|------|--------|
 """
     for ch, st in sorted(channel_stats.items(), key=lambda x: x[1]['bad'], reverse=True):
         rate = (st['bad'] / st['total'] * 100) if st['total'] > 0 else 0
         defects_md += f"| {ch} | {st['total']} | {st['bad']} | {st['suspect']} | {rate:.1f}% |\n"
     
-    defects_md += "\n## 불량 시그널 상세\n\n"
+    defects_md += "\n## 遺덈웾 ?쒓렇???곸꽭\n\n"
     for r in results:
-        if r['final_verdict'] == '불량':
+        if r['final_verdict'] == '遺덈웾':
             defects_md += f"### {r['stock']} ({r.get('ticker','')})\n"
             defects_md += f"- ID: `{r['id']}`\n"
-            defects_md += f"- 영상: {r.get('video_title','')}\n"
+            defects_md += f"- ?곸긽: {r.get('video_title','')}\n"
             defects_md += f"- key_quote: {r.get('key_quote','')[:100]}\n"
-            defects_md += f"- 사유: {r['reason']}\n\n"
+            defects_md += f"- ?ъ쑀: {r['reason']}\n\n"
     
-    defects_md += "\n## 의심 시그널 상세\n\n"
+    defects_md += "\n## ?섏떖 ?쒓렇???곸꽭\n\n"
     for r in results:
-        if r['final_verdict'] == '의심':
+        if r['final_verdict'] == '?섏떖':
             defects_md += f"### {r['stock']} ({r.get('ticker','')})\n"
             defects_md += f"- ID: `{r['id']}`\n"
-            defects_md += f"- 영상: {r.get('video_title','')}\n"
+            defects_md += f"- ?곸긽: {r.get('video_title','')}\n"
             defects_md += f"- key_quote: {r.get('key_quote','')[:100]}\n"
-            defects_md += f"- 사유: {r['reason']}\n\n"
+            defects_md += f"- ?ъ쑀: {r['reason']}\n\n"
     
     with open("data/signal_defects.md", 'w', encoding='utf-8') as f:
         f.write(defects_md)
     
-    summary = f"""🔍 [QA] 전체 검증 완료!
+    summary = f"""?뵇 [QA] ?꾩껜 寃利??꾨즺!
 
-📊 1단계 Haiku: 정상 {h_normal} / 의심 {h_suspect} / 불량 {h_bad}
-🔬 2단계 Sonnet: {len(need_sonnet)}건 재확인, {flipped}건 판정 변경
-✅ 최종: 정상 {f_normal} / 의심 {f_suspect} / 불량 {f_bad}
-💰 비용: ~${total_cost:.2f}"""
+?뱤 1?④퀎 Haiku: ?뺤긽 {h_normal} / ?섏떖 {h_suspect} / 遺덈웾 {h_bad}
+?뵮 2?④퀎 Sonnet: {len(need_sonnet)}嫄??ы솗?? {flipped}嫄??먯젙 蹂寃???理쒖쥌: ?뺤긽 {f_normal} / ?섏떖 {f_suspect} / 遺덈웾 {f_bad}
+?뮥 鍮꾩슜: ~${total_cost:.2f}"""
     
     log_telegram(summary)
     print("\n" + summary, flush=True)
@@ -302,3 +298,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

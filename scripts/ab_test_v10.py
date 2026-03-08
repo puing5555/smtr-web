@@ -1,5 +1,5 @@
-"""
-A/B Test: V10.10 (단일) vs V10.11 (2단계)
+﻿"""
+A/B Test: V10.10 (?⑥씪) vs V10.11 (2?④퀎)
 """
 import json, os, time, random, re, sys
 from pathlib import Path
@@ -15,7 +15,7 @@ except ImportError:
 # === Config ===
 SUPABASE_URL = "https://arypzhotxflimroprmdk.supabase.co"
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyeXB6aG90eGZsaW1yb3BybWRrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MjAwNjExMCwiZXhwIjoyMDg3NTgyMTEwfQ.Q4ycJvyDqh-3ns3yk6JE4hB2gKAC39tgHE9ofSn0li8"
-MODEL = "claude-sonnet-4-20250514"
+MODEL = "claude-sonnet-4-6"
 MAX_COST = 10.0
 SAMPLE_SIZE = 30
 MAX_SUB_CHARS = 12000
@@ -34,57 +34,56 @@ INPUT_CPT = 3.0 / 1_000_000
 OUTPUT_CPT = 15.0 / 1_000_000
 
 # === Prompts ===
-PROMPT_A = """당신은 투자 자막 분석 전문가입니다. 아래 자막에서 투자 시그널을 추출하세요.
+PROMPT_A = """?뱀떊? ?ъ옄 ?먮쭑 遺꾩꽍 ?꾨Ц媛?낅땲?? ?꾨옒 ?먮쭑?먯꽌 ?ъ옄 ?쒓렇?먯쓣 異붿텧?섏꽭??
 
-채널: {channel_name} | 제목: {video_title}
-자막:
+梨꾨꼸: {channel_name} | ?쒕ぉ: {video_title}
+?먮쭑:
 {subtitle}
 
-## 시그널 5단계만 사용: 매수/긍정/중립/부정/매도
-- 매수: "사라, 담아라" 등 명확한 매수 액션
-- 긍정: "좋아보인다" 등 호의적이나 매수 권유 아님
-- 중립: 뉴스/리포트/교육 전달
-- 부정/매도: 각각 부정적/명확한 매도
+## ?쒓렇??5?④퀎留??ъ슜: 留ㅼ닔/湲띿젙/以묐┰/遺??留ㅻ룄
+- 留ㅼ닔: "?щ씪, ?댁븘?? ??紐낇솗??留ㅼ닔 ?≪뀡
+- 湲띿젙: "醫뗭븘蹂댁씤?? ???몄쓽?곸씠??留ㅼ닔 沅뚯쑀 ?꾨떂
+- 以묐┰: ?댁뒪/由ы룷??援먯쑁 ?꾨떖
+- 遺??留ㅻ룄: 媛곴컖 遺?뺤쟻/紐낇솗??留ㅻ룄
 
-## 매수 vs 긍정: "본인이 샀거나 사라고 했는가?" Yes=매수, No=긍정
+## 留ㅼ닔 vs 湲띿젙: "蹂몄씤???嫄곕굹 ?щ씪怨??덈뒗媛?" Yes=留ㅼ닔, No=湲띿젙
 
-## 규칙
-- 1영상 1종목 1시그널, key_quote에 종목명 필수, 20자+, 타임스탬프 필수
-- 한국/미국주식/크립토만, 교육/뉴스만이면 시그널 없음
-- 논거 종목은 최대 긍정까지
+## 洹쒖튃
+- 1?곸긽 1醫낅ぉ 1?쒓렇?? key_quote??醫낅ぉ紐??꾩닔, 20??, ??꾩뒪?ы봽 ?꾩닔
+- ?쒓뎅/誘멸뎅二쇱떇/?щ┰?좊쭔, 援먯쑁/?댁뒪留뚯씠硫??쒓렇???놁쓬
+- ?쇨굅 醫낅ぉ? 理쒕? 湲띿젙源뚯?
 
-JSON만 출력:
+JSON留?異쒕젰:
 {{"signals": [{{"speaker":"","stock_name":"","stock_code":"","market":"","mention_type":"","signal_type":"","confidence":"","timestamp":"","key_quote":"","reasoning":""}}]}}
-시그널 없으면 {{"signals": []}}"""
+?쒓렇???놁쑝硫?{{"signals": []}}"""
 
-PROMPT_B1 = """아래 자막에서 언급된 투자 종목만 추출하세요.
+PROMPT_B1 = """?꾨옒 ?먮쭑?먯꽌 ?멸툒???ъ옄 醫낅ぉ留?異붿텧?섏꽭??
 
-채널: {channel_name} | 제목: {video_title}
-자막:
+梨꾨꼸: {channel_name} | ?쒕ぉ: {video_title}
+?먮쭑:
 {subtitle}
 
-규칙: 한국/미국주식/크립토만, 정식 종목명, 지수 제외, 비종목 제외
+洹쒖튃: ?쒓뎅/誘멸뎅二쇱떇/?щ┰?좊쭔, ?뺤떇 醫낅ぉ紐? 吏???쒖쇅, 鍮꾩쥌紐??쒖쇅
 
-JSON만:
+JSON留?
 {{"stocks": [{{"stock_name":"","stock_code":"","market":""}}]}}
-종목 없으면 {{"stocks": []}}"""
+醫낅ぉ ?놁쑝硫?{{"stocks": []}}"""
 
-PROMPT_B2 = """아래 자막에서 **{stock_name}**에 대한 투자 시그널을 판단하세요.
+PROMPT_B2 = """?꾨옒 ?먮쭑?먯꽌 **{stock_name}**??????ъ옄 ?쒓렇?먯쓣 ?먮떒?섏꽭??
 
-채널: {channel_name} | 제목: {video_title}
-자막:
+梨꾨꼸: {channel_name} | ?쒕ぉ: {video_title}
+?먮쭑:
 {subtitle}
 
-## 시그널: 매수/긍정/중립/부정/매도
-매수 vs 긍정: "본인이 샀거나 사라고 했는가?" Yes=매수, No=긍정
-- 매수: 본인 매매 공개, "사라/담아라", 포트폴리오 편입, 분할매수 지시
-- 긍정: "좋아보인다", "관심가져라", "전망 밝다", 분석만 제공
+## ?쒓렇?? 留ㅼ닔/湲띿젙/以묐┰/遺??留ㅻ룄
+留ㅼ닔 vs 湲띿젙: "蹂몄씤???嫄곕굹 ?щ씪怨??덈뒗媛?" Yes=留ㅼ닔, No=湲띿젙
+- 留ㅼ닔: 蹂몄씤 留ㅻℓ 怨듦컻, "?щ씪/?댁븘??, ?ы듃?대━???몄엯, 遺꾪븷留ㅼ닔 吏??- 湲띿젙: "醫뗭븘蹂댁씤??, "愿?ш??몃씪", "?꾨쭩 諛앸떎", 遺꾩꽍留??쒓났
 
-규칙: 논거→최대긍정, 교육/뉴스→시그널없음, key_quote에 종목명+근거 20자+, 타임스탬프 필수
+洹쒖튃: ?쇨굅?믪턀?湲띿젙, 援먯쑁/?댁뒪?믪떆洹몃꼸?놁쓬, key_quote??醫낅ぉ紐?洹쇨굅 20??, ??꾩뒪?ы봽 ?꾩닔
 
-JSON만:
+JSON留?
 {{"signal": {{"speaker":"","stock_name":"","stock_code":"","market":"","mention_type":"","signal_type":"","confidence":"","timestamp":"","key_quote":"","reasoning":""}}}}
-시그널 없으면 {{"signal": null, "reason": ""}}"""
+?쒓렇???놁쑝硫?{{"signal": null, "reason": ""}}"""
 
 # === Helpers ===
 class Cost:
@@ -147,7 +146,7 @@ def fetch_videos():
     return vids
 
 def trunc(s, n=MAX_SUB_CHARS):
-    return s[:n] + "\n...(잘림)" if len(s) > n else s
+    return s[:n] + "\n...(?섎┝)" if len(s) > n else s
 
 # === Methods ===
 def method_a(video, cost):
@@ -210,7 +209,7 @@ def main():
             sys.stdout.flush()
             rb = method_b(v, cost_b)
             sf = rb.get("stocks_found", 0)
-            print(f"{sf} stocks → {len(rb['signals'])} sigs (${cost_b.usd:.3f})")
+            print(f"{sf} stocks ??{len(rb['signals'])} sigs (${cost_b.usd:.3f})")
             
             results.append({
                 "video_id": v.get("video_id", v["id"]),
@@ -232,11 +231,11 @@ def main():
     ts = sum(r["method_b"]["stocks_found"] for r in valid)
 
     def types(rs, k):
-        c = {"매수":0,"긍정":0,"중립":0,"부정":0,"매도":0,"기타":0}
+        c = {"留ㅼ닔":0,"湲띿젙":0,"以묐┰":0,"遺??:0,"留ㅻ룄":0,"湲고?":0}
         for r in rs:
             if "error" in r: continue
             for s in r[k]["signals"]:
-                t = s.get("signal_type","기타")
+                t = s.get("signal_type","湲고?")
                 c[t] = c.get(t, 0) + 1
         return c
 
@@ -248,11 +247,11 @@ def main():
         ma = {s.get("stock_name"): s.get("signal_type") for s in r["method_a"]["signals"]}
         mb = {s.get("stock_name"): s.get("signal_type") for s in r["method_b"]["signals"]}
         for st in set(ma) & set(mb):
-            if ma[st] != mb[st] and {ma[st], mb[st]} & {"매수","긍정"}:
+            if ma[st] != mb[st] and {ma[st], mb[st]} & {"留ㅼ닔","湲띿젙"}:
                 diffs.append({"video": r["video_id"][:20], "stock": st, "a": ma[st], "b": mb[st]})
 
     # False positives
-    bad = ["코스피","코스닥","나스닥","S&P","다우","금리","환율","달러","유가","부동산","채권"]
+    bad = ["肄붿뒪??,"肄붿뒪??,"?섏뒪??,"S&P","?ㅼ슦","湲덈━","?섏쑉","?щ윭","?좉?","遺?숈궛","梨꾧텒"]
     def fps(rs, k):
         return [{"v": r["video_id"][:15], "s": s.get("stock_name","")} 
                 for r in rs if "error" not in r 
@@ -278,66 +277,63 @@ def main():
         json.dump({"summary": summary, "results": results}, f, ensure_ascii=False, indent=2)
 
     # Save markdown
-    md = f"""# A/B 테스트 결과: V10.10 vs V10.11 2단계 구조
+    md = f"""# A/B ?뚯뒪??寃곌낵: V10.10 vs V10.11 2?④퀎 援ъ“
 
-## 개요
-- 일시: {datetime.now().strftime('%Y-%m-%d %H:%M')}
-- 샘플: {len(videos)}개 영상, 유효: {len(valid)}개
-- 모델: {MODEL}
+## 媛쒖슂
+- ?쇱떆: {datetime.now().strftime('%Y-%m-%d %H:%M')}
+- ?섑뵆: {len(videos)}媛??곸긽, ?좏슚: {len(valid)}媛?- 紐⑤뜽: {MODEL}
 
-## 비용
-| | A (단일) | B (2단계) |
+## 鍮꾩슜
+| | A (?⑥씪) | B (2?④퀎) |
 |--|----------|-----------|
-| API 호출 | {cost_a.calls}회 | {cost_b.calls}회 |
-| 입력 토큰 | {cost_a.inp:,} | {cost_b.inp:,} |
-| 출력 토큰 | {cost_a.out:,} | {cost_b.out:,} |
-| 비용 | ${cost_a.usd:.4f} | ${cost_b.usd:.4f} |
-| **총합** | **${cost_a.usd + cost_b.usd:.4f}** ||
+| API ?몄텧 | {cost_a.calls}??| {cost_b.calls}??|
+| ?낅젰 ?좏겙 | {cost_a.inp:,} | {cost_b.inp:,} |
+| 異쒕젰 ?좏겙 | {cost_a.out:,} | {cost_b.out:,} |
+| 鍮꾩슜 | ${cost_a.usd:.4f} | ${cost_b.usd:.4f} |
+| **珥앺빀** | **${cost_a.usd + cost_b.usd:.4f}** ||
 
-## 1. 시그널 수
-| | A | B |
+## 1. ?쒓렇????| | A | B |
 |--|---|---|
-| 총 시그널 | {ta} | {tb} |
-| 영상당 평균 | {ta/n:.2f} | {tb/n:.2f} |
-| B 종목 추출 | - | {ts} |
+| 珥??쒓렇??| {ta} | {tb} |
+| ?곸긽???됯퇏 | {ta/n:.2f} | {tb/n:.2f} |
+| B 醫낅ぉ 異붿텧 | - | {ts} |
 
-## 2. 시그널 타입 분포
-| 타입 | A | B | 차이 |
+## 2. ?쒓렇?????遺꾪룷
+| ???| A | B | 李⑥씠 |
 |------|---|---|------|
-| 매수 | {ta_t['매수']} | {tb_t['매수']} | {tb_t['매수']-ta_t['매수']:+d} |
-| 긍정 | {ta_t['긍정']} | {tb_t['긍정']} | {tb_t['긍정']-ta_t['긍정']:+d} |
-| 중립 | {ta_t['중립']} | {tb_t['중립']} | {tb_t['중립']-ta_t['중립']:+d} |
-| 부정 | {ta_t['부정']} | {tb_t['부정']} | {tb_t['부정']-ta_t['부정']:+d} |
-| 매도 | {ta_t['매도']} | {tb_t['매도']} | {tb_t['매도']-ta_t['매도']:+d} |
+| 留ㅼ닔 | {ta_t['留ㅼ닔']} | {tb_t['留ㅼ닔']} | {tb_t['留ㅼ닔']-ta_t['留ㅼ닔']:+d} |
+| 湲띿젙 | {ta_t['湲띿젙']} | {tb_t['湲띿젙']} | {tb_t['湲띿젙']-ta_t['湲띿젙']:+d} |
+| 以묐┰ | {ta_t['以묐┰']} | {tb_t['以묐┰']} | {tb_t['以묐┰']-ta_t['以묐┰']:+d} |
+| 遺??| {ta_t['遺??]} | {tb_t['遺??]} | {tb_t['遺??]-ta_t['遺??]:+d} |
+| 留ㅻ룄 | {ta_t['留ㅻ룄']} | {tb_t['留ㅻ룄']} | {tb_t['留ㅻ룄']-ta_t['留ㅻ룄']:+d} |
 
-## 3. 매수/긍정 분류 차이
-{len(diffs)}건 발견:
+## 3. 留ㅼ닔/湲띿젙 遺꾨쪟 李⑥씠
+{len(diffs)}嫄?諛쒓껄:
 """
     for d in diffs[:20]:
-        md += f"- **{d['stock']}**: A={d['a']} → B={d['b']}\n"
+        md += f"- **{d['stock']}**: A={d['a']} ??B={d['b']}\n"
     
     md += f"""
-## 4. 비종목 오추출
-| | A | B |
+## 4. 鍮꾩쥌紐??ㅼ텛異?| | A | B |
 |--|---|---|
-| 오추출 | {len(fpa)} | {len(fpb)} |
+| ?ㅼ텛異?| {len(fpa)} | {len(fpb)} |
 
-## 5. 결론
-- **시그널 수**: A={ta}, B={tb} ({'B가 더 많음' if tb>ta else 'A가 더 많음' if ta>tb else '동일'})
-- **매수/긍정 분류 차이**: {len(diffs)}건
-- **비종목 오추출**: A={len(fpa)}, B={len(fpb)}
-- **비용**: A=${cost_a.usd:.2f}, B=${cost_b.usd:.2f} (B가 {cost_b.usd/max(cost_a.usd,0.001):.1f}배)
-- **종합**: {'2단계(B)가 종목별 집중 분석으로 매수/긍정 구분이 더 정확할 가능성 높음' if len(diffs) > 2 else '두 방식의 차이가 크지 않음'}
+## 5. 寃곕줎
+- **?쒓렇????*: A={ta}, B={tb} ({'B媛 ??留롮쓬' if tb>ta else 'A媛 ??留롮쓬' if ta>tb else '?숈씪'})
+- **留ㅼ닔/湲띿젙 遺꾨쪟 李⑥씠**: {len(diffs)}嫄?- **鍮꾩쥌紐??ㅼ텛異?*: A={len(fpa)}, B={len(fpb)}
+- **鍮꾩슜**: A=${cost_a.usd:.2f}, B=${cost_b.usd:.2f} (B媛 {cost_b.usd/max(cost_a.usd,0.001):.1f}諛?
+- **醫낇빀**: {'2?④퀎(B)媛 醫낅ぉ蹂?吏묒쨷 遺꾩꽍?쇰줈 留ㅼ닔/湲띿젙 援щ텇?????뺥솗??媛?μ꽦 ?믪쓬' if len(diffs) > 2 else '??諛⑹떇??李⑥씠媛 ?ъ? ?딆쓬'}
 """
 
     with open(OUTPUT_DIR/"ab_test_v10_results.md","w",encoding="utf-8") as f:
         f.write(md)
 
     print(f"\n{'='*60}")
-    print(f"완료! 총비용: ${cost_a.usd + cost_b.usd:.4f}")
+    print(f"?꾨즺! 珥앸퉬?? ${cost_a.usd + cost_b.usd:.4f}")
     print(f"A: {ta} signals, B: {tb} signals")
-    print(f"매수/긍정 분류차이: {len(diffs)}건")
-    print(f"결과: {OUTPUT_DIR/'ab_test_v10_results.md'}")
+    print(f"留ㅼ닔/湲띿젙 遺꾨쪟李⑥씠: {len(diffs)}嫄?)
+    print(f"寃곌낵: {OUTPUT_DIR/'ab_test_v10_results.md'}")
 
 if __name__ == "__main__":
     main()
+

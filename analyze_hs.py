@@ -1,6 +1,6 @@
-"""
-이효석아카데미 396개 자막 → 시그널 분석
-OpenClaw sessions_spawn 대신 직접 Anthropic API 사용 (배치 효율)
+﻿"""
+?댄슚?앹븘移대뜲誘?396媛??먮쭑 ???쒓렇??遺꾩꽍
+OpenClaw sessions_spawn ???吏곸젒 Anthropic API ?ъ슜 (諛곗튂 ?⑥쑉)
 """
 import os, json, time, sys, glob, re, random
 
@@ -71,25 +71,24 @@ def truncate_subtitle(text, max_chars=30000):
     """Truncate subtitle to fit in context window"""
     if len(text) <= max_chars:
         return text
-    return text[:max_chars] + "\n\n[자막이 너무 길어 일부 생략됨]"
+    return text[:max_chars] + "\n\n[?먮쭑???덈Т 湲몄뼱 ?쇰? ?앸왂??"
 
 def analyze_with_anthropic(vid_id, title, subtitle_text):
     """Call Anthropic API directly"""
     import urllib.request
     
-    user_msg = f"""다음 YouTube 영상의 자막을 분석하여 투자 시그널을 추출해주세요.
+    user_msg = f"""?ㅼ쓬 YouTube ?곸긽???먮쭑??遺꾩꽍?섏뿬 ?ъ옄 ?쒓렇?먯쓣 異붿텧?댁＜?몄슂.
 
-영상 제목: {title}
-채널: 이효석아카데미
-
-=== 자막 시작 ===
+?곸긽 ?쒕ぉ: {title}
+梨꾨꼸: ?댄슚?앹븘移대뜲誘?
+=== ?먮쭑 ?쒖옉 ===
 {truncate_subtitle(subtitle_text)}
-=== 자막 끝 ===
+=== ?먮쭑 ??===
 
-위 자막에서 투자 시그널을 추출해주세요. 종목에 대한 구체적 언급이 없으면 {{"signals": []}}을 반환하세요."""
+???먮쭑?먯꽌 ?ъ옄 ?쒓렇?먯쓣 異붿텧?댁＜?몄슂. 醫낅ぉ?????援ъ껜???멸툒???놁쑝硫?{{"signals": []}}??諛섑솚?섏꽭??"""
 
     body = json.dumps({
-        "model": "claude-sonnet-4-20250514",
+        "model": "claude-sonnet-4-6",
         "max_tokens": 4096,
         "system": prompt,
         "messages": [{"role": "user", "content": user_msg}]
@@ -206,7 +205,7 @@ for vtt_file in vtt_files:
         if '429' in err or 'rate' in err.lower():
             consecutive_success = 0
             delay = min(max_delay, delay * 2)
-            print(f"  [{count}/{total}] RATE LIMITED, delay→{delay:.1f}s")
+            print(f"  [{count}/{total}] RATE LIMITED, delay??delay:.1f}s")
             time.sleep(delay * 2)
             # Retry
             progress['failed'].append(vid_id)
@@ -226,3 +225,4 @@ print(f"Analyzed: {len(progress['done'])}")
 print(f"Total signals: {progress['total_signals']}")
 print(f"Skipped: {len(progress['skipped'])}")
 print(f"Failed: {len(progress['failed'])}")
+

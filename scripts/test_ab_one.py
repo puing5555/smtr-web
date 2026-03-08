@@ -1,4 +1,4 @@
-"""Quick test: run A and B on exactly 1 video."""
+﻿"""Quick test: run A and B on exactly 1 video."""
 import httpx, json, time, sys
 from pathlib import Path
 
@@ -16,7 +16,7 @@ def call(prompt, mt=2000):
     t0 = time.time()
     r = httpx.post("https://api.anthropic.com/v1/messages",
         headers={"x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json"},
-        json={"model": "claude-sonnet-4-20250514", "max_tokens": mt, "messages": [{"role": "user", "content": prompt}]},
+        json={"model": "claude-sonnet-4-6", "max_tokens": mt, "messages": [{"role": "user", "content": prompt}]},
         timeout=120)
     el = time.time() - t0
     d = r.json()
@@ -28,18 +28,19 @@ def call(prompt, mt=2000):
 
 # Method A
 print("\n=== Method A ===", flush=True)
-pa = f"""자막에서 투자 시그널 추출. 시그널: 매수/긍정/중립/부정/매도. JSON출력.
-자막: {sub}
+pa = f"""?먮쭑?먯꽌 ?ъ옄 ?쒓렇??異붿텧. ?쒓렇?? 留ㅼ닔/湲띿젙/以묐┰/遺??留ㅻ룄. JSON異쒕젰.
+?먮쭑: {sub}
 {{"signals": [{{"speaker":"","stock_name":"","signal_type":"","timestamp":"","key_quote":"","reasoning":""}}]}}"""
 ta = call(pa)
 print(ta[:300], flush=True)
 
 # Method B step 1
 print("\n=== Method B Step 1 ===", flush=True)
-pb1 = f"""자막에서 투자 종목만 추출. JSON출력.
-자막: {sub}
+pb1 = f"""?먮쭑?먯꽌 ?ъ옄 醫낅ぉ留?異붿텧. JSON異쒕젰.
+?먮쭑: {sub}
 {{"stocks": [{{"stock_name":"","stock_code":"","market":""}}]}}"""
 tb1 = call(pb1, 500)
 print(tb1[:300], flush=True)
 
 print("\nDone!", flush=True)
+

@@ -1,4 +1,4 @@
-import httpx, time, sys
+﻿import httpx, time, sys
 print("Starting test...", flush=True)
 
 # Test 1: Supabase
@@ -22,7 +22,7 @@ print("Testing Anthropic...", flush=True)
 try:
     r = httpx.post("https://api.anthropic.com/v1/messages",
         headers={"x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json"},
-        json={"model": "claude-sonnet-4-20250514", "max_tokens": 50, "messages": [{"role": "user", "content": "hi"}]},
+        json={"model": "claude-sonnet-4-6", "max_tokens": 50, "messages": [{"role": "user", "content": "hi"}]},
         timeout=30)
     print(f"Anthropic OK: {time.time()-t0:.1f}s, {r.status_code}", flush=True)
     print(r.text[:200], flush=True)
@@ -30,3 +30,4 @@ except Exception as e:
     print(f"Anthropic ERROR: {e}", flush=True)
 
 print("Done!", flush=True)
+

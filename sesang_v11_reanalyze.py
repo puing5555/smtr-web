@@ -1,10 +1,8 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-세상학개론 V11 재분석 스크립트
-- DB에서 세상학개론 채널 시그널을 가져와 V11 프롬프트로 재분석
-- 비디오별 그룹핑으로 API 호출 효율화 (같은 영상의 시그널은 1번만 호출)
-- 결과를 DB에 UPDATE하고 진행상황 저장
-"""
+?몄긽?숆컻濡?V11 ?щ텇???ㅽ겕由쏀듃
+- DB?먯꽌 ?몄긽?숆컻濡?梨꾨꼸 ?쒓렇?먯쓣 媛?몄? V11 ?꾨＼?꾪듃濡??щ텇??- 鍮꾨뵒?ㅻ퀎 洹몃９?묒쑝濡?API ?몄텧 ?⑥쑉??(媛숈? ?곸긽???쒓렇?먯? 1踰덈쭔 ?몄텧)
+- 寃곌낵瑜?DB??UPDATE?섍퀬 吏꾪뻾?곹솴 ???"""
 
 import json
 import os
@@ -16,19 +14,19 @@ from pathlib import Path
 import anthropic
 import requests
 
-# ─── 환경 설정 ───────────────────────────────────────────────
+# ??? ?섍꼍 ?ㅼ젙 ???????????????????????????????????????????????
 SUPABASE_URL = 'https://arypzhotxflimroprmdk.supabase.co'
 SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyeXB6aG90eGZsaW1yb3BybWRrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MjAwNjExMCwiZXhwIjoyMDg3NTgyMTEwfQ.Q4ycJvyDqh-3ns3yk6JE4hB2gKAC39tgHE9ofSn0li8'
 ANTHROPIC_KEY = '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'
-MODEL = 'claude-sonnet-4-20250514'
+MODEL = 'claude-sonnet-4-6'
 PROMPT_FILE = 'C:/Users/Mario/work/prompts/pipeline_v11.md'
 PROGRESS_FILE = 'C:/Users/Mario/work/data/sesang_v11_progress.json'
 
-# API 비용 추적 (claude-sonnet-4 기준: input $3/M, output $15/M)
+# API 鍮꾩슜 異붿쟻 (claude-sonnet-4 湲곗?: input $3/M, output $15/M)
 INPUT_PRICE_PER_TOKEN = 3.0 / 1_000_000
 OUTPUT_PRICE_PER_TOKEN = 15.0 / 1_000_000
 
-# ─── Supabase 클라이언트 ──────────────────────────────────────
+# ??? Supabase ?대씪?댁뼵????????????????????????????????????????
 class SupabaseClient:
     def __init__(self, url: str, key: str):
         self.url = url.rstrip('/')
@@ -52,7 +50,7 @@ class SupabaseClient:
         return resp.json()
 
 
-# ─── 진행상황 저장/불러오기 ──────────────────────────────────
+# ??? 吏꾪뻾?곹솴 ???遺덈윭?ㅺ린 ??????????????????????????????????
 def load_progress() -> dict:
     if Path(PROGRESS_FILE).exists():
         with open(PROGRESS_FILE, 'r', encoding='utf-8') as f:
@@ -66,19 +64,19 @@ def save_progress(progress: dict):
         json.dump(progress, f, ensure_ascii=False, indent=2)
 
 
-# ─── V11 프롬프트 로드 ───────────────────────────────────────
+# ??? V11 ?꾨＼?꾪듃 濡쒕뱶 ???????????????????????????????????????
 def load_v11_prompt() -> str:
     with open(PROMPT_FILE, 'r', encoding='utf-8') as f:
         return f.read()
 
 
-# ─── 재분석 프롬프트 생성 ────────────────────────────────────
+# ??? ?щ텇???꾨＼?꾪듃 ?앹꽦 ????????????????????????????????????
 def build_reanalysis_prompt(v11_prompt: str, video_title: str, subtitle: str, signals: list) -> str:
     """
-    V11 프롬프트 + 기존 시그널 목록 + 자막으로 재분석 요청 프롬프트 생성
+    V11 ?꾨＼?꾪듃 + 湲곗〈 ?쒓렇??紐⑸줉 + ?먮쭑?쇰줈 ?щ텇???붿껌 ?꾨＼?꾪듃 ?앹꽦
     """
     signal_list = '\n'.join(
-        f"  - 시그널ID={s['id']}, 종목={s.get('stock','?')}, 현재신호={s.get('signal','?')}, 현재타임스탬프={s.get('timestamp','?')}"
+        f"  - ?쒓렇?륤D={s['id']}, 醫낅ぉ={s.get('stock','?')}, ?꾩옱?좏샇={s.get('signal','?')}, ?꾩옱??꾩뒪?ы봽={s.get('timestamp','?')}"
         for s in signals
     )
 
@@ -87,177 +85,176 @@ def build_reanalysis_prompt(v11_prompt: str, video_title: str, subtitle: str, si
 
 ---
 
-## 재분석 요청
+## ?щ텇???붿껌
 
-아래 영상의 기존 시그널들을 V11 규칙에 따라 재검토하세요.
+?꾨옒 ?곸긽??湲곗〈 ?쒓렇?먮뱾??V11 洹쒖튃???곕씪 ?ш??좏븯?몄슂.
 
-**영상 제목**: {video_title}
+**?곸긽 ?쒕ぉ**: {video_title}
 
-**자막**:
-{subtitle[:15000] if subtitle else '(자막 없음)'}
+**?먮쭑**:
+{subtitle[:15000] if subtitle else '(?먮쭑 ?놁쓬)'}
 
-**기존 시그널 목록** (재분석 대상):
+**湲곗〈 ?쒓렇??紐⑸줉** (?щ텇?????:
 {signal_list}
 
 ---
 
-## 출력 요구사항
+## 異쒕젰 ?붽뎄?ы빆
 
-각 시그널 ID별로 다음 형식의 JSON을 출력하세요:
+媛??쒓렇??ID蹂꾨줈 ?ㅼ쓬 ?뺤떇??JSON??異쒕젰?섏꽭??
 
 ```json
 {{
   "results": [
     {{
-      "signal_id": "<기존 시그널 ID>",
+      "signal_id": "<湲곗〈 ?쒓렇??ID>",
       "action": "update" | "reject",
-      "signal": "매수|긍정|중립|부정|매도",
-      "timestamp": "MM:SS 또는 HH:MM:SS 형식만",
-      "key_quote": "핵심 발언 원문 20자 이상",
-      "reasoning": "V11 규칙 기준 분류 이유",
-      "reject_reason": "action=reject일 때만: 거부 이유 (가정형발언/지수종목/타임스탬프없음 등)"
+      "signal": "留ㅼ닔|湲띿젙|以묐┰|遺??留ㅻ룄",
+      "timestamp": "MM:SS ?먮뒗 HH:MM:SS ?뺤떇留?,
+      "key_quote": "?듭떖 諛쒖뼵 ?먮Ц 20???댁긽",
+      "reasoning": "V11 洹쒖튃 湲곗? 遺꾨쪟 ?댁쑀",
+      "reject_reason": "action=reject???뚮쭔: 嫄곕? ?댁쑀 (媛?뺥삎諛쒖뼵/吏?섏쥌紐???꾩뒪?ы봽?놁쓬 ??"
     }}
   ]
 }}
 ```
 
-**V11 핵심 체크리스트**:
-1. 가정형 발언("만약/~했다면/~이었다면") → action=reject
-2. 지수/달러/원자재(코스피/달러/금 등) → action=reject
-3. 타임스탬프를 자막에서 최대한 찾아 MM:SS 형식으로 → 찾을 수 없으면 confidence=low
-4. 매수 기준: "본인이 샀거나 사라고 했는가?" → Yes=매수 / No=긍정
+**V11 ?듭떖 泥댄겕由ъ뒪??*:
+1. 媛?뺥삎 諛쒖뼵("留뚯빟/~?덈떎硫?~?댁뿀?ㅻ㈃") ??action=reject
+2. 吏???щ윭/?먯옄??肄붿뒪???щ윭/湲??? ??action=reject
+3. ??꾩뒪?ы봽瑜??먮쭑?먯꽌 理쒕???李얠븘 MM:SS ?뺤떇?쇰줈 ??李얠쓣 ???놁쑝硫?confidence=low
+4. 留ㅼ닔 湲곗?: "蹂몄씤???嫄곕굹 ?щ씪怨??덈뒗媛?" ??Yes=留ㅼ닔 / No=湲띿젙
 
-JSON만 출력하세요. 다른 설명 없이.
+JSON留?異쒕젰?섏꽭?? ?ㅻⅨ ?ㅻ챸 ?놁씠.
 """
 
 
-# ─── API 응답 파싱 ───────────────────────────────────────────
+# ??? API ?묐떟 ?뚯떛 ???????????????????????????????????????????
 def parse_api_response(content: str) -> list:
-    """API 응답에서 JSON 결과 추출"""
-    # ```json ... ``` 블록 추출
+    """API ?묐떟?먯꽌 JSON 寃곌낵 異붿텧"""
+    # ```json ... ``` 釉붾줉 異붿텧
     match = re.search(r'```json\s*(.*?)\s*```', content, re.DOTALL)
     if match:
         json_str = match.group(1)
     else:
-        # JSON 블록 없으면 전체에서 { "results": ... } 패턴 찾기
+        # JSON 釉붾줉 ?놁쑝硫??꾩껜?먯꽌 { "results": ... } ?⑦꽩 李얘린
         match = re.search(r'\{.*?"results".*?\}', content, re.DOTALL)
         if match:
             json_str = match.group(0)
         else:
-            print(f"  ⚠️  JSON 파싱 실패. 응답 내용:\n{content[:500]}")
+            print(f"  ?좑툘  JSON ?뚯떛 ?ㅽ뙣. ?묐떟 ?댁슜:\n{content[:500]}")
             return []
 
     try:
         data = json.loads(json_str)
         return data.get('results', [])
     except json.JSONDecodeError as e:
-        print(f"  ⚠️  JSON 디코드 오류: {e}")
+        print(f"  ?좑툘  JSON ?붿퐫???ㅻ쪟: {e}")
         return []
 
 
-# ─── 타임스탬프 유효성 검증 ──────────────────────────────────
+# ??? ??꾩뒪?ы봽 ?좏슚??寃利???????????????????????????????????
 def is_valid_timestamp(ts: str) -> bool:
-    """HH:MM:SS 또는 MM:SS 형식인지 확인"""
+    """HH:MM:SS ?먮뒗 MM:SS ?뺤떇?몄? ?뺤씤"""
     if not ts:
         return False
-    # 금지 패턴
-    forbidden = ['N/A', 'n/a', '없음', '미상', '초반', '중반', '후반', '전체', '날짜', '월', '일']
+    # 湲덉? ?⑦꽩
+    forbidden = ['N/A', 'n/a', '?놁쓬', '誘몄긽', '珥덈컲', '以묐컲', '?꾨컲', '?꾩껜', '?좎쭨', '??, '??]
     for f in forbidden:
         if f in str(ts):
             return False
-    # 형식 체크
+    # ?뺤떇 泥댄겕
     pattern = r'^\d{1,2}:\d{2}(:\d{2})?$'
     if not re.match(pattern, str(ts)):
         return False
-    # 0:00 금지
+    # 0:00 湲덉?
     if ts in ['0:00', '00:00', '00:00:00']:
         return False
     return True
 
 
-# ─── 메인 실행 ───────────────────────────────────────────────
+# ??? 硫붿씤 ?ㅽ뻾 ???????????????????????????????????????????????
 def main():
     print("=" * 60)
-    print("세상학개론 V11 재분석 스크립트")
-    print(f"시작 시각: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print("?몄긽?숆컻濡?V11 ?щ텇???ㅽ겕由쏀듃")
+    print(f"?쒖옉 ?쒓컖: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
 
-    # 클라이언트 초기화
-    db = SupabaseClient(SUPABASE_URL, SUPABASE_KEY)
+    # ?대씪?댁뼵??珥덇린??    db = SupabaseClient(SUPABASE_URL, SUPABASE_KEY)
     ai = anthropic.Anthropic(api_key=ANTHROPIC_KEY)
 
-    # V11 프롬프트 로드
-    print("\n[준비] V11 프롬프트 로드 중...")
+    # V11 ?꾨＼?꾪듃 濡쒕뱶
+    print("\n[以鍮? V11 ?꾨＼?꾪듃 濡쒕뱶 以?..")
     v11_prompt = load_v11_prompt()
-    print(f"  ✓ 프롬프트 로드 완료 ({len(v11_prompt):,} 자)")
+    print(f"  ???꾨＼?꾪듃 濡쒕뱶 ?꾨즺 ({len(v11_prompt):,} ??")
 
-    # 진행상황 불러오기
+    # 吏꾪뻾?곹솴 遺덈윭?ㅺ린
     progress = load_progress()
     total_cost = progress.get('total_cost', 0.0)
     updated_ids = progress.get('updated_signal_ids', [])
     processed_video_ids = progress.get('processed_video_ids', [])
 
-    # ── STEP 1: 세상학개론 채널 ID 찾기 ──────────────────────
-    print("\n[STEP 1] 세상학개론 채널 찾기...")
-    channels = db.select('influencer_channels', 'channel_name=ilike.*세상학개론*&select=id,channel_name,channel_id')
+    # ?? STEP 1: ?몄긽?숆컻濡?梨꾨꼸 ID 李얘린 ??????????????????????
+    print("\n[STEP 1] ?몄긽?숆컻濡?梨꾨꼸 李얘린...")
+    channels = db.select('influencer_channels', 'channel_name=ilike.*?몄긽?숆컻濡?&select=id,channel_name,channel_id')
     if not channels:
-        # 한글 ilike가 안 될 경우 전체 조회 후 필터
+        # ?쒓? ilike媛 ????寃쎌슦 ?꾩껜 議고쉶 ???꾪꽣
         channels = db.select('influencer_channels', 'select=id,channel_name,channel_id')
-        channels = [c for c in channels if '세상학개론' in (c.get('channel_name') or '')]
+        channels = [c for c in channels if '?몄긽?숆컻濡? in (c.get('channel_name') or '')]
 
     if not channels:
-        print("  ❌ 세상학개론 채널을 찾을 수 없습니다.")
-        print("  → influencer_channels 테이블의 channel_name 컬럼을 확인하세요.")
+        print("  ???몄긽?숆컻濡?梨꾨꼸??李얠쓣 ???놁뒿?덈떎.")
+        print("  ??influencer_channels ?뚯씠釉붿쓽 channel_name 而щ읆???뺤씤?섏꽭??")
         return
 
     channel = channels[0]
     channel_db_id = channel['id']
     channel_yt_id = channel.get('channel_id', '')
-    print(f"  ✓ 채널 발견: {channel['channel_name']} (DB ID: {channel_db_id})")
+    print(f"  ??梨꾨꼸 諛쒓껄: {channel['channel_name']} (DB ID: {channel_db_id})")
 
-    # ── STEP 2: 세상학개론 영상 목록 가져오기 ────────────────
-    print("\n[STEP 2] 세상학개론 영상 목록 조회...")
+    # ?? STEP 2: ?몄긽?숆컻濡??곸긽 紐⑸줉 媛?몄삤湲?????????????????
+    print("\n[STEP 2] ?몄긽?숆컻濡??곸긽 紐⑸줉 議고쉶...")
     videos = db.select(
         'influencer_videos',
         f'channel_id=eq.{channel_db_id}&select=id,video_id,title,subtitle,transcript'
     )
     if not videos:
-        # channel_id가 YouTube channel_id를 참조하는 경우
+        # channel_id媛 YouTube channel_id瑜?李몄“?섎뒗 寃쎌슦
         videos = db.select(
             'influencer_videos',
             f'channel_id=eq.{channel_yt_id}&select=id,video_id,title,subtitle,transcript'
         )
 
-    print(f"  ✓ 영상 {len(videos)}개 발견")
+    print(f"  ???곸긽 {len(videos)}媛?諛쒓껄")
 
     if not videos:
-        print("  ❌ 영상 데이터가 없습니다. DB 구조를 확인하세요.")
+        print("  ???곸긽 ?곗씠?곌? ?놁뒿?덈떎. DB 援ъ“瑜??뺤씤?섏꽭??")
         return
 
     video_map = {v['id']: v for v in videos}
     video_ids = [v['id'] for v in videos]
 
-    # ── STEP 3: 시그널 가져오기 (review_status != rejected) ──
-    print("\n[STEP 3] 세상학개론 시그널 조회...")
-    # video_id IN (...)로 쿼리
+    # ?? STEP 3: ?쒓렇??媛?몄삤湲?(review_status != rejected) ??
+    print("\n[STEP 3] ?몄긽?숆컻濡??쒓렇??議고쉶...")
+    # video_id IN (...)濡?荑쇰━
     if not video_ids:
-        print("  ❌ 영상 ID가 없습니다.")
+        print("  ???곸긽 ID媛 ?놁뒿?덈떎.")
         return
 
-    # Supabase REST API에서 IN 쿼리: video_id=in.(id1,id2,...)
+    # Supabase REST API?먯꽌 IN 荑쇰━: video_id=in.(id1,id2,...)
     ids_str = ','.join(str(vid) for vid in video_ids)
     all_signals = db.select(
         'influencer_signals',
         f'video_id=in.({ids_str})&review_status=neq.rejected&select=id,video_id,stock,signal,timestamp,key_quote,reasoning,speaker,pipeline_version'
     )
 
-    print(f"  ✓ 시그널 {len(all_signals)}개 발견 (rejected 제외)")
+    print(f"  ???쒓렇??{len(all_signals)}媛?諛쒓껄 (rejected ?쒖쇅)")
 
     if not all_signals:
-        print("  ❌ 재분석할 시그널이 없습니다.")
+        print("  ???щ텇?앺븷 ?쒓렇?먯씠 ?놁뒿?덈떎.")
         return
 
-    # ── STEP 4: 비디오별 그룹핑 ──────────────────────────────
+    # ?? STEP 4: 鍮꾨뵒?ㅻ퀎 洹몃９????????????????????????????????
     video_signals: dict[str, list] = {}
     for sig in all_signals:
         vid = str(sig['video_id'])
@@ -267,41 +264,41 @@ def main():
 
     total_videos = len(video_signals)
     total_signals = len(all_signals)
-    print(f"\n  📊 분석 대상: 영상 {total_videos}개, 시그널 {total_signals}개")
-    print(f"  ⏭️  이전 진행: 영상 {len(processed_video_ids)}개 완료\n")
+    print(f"\n  ?뱤 遺꾩꽍 ??? ?곸긽 {total_videos}媛? ?쒓렇??{total_signals}媛?)
+    print(f"  ??툘  ?댁쟾 吏꾪뻾: ?곸긽 {len(processed_video_ids)}媛??꾨즺\n")
 
-    # ── STEP 5: 영상별 재분석 ────────────────────────────────
+    # ?? STEP 5: ?곸긽蹂??щ텇??????????????????????????????????
     update_count = 0
     reject_count = 0
     error_count = 0
 
     for video_idx, (vid_id, signals) in enumerate(video_signals.items(), 1):
         if vid_id in processed_video_ids:
-            print(f"  ⏭️  [{video_idx}/{total_videos}] 이미 처리됨, 건너뜀")
+            print(f"  ??툘  [{video_idx}/{total_videos}] ?대? 泥섎━?? 嫄대꼫?")
             continue
 
         video = video_map.get(int(vid_id) if vid_id.isdigit() else vid_id)
         if not video:
-            print(f"  ⚠️  [{video_idx}/{total_videos}] 영상 정보 없음 (id={vid_id})")
+            print(f"  ?좑툘  [{video_idx}/{total_videos}] ?곸긽 ?뺣낫 ?놁쓬 (id={vid_id})")
             continue
 
-        title = video.get('title', '제목 없음')
+        title = video.get('title', '?쒕ぉ ?놁쓬')
         subtitle = video.get('subtitle') or video.get('transcript') or ''
         sig_count = len(signals)
 
-        print(f"\n[진행] 영상 {video_idx}/{total_videos}: {title[:50]} (시그널 {sig_count}개)")
+        print(f"\n[吏꾪뻾] ?곸긽 {video_idx}/{total_videos}: {title[:50]} (?쒓렇??{sig_count}媛?")
 
         if not subtitle:
-            print(f"  ⚠️  자막 없음. 시그널 {sig_count}개 건너뜀.")
+            print(f"  ?좑툘  ?먮쭑 ?놁쓬. ?쒓렇??{sig_count}媛?嫄대꼫?.")
             processed_video_ids.append(vid_id)
             save_progress({**progress, 'processed_video_ids': processed_video_ids,
                            'updated_signal_ids': updated_ids, 'total_cost': total_cost})
             continue
 
-        # V11 재분석 프롬프트 생성
+        # V11 ?щ텇???꾨＼?꾪듃 ?앹꽦
         prompt = build_reanalysis_prompt(v11_prompt, title, subtitle, signals)
 
-        # API 호출
+        # API ?몄텧
         try:
             response = ai.messages.create(
                 model=MODEL,
@@ -313,57 +310,56 @@ def main():
             output_tokens = response.usage.output_tokens
             call_cost = input_tokens * INPUT_PRICE_PER_TOKEN + output_tokens * OUTPUT_PRICE_PER_TOKEN
             total_cost += call_cost
-            print(f"  💬 API 호출 완료 (in={input_tokens:,}tok, out={output_tokens:,}tok, 비용=${call_cost:.4f})")
+            print(f"  ?뮠 API ?몄텧 ?꾨즺 (in={input_tokens:,}tok, out={output_tokens:,}tok, 鍮꾩슜=${call_cost:.4f})")
         except Exception as e:
-            print(f"  ❌ API 호출 실패: {e}")
+            print(f"  ??API ?몄텧 ?ㅽ뙣: {e}")
             error_count += 1
             time.sleep(5)
             continue
 
-        # 응답 파싱
+        # ?묐떟 ?뚯떛
         results = parse_api_response(content)
         if not results:
-            print(f"  ⚠️  파싱된 결과 없음.")
+            print(f"  ?좑툘  ?뚯떛??寃곌낵 ?놁쓬.")
             error_count += 1
             continue
 
-        # 결과 매핑 (signal_id → result)
+        # 寃곌낵 留ㅽ븨 (signal_id ??result)
         result_map = {str(r.get('signal_id', '')): r for r in results}
 
-        # 각 시그널 처리
+        # 媛??쒓렇??泥섎━
         for sig in signals:
             sig_id = str(sig['id'])
             result = result_map.get(sig_id)
 
             if not result:
-                print(f"  ⚠️  시그널 {sig_id} 결과 없음")
+                print(f"  ?좑툘  ?쒓렇??{sig_id} 寃곌낵 ?놁쓬")
                 continue
 
             action = result.get('action', 'update')
             stock = sig.get('stock', '?')
 
             if action == 'reject':
-                # rejected로 업데이트
-                reject_reason = result.get('reject_reason', 'V11 규칙 위반')
+                # rejected濡??낅뜲?댄듃
+                reject_reason = result.get('reject_reason', 'V11 洹쒖튃 ?꾨컲')
                 db.update('influencer_signals', {'id': sig_id}, {
                     'review_status': 'rejected',
-                    'reasoning': f"[V11 자동 거부] {reject_reason}",
+                    'reasoning': f"[V11 ?먮룞 嫄곕?] {reject_reason}",
                     'pipeline_version': 'V11'
                 })
-                print(f"  🚫 {stock}: 거부 → {reject_reason[:50]}")
+                print(f"  ?슟 {stock}: 嫄곕? ??{reject_reason[:50]}")
                 reject_count += 1
 
             else:
-                # 업데이트
+                # ?낅뜲?댄듃
                 new_signal = result.get('signal', sig.get('signal'))
                 new_timestamp = result.get('timestamp', sig.get('timestamp'))
                 new_key_quote = result.get('key_quote', sig.get('key_quote'))
                 new_reasoning = result.get('reasoning', sig.get('reasoning'))
 
-                # 타임스탬프 유효성 검증
-                if not is_valid_timestamp(new_timestamp):
-                    # 유효하지 않으면 기존 값 유지 또는 경고
-                    print(f"  ⚠️  {stock}: 타임스탬프 형식 불량 '{new_timestamp}' → 기존 값 유지")
+                # ??꾩뒪?ы봽 ?좏슚??寃利?                if not is_valid_timestamp(new_timestamp):
+                    # ?좏슚?섏? ?딆쑝硫?湲곗〈 媛??좎? ?먮뒗 寃쎄퀬
+                    print(f"  ?좑툘  {stock}: ??꾩뒪?ы봽 ?뺤떇 遺덈웾 '{new_timestamp}' ??湲곗〈 媛??좎?")
                     new_timestamp = sig.get('timestamp')
 
                 update_data = {
@@ -376,13 +372,12 @@ def main():
 
                 db.update('influencer_signals', {'id': sig_id}, update_data)
                 old_signal = sig.get('signal', '?')
-                changed = '✅' if new_signal != old_signal else '  '
-                print(f"  {changed} {stock}: {old_signal} → {new_signal} | timestamp: {new_timestamp}")
+                changed = '?? if new_signal != old_signal else '  '
+                print(f"  {changed} {stock}: {old_signal} ??{new_signal} | timestamp: {new_timestamp}")
                 update_count += 1
                 updated_ids.append(sig_id)
 
-        # 진행상황 저장
-        processed_video_ids.append(vid_id)
+        # 吏꾪뻾?곹솴 ???        processed_video_ids.append(vid_id)
         progress_data = {
             'processed_video_ids': processed_video_ids,
             'updated_signal_ids': updated_ids,
@@ -392,22 +387,23 @@ def main():
         }
         save_progress(progress_data)
 
-        # API 레이트리밋 방지
+        # API ?덉씠?몃━諛?諛⑹?
         time.sleep(2)
 
-    # ── 완료 리포트 ──────────────────────────────────────────
+    # ?? ?꾨즺 由ы룷????????????????????????????????????????????
     print("\n" + "=" * 60)
-    print("✅ 완료 리포트")
+    print("???꾨즺 由ы룷??)
     print("=" * 60)
-    print(f"  처리된 영상:        {len(processed_video_ids)} / {total_videos}개")
-    print(f"  업데이트된 시그널:  {update_count}개")
-    print(f"  거부된 시그널:      {reject_count}개")
-    print(f"  오류 발생:          {error_count}건")
-    print(f"  총 API 비용:        ${total_cost:.4f}")
-    print(f"  진행상황 파일:      {PROGRESS_FILE}")
-    print(f"  완료 시각:          {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"  泥섎━???곸긽:        {len(processed_video_ids)} / {total_videos}媛?)
+    print(f"  ?낅뜲?댄듃???쒓렇??  {update_count}媛?)
+    print(f"  嫄곕????쒓렇??      {reject_count}媛?)
+    print(f"  ?ㅻ쪟 諛쒖깮:          {error_count}嫄?)
+    print(f"  珥?API 鍮꾩슜:        ${total_cost:.4f}")
+    print(f"  吏꾪뻾?곹솴 ?뚯씪:      {PROGRESS_FILE}")
+    print(f"  ?꾨즺 ?쒓컖:          {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
 
 
 if __name__ == '__main__':
     main()
+
